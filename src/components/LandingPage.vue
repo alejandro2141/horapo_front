@@ -14,7 +14,9 @@ const count = ref(0)
 
 <template>
     <GeneralHeader></GeneralHeader>
+    <div id="main-content">
     <LandingContent></LandingContent>
+    </div>
     <FooterContent></FooterContent>
 </template>
 
