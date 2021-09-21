@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hora123</title>
+    <!-- Import Styles --> 
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <!-- Import Vue.js -->
+    <script src="./node_modules/vue/dist/vue.global.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="./node_modules/bootstrap/dist/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <!--Local Font Awesome-->
+    <link href="./node_modules/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet"> <!--load all styles -->
+
+  </head>
+  <body style="background-image: url(assets/images/background_patient.JPG); height: 100%; width: 100%; border: 0px solid black;">
+    <div id="app" class="p-3" >     
+   
+        <public-header></public-header>     
+
+        
+        Ingrese su correo y le enviaremos sus horas ya agendadas. 
+        <div id="form" class=" p-0">
+            <form autocomplete="off">
+                    <div class="form-row">
+            
+                        <div class="form-group col-md-6">
+                            <label for="inputNames"></label>
+                            <i class="far fa-envelope"></i> <input type="text" class="form-control" id="inputNames" placeholder="Ej: Email " v-model="email">
+                        </div>
+                       
+                    </div>
+                    
+                    <div class="pt-2 text-center">
+                        <button v-on:click="sendRecoverApp()" type="button" class="btn btn-success ">Enviar</button>
+                    </div>
+
+            </form>
+        </div>
+
+
+
+    </div>
+    
+    <!-- Import Js -->
+    <script src="./getMyApp.js"></script>
+    <script src="./config123.js"></script>
+    <!-- Import Components -->
+    <script src="../cross-components/publicHeader.js"></script>
+    <!-- Import ANXIOS -->  
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <!-- Import JS BOOTSTRAP -->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  <!-- MOUNT APP-->
+    <script>
+    const mountedApp = app.mount('#app')
+    </script>
+
+  </body>
+
+
+
+</html>
+
+
+
