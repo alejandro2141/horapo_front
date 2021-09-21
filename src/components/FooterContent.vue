@@ -17,15 +17,15 @@ const count = ref(0)
 			<!-- Section: Social media -->
 			<section class="mb-0 ">
 				<!-- button 1 -->
-				<a href="aboutUs.html" class="btn btn-outline-secondary text-secondary btn-floating m-1"  role="button">
+				<a href="./nested/aboutUs.html" class="btn btn-outline-secondary text-secondary btn-floating m-1"  role="button">
 					<i class="">123hora?</i>
 				</a>
 				<!-- button 1 -->
-				<a HREF="../conmed-vuj-3/index.html" class="btn btn-outline-secondary  text-secondary btn-floating m-1"  role="button">
+				<a HREF="./conmed-vuj-3/index.html" class="btn btn-outline-secondary  text-secondary btn-floating m-1"  role="button">
 					<i class="">Profesional</i>
 				</a>
 				<!-- button 1 -->
-				<a HREF="register.html" class="btn btn-outline-secondary text-secondary btn-floating m-1"  role="button">
+				<a HREF="./nested/register.html" class="btn btn-outline-secondary text-secondary btn-floating m-1"  role="button">
 					<i class="">Registrate</i>
 				</a>
 			
