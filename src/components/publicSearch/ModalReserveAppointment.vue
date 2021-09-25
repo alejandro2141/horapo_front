@@ -9,64 +9,25 @@ defineProps({
 </script>
 
 <template>
-       
-    <teleport to="body" disabled="true">
-    <transition name="modal">
-    <div class="modal-mask " v-if="app != null && showModalAux" tabindex="-1" >
-    <div class="modal-wrapper">
-    <div class="modal-container mt-5">
-                <div class="modal-header display-5" >
-                     {{app.specialty_name }} 
-                    <button type="button" class="btn-close"  @click="showModalAux = false" aria-label="Close"></button>
-                </div>
+     
+ <button @click="modalOpen = true">
+        Open full screen modal! (With teleport!)
+    </button>
 
-                <div class="modal-body" > 
-                  
-                <div class="h3 mb-3">
-                    Dia <text class="display-4"> {{app.date.substring(0, 10) }} </text> <br>
-                    Hora <text class="display-4">  {{app.start_time.substring(0, 5) }}  Hrs </text>
-                </div>
-                
-                <div class="h4 mb-3">
-                <i class="fas fa-user-md "></i> Con:  {{app.name }} <br>
-                </div>               
-                
-                <div class="h4 mb-3">  
-				<i class="fas fa-map-marker-alt"></i>
-                {{app.center_name }} <br/> 
-                Direccion: {{app.center_address }}
-                </div>
-                <hr>
-                           
-                <div class="h2 text-dark"> Ingrese Datos del Paciente
-                </div>							
-                            <form autocomplete="off" method="POST" action="take_appointment.html">			
-                                <input class="form-control form-control-lg" type="hidden" placeholder="Token" name="token" value="AAAAA"  >
-                                <br>	
-                                <input class="form-control form-control-lg" type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
-                                <div v-if="error_msg_name" class="text-danger">Debe Indicar Nombre del paciente</div>
-                                <br>
-                                <input class="form-control form-control-lg" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
-                                <div v-if="error_msg_doc_id" class="text-danger">Debe Indicar RUT o Pasaporte del paciente</div>
-                                <br/>
-                                <input  type="number" class="form-control form-control-lg"  placeholder="Edad" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
-                                <div v-if="error_msg_age" class="text-danger">Debe Indicar Edad del paciente</div>
-                                <br/>
-                                <input class="form-control form-control-lg" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
-                                <div v-if="error_msg_email" class="text-danger">Debe Indicar un correo valido</div>
-                                <br>
-                                <input class="form-control form-control-lg" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
-                                <div v-if="error_msg_phone" class="text-danger">Debe Indicar un Telefono de contacto</div>
-                                <br>
-                                <button type="button" @click="sendReserveAppointment(app.app_id)" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
-                            </form> 
-                    </div>
-        </div> 
-        </div> 
-        </div> 
-        </transition>
-	</teleport>
-	
+	<div id="aqui" class="bg-success p-3 m-3"></div>
+
+    <teleport to="#qui">
+      <div v-if="modalOpen" >
+        <div>
+          I'm a teleported modal! 
+          (My parent is "body")
+          <button @click="modalOpen = false">
+            Close
+          </button>
+        </div>
+      </div>
+    </teleport>
+
 </template>
 
 
@@ -81,7 +42,7 @@ defineProps({
 export default {
   data() {
     return {
-
+ modalOpen: ref(false),
           showModalAux : true,
 		  appointment_confirm : null,
 
