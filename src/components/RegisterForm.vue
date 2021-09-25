@@ -64,18 +64,7 @@ import { ref } from 'vue'
                     <label for="inputSpecialty">Ingrese su especialidad</label>
                     <input type="text" class="form-control" id="specialty" placeholder="Ej: Kinesiologia, psicologia, terapia.." v-model="specialty">
                 </div>
-            <!--
-                <div class="form-group col-md-4">
-                    <label for="inputState">Especialidad</label>
-                    <select id="inputState" class="form-control" v-model="specialty" >
-                    <option selected>Choose...</option>
-                    <option>Kinesiologia</option>
-                    <option>Psicologia</option>
-                    <option>Enfermeria</option>
-                    <option></option>
-                    </select>
-                </div>
-            -->
+
                 <div class="text-center pt-5 mb-5 pb-5">
                     <button @click='sendFormRegister' class="btn btn-primary">Registrarme!</button>
                 </div>
