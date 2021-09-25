@@ -13,22 +13,20 @@ const count = ref(0)
        <div class="" >
             <div class="row" style="--bs-gutter-x: 0rem ; margin-right: 0rem ; margin-left: 0rem ">
             
-                    <div class="col-9" style="position: relative;" >
+                <div class="col " style="position: relative;" >
                     <div  >
-                        <input type="text" class="form-control form-control-lg border" :class="{'border-success' : ready_input , 'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"  placeholder="Ubicacion/Comuna" >
+                        <input type="text" class="form-control form-control-lg border  " :class="{'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"  placeholder="Ubicacion/Comuna" >
                     </div>
                     
-                    <div v-if="!ready_input" style="position: absolute; z-index: 9; top : 7px ; right : 3px " class="mb-2 bg-secondary text-white rounded" > 
-                       <i class="display-6 m-1 fas fa-map-marker-alt"></i>
-                    </div>
-                    <div v-if="ready_input" style="position: absolute; z-index: 9; top : 7px ; right : 3px " class="mb-2 bg-success text-white rounded" > 
-                        <i class="display-6 m-1 bi bi-check2"></i>
+                   
+                    <div v-if="ready_input" style="position: absolute; z-index: 9; top : 7px ; right : 3px " class="mb-2  rounded" > 
+                        <i class="display-6 m-1 bi bi-check2 text-success"></i>
                     </div>
 
                 </div>    
                
                 <div class="col-2 m-0 p-0">
-                    <i  class="display-2 p-0 bi bi-x-square m-1"  @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null); "></i>
+                    <i  class="display-2 p-0 bi bi-x-square m-1 text-muted"  @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null); "></i>
                 </div>
             </div>
         </div>
