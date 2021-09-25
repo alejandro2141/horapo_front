@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import patientAppointmentAvailable  from './PatientAppointmentAvailable.vue'
-import modalReserveAppointment from './modalReserveAppointment.vue'
+import modalReserveAppointment from './ModalReserveAppointment.vue'
 
 defineProps({
   msg: String,
@@ -21,18 +21,18 @@ const count = ref(0)
                <patientAppointmentAvailable v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </patientAppointmentAvailable>            
             </div>
          
-            
                 <!-- Start make room for Modal data when it display-->
                 <div style="height: 400px">
                 </div>
         
         </div>	
         
+        
+        <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
         <modalReserveAppointment  :app="app" v-on:showConfirmationModal="showConfirmationModal"  > </modalReserveAppointment>
         <!-- Modal Reserve and Confirm End -->
           
-
 </template>
 
 <style scoped>
