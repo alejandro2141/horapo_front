@@ -12,20 +12,18 @@ const count = ref(0)
         <div class="" >
             <div class="row" style="--bs-gutter-x: 0rem ; margin-right: 0rem ; margin-left: 0rem ">
                 
-                <div  class="display-3 col-1 text-muted" :class="{'text-success' : ready_input  }" style="z-index : 9" >
-                <i class="display-6 m-1 fas fa-stethoscope"></i>
-                </div>
+               
 
                 <div class="col" style="position: relative;" >
                     <div  >
-                        <input type="text" class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'text-success' : ready_input  }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Especialidad, Psicolog.., Kinesio.." aria-label=".form-control-lg example" >
+                        <input type="text" class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Especialidad, Psicolog.., Kinesio.." aria-label=".form-control-lg example" >
                     </div>
                     
                     <div v-if="!ready_input" style="position: absolute; z-index: 9;  top : 7px ; right : 3px  " class="mb-2 text-muted  rounded" > 
                       
                     </div>
-                    <div v-if="ready_input" style="position: absolute; z-index: 9; top : 7px ; right : 3px  " class="mb-2 text-muted  rounded" > 
-                        <i class="display-6 m-1 bi bi-check2"></i>
+                    <div v-if="ready_input" style="position: absolute; z-index: 9; top : 7px ; right : 3px  " class="mb-2  rounded" > 
+                        <i class="display-6 m-1 bi bi-check2 text-success"></i>
                     </div>
 
                 </div>    
