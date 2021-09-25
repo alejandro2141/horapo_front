@@ -9,14 +9,16 @@ const count = ref(0)
 </script>
 
 <template>
-   SearchAppointment Template
+    <div class="h2" >
+    Busca una Hora profesional
+    </div>
         <div>
             <div>
             <searchAppointmentForm  v-on:searchAppointments="searchAppointments"></searchAppointmentForm>
            
             <searchAppointmentResult  v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  > </searchAppointmentResult> 	    
             </div>
-        </div>
+     </div>
 </template>
 
 <style scoped>
