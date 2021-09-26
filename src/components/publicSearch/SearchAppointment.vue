@@ -53,7 +53,6 @@ export default {
 
  mounted () {
              this.daterequired = new Date().toISOString().split('T')[0] ;
-            
         },
 
 methods: {
