@@ -14,11 +14,11 @@ const count = ref(0)
 </script>
 
 <template>
-       <div class="" v-if="appointment_list != null && daterequired != null" >
+        <div class="" v-if="appointment_list != null && daterequired != null" >
             <small class="mb-2 pl-3" > {{ notificationMessage }} </small> 
          
             <div class="mt-0"  v-for="appointment in appointment_list" :key="appointment.id" >
-               <patientAppointmentAvailable v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </patientAppointmentAvailable>            
+               <patientAppointmentAvailable v-if="appointment != null"  v-on:click="setModalReserve(appointment); modalOpen = true" :appointment='appointment'  > </patientAppointmentAvailable>            
             </div>
          
                 <!-- Start make room for Modal data when it display-->
@@ -26,11 +26,11 @@ const count = ref(0)
                 </div>
         
         </div>	
-        
-        
+    
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
-        <modalReserveAppointment  :app="app" v-on:showConfirmationModal="showConfirmationModal"  > </modalReserveAppointment>
+       
+        <modalReserveAppointment   :app="app" v-if="modalOpen" :modalOpen="modalOpen" v-on:updateSearchResult="updateSearchResult"  > </modalReserveAppointment>
         <!-- Modal Reserve and Confirm End -->
           
 </template>
@@ -52,9 +52,12 @@ export default {
             appConfirmed : null, 
             appointment_list : null,
             notificationMessage: null, 
+            modalOpen : ref(false), 
     }
   },
-   
+
+   emits: ["updateLastSearch"],
+
    mounted () {    
         },
 
@@ -71,14 +74,16 @@ export default {
             {
                 console.log("Set Modal Reserve method in SearchApp Resutl"+JSON.stringify(appointment));
                 this.app=appointment;
+                this.modalOpen = true; 
               
             },
+            /*
             showConfirmationModal(appconfirm)
             {
                 console.log ("showConfirmationModal method. Display Confirmation Modal: "+ JSON.stringify(appconfirm)) ;
                 this.appConfirmed=appconfirm;
             },
-
+            */
             updateSearchResult()
             {
                 console.log (" update search Result. ");
