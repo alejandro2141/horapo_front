@@ -246,7 +246,7 @@ computed: {
 						patient_insurance:	9999 ,
 								};
 						console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
-						let response_json = await axios.post("http://192.168.0.110:8080/save_appointment",json );
+						let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/save_appointment",json );
 					//  console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
 						console.log ("RESPONSE save_appointment data raw :"+JSON.stringify(response_json.data)) ;
 						console.log ("RESPONSE save_appointment patient name :"+response_json.data.patient_name ) ;
