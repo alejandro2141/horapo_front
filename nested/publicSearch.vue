@@ -5,6 +5,7 @@
 import GeneralHeader from '../src/components/GeneralHeader.vue'
 import SearchAppointment from '../src/components/publicSearch/SearchAppointment.vue'
 
+
 </script>
 
 <template>
