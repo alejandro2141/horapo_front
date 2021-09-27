@@ -1,12 +1,11 @@
 import { createApp } from 'vue'
 import App from './publicSearch.vue'
+import { BKND_CONFIG } from '../config123.js'
+
+const app = createApp(App)
+app.mount('#app')
+app.config.globalProperties.BKND_CONFIG = BKND_CONFIG
+
+console.log(app.config)
 
 
-createApp(App).mount('#app')
-//App.config.globalProperties.db_host_config = 'http://192.168.0.110:8080/'
-/*
-// After
-const app = createApp({})
-app.config.globalProperties.db_host = 'http://192.168.0.110:8080/'
-
-*/
