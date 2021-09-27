@@ -127,7 +127,7 @@ export default {
                         };
                  //app.config.globalProperties.dbhost = 'http://192.168.0.114:8080' ;       
                 console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
-                let response_json = await axios.post("http://192.168.0.114:8080/public_register_professional",json );
+                let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/public_register_professional",json );
                 console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
                 //app = response_json.data[0];
                 console.log ("Rows : "+JSON.stringify(response_json.data.rows[0].name )  );
@@ -142,8 +142,7 @@ export default {
                 //}
 
                 }
-            //location.href = "professional_view_appointments_agenda.html?"+this.getUrlParam() ;
-            //location.reload();
+
         },
 
 
