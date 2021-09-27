@@ -80,7 +80,8 @@ methods: {
                  insurance : params.insurance,
                   		  };
 				console.log ("getAppointments REQUEST :"+ JSON.stringify(json)  );
-				let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
+				//let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
+				let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/patient_get_appointments_day",json);
 				console.log ("getAppointments RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
 				this.appointments = response_json.data.rows;
                // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
