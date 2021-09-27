@@ -150,7 +150,7 @@ watch: {
 				 nodata : 'nodata' ,
 				   		  };
 				console.log ("getSpecialtyList REQUEST :"+ JSON.stringify(json)  );
-				let response_json = await axios.post("http://192.168.0.110:8080/common_get_specialty_list",json);
+				let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/common_get_specialty_list",json);
 				console.log ("getSpecialtyList RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
 				this.specialty_list = response_json.data.rows;	
                 this.specialty_list.sort();	
