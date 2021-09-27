@@ -139,7 +139,7 @@ export default {
                      nodata : 'nodata' ,
                                  };
                     console.log ("getComunaList REQUEST :"+ JSON.stringify(json)  );
-                    let response_json = await axios.post("http://192.168.0.114:8080/common_get_comuna_list",json);
+                    let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/common_get_comuna_list",json);
                     console.log ("getComunaList RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                     this.comuna_list = response_json.data.rows;		
                     console.log("getComunaList list: "+JSON.stringify(this.comuna_list) );
