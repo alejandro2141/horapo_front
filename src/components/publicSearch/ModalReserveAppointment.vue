@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
 
 defineProps({
   app : Object,
@@ -151,7 +152,7 @@ defineProps({
 
 
 export default {
-  data() {
+ data : function() {
     return {
  		//modalOpen : ref(false),
 		modalConfirmationOpen : ref(false) ,
@@ -246,7 +247,7 @@ computed: {
 						patient_insurance:	9999 ,
 								};
 						console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
-						let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/save_appointment",json );
+						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/save_appointment",json );
 					//  console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
 						console.log ("RESPONSE save_appointment data raw :"+JSON.stringify(response_json.data)) ;
 						console.log ("RESPONSE save_appointment patient name :"+response_json.data.patient_name ) ;
