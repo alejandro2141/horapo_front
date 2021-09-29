@@ -7,6 +7,8 @@ export default defineConfig({
   plugins: [vue()]
 })
 */
+
+
 const { resolve } = require('path')
 
 module.exports = defineConfig({
@@ -17,11 +19,11 @@ module.exports = defineConfig({
         aboutUs: resolve(__dirname, './nested/aboutUs.html'),
         register: resolve(__dirname, './nested/register.html'),
         getappointments: resolve(__dirname, './nested/getAppointments.html'),
-        publicsearch: resolve(__dirname, './nested/publicSearch.html')
+        publicsearch: resolve(__dirname, './nested/publicSearch.html'),
         
-
       }
     }
   },
   plugins: [vue()]
 })
+
