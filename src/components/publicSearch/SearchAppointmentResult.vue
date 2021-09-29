@@ -44,7 +44,7 @@ const count = ref(0)
 
 
 export default {
-  data() {
+ data : function() {
     return {
             app : null ,
             showModal : false , 
