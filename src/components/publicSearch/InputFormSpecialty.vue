@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios';
 
 defineProps({
   msg: String
@@ -42,10 +43,9 @@ const count = ref(0)
 
 <script>
 //const showForm = ref(false)
-import searchAppointmentForm  from './SearchAppointmentForm.vue'
 
 export default {
-  data(){
+ data : function() {
         return {
             form_specialty  : null,
             specialty_list : [],
@@ -63,7 +63,7 @@ export default {
             
         },
 
- mounted () {    
+ beforeUpdate ()  {    
         this.getSpecialtyList();
         this.position_cpy = this.position ; 
         },
@@ -150,7 +150,7 @@ watch: {
 				 nodata : 'nodata' ,
 				   		  };
 				console.log ("getSpecialtyList REQUEST :"+ JSON.stringify(json)  );
-				let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/common_get_specialty_list",json);
+				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_specialty_list",json);
 				console.log ("getSpecialtyList RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
 				this.specialty_list = response_json.data.rows;	
                 this.specialty_list.sort();	
