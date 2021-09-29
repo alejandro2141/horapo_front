@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
+
 defineProps({
   msg: String
 })
@@ -57,7 +58,7 @@ import inputFormSpecialty  from './InputFormSpecialty.vue'
 import inputFormComuna  from './InputFormComuna.vue'
 
 export default {
-  data() {
+ data : function() {
     return {
             search_button_message: "Buscar " ,
 
