@@ -59,7 +59,7 @@ defineProps({
 
 
 export default {
-  data() {
+  data : function() {
     return {
         }
   },
