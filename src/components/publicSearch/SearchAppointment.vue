@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios';
 
 defineProps({
   msg: String
@@ -32,7 +33,7 @@ import searchAppointmentForm  from './SearchAppointmentForm.vue'
 import searchAppointmentResult  from './SearchAppointmentResult.vue'
 
 export default {
-  data() {
+  data : function() {
     return {
             daterequired : null,
             specialty: null,
@@ -81,7 +82,7 @@ methods: {
                   		  };
 				console.log ("getAppointments REQUEST :"+ JSON.stringify(json)  );
 				//let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
-				let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/patient_get_appointments_day",json);
+				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day",json);
 				console.log ("getAppointments RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
 				this.appointments = response_json.data.rows;
                // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
