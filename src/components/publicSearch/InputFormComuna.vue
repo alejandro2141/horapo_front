@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios';
 
 defineProps({
   msg: String,
@@ -42,7 +43,7 @@ const count = ref(0)
 import searchAppointmentForm  from './SearchAppointmentForm.vue'
 
 export default {
-   data(){
+   data : function() {
         return {
              form_comuna  : null,
             comuna_list : [],
@@ -52,7 +53,7 @@ export default {
         }
     },  
     
- mounted () {    
+  beforeUpdate () {    
         this.getComunaList();
         },
 
@@ -139,7 +140,7 @@ export default {
                      nodata : 'nodata' ,
                                  };
                     console.log ("getComunaList REQUEST :"+ JSON.stringify(json)  );
-                    let response_json = await axios.post(this.BKND_CONFIG.$BKND_HOST+"/common_get_comuna_list",json);
+                    let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json);
                     console.log ("getComunaList RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                     this.comuna_list = response_json.data.rows;		
                     console.log("getComunaList list: "+JSON.stringify(this.comuna_list) );
