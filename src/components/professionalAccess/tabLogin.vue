@@ -1,0 +1,115 @@
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios';
+
+
+defineProps({
+  session: Object
+})
+   
+</script>
+
+<template>
+    
+     <div>
+
+            <div class="d-flex justify-content-between" >	
+                <div class="m-2">
+                </div>
+                
+                <div class="m-2 display-2">
+            Login Professional 
+                </div>
+                
+                <div class="m-2">
+                </div>
+                
+            </div>
+
+            <div id="formLogin" class="mx-auto "  style="width: 95%;">
+                <form autocomplete="off" >
+                   <input  v-model="form_token" id="form_token" name="form_token" type="hidden"  > 
+                   <input class="autocomplete form-control form-control-lg ml-2" v-model="form_email" id="form_email" name="form_email" type="text" placeholder="Usuario ejemplo@correo.com" aria-label=".form-control-lg example"   >
+                   <br/>
+                   <input class="form-control form-control-lg" v-model="form_pass" id="form_pass" name="form_pass"  type="text" placeholder="Su contraseña" aria-label=".form-control-lg example" >
+                    <br/> 
+                    <i  type="submit" v-on:click="sendLogin()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%;"  >{{ login_message }}</i>
+                </form> 
+                  
+            </div>
+        </div>		
+
+
+</template>
+
+<style scoped>
+</style>
+
+<script>
+
+export default {
+   data : function() {
+        return {
+            login_message : "Ingrese sus credenciales",
+            url_param : [] ,
+            form_token : "",
+            form_email : "a",
+            form_pass : "a",
+        }   
+    },
+    emits: ['startSession'] ,
+
+    methods: {
+        //SEND LOGIN
+        async sendLogin(event) {
+			const json = { 
+			   form_email : this.form_email ,
+			   form_pass : this.form_pass ,  
+			   form_user_type : '1',			   
+			   form_token : this.form_token ,					   
+   			   	      };
+			console.log ("REQUEST :"+ JSON.stringify(json)  );
+			
+			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_login",json);
+			console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
+			//this.response_json = response.data;
+			  if (response_json.data.result_code == 0 ) {
+					  console.log("Login Exitosos!!");
+					   //this.url_param: ["token"]=""
+                       this.login_message="Login Exitoso !!!"
+					  this.setParamFromJSONDATA(response_json.data);
+
+					   //TODO Aqui ponemos el emit con los datos de la sesion
+                       console.log("enviando emit");
+                       this.$emit('startSession', response_json.data );
+					  //window.location.replace("professional_day_v2.html"+this.getUrlParam());
+					  }
+					  else  {
+					  console.log("Login Fallido");
+					  this.login_message  = "Error Login " ;
+					  }				  
+	        },
+        //SET PARAM
+            setParamFromJSONDATA(obj)
+            {
+                for (var key of Object.keys(obj)) 
+                    {
+                    //console.log(key + " -> " + obj[key]);
+                    this.url_param[key] = obj[key];
+                    }
+            },
+        //GET URL PARAM
+            getUrlParam()
+	        {			
+				console.log("GET URL parameters ");
+				var urla='?';
+				for (var key of Object.keys(this.url_param)) 
+				{urla+=key+"="+this.url_param[key]+"&" ;}	
+				return urla ;
+	        },
+        },
+
+}
+
+
+</script>
