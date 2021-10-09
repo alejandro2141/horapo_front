@@ -16,31 +16,32 @@ defineProps({
 		    <transition name="modal">
 			<div class="modal-mask " v-if="app != null && showModalAux"  >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-1 bg-light ">
-                <div class="modal-header " >
-                     {{app.specialty_name }} 
-                    <button type="button" class="btn-close h1"  @click="modalOpen = false" aria-label="Close"></button>
+			<div class="modal-container  m-1 p-2 bg-info ">
+                <div class="modal-header h1" >
+                    {{app.specialty_name }} <i class=" bi bi-x"  @click="modalOpen = false" aria-label="Close"></i>
                 </div>
 
                 <div class="modal-body " > 
                   
-                <div class="mb-3">
-                    Dia <text class=""> {{app.date.substring(0, 10) }} </text> <br>
-                    Hora <text class="">  {{app.start_time.substring(0, 5) }}  Hrs </text>
+                <div class="mb-2 h2">
+                   <text class=""> <i class="bi bi-calendar-check"></i> Dia  {{app.date.substring(0, 10) }} </text> 
+                    <text class=""> Hora {{app.start_time.substring(0, 5) }}  Hrs </text>
                 </div>
                 
-                <div class="mb-3">
-                <i class="fas fa-user-md "></i> Con:  {{app.name }} <br>
+                <div class="mb-2 h2">
+					<text class="">  
+               			<i class="bi bi-person-circle"></i> Con:  {{app.name }} 
+			   		</text>
                 </div>               
                 
-                <div class="mb-3">  
+                <div class="mb-1">  
 				<i class="fas fa-map-marker-alt"></i>
                 {{app.center_name }} <br/> 
                 Direccion: {{app.center_address }}
                 </div>
                 <hr>
                            
-                <div class="text-dark"> Ingrese Datos del Paciente
+                <div class="text-dark"> Datos del Paciente
                 </div>							
                             <form autocomplete="off" method="POST" action="take_appointment.html">			
                                 <input class="form-control form-control-lg" type="hidden" placeholder="Token" name="token" value="AAAAA"  >
