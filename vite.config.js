@@ -20,6 +20,7 @@ module.exports = defineConfig({
         register: resolve(__dirname, './nested/register.html'),
         getappointments: resolve(__dirname, './nested/getAppointments.html'),
         publicsearch: resolve(__dirname, './nested/publicSearch.html'),
+        professionalaccess: resolve(__dirname, './nested/professionalAccess.html'),
         
       }
     }
