@@ -15,20 +15,21 @@ const count = ref(0)
             <div class="row" style="--bs-gutter-x: 0rem ; margin-right: 0rem ; margin-left: 0rem ">
             
                 <div class="col " style="position: relative;" >
-                    <div  >
-                        <input type="text" class="form-control form-control-lg border  " :class="{'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"  placeholder="Ubicacion/Comuna" >
+
+                    <div  style="position: absolute; z-index: 9; top : 1px ; left : 3px " class="mb-2  rounded" > 
+                        <i class="display-2 m-1  bi bi-search  text-muted" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null); " ></i>
+                    </div>
+
+                    <div>
+                        <input style=" z-index: 9;  padding-left : 50px " type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   placeholder="Ubicacion/Comuna" >
                     </div>
                     
-                   
-                    <div v-if="ready_input" style="position: absolute; z-index: 9; top : 7px ; right : 3px " class="mb-2  rounded" > 
-                        <i class="display-6 m-1 bi bi-check2 text-success"></i>
+                    <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
+                        <i class="display-2 m-1  bi bi-x  text-muted" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null); " ></i>
                     </div>
 
                 </div>    
-               
-                <div class="col-2 m-0 p-0">
-                    <i  class="display-2 p-0 bi bi-x-square m-1 text-muted"  @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null); "></i>
-                </div>
+                
             </div>
         </div>
 </template>
