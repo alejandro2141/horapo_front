@@ -11,7 +11,7 @@ const count = ref(0)
 
 <template>
     <div class="h2" >
-    Busca una Hora profesional
+    Busca tu Hora 
     </div>
         <div>
             <div>
