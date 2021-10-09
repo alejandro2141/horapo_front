@@ -21,7 +21,7 @@ const count = ref(0)
 					<i class="">123hora?</i>
 				</a>
 				<!-- button 1 -->
-				<a HREF="./conmed-vuj-3/index.html" class="btn btn-outline-secondary  text-secondary btn-floating m-1"  role="button">
+				<a HREF="./nested/professionalAccess.html" class="btn btn-outline-secondary  text-secondary btn-floating m-1"  role="button">
 					<i class="">Profesional</i>
 				</a>
 				<!-- button 1 -->
