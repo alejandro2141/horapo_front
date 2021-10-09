@@ -1,0 +1,68 @@
+<script setup>
+import { ref } from 'vue'
+import axios from 'axios';
+
+
+</script>
+
+<template>
+
+   	  <select class="form-select form-control-lg" aria-label="Default" id="form_center"  v-model="form_center"  name="form_center">
+            <option selected v-for="(center) in center_list" :value="center.id" :key="center.id" > {{center.name}} </option>	
+      </select>
+
+</template>
+
+<style scoped>
+</style>
+
+
+<script>
+
+export default {
+   data : function() {
+        return {
+      form_center : null ,
+      center_list : [] ,
+        }   
+    },
+   	
+    props: ['required_day','session_params'],
+    
+    emits: ['selectedCenterCode'] ,
+
+	created () {
+      this.getCenters() ;
+      console.log("inputFormCenterProfessiona  MOUNTED ");
+    },
+
+    mounted() {   
+        },
+
+    watch: {
+    //WATCHER CENTER to pass the value to parent
+        form_center(value, oldValue) {
+            this.$emit("selectedCenterCode", this.form_center ); 
+        },
+    },//end watch
+
+	methods :{
+
+        async getCenters() {
+			const json = { 
+			   professional_id : this.session_params.professional_id  ,			   
+   			   	      };
+			console.log ("getCenters REQUEST :"+ JSON.stringify(json)  );
+			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+			console.log ("getCenters RESPONSE :"+JSON.stringify(response_json.data.rows)) ;
+			this.center_list = response_json.data.rows;
+            //this.prevCenterName="noset";
+			},
+
+
+            },
+
+    }
+
+</script>
+
