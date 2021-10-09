@@ -28,7 +28,7 @@ defineProps({
         <button class="btn btn-success m-2 p-2" v-on:click="sendRecoverApp()" type="button">Enviar</button>
         </div>
         </form>
-        {{ user_email }}
+       
         </div>
 
 </template>
