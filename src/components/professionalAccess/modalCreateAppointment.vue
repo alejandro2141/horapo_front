@@ -31,7 +31,7 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                   
                    <form autocomplete="off"  >	
                      <h1 class="display-4">  Hora Inicio: </h1>
-                     <input class="form-control form-control-lg" type="text" :placeholder="hourCreate" :value="hourCreate" >
+                     <input class="form-control form-control-lg" type="text"  v-model="form_start_time" >
 
                       <input class="form-control form-control-lg" type="hidden" placeholder="form_date" name="form_date"   value="par_required_day"  >
                       <h1 class="display-4"> Especialidad:</h1>
@@ -115,11 +115,11 @@ export default {
            // centers: null,
             form_center_id : null,
             form_public : null ,
+            form_start_time : null ,
           }   
     },
    	
    props: ['daterequired','hourCreate', 'session_params' ],
-    
    emits: ['UpdateHoursList'] , 
       
    	mounted () {
@@ -154,7 +154,7 @@ export default {
              
              this.showModalCreateApp= true ;
             console.log ("hourCreate Change!!!"+newValue+ " ShoModalCreateApp="+this.showModalCreateApp);
-
+            this.form_start_time = newValue.start_time ; 
         }
     }
 
