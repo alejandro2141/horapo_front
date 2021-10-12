@@ -29,59 +29,60 @@ import ModalCreateAppointment from './modalCreateAppointment.vue';
 
         </div>
 
-    <div v-for="(hour) in hours" :key="hour" >
-        <div class="d-flex mt-3" >
-            
-            <div class="text-secondary display-3" >
-                {{ hour.app_start }}:00
-            </div>
-            <div class=" display-5 w-100   text-center" >
-                <i class="text-secondary bi bi-slash-circle"></i>
-            </div>
+    <div v-for="(hour) in hours" :key="hour"  >
+      
+                 <div v-if="hour.app_available != null" >
+                
+                    <div v-if="hour.app_available == false ">
+                        <AppointmentReserved :appointment='hour' :index="hour.id" > </AppointmentReserved>
+                    </div>
+                    <div v-else>
+                        <AppointmentAvailable :appointment='hour' :index="hour.id" > </AppointmentAvailable>
+                    </div>
 
-            <div class="display-5" >
-                <i class="text-secondary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" ></i>
-            </div>
+                </div>
+       
+                <div v-else class="d-flex mt-0">
 
-        </div>
-        <hr/>
+                    <div class="text-secondary" >
+                        {{ hour.start_time.substring(0,5) }}
+                    </div>
+                    <div class=" display-6 w-100   text-center" >
+                      ---  <!--  <i class="text-secondary bi bi-slash-circle"></i> -->
+                    </div>
+
+                    <div class="display-6" >
+                        <i class="text-secondary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" ></i>
+                    </div>
+
+
+                </div>
+
+
+        
+        <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />
     </div>
 
-    
-    <div v-for="(appointment) in appointments" :key="appointment.id" >
-        
-        <div v-if="sameCenter(appointment.center_name)" >
-        <!-- do Nothing --> 
-        </div>
-        
-        <div v-else>
-          <!-- INCLUDE CENTER NAME -->
-          <br/>
-            <div class="d-flex p-10 justify-content-between  mb-2 text-muted"  :style="{'background-color' : '#'+appointment.center_color }" >
-                <div class="display-1 w-20">
-                    <i class="fas fa-running "></i>    
-                    <i class="fas fa-caret-right"></i>
-                    <i class="fas fa-clinic-medical"></i>
-                </div>
-                <div class="w-80 ml-3 ">
-                        {{appointment.center_name}} <br>
-                        {{appointment.center_address}}
-                </div>
+    <!-- 
+    <div v-for="(hour) in hours" :key="hour.id" >
+
+        <div v-if="hour.app_available != null" >
+           
+            <div v-if="hour.app_available == false ">
+                <AppointmentReserved :appointment='hour' :index="hour.id" > </AppointmentReserved>
             </div>
+            <div v-else>
+                <AppointmentAvailable :appointment='hour' :index="hour.id" > </AppointmentAvailable>
+            </div>
+
         </div>
-        <div v-if="appointment.app_available == false ">
-            <AppointmentReserved :appointment='appointment' :index="index" > </AppointmentReserved>
-        </div>
-        <div v-else>
-            <AppointmentAvailable :appointment='appointment' :index="index" > </AppointmentAvailable>
-        </div>
-    
+    -->
 <!--
     <ModalAppointmentDetails :appointment="appointment" :index="index"></ModalAppointmentDetails> 
     <ModalReserve :appointment="appointment" :index="index"></ModalReserve> 
 -->
-    </div>
-
+   
+<!--
 	<div class="mt-3 d-flex justify-content-between" >	
 			<div class="m-2">
 			</div>
@@ -93,7 +94,7 @@ import ModalCreateAppointment from './modalCreateAppointment.vue';
 			<div class="m-2">
 			</div>
 	</div>
-    
+    -->
     <!--
     <ModalAddHours :session_params="session_params" :centers="centers"  :daterequired="daterequired" ></ModalAddHours> 
 	<ModalDuplicateDay :session_params="session_params"  :daterequired="daterequired" > </ModalDuplicateDay> 
@@ -116,13 +117,11 @@ import ModalCreateAppointment from './modalCreateAppointment.vue';
 export default {
    data : function() {
         return {
-            hours : [
-                {app_start:'00',  app_duration : '60' }, 
-                {app_start:'01',  app_duration : '60' },
-                 ]  ,
+            hours : [] ,
             
             //hr:'01', '02', '03', '04', '05','06','07','08','09','10', '11','12','13','14','15','16','17','18','19','20','21','22','23' ],
             hourCreate : null ,
+            prevCenterName : 'NoSet' ,
         }   
     },
    	
@@ -131,15 +130,75 @@ export default {
 	created () {
        // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
 	},
+    
+    watch : {
+        appointments(newValue){         
+            this.hours = [  { "start_time" : "00:00" },
+                            { "start_time" : "01:00" },
+                            { "start_time" : "02:00" },
+                            { "start_time" : "03:00" },   
+                            { "start_time" : "04:00" },
+                            { "start_time" : "05:00" },
+                            { "start_time" : "06:00" },
+                            { "start_time" : "07:00" },   
+                            { "start_time" : "08:00" },
+                            { "start_time" : "09:00" },
+                            { "start_time" : "10:00" },   
+                            { "start_time" : "11:00" },
+                            { "start_time" : "12:00" },
+                            { "start_time" : "13:00" },
+                            { "start_time" : "14:00" },   
+                            
+                            ];
+
+            this.showModalCreateApp= true ;
+            console.log ("appointments change !!!");
+            let poped = newValue.pop() ;
+            
+            console.log ("appointments change !!!");
+            
+            while ( poped != null )
+            {  
+            this.hours.push( poped )    
+            console.log( "StartTime POP="+JSON.stringify(poped.start_time ) ) 
+            poped = newValue.pop() ;
+            } 
+            //this.hours.sort();
+
+             this.hours.sort(function(a, b){
+            let x = a.start_time;
+            let y = b.start_time
+            if (x < y) {return -1;}
+            if (x > y) {return 1;}
+            return 0;
+            });
+
+            
+
+        }
+    },
 
 	methods :{
 
         displayModalCreateApp(ahour)
         {
             this.hourCreate = ahour ;
-            console.log("Display Modal Create App:"+this.hourCreate+" Day:"+this.daterequired );
+            console.log("Display Modal Create App:"+this.hourCreate.start_time+" Day:"+this.daterequired );
             
         },
+
+        sameCenter(center){
+        console.log ("Compare cen Name  center:"+center+" prevCenterName:"+this.prevCenterName+" resultComparison "+center.localeCompare(this.prevCenterName)   );
+           if (center.localeCompare(this.prevCenterName) === 0 )
+            {   
+                return true ;
+            }
+            else{
+                this.prevCenterName=center;
+                return false;
+            //  this.prevCenterName=center;
+            }
+        },  
 
  
 
