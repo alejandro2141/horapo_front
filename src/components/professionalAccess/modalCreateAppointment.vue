@@ -20,7 +20,7 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                 <div class="modal-header h1" >
                     <div class="d-flex flex-row bd-highlight mb-3">
                         <div class="p-2 bd-highlight">Crear Hora <br/>
-                         Dia {{daterequired}} </div>
+                       </div>
                         <div class="p-2 bd-highlight"></div>
                          <div class="p-2 bd-highlight"><i class=" bi bi-x display-1"  v-on:click="showModalCreateApp = false" aria-label="Close"></i>
                        </div>
@@ -30,7 +30,10 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                 <div class="modal-body " > 
                   
                    <form autocomplete="off"  >	
-                     <h1 class="display-4">  Hora Inicio: </h1>
+
+                    <h1 class="display-4"> Dia {{daterequired}} </h1>
+                    <h1 class="display-4">  Hora Inicio: </h1>
+
                      <input class="form-control form-control-lg" type="text"  v-model="form_start_time" >
 
                       <input class="form-control form-control-lg" type="hidden" placeholder="form_date" name="form_date"   value="par_required_day"  >
@@ -38,11 +41,11 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                         <InputFormSpecialtyProfessional v-on:selectedSpecialtyCode="selectedSpecialtyCode"  :session_params="session_params" > </InputFormSpecialtyProfessional> 
                       
                       <h1 class="display-4">Centro de Atencion: </h1>
-                        <InputFormCenterProfessional v-on:selectedSpecialtyCode="selectedSpecialtyCode" :session_params="session_params" > </InputFormCenterProfessional> 
+                        <InputFormCenterProfessional v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" > </InputFormCenterProfessional> 
                      
                       <h1 class="display-4"> Tiempo de atencion:</h1> 
                    
-                        <select class="form-select form-control-lg" aria-label="Default" id="time" name="timeextension">
+                        <select class="form-select form-control-lg" aria-label="Default" id="time" name="timeextension" v-model="form_app_duration">
                             <option value="15">15 Min </option>
                             <option value="30">30 Min </option>
                             <option value="45">45 Min </option>
@@ -67,17 +70,11 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                           </select>
                         </div>
                       </div>
-
-
-                     
                       
                       <button type="button" @click="createHours();" data-bs-dismiss="modal" class="btn btn-primary">GUARDAR </button>
-                      
-                      
-                      
+
                       </form>			
-					
-                            
+        
                 </div>
         </div> 
         </div> 		
@@ -116,6 +113,9 @@ export default {
             form_center_id : null,
             form_public : null ,
             form_start_time : null ,
+            form_specialty_code : null ,
+            form_center_code  : null ,
+            form_app_duration : 15,
           }   
     },
    	
@@ -147,6 +147,41 @@ export default {
             console.log("selecte Specialty Code "+value);
         },
     */
+    selectedSpecialtyCode(value)
+    {
+    console.log("speciality selected code: "+value);
+    this.form_specialty_code = value ;
+    },
+
+    selectedCenterCode(value)
+    {
+    console.log("Center selected code: "+value);
+    this.form_center_code = value ;
+    },
+
+	  async createHours() {
+        const json = { 
+              form_center_id  : this.form_center_code ,
+              form_professional_id : this.session_params.professional_id  ,
+             //hours 
+              form_date : this.daterequired ,
+              form_start_time : this.form_start_time , //cambio
+              form_appointment_duration : this.form_app_duration , 
+              form_specialty_code : this.form_specialty_code,
+              form_public : 1 ,
+                        };
+                  
+        console.log ("createHours REQUEST :"+ JSON.stringify(json)  );
+        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_appointment",json);
+        console.log ("createHours RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+        //location.reload();
+        //this.agendas = response_json.data.rows;
+        //location.reload();
+        this.$emit('UpdateHoursList');
+        }
+
+
+
 
     },
     watch : {
