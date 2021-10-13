@@ -16,18 +16,16 @@ import axios from 'axios';
         
                 <div class="m-2">
                     
-                    <div>
-                    {{appointment.date.substring(0, 10) }} 
-                    </div>
                     <div class="display-2">
                     {{appointment.start_time.substring(0, 5) }}							
                     </div>
-                    <div class="display-6">
-                    a {{appointment.end_time.substring(0, 5) }}
+                    <div class="">
+                   {{appointment.duration }} Min.  
                     </div>
 
                     <div class="display-1 text-success">
-                        <i class="fas fa-user-injured"></i>
+                        <i class="bi bi-person"></i>
+                        - {{appointment.confirmation_status }} -
                     </div>
 
                 </div>
@@ -42,11 +40,10 @@ import axios from 'axios';
 
                         </div>
                         <div  v-if="appointment.available_public_search == 1">
-                                <i class="fas fa-wifi text-success"></i>
+                                <i class="bi bi-wifi text-success display-2"></i>
+
                         </div>
-                        <div v-else >
-                                <i class="fas fa-wifi text-muted"></i>
-                        </div>
+
                     </div>
                     
                     <div>
@@ -55,17 +52,25 @@ import axios from 'axios';
                     Rut:{{appointment.patient_doc_id }}
                     </div>
                     
-                    <div>
-                    {{appointment.center_name }}<br>
-                    </div>
-                    <div>
-                    {{appointment.center_address }}<br>
-                    </div>	
+                    
+                   
                      <div class="text-danger" v-if="appointment.app_blocked == 1 ">
                      Espacio de tiempo Bloqueado
                      </div>
                 </div>
+
+
+        
+        </div>
+            
+            <div>
+                    {{appointment.center_name }}<br>
             </div>
+             <div>
+                    {{appointment.center_address }}<br>
+            </div>
+
+           	
     </div>
 
 </template>
