@@ -8,7 +8,7 @@ import GeneralHeader from '../src/components/GeneralHeader.vue'
 
 <template>
 <GeneralHeader></GeneralHeader>
-    <div id="app" class="text-center m-4" >     
+    <div id="app" class="text-center p-5 bg-light" >     
    
         123Hora es una plataforma de agendamiento de horas profesionales, aqui puede buscar y agendar una hora con profesionales de Psicologia, Kinesiologia y otras terapias. <br> Esta plataforma reune a los mejores profesionales en un solo lugar para sus pacientes.
         <br>
