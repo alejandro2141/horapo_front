@@ -12,7 +12,7 @@ import ModalCreateAppointment from './modalCreateAppointment.vue';
 
  <div id="search_result">
 
-<ModalCreateAppointment :daterequired='daterequired' :hourCreate='hourCreate' :session_params='session_params' > </ModalCreateAppointment>
+<ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params' > </ModalCreateAppointment>
 
      <div class=" text-secondary d-flex  calendarlist" >
             
@@ -126,7 +126,7 @@ export default {
     },
    	
    props: ['daterequired','session_params','appointments'],
-
+   emits: ['updateAppointmentList'] , 
 	created () {
        // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
 	},
@@ -148,7 +148,6 @@ export default {
                             { "start_time" : "12:00" },
                             { "start_time" : "13:00" },
                             { "start_time" : "14:00" },   
-                            
                             ];
 
             this.showModalCreateApp= true ;
@@ -185,6 +184,11 @@ export default {
             this.hourCreate = ahour ;
             console.log("Display Modal Create App:"+this.hourCreate.start_time+" Day:"+this.daterequired );
             
+        },
+        updateAppList()
+        {
+            console.log("Update App List in List Appointments");
+            this.$emit('updateAppointmentList');
         },
 
         sameCenter(center){
