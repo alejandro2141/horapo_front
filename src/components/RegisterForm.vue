@@ -5,8 +5,9 @@ import axios from 'axios';
 </script>
 
 <template>
+<div class="bg-light">
         <div class="m-2 p-2 text-center">
-            <br>   Para que sus horas de atención esten disponibles en la busqueda de pacientes, debe registarse como profesional completando el siguiente formulario.
+               Para que sus horas de atención esten disponibles en la busqueda de pacientes, debe registarse como profesional completando el siguiente formulario.
             <div class="text-center mt-2 pt-5 "> 
                  <a HREF="/index.html" type="button" class="btn btn-outline-secondary m-2">Regresar</a>
                  <button type="button" @click="showForm  = !showForm " class="btn btn-secondary ">Si, deseo Registarme</button>
@@ -75,7 +76,7 @@ import axios from 'axios';
         </div>
 
         </template>
-
+</div>
 </template>
 
 <style scoped>
