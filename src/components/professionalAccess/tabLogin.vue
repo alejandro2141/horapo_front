@@ -17,8 +17,8 @@ defineProps({
                 <div class="m-2">
                 </div>
                 
-                <div class="m-2 display-2">
-            Login Professional 
+                <div class="m-2 ">
+            <h1> Acceso Profesionales Registrados </h1> 
                 </div>
                 
                 <div class="m-2">
@@ -53,8 +53,8 @@ export default {
             login_message : "Ingrese sus credenciales",
             url_param : [] ,
             form_token : "",
-            form_email : "a",
-            form_pass : "a",
+            form_email : "",
+            form_pass : "",
         }   
     },
     emits: ['startSession'] ,
