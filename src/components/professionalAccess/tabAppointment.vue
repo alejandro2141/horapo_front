@@ -14,7 +14,7 @@ import ListAppointments from './listAppointments.vue'
       <div>
             <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> 
-           <ListAppointments v-if="session_params" :daterequired="daterequired" :appointments="appointments" :session_params="session_params" ></ListAppointments>
+           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :session_params="session_params" ></ListAppointments>
 
             <div id='footer' style='height : 800px'>
             </div>
@@ -48,6 +48,7 @@ data: function () {
  
     methods: {
 
+
         set_daterequired : function (year_month_day) {
             console.log("TAB HOME GoToDay "+year_month_day);
            // this.getAppointments(year_month_day);
@@ -57,7 +58,7 @@ data: function () {
             },
 
         async updateAppointmentList() {
-			
+	        	
 				const json = { 
 				// agenda_id : this.par_agenda_id ,			 
 				 date : this.daterequired ,
