@@ -18,15 +18,15 @@ const count = ref(0)
                 <div class="col" style="position: relative;" >
 
                     <div  style="position: absolute; z-index: 9; top : 1px ; left : 3px " class="mb-2  rounded" > 
-                        <i class="display-2 m-1  bi bi-search  text-muted" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null); " ></i>
+                        <i class="display-6   bi bi-search  text-muted" ></i>
                     </div>
 
                     <div>
-                        <input style=" z-index: 9;  padding-left : 50px " type="text" class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Especialidad, Psicolog.., Kinesio.." aria-label=".form-control-lg example"  >
+                        <input style=" z-index: 9;  padding-left : 40px ; padding-right : 50px" type="text" class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Especialidad, Psicolog.., Kinesio.." aria-label=".form-control-lg example"  >
                     </div>
                     
                      <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
-                        <i class="display-2 m-1  bi bi-x  text-muted"  @click="form_specialty = null; display_error = false ; $emit('selectedSpecialtyCode', null); " ></i>
+                        <i class="display-2 m-1  bi bi-x  text-muted "  @click="form_specialty = null; display_error = false ; $emit('selectedSpecialtyCode', null); " ></i>
                     </div>
                     
                 </div>    
