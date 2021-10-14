@@ -25,7 +25,8 @@ import axios from 'axios';
 
                     <div class="display-1 text-success">
                         <i class="bi bi-person"></i>
-                        - {{appointment.confirmation_status }} -
+                         {{appointment.confirmation_status }} 
+                        
                     </div>
 
                 </div>
