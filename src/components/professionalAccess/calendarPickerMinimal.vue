@@ -9,13 +9,13 @@ import axios from 'axios';
     
     <div class="text-center">
         <div class="display-1">
-          {{this.calendar[parseInt(this.req_year)][parseInt(this.req_month)][parseInt(this.req_day)] }}
+          {{calendar[parseInt(req_year)][parseInt(req_month)][parseInt(req_day)] }}
         </div>
         <div class="display-1">
-            <i v-on:click="prevDay()" class="bi bi-caret-left"></i>  {{this.req_day}} <i  v-on:click="nextDay()" class="bi bi-caret-right"></i>
+            <i v-on:click="prevDay()" class="bi bi-caret-left"></i>  {{req_day}} <i  v-on:click="nextDay()" class="bi bi-caret-right"></i>
         </div>
         <div class="display-4">
-            <i v-on:click="prevMonth()" class="bi bi-caret-left display-1"></i> {{ this.calendar[parseInt(this.req_year)][parseInt(this.req_month)][0]  }} 20{{this.req_year}}<i v-on:click="nextMonth()" class="bi bi-caret-right display-1"></i>
+            <i v-on:click="prevMonth()" class="bi bi-caret-left display-1"></i> {{ calendar[parseInt(req_year)][parseInt(req_month)][0]  }} 20{{req_year}}<i v-on:click="nextMonth()" class="bi bi-caret-right display-1"></i>
         </div>
     </div>
     <hr>
@@ -31,7 +31,7 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
-        calendar : null, 
+        calendar : [] , 
         today_day : null,
         today_month : null,
         today_year : null,
@@ -46,8 +46,10 @@ export default {
     
     emits: ['set_daterequired'] ,
 
+
 	created () {
-		console.log("CREATED CALENDAR-PICKER");
+        //this.setCalendar();
+	    console.log("CALENDAR PICKER MINIMAL CREATED !!");
 		let tempDate=new Date().toISOString().split('T')[0].split('-');
 	    console.log("tempDate : "+tempDate);
         this.today_day = parseInt(tempDate[2])
@@ -59,9 +61,30 @@ export default {
         this.req_year = this.today_year,
 
 		console.log("tday:"+ this.today_day + " tmont:"+this.today_month + " tyear:"+this.today_year );
-  
-        this.setCalendar();
+         this.setCalendar() ;
+        /*
+        this.calendar[21] = [] ;
+        this.calendar[22] = [] ;
+        this.calendar[21][10] = [] ;
+        this.calendar[21][11] = [] 
+        this.calendar[21][10] = [ "Octubre", 
+                                            "Viernes" , "Sabado" , "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"    ] ;
+
+        this.calendar[21][11] = [ "Noviembre", "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Lunes" , "Martes"     ] ;
+        */
+
+        console.log("CALENDAR PICKER MINIMAL CREATED END !!");
 	},
+     mounted() {   
+         // this.setCalendar();
+         console.log("CALENDAR PICKER MINIMAL MOUNTED !!");
+        // this.setCalendar() ;
+        },
+
 	methods :{
         nextDay()
         {
@@ -93,11 +116,11 @@ export default {
         setCalendar()
         {
         console.log("set Calendar method");
-        this.calendar = [] ;
+        //this.calendar = [] ;
         this.calendar[21] = [] ;
         this.calendar[22] = [] ;
         this.calendar[21][10] = [] ;
-        this.calendar[21][11] = [] ;
+        this.calendar[21][11] = [] 
         this.calendar[21][10] = [ "Octubre", 
                                             "Viernes" , "Sabado" , "Domingo", 
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
@@ -106,7 +129,8 @@ export default {
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"    ] ;
 
         this.calendar[21][11] = [ "Noviembre", "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", "Lunes" , "Martes"     ] ;
-        console.log("calendar al zoom "+ JSON.stringify(this.calendar )  );
+       
+        console.log("Set CALENDAR:  "+ JSON.stringify(this.calendar )  );
         },
 
 	 //********* GO TO DAY
