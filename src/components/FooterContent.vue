@@ -9,7 +9,7 @@ const count = ref(0)
 </script>
 
 <template>
-   <div class="  mb-0 mt-5 pt-5" >
+   <div class="fixed-bottom bg-light" >
 		<hr>
 			<div class=" text-center  ">
 			<!-- Grid container -->
