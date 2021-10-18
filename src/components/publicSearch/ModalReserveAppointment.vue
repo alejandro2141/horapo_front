@@ -66,7 +66,7 @@ defineProps({
                                 <div v-if="error_msg_insurance_code" class="text-danger">Debe Indicar su isapre, Fonasa o "Particular" en caso de no tener</div>
                                 <br>
 								-->
-                                <button type="button" @click="sendReserveAppointment(app.app_id); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
+                                <button type="button" @click="sendReserveAppointment(app); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
                             </form> 
                     </div>
         </div> 
@@ -194,7 +194,7 @@ computed: {
 
 	methods: {
 
-		async sendReserveAppointment(appid)
+		async sendReserveAppointment(app)
 		{
 			console.log("Send Reserve Appointment Post. ");
 			if (this.form_patient_name === null || this.form_patient_name === "" )
@@ -238,7 +238,7 @@ computed: {
 					var r =confirm("Desea continuar con la Reservar esta cita?");
 					  if (r == true) {
 						const json = { 
-						appointment_id : appid,
+						appointment_id : app.app_id,
 						patient_age : this.form_patient_age,
 						patient_name : this.form_patient_name,
 						patient_doc_id	: this.form_patient_doc_id,
@@ -246,9 +246,12 @@ computed: {
 						patient_phone	:	this.form_patient_phone,
 						//patient_insurance:	this.form_patient_insurance_code,
 						patient_insurance:	9999 ,
+						form_public : app.available_public_search ,
+						app_available : false 
+
 								};
 						console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
-						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/save_appointment",json );
+						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_take_appointment",json );
 					//  console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
 						console.log ("RESPONSE save_appointment data raw :"+JSON.stringify(response_json.data)) ;
 						console.log ("RESPONSE save_appointment patient name :"+response_json.data.patient_name ) ;
