@@ -37,7 +37,7 @@ import ModalShowAppointmentDetails from './modalShowAppointmentDetails.vue';
                  <div v-if="hour.app_available != null" >
                 
                     <div v-if="hour.app_available == false ">
-                        <AppointmentReserved v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id" > </AppointmentReserved>
+                        <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" > </AppointmentReserved>
                     </div>
                     <div v-else>
                         <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id" > </AppointmentAvailable>
@@ -182,6 +182,12 @@ export default {
     },
 
 	methods :{
+        displayModalReservedDetails(hour)
+        {
+            console.log ("show app details Reserved")
+        },
+
+
 
         displayModalViewAppDetails(hour)
         {
