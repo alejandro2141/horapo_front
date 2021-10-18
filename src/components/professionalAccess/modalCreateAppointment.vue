@@ -62,8 +62,8 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                         </div>
                         <div class="col">
                           <select  class="autocomplete form-select form-select mb-2" placeholder="Disonible Internet"  aria-label=".form-select-lg example" id="form_public"  v-model="form_public" name="form_public" >
-                            <option value="0">NO</option>
-                            <option value="1">SI</option>
+                            <option value="false">NO</option>
+                            <option value="true">SI</option>
                           </select>
                         </div>
                       </div>
@@ -178,7 +178,7 @@ export default {
             form_start_time : null ,
             form_specialty_code : null ,
             form_center_code  : null ,
-            form_app_duration : 15,
+            form_app_duration : 30,
           }   
     },
    	
@@ -234,7 +234,7 @@ export default {
               form_start_time : this.form_start_time , //cambio
               form_appointment_duration : this.form_app_duration , 
               form_specialty_code : this.form_specialty_code,
-              form_public : 1 ,
+              form_public : this.form_public ,
                         };
                   
         console.log ("createHours REQUEST :"+ JSON.stringify(json)  );
