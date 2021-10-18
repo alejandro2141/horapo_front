@@ -11,7 +11,7 @@ defineProps({
 
 <template>
     
-     <div>
+     <div class="p-3">
 
             <div class="d-flex justify-content-between" >	
                 <div class="m-2">
