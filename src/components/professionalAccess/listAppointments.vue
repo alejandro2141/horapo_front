@@ -4,6 +4,8 @@ import axios from 'axios'
 import AppointmentAvailable from './appointmentAvailable.vue'
 import AppointmentReserved from  './appointmentReserved.vue'
 import ModalCreateAppointment from './modalCreateAppointment.vue';
+import ModalShowAppointmentDetails from './modalShowAppointmentDetails.vue';
+
 
 
 </script>
@@ -13,6 +15,7 @@ import ModalCreateAppointment from './modalCreateAppointment.vue';
  <div id="search_result">
 
 <ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params' > </ModalCreateAppointment>
+<ModalShowAppointmentDetails v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' > </ModalShowAppointmentDetails>
 
      <div class=" text-secondary d-flex  calendarlist" >
             
@@ -34,10 +37,10 @@ import ModalCreateAppointment from './modalCreateAppointment.vue';
                  <div v-if="hour.app_available != null" >
                 
                     <div v-if="hour.app_available == false ">
-                        <AppointmentReserved :appointment='hour' :index="hour.id" > </AppointmentReserved>
+                        <AppointmentReserved v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id" > </AppointmentReserved>
                     </div>
                     <div v-else>
-                        <AppointmentAvailable :appointment='hour' :index="hour.id" > </AppointmentAvailable>
+                        <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id" > </AppointmentAvailable>
                     </div>
 
                 </div>
@@ -121,6 +124,7 @@ export default {
             
             //hr:'01', '02', '03', '04', '05','06','07','08','09','10', '11','12','13','14','15','16','17','18','19','20','21','22','23' ],
             hourCreate : null ,
+            hourDetails : null ,
             prevCenterName : 'NoSet' ,
         }   
     },
@@ -178,6 +182,12 @@ export default {
     },
 
 	methods :{
+
+        displayModalViewAppDetails(hour)
+        {
+        console.log("Display Modal View App Details :"+JSON.stringify(hour));
+        this.hourDetails = hour; 
+        },
 
         displayModalCreateApp(ahour)
         {
