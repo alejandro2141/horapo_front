@@ -57,13 +57,13 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                         <div class="h2 p-2">En Internet</div>
 
                         <div class="m-3" v-on:click="form_public = !form_public">  
-                            {{form_public}}
                             <i v-if="form_public" class="display-1 bi bi-wifi"> </i>
                             <i v-else  class="display-3 bi bi-wifi-off"> </i>
                         </div>
                      </div>
        
-                      <button type="button" @click="updateApp(hourDetails);" data-bs-dismiss="modal" class="btn btn-primary">GUARDAR CAMBIOS</button>
+                      <button type="button" @click="updateApp(hourDetails);" data-bs-dismiss="modal" class="btn btn-primary m-2">GUARDAR CAMBIOS</button>
+                      <button type="button" @click="cancelHour(hourDetails);" data-bs-dismiss="modal" class="btn btn-danger m-2">CANCELAR ESTA HORA</button>
 
                       </form>			
         
