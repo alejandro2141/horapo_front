@@ -16,12 +16,12 @@ import TabAppointment from '../src/components/professionalAccess/tabAppointment.
     </div>
    <tab-assistants v-if="session_params['professional_name']" :style="{display:  visible_tab_assistants }" :session_params="session_params"  class="position-relative  w-100" > </tab-assistants> 
 --> 
-<div class="bg-light">
-    <div v-if="session_params['professional_name']" :style="{display:  visible_tab_appointments }"    class="position-relative w-100">
+<div>
+    <div v-if="session_params['professional_name']" :style="{display:  visible_tab_appointments }"    class="position-relative w-100 bg-light">
         <TabAppointment :session_params="session_params" >  </TabAppointment> 	
     </div>
 
-    <div :style="{display:  visible_tab_login }"  class="position-relative w-100" >	 
+    <div :style="{display:  visible_tab_login }"  class=" position-relative w-100 bg-light" >	 
         <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
     </div>
 </div>
