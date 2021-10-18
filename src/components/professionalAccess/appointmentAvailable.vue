@@ -25,7 +25,8 @@ import axios from 'axios';
                             
                             <div class=" w-100 " style="padding-left: 15px;" >
                                 <div class="display-5" >
-                                DISPONIBLE  <i v-if="appointment.available_public_search == 1" class="bi bi-wifi text-success display-2"></i>
+                                DISPONIBLE  
+                                <i v-if="appointment.available_public_search" class="bi bi-wifi text-success display-2"></i>
                                       
                                 </div>
 
