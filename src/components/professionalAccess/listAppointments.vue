@@ -5,6 +5,8 @@ import AppointmentAvailable from './appointmentAvailable.vue'
 import AppointmentReserved from  './appointmentReserved.vue'
 import ModalCreateAppointment from './modalCreateAppointment.vue';
 import ModalShowAppointmentDetails from './modalShowAppointmentDetails.vue';
+import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
+import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppointment.vue';
 
 
 
@@ -15,7 +17,9 @@ import ModalShowAppointmentDetails from './modalShowAppointmentDetails.vue';
  <div id="search_result">
 
 <ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params' > </ModalCreateAppointment>
-<ModalShowAppointmentDetails v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' > </ModalShowAppointmentDetails>
+<ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' > </ModalShowAppointmentDetails>
+<ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' > </ModalShowAppointmentTaken>
+<ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' > </ModalProfessionalReserveAppointment>
 
      <div class=" text-secondary d-flex  calendarlist" >
             
@@ -125,6 +129,8 @@ export default {
             //hr:'01', '02', '03', '04', '05','06','07','08','09','10', '11','12','13','14','15','16','17','18','19','20','21','22','23' ],
             hourCreate : null ,
             hourDetails : null ,
+            hourTaken : null ,
+            hourToReserve : null ,
             prevCenterName : 'NoSet' ,
         }   
     },
@@ -182,11 +188,17 @@ export default {
     },
 
 	methods :{
-        displayModalReservedDetails(hour)
+        showReserveModal(hour)
         {
-            console.log ("show app details Reserved")
+            console.log ("show Reserve Modal in ListAppointment ")
+            this.hourToReserve = hour;
         },
-
+        
+       displayModalReservedDetails(hour)
+       {
+            console.log ("Display Modal Reserved APP!")
+            this.hourTaken=hour ;
+       },
 
 
         displayModalViewAppDetails(hour)
