@@ -23,10 +23,9 @@ import axios from 'axios';
                    {{appointment.duration }} Min.  
                     </div>
 
-                    <div class="display-1 text-success">
-                        <i class="bi bi-person"></i>
-                         {{appointment.confirmation_status }} 
-                        
+                    <div >
+                       <text class="text-success" v-if='appointment.confirmation_status == 0' >Sin Confirmar </text> 
+                       <i class="display-1 text-success bi bi-person"></i>
                     </div>
 
                 </div>
