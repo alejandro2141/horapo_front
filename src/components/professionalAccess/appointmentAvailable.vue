@@ -24,9 +24,14 @@ import axios from 'axios';
                             </div>
                             
                             <div class=" w-100 " style="padding-left: 15px;" >
-                                <div class="display-5" >
-                                DISPONIBLE 
-                                <i v-if="appointment.available_public_search" class="bi bi-wifi text-success display-2"></i>
+                                <div  >
+                                    <div v-if="appointment.app_status == 1 " class="text-danger" >
+                                        Hora Cancelada 
+                                    </div>
+                                    <div v-else class="text-success"> 
+                                        DISPONIBLE <i v-if="appointment.available_public_search" class="bi bi-wifi text-success h3"></i> 
+                                    </div> 
+
                                       
                                 </div>
 
