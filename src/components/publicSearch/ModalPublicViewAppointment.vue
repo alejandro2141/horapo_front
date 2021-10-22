@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
+
 
 defineProps({
   app : Object,
@@ -13,9 +15,11 @@ defineProps({
 
 <template>
 
+<ModalPublicReserveAppForm v-on:updateSearchResult='updateSearchResult' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve'></ModalPublicReserveAppForm>
+
 	<teleport to="body"   >
 
-		<div v-if="showModalPublicReserve" class="modal bg-secondary"    >
+		<div v-if="showModalPublicAppDetails" class="modal bg-secondary"    >
 		    
 			<transition name="modal">
 			<div class="modal-mask " v-if="app != null && showModalAux"  >
@@ -26,12 +30,9 @@ defineProps({
  					<div class="d-flex flex-row justify-content-end  m-1">
                       <div class="display-4 " style="margin-right: 1em;" >  {{ app.specialty_name}}  </div>
                       <div class="" style="margin-right: 1em;" > </div>
-                      <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalPublicReserve = false" aria-label="Close"></i> </div>
+                      <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
                     </div>
 
-
-
-                  
                 <div class="mb-2 h2">
                    <text class="">  <i class="bi bi-calendar"></i> Dia  {{app.date.substring(0, 10) }} </text> 
                     <text class=""> <i class="bi bi-smartwatch"></i> Hora {{app.start_time.substring(0, 5) }}  Hrs </text>
@@ -53,35 +54,9 @@ defineProps({
 	<text>Mapa:</text>
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.80973223681!2d-70.66387378523802!3d-33.40212780241913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c678e0d23d79%3A0x944abd548ad95b98!2sTrist%C3%A1n%20Cornejo%20957%2C%20Independencia%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1634857648760!5m2!1ses-419!2scl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </div>
-	 <button type="button" @click="reserveHour(hourDetails);" data-bs-dismiss="modal" class="btn btn-primary m-2"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
-                    
-					
-					
-        <!--  
-                <div class="text-dark"> Datos del Paciente
-                </div>							
-                            <form autocomplete="off" method="POST" action="take_appointment.html">			
-                                <input class="form-control form-control-lg" type="hidden" placeholder="Token" name="token" value="AAAAA"  >
-                                <br>	
-                                <input class="form-control form-control-lg" type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
-                                <div v-if="error_msg_name" class="text-danger">Debe Indicar Nombre del paciente</div>
-                                <br>
-                                <input class="form-control form-control-lg" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
-                                <div v-if="error_msg_doc_id" class="text-danger">Debe Indicar RUT o Pasaporte del paciente</div>
-                                <br/>
-                                <input  type="number" class="form-control form-control-lg"  placeholder="Edad" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
-                                <div v-if="error_msg_age" class="text-danger">Debe Indicar Edad del paciente</div>
-                                <br/>
-                                <input class="form-control form-control-lg" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
-                                <div v-if="error_msg_email" class="text-danger">Debe Indicar un correo valido</div>
-                                <br>
-                                <input class="form-control form-control-lg" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
-                                <div v-if="error_msg_phone" class="text-danger">Debe Indicar un Telefono de contacto</div>
-                                <br>
-							
-                                <button type="button" @click="sendReserveAppointment(app); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
-                            </form> 
-							-->
+	 <button type="button" @click="reserveHour(app);"  class="btn btn-primary m-2"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
+                    		
+
                     </div>
         </div> 
         </div> 		
@@ -89,7 +64,7 @@ defineProps({
         </transition>
     	</div>
 	</teleport>
-
+<!--
 	<teleport to="body"   >
 			<div v-if="modalConfirmationOpen" class="modal bg-secondary" >
 				
@@ -141,7 +116,7 @@ defineProps({
 
 			</div> 
 	</teleport>
-
+-->
 	
 
 </template>
@@ -258,7 +233,9 @@ export default {
 		  error_msg_phone : false,
 		  error_msg_insurance_code : false,
 
-		  showModalPublicReserve : false ,
+		  showModalPublicAppDetails : false ,
+		  appToReserve : Object ,
+		  eventShowModalPubicReserve : null,
         }
   },
  emits: ["updateSearchResult"],
@@ -272,16 +249,27 @@ computed: {
 	  watch: {
 		openModalEvent(newApp, oldApp) {
 			console.log("openModalEvent !!!");
-			this.showModalPublicReserve = true ; 
+			this.showModalPublicAppDetails = true ; 
 	  },
 	},
 
 	methods: {
-		reserveHour(hourDetails)
+		reserveHour(hour)
 		{
-			console.log("Emit Reserve Hour ");
+			console.log("Public Reserve Hour ... display Modal");
+			
+			this.showModalPublicAppDetails = false ;
+			this.appToReserve = hour ;
+			this.eventShowModalPubicReserve = Math.random() ;
 		},
 
+		updateSearchResult()
+            {
+                console.log (" update search Result. ");
+                //this.appointment_list=null ;
+                this.$emit('updateSearchResult');
+            },
+/*
 		async sendReserveAppointment(app)
 		{
 			console.log("Send Reserve Appointment Post. ");
@@ -315,14 +303,7 @@ computed: {
 				return null ; 
 			}
 			else { this.error_msg_phone=false;}
-/*
-			if (this.form_patient_insurance_code === null || this.form_patient_insurance_code === "" )
-			{   this.error_msg_insurance_code=true;
-				return null ; 
-			}
-            
-			else { this.error_msg_insurance_code=false;}
-*/
+
 					var r =confirm("Desea continuar con la Reservar esta cita?");
 					  if (r == true) {
 						const json = { 
@@ -353,7 +334,7 @@ computed: {
 					//this.showModalConfirmation=true;
 						}
 		},
-
+*/
 		selectedInsuranceCode(code)
             {
             console.log("Insurance Code:"+code);
