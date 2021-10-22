@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import patientAppointmentAvailable  from './PatientAppointmentAvailable.vue'
-import modalReserveAppointment from './ModalReserveAppointment.vue'
+import modalPublicViewAppointment from './ModalPublicViewAppointment.vue'
 
 defineProps({
   msg: String,
@@ -18,19 +18,17 @@ const count = ref(0)
             <small class="mb-2 pl-3" > {{ notificationMessage }} </small> 
          
             <div class="mt-0"  v-for="appointment in appointment_list" :key="appointment.id" >
-               <patientAppointmentAvailable v-if="appointment != null"  v-on:click="setModalReserve(appointment); modalOpen = true" :appointment='appointment'  > </patientAppointmentAvailable>            
+               <patientAppointmentAvailable v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </patientAppointmentAvailable>            
             </div>
-         
                 <!-- Start make room for Modal data when it display-->
                 <div style="height: 400px">
                 </div>
-        
         </div>	
     
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
        
-        <modalReserveAppointment   :app="app" v-if="modalOpen" :modalOpen="modalOpen" v-on:updateSearchResult="updateSearchResult"  > </modalReserveAppointment>
+        <modalPublicViewAppointment   :app="app" :openModalEvent="openModalEvent"   v-on:updateSearchResult="updateSearchResult"  > </modalPublicViewAppointment>
         <!-- Modal Reserve and Confirm End -->
           
 </template>
@@ -53,6 +51,7 @@ export default {
             appointment_list : null,
             notificationMessage: null, 
             modalOpen : ref(false), 
+            openModalEvent : null ,
     }
   },
 
@@ -74,8 +73,8 @@ export default {
             {
                 console.log("Set Modal Reserve method in SearchApp Resutl"+JSON.stringify(appointment));
                 this.app=appointment;
-                this.modalOpen = true; 
-              
+                //this.modalOpen = true; 
+                this.openModalEvent = Math.random();
             },
             /*
             showConfirmationModal(appconfirm)
