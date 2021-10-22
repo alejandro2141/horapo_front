@@ -9,6 +9,7 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 <template>
 
 	<teleport to="body"   >
+    
 		<div  v-if="showModalAppointmentTaken" class="modal bg-secondary"    >
 		    <transition name="modal">
 			<div class="modal-mask "   >
