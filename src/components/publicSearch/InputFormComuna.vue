@@ -1,11 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import { BKND_CONFIG } from '../../../config123.js' 
 
-defineProps({
-  msg: String,
-  position : String
-})
 
 const count = ref(0)
 </script>
@@ -29,6 +26,14 @@ const count = ref(0)
                     </div>
 
                 </div>    
+
+                <div >
+                     <div class="h3 m-3 text-primary " v-for="location in location_filtered" :key="location.id" > 
+                        <div @click="this.form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); this.clearfiltered = true">
+                             <i class="display-6   bi bi-search  text-muted" ></i> {{ location.name }} 
+                        </div>
+                     </div>
+                </div>   
                 
             </div>
         </div>
@@ -46,92 +51,45 @@ import searchAppointmentForm  from './SearchAppointmentForm.vue'
 export default {
    data : function() {
         return {
-             form_comuna  : null,
-            comuna_list : [],
-            ready_input : false,
-            display_error : false,
-            
+            form_comuna : null ,
+            comuna_list : [] ,
+            ready_input : false ,
+            display_error : false  ,
+            location_filtered : []  , 
+            clearfiltered : false ,
         }
     },  
-    
-  beforeUpdate () {    
+ 
+   props: [], 
+   emits: ["selectedComunaCode"],
+
+mounted() {   
         this.getComunaList();
         },
 
     watch: {
         //WATCHER PREDICTOR COMUNA
             form_comuna(value, oldValue) {
-                if (value !=null )
-                {
 
-                    //i get text behind cursor: 
-                    let textToSearch= this.form_comuna.substring(0, document.getElementById('form_comuna').selectionStart ) ;
-                    //capitalize Text To Search
-                    //textToSearch = textToSearch.charAt(0).toUpperCase() + textToSearch.slice(1).toLowerCase();
-                    
-                    var separateWord = textToSearch.toLowerCase().split(' ');
-                    for (var i = 0; i < separateWord.length; i++) {
-                        if (separateWord[i].length > 1 )
-                        { 
-                            separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
-                            separateWord[i].substring(1);
-                        }
-                    }
-                    textToSearch=separateWord.join(' ');
-                    console.log ("Start CursorPosition:"+document.getElementById('form_comuna').selectionStart+" textToSearch("+textToSearch+")   Value="+value+"   oldValue="+oldValue);
-                    if (oldValue === null) { oldValue = " " ;}
-                    
-                    
-                    
-                    let result = this.comuna_list.filter(item => item.name.substring(0,textToSearch.length)  ===  textToSearch );
-                    //result contain an array with match 
-                    if (result.length >0 && textToSearch.length>0  )
-                    {console.log("MATCH!!  ("+textToSearch+")  Match to:"+result[0].name);
-                        //check if both are diferent
-                        if (textToSearch.localeCompare(result[0].name) != 0 )
-                        { console.log("Text to search ("+textToSearch+") not equal to: "+result[0].name+" Comparison result="+textToSearch.localeCompare(result[0].name) );
-                                
-                                //si nuevo valor es mayor que el antiguo
-                                if (value.length > oldValue.length )
-                                {
-                                console.log("replacing FORM value to :"+result[0].name);
-                                //before replace save cursor
-                                this.cursor_position=textToSearch.length
-                                this.form_comuna=result[0].name; 
-                                this.ready_input=true; 
-                                }
-                                else{
-                                    console.log("No reemplaza, OLD > NEW ");
-                                    this.$emit("selectedComunaCode", null); 
-                                    this.ready_input=false;
-                                    //this.result= null;
-                                   
-                                }
-                        }
+                    if (value !=null && value.length >= 0 &&  !this.clearfiltered)
+                    {
+                        console.log("Text Location to search "+value);
+                        let tempfiltered = this.comuna_list.filter(item => item.name.substring(0,value.length)  ===  value );
+                        if (tempfiltered.length >= 1 )
+                            {
+                            this.location_filtered = tempfiltered;
+                            }
                         else
                         {
-                            console.log("BUTE are the same, skip replacing. Comparison result="+textToSearch.localeCompare(result[0].name));
-                            console.log("Moving Cursor to cursor_position stored before replace:"+this.cursor_position);
-                            document.getElementById('form_comuna').selectionStart = this.cursor_position ;
-                            document.getElementById('form_comuna').selectionEnd = this.cursor_position ;
-                            this.ready_input=false;
-                        }
-                        
-                        this.$emit("selectedComunaCode",result[0].id); 
-                        this.ready_input=true; 
-                        this.message_error=null ;
+                            this.location_filtered = null ;  
+                        }         
                     }
-                    else {console.log("No Match!! Do Nothing testToSearch("+textToSearch+") " );
-                    this.form_comuna=textToSearch ;
-                    this.$emit("selectedComunaCode", null); 
-                    this.ready_input=false;
-                    this.message_error="Comuna no Existe" ; 
-                    //We should deleete all letters ahead. 
-                    }
-
-                }
+                    else
+                    {
+                    // this.ready_input = false;
+                    this.location_filtered = null
+                    }  
               },
-
         },
 
     methods: {
