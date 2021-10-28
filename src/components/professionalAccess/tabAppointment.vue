@@ -7,10 +7,12 @@ import DateRequiredActions from './dateRequiredActions.vue'
 import ListAppointments from './listAppointments.vue'
 
 
+
 </script>
 
 <template>
      
+
       <div>
             <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> 
@@ -42,12 +44,13 @@ data: function () {
     created () {
         //this.daterequired="12-12-2021";
             //this.getCenters();
+             console.log("TAB APPOINTMENT session_params "+this.session_params.professional_id );
+     
             this.daterequired = new Date().toISOString().split('T')[0] ;
             this.updateAppointmentList();
          },
  
     methods: {
-
 
         set_daterequired : function (year_month_day) {
             console.log("TAB HOME GoToDay "+year_month_day);
