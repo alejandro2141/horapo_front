@@ -5,25 +5,34 @@ import GeneralHeader from '../src/components/GeneralHeader.vue'
 import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
 import TabCenter from '../src/components/professionalAccess/tabCenter.vue'
 import TabAppointment from '../src/components/professionalAccess/tabAppointment.vue'
+import SwitchViewButton from '../src/components/professionalAccess/switchViewButton.vue'
+
 
 </script>
 
 <template>
-    <GeneralHeader></GeneralHeader>
- <!--   	
-     <div v-if="session_params['professional_name']" :style="{display :  visible_tab_centers }" class="position-relative w-100" > 
-        <TabCenter   :session_params="session_params"  > </TabCenter>  
-    </div>
-   <tab-assistants v-if="session_params['professional_name']" :style="{display:  visible_tab_assistants }" :session_params="session_params"  class="position-relative  w-100" > </tab-assistants> 
---> 
-<div>
-    <div v-if="session_params['professional_name']" :style="{display:  visible_tab_appointments }"    class="position-relative w-100 bg-light">
-        <TabAppointment :session_params="session_params" >  </TabAppointment> 	
-    </div>
 
+ <SwitchViewButton v-if="session_params['professional_name']"  v-on:switchView="switchView" ></SwitchViewButton>
+
+    <GeneralHeader></GeneralHeader>
+ 
+<div>
     <div :style="{display:  visible_tab_login }"  class=" position-relative w-100 bg-light" >	 
         <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
     </div>
+
+    <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"    class="position-relative w-100 bg-light">
+        <TabCenter :session_params="session_params" >  </TabCenter> 	
+    </div>
+
+
+    <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"    class="position-relative w-100 bg-light">
+        <TabAppointment :session_params="session_params" >  </TabAppointment> 	
+    </div>
+
+  
+
+
 </div>
 
 </template>
@@ -56,6 +65,18 @@ export default {
   },
 
 methods: {
+    switchView(){
+        console.log("SwitchView in professional access ");
+        if ( this.visible_tab_centers == 'none' ){ 
+                this.visible_tab_centers = 'block' ; 
+                this.visible_tab_appointments = 'none';
+        }
+        else {
+                this.visible_tab_centers = 'none' ; 
+                this.visible_tab_appointments = 'block';
+            }
+
+    },
 //Start Session
     startSessionMethod (param)
     {
