@@ -27,10 +27,7 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                         <p>{{centerToShowDetails.phone2}}</p>
                         <p>{{centerToShowDetails.comuna}}</p>
                     </div>
-
-
-                   MODAL VIE CENTER DETAILS
-
+                    <p  @click="removeCenter(centerToShowDetails)" class="text-danger">Eliminar</p>
 
 
                     
@@ -130,12 +127,32 @@ data: function () {
 	},
 
 	props: ['session_params','activatorViewCenterDetails','centerToShowDetails'],
-    emits: [],
+    emits: ['updateCenterList'],
 
     created () {
          },
  
     methods: {
+        
+            async removeCenter(center)
+            {
+                console.log("Remove this center "+center.id);
+                confirm("Esta seguro que desea continuar con la eliminacion de este centro desde su agenda ? ");
+                const json = { 
+                    center_id : center.id ,	
+                    professional_id : this.session_params.professional_id ,			   
+                        };
+                console.log ("deleteCenter REQUEST :"+ JSON.stringify(json)  );
+                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_delete_center",json);
+                console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
+                //location.href = "professional_show_centers.html?"+this.getUrlParam()  ;
+                //this.getCenters();
+                //his.centers = response_json.data.rows;
+                
+                this.$emit("updateCenterList"); 
+                this.showModalCenterDetails = false ;
+            },
+
         },
     
     watch : {
