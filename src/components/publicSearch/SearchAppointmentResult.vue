@@ -15,7 +15,7 @@ const count = ref(0)
 
 <template>
         <div class="" v-if="appointment_list != null && daterequired != null" >
-            <small class="mb-2 pl-3" > {{ notificationMessage }} </small> 
+            <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small> 
          
             <div class="mt-0"  v-for="appointment in appointment_list" :key="appointment.id" >
                <patientAppointmentAvailable v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </patientAppointmentAvailable>            
@@ -24,10 +24,8 @@ const count = ref(0)
                 <div style="height: 400px">
                 </div>
         </div>	
-    
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
-       
         <modalPublicViewAppointment   :app="app" :openModalEvent="openModalEvent"   v-on:updateSearchResult="updateSearchResult"  > </modalPublicViewAppointment>
         <!-- Modal Reserve and Confirm End -->
           
@@ -49,7 +47,7 @@ export default {
             showModalConfirmation : false ,
             appConfirmed : null, 
             appointment_list : null,
-            notificationMessage: null, 
+          //  notificationMessage: null, 
             modalOpen : ref(false), 
             openModalEvent : null ,
     }
@@ -63,7 +61,7 @@ export default {
     watch: {
             appointments(newAppointments, oldAppointments ) {
                 this.appointment_list =  newAppointments ;   
-                this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
+             //   this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                       
             },
         },
