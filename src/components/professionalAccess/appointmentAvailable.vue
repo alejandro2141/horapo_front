@@ -18,9 +18,10 @@ import axios from 'axios';
                                 <div class="display-3 "  style="padding-right: 3rem;">
                                 {{appointment.start_time.substring(0, 5) }}							
                                 </div>
-                                <div class="">
+                                  <div class="">
                                 <i class="bi bi-clock-history"></i> {{appointment.duration }} Min
                                 </div>
+
                             </div>
                             
                             <div class=" w-100 " style="padding-left: 15px;" >
