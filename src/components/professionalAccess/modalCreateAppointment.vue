@@ -15,6 +15,7 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-1 modal-background">
  
+
                 <div class="modal-header" >
                     <div class="d-flex flex-row bd-highlight mb-1 display-3">
                         <div class="p-1 bd-highlight">Crear Hora <br/>
@@ -53,26 +54,29 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                         <InputFormSpecialtyProfessional v-on:selectedSpecialtyCode="selectedSpecialtyCode"  :session_params="session_params" > </InputFormSpecialtyProfessional> 
                       
                       <h2 >Centro de Atencion: </h2>
-                        <InputFormCenterProfessional v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" > </InputFormCenterProfessional> 
+                        <InputFormCenterProfessional v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
                      
-                      <h2>Citas Publicas Internet</h2> 
+                      <h2>Cita Publica en Internet <i class="bi bi-wifi"></i></h2> 
                       <div class="row">
                         <div class="col">
                           <i class="display-1 fas fa-wifi"></i>
                         </div>
+
                         <div class="col">
                           <select  class="autocomplete form-select form-select mb-2" placeholder="Disonible Internet"  aria-label=".form-select-lg example" id="form_public"  v-model="form_public" name="form_public" >
-                            <option value="false">NO</option>
-                            <option value="true">SI</option>
+                            <option value="false">Cita Visible Internet </option>
+                            <option value="true">Cita No visible en Internet</option>
                           </select>
                         </div>
+                        
                       </div>
                       
                       <button type="button" @click="createHours();" data-bs-dismiss="modal" class="btn btn-primary">GUARDAR </button>
 
                       </form>			
-        
-                </div>
+
+</div>
+
         </div> 
         </div> 		
 		</div> 
@@ -171,7 +175,7 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 export default {
    data : function() {
         return {
-            showModalCreateApp: false ,
+            needsCreateCenter: false ,
            // centers: null,
             form_center_id : null,
             form_public : null ,
@@ -179,11 +183,15 @@ export default {
             form_specialty_code : null ,
             form_center_code  : null ,
             form_app_duration : 30,
+
+            showModalCreateApp : false,
+
+            showErrorCenters : false ,
           }   
     },
    	
    props: ['daterequired','hourCreate', 'session_params' ],
-   emits: ['updateAppList'] , 
+   emits: ['updateAppList','switchView'] , 
       
    	mounted () {
            this.auxHourCreate = ref(this.hourCreate) ;
@@ -193,6 +201,14 @@ export default {
 
 	methods :{
 //GET CENTERS      
+    centersError(value) {
+      console.log("centersError In modal "+value);
+      this.needsCreateCenter = value ; 
+    },
+
+    switchView(){
+            this.$emit('switchView');
+         },
 
     /*
         async getCenters() {
