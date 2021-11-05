@@ -19,16 +19,22 @@ import axios from 'axios'
 			<div class="modal-container  m-1 p-0 modal-background">
               
                 <div class="modal-body " > 
-                  
+
+ 
+
                   <div class="d-flex flex-row justify-content-end  m-1">
-                      <div class="display-4 " style="margin-right: 1em;" >  {{ app.specialty_name}}  </div>
+                      <div class="h3 " style="margin-right: 1em;" >  {{ app.specialty_name}}  </div>
                       <div class="" style="margin-right: 1em;" > </div>
                       <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalConfirmation = false ; this.updateSearchResult() " aria-label="Close"></i> </div>
                   </div>
 
-							<p> {{app.specialty_name }} 
-								{{appConfirmed.date.substring(0, 10) }} 
-								{{appConfirmed.start_time.substring(0, 5) }}
+              <div class="h1 text-success m-3 ">              
+                  <i class="bi bi-hand-thumbs-up"> Reserva Exitosa </i> 
+              </div>
+
+							<p> 
+								{{appConfirmed.date.substring(0, 10) }}  a las : 
+								{{appConfirmed.start_time.substring(0, 5) }} Hrs 
 								<br>
 								Profesional: {{app.name }}
 							</p>
@@ -42,7 +48,7 @@ import axios from 'axios'
 								<p>
 								Informacion de su cita ha sido enviada a su correo <b> {{appConfirmed.patient_email}} </b> 
 								</p>
-								<p>
+								<p style="border-style: dotted;" class="p-2 bg-warning text-dark">
 								IMPORTANTE: <br>
 								48 Hrs antes de su cita, debe confirmar su asistencia en el enlace que fue enviado a su correo. 
 								</p>
