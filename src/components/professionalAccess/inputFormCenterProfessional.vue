@@ -1,15 +1,23 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import SwitchViewButton from './switchViewButton.vue'
+
 
 
 </script>
 
 <template>
 
+    <div v-if="center_list.length > 0" >
    	  <select class="form-select form-control-lg" aria-label="Default" id="form_center"  v-model="form_center"  name="form_center">
             <option selected v-for="(center) in center_list" :value="center.id" :key="center.id" > {{center.name}} </option>	
       </select>
+    </div>
+    <div v-else >
+          <SwitchViewButton v-if="session_params['professional_name']"  v-on:switchView="switchView" ></SwitchViewButton>
+
+    </div>
 
 </template>
 
@@ -29,11 +37,13 @@ export default {
    	
     props: ['required_day','session_params'],
     
-    emits: ['selectedCenterCode'] ,
+    emits: ['selectedCenterCode','switchView','centersError'] ,
 
 	created () {
       this.getCenters() ;
       console.log("inputFormCenterProfessiona  MOUNTED ");
+      
+
     },
 
     mounted() {   
@@ -47,6 +57,10 @@ export default {
     },//end watch
 
 	methods :{
+
+        switchView(){
+            this.$emit('switchView');
+         },
 
         async getCenters() {
 			const json = { 
