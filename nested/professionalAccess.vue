@@ -1,7 +1,7 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import GeneralHeader from '../src/components/GeneralHeader.vue'
+import ProfesionalGeneralHeader from '../src/components/professionalAccess/ProfesionalGeneralHeader.vue'
 import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
 import TabCenter from '../src/components/professionalAccess/tabCenter.vue'
 import TabAppointment from '../src/components/professionalAccess/tabAppointment.vue'
@@ -14,10 +14,10 @@ import SwitchViewButton from '../src/components/professionalAccess/switchViewBut
 
  <SwitchViewButton v-if="session_params['professional_name']"  v-on:switchView="switchView" ></SwitchViewButton>
 
-    <GeneralHeader></GeneralHeader>
+    <ProfesionalGeneralHeader></ProfesionalGeneralHeader>
  
 <div>
-    <div :style="{display:  visible_tab_login }"  class=" position-relative w-100 bg-light" >	 
+    <div :style="{display:  visible_tab_login }"  class=" position-relative " >	 
         <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
     </div>
 
@@ -27,12 +27,8 @@ import SwitchViewButton from '../src/components/professionalAccess/switchViewBut
 
 
     <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"    class="position-relative w-100 bg-light">
-        <TabAppointment :session_params="session_params" >  </TabAppointment> 	
+        <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters" >  </TabAppointment> 	
     </div>
-
-  
-
-
 </div>
 
 </template>
@@ -63,13 +59,14 @@ export default {
         counter : 0,
     }
   },
-
+	
 methods: {
     switchView(){
         console.log("SwitchView in professional access ");
         if ( this.visible_tab_centers == 'none' ){ 
-                this.visible_tab_centers = 'block' ; 
-                this.visible_tab_appointments = 'none';
+                //this.visible_tab_centers = 'block' ; 
+                //this.visible_tab_appointments = 'none';
+                this.switchToCenters();
         }
         else {
                 this.visible_tab_centers = 'none' ; 
@@ -77,6 +74,13 @@ methods: {
             }
 
     },
+
+    switchToCenters(){
+                this.visible_tab_centers = 'block' ; 
+                this.visible_tab_appointments = 'none';
+                
+    },
+
 //Start Session
     startSessionMethod (param)
     {
