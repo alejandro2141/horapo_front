@@ -33,12 +33,16 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                       <h3 class="" > Hora {{form_start_time}} ({{form_app_duration}}  Min.)</h3>
                       <h4 class="" > {{ hourTaken.center_name}}      </h4> 
                       <h4 class="" > {{ hourTaken.center_address}}   </h4>
-                      <h4> Paciente :</h4> 
-
-
-                      <h4>{{ hourTaken.patient_name}}</h4>
-                      <h4>{{ hourTaken.patient_doc_id}} <i class="bi bi-phone-vibrate"></i> {{ hourTaken.patient_phone1}}</h4>
-                      <h4><i class="bi bi-mailbox"></i> {{ hourTaken.patient_email}}
+                      <h4> Paciente : <b> {{ hourTaken.patient_name}} </b>.. {{ hourTaken.patient_doc_id}} </h4>
+                      <h4 class="text-primary" > 
+                            <a :href='"tel:+56"+hourTaken.patient_phone1'>
+                                <i class="bi bi-telephone"></i>  {{ hourTaken.patient_phone1}}
+                            </a>
+                      </h4>
+                                           
+                      <h4 class="text-primary" > 
+                          <a :href ='"mailto:"+hourTaken.patient_email'><i class="bi bi-envelope"></i> {{ hourTaken.patient_email}} 
+                          </a>     
                       </h4>
                       
 
