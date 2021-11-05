@@ -5,22 +5,26 @@ import axios from 'axios';
 import CalendarPickerMinimal from './calendarPickerMinimal.vue'
 import DateRequiredActions from './dateRequiredActions.vue'
 import ListAppointments from './listAppointments.vue'
-
+import FirstTimeLogin from './firstTimeLogin.vue'
 
 
 </script>
 
 <template>
-     
 
-      <div>
+      <div v-if='!session_params.first_time' >
+
             <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> 
-           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :session_params="session_params" ></ListAppointments>
+           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :session_params="session_params" v-on:switchView='switchView' ></ListAppointments>
 
             <div id='footer' style='height : 800px'>
             </div>
 	    </div>
+
+      <div v-else>
+        <FirstTimeLogin v-on:switchToCenters='switchToCenters' ></FirstTimeLogin>
+      </div>
 
 </template>
 
@@ -40,7 +44,7 @@ data: function () {
 		 }
 	},
 	props: ['session_params'],
-
+  emits: ['switchView','switchToCenters' ] ,
     created () {
         //this.daterequired="12-12-2021";
             //this.getCenters();
@@ -51,6 +55,14 @@ data: function () {
          },
  
     methods: {
+
+        switchView(){
+            this.$emit('switchView');
+         },
+
+        switchToCenters(){
+            this.$emit('switchToCenters');
+        },
 
         set_daterequired : function (year_month_day) {
             console.log("TAB HOME GoToDay "+year_month_day);
