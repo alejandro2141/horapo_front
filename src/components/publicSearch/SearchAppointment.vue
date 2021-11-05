@@ -10,7 +10,7 @@ const count = ref(0)
 </script>
 
 <template>
-    <div class="h2" >
+    <div class="h2 bg-light p-2" >
     Busca tu Hora 
     </div>
         <div>
