@@ -27,7 +27,7 @@ export default {
         }   
     },
    	
-    props: ['required_day'],
+    props: ['required_day','session_params'],
     
     emits: ['selectedSpecialtyCode'] ,
 
@@ -50,7 +50,7 @@ export default {
         async  getSpecialtyList() {
                     console.log ("GET SPECIALTY LIST METHOD"); 
                         const json = { 
-                        nodata : 'nodata' ,
+                             professional_id : this.session_params.professional_id  ,		
                                 };
                         console.log ("getSpecialtyList REQUEST :"+ JSON.stringify(json)  );
                         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/get_professional_specialty",json);
