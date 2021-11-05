@@ -16,22 +16,20 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
  <div id="search_result">
 
-<ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params' > </ModalCreateAppointment>
+<ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' > </ModalCreateAppointment>
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' > </ModalShowAppointmentDetails>
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' > </ModalShowAppointmentTaken>
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' > </ModalProfessionalReserveAppointment>
 
-     <div class=" text-secondary d-flex  calendarlist" >
+     <div class="d-flex  listHoursHeader" >
             
             <div class="display-2 p-1" >
                 <i class="bi bi-smartwatch"></i>
             </div>
         
-            <div class="w-100 display-5 p-1"  >
-               Copiar dia <i class="bi bi-box-arrow-right"></i>
-            </div>
-
-            <div class="display-5 p-1 " >
+        
+            <div @click="duplicateDay(daterequired)" class=" text-primary w-100 display-5 p-1"  >
+             Dupicar dia  <i class="bi bi-box-arrow-right"></i>
             </div>
 
         </div>
@@ -54,14 +52,13 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                     <div class="text-secondary" >
                         {{ hour.start_time.substring(0,5) }}
                     </div>
-                    <div class=" display-6 w-100   text-center" >
-                      ---  <!--  <i class="text-secondary bi bi-slash-circle"></i> -->
+                    <div class="display-6 w-100   text-center" >
+                        <!--  <i class="text-secondary bi bi-slash-circle"></i> -->
                     </div>
 
-                    <div class="display-6" >
-                        <i class="text-secondary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" ></i>
+                    <div class="h1" >
+                        <i class="text-secondary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>
                     </div>
-
 
                 </div>
 
@@ -112,8 +109,8 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
 <style scoped>
 
-    .calendarlist {
-    background-color:#DAEFF3
+    .listHoursHeader {
+    background-color:#d3d3d3
         }
 
 </style>
@@ -136,7 +133,7 @@ export default {
     },
    	
    props: ['daterequired','session_params','appointments'],
-   emits: ['updateAppointmentList'] , 
+   emits: ['updateAppointmentList','switchView' ] , 
 	created () {
        // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
 	},
@@ -158,6 +155,15 @@ export default {
                             { "start_time" : "12:00" },
                             { "start_time" : "13:00" },
                             { "start_time" : "14:00" },   
+                            { "start_time" : "15:00" }, 
+                            { "start_time" : "16:00" }, 
+                            { "start_time" : "17:00" }, 
+                            { "start_time" : "18:00" }, 
+                            { "start_time" : "19:00" }, 
+                            { "start_time" : "20:00" }, 
+                            { "start_time" : "21:00" }, 
+                            { "start_time" : "22:00" }, 
+                            { "start_time" : "23:00" }, 
                             ];
 
             this.showModalCreateApp= true ;
@@ -188,6 +194,13 @@ export default {
     },
 
 	methods :{
+        duplicateDay(date){
+            console.log("duplicate day in list appointments "+date) ; 
+        },
+        switchView(){
+            this.$emit('switchView');
+         },
+
         showReserveModal(hour)
         {
             console.log ("show Reserve Modal in ListAppointment ")
