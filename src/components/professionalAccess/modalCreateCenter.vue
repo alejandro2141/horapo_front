@@ -19,19 +19,23 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                    
                     <form autocomplete="off">	
 
-                        <div class="d-flex justify-content-between">
-                            <div class="h2 text-center" >Creación</div>
-                            <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalCreate = false" aria-label="Close"></i> </div>
-                        </div>
+                    <div class="d-flex flex-row bd-highlight mb-1 display-3">
+                        <div class="p-1 bd-highlight">Crear Centro<br/>
+                       </div>
+                        <div class="p-1 bd-highlight"></div>
+                         <div class="p-1 bd-highlight"><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalCreate = false" aria-label="Close"></i>
+                       </div>
+                    </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nombre de Nuevo centro de atención </label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Clinica privada las Condes">
+                            <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
                         </div>
+
                         <div class="form-group">
                             <label for="exampleInputPassword1">Direccion del centro</label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes 122, of 3098">
-                            <small id="emailHelp" class="form-text text-muted">Esta direccion al que debe concurrir el pasciente a su cita</small>		
+                            <input type="text" class="form-control" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
+                            <small id="emailHelp" class="form-text text-muted">Esta direccion al que debe concurrir el paciente a su cita</small>		
                         </div>
 
                         <div class="form-group">
@@ -40,13 +44,13 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                         <inputFormComuna v-on:selectedComunaCode="selectedComunaCode"> </inputFormComuna>   
                         
                         </div>
-
+<!--
                         <div class="form-group">
                             <label for="formRegion">Region</label>
                             <input type="text" class="form-control" autocomplete="off" id="form_center_region" name="form_center_region" v-model="form_center_region"  placeholder="Seleccione Region...">
                             <small id="helpFormRegion" class="form-text text-muted">Region donde se ubica este centro</small>		
                         </div>
-
+-->
                         <div class="form-group">
                             <label for="exampleInputPassword1">Telefono1</label>
                             <input type="text" class="form-control" autocomplete="off" id="form_center_phone1" name="form_center_phone1" v-model="form_center_phone1" placeholder="569763522">
@@ -190,11 +194,16 @@ data: function () {
            center_phone1 : this.form_center_phone1 ,
            center_phone2 : this.form_center_phone2 ,
            professional_id: this.session_params.professional_id ,
+           
                         };
         console.log("REQUEST :"+JSON.stringify(json));
         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_center",json);
         console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
-        this.$emit('updateCenterList');        
+        this.$emit('updateCenterList');  
+        this.showModalCreate = false ;    
+        
+        let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
+        this.session_params.first_time = false ;
         
         },
 
