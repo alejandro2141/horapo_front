@@ -11,14 +11,14 @@ defineProps({
 
 <template>
     
-     <div class="p-3">
+     <div class="border border-dark m-3 p-2 bg-light ">
 
             <div class="d-flex justify-content-between" >	
                 <div class="m-2">
                 </div>
                 
-                <div class="m-2 ">
-            <h1> Acceso Profesionales Registrados </h1> 
+                <div class="">
+            <h3> Acceso Profesionales Registrados </h3> 
                 </div>
                 
                 <div class="m-2">
@@ -26,13 +26,14 @@ defineProps({
                 
             </div>
 
-            <div id="formLogin" class="mx-auto "  style="width: 95%;">
-                <form autocomplete="off" >
+            <div id="formLogin" class="mx-auto p-3"  style="width: 95%;">
+                <form autocomplete="on" >
                    <input  v-model="form_token" id="form_token" name="form_token" type="hidden"  > 
                    <input class="autocomplete form-control form-control-lg ml-2" v-model="form_email" id="form_email" name="form_email" type="text" placeholder="Usuario ejemplo@correo.com" aria-label=".form-control-lg example"   >
                    <br/>
                    <input class="form-control form-control-lg" v-model="form_pass" id="form_pass" name="form_pass"  type="text" placeholder="Su contraseña" aria-label=".form-control-lg example" >
                     <br/> 
+
                     <i  type="submit" v-on:click="sendLogin()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%;"  >{{ login_message }}</i>
                 </form> 
                   
