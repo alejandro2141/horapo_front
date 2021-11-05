@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-import { BKND_CONFIG } from '../../../config123.js' 
+import { GLOBAL_COMUNAS } from '../../../config123.js' 
 
 
 const count = ref(0)
@@ -13,16 +13,16 @@ const count = ref(0)
             
                 <div class="col " style="position: relative;" >
 
-                    <div  style="position: absolute; z-index: 9; top : 1px ; left : 3px " class="mb-2  rounded" > 
-                        <i class="display-6  bi bi-search  text-muted" ></i>
+                    <div  style="position: absolute; z-index: 9; top : 6px ; left : 3px " class="mb-2  rounded" > 
+                        <i class="display-6  bi bi-search  text-muted m-0"  ></i>
                     </div>
 
                     <div>
-                        <input style=" z-index: 9;  padding-left : 50px ;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   placeholder="Ubicacion/Comuna" >
+                        <input style=" z-index: 9;  padding-left : 40px ;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   placeholder="Comuna" >
                     </div>
                     
                     <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
-                        <i class="display-2 m-1  bi bi-x  text-muted" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null); " ></i>
+                        <i class="display-2 m-1  bi bi-x  text-muted" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
                     </div>
 
                 </div>    
@@ -30,7 +30,7 @@ const count = ref(0)
                 <div >
                      <div class="h3 m-3 text-primary " v-for="location in location_filtered" :key="location.id" > 
                         <div @click="this.form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); this.clearfiltered = true">
-                             <i class="display-6   bi bi-search  text-muted" ></i> {{ location.name }} 
+                             <i class="display-6  text-muted" ></i> - {{ location.name }} 
                         </div>
                      </div>
                 </div>   
@@ -64,8 +64,11 @@ export default {
    emits: ["selectedComunaCode"],
 
 mounted() {   
-        this.getComunaList();
-        },
+       //this.getComunaList();
+       console.log("BKND GLOBAL COMUNA APP.CONFIG="+JSON.stringify( GLOBAL_COMUNAS )) ;
+       this.comuna_list =  this.GLOBAL_COMUNAS ;
+       
+       },
 
     watch: {
         //WATCHER PREDICTOR COMUNA
@@ -73,21 +76,24 @@ mounted() {
 
                     if (value !=null && value.length >= 0 &&  !this.clearfiltered)
                     {
+                         value = value.charAt(0).toUpperCase() + value.slice(1) ; 
+
                         console.log("Text Location to search "+value);
-                        let tempfiltered = this.comuna_list.filter(item => item.name.substring(0,value.length)  ===  value );
+                        let tempfiltered = this.comuna_list.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name > b.name) ? 1 : -1);
                         if (tempfiltered.length >= 1 )
                             {
                             this.location_filtered = tempfiltered;
                             }
                         else
                         {
-                            this.location_filtered = null ;  
+                            //this.location_filtered = null ;  
                         }         
                     }
                     else
                     {
                     // this.ready_input = false;
                     this.location_filtered = null
+                    this.clearfiltered = false ; 
                     }  
               },
         },
