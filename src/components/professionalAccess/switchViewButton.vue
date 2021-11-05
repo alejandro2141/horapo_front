@@ -6,11 +6,11 @@ import axios from 'axios';
 </script>
 
 <template>
-<div class="position-absolute border-1  d-flex flex-row-reverse " >
-    <div class="border text-primary">
-     <i @click="switchView()" class=" text-center display-2 bi bi-geo"></i> 
+<div class="d-flex float-end bg-light " >
+    <div class=" text-primary m-1 ">
+     <text @click="switchView()" class="display-6" >ver {{cview}}</text> 
      </div>
-</div>
+ </div>
 </template>
 
 <style scoped>
@@ -22,6 +22,7 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
+            cview : 'Centros',
        
         }   
     },
@@ -37,6 +38,13 @@ export default {
         {
             console.log("switch view to");
             this.$emit('switchView');
+            if (this.cview == 'Agenda'){
+                this.cview = 'Centros'
+            }
+            else{
+                this.cview = 'Agenda'
+            }
+
         }
     }
 }
