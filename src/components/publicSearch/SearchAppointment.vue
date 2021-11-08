@@ -1,12 +1,9 @@
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios';
+import axios from 'axios'
+import searchAppointmentForm  from './SearchAppointmentForm.vue' 
+import searchAppointmentResult  from './SearchAppointmentResult.vue'
 
-defineProps({
-  msg: String
-})
-
-const count = ref(0)
 </script>
 
 <template>
@@ -15,7 +12,7 @@ const count = ref(0)
     </div>
         <div>
             <div>
-            <searchAppointmentForm  v-on:searchAppointments="searchAppointments"></searchAppointmentForm>
+            <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
            
             <searchAppointmentResult  v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  > </searchAppointmentResult> 	    
             </div>
@@ -28,9 +25,7 @@ const count = ref(0)
 
 
 <script>
-//const showForm = ref(false)
-import searchAppointmentForm  from './SearchAppointmentForm.vue' 
-import searchAppointmentResult  from './SearchAppointmentResult.vue'
+
 
 export default {
   data : function() {
@@ -52,9 +47,11 @@ export default {
     }
   },
 
+    props: ['global_specialties','global_comunas'], 
+
  mounted () {
              this.daterequired = new Date().toISOString().split('T')[0] ;
-
+             console.log('Search Appointment global_specialties'+this.global_specialties);
         },
 
 methods: {
