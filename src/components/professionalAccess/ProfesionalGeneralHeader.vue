@@ -1,25 +1,27 @@
 <script setup>
 import { ref } from 'vue'
+import SwitchViewButton from './switchViewButton.vue'
 
-defineProps({
-  msg: String
-})
 
-const count = ref(0)
 </script>
 
 <template>
 
-    <div class="text-left m-2 pb-0 text-dark bg-light">
-		<div class="display-6 "  > 
+    <div class="d-flex p-2 justify-content-around bg-light border border-secondary"> 
+		
+		<div> 
 			<a HREF="/index.html" class="text-primary text-decoration-none"> 
-			<i class="bi bi-arrow-left-square"></i> 
-			Salir
-			</a> 
+			<i class="bi bi-arrow-left-square"></i> Salir </a> 
 		</div>
-		<div class="text-muted">	
+
+		<div class="text-primary " >
 		</div>
-		<hr>
+
+		<div class="">	
+			<SwitchViewButton v-if="session_params['professional_name'] != null"  v-on:switchView="switchView" ></SwitchViewButton>
+		</div>
+				
+
 	</div>
 
 </template>
@@ -28,3 +30,25 @@ const count = ref(0)
 
 </style>
 
+<script>
+
+export default {
+   data : function() {
+        return {
+        }   
+    },
+    props : ['session_params'] ,
+	emits : ['switchView']  ,
+
+    methods: {
+		switchView(){
+			console.log("switchView in Profesional General Header");
+			this.$emit('switchView');
+		}
+
+        },
+
+}
+
+
+</script>
