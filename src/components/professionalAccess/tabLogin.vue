@@ -11,14 +11,19 @@ defineProps({
 
 <template>
     
-     <div class="border border-dark m-3 p-2 bg-light ">
+     <div class="border border-dark m-3 bg-light ">
 
             <div class="d-flex justify-content-between" >	
                 <div class="m-2">
+         
                 </div>
                 
-                <div class="">
-            <h3> Acceso Profesionales Registrados </h3> 
+                <div class="h3">
+            
+            Acceso Profesionales
+            
+            
+
                 </div>
                 
                 <div class="m-2">
@@ -72,7 +77,7 @@ export default {
 			console.log ("REQUEST :"+ JSON.stringify(json)  );
 			
 			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_login",json);
-			console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
+			console.log ("RESPONSE login:"+JSON.stringify(response_json.data)) ;
 			//this.response_json = response.data;
 			  if (response_json.data.result_code == 0 ) {
 					  console.log("Login Exitosos!!");
