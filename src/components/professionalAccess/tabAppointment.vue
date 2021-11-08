@@ -48,8 +48,7 @@ data: function () {
     created () {
         //this.daterequired="12-12-2021";
             //this.getCenters();
-             console.log("TAB APPOINTMENT session_params "+this.session_params.professional_id );
-     
+            console.log("TAB APPOINTMENT session_params "+this.session_params.professional_id );   
             this.daterequired = new Date().toISOString().split('T')[0] ;
             this.updateAppointmentList();
          },
