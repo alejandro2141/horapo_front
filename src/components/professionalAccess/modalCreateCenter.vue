@@ -41,7 +41,7 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                         <div class="form-group">
                         <label for="exampleInputPassword1">Comuna</label>
                         
-                        <inputFormComuna v-on:selectedComunaCode="selectedComunaCode"> </inputFormComuna>   
+                        <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
                         
                         </div>
 <!--
@@ -170,7 +170,7 @@ data: function () {
 		 }
 	},
 
-	props: ['session_params','activatorCreateNewCenter','centerToShowDetails'],
+	props: ['session_params','activatorCreateNewCenter','centerToShowDetails','global_comunas'],
     emits: ['updateCenterList'],
 
     created () {
