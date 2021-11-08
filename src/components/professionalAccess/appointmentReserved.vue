@@ -16,41 +16,34 @@ import axios from 'axios';
         
                 <div class="m-2">
                     
-                    <div class="display-2">
+                    <div class="display-4">
                     {{appointment.start_time.substring(0, 5) }}							
                     </div>
-                    <div class="">
-                   {{appointment.duration }} Min.  
+                    <div class="text-muted">
+                   {{appointment.duration }}min.  
                     </div>
 
-                    <div >
-                       <text class="text-success" v-if='appointment.confirmation_status == 0' >Sin Confirmar </text> 
-                       <i class="display-1 text-success bi bi-person"></i>
-                    </div>
-
+                 
                 </div>
                 
                 <div class="mt-2 w-100" >
                     <div class="d-flex justify-content-between " >
                         <div>
-                        {{appointment.specialty_name }}
+                        {{appointment.specialty_name }} 
+                        <text class="bg-info text-white" v-if='appointment.confirmation_status == 0' >Sin Confirmar </text>
+                        <i v-if="appointment.available_public_search" style="margin-left: 1.0em;" class="bi bi-wifi text-success ">On Line</i>
+                        
+
                                 <div class="text-danger" v-if="appointment.app_status == 1 ">
                                     Cita Cancelada 
                                 </div>
 
                         </div>
-                        <div  v-if="appointment.available_public_search == 1">
-                                <i class="bi bi-wifi text-success display-2"></i>
-
-                        </div>
+                       
 
                     </div>
                     
-                    <div>
-                    Paciente:   {{appointment.patient_name }}<br>
-                    Edad: {{appointment.patient_age }} <br/>
-                    Rut:{{appointment.patient_doc_id }}
-                    </div>
+                    
                     
                     
                    
@@ -62,6 +55,12 @@ import axios from 'axios';
 
         
         </div>
+
+            <div>
+                <i class="display-4 bi bi-file-earmark-person"></i>
+                    {{appointment.patient_name }} 
+                    {{appointment.patient_age }}Años, id:{{appointment.patient_doc_id }}
+                    </div>
             
             <div>
                     {{appointment.center_name }}<br>
