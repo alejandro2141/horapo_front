@@ -51,7 +51,7 @@ defineProps({
                 <hr>
 
 <div >
-	<text>Mapa:</text>
+	
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3330.80973223681!2d-70.66387378523802!3d-33.40212780241913!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c678e0d23d79%3A0x944abd548ad95b98!2sTrist%C3%A1n%20Cornejo%20957%2C%20Independencia%2C%20Regi%C3%B3n%20Metropolitana!5e0!3m2!1ses-419!2scl!4v1634857648760!5m2!1ses-419!2scl" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </div>
 	 <button type="button" @click="reserveHour(app);"  class="btn btn-primary m-2"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
