@@ -129,110 +129,25 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
-            needsCreateCenter: false ,
-           // centers: null,
-            form_center_id : null,
-            form_public : null ,
-            form_start_time : null ,
-            form_specialty_code : null ,
-            form_center_code  : null ,
-            form_app_duration : 30,
-
-            showModalCreateApp : false,
-
-            showErrorCenters : false ,
+           showModalDuplicateDay : false ,
           }   
     },
    	
-   props: ['daterequired','hourCreate', 'session_params' ],
-   emits: ['updateAppList','switchView'] , 
+   props: ['daterequired', 'session_params' ],
+   emits: ['updateAppList'] , 
       
-   	mounted () {
-           this.auxHourCreate = ref(this.hourCreate) ;
-           console.log("Modal Create Appointment Mounted !!!" );
-         //  this.getCenters();
+   	mounted () { 
     },
 
 	methods :{
-//GET CENTERS      
-    centersError(value) {
-      console.log("centersError In modal "+value);
-      this.needsCreateCenter = value ; 
     },
 
-    switchView(){
-            this.$emit('switchView');
-         },
-
-    /*
-        async getCenters() {
-			const json = { 
-			   professional_id : this.session_params.professional_id  ,			   
-   			   	      };
-			console.log ("getCenters REQUEST :"+ JSON.stringify(json)  );
-			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
-			console.log ("getCenters RESPONSE :"+JSON.stringify(response_json.data.rows)) ;
-			this.centers = response_json.data.rows;
-            //this.prevCenterName="noset";
-			},
-
-        selectedSpecialtyCode(value){
-            console.log("selecte Specialty Code "+value);
-        },
-    */
-    selectedSpecialtyCode(value)
-    {
-    console.log("speciality selected code: "+value);
-    this.form_specialty_code = value ;
-    },
-
-    selectedCenterCode(value)
-    {
-    console.log("Center selected code: "+value);
-    this.form_center_code = value ;
-    },
-
-	  async createHours() {
-    	var r =confirm("Se procedera a crear esta hora en su agenda");
-					  if (r == true) {
-
-        const json = { 
-              form_center_id  : this.form_center_code ,
-              form_professional_id : this.session_params.professional_id  ,
-             //hours 
-              form_date : this.daterequired ,
-              form_start_time : this.form_start_time , //cambio
-              form_appointment_duration : this.form_app_duration , 
-              form_specialty_code : this.form_specialty_code,
-              form_public : this.form_public ,
-                        };
-                  
-        console.log ("createHours REQUEST :"+ JSON.stringify(json)  );
-        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_appointment",json);
-        console.log ("createHours RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
-        //location.reload();
-        //this.agendas = response_json.data.rows;
-        //location.reload();
-        this.$emit('updateAppList');
-        this.showModalCreateApp = false ;
-            }
-
-
-        }
-
-
-
-
-    },
     watch : {
-        hourCreate(newValue){
-             
-             this.showModalCreateApp= true ;
-            console.log ("hourCreate Change!!!"+newValue+ " ShoModalCreateApp="+this.showModalCreateApp);
-            this.form_start_time = newValue.start_time ; 
-        }
-    }
-
+        activatorCreateNewCenter (newValue){
+            console.log ("showModalCreate !!!"+newValue );  
+            this.showModalCreate = true ;
+        },
+    },
     
 }
 </script>
