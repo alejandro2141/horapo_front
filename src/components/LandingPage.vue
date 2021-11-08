@@ -27,3 +27,17 @@ body {
 }
 */
 </style>
+
+<script>
+
+export default {
+ data : function() {
+        return {  
+        }
+    },  
+    props: [], 
+    emits: [],
+
+}
+
+</script>
