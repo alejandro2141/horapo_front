@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-import { GLOBAL_COMUNAS } from '../../../config123.js' 
+//import { GLOBAL_COMUNAS } from '../../../config123.js' 
 
 
 const count = ref(0)
@@ -29,7 +29,7 @@ const count = ref(0)
 
                 <div >
                      <div class="h3 m-3 text-primary " v-for="location in location_filtered" :key="location.id" > 
-                        <div @click="this.form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); this.clearfiltered = true">
+                        <div @click="form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); clearfiltered = true">
                              <i class="display-6  text-muted" ></i> - {{ location.name }} 
                         </div>
                      </div>
@@ -60,14 +60,13 @@ export default {
         }
     },  
  
-   props: [], 
+   props: ['global_comunas'], 
    emits: ["selectedComunaCode"],
 
 mounted() {   
        //this.getComunaList();
-       console.log("BKND GLOBAL COMUNA APP.CONFIG="+JSON.stringify( GLOBAL_COMUNAS )) ;
-       this.comuna_list =  this.GLOBAL_COMUNAS ;
-       
+      // console.log("BKND GLOBAL COMUNA APP.CONFIG="+JSON.stringify( GLOBAL_COMUNAS )) ;
+       //this.comuna_list =  this.GLOBAL_COMUNAS ;
        },
 
     watch: {
@@ -79,7 +78,7 @@ mounted() {
                          value = value.charAt(0).toUpperCase() + value.slice(1) ; 
 
                         console.log("Text Location to search "+value);
-                        let tempfiltered = this.comuna_list.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name > b.name) ? 1 : -1);
+                        let tempfiltered = this.global_comunas.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name > b.name) ? 1 : -1);
                         if (tempfiltered.length >= 1 )
                             {
                             this.location_filtered = tempfiltered;
@@ -99,6 +98,7 @@ mounted() {
         },
 
     methods: {
+        /*
         async  getComunaList() {
                 console.log ("GET COMUNA LIST METHOD"); 
                     const json = { 
@@ -110,7 +110,7 @@ mounted() {
                     this.comuna_list = response_json.data.rows;		
                     console.log("getComunaList list: "+JSON.stringify(this.comuna_list) );
                 },
-
+            */
         },
 
 
