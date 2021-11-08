@@ -126,7 +126,7 @@ data: function () {
 		 }
 	},
 
-	props: ['session_params','activatorViewCenterDetails','centerToShowDetails'],
+	props: ['session_params','activatorViewCenterDetails','centerToShowDetails','global_comunas'],
     emits: ['updateCenterList'],
 
     created () {
