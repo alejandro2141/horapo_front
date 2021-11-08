@@ -7,11 +7,11 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 
 <template>
 
-     <ModalViewCenterDetails  :session_params='session_params' :activatorViewCenterDetails='activatorViewCenterDetails' :centerToShowDetails='centerToShowDetails' v-on:updateCenterList="updateCenterList"> </ModalViewCenterDetails>                    
-     <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" >  </ModalCreateCenter>
+     <ModalViewCenterDetails  :session_params='session_params' :activatorViewCenterDetails='activatorViewCenterDetails' :centerToShowDetails='centerToShowDetails' v-on:updateCenterList="updateCenterList"  :global_comunas="global_comunas"   > </ModalViewCenterDetails>                    
+     <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" >  </ModalCreateCenter>
       
 <div  class="mx-auto " style="width: 95%;" >
-        <text class="h4">Centros de Atencion en su agenda </text> 
+        <text class="h4 center ">Centros en su agenda </text> 
 	
         <div  id="search_result" v-if='centers.length > 0'  >
             <div v-for="center in centers"  :key='center.id' >
@@ -19,7 +19,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-building display-2"></i> {{center.name}}</h5>
                         <p class="card-text">{{center.address}} </p>
-                        <b>{{ this.comuna_list.find(o => o.id === center.comuna).name }} </b>
+                        <b>{{ comuna_list.find(o => o.id === center.comuna).name }} </b>
                         <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p>
                     </div>
                 </div>   
@@ -68,12 +68,14 @@ data: function () {
             activatorViewCenterDetails : null ,
 		 }
 	},
-	props: ['session_params'],
+	props: ['session_params','global_comunas'],
 
     created () {
         console.log("TAB CENTER this session_params"+this.session_params.professional_id);
-        this.getComunaList();
+        //this.getComunaList();
+        this.comuna_list = this.global_comunas ;
         this.getCenters();
+        
    
          },
  
@@ -89,6 +91,7 @@ data: function () {
             this.centerToShowDetails = center ;
             this.activatorViewCenterDetails = Math.random();     
         },
+        /*
         async  getComunaList() {
                     console.log ("GET COMUNA LIST METHOD"); 
                         const json = { 
@@ -100,6 +103,7 @@ data: function () {
                         this.comuna_list = response_json.data.rows;		
                         console.log("getComunaList list: "+JSON.stringify(this.comuna_list) );
                     },   
+        */
         //CREATE New Center
         async getCenters() {
                         const json = { 
