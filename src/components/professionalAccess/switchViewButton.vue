@@ -7,8 +7,8 @@ import axios from 'axios';
 
 <template>
 <div class="d-flex float-end bg-light " >
-    <div class=" text-primary m-1 ">
-     <text @click="switchView()" class="display-6" >ver {{cview}}</text> 
+    <div class=" text-primary ">
+     <text @click="switchView()" class="" >{{cview}}</text> 
      </div>
  </div>
 </template>
