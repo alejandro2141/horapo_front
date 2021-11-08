@@ -8,14 +8,14 @@ import axios from 'axios';
 <template>
     
     <div class="text-center">
-        <div class="display-1">
+        <div class="display-5">
           {{calendar[parseInt(req_year)][parseInt(req_month)][parseInt(req_day)] }}
         </div>
-        <div class="display-1">
-            <i v-on:click="prevDay()" class="bi bi-caret-left"></i>  {{req_day}} <i  v-on:click="nextDay()" class="bi bi-caret-right"></i>
+        <div class="display-5">
+            <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i>  {{req_day}} <i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
         </div>
-        <div class="display-4">
-            <i v-on:click="prevMonth()" class="bi bi-caret-left display-1"></i> {{ calendar[parseInt(req_year)][parseInt(req_month)][0]  }} 20{{req_year}}<i v-on:click="nextMonth()" class="bi bi-caret-right display-1"></i>
+        <div class="display-5">
+            <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i> {{ calendar[parseInt(req_year)][parseInt(req_month)][0]  }} 20{{req_year}}<i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>
         </div>
     </div>
     <hr>
