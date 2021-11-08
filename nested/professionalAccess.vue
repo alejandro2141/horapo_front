@@ -1,32 +1,31 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+import axios from 'axios'
+import { BKND_CONFIG } from '../config123.js'
 import ProfesionalGeneralHeader from '../src/components/professionalAccess/ProfesionalGeneralHeader.vue'
 import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
 import TabCenter from '../src/components/professionalAccess/tabCenter.vue'
 import TabAppointment from '../src/components/professionalAccess/tabAppointment.vue'
-import SwitchViewButton from '../src/components/professionalAccess/switchViewButton.vue'
-
 
 </script>
 
 <template>
 
- <SwitchViewButton v-if="session_params['professional_name']"  v-on:switchView="switchView" ></SwitchViewButton>
-
-    <ProfesionalGeneralHeader></ProfesionalGeneralHeader>
- 
-<div>
-    <div :style="{display:  visible_tab_login }"  class=" position-relative " >	 
+    <ProfesionalGeneralHeader :session_params='session_params' v-on:switchView="switchView" > </ProfesionalGeneralHeader>
+   
+<div class='m-0'>
+     
+    <div  :style="{display:  visible_tab_login }"  class=" position-relative " >	 
         <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
     </div>
 
-    <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"    class="position-relative w-100 bg-light">
-        <TabCenter :session_params="session_params" >  </TabCenter> 	
+    <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
+        <TabCenter :session_params="session_params" :global_comunas="global_comunas"  >  </TabCenter> 	
     </div>
 
 
-    <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"    class="position-relative w-100 bg-light">
+    <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
         <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters" >  </TabAppointment> 	
     </div>
 </div>
@@ -42,6 +41,9 @@ import SwitchViewButton from '../src/components/professionalAccess/switchViewBut
 export default {
   data : function() {
     return {
+        global_specialties : [],
+        global_comunas : [],  
+
         session : "sesionname",
         session_params : [] ,
 
@@ -59,8 +61,32 @@ export default {
         counter : 0,
     }
   },
-	
+
+props: [], 
+emits: [],
+
+created() {
+        console.log("NESTED PROFESSIONAL ACCESS SEARCH Fill Global variables");
+        this.loadGlobalSpecialties();
+        this.loadGlobalComunas();
+},
+
 methods: {
+    async loadGlobalSpecialties() {
+                console.log ("APP GET SPECIALTY LIST METHOD"); 
+				let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_specialty_list");
+                this.global_specialties = response_json.data.rows;
+                console.log("APP global_specialties: "+JSON.stringify(this.global_specialties) );
+            },
+
+    async loadGlobalComunas() {
+                 console.log ("APP GET COMUNA LIST METHOD"); 
+				let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_comuna_list");
+                this.global_comunas = response_json.data.rows;
+                console.log("APP Comuna list: "+JSON.stringify(this.global_comunas) );
+
+            },
+
     switchView(){
         console.log("SwitchView in professional access ");
         if ( this.visible_tab_centers == 'none' ){ 
