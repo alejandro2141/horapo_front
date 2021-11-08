@@ -1,10 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { GLOBAL_SPECIALTIES } from '../../../config123.js' 
+import { BKND_CONFIG } from '../../../config123.js' 
 
-
-const count = ref(0)
 </script>
 
 <template>
@@ -18,7 +16,7 @@ const count = ref(0)
                     </div>
 
                     <div>
-                        <input style=" z-index: 9;  padding-left : 40px ; padding-right : 50px" type="text" class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Psicologia, Kinesiología, Nutri..." aria-label=".form-control-lg example"  >
+                        <input autocomplete="off" type="text" style=" z-index: 9;  padding-left : 40px ; padding-right : 50px"  class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Psicologia, Kinesiología, Nutri..." aria-label=".form-control-lg example"  >
                     </div>
                     
                      <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
@@ -29,7 +27,7 @@ const count = ref(0)
                 
                 <div >
                      <div class=" h3 m-0 p-2 text-primary " v-for="specialty in specialty_filtered" :key="specialty.id" > 
-                        <div  @click="this.form_specialty = specialty.name ; $emit('selectedSpecialtyCode', specialty.id); this.clearfiltered = true ; ">
+                        <div  @click="form_specialty = specialty.name ; $emit('selectedSpecialtyCode', specialty.id); clearfiltered = true ; ">
                              <i class="display-6  text-muted" ></i> - {{ specialty.name }} 
                         </div>
                      </div>
@@ -58,21 +56,17 @@ export default {
             clearfiltered : false ,  
         }
     },  
-    props: [], 
+    props: ['global_specialties'], 
     emits: ["selectedSpecialtyCode"],
 
 beforeCreate() {},
-created() {},
-beforeMount() {},
-mounted() {   
-       // this.getSpecialtyList() ;    
-       // this.daterequired = new Date().toISOString().split('T')[0] ;  
-        this.specialty_list =  this.GLOBAL_SPECIALTIES ;
+created() {
+  // this.getSpecialtyList() ;
+},
+mounted(){
+    console.log("INPUT global_specialties="+this.global_specialties); 
+},
 
-        },
-beforeUpdate() {},
-activated() {},
- 
 watch: {
     //WATCHER PREDICTOR SPECIALTY
     form_specialty(value, oldValue) {
@@ -81,10 +75,10 @@ watch: {
             value = value.charAt(0).toUpperCase() + value.slice(1) ; 
 
             console.log("Text to search "+value);
-            let tempfiltered = this.specialty_list.filter(item => item.name.substring(0,value.length)  ===  value );
+            let tempfiltered = this.global_specialties.filter(item => item.name.substring(0,value.length)  ===  value );
             if (tempfiltered.length >= 1 )
                 {
-                this.specialty_filtered = this.specialty_list.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name > b.name) ? 1 : -1);
+                this.specialty_filtered = this.global_specialties.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name > b.name) ? 1 : -1);
                 //this.specialty_filtered.sort() ;  
                 }
             else
