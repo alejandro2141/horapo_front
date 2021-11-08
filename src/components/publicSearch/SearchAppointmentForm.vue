@@ -1,12 +1,10 @@
 <script setup>
 import { ref } from 'vue'
+//const showForm = ref(false)
+import inputFormSpecialty  from './InputFormSpecialty.vue'
+import inputFormComuna  from './InputFormComuna.vue'
 
 
-defineProps({
-  msg: String
-})
-
-const count = ref(0)
 </script>
 
 <template>
@@ -20,13 +18,13 @@ const count = ref(0)
                    
                 <div class="w-100 mb-1">
                     <div class="">
-                        <inputFormSpecialty  v-on:selectedSpecialtyCode="selectedSpecialtyCode"> </inputFormSpecialty> 
+                        <inputFormSpecialty  v-on:selectedSpecialtyCode="selectedSpecialtyCode" :global_specialties="global_specialties" > </inputFormSpecialty> 
                     </div>
                 </div>
                 
                 <div class="row  mb-1  border-secondary ">
                     <div class="col">
-                        <inputFormComuna position="true"  v-on:selectedComunaCode="selectedComunaCode"> </inputFormComuna>
+                        <inputFormComuna position="true"  v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
                 </div>
                 <!--
@@ -53,9 +51,6 @@ const count = ref(0)
 
 
 <script>
-//const showForm = ref(false)
-import inputFormSpecialty  from './InputFormSpecialty.vue'
-import inputFormComuna  from './InputFormComuna.vue'
 
 export default {
  data : function() {
@@ -72,6 +67,8 @@ export default {
             specialty_list : [ ] ,
     }
   },
+
+ props: ['global_specialties','global_comunas'], 
 
    mounted () {    
         },
