@@ -10,23 +10,19 @@ defineProps({
 
 <template>
      
-    <div v-if="appointment != null"  class="border-0  p-0 mb-0 bg-light">
+    <div v-if="appointment != null"  class="border  p-0 mb-0 bg-light ">
         <div id="app" class="m-0 d-flex  "  >	
-            <div class="bg-primary">
+            <div class="bg-light">
                      &nbsp;
             </div>
             <div>
                 <div class="">
-                    <div class="display-4">	
-                    Fecha {{appointment.date.substring(0, 10) }}  
+                    <div class="display-5">	
+                    {{appointment.date.substring(0, 10) }}  {{appointment.start_time.substring(0, 5) }} hrs  
                     </div>       
                 </div>
-                <div class="">
-                    <div class="display-4">	
-                    Hora {{appointment.start_time.substring(0, 5) }}  
-                    </div>       
-                </div>
-                <div class="display-5">
+           
+                <div class="display-6">
                     <div class="">	
                     {{appointment.specialty_name }}
                     </div>       
