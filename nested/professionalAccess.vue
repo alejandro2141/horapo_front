@@ -26,7 +26,7 @@ import TabAppointment from '../src/components/professionalAccess/tabAppointment.
 
 
     <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
-        <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters" >  </TabAppointment> 	
+        <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties"  >  </TabAppointment> 	
     </div>
 </div>
 
