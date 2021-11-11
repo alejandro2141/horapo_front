@@ -50,28 +50,33 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                             </select>
                      
                       
-                      <h2> Especialidad:</h2>
+                      <h2>Especialidades de esta Hora:</h2>
                         <InputFormSpecialtyProfessional v-on:selectedSpecialtyCode="selectedSpecialtyCode"  :session_params="session_params" > </InputFormSpecialtyProfessional> 
                       
-                      <h2 >Centro de Atencion: </h2>
+                      <div class="text-start" v-for="(speci) in form_specialty_code_array" :key="speci.id"  >  &#9749;  {{ speci.name }}  
+                      </div>
+
+                       
+                        <p class="text-danger  text-end"  @click="form_specialty_code_array = []  ">Eliminar</p>
+                       
+                      <h2 class="mt-4">Centro de Atencion: </h2>
                         <InputFormCenterProfessional v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
                      
-                      <h2>Cita Publica en Internet <i class="bi bi-wifi"></i></h2> 
-                      <div class="row">
-                        <div class="col">
-                          <i class="display-1 fas fa-wifi"></i>
-                        </div>
-
-                        <div class="col">
+                      <h2>Cita  On Line ? <i v-if="form_public == 'true'" class=" text-success bi bi-wifi">On Line</i> </h2> 
+            
+                      <div class="">
                           <select  class="autocomplete form-select form-select mb-2" placeholder="Disonible Internet"  aria-label=".form-select-lg example" id="form_public"  v-model="form_public" name="form_public" >
-                            <option value="false">Cita Visible Internet </option>
-                            <option value="true">Cita No visible en Internet</option>
+                            <option value="true">Hora Publica </option>
+                            <option value="false">Hora Privada</option>
                           </select>
                         </div>
                         
-                      </div>
-                      
+            
+
+                      <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
                       <button type="button" @click="createHours();" data-bs-dismiss="modal" class="btn btn-primary">GUARDAR </button>
+                    	<div class="" style="height : 700px"> </div>
+
 
                       </form>			
 
@@ -88,16 +93,38 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 
 <style scoped>
 
-
 .modal {
-  position: absolute;
-  display: flex;
+   /*position: static;  */
+   /*position: static; */
+	/*position: relative; */ 
+	/*position: absolute; */ 
+	position: fixed; 
+	/*position: sticky; */
+ /* position: fixed;  */
+ /* display: block; */ 
+   display: flex; 
+
 }
 
+/*
 .modal div {
-  display: flex;
-  flex-direction: column;
+  display: flex; 
+  flex-direction: column; 
+
 }
+*/
+
+div.scroll {
+       			margin:4px, 4px;
+                padding:4px;
+                background-color: green;
+                width: 100%; 
+                /* height: 190%;*/
+                overflow-x: auto;
+                overflow-y: auto;
+                text-align:justify;
+      }
+
 /*
 .modal-background {
     background-color:#DAEFF3
@@ -108,14 +135,14 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 
 
 .modal-mask {
-  position: fixed;
+  /*position: fixed;*/
   z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+ /* display: table;*/
 }
 
 .modal-wrapper {
@@ -167,6 +194,7 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 }
 
 /************************ */
+
 </style>
 
 
@@ -181,6 +209,8 @@ export default {
             form_public : null ,
             form_start_time : null ,
             form_specialty_code : null ,
+            form_specialty_code_array : [] ,
+            
             form_center_code  : null ,
             form_app_duration : 30,
 
@@ -210,26 +240,19 @@ export default {
             this.$emit('switchView');
          },
 
-    /*
-        async getCenters() {
-			const json = { 
-			   professional_id : this.session_params.professional_id  ,			   
-   			   	      };
-			console.log ("getCenters REQUEST :"+ JSON.stringify(json)  );
-			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
-			console.log ("getCenters RESPONSE :"+JSON.stringify(response_json.data.rows)) ;
-			this.centers = response_json.data.rows;
-            //this.prevCenterName="noset";
-			},
-
-        selectedSpecialtyCode(value){
-            console.log("selecte Specialty Code "+value);
-        },
-    */
     selectedSpecialtyCode(value)
     {
-    console.log("speciality selected code: "+value);
-    this.form_specialty_code = value ;
+    console.log("speciality selected code Modal: "+value);
+    console.log("speciality id: "+JSON.parse(value).id +"  Name:"+JSON.parse(value).name);
+    //this.form_specialty_code = value ;
+    
+    console.log("ID Duplicado :"+ JSON.stringify( this.form_specialty_code_array.find(elem => elem.id ==  JSON.parse(value).id  ) ));
+    
+    if (this.form_specialty_code_array.find(elem => elem.id ==  JSON.parse(value).id  ) == null )
+      {    this.form_specialty_code_array.push(JSON.parse(value)) ; }
+    else{console.log("Skip duplicated Value Specialty");}
+    
+    console.log("speciality selected code Modal array: "+JSON.stringify(this.form_specialty_code_array));
     },
 
     selectedCenterCode(value)
@@ -242,6 +265,8 @@ export default {
     	var r =confirm("Se procedera a crear esta hora en su agenda");
 					  if (r == true) {
 
+
+
         const json = { 
               form_center_id  : this.form_center_code ,
               form_professional_id : this.session_params.professional_id  ,
@@ -249,7 +274,11 @@ export default {
               form_date : this.daterequired ,
               form_start_time : this.form_start_time , //cambio
               form_appointment_duration : this.form_app_duration , 
-              form_specialty_code : this.form_specialty_code,
+              //form_specialty_code : this.form_specialty_code,
+              //form_specialty_code : JSON.stringify(this.form_specialty_code_array),
+              //form_specialty_code : JSON.parse(JSON.stringify(this.form_specialty_code_array)),
+              form_specialty_code : this.form_specialty_code_array,
+              
               form_public : this.form_public ,
                         };
                   
@@ -264,7 +293,13 @@ export default {
             }
 
 
-        }
+        },
+    uniq(a) {
+      return a.sort().filter(function(item, pos, ary) {
+          return !pos || item != ary[pos - 1];
+      });
+    }
+
 
 
 
