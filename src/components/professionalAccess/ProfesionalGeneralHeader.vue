@@ -7,7 +7,7 @@ import SwitchViewButton from './switchViewButton.vue'
 
 <template>
 
-    <div class="d-flex p-2 justify-content-around bg-light border border-secondary"> 
+    <div class="d-flex p-1 justify-content-around bg-white "> 
 		
 		<div> 
 			<a HREF="/index.html" class="text-primary text-decoration-none"> 
