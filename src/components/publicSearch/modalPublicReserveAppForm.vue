@@ -13,7 +13,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
   <div>
   	<teleport to="body"   >
 
-		<div v-if="showModalPublicReserveForm" class="modal bg-secondary"    >
+		<div v-if="showModalPublicReserveForm" class="modal  bg-secondary scroll"    >
 		    
 			<transition name="modal">
 			<div class="modal-mask "  >
@@ -49,9 +49,14 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                                 <input class="form-control form-control-lg" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
                                 <div v-if="error_msg_phone" class="text-danger">Debe Indicar un Telefono de contacto</div>
                                 <br>
-							
+															
+                                <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
                                 <button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
-                            </form> 
+                            
+								<div class="" style="height : 700px"> 
+                				</div>
+							
+							</form> 
                 </div>
         </div> 
         </div> 		
@@ -68,14 +73,37 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 
 .modal {
-  position: absolute;
-  display: flex;
+   /*position: static;  */
+   /*position: static; */
+	/*position: relative; */ 
+	/*position: absolute; */ 
+	position: fixed; 
+	/*position: sticky; */
+ /* position: fixed;  */
+ /* display: block; */ 
+   display: flex; 
+
 }
 
+/*
 .modal div {
-  display: flex;
-  flex-direction: column;
+  display: flex; 
+  flex-direction: column; 
+
 }
+*/
+
+div.scroll {
+       			margin:4px, 4px;
+                padding:4px;
+                background-color: green;
+                width: 100%; 
+                /* height: 190%;*/
+                overflow-x: auto;
+                overflow-y: auto;
+                text-align:justify;
+      }
+
 /*
 .modal-background {
     background-color:#DAEFF3
@@ -86,14 +114,14 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 
 .modal-mask {
-  position: fixed;
+  /*position: fixed;*/
   z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+ /* display: table;*/
 }
 
 .modal-wrapper {
