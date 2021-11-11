@@ -58,7 +58,7 @@ export default {
             search_button_message: "Buscar " ,
 
             form_token : null,
-            form_specialty_code : null,
+            form_specialty : null,
             form_comuna_code  : null,
             form_insurance_code : null,
 
@@ -86,8 +86,8 @@ export default {
 
         selectedSpecialtyCode(code)
         {
-        console.log("Specialty Code:"+code);
-        this.form_specialty_code = code;
+        console.log("Specialty Code:"+JSON.stringify(code));
+        this.form_specialty = code;
         },
 
         selectedInsuranceCode(code)
@@ -98,15 +98,17 @@ export default {
 
         //SEND FORM 
         sendFormSearch(){
-            const params = { 
+           
+            const search_params = { 
 				// agenda_id : this.par_agenda_id ,			 
-				 specialty : this.form_specialty_code ,
+				 specialty : this.form_specialty ,
                  comuna : this.form_comuna_code ,
                  insurance : this.form_insurance_code ,
                   		  };
 
-            this.$emit("searchAppointments",params );
+            this.$emit("searchAppointments",search_params );
             }
+
         },
 
 }
