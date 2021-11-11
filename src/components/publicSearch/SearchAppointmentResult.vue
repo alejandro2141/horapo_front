@@ -2,27 +2,28 @@
 import { ref } from 'vue'
 import patientAppointmentAvailable  from './PatientAppointmentAvailable.vue'
 import modalPublicViewAppointment from './ModalPublicViewAppointment.vue'
-
+/*
 defineProps({
   msg: String,
   session_params : Array  ,
   appointments  : Array , 
   daterequired : String,
 })
-
+*/
 const count = ref(0)
 </script>
 
 <template>
-        <div class="" v-if="appointment_list != null && daterequired != null" >
+        <div  v-if="appointment_list != null && daterequired != null" >
             <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small> 
          
-            <div class="mt-0"  v-for="appointment in appointment_list" :key="appointment.id" >
-               <patientAppointmentAvailable v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </patientAppointmentAvailable>            
+            <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
+               <patientAppointmentAvailable :searchParameters='searchParameters' class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" > </patientAppointmentAvailable>            
             </div>
                 <!-- Start make room for Modal data when it display-->
-                <div style="height: 400px">
-                </div>
+            <div style="height: 400px">
+            </div>
+
         </div>	
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
@@ -50,9 +51,11 @@ export default {
           //  notificationMessage: null, 
             modalOpen : ref(false), 
             openModalEvent : null ,
+            
     }
   },
 
+   props: ['searchParameters','session_params','appointments','daterequired','global_comunas'],
    emits: ["updateLastSearch"],
 
    mounted () {    
