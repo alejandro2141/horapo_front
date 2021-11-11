@@ -8,7 +8,7 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
 <template>
 
      	<teleport to="body"   >
-		<div  v-if="showModalCreate" class="modal bg-secondary"    >
+		<div  v-if="showModalCreate" class="modal bg-secondary scroll" >
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
@@ -60,10 +60,15 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                             <input type="text" class="form-control" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
                         </div>
 
-                    </form>
-                        
                         <text v-on:click="createNewCenter" class="text-primary text-center mt-3 p-3"> Agregar </text>
-
+                      
+                        <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Centro </button>
+                 
+                      </form>
+                        
+                      	<div class="" style="height : 700px"> 
+                				</div>
+							
                 </div>
             </div> 
             </div> 		
@@ -77,15 +82,39 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
 
 
 <style scoped>
+
 .modal {
-  position: absolute;
-  display: flex;
+   /*position: static;  */
+   /*position: static; */
+	/*position: relative; */ 
+	/*position: absolute; */ 
+	position: fixed; 
+	/*position: sticky; */
+ /* position: fixed;  */
+ /* display: block; */ 
+   display: flex; 
+
 }
 
+/*
 .modal div {
-  display: flex;
-  flex-direction: column;
+  display: flex; 
+  flex-direction: column; 
+
 }
+*/
+
+div.scroll {
+       			margin:4px, 4px;
+                padding:4px;
+                background-color: green;
+                width: 100%; 
+                /* height: 190%;*/
+                overflow-x: auto;
+                overflow-y: auto;
+                text-align:justify;
+      }
+
 /*
 .modal-background {
     background-color:#DAEFF3
@@ -96,14 +125,14 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
 
 
 .modal-mask {
-  position: fixed;
+  /*position: fixed;*/
   z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+ /* display: table;*/
 }
 
 .modal-wrapper {
@@ -135,6 +164,15 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
   margin-top: 1rem;
 }
 
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
 .modal-enter-active,
 .modal-leave-active {
   transition: opacity 0.5s ease;
@@ -146,6 +184,7 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
 }
 
 /************************ */
+
 </style>
 
 
@@ -203,10 +242,8 @@ data: function () {
         this.showModalCreate = false ;    
         
         let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
-        this.session_params.first_time = false ;
-        
+        this.session_params.first_time = false ;   
         },
-
 
 	    },
     
