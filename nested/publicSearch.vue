@@ -6,7 +6,7 @@ import axios from 'axios'
 import { BKND_CONFIG } from '../config123.js'
 import GeneralHeader from '../src/components/GeneralHeader.vue'
 import SearchAppointment from '../src/components/publicSearch/SearchAppointment.vue'
-
+    
 
 </script>
 
