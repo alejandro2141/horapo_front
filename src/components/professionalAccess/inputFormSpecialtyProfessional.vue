@@ -8,7 +8,7 @@ import axios from 'axios';
 <template>
 
    	  <select class="form-select form-control-lg" aria-label="Default" id="form_specialty"  v-model="form_specialty"  name="form_specialty">
-            <option selected v-for="(specialty) in specialty_list" :value="specialty.id" :key="specialty.id" > {{specialty.name}} </option>	
+            <option selected v-for="(specialty) in specialty_list" :value="specialty" :key="specialty.id" > {{specialty.name}} </option>	
       </select>
 
 </template>
@@ -41,7 +41,7 @@ export default {
     watch: {
     //WATCHER PREDICTOR SPECIALTY
         form_specialty(value, oldValue) {
-            this.$emit("selectedSpecialtyCode", this.form_specialty ); 
+            this.$emit("selectedSpecialtyCode", JSON.stringify(this.form_specialty) ); 
         },
 
     },//end watch
