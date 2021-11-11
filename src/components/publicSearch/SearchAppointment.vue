@@ -7,14 +7,14 @@ import searchAppointmentResult  from './SearchAppointmentResult.vue'
 </script>
 
 <template>
-    <div class="h2 bg-light p-2" >
+    <div class="h2 bg-white p-2" >
     Busca tu Hora 
     </div>
         <div>
             <div>
             <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
            
-            <searchAppointmentResult  v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  > </searchAppointmentResult> 	    
+            <searchAppointmentResult  :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" > </searchAppointmentResult> 	    
             </div>
      </div>
 </template>
@@ -44,6 +44,7 @@ export default {
 
             notificationMessage : null,
             notificationMessage_alert : false,
+            searchParameters : Object , 
     }
   },
 
@@ -68,22 +69,31 @@ methods: {
             },
 
         async searchAppointments(params) {	
-            this.params_bkp = params ; 
-                console.log("search Appointments input "+JSON.stringify(params) )
+           
+                console.log("search Appointments input params :"+JSON.stringify(params) )
+                
+                let specialty_code = null ;
+                if (params.specialty != null)
+                { 
+                    specialty_code = params.specialty.id ; 
+                }
+
                  const json = { 
 				// agenda_id : this.par_agenda_id ,			 
 				 date : this.daterequired ,
-				 specialty : params.specialty ,
+				 specialty : specialty_code ,
                  comuna : params.comuna ,
                  insurance : params.insurance,
                   		  };
-				console.log ("getAppointments REQUEST :"+ JSON.stringify(json)  );
+				console.log ("searchAppointments input to send JSON :"+ JSON.stringify(json)  );
 				//let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
 				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day",json);
 				console.log ("getAppointments RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
 				this.appointments = response_json.data.rows;
                // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                 this.notificationMessage_alert=	false ;
+                this.searchParameters = params ;
+
 
             },
 
