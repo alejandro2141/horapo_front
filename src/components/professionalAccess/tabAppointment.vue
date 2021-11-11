@@ -16,7 +16,7 @@ import FirstTimeLogin from './firstTimeLogin.vue'
 
             <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> 
-           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :session_params="session_params" v-on:switchView='switchView' ></ListAppointments>
+           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' ></ListAppointments>
 
             <div id='footer' style='height : 800px'>
             </div>
@@ -43,7 +43,7 @@ data: function () {
             appointments: null, 
 		 }
 	},
-	props: ['session_params'],
+	props: ['session_params','global_specialties'],
   emits: ['switchView','switchToCenters' ] ,
     created () {
         //this.daterequired="12-12-2021";
