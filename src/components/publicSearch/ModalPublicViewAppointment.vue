@@ -34,19 +34,19 @@ defineProps({
                     </div>
 
                 <div class="mb-2 h2">
-                   <text class="">  <i class="bi bi-calendar"></i> Dia  {{app.date.substring(0, 10) }} </text> 
-                    <text class=""> <i class="bi bi-smartwatch"></i> Hora {{app.start_time.substring(0, 5) }}  Hrs </text>
+                   <text class="">   {{app.date.substring(0, 10) }}  {{app.start_time.substring(0, 5) }}hrs. </text>
+                  <!--  <text class=""> <i class="bi bi-smartwatch"></i> Hora {{app.start_time.substring(0, 5) }}  Hrs </text> -->
                 </div>
                 
                 <div class="mb-2 h2">
 					<text class="">  
-               			<i class="bi bi-person-badge"></i>  Con:  {{app.name }} 
+               			Con:  {{app.name }} 
 			   		</text>
                 </div>               
                 
                 <div class="mb-1">  
-				<i class="bi bi-pin"></i> En {{app.center_name }}.  
-                Direccion: {{app.center_address }}
+				" {{app.center_name }} " <br>  
+               En: {{app.center_address }}
                 </div>
                 <hr>
 
@@ -201,7 +201,8 @@ defineProps({
   opacity: 0;
 }
 
-/************************ */
+
+
 </style>
 
 
