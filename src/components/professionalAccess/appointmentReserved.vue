@@ -7,7 +7,7 @@ import axios from 'axios';
 
 <template>
      
-    <div   class="mb-2  bg-light " data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
+    <div   class="mb-2  bg-white " data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
         <div id="app " class="m-0 d-flex  "  >			
                 
                 <div class="m-0 border-bottom" :style="{'background-color' : '#'+appointment.center_color }" >
@@ -30,14 +30,15 @@ import axios from 'axios';
                     <div class="d-flex justify-content-between " >
                         <div>
                         {{appointment.specialty_name }} 
-                        <text class="bg-info text-white" v-if='appointment.confirmation_status == 0' >Sin Confirmar </text>
                         <i v-if="appointment.available_public_search" style="margin-left: 1.0em;" class="bi bi-wifi text-success ">On Line</i>
-                        
+                        <br>
 
-                                <div class="text-danger" v-if="appointment.app_status == 1 ">
-                                    Cita Cancelada 
-                                </div>
+                        <div class="text-danger" v-if="appointment.app_status == 1 ">
+                            Cita Cancelada 
+                        </div>
 
+                        <text class="bg-info text-white" v-if='appointment.confirmation_status == 0' >Sin Confirmar </text>
+                       
                         </div>
                        
 
@@ -86,7 +87,7 @@ export default {
         }   
     },
    	
-    props: ['daterequired','appointment','index'],
+    props: ['daterequired','appointment','index','global_specialties'],
 
 	created () {
 	},
