@@ -2,12 +2,11 @@
 import { ref } from 'vue'
 import axios from 'axios';
 
-
 </script>
 
 <template>
      
-<div   class="bg-light mb-2" data-bs-toggle="modal" :data-bs-target="'#modal_reserve_'+index" >
+<div   class="bg-white mb-2" data-bs-toggle="modal" :data-bs-target="'#modal_reserve_'+index" >
                         <div id="app" class="d-flex justify-content-start"  >	
                             <!--
                             <div class="m-0"  :style="{'background-color' : '#'+appointment.center_color }"  >
@@ -34,8 +33,26 @@ import axios from 'axios';
                                 </div> 
 
                                 <div class="">
-                                       {{appointment.specialty_name }}<br>
-  
+                                    <text v-if=" appointment.specialty != null " >  
+                                        <i class="bi bi-node-plus"></i> {{ id2name(appointment.specialty ) }} <br>
+                                    </text>
+                                    <text v-if=" appointment.specialty1 != null " >  
+                                        <i class="bi bi-node-plus"></i> {{ id2name(appointment.specialty1 ) }} <br>
+                                    </text>
+                                    <text v-if=" appointment.specialty2 != null " >  
+                                        <i class="bi bi-node-plus"></i> {{ id2name(appointment.specialty2 ) }} <br>
+                                    </text>
+                                    <text v-if=" appointment.specialty3 != null " >  
+                                        <i class="bi bi-node-plus"></i> {{ id2name(appointment.specialty3 ) }} <br>
+                                    </text>
+                                    <text v-if=" appointment.specialty4 != null " >  
+                                        <i class="bi bi-node-plus"></i> {{ id2name(appointment.specialty4 ) }} <br>
+                                    </text>
+                                    <text v-if=" appointment.specialty5 != null " >  
+                                        <i class="bi bi-node-plus"></i> {{ id2name(appointment.specialty5 ) }} <br>
+                                    </text>
+                                       
+
                                 </div>
                                         
                               
@@ -70,11 +87,20 @@ export default {
         }   
     },
    	
-	props: ['daterequired','appointment','index'],
+	props: ['daterequired','appointment','index','global_specialties'],
 
 	created () {
+        console.log("IN APPOINTMENT AVAILABLE COMPONENT "+this.global_specialties);
 	},
 	methods :{
+
+        id2name(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        }
+
     }
 }
 </script>
