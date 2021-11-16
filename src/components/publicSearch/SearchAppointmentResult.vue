@@ -18,7 +18,7 @@ const count = ref(0)
             <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small> 
          
             <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
-               <patientAppointmentAvailable :searchParameters='searchParameters' class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" > </patientAppointmentAvailable>            
+               <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" > </patientAppointmentAvailable>            
             </div>
                 <!-- Start make room for Modal data when it display-->
             <div style="height: 400px">
@@ -27,7 +27,7 @@ const count = ref(0)
         </div>	
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
-        <modalPublicViewAppointment   :app="app" :openModalEvent="openModalEvent"   v-on:updateSearchResult="updateSearchResult"  > </modalPublicViewAppointment>
+        <modalPublicViewAppointment   :app="app" :openModalEvent="openModalEvent"   v-on:updateSearchResult="updateSearchResult"  :global_comunas='global_comunas' > </modalPublicViewAppointment>
         <!-- Modal Reserve and Confirm End -->
           
 </template>
