@@ -18,12 +18,13 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 			<transition name="modal">
 			<div class="modal-mask "  >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background">
+			<div class="modal-container  m-1 p-0 modal-background ">
               
-                <div class="modal-body " > 
+                <div class="modal-body w-100" > 
                   
-                  <div class="d-flex flex-row justify-content-end  m-1">
-                      <div class="display-4 " style="margin-right: 1em;" >  {{ appToReserve.specialty_name}}  </div>
+                  <div class="d-flex  justify-content-end  m-1">
+				
+                      <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ appToReserve.specialty_name}}  </div>
                       <div class="" style="margin-right: 1em;" > </div>
                       <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                   </div>
@@ -32,9 +33,9 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                 <div class="text-dark"> Datos del Paciente
                 </div>							
                             <form autocomplete="off" method="POST" action="take_appointment.html">			
-                                <input class="form-control form-control-lg" type="hidden" placeholder="Token" name="token" value="AAAAA"  >
+                                <input class="form-control form-control-lg " type="hidden" placeholder="Token" name="token" value="AAAAA"  >
                                 <br>	
-                                <input class="form-control form-control-lg" type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
+                                <input class="form-control form-control-lg " type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
                                 <div v-if="error_msg_name" class="text-danger">Debe Indicar Nombre del paciente</div>
                                 <br>
                                 <input class="form-control form-control-lg" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
@@ -53,7 +54,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                                 <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
                                 <button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
                             
-								<div class="" style="height : 700px"> 
+								<div class="" style="height : 500px"> 
                 				</div>
 							
 							</form> 
@@ -71,47 +72,21 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 <style scoped>
 
-
 .modal {
-   /*position: static;  */
-   /*position: static; */
-	/*position: relative; */ 
-	/*position: absolute; */ 
 	position: fixed; 
-	/*position: sticky; */
- /* position: fixed;  */
- /* display: block; */ 
    display: flex; 
 
 }
 
-/*
-.modal div {
-  display: flex; 
-  flex-direction: column; 
-
-}
-*/
-
 div.scroll {
        			margin:4px, 4px;
                 padding:4px;
-                background-color: green;
                 width: 100%; 
                 /* height: 190%;*/
                 overflow-x: auto;
                 overflow-y: auto;
                 text-align:justify;
       }
-
-/*
-.modal-background {
-    background-color:#DAEFF3
-        }
-*/
-/************************* */
-
-
 
 .modal-mask {
   /*position: fixed;*/
@@ -131,8 +106,8 @@ div.scroll {
 
 .modal-container {
  /*width: 100px;*/
-  margin: 2px auto;
-  padding: 20px 30px;
+  /*margin: 1px auto;*/
+  /*padding: 20px 30px;*/
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
@@ -145,22 +120,13 @@ div.scroll {
 }
 
 .modal-body {
-  margin: 20px 0;
+  margin: 0px 0;
 }
 
 .modal-default-button {
   display: block;
   margin-top: 1rem;
 }
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter-active,
 .modal-leave-active {
