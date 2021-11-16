@@ -27,13 +27,17 @@ import inputFormComuna  from './InputFormComuna.vue'
                         <inputFormComuna position="true"  v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
                 </div>
-                <!--
-                <div class="row  mb-1 ">
-                    <div class="col">
-                         <inputFormInsuranceList position="true"  v-on:selectedInsuranceCode="selectedInsuranceCode"> </inputFormInsuranceList>
-                    </div>
+                
+                <div @click="form_home_visit = !form_home_visit"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
+                  <div>Visita a Domicilio <i class="bi bi-house-door"></i> </div>
+
+                  <div></div>
+
+                  <div v-if="form_home_visit"  > <b> SI </b> </div>
+                  <div v-if="!form_home_visit" > <b> NO </b> </div>
+
                 </div>
-                -->
+                
                 <p></p>
                 <div class="text-center">
                 <button type="button" v-on:click="sendFormSearch()" class="btn btn-primary btn-lg m-2"> Buscar una Hora</button>
@@ -65,6 +69,8 @@ export default {
             insurance_list : [],
             comuna_list : [],
             specialty_list : [ ] ,
+
+            form_home_visit : 0,
     }
   },
 
@@ -103,7 +109,7 @@ export default {
 				// agenda_id : this.par_agenda_id ,			 
 				 specialty : this.form_specialty ,
                  comuna : this.form_comuna_code ,
-                 insurance : this.form_insurance_code ,
+                 home_visit : this.form_home_visit,
                   		  };
 
             this.$emit("searchAppointments",search_params );
