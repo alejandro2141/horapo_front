@@ -73,7 +73,7 @@ methods: {
                 console.log("search Appointments input params :"+JSON.stringify(params) )
                 
                 let specialty_code = null ;
-                if (params.specialty != null)
+                if (  params.specialty != null)
                 { 
                     specialty_code = params.specialty.id ; 
                 }
@@ -83,7 +83,7 @@ methods: {
 				 date : this.daterequired ,
 				 specialty : specialty_code ,
                  comuna : params.comuna ,
-                 insurance : params.insurance,
+                 home_visit : params.home_visit,
                   		  };
 				console.log ("searchAppointments input to send JSON :"+ JSON.stringify(json)  );
 				//let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
@@ -93,8 +93,6 @@ methods: {
                // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                 this.notificationMessage_alert=	false ;
                 this.searchParameters = params ;
-
-
             },
 
             updateLastSearch()
