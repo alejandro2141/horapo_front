@@ -59,19 +59,38 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                        
                         <p class="text-danger  text-end"  @click="form_specialty_code_array = []  ">Eliminar</p>
                        
-                      <h2 class="mt-4">Centro de Atencion: </h2>
+                      <div @click="form_public = !form_public"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
+                        <div>Cita en Internet  <i class="bi bi-wifi"></i> </div>
+
+                        <div></div>
+
+                        <div v-if="form_public"  > <b> Publica  </b> </div>
+                        <div v-if="!form_public" > <b> Privada  </b> </div>
+
+                      </div>
+<br>
+        
+                      <div @click="form_home_visit = !form_home_visit"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
+                        <div>Visita a Domicilio <i class="bi bi-house-door"></i> </div>
+
+                        <div></div>
+
+                        <div v-if="form_home_visit"  > <b> SI </b> </div>
+                        <div v-if="!form_home_visit" > <b> NO </b> </div>
+
+                      </div>
+                      <div v-if="form_home_visit">
+                          Aqui formulario de comunas a las que va a domicilio 
+                      </div>                                       
+
+                      <div v-if="!form_home_visit">
+                        <h2 class="mt-4">Centro de Atencion: </h2>
                         <InputFormCenterProfessional v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
                      
-                      <h2>Cita  On Line ? <i v-if="form_public == 'true'" class=" text-success bi bi-wifi">On Line</i> </h2> 
-            
-                      <div class="">
-                          <select  class="autocomplete form-select form-select mb-2" placeholder="Disonible Internet"  aria-label=".form-select-lg example" id="form_public"  v-model="form_public" name="form_public" >
-                            <option value="true">Hora Publica </option>
-                            <option value="false">Hora Privada</option>
-                          </select>
-                        </div>
-                        
-            
+                      </div>
+
+                      
+                     
 
                       <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
                       <button type="button" @click="createHours();" data-bs-dismiss="modal" class="btn btn-primary">GUARDAR </button>
@@ -217,6 +236,7 @@ export default {
             showModalCreateApp : false,
 
             showErrorCenters : false ,
+            form_home_visit : 0 ,
           }   
     },
    	
