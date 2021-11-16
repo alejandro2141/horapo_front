@@ -8,33 +8,37 @@ import { ref } from 'vue'
 
 <template>
      
-    <div v-if="appointment != null"   style="border: 1px solid rgb(168, 168, 168); border-radius: 10px;"  class="bg-white p-0 mb-1 ">
+    <div v-if="appointment != null"   style="border: 3px solid rgb(168, 168, 168); border-radius: 10px;"  class="bg-white p-0 mb-1 ">
         <div id="app" class="m-0 d-flex  "  >	
             <div class="">
                      &nbsp;
             </div>
             <div>
                 <div class="">
-                    <div class="display-5">	
-                    {{appointment.date.substring(0, 10) }}  {{appointment.start_time.substring(0, 5) }} hrs  
+                    <div class="display-5" style=" color:#2e5668">	
+                   <b> {{ transform_date( appointment.date.substring(0, 10) ) }}</b>
+                    
+                   {{appointment.start_time.substring(0, 5) }}<text style=" font-size: 0.6em;">hrs</text>  
                     </div>       
                 </div>
            
-                <div class="display-6">
-                    <div class="">	
-                    {{ showSpecialtyName(appointment) }}
+                <div class="display-5">
+                    <div style=" color:#1f9d94">	
+                    {{ showSpecialtyName(appointment) }} 
                     </div>       
                 </div>
                 <div class="">
-                        <div class="">	
+                        <div class="" style="color:#2e5668" >	
                         <i class="fas fa-map-marker-alt "></i>   "{{ appointment.center_name }}"
                         </div>       
                 </div>
                 <div class="">
                     <div class="">	
-                  <div class="display-6"> <i class="h5 text-center bi bi-geo-alt"></i> {{comuna_id2name(appointment.comuna) }} </div>
+                  <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i> {{comuna_id2name(appointment.comuna) }} </div>
 
-                    {{appointment.center_address }}
+                        <div style="color:#2e5668">
+                            {{appointment.center_address }}
+                        </div>
                     </div>       
                 </div>
             
@@ -70,7 +74,7 @@ methods: {
         if (this.searchParameters.specialty != null)
         {return this.searchParameters.specialty.name }
         else {
-            return (app.specialty_name)
+            return (app.specialty_name )
         }
     },
     comuna_id2name(id)
@@ -78,6 +82,12 @@ methods: {
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
+    },
+
+    transform_date(date)
+    {
+        let temp = date.split("-") ;
+        return (" "+temp[2]+"/"+temp[1]+"/"+temp[0])
     },
         
         
