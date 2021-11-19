@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import axios from 'axios';
 import InputFormSpecialtyProfessional from './inputFormSpecialtyProfessional.vue';
 import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
+import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
+
+
 
 </script>
 
@@ -51,50 +54,57 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                      
                       
                       <h2>Especialidades de esta Hora:</h2>
-                        <InputFormSpecialtyProfessional v-on:selectedSpecialtyCode="selectedSpecialtyCode"  :session_params="session_params" > </InputFormSpecialtyProfessional> 
-                      
-                      <div class="text-start" v-for="(speci) in form_specialty_code_array" :key="speci.id"  >  &#9749;  {{ speci.name }}  
-                      </div>
-
-                       
-                        <p class="text-danger  text-end"  @click="form_specialty_code_array = []  ">Eliminar</p>
-                       
-                      <div @click="form_public = !form_public"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
-                        <div>Cita en Internet  <i class="bi bi-wifi"></i> </div>
+                        <InputFormSpecialtyProfessional v-on:selectedSpecialties="selectedSpecialties"  :session_params="session_params" > </InputFormSpecialtyProfessional> 
+                      <br>
+                      <h2>Cita en Internet  </h2>
+                        <div @click="form_public = !form_public"  class="d-flex justify-content-between ">
+                        <div class="border border-1 border-primary p-2">
+                          <text class="p-2" :class="{'text-white' : form_public ,'bg-primary' : form_public }">SI </text>
+                          <text class="p-2" :class="{'text-white' : !form_public ,'bg-primary' : !form_public }" >NO </text>
+                        </div>
 
                         <div></div>
 
-                        <div v-if="form_public"  > <b> Publica  </b> </div>
+                        <div v-if="form_public" class="text-success" > <b> <i class="bi bi-wifi"></i> Publica  </b> </div>
                         <div v-if="!form_public" > <b> Privada  </b> </div>
 
                       </div>
-<br>
-        
-                      <div @click="form_home_visit = !form_home_visit"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
-                        <div>Visita a Domicilio <i class="bi bi-house-door"></i> </div>
-
-                        <div></div>
-
-                        <div v-if="form_home_visit"  > <b> SI </b> </div>
-                        <div v-if="!form_home_visit" > <b> NO </b> </div>
-
+                    
+                      <br>
+                     <h2>Tipo de Cita:</h2>
+                      <div class=" h4 d-flex justify-content-between ">
+                        <div @click="form_app_type=1"  class="text-center border border-1 border-primary p-2"> A Domicilio </div>
+                        <div @click="form_app_type=2" class="text-center border border-1 border-primary p-2"> En Consulta </div>
+                        <div @click="form_app_type=3" class="text-center border border-1 border-primary p-2">Remota </div>
                       </div>
-                      <div v-if="form_home_visit">
-                          Aqui formulario de comunas a las que va a domicilio 
-                      </div>                                       
+            
+                      <div v-if="form_app_type == 1 "> 
+                          Comunas a las que concurre a domicilio 
+                          <div class="text-start" v-for="(comuna) in form_comunas" :key="comuna.id"  > <i class="bi bi-geo-alt"></i> {{ comuna.name }}  
+                          </div>
+                          <p class="text-danger  text-end"  @click="form_comunas.pop()">Eliminar</p>
+                       
+                         <InputFormComunaProfessional v-on:selectedComuna="selectedComuna" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
+                      </div>
 
-                      <div v-if="!form_home_visit">
-                        <h2 class="mt-4">Centro de Atencion: </h2>
+                   
+                                      
+
+                      <div v-if="form_app_type == 2 " >
+                        Seleccione Centro de Atencion 
                         <InputFormCenterProfessional v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
                      
                       </div>
 
                       
-                     
+                     <br>
+                      <div class="m-1 p-2">
+                          <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
+                          <button type="button" @click="createHours();" data-bs-dismiss="modal" class="btn btn-primary">GUARDAR </button>
+                    	</div>
 
-                      <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
-                      <button type="button" @click="createHours();" data-bs-dismiss="modal" class="btn btn-primary">GUARDAR </button>
-                    	<div class="" style="height : 700px"> </div>
+
+                      <div class="" style="height : 700px"> </div>
 
 
                       </form>			
@@ -237,10 +247,12 @@ export default {
 
             showErrorCenters : false ,
             form_home_visit : 0 ,
+            form_comunas : [] , 
+            form_app_type : 1,
           }   
     },
    	
-   props: ['daterequired','hourCreate', 'session_params' ],
+   props: ['daterequired','hourCreate', 'session_params', 'global_comunas' ],
    emits: ['updateAppList','switchView'] , 
       
    	mounted () {
@@ -250,6 +262,19 @@ export default {
     },
 
 	methods :{
+
+    selectedComuna(comuna)
+    {
+      console.log("capture emit comuna "+JSON.stringify(comuna));
+      
+      if (this.form_comunas.find(elem => elem.id ==  comuna.id  ) == null )
+      {     this.form_comunas.push(comuna) ; }
+      else { console.log("Skip duplicated Value Specialty"); 
+      }
+      
+     
+    },
+
 //GET CENTERS      
     centersError(value) {
       console.log("centersError In modal "+value);
@@ -260,20 +285,10 @@ export default {
             this.$emit('switchView');
          },
 
-    selectedSpecialtyCode(value)
+    selectedSpecialties(value)
     {
     console.log("speciality selected code Modal: "+value);
-    console.log("speciality id: "+JSON.parse(value).id +"  Name:"+JSON.parse(value).name);
-    //this.form_specialty_code = value ;
-    
-    console.log("ID Duplicado :"+ JSON.stringify( this.form_specialty_code_array.find(elem => elem.id ==  JSON.parse(value).id  ) ));
-    
-    if (this.form_specialty_code_array.find(elem => elem.id ==  JSON.parse(value).id  ) == null )
-      {    this.form_specialty_code_array.push(JSON.parse(value)) ; }
-    else{console.log("Skip duplicated Value Specialty");}
-    
-    console.log("speciality selected code Modal array: "+JSON.stringify(this.form_specialty_code_array));
-    },
+     },
 
     selectedCenterCode(value)
     {
