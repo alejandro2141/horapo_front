@@ -16,7 +16,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
  <div id="search_result" class="border">
 
-<ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' > </ModalCreateAppointment>
+<ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" > </ModalCreateAppointment>
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' > </ModalShowAppointmentDetails>
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' > </ModalShowAppointmentTaken>
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' > </ModalProfessionalReserveAppointment>
@@ -141,7 +141,7 @@ export default {
         }   
     },
    	
-   props: ['daterequired','session_params','appointments','global_specialties'],
+   props: ['daterequired','session_params','appointments','global_specialties', 'global_comunas'  ],
    emits: ['updateAppointmentList','switchView' ] , 
 	created () {
        // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
