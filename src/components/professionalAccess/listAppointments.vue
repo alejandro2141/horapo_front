@@ -45,10 +45,10 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                  <div v-if="hour.app_available != null" >
                 
                     <div v-if="hour.app_available == false ">
-                        <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' > </AppointmentReserved>
+                        <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentReserved>
                     </div>
                     <div v-else>
-                        <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id"  :global_specialties='global_specialties' > </AppointmentAvailable>
+                        <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id"  :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentAvailable>
                     </div>
 
                 </div>
