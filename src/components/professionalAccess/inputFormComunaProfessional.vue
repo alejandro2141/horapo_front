@@ -4,11 +4,16 @@ import axios from 'axios';
 //import { GLOBAL_COMUNAS } from '../../../config123.js' 
 
 
-const count = ref(0)
 </script>
 
 <template>
        <div class="" >
+
+            <div class="text-start" v-for="(comuna) in comuna_list" :key="comuna.id"  > <i class="bi bi-geo-alt"></i> {{ comuna.name }}  
+            </div>
+            <p class="text-danger  text-end"  @click="comuna_list.pop()">Eliminar</p>
+
+
             <div class="row" style="--bs-gutter-x: 0rem ; margin-right: 0rem ; margin-left: 0rem ">
             
                 <div class="col " style="position: relative;" >
@@ -22,14 +27,14 @@ const count = ref(0)
                     </div>
                     
                     <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
-                        <i class="display-2 m-1  bi bi-x  text-muted" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
+                        <i class="display-2 m-1  bi bi-x  text-muted" @click="form_comuna = null; ready_input = false ;   " ></i>
                     </div>
 
                 </div>    
 
                 <div >
                      <div class="h3 m-3 text-primary " v-for="location in location_filtered" :key="location.id" > 
-                        <div @click="form_comuna = location.name ;  $emit('selectedComuna', location ); clearfiltered = true">
+                        <div @click="addComuna2list(location)">
                              <i class="display-6  text-muted" ></i> - {{ location.name }} 
                         </div>
                      </div>
@@ -60,7 +65,7 @@ export default {
     },  
  
    props: ['global_comunas'], 
-   emits: ["selectedComuna"],
+   emits: ["selectedComunas"],
 
 mounted() {   
        //this.getComunaList();
@@ -69,12 +74,14 @@ mounted() {
        },
 
     watch: {
-        //WATCHER PREDICTOR COMUNA
-            form_comuna(value, oldValue) {
 
+           
+            //WATCHER PREDICTOR COMUNA
+            form_comuna(value, oldValue) 
+            {
                     if (value !=null && value.length >= 0 &&  !this.clearfiltered)
                     {
-                         value = value.charAt(0).toUpperCase() + value.slice(1) ; 
+                        value = value.charAt(0).toUpperCase() + value.slice(1) ; 
 
                         console.log("Text Location to search "+value);
                         let tempfiltered = this.global_comunas.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name > b.name) ? 1 : -1);
@@ -93,10 +100,27 @@ mounted() {
                     this.location_filtered = null
                     this.clearfiltered = false ; 
                     }  
-              },
+            },
+
         },
 
     methods: {
+        addComuna2list(comuna){
+            console.log("comuna selected "+JSON.stringify(comuna));
+            this.form_comuna = comuna.name ;  
+           
+                if (this.comuna_list.find(elem => elem.id ==  comuna.id  ) == null )
+                    {      
+                            this.comuna_list.push(comuna) ;
+                            this.clearfiltered = true ;
+                            this.$emit('selectedComunas',JSON.stringify(this.comuna_list )); 
+                    }
+                else { console.log("Skip duplicated Value Specialty"); 
+                    }
+
+           
+            },
+
         /*
         async  getComunaList() {
                 console.log ("GET COMUNA LIST METHOD"); 
