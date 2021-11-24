@@ -27,17 +27,38 @@ import inputFormComuna  from './InputFormComuna.vue'
                         <inputFormComuna position="true"  v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
                 </div>
-                
-                <div @click="form_home_visit = !form_home_visit"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
-                  <div>Visita a Domicilio <i class="bi bi-house-door"></i> </div>
 
-                  <div></div>
-
-                  <div v-if="form_home_visit"  > <b> SI </b> </div>
-                  <div v-if="!form_home_visit" > <b> NO </b> </div>
-
+                <div class="bg-white">
+                    <div class="d-flex justify-content-around h3"> 
+                        <div><i class="bi bi-camera-video"></i> </div>
+                        <div><i class="bi bi-building"></i> </div>
+                        <div><i class="bi bi-house-door"></i> </div>
+                    </div>
+                    <div class="d-flex justify-content-around h1 m-0 p-0"> 
+                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="option1"></div>
+                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="option1"></div>
+                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="option1"></div>
+                    </div>
+                    <div class="d-flex justify-content-around h6"> 
+                        <div>Tele Atención</div>
+                        <div>En Consulta </div>
+                        <div>A Domicilio</div>
+                    </div>
                 </div>
-                
+                <!--
+                <div @click="form_home_visit = !form_home_visit"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
+                    <div>Visita a Domicilio <i class="bi bi-house-door"></i> </div>
+                    <div></div>
+                    <div v-if="form_home_visit != null"> 
+                        <div v-if="form_home_visit"  > <b> SI </b> </div>
+                        <div v-if="!form_home_visit" > <b> NO </b> </div>
+                    </div>
+                    <div v-else> 
+                        ---
+                    </div>
+                </div>
+                -->
+
                 <p></p>
                 <div class="text-center">
                 <button type="button" v-on:click="sendFormSearch()" class="btn btn-primary btn-lg m-2"> Buscar una Hora</button>
@@ -70,7 +91,7 @@ export default {
             comuna_list : [],
             specialty_list : [ ] ,
 
-            form_home_visit : 0,
+            form_home_visit : null,
     }
   },
 
@@ -110,6 +131,7 @@ export default {
 				 specialty : this.form_specialty ,
                  comuna : this.form_comuna_code ,
                  home_visit : this.form_home_visit,
+                 
                   		  };
 
             this.$emit("searchAppointments",search_params );
