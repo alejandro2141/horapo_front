@@ -52,21 +52,43 @@ import axios from 'axios';
                                         <i class="bi bi-node-plus"></i> {{ id2name(appointment.specialty5 ) }} <br>
                                     </text>
                                        
-
                                 </div>
-                                        
-                              
-                               
-                                    
                             </div>
-
-            	  
-                            
                         </div>
-                        <text style=" font-size: 1.0em;" >
-                          <i class="bi bi-geo-alt"  ></i>    {{appointment.center_address }}       
-                        </text>
 
+                        <div v-if="appointment.app_type_center" style=" font-size: 1.0em;" >
+                             <i class="bi bi-building"> En Consulta </i> <br>
+                          <i class="bi bi-geo-alt"  ></i>    {{appointment.center_address }}       
+                        </div>
+                        
+                        <div v-if="appointment.app_type_home" style=" font-size: 1.0em;" >
+                          <i class="bi bi-house"> A Domicilio Comunas </i> <br>
+
+                            <text v-if=" appointment.location1 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location1) }} <br>
+                            </text>
+                            <text v-if=" appointment.location2 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location2) }} <br>
+                            </text>
+                            <text v-if=" appointment.location3 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location3) }} <br>
+                            </text>
+                            <text v-if=" appointment.location4 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location4) }} <br>
+                            </text>
+                            <text v-if=" appointment.location5 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location5) }} <br>
+                            </text>
+                            <text v-if=" appointment.location6 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location6) }} <br>
+                            </text>
+
+
+                        </div>
+
+                        <div v-if="appointment.app_type_remote" style=" font-size: 1.0em;" >
+                          <i class="bi bi-camera-video"> Remota </i> 
+                        </div>
 
                         
 
@@ -87,7 +109,7 @@ export default {
         }   
     },
    	
-	props: ['daterequired','appointment','index','global_specialties'],
+	props: [ 'daterequired' , 'appointment' , 'index' , 'global_specialties' , 'global_comunas' ],
 
 	created () {
         console.log("IN APPOINTMENT AVAILABLE COMPONENT "+this.global_specialties);
@@ -96,6 +118,12 @@ export default {
 
         id2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        },
+        id2comuna(id){
+            let temp= this.global_comunas.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
 
