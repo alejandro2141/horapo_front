@@ -72,30 +72,41 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     
                       <br>
                      <h2>Tipo de Cita:</h2>
-                      <div class=" h4 d-flex justify-content-between ">
-                        <div @click="form_app_type=1"  class="text-center border border-1 border-primary p-2"> A Domicilio </div>
-                        <div @click="form_app_type=2" class="text-center border border-1 border-primary p-2"> En Consulta </div>
-                        <div @click="form_app_type=3" class="text-center border border-1 border-primary p-2">Remota </div>
-                      </div>
-            
-                      <div v-if="form_app_type == 1 "> 
-                          Comunas a las que concurre a domicilio 
-                          <div class="text-start" v-for="(comuna) in form_comunas" :key="comuna.id"  > <i class="bi bi-geo-alt"></i> {{ comuna.name }}  
-                          </div>
-                          <p class="text-danger  text-end"  @click="form_comunas.pop()">Eliminar</p>
-                       
-                         <InputFormComunaProfessional v-on:selectedComuna="selectedComuna" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
-                      </div>
+                        <div @click="form_show_home = !form_show_home; form_show_center = false ; form_show_remote = false ; "  class="p-2 h3"><i :class="{'bi':true , 'bi-circle':!form_show_home  , 'text-primary' : form_show_home , 'bi-circle-fill' : form_show_home }"></i> A Domicilio </div>
+                                                     
+                              <div v-if="form_show_home" class="border border-1 p-2"> 
+                                A domicilio comunas en las que atiende (Máximo 6). 
+                                <!----
+                                <div class="text-start" v-for="(comuna) in form_comunas" :key="comuna.id"  > <i class="bi bi-geo-alt"></i> {{ comuna.name }}  
+                                </div>
+                                  <p class="text-danger  text-end"  @click="form_comunas.pop()">Eliminar</p>
+                                -->
+                                  <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
+                                <br>  
+                              </div>
+                              <div v-else >
+                                ...
+                              </div>
 
-                   
-                                      
-
-                      <div v-if="form_app_type == 2 " >
-                        Seleccione Centro de Atencion 
-                        <InputFormCenterProfessional v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+                        
+                            <div @click="form_show_center = !form_show_center; form_show_home = false ; form_show_remote = false ;"  class="p-2 h3"><i :class="{'bi':true , 'bi-circle':!form_show_center  , 'text-primary' : form_show_center , 'bi-circle-fill' : form_show_center }"></i> En Consulta </div>
+                              <div v-if="form_show_center" >
+                                Seleccione Centro de Atencion 
+                                <InputFormCenterProfessional class="m-3" v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+                                <br>
+                              </div>
+                              <div v-else>
+                                ...
+                              </div>
+                          
+                           <div @click="form_show_remote = !form_show_remote ; form_show_center = false ; form_show_home= false ; "  class="p-2 h3"><i :class="{'bi':true , 'bi-circle':!form_show_remote  , 'text-primary' : form_show_remote , 'bi-circle-fill' : form_show_remote }"></i> Remota </div>
+                              <div v-if="form_show_remote" >
+                                Aun no implementamos esta funcionalidad
+                              </div>
+                              <div v-else>
+                                ...
+                              </div>
                      
-                      </div>
-
                       
                      <br>
                       <div class="m-1 p-2">
@@ -235,7 +246,7 @@ export default {
             needsCreateCenter: false ,
            // centers: null,
             form_center_id : null,
-            form_public : null ,
+            form_public : true ,
             form_start_time : null ,
             form_specialty_code : null ,
             form_specialty_code_array : [] ,
@@ -247,9 +258,14 @@ export default {
 
             showErrorCenters : false ,
             form_home_visit : 0 ,
-            form_comunas : [] , 
-            form_app_type : 1,
-          }   
+            form_comunas_id : [] , 
+            form_app_type : null,
+
+            form_show_home : false ,
+            form_show_center : false ,
+            form_show_remote : false ,
+
+        }   
     },
    	
    props: ['daterequired','hourCreate', 'session_params', 'global_comunas' ],
@@ -263,16 +279,15 @@ export default {
 
 	methods :{
 
-    selectedComuna(comuna)
+    selectedComunas(value)
     {
-      console.log("capture emit comuna "+JSON.stringify(comuna));
-      
-      if (this.form_comunas.find(elem => elem.id ==  comuna.id  ) == null )
-      {     this.form_comunas.push(comuna) ; }
-      else { console.log("Skip duplicated Value Specialty"); 
-      }
-      
-     
+      console.log("capture emit comuna List "+JSON.stringify(value));
+      let aux=JSON.parse(value) ;
+      this.form_comunas_id = [] ;
+          for (let i = 0 ; i < aux.length ; i++) {
+             this.form_comunas_id.push( aux[i].id );
+          }
+          console.log("Comuna id array:"+this.form_comunas_id );
     },
 
 //GET CENTERS      
@@ -287,7 +302,12 @@ export default {
 
     selectedSpecialties(value)
     {
-    console.log("speciality selected code Modal: "+value);
+    let aux=JSON.parse(value) ;
+    this.form_specialty_code_array= [] ;
+          for (let i = 0 ; i < aux.length ; i++) {
+             this.form_specialty_code_array.push( aux[i].id );
+          }
+          console.log("specialty id array:"+this.form_specialty_code_array);
      },
 
     selectedCenterCode(value)
@@ -313,9 +333,14 @@ export default {
               //form_specialty_code : JSON.stringify(this.form_specialty_code_array),
               //form_specialty_code : JSON.parse(JSON.stringify(this.form_specialty_code_array)),
               form_specialty_code : this.form_specialty_code_array,
-              
               form_public : this.form_public ,
-                        };
+
+              form_type_home : this.form_show_home ,
+              form_type_center : this.form_show_center ,
+              form_type_remote : this.form_show_remote ,
+
+              form_type_home_comunas : this.form_comunas_id ,           
+                      };
                   
         console.log ("createHours REQUEST :"+ JSON.stringify(json)  );
         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_appointment",json);
