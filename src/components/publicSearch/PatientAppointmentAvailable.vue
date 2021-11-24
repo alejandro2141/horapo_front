@@ -27,19 +27,45 @@ import { ref } from 'vue'
                     {{ showSpecialtyName(appointment) }} 
                     </div>       
                 </div>
+ 
                 <div class="">
-                        <div class="" style="color:#2e5668" >	
-                        <i class="fas fa-map-marker-alt "></i>   "{{ appointment.center_name }}"
-                        </div>       
-                </div>
-                <div class="">
-                    <div class="">	
-                  <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i> {{comuna_id2name(appointment.comuna) }} </div>
+                    <div v-if="appointment.app_type_center" class="">
+                       <i class="bi bi-building"></i> En consulta 	
+                        <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i> {{comuna_id2name(appointment.comuna) }} </div>
+                            <div class="" style="color:#2e5668" >	
+                                <i class="fas fa-map-marker-alt "></i>   "{{ appointment.center_name }}"
+                            </div> 
+                            <div style="color:#2e5668">
+                                {{appointment.center_address }}
+                            </div>
+                    </div>
+                    <div v-if="appointment.app_type_home" class="">
+                       <i class="bi bi-house"></i>  A domicilio : 
+                            <text v-if=" appointment.location1 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(appointment.location1) }} 
+                            </text>
+                            <text v-if=" appointment.location2 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(appointment.location2) }} 
+                            </text>
+                            <text v-if=" appointment.location3 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(appointment.location3) }}
+                            </text>
+                            <text v-if=" appointment.location4 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(appointment.location4) }} 
+                            </text>
+                            <text v-if=" appointment.location5 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(appointment.location5) }} 
+                            </text>
+                            <text v-if=" appointment.location6 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(appointment.location6) }} 
+                            </text>
 
-                        <div style="color:#2e5668">
-                            {{appointment.center_address }}
-                        </div>
-                    </div>       
+
+                    </div>
+                    <div v-if="appointment.app_type_remote" class="">
+                       <i class="bi bi-camera-video"></i> Tele Atención  	                       
+                    </div>
+
                 </div>
             
             </div>
