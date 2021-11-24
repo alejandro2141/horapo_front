@@ -84,6 +84,9 @@ methods: {
 				 specialty : specialty_code ,
                  comuna : params.comuna ,
                  home_visit : params.home_visit,
+                 type_home : params.type_home,
+                 type_center : params.type_center,
+                 type_remote : params.type_remote,
                   		  };
 				console.log ("searchAppointments input to send JSON :"+ JSON.stringify(json)  );
 				//let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
