@@ -35,9 +35,9 @@ import inputFormComuna  from './InputFormComuna.vue'
                         <div><i class="bi bi-house-door"></i> </div>
                     </div>
                     <div class="d-flex justify-content-around h1 m-0 p-0"> 
-                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="option1"></div>
-                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="option1"></div>
-                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="option1"></div>
+                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_remote" ></div>
+                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_center"></div>
+                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_home"></div>
                     </div>
                     <div class="d-flex justify-content-around h6"> 
                         <div>Tele Atención</div>
@@ -91,7 +91,9 @@ export default {
             comuna_list : [],
             specialty_list : [ ] ,
 
-            form_home_visit : null,
+            form_app_type_home : false ,
+            form_app_type_center : false ,
+            form_app_type_remote : false ,
     }
   },
 
@@ -130,8 +132,9 @@ export default {
 				// agenda_id : this.par_agenda_id ,			 
 				 specialty : this.form_specialty ,
                  comuna : this.form_comuna_code ,
-                 home_visit : this.form_home_visit,
-                 
+                 type_home : this.form_app_type_home,
+                 type_center : this.form_app_type_center,
+                 type_remote : this.form_app_type_remote,
                   		  };
 
             this.$emit("searchAppointments",search_params );
