@@ -155,8 +155,8 @@ export default {
   },
 
  props: ['appConfirmed','eventShowModalConfirmation','app' ],
- emits: ['updateSearchResult'] , 
-      
+ emits: ['updateLastSearch'] , 
+          
 
 computed: {
 	},
@@ -179,7 +179,7 @@ computed: {
             {
                 console.log (" update search Result. In Modal Public Reserve Confirmation ");
                 //this.appointment_list=null ;
-                this.$emit('updateSearchResult');
+                this.$emit('updateLastSearch');
                 this.showModalConfirmation = false ;
             },
 
