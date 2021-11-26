@@ -9,7 +9,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 </script>
 
 <template>
-<ModalPublicReserveConfirmation v-on:updateSearchResult='updateSearchResult'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app'  ></ModalPublicReserveConfirmation>
+<ModalPublicReserveConfirmation v-on:updateLastSearch='updateLastSearch'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app'  ></ModalPublicReserveConfirmation>
   <div>
   	<teleport to="body"   >
 
@@ -172,7 +172,7 @@ export default {
   },
 
  props: ['appToReserve','eventShowModalPubicReserve' ],
- emits: ['updateAppList','updateSearchResult'] , 
+ emits: ['updateAppList','updateLastSearch'] , 
       
 
 computed: {
@@ -186,11 +186,11 @@ computed: {
       	},
 
 	methods: {
-		updateSearchResult()
+		updateLastSearch()
             {
                 console.log (" update search Result. in Public Reserve Form ");
                 //this.appointment_list=null ;
-                this.$emit('updateSearchResult');
+                this.$emit('updateLastSearch');
             },
 
 		async sendReserveAppointment(app)
