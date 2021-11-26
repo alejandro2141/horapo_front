@@ -10,7 +10,7 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 
 <template>
 
-<ModalPublicReserveAppForm v-on:updateSearchResult='updateSearchResult' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve'></ModalPublicReserveAppForm>
+<ModalPublicReserveAppForm v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve'></ModalPublicReserveAppForm>
 
 	<teleport to="body"   >
 
@@ -21,16 +21,22 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background" style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;"  >
               
-                <div class="modal-body " > 
- 					<div class="d-flex flex-row justify-content-end  m-0">
+                <div class="modal-body scroll" > 
+ 					<div class="d-flex flex-row justify-content-end ">
                       <div class="display-4 " style="color:#1f9d94 ; margin-right: 1em;"  > <b> {{ app.specialty_name}} </b> </div>
                       <div class="" style="margin-right: 1em;" > </div>
                       <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
                     </div>
 
-                    <div class=" w-100 display-6 m-0 p-0" style="color:#2e5668">	
-                   		 {{ transform_date( app.date.substring(0, 10) ) }} 
-                        {{app.start_time.substring(0, 5) }} hrs   
+					<div class="display-4 " style="color:#2e5668" >
+						 {{ transform_date( app.date.substring(0, 10) ) }}  
+                        {{app.start_time.substring(0, 5) }} hrs  
+					</div>
+
+				<br>
+                    
+					<div class=" w-100 display-6 m-0 p-0" style="color:#2e5668">	
+                   		 
                     </div> 
 
 
@@ -40,21 +46,49 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 			   		</text>
                 </div>               
                 
-                <div class="mb-1" style="color:#2e5668">  
-				" {{app.center_name }} " <br> 
+				<div v-if="app.app_type_center" >
+					<div class="h3" style="color:#2e5668"> <i class="bi bi-building h2"></i> Cita en Centro<br> {{app.center_name }}</div>
+					<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
+					<div class="h5">Direccion:  {{app.center_address }}</div>
+						<hr>
+						<a :href="app.url_map" >Mapa</a>
+						<img  :src="'/centerMap/center_map_id_'+app.center_id+'.JPG'" class="img-fluid" alt="center map">
+						
 				</div>
 
- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div>
+				<div v-if="app.app_type_home" >
+					<div><i class="bi bi-house h1"></i> Cita a domicilio </div>
+					En Comunas: 
+							<text v-if=" app.location1 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location1) }} 
+                            </text>
+                            <text v-if=" app.location2 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location2) }} 
+                            </text>
+                            <text v-if=" app.location3 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location3) }}
+                            </text>
+                            <text v-if=" app.location4 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location4) }} 
+                            </text>
+                            <text v-if=" app.location5 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location5) }} 
+                            </text>
+                            <text v-if=" app.location6 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location6) }} 
+                            </text>
 
 
-				<div>
-				
-               En: {{app.center_address }}
-                </div>
-                <hr>
+						
+				</div>
+
+				<div v-if="app.app_type_remote" >
+					<i class="bi bi-camera-video h1"></i>
+					<div> Remoto </div>
+				</div>
+
 <div>
-	<a :href="app.url_map" >Ir al Mapa</a>
-		<img :src="'/centerMap/center_map_id_'+app.center_id+'.JPG'" class="img-fluid" alt="center map">
+
 	
 
 </div>
@@ -74,16 +108,22 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 
 <style scoped>
 
-
 .modal {
-  position: absolute;
-  display: flex;
+	position: fixed; 
+   display: flex; 
 }
 
-.modal div {
-  display: flex;
-  flex-direction: column; 
-}
+div.scroll {
+       			margin:4px, 4px;
+                padding:4px;
+                background-color: rgb(255, 255, 255);
+                width: 100%; 
+                /* height: 190%;*/
+                overflow-x: auto;
+                overflow-y: auto;
+               /* text-align:justify;*/
+      }
+
 /*
 .modal-background {
     background-color:#DAEFF3
@@ -94,14 +134,14 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 
 
 .modal-mask {
-  position: fixed;
+  /*position: fixed;*/
   z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+ /* display: table;*/
 }
 
 .modal-wrapper {
@@ -153,7 +193,6 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 }
 
 
-
 </style>
 
 
@@ -191,7 +230,7 @@ export default {
         }
   },
 
-	emits: ["updateSearchResult"],
+	emits: ["updateLastSearch"],
 	props: [ 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen' ],
 
 
@@ -220,11 +259,11 @@ computed: {
 			this.appToReserve = hour ;
 			this.eventShowModalPubicReserve = Math.random() ;
 		},
-		updateSearchResult()
+		updateLastSearch()
         {
                 console.log (" update search Result. ");
                 //this.appointment_list=null ;
-                this.$emit('updateSearchResult');
+                this.$emit('updateLastSearch');
         },
 		selectedInsuranceCode(code)
         {
