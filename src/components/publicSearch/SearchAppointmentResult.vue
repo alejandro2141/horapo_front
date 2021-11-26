@@ -27,7 +27,7 @@ const count = ref(0)
         </div>	
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
-        <modalPublicViewAppointment   :app="app" :openModalEvent="openModalEvent"   v-on:updateSearchResult="updateSearchResult"  :global_comunas='global_comunas' > </modalPublicViewAppointment>
+        <modalPublicViewAppointment   :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' > </modalPublicViewAppointment>
         <!-- Modal Reserve and Confirm End -->
           
 </template>
@@ -84,7 +84,7 @@ export default {
                 this.appConfirmed=appconfirm;
             },
             */
-            updateSearchResult()
+            updateLastSearch()
             {
                 console.log (" update search Result. ");
                 //this.appointment_list=null ;
