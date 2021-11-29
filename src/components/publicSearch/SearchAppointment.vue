@@ -96,6 +96,7 @@ methods: {
                // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                 this.notificationMessage_alert=	false ;
                 this.searchParameters = params ;
+                this.params_bkp = params ; 
             },
 
             updateLastSearch()
