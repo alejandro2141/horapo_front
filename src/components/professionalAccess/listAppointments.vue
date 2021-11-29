@@ -20,11 +20,12 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' > </ModalShowAppointmentDetails>
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' > </ModalShowAppointmentTaken>
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' > </ModalProfessionalReserveAppointment>
+<hr>
+    <div class="d-flex justify-content-around  listHoursHeader" >
 
-     <div class="d-flex justify-content-around  listHoursHeader" >
-            
+
             <div class="display-6" style="margin-left : 1em" >
-                <i class="bi bi-smartwatch"></i>
+                <i class="text-secondary bi bi-smartwatch"></i>
             </div>
             
             <div>
@@ -36,9 +37,8 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
              Duplicar dia  <i class="bi bi-box-arrow-right"></i>
             </div>
 
-
-
-        </div>
+    </div>
+<hr>
 
     <div v-for="(hour) in hours" :key="hour"  >
       
@@ -119,7 +119,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 <style scoped>
 
     .listHoursHeader {
-    background-color:#d3d3d3
+    background-color:#ffffff
         }
 
 </style>
