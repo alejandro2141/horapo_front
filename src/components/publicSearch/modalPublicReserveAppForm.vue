@@ -18,14 +18,14 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 			<transition name="modal">
 			<div class="modal-mask "  >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background ">
+			<div class="modal-container  m-1 p-0 modal-background "  style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" >
               
                 <div class="modal-body w-100" > 
                   
-                  <div class="d-flex  justify-content-end  m-1">
+                  <div class="d-flex  justify-content-end  m-0">
 				
                       <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ appToReserve.specialty_name}}  </div>
-                      <div class="" style="margin-right: 1em;" > </div>
+                      <div class="" style="" > </div>
                       <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                   </div>
 
@@ -79,8 +79,8 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 }
 
 div.scroll {
-       			margin:4px, 4px;
-                padding:4px;
+       			margin:1px, 1px;
+                padding:1px;
                 width: 100%; 
                 /* height: 190%;*/
                 overflow-x: auto;
