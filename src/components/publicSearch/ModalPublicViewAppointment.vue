@@ -19,9 +19,9 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 			<transition name="modal">
 			<div class="modal-mask " v-if="app != null && showModalAux"  >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background" style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;"  >
+			<div class="modal-container  m-1 p-0 modal-background" style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;"   >
               
-                <div class="modal-body scroll" > 
+                <div class="modal-body scroll"  style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" > 
  					<div class="d-flex flex-row justify-content-end ">
                       <div class="display-4 " style="color:#1f9d94 ; margin-right: 1em;"  > <b> {{ app.specialty_name}} </b> </div>
                       <div class="" style="margin-right: 1em;" > </div>
@@ -51,9 +51,11 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 					<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
 					<div class="h5">Direccion:  {{app.center_address }}</div>
 						<hr>
-						<a :href="app.url_map" >Mapa</a>
-						<img  :src="'/centerMap/center_map_id_'+app.center_id+'.JPG'" class="img-fluid" alt="center map">
+						<a v-if="imgLoaded" :href="app.url_map" >Mapa</a>
 						
+						<img   @load="imgLoaded = true" @error="imgLoaded = false"  :src="imgMapUrl" class="img-fluid" alt="center map">
+					
+
 				</div>
 
 				<div v-if="app.app_type_home" >
@@ -76,10 +78,7 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
                             </text>
                             <text v-if=" app.location6 != null " >  
                                 <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location6) }} 
-                            </text>
-
-
-						
+                            </text>	
 				</div>
 
 				<div v-if="app.app_type_remote" >
@@ -227,6 +226,8 @@ export default {
 		  showModalPublicAppDetails : false ,
 		  appToReserve : Object ,
 		  eventShowModalPubicReserve : null,
+		  imgLoaded : null,
+		  imgMapUrl : null,
         }
   },
 
@@ -244,8 +245,16 @@ computed: {
 		openModalEvent(newApp, oldApp) {
 			console.log("openModalEvent !!!");
 			this.showModalPublicAppDetails = true ; 
-	  },
+			this.imgMapUrl = '/centerMap/center_map_id_'+this.app.center_id+'.JPG' ;
+	  	},
+		
+		imgLoaded(newApp, oldApp) {
+			if(!newApp)
+			{this.imgMapUrl = '/centerMap/imgMapNotCreated.JPG' ;}
+		},
+
 	},
+
 
 	methods: {
 
