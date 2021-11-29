@@ -16,7 +16,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-1 modal-background">
+			<div class="modal-container  m-1 p-1 modal-background" style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" >
  
 
                 <div class="modal-header" >
@@ -29,7 +29,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     </div>
                 </div>
 
-                <div class="modal-body mt-0" > 
+                <div class="modal-body mt-0"  > 
                  
 
                    <form autocomplete="off"  >	
