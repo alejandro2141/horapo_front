@@ -2,15 +2,7 @@
 import { ref } from 'vue'
 import patientAppointmentAvailable  from './PatientAppointmentAvailable.vue'
 import modalPublicViewAppointment from './ModalPublicViewAppointment.vue'
-/*
-defineProps({
-  msg: String,
-  session_params : Array  ,
-  appointments  : Array , 
-  daterequired : String,
-})
-*/
-const count = ref(0)
+
 </script>
 
 <template>
