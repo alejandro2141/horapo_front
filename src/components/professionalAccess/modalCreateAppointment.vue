@@ -268,7 +268,7 @@ export default {
         }   
     },
    	
-   props: ['daterequired','hourCreate', 'session_params', 'global_comunas' ],
+   props: ['daterequired','hourCreate', 'session_params', 'global_comunas' ,'openModalCreateAppEvent' ],
    emits: ['updateAppList','switchView'] , 
       
    	mounted () {
@@ -368,10 +368,20 @@ export default {
     watch : {
         hourCreate(newValue){
              
-             this.showModalCreateApp= true ;
+            // this.showModalCreateApp= true ; openModalCreateAppEvent
             console.log ("hourCreate Change!!!"+newValue+ " ShoModalCreateApp="+this.showModalCreateApp);
             this.form_start_time = newValue.start_time ; 
-        }
+        },
+        openModalCreateAppEvent(newApp, oldApp) {
+            console.log("openModalEvent Show App Taken Details !!!");
+           this.showModalCreateApp= true; 
+        },
+
+        
+
+
+
+
     }
 
     
