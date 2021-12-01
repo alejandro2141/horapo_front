@@ -163,7 +163,7 @@ export default {
           }   
     },
    	
-   props: ['daterequired','hourTaken', 'session_params' ],
+   props: ['daterequired','hourTaken', 'session_params', 'openModalShowAppTakenEvent' ],
    emits: ['updateAppList'] , 
       
    	mounted () {
@@ -227,7 +227,7 @@ export default {
     },
     watch : {
         hourTaken(newValue){
-             this.showModalAppointmentTaken= true ;
+            // this.showModalAppointmentTaken= true ;openModalShowAppTakenEvent
             console.log ("Hour Modal App Taken details Change!!!"+newValue+ " Show ModalApp Details ="+ this.showModalAppointmentDetais );
             this.form_start_time = newValue.start_time ;
             this.form_center_id =  newValue.center_id ;
@@ -238,7 +238,13 @@ export default {
             this.form_app_duration  =  newValue.duration ;
             this.form_app_d  =  newValue.duration ;
             console.log ("this.form_public!!!"+this.form_public );
-        }
+        },
+        openModalShowAppTakenEvent(newApp, oldApp) {
+            console.log("openModalEvent Show App Taken Details !!!");
+           this.showModalAppointmentTaken = true ;
+        },
+
+
     }
 
     
