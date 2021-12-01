@@ -165,7 +165,7 @@ export default {
           }   
     },
    	
-   props: ['daterequired','hourToReserve', 'session_params' ],
+   props: ['daterequired','hourToReserve', 'session_params', 'openModalReserveAppEvent' ],
    emits: ['updateAppList','reserveUpdateAppList'] , 
       
    	mounted () {
@@ -211,9 +211,15 @@ export default {
     },
     watch : {
         hourToReserve(newValue){
-             this.showModalReserveAppointment= true ;
+        //     this.showModalReserveAppointment= true ;openModalReserveAppEvent
             console.log ("hourToReserve!!!"+newValue+ " hourToReserve ="+ this.showModalReserveAppointment );
-        }
+        },
+        openModalReserveAppEvent(newApp, oldApp) {
+          console.log("openModalEvent Reserve App  !!!");
+          this.showModalReserveAppointment= true ; 
+        },
+
+
     }
 
     
