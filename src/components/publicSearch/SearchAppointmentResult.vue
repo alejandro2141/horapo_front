@@ -2,11 +2,12 @@
 import { ref } from 'vue'
 import patientAppointmentAvailable  from './PatientAppointmentAvailable.vue'
 import modalPublicViewAppointment from './ModalPublicViewAppointment.vue'
+import LoadProgress from './loadProgress.vue'
 
 </script>
 
 <template>
-        <div  v-if="appointment_list != null && daterequired != null" >
+       <div  v-if="appointment_list != null && daterequired != null" >
             <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small> 
          
             <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
@@ -35,14 +36,15 @@ import modalPublicViewAppointment from './ModalPublicViewAppointment.vue'
 export default {
  data : function() {
     return {
-            app : null ,
+            app : null , 
             showModal : false , 
-            showModalConfirmation : false ,
+            showModalConfirmation : false , 
             appConfirmed : null, 
-            appointment_list : null,
+            appointment_list : null, 
           //  notificationMessage: null, 
             modalOpen : ref(false), 
-            openModalEvent : null ,
+            openModalEvent : null , 
+            showLoaderProgress : false , 
             
     }
   },
@@ -50,14 +52,31 @@ export default {
    props: ['searchParameters','session_params','appointments','daterequired','global_comunas'],
    emits: ["updateLastSearch"],
 
+    beforeCreate(){
+       console.log("showloader progress BEFORE CREATE !!!");
+    },
+    activated(){
+  console.log("showloader progress ACTIVATED !!!");
+    },
    mounted () {    
+       console.log("showloader progress MOUNTED !!!");
+        },
+
+        beforeUpdate(){
+        this.showLoaderProgress = true  ;
+        console.log("showloader progress BEFORE UPDATE !!!");
+        },
+
+        updated()
+        {
+        this.showLoaderProgress = false  ;
+        console.log("showloader progress UPDATE !!!");
         },
 
     watch: {
             appointments(newAppointments, oldAppointments ) {
                 this.appointment_list =  newAppointments ;   
-             //   this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
-                      
+             //   this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	                 
             },
         },
 
