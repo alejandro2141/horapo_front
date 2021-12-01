@@ -16,10 +16,10 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
  <div id="search_result" class="border">
 
-<ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" > </ModalCreateAppointment>
-<ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' > </ModalShowAppointmentDetails>
-<ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' > </ModalShowAppointmentTaken>
-<ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' > </ModalProfessionalReserveAppointment>
+<ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" :openModalCreateAppEvent='openModalCreateAppEvent' > </ModalCreateAppointment>
+<ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' :openModalShowDetailsEvent="openModalShowDetailsEvent"  > </ModalShowAppointmentDetails>
+<ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' > </ModalShowAppointmentTaken>
+<ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' > </ModalProfessionalReserveAppointment>
 <hr>
     <div class="d-flex justify-content-around  listHoursHeader" >
 
@@ -42,7 +42,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
     <div v-for="(hour) in hours" :key="hour"  >
       
-                 <div v-if="hour.app_available != null" >
+                <div v-if="hour.app_available != null" >
                 
                     <div v-if="hour.app_available == false ">
                         <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentReserved>
@@ -66,13 +66,9 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                     <div class="h1 m-2" >
                         <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>
                     </div>
-                    
-
 
                 </div>
 
-
-        
         <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />
     </div>
 
@@ -131,13 +127,16 @@ export default {
    data : function() {
         return {
             hours : [] ,
-            
             //hr:'01', '02', '03', '04', '05','06','07','08','09','10', '11','12','13','14','15','16','17','18','19','20','21','22','23' ],
             hourCreate : null ,
             hourDetails : null ,
             hourTaken : null ,
             hourToReserve : null ,
             prevCenterName : 'NoSet' ,
+            openModalShowDetailsEvent : null ,
+            openModalShowAppTakenEvent : null ,
+            openModalCreateAppEvent : null,
+            openModalReserveAppEvent : null,
         }   
     },
    	
@@ -214,26 +213,29 @@ export default {
         {
             console.log ("show Reserve Modal in ListAppointment ")
             this.hourToReserve = hour;
+            this.openModalReserveAppEvent = Math.random(); 
         },
         
        displayModalReservedDetails(hour)
        {
             console.log ("Display Modal Reserved APP!")
             this.hourTaken=hour ;
+            this.openModalShowAppTakenEvent = Math.random();
        },
 
 
         displayModalViewAppDetails(hour)
         {
-        console.log("Display Modal View App Details :"+JSON.stringify(hour));
-        this.hourDetails = hour; 
+            console.log("Display Modal View App Details :"+JSON.stringify(hour));
+            this.hourDetails = hour; 
+            this.openModalShowDetailsEvent = Math.random();
         },
 
         displayModalCreateApp(ahour)
         {
             this.hourCreate = ahour ;
             console.log("Display Modal Create App:"+this.hourCreate.start_time+" Day:"+this.daterequired );
-            
+            this.openModalCreateAppEvent = Math.random();
         },
         updateAppList()
         {
