@@ -178,7 +178,7 @@ export default {
           }   
     },
    	
-   props: ['daterequired','hourDetails', 'session_params' ],
+   props: ['daterequired','hourDetails', 'session_params' , 'openModalShowDetailsEvent' ],
    emits: ['updateAppList','showReserveModal'] , 
       
    	mounted () {
@@ -254,7 +254,7 @@ export default {
     },
     watch : {
         hourDetails(newValue){
-             this.showModalAppointmentDetais= true ;
+            // this.showModalAppointmentDetais= true ;
             console.log ("Hour Modal App Details Change!!!"+newValue+ " Show ModalApp Details ="+ this.showModalAppointmentDetais );
             this.form_start_time = newValue.start_time ;
             this.form_center_id =  newValue.center_id ;
@@ -265,8 +265,13 @@ export default {
             this.form_app_duration  =  newValue.duration ;
             this.form_app_d  =  newValue.duration ;
             console.log ("this.form_public!!!"+this.form_public );
-        }
+        },
+      	openModalShowDetailsEvent(newApp, oldApp) {
+            console.log("openModalEvent Show Details !!!");
+           this.showModalAppointmentDetais= true ;
+        },
     }
+  
 
     
 }
