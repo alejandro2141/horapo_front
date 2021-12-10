@@ -3,14 +3,19 @@ import { ref } from 'vue'
 import axios from 'axios'
 import searchAppointmentForm  from './SearchAppointmentForm.vue' 
 import searchAppointmentResult  from './SearchAppointmentResult.vue'
+import loadProgress from './loadProgress.vue'
 
 </script>
 
 <template>
+ <loadProgress  :active_spinner="active_spinner" > </loadProgress>
+   
     <div class="h2 bg-white p-2" >
+   
+
     Busca tu Hora 
     </div>
-        <div>
+      <div>
             <div>
             <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
            
@@ -45,6 +50,8 @@ export default {
             notificationMessage : null,
             notificationMessage_alert : false,
             searchParameters : Object , 
+
+            active_spinner : false ,
     }
   },
 
@@ -69,7 +76,7 @@ methods: {
             },
 
         async searchAppointments(params) {	
-           
+                this.active_spinner = true ; 
                 console.log("search Appointments input params :"+JSON.stringify(params) )
                 
                 let specialty_code = null ;
@@ -97,6 +104,7 @@ methods: {
                 this.notificationMessage_alert=	false ;
                 this.searchParameters = params ;
                 this.params_bkp = params ; 
+                this.active_spinner = false ; 
             },
 
             updateLastSearch()
