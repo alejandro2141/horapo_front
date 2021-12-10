@@ -374,7 +374,7 @@ export default {
         },
         openModalCreateAppEvent(newApp, oldApp) {
             console.log("openModalEvent Show App Taken Details !!!");
-           this.showModalCreateApp= true; 
+           this.showModalCreateApp= true;
         },
 
         
