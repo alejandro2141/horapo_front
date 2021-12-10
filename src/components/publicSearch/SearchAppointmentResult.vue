@@ -7,6 +7,8 @@ import LoadProgress from './loadProgress.vue'
 </script>
 
 <template>
+<loadProgress  :active_spinner="active_spinner" > </loadProgress>
+ 
        <div  v-if="appointment_list != null && daterequired != null" >
             <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small> 
          
@@ -45,7 +47,7 @@ export default {
             modalOpen : ref(false), 
             openModalEvent : null , 
             showLoaderProgress : false , 
-            
+            active_spinner : false ,
     }
   },
 
@@ -71,6 +73,7 @@ export default {
         {
         this.showLoaderProgress = false  ;
         console.log("showloader progress UPDATE !!!");
+       
         },
 
     watch: {
