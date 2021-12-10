@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
+import loadProgress from './loadProgress.vue'
 
 
 
@@ -14,6 +15,8 @@ import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 
 	<teleport to="body"   >
 
+		<loadProgress  :active_spinner="active_spinner" > </loadProgress>
+ 
 		<div v-if="showModalPublicAppDetails" class="modal bg-secondary"   >
 		    
 			<transition name="modal">
@@ -228,6 +231,8 @@ export default {
 		  eventShowModalPubicReserve : null,
 		  imgLoaded : null,
 		  imgMapUrl : null,
+
+		  active_spinner : null,
         }
   },
 
@@ -243,9 +248,14 @@ computed: {
 
 	  watch: {
 		openModalEvent(newApp, oldApp) {
+			
+			
+			
 			console.log("openModalEvent !!!");
 			this.showModalPublicAppDetails = true ; 
+			
 			this.imgMapUrl = '/centerMap/center_map_id_'+this.app.center_id+'.JPG' ;
+			
 	  	},
 		
 		imgLoaded(newApp, oldApp) {
@@ -257,8 +267,6 @@ computed: {
 
 
 	methods: {
-
-	
 
 		reserveHour(hour)
 		{
