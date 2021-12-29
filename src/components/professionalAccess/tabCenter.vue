@@ -11,7 +11,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
      <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" >  </ModalCreateCenter>
       
 <div  class="mx-auto " style="width: 95%;" >
-        <text class="h4 center ">Centros en su agenda </text> 
+        <text class="h4 center ">Consultas en su agenda </text> 
 	
         <div  id="search_result" v-if='centers.length > 0'  >
             <div v-for="center in centers"  :key='center.id' >
@@ -29,17 +29,17 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 
         <div  v-else class=" m-2 p-2">
            <p> Algo de informacion antes de continuar: <br>
-            -Puede crear mas de un Centro<br>
-            -La direccion del centro es donde el paciente debe asistir <br>
-            -Siempre puede ver la lista de Centros en el link  <text class="text-primary">"Ver Centros"</text> <br>
+            -Puede crear mas de una Consulta<br>
+            -La direccion de Consulta es donde el paciente debe asistir <br>
+            -Siempre puede ver la lista de Consultas en el link  <text class="text-primary">"Ver Consultas"</text> <br>
            </p>
-         <p class="">Para crear su primer centro, por favor click en el link siguiente </p>
+         <p class="">Para crear su primera Consulta, por favor click en el link siguiente </p>
            
         
         </div>
 
         <div class="text-center p-3 m-3"> 
-            <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar un nuevo centro </text>
+            <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text>
         </div>
 
         <!--
