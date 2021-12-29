@@ -74,7 +74,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                      <h2>Tipo de Cita:</h2>
                         <div @click="form_show_home = !form_show_home; form_show_center = false ; form_show_remote = false ; "  class="p-2 h3"><i :class="{'bi':true , 'bi-circle':!form_show_home  , 'text-primary' : form_show_home , 'bi-circle-fill' : form_show_home }"></i> A Domicilio </div>
                                                      
-                              <div v-if="form_show_home" class="border border-1 p-2"> 
+                              <div v-if="form_show_home" class="border border-2 p-2"> 
                                 A domicilio comunas en las que atiende (Máximo 6). 
                                 <!----
                                 <div class="text-start" v-for="(comuna) in form_comunas" :key="comuna.id"  > <i class="bi bi-geo-alt"></i> {{ comuna.name }}  
@@ -85,20 +85,21 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                 <br>  
                               </div>
                               <div v-else >
-                                ...
+                                
                               </div>
 
                         
                             <div @click="form_show_center = !form_show_center; form_show_home = false ; form_show_remote = false ;"  class="p-2 h3"><i :class="{'bi':true , 'bi-circle':!form_show_center  , 'text-primary' : form_show_center , 'bi-circle-fill' : form_show_center }"></i> En Consulta </div>
-                              <div v-if="form_show_center" >
+                              <div v-if="form_show_center" class="border border-2 p-2" >
                                 Seleccione Centro de Atencion 
                                 <InputFormCenterProfessional class="m-3" v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
                                 <br>
                               </div>
                               <div v-else>
-                                ...
+                                
                               </div>
                           
+                          <!--
                            <div @click="form_show_remote = !form_show_remote ; form_show_center = false ; form_show_home= false ; "  class="p-2 h3"><i :class="{'bi':true , 'bi-circle':!form_show_remote  , 'text-primary' : form_show_remote , 'bi-circle-fill' : form_show_remote }"></i> Remota </div>
                               <div v-if="form_show_remote" >
                                 Aun no implementamos esta funcionalidad
@@ -106,7 +107,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                               <div v-else>
                                 ...
                               </div>
-                     
+                            -->
                       
                      <br>
                       <div class="m-1 p-2">
