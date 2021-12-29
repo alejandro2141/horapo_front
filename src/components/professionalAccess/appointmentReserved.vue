@@ -37,7 +37,8 @@ import axios from 'axios';
                             Cita Cancelada 
                         </div>
 
-                        <text class="bg-info text-white" v-if='appointment.confirmation_status == 0' >Sin Confirmar </text>
+                        <text class="bg-primary text-white" v-if='appointment.confirmation_status == 0' >
+                            Reservada. Sin Confirmar </text>
                        
                         </div>
                        
@@ -58,17 +59,43 @@ import axios from 'axios';
         </div>
 
             <div>
-                <i class="display-4 bi bi-file-earmark-person"></i>
-                    {{appointment.patient_name }} 
-                    {{appointment.patient_age }}Años, id:{{appointment.patient_doc_id }}
-                    </div>
+                    <h4>{{appointment.patient_name }} </h4>
+                    id:{{appointment.patient_doc_id }},  
+                    Edad:{{appointment.patient_age }} 
+            </div>
             
-            <div>
+            <div v-if="appointment.app_type_home" style=" font-size: 1.0em;" >
+                          <i class="bi bi-house"> A Domicilio Comunas </i> <br>
+
+                            <text v-if=" appointment.location1 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location1) }} <br>
+                            </text>
+                            <text v-if=" appointment.location2 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location2) }} <br>
+                            </text>
+                            <text v-if=" appointment.location3 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location3) }} <br>
+                            </text>
+                            <text v-if=" appointment.location4 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location4) }} <br>
+                            </text>
+                            <text v-if=" appointment.location5 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location5) }} <br>
+                            </text>
+                            <text v-if=" appointment.location6 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location6) }} <br>
+                            </text>
+            </div>
+
+            <div v-if="appointment.center_name != null " >
                     {{appointment.center_name }}<br>
             </div>
-             <div>
+             <div v-if="appointment.center_address != null ">
                     {{appointment.center_address }}<br>
             </div>
+
+            
+            
 
            	
     </div>
@@ -87,11 +114,19 @@ export default {
         }   
     },
    	
-    props: ['daterequired','appointment','index','global_specialties'],
+    props: ['daterequired','appointment','index','global_specialties', 'global_comunas'],
 
 	created () {
 	},
 	methods :{
+
+        id2comuna(id){
+            let temp= this.global_comunas.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        }
+
     }
 }
 </script>
