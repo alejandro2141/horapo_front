@@ -41,10 +41,18 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                                 <input class="form-control form-control-lg" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
                                 <div v-if="error_msg_doc_id" class="text-danger">Debe Indicar RUT o Pasaporte del paciente</div>
                                 <br/>
+
+								<div v-if='appToReserve.app_type_home' >
+									<input  type="text" class="form-control form-control-lg"  placeholder="Ingrese su Direccion de atención" name="form_patient_address" id="form_patient_address"  v-model="form_patient_address" >
+									<div v-if="error_msg_address" class="text-danger">Debe Indicar Su Direccion de atencion a domicilio </div>
+									<br/>
+								</div>
+
                                 <input  type="number" class="form-control form-control-lg"  placeholder="Edad" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
                                 <div v-if="error_msg_age" class="text-danger">Debe Indicar Edad del paciente</div>
                                 <br/>
-                                <input class="form-control form-control-lg" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
+                                
+								<input class="form-control form-control-lg" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
                                 <div v-if="error_msg_email" class="text-danger">Debe Indicar un correo valido</div>
                                 <br>
                                 <input class="form-control form-control-lg" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
