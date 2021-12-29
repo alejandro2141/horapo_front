@@ -22,7 +22,7 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
-            cview : 'Centros',
+            cview : 'Consultas',
        
         }   
     },
@@ -39,7 +39,7 @@ export default {
             console.log("switch view to");
             this.$emit('switchView');
             if (this.cview == 'Agenda'){
-                this.cview = 'Centros'
+                this.cview = 'Consultas'
             }
             else{
                 this.cview = 'Agenda'
