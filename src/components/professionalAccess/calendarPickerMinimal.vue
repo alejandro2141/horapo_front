@@ -18,7 +18,7 @@ import axios from 'axios';
             <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i> {{ calendar[parseInt(req_year)][parseInt(req_month)][0]  }} 20{{req_year}}<i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>
         </div>
     </div>
-    <hr>
+    
 
 </template>
 
