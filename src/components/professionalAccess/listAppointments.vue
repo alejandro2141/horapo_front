@@ -25,13 +25,11 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
 
             <div class="display-6" style="margin-left : 1em" >
-                <i class="text-secondary bi bi-smartwatch"></i>
+               <!-- <i class="text-secondary bi bi-smartwatch"></i> -->
             </div>
             
             <div>
-
             </div>
-        
         
             <div @click="duplicateDay(daterequired)" class=" text-primary"  >
              Duplicar dia  <i class="bi bi-box-arrow-right"></i>
@@ -53,20 +51,19 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
                 </div>
        
-                <div v-else class="d-flex justify-content-around">
+                <div v-else class="d-flex flex-row-reverse">
 
-                    <div class="text-secondary display-5" >
-                        {{ hour.start_time.substring(0,5) }}
-                    </div>
-                    
-                    <div class="  text-center" >
-                        <!--  <i class="text-secondary bi bi-slash-circle"></i> -->
+                    <div class="" >
+                         <!--  <i class="text-secondary bi bi-slash-circle"></i> -->
                     </div>
 
                     <div class="h1 m-2" >
-                        <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>
+                        <!-- <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>  -->
                     </div>
-
+                    
+                    <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" >
+                        <i class="bi bi-plus"></i> {{ hour.start_time.substring(0,5) }}
+                    </div>
                 </div>
 
         <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />
