@@ -5,7 +5,7 @@ import { ref } from 'vue'
 
 <template>
 <div v-if="spinner_on" class="spinner  text-center" style="" >
-    <img class="mt-5 pt-5" width="150"  src="/dist/spinner.gif" >
+    <img class="mt-5 pt-5" width="150"  src="/public/spinner.gif" >
       
  </div>
 </template>
@@ -49,7 +49,7 @@ export default {
                     else if (newValue == false)
                     {
                         console.log("Spinner Off");
-                        setTimeout( ()=> this.spinner_on = false , 1000 )
+                        setTimeout( ()=> this.spinner_on = false , 500 )
                         //this.spinner_on = false ;
                     }
                     else{
