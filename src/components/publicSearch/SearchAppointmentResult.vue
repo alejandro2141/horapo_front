@@ -22,7 +22,7 @@ import LoadProgress from './loadProgress.vue'
         </div>	
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
-        <modalPublicViewAppointment   :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' > </modalPublicViewAppointment>
+        <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' > </modalPublicViewAppointment>
         <!-- Modal Reserve and Confirm End -->
           
 </template>
@@ -84,6 +84,8 @@ export default {
         },
 
     methods: {
+
+          
             setModalReserve(appointment)
             {
                 console.log("Set Modal Reserve method in SearchApp Resutl"+JSON.stringify(appointment));
