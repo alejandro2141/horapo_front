@@ -9,7 +9,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 </script>
 
 <template>
-<ModalPublicReserveConfirmation v-on:updateLastSearch='updateLastSearch'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app'  ></ModalPublicReserveConfirmation>
+<ModalPublicReserveConfirmation :searchParameters='searchParameters' v-on:updateLastSearch='updateLastSearch'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app'  ></ModalPublicReserveConfirmation>
   <div>
   	<teleport to="body"   >
 
@@ -24,44 +24,109 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                   
                   <div class="d-flex  justify-content-end  m-0">
 				
-                      <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ appToReserve.specialty_name}}  </div>
+                      <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ showSpecialtyName(appToReserve) }}  </div>
                       <div class="" style="" > </div>
                       <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                   </div>
-
+				
+				 {{ transform_date( appToReserve.date.substring(0, 10) ) }}   {{appToReserve.start_time.substring(0, 5) }} hrs
 
                 <div class="text-dark"> Datos del Paciente
                 </div>							
                             <form autocomplete="off" method="POST" action="take_appointment.html">			
                                 <input class="form-control form-control-lg " type="hidden" placeholder="Token" name="token" value="AAAAA"  >
-                                <br>	
+                                <br>
+								<!--	
                                 <input class="form-control form-control-lg " type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
                                 <div v-if="error_msg_name" class="text-danger">Debe Indicar Nombre del paciente</div>
                                 <br>
+								-->
+
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" placeholder="Ej. Juan Alejandro Morales Miranda"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name" >
+									<div class="input-group-append">
+										<span class="input-group-text" id="basic-addon2">Nombre</span>
+									</div>
+								<div v-if="error_msg_name" class="text-danger">Debe Indicar Nombre del paciente</div>
+								</div>
+ 								
+
+								<!--
                                 <input class="form-control form-control-lg" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
                                 <div v-if="error_msg_doc_id" class="text-danger">Debe Indicar RUT o Pasaporte del paciente</div>
                                 <br/>
+								-->
 
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" placeholder="Ej. 13.909.371-3" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id" >
+									<div class="input-group-append">
+										<span class="input-group-text" id="basic-addon2">N°Cedula</span>
+									</div>
+									<div v-if="error_msg_doc_id" class="text-danger">Debe Indicar RUT o Pasaporte del paciente</div>
+								</div>
+ 								
+
+								<!--
 								<div v-if='appToReserve.app_type_home' >
 									<input  type="text" class="form-control form-control-lg"  placeholder="Ingrese su Direccion de atención" name="form_patient_address" id="form_patient_address"  v-model="form_patient_address" >
 									<div v-if="error_msg_address" class="text-danger">Debe Indicar Su Direccion de atencion a domicilio </div>
 									<br/>
 								</div>
+								-->
 
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" placeholder="Ej. Tristan Cornejo 999, Independencia" name="form_patient_address" id="form_patient_address"  v-model="form_patient_address" >
+									<div class="input-group-append">
+										<span class="input-group-text" id="basic-addon2">Dirección</span>
+									</div>
+									<div v-if="error_msg_address" class="text-danger">Debe Indicar Su Direccion de atencion a domicilio </div>
+								</div>
+ 									
+								<!--
                                 <input  type="number" class="form-control form-control-lg"  placeholder="Edad" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
                                 <div v-if="error_msg_age" class="text-danger">Debe Indicar Edad del paciente</div>
                                 <br/>
-                                
+								-->								
+								<div class="input-group mb-3">
+									<input  type="number" class="form-control" placeholder="Ej. 31" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
+									<div class="input-group-append">
+										<span class="input-group-text" id="basic-addon2">edad</span>
+									</div>
+								<div v-if="error_msg_age" class="text-danger">Debe Indicar Edad del paciente</div>
+								</div>
+
+
+                                <!--
 								<input class="form-control form-control-lg" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
                                 <div v-if="error_msg_email" class="text-danger">Debe Indicar un correo valido</div>
                                 <br>
+								-->
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" placeholder="Ej. sucorreo@ejemplo.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
+									<div class="input-group-append">
+										<span class="input-group-text" id="basic-addon2">Email@</span>
+									</div>
+								<div v-if="error_msg_email" class="text-danger">Debe Indicar un correo valido</div>
+								</div>
+ 								
+								<!--
                                 <input class="form-control form-control-lg" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
                                 <div v-if="error_msg_phone" class="text-danger">Debe Indicar un Telefono de contacto</div>
                                 <br>
+								-->
+
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" placeholder="Ej. 975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone">
+									<div class="input-group-append">
+										<span class="input-group-text" id="basic-addon2">Telefono</span>
+									</div>
+								<div v-if="error_msg_phone" class="text-danger">Debe Indicar un Telefono de contacto</div>
+                              	</div>
+ 								
 															
                                 <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
                                 <button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
-                            
+                            	<text class="text-secondary" style=""><br>#{{appToReserve.app_id}}</text>	
 								<div class="" style="height : 500px"> 
                 				</div>
 							
@@ -165,12 +230,14 @@ export default {
 		  form_patient_phone : null ,
 		  form_patient_insurance_code : null ,
 		  form_patient_age : null, 
+		  form_patient_address : null ,
  
 		  error_msg_name : false,
 		  error_msg_age : false,
 		  error_msg_doc_id: false,
 		  error_msg_email : false, 
 		  error_msg_phone : false,
+		  error_msg_address : false,
 
 		  app : Object ,
 		  appConfirmed : Object,
@@ -179,7 +246,7 @@ export default {
         }
   },
 
- props: ['appToReserve','eventShowModalPubicReserve' ],
+ props: [ 'searchParameters', 'appToReserve','eventShowModalPubicReserve' ],
  emits: ['updateAppList','updateLastSearch'] , 
       
 
@@ -194,6 +261,27 @@ computed: {
       	},
 
 	methods: {
+		
+		transform_date(date)
+    	{
+        let temp = date.split("-") ;
+        return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+    	},
+        getShortMonthName(month)
+			{
+				console.log("MONTH:"+month);
+				let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+				return months[month];
+
+			},
+		showSpecialtyName(app)
+            {
+                if (this.searchParameters.specialty != null)
+                {return this.searchParameters.specialty.name }
+                else {
+                    return (app.specialty_name )
+                }
+            },
 		updateLastSearch()
             {
                 console.log (" update search Result. in Public Reserve Form ");
@@ -244,12 +332,13 @@ computed: {
 						patient_doc_id	: this.form_patient_doc_id,
 						patient_email	: this.form_patient_email,
 						patient_phone	:	this.form_patient_phone,
+						patient_address : this.form_patient_address , 
 						//patient_insurance:	this.form_patient_insurance_code,
 						patient_insurance:	9999 ,
 						form_public : app.available_public_search ,
 						app_available : false 
+						};
 
-								};
 						console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
 						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_take_appointment",json );
 					//  console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
@@ -268,6 +357,7 @@ computed: {
 					//this.modalConfirmationOpen = true ;
 					//this.showModalConfirmation=true;
 						}
+
 		},
 
 
