@@ -7,8 +7,10 @@ import { ref } from 'vue'
 </script>
 
 <template>
-     
+    
+    
     <div v-if="appointment != null"   style="border: 3px solid rgb(168, 168, 168); border-radius: 10px;"  class="bg-white p-0 mb-1 ">
+        
         <div id="app" class="m-0 d-flex  "  >	
             <div class="">
                      &nbsp;
@@ -30,7 +32,7 @@ import { ref } from 'vue'
  
                 <div class="">
                     <div v-if="appointment.app_type_center" class="">
-                       <i class="bi bi-building"></i> En consulta 	
+                       <i class="h1 bi bi-building"></i> En consulta 	
                         <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i> {{comuna_id2name(appointment.comuna) }} </div>
                             <div class="" style="color:#2e5668" >	
                                 <i class="fas fa-map-marker-alt "></i>   "{{ appointment.center_name }}"
@@ -40,7 +42,7 @@ import { ref } from 'vue'
                             </div>
                     </div>
                     <div v-if="appointment.app_type_home" class="">
-                       <i class="bi bi-house"></i>  A domicilio : 
+                       <i class="h1 bi bi-house"></i>  Consulta a Domicilio en : <br>
                             <text v-if=" appointment.location1 != null " >  
                                 <i class="bi bi-geo-alt"></i> {{ comuna_id2name(appointment.location1) }} 
                             </text>
@@ -69,7 +71,10 @@ import { ref } from 'vue'
                 </div>
             
             </div>
-        </div>
+
+            </div>
+               
+     <text style="color: #bbbbbb;" >#{{appointment.app_id}}</text> 
        </div>
 
 </template>
