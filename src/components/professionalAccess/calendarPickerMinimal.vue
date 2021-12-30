@@ -121,14 +121,23 @@ export default {
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
                                             "Lunes" , "Martes"     ] ;
 
-         this.calendar[21][12] = [ "Diciembre", 
+        this.calendar[21][12] = [ "Diciembre", 
                                             "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes"  ] ;
+ 
+        this.calendar[22][1] = [ "Enero", 
+                                            "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" ] ;
 
        
+
         console.log("Set CALENDAR:  "+ JSON.stringify(this.calendar )  );
         },
 
