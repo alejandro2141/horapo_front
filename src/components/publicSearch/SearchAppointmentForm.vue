@@ -30,17 +30,17 @@ import inputFormComuna  from './InputFormComuna.vue'
 
                 <div class="bg-white">
                     <div class="d-flex justify-content-around h3"> 
-                        <div><i class="bi bi-camera-video"></i> </div>
+                        <!-- <div><i class="bi bi-camera-video"></i> </div> -->
                         <div><i class="bi bi-building"></i> </div>
                         <div><i class="bi bi-house-door"></i> </div>
                     </div>
                     <div class="d-flex justify-content-around h1 m-0 p-0"> 
-                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_remote" ></div>
+                       <!-- <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_remote" ></div> -->
                         <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_center"></div>
                         <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_home"></div>
                     </div>
                     <div class="d-flex justify-content-around h6"> 
-                        <div>Tele Atención</div>
+                        <!-- <div>Tele Atención</div> -->
                         <div>En Consulta </div>
                         <div>A Domicilio</div>
                     </div>
