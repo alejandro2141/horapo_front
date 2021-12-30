@@ -11,7 +11,7 @@ import loadProgress from './loadProgress.vue'
 
 <template>
 
-<ModalPublicReserveAppForm v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve'></ModalPublicReserveAppForm>
+<ModalPublicReserveAppForm   :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve'></ModalPublicReserveAppForm>
 
 	<teleport to="body"   >
 
@@ -22,48 +22,49 @@ import loadProgress from './loadProgress.vue'
 			<transition name="modal">
 			<div class="modal-mask " v-if="app != null && showModalAux"  >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background" style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;"   >
+			<div class="modal-container  m-1 p-0 modal-background"    >
               
-                <div class="modal-body scroll"  style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" > 
+                <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168); " > 
  					<div class="d-flex flex-row justify-content-end ">
-                      <div class="display-4 " style="color:#1f9d94 ; margin-right: 1em;"  > <b> {{ app.specialty_name}} </b> </div>
+                      <div class="display-4 " style="color:#1f9d94 ; margin-right: 1em;"  > 		 </div>
                       <div class="" style="margin-right: 1em;" > </div>
                       <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
                     </div>
 
-					<div class="display-4 " style="color:#2e5668" >
-						 {{ transform_date( app.date.substring(0, 10) ) }}  
-                        {{app.start_time.substring(0, 5) }} hrs  
+					
+
+					<div class=" d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
+						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(app.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{app.date.substring(8, 10) }} </text>  </div>
+					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app) }} </div> 
 					</div>
 
-				<br>
-                    
-					<div class=" w-100 display-6 m-0 p-0" style="color:#2e5668">	
-                   		 
-                    </div> 
+			<div style="margin-top: 1em; margin-left: 1em;" class="h4">
+					<div class="" >
+						<i class="bi bi-smartwatch "></i>  {{ transform_date( app.date.substring(0, 10) ) }}   {{app.start_time.substring(0, 5) }} hrs  
+					</div>
+						<br>
+					<div class="">	
+						<i class="bi bi-person m-1"></i>Con :  {{app.name }} 
+					</div>
+						<br>
+					
+					
 
-
-                <div class="mb-2 h2" style="color:#2e5668" >
-					<text class="">  
-               			Con:  {{app.name }} 
-			   		</text>
-                </div>               
-                
-				<div v-if="app.app_type_center" >
-					<div class="h3" style="color:#2e5668"> <i class="bi bi-building h2"></i> Cita en Centro<br> {{app.center_name }}</div>
+				<div v-if="app.app_type_center" class="" >
+					<div  style="color:#2e5668"> <i class="bi bi-building  m-1"></i> <b>Cita en Centro</b><br> {{app.center_name }}</div>
 					<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
-					<div class="h5">Direccion:  {{app.center_address }}</div>
+					<div class="">Direccion:  {{app.center_address }}</div>
+				<!--
 						<hr>
 						<a v-if="imgLoaded" :href="app.url_map" >Mapa</a>
 						
 						<img   @load="imgLoaded = true" @error="imgLoaded = false"  :src="imgMapUrl" class="img-fluid" alt="center map">
-					
-
+				-->
 				</div>
 
-				<div v-if="app.app_type_home" >
-					<div><i class="bi bi-house h1"></i> Cita a domicilio </div>
-					En Comunas: 
+				<div v-if="app.app_type_home" class="" >
+					<div><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en Comunas: </div>
+							<div class="m-2">
 							<text v-if=" app.location1 != null " >  
                                 <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location1) }} 
                             </text>
@@ -82,20 +83,20 @@ import loadProgress from './loadProgress.vue'
                             <text v-if=" app.location6 != null " >  
                                 <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location6) }} 
                             </text>	
+							</div>
 				</div>
 
-				<div v-if="app.app_type_remote" >
-					<i class="bi bi-camera-video h1"></i>
-					<div> Remoto </div>
-				</div>
+			</div>
+
 
 <div>
 
 	
 
 </div>
-	 <button type="button" @click="reserveHour(app);"  class="btn btn-primary m-2"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
-                    		
+	 <button type="button" @click="reserveHour(app);"  class="btn btn-primary m-4"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
+    <br>
+	<text class="text-secondary" style="">#{{app.app_id}}</text>	
 
                     </div>
         </div> 
@@ -156,7 +157,7 @@ div.scroll {
   margin: 2px auto;
   padding: 20px 30px;
   background-color: #fff;
-  border-radius: 2px;
+  /*border-radius: 2px;*/
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -237,7 +238,7 @@ export default {
   },
 
 	emits: ["updateLastSearch"],
-	props: [ 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen' ],
+	props: [ 'searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen' ],
 
 
 computed: {
@@ -248,14 +249,9 @@ computed: {
 
 	  watch: {
 		openModalEvent(newApp, oldApp) {
-			
-			
-			
 			console.log("openModalEvent !!!");
 			this.showModalPublicAppDetails = true ; 
-			
-			this.imgMapUrl = '/centerMap/center_map_id_'+this.app.center_id+'.JPG' ;
-			
+			this.imgMapUrl = '/centerMap/center_map_id_'+this.app.center_id+'.JPG' ;	
 	  	},
 		
 		imgLoaded(newApp, oldApp) {
@@ -267,6 +263,23 @@ computed: {
 
 
 	methods: {
+
+		getShortMonthName(month)
+		{
+			console.log("MONTH:"+month);
+			let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+			return months[month];
+
+		},
+
+		showSpecialtyName(app)
+            {
+                if (this.searchParameters.specialty != null)
+                {return this.searchParameters.specialty.name }
+                else {
+                    return (app.specialty_name )
+                }
+            },
 
 		reserveHour(hour)
 		{
@@ -293,10 +306,11 @@ computed: {
             if (temp != null) { return temp.name }
             else { return null }
    		},
+
 		transform_date(date)
     	{
         let temp = date.split("-") ;
-        return (" "+temp[2]+"/"+temp[1]+"/"+temp[0])
+        return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
     	},
         
 
