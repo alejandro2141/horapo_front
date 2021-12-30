@@ -27,12 +27,13 @@ import axios from 'axios'
                   </div>
 
               <div class="h1 text-success m-3 ">              
-                  <i class="bi bi-hand-thumbs-up"> Reserva Exitosa </i> 
+                   Reserva Exitosa  
               </div>
-
+                
                     <div class=" w-100 display-6 m-0 p-0" style="color:#2e5668">	
-                   		 {{ transform_date( appConfirmed.date.substring(0, 10) ) }} 
-                        {{appConfirmed.start_time.substring(0, 5) }} hrs   
+               {{ transform_date( appConfirmed.date.substring(0, 10) ) }}   {{appConfirmed.start_time.substring(0, 5) }} hrs
+
+
                     </div> 
 
 							<div class="h3 mb-2" style="color:#2e5668" > 
@@ -154,7 +155,7 @@ export default {
         }
   },
 
- props: ['appConfirmed','eventShowModalConfirmation','app' ],
+ props: [ 'searchParameters', 'appConfirmed','eventShowModalConfirmation','app' ],
  emits: ['updateLastSearch'] , 
           
 
@@ -170,10 +171,17 @@ computed: {
 
 	methods: {
 
-            transform_date(date)
+           	transform_date(date)
             {
               let temp = date.split("-") ;
-              return (" "+temp[2]+"/"+temp[1]+"/"+temp[0])
+              return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+            },
+             getShortMonthName(month)
+            {
+              console.log("MONTH:"+month);
+              let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+              return months[month];
+
             },
             updateSearchResult()
             {
