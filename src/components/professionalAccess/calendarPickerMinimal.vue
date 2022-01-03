@@ -32,6 +32,7 @@ export default {
    data : function() {
         return {
         calendar : [] , 
+        calendar2 : [] ,
         today_day : null,
         today_month : null,
         today_year : null,
@@ -61,8 +62,8 @@ export default {
         this.req_year = this.today_year,
 
 		console.log("tday:"+ this.today_day + " tmont:"+this.today_month + " tyear:"+this.today_year );
-         this.setCalendar() ;
-
+        this.setCalendar() ;
+        
         console.log("CALENDAR PICKER MINIMAL CREATED END !!");
 	},
      mounted() {   
@@ -74,39 +75,106 @@ export default {
 	methods :{
         nextDay()
         {
+            if (this.calendar[this.req_year][this.req_month].length-2 < this.req_day)
+            {
+                this.req_day = 1 ; 
+                this.nextMonth();
+            }
+            else
+            {
             this.req_day++;
             console.log("NextDay method");
             this.$emit('set_daterequired', "20"+this.req_year+"-"+this.req_month+"-"+ this.req_day ) ;
+            }
+
         },
         prevDay()
         {
+            if (this.req_day <= 1)
+            {
+                this.req_day = this.calendar[this.req_year][this.req_month-1].length-1 ;
+                this.prevMonth();
+            }
+            else
+            {
             this.req_day--;
-            console.log("NextDay method");
+            console.log("prevDay method");
             this.$emit('set_daterequired', "20"+this.req_year+"-"+this.req_month+"-"+ this.req_day ) ;
-      
+            } 
         },
         nextMonth()
-        {
+        {   
+            if ( this.req_month == 12 )
+            {
+            this.req_month = 1;
+            this.req_year++ ; 
+             if (this.req_day > this.calendar[this.req_year][this.req_month].length-1 )
+                    {
+                        this.req_day= this.calendar[this.req_year][this.req_month].length-1 ;
+                    }
+             
+            this.$emit('set_daterequired', "20"+(this.req_year + 1) +"-"+this.req_month+"-"+ this.req_day ) ;
+            }
+            else
+            {
             this.req_month++;
             console.log("NextMonth method");
+                 if (this.req_day > this.calendar[this.req_year][this.req_month].length-1 )
+                    {
+                        this.req_day= this.calendar[this.req_year][this.req_month].length-1 ;
+                    }
+            
             this.$emit('set_daterequired', "20"+this.req_year+"-"+this.req_month+"-"+ this.req_day ) ;
+            }
+           
         },
         prevMonth()
         {
+            if ( this.req_month == 1 )
+            {
+            this.req_month = 12;
+            this.req_year-- ; 
+             if (this.req_day > this.calendar[this.req_year][this.req_month].length-1 )
+                    {
+                        this.req_day= this.calendar[this.req_year][this.req_month].length-1 ;
+                    }
+            this.$emit('set_daterequired', "20"+(this.req_year + 1) +"-1-"+ this.req_day ) ;
+            }
+            else
+            {
             this.req_month--;
             console.log("NextMonth method");
+             if (this.req_day > this.calendar[this.req_year][this.req_month].length-1 )
+                    {
+                        this.req_day= this.calendar[this.req_year][this.req_month].length-1 ;
+                    }
             this.$emit('set_daterequired', "20"+this.req_year+"-"+this.req_month+"-"+ this.req_day ) ;
-        },
+            }
+       
+       },
+
+       
 
 
         setCalendar()
         {
         console.log("set Calendar method");
+
+
         //this.calendar = [] ;
         this.calendar[21] = [] ;
         this.calendar[22] = [] ;
         this.calendar[21][10] = [] ;
-        this.calendar[21][11] = [] 
+        this.calendar[21][11] = [] ;
+
+        this.calendar[21][9] = [ "Septiembre", 
+                                            "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" ,
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves"    ] ;
+
+
         this.calendar[21][10] = [ "Octubre", 
                                             "Viernes" , "Sabado" , "Domingo", 
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
@@ -135,7 +203,55 @@ export default {
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
                                             "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
                                             "Lunes" ] ;
+         this.calendar[22][2] = [ "Febrero", 
+                                            "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",  
+                                            "Lunes"] ;
+         this.calendar[22][3] = [ "Marzo", 
+                                            "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",  
+                                            "Lunes" , "Martes", "Miercoles", "Jueves" ] ;
+        this.calendar[22][4] = [ "Abril", 
+                                            "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",  
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", ] ;
+        this.calendar[22][5] = [ "Mayo", 
+                                            "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",  
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes"
+                                            ] ;
+        this.calendar[22][6] = [ "Junio", 
+                                            "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",  
+                                            "Lunes" , "Martes", "Miercoles", "Jueves"  ] ;
+        this.calendar[22][7] = [ "Julio", 
+                                            "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" ] ;    
 
+        this.calendar[22][8] = [ "Agosto", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo",
+                                            "Lunes" , "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo", 
+                                            "Lunes" , "Martes", "Miercoles" ] ;    
+  
+
+       
+       
        
 
         console.log("Set CALENDAR:  "+ JSON.stringify(this.calendar )  );
