@@ -26,11 +26,23 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 				
                       <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ showSpecialtyName(appToReserve) }}  </div>
                       <div class="" style="" > </div>
+
                       <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                   </div>
-				
-				 {{ transform_date( appToReserve.date.substring(0, 10) ) }}   {{appToReserve.start_time.substring(0, 5) }} hrs
 
+				<div v-if="appToReserve.app_type_home" class="h4" >
+					<div style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> </div>
+				</div>
+
+					<div class="" >
+						<i class="bi bi-smartwatch "></i>  {{ transform_date( appToReserve.date.substring(0, 10) ) }}   {{appToReserve.start_time.substring(0, 5) }} hrs  
+					</div>
+					<div class="">	
+						<i class="bi bi-person m-1"></i>Con :  {{appToReserve.name }} 
+					</div>
+						<br>
+
+				 
                 <div class="text-dark"> Datos del Paciente
                 </div>							
                             <form autocomplete="off" method="POST" action="take_appointment.html">			
@@ -77,7 +89,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 								<div class="input-group mb-3">
 									<input type="text" class="form-control" placeholder="Ej. Tristan Cornejo 999, Independencia" name="form_patient_address" id="form_patient_address"  v-model="form_patient_address" >
 									<div class="input-group-append">
-										<span class="input-group-text" id="basic-addon2">Dirección</span>
+										<span class="input-group-text" id="basic-addon2">Su Dirección</span>
 									</div>
 									<div v-if="error_msg_address" class="text-danger">Debe Indicar Su Direccion de atencion a domicilio </div>
 								</div>
@@ -126,7 +138,9 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 															
                                 <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
                                 <button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
-                            	<text class="text-secondary" style=""><br>#{{appToReserve.app_id}}</text>	
+                            	
+								<br>
+								<text class="text-secondary" style=""><br>#{{appToReserve.app_id}}</text>	
 								<div class="" style="height : 500px"> 
                 				</div>
 							
@@ -261,6 +275,15 @@ computed: {
       	},
 
 	methods: {
+		showSpecialtyName(app)
+            {
+                if (this.searchParameters.specialty != null)
+                {return this.searchParameters.specialty.name }
+                else {
+                    return (app.specialty_name )
+                }
+            },
+
 		
 		transform_date(date)
     	{
@@ -269,9 +292,9 @@ computed: {
     	},
         getShortMonthName(month)
 			{
-				console.log("MONTH:"+month);
+				console.log("Modal Public Reserve App form MONTH:"+parseInt(month));
 				let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
-				return months[month];
+				return months[parseInt(month)];
 
 			},
 		showSpecialtyName(app)
