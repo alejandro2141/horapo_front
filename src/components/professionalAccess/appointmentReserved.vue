@@ -8,6 +8,7 @@ import axios from 'axios';
 <template>
      
     <div   class="mb-2  bg-white " data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
+    <text class="text-secondary" style="">#{{appointment.app_id}}</text>
         <div id="app " class="m-0 d-flex  "  >			
                 
                 <div class="m-0 border-bottom" :style="{'background-color' : '#'+appointment.center_color }" >
@@ -29,7 +30,7 @@ import axios from 'axios';
                 <div class="mt-2 w-100" >
                     <div class="d-flex justify-content-between " >
                         <div>
-                        {{appointment.specialty_name }} 
+                       <text class="text-success"  >{{ id2name(appointment.specialty_reserved ) }}  </text> 	
                         <i v-if="appointment.available_public_search" style="margin-left: 1.0em;" class="bi bi-wifi text-success ">On Line</i>
                         <br>
 
@@ -37,7 +38,7 @@ import axios from 'axios';
                             Cita Cancelada 
                         </div>
 
-                        <text class="bg-primary text-white" v-if='appointment.confirmation_status == 0' >
+                        <text class="bg-secondary text-white" v-if='appointment.confirmation_status == 0' >
                             Reservada. Sin Confirmar </text>
                        
                         </div>
@@ -65,8 +66,9 @@ import axios from 'axios';
             </div>
             
             <div v-if="appointment.app_type_home" style=" font-size: 1.0em;" >
-                          <i class="bi bi-house"> A Domicilio Comunas </i> <br>
-
+                          <i class="bi bi-house"> A Domicilio  </i> <br>
+                           Direccion Paciente:  {{appointment.patient_address }} <br>
+                            <!--
                             <text v-if=" appointment.location1 != null " >  
                                 <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location1) }} <br>
                             </text>
@@ -85,6 +87,7 @@ import axios from 'axios';
                             <text v-if=" appointment.location6 != null " >  
                                 <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location6) }} <br>
                             </text>
+                            -->
             </div>
 
             <div v-if="appointment.center_name != null " >
@@ -95,7 +98,8 @@ import axios from 'axios';
             </div>
 
             
-            
+           
+
 
            	
     </div>
@@ -119,6 +123,13 @@ export default {
 	created () {
 	},
 	methods :{
+      	
+        id2name(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        },
 
         id2comuna(id){
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
