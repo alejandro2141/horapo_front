@@ -7,6 +7,7 @@ import ModalCreateAppointment from './modalCreateAppointment.vue';
 import ModalShowAppointmentDetails from './modalShowAppointmentDetails.vue';
 import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
 import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppointment.vue';
+import ModalDuplicateDay from './modalDuplicateDay.vue';
 
 
 
@@ -15,6 +16,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 <template>
 
  <div id="search_result" class="border">
+<ModalDuplicateDay :openModalDuplicateDay='openModalDuplicateDay' :appointments_day='appointments_day' :global_comunas='global_comunas' :global_specialties='global_specialties' > </ModalDuplicateDay>
 
 <ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" :openModalCreateAppEvent='openModalCreateAppEvent' > </ModalCreateAppointment>
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' :openModalShowDetailsEvent="openModalShowDetailsEvent"  > </ModalShowAppointmentDetails>
@@ -134,6 +136,8 @@ export default {
             openModalShowAppTakenEvent : null ,
             openModalCreateAppEvent : null,
             openModalReserveAppEvent : null,
+            openModalDuplicateDay : null ,
+            appointments_day : null ,
         }   
     },
    	
@@ -144,7 +148,11 @@ export default {
 	},
     
     watch : {
-        appointments(newValue){         
+        appointments(newValue){
+                //copy array including only app to be display in Modal duplicate day
+                this.appointments_day = [].concat(newValue);
+
+            console.log("appointment_day:"+this.appointments_day);    
             this.hours = [  { "start_time" : "00:00" },
                             { "start_time" : "01:00" },
                             { "start_time" : "02:00" },
@@ -174,6 +182,7 @@ export default {
             this.showModalCreateApp= true ;
             console.log ("appointments change !!!");
             let poped = newValue.pop() ;
+ 
             
             console.log ("appointments change !!!");
             
@@ -201,6 +210,9 @@ export default {
 	methods :{
         duplicateDay(date){
             console.log("duplicate day in list appointments "+date) ; 
+            this.openModalDuplicateDay= Math.random(); 
+
+
         },
         switchView(){
             this.$emit('switchView');
