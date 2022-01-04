@@ -38,7 +38,7 @@ import loadProgress from './loadProgress.vue'
 
 
 				<div v-if="app.app_type_home" class="" >
-						<div class="h4" style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en comunas: </div>
+						<div class="h3" style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en : </div>
 				
 							<div class="m-2">
 							<text v-if=" app.location1 != null " >  
@@ -99,6 +99,7 @@ import loadProgress from './loadProgress.vue'
 </div>
 	 <button type="button" @click="reserveHour(app);"  class="btn btn-primary m-4"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
     <br>
+	<br>
 	<text class="text-secondary" style="">#{{app.app_id}}</text>	
 
                     </div>
