@@ -7,6 +7,8 @@ import axios from 'axios';
 <template>
      
 <div   class="bg-white mb-2" data-bs-toggle="modal" :data-bs-target="'#modal_reserve_'+index" >
+  <text class="text-secondary" style="">#{{appointment.app_id}}</text>
+
                         <div id="app" class="d-flex justify-content-start"  >	
                             <!--
                             <div class="m-0"  :style="{'background-color' : '#'+appointment.center_color }"  >
@@ -83,15 +85,11 @@ import axios from 'axios';
                                 <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location6) }} <br>
                             </text>
 
-
                         </div>
 
                         <div v-if="appointment.app_type_remote" style=" font-size: 1.0em;" >
                           <i class="bi bi-camera-video"> Remota </i> 
-                        </div>
-
-                        
-
+                        </div>              
     </div>
 
 </template>
