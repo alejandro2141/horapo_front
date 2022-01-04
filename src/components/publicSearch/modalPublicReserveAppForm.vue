@@ -27,10 +27,10 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                       <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ showSpecialtyName(appToReserve) }}  </div>
                       <div class="" style="" > </div>
 
-                      <div class=""><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
+                      <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                   </div>
 
-				<div v-if="appToReserve.app_type_home" class="h4" >
+				<div v-if="appToReserve.app_type_home" class="h3" >
 					<div style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> </div>
 				</div>
 
@@ -245,7 +245,7 @@ export default {
 		  form_patient_insurance_code : null ,
 		  form_patient_age : null, 
 		  form_patient_address : null ,
- 
+		   
 		  error_msg_name : false,
 		  error_msg_age : false,
 		  error_msg_doc_id: false,
@@ -275,20 +275,12 @@ computed: {
       	},
 
 	methods: {
-		showSpecialtyName(app)
-            {
-                if (this.searchParameters.specialty != null)
-                {return this.searchParameters.specialty.name }
-                else {
-                    return (app.specialty_name )
-                }
-            },
 
-		
+
 		transform_date(date)
     	{
-        let temp = date.split("-") ;
-        return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+      	  let temp = date.split("-") ;
+      	  return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
     	},
         getShortMonthName(month)
 			{
@@ -346,6 +338,18 @@ computed: {
 			}
 			else { this.error_msg_phone=false;}
 
+			// SET SPECIALTY, Depends if user search or just click without search. 
+			let specialty_reserved = null ; 
+			if (this.searchParameters.specialty != null)
+			{
+				specialty_reserved = this.searchParameters.specialty.id ;
+			}
+			else
+			{
+				specialty_reserved =  this.appToReserve.specialty  ;
+			}
+			// 	END SET SPECIALTY 
+
 					var r =confirm("Desea continuar con la Reservar esta cita?");
 					  if (r == true) {
 						const json = { 
@@ -354,10 +358,13 @@ computed: {
 						patient_name : this.form_patient_name,
 						patient_doc_id	: this.form_patient_doc_id,
 						patient_email	: this.form_patient_email,
-						patient_phone	:	this.form_patient_phone,
+						patient_phone	: this.form_patient_phone,
 						patient_address : this.form_patient_address , 
+							
+						specialty_reserved : specialty_reserved,
+
 						//patient_insurance:	this.form_patient_insurance_code,
-						patient_insurance:	9999 ,
+						patient_insurance :	9999 ,
 						form_public : app.available_public_search ,
 						app_available : false 
 						};
