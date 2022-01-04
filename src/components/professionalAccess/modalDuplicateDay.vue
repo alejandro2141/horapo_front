@@ -1,11 +1,14 @@
+
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import InputFormSpecialtyProfessional from './inputFormSpecialtyProfessional.vue';
+import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
+
 
 </script>
 
 <template>
-
 	<teleport to="body"   >
 		<div  v-if="showModalDuplicateDay" class="modal bg-secondary"    >
 		    <transition name="modal">
@@ -13,27 +16,89 @@ import axios from 'axios';
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-1 modal-background">
  
-                <div class="modal-header" >
-                    <div class="d-flex flex-row bd-highlight mb-1 display-3">
-                        <div class="p-1 bd-highlight">Duplicar Sus Horas <br/>
-                       </div>
-                        <div class="p-1 bd-highlight"></div>
-                         <div class="p-1 bd-highlight"><i class="display-1 bi bi-x "  v-on:click="showModalDuplicateDay = false" aria-label="Close"></i>
-                       </div>
-                    </div>
-                </div>
 
                 <div class="modal-body mt-0" > 
-                 
-                    <form autocomplete="off"  >	
-                    Modal duplicate Day 
-                    </form>			
+                
+                    <div class="d-flex flex-row bd-highlight mb-1 display-5">
+                        <div class="p-1 bd-highlight">DUPLICATE DAY <br/>
+                        </div>
+                            <div class="p-1 bd-highlight"></div>
+                            <div class="p-1 bd-highlight"><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalDuplicateDay = false" aria-label="Close"></i>
+                        </div>
+                    </div>
 
+                    <div class="m-3" >
+                      Copiar la configuracion de este dia a: 
+                    </div>
+
+                    <div>
+                      <h2> Dia Mes Año </h2>
+                        <input class="form-control " type="text"  v-model="form_day" >
+                        <input class="form-control " type="text"  v-model="form_month" >
+                        <input class="form-control " type="text"  v-model="form_year" >
+                    </div>
+
+
+                   <!--
+                        <div class="">
+                       
+                            <div v-for="(appointment) in appointments_day" :key="appointment"  >
+                              <div class="border border-1" >
+                                  <div class="flex ">
+                                    <div  v-if="appointment.app_type_center" style=" font-size: 1.0em;" >
+                                      <i class="bi bi-building"> </i>  
+                                    </div>
+
+                                    <div  v-if="appointment.app_type_home" style=" font-size: 1.0em;" >
+                                      <i  class="bi bi-house"></i> 
+                                    </div> 
+                                    
+                                    <div>
+                                     {{appointment.start_time.substring(0, 5) }}	 {{appointment.duration }}min  en 
+                                    </div>
+                                    <div> 
+                                     <text v-if="appointment.app_type_center" > {{appointment.center_name }}</text> 
+                                    </div>
+                                    <div> 
+                                    
+                                     <text v-if="appointment.app_type_home" > A domicilio </text> 
+                                    </div>
+                                        <div class="">
+                                            {{ id2name(appointment.specialty ) }}
+                                            {{ id2name(appointment.specialty1 ) }}
+                                            {{ id2name(appointment.specialty2 ) }} 
+                                            {{ id2name(appointment.specialty3 ) }} 
+                                            {{ id2name(appointment.specialty4 ) }}
+                                            {{ id2name(appointment.specialty5 ) }}
+                                        </div>
+                                  
+                                  </div>
+                                  
+                                  
+                                  
+                                  
+                                 
+
+                              </div>
+
+                            </div>
+
+                          
+
+                        </div>
+
+                  
+                        <div class="m-3">
+                            Destino
+                        </div>
+                  
+                      -->
+
+     
                 </div>
-
-            </div> 
-            </div> 		
-            </div> 
+        </div> 
+        </div> 		
+		</div> 
         </transition>
     	</div>
 	</teleport> 
@@ -129,26 +194,49 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
-           showModalDuplicateDay : false ,
+            showModalDuplicateDay: false ,
+            form_day : null,
+            form_month : null,
+            form_year : null,
           }   
     },
    	
-   props: ['daterequired', 'session_params' ],
-   emits: ['updateAppList'] , 
+   props: ['daterequired','hourDetails', 'session_params' , 'appointments_day', 'openModalDuplicateDay' , 'global_comunas' , 'global_specialties' ],
+   emits: [] , 
       
-   	mounted () { 
-    },
+   	mounted () {
+           this.auxHourCreate = ref(this.hourCreate) ;
+           console.log("Modal Create Appointment Mounted !!!" );
+       },
 
 	methods :{
-    },
+        id2name(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        },
+        id2comuna(id){
+            let temp= this.global_comunas.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        }
+
+      },
 
     watch : {
-        activatorCreateNewCenter (newValue){
-            console.log ("showModalCreate !!!"+newValue );  
-            this.showModalCreate = true ;
+      	openModalDuplicateDay(newApp, oldApp) {
+         
+           console.log("openModal Duplicate Day !!!");
+           this.showModalDuplicateDay = true ;
+              console.log("appointment_day:"+this.appointments_day);    
         },
-    },
+      }
     
 }
 </script>
+
+
+
 
