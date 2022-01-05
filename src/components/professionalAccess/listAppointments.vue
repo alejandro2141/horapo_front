@@ -16,7 +16,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 <template>
 
  <div id="search_result" class="border">
-<ModalDuplicateDay :openModalDuplicateDay='openModalDuplicateDay' :appointments_day='appointments_day' :global_comunas='global_comunas' :global_specialties='global_specialties' > </ModalDuplicateDay>
+<ModalDuplicateDay :session_params='session_params' :daterequired='daterequired' :openModalDuplicateDay='openModalDuplicateDay' :appointments_day='appointments_day' :global_comunas='global_comunas' :global_specialties='global_specialties' > </ModalDuplicateDay>
 
 <ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" :openModalCreateAppEvent='openModalCreateAppEvent' > </ModalCreateAppointment>
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' :openModalShowDetailsEvent="openModalShowDetailsEvent"  > </ModalShowAppointmentDetails>
@@ -210,6 +210,7 @@ export default {
 	methods :{
         duplicateDay(date){
             console.log("duplicate day in list appointments "+date) ; 
+            console.log("Session Params "+JSON.stringify(this.session_params) ) ;
             this.openModalDuplicateDay= Math.random(); 
 
 
