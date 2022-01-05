@@ -19,25 +19,70 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 
                 <div class="modal-body mt-0" > 
                 
-                    <div class="d-flex flex-row bd-highlight mb-1 display-5">
-                        <div class="p-1 bd-highlight">DUPLICATE DAY <br/>
+                    <div class="d-flex flex-row bd-highlight mb-1 h3">
+                        <div class="p-1 bd-highlight">Duplicar Horas Dia <br/>
                         </div>
                             <div class="p-1 bd-highlight"></div>
                             <div class="p-1 bd-highlight"><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalDuplicateDay = false" aria-label="Close"></i>
                         </div>
                     </div>
 
-                    <div class="m-3" >
-                      Copiar la configuracion de este dia a: 
+                    <div class="h3" >
+                      {{ transform_date(daterequired)}}
                     </div>
-
                     <div>
-                      <h2> Dia Mes Año </h2>
-                        <input class="form-control " type="text"  v-model="form_day" >
-                        <input class="form-control " type="text"  v-model="form_month" >
-                        <input class="form-control " type="text"  v-model="form_year" >
+                      Al siguiente dia: 
                     </div>
 
+                       <div class="d-flex flex-row h1 " >
+                              <div class="col-4">
+                                  DIA
+                              </div>
+                               <div class="col-4">
+                                  MES
+                              </div>
+                               <div class="col-4">
+                                  AÑO
+                              </div>
+                       </div>
+                       
+                        <div class="d-flex flex-row border border-2" >
+                                    <div class="d-flex flex-row m-2 ">
+                                        <div class="col-7">
+                                         
+                                            <input type="text" style="height : 100%" class="form-control p-1" v-model="form_day">
+                                        </div>
+                                        <div class="col-5">
+                                            <button @click="form_day++" type="button" class="btn btn-secondary btn-sm"><i class="bi bi-caret-up"></i></button>
+                                            <button @click="form_day--" type="button" class="btn btn-secondary btn-sm"><i class="bi bi-caret-down"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row m-2 ">
+                                        <div class="col-7">
+                                            <input type="text" style="height : 100%" class="form-control p-1" v-model="form_month">
+                                        </div>
+                                        <div class="col-5">
+                                            <button @click="form_month++" type="button" class="btn btn-secondary btn-sm"><i class="bi bi-caret-up"></i></button>
+                                            <button @click="form_month--" type="button" class="btn btn-secondary btn-sm"><i class="bi bi-caret-down"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row m-2 ">
+                                        <div class="col-7">
+                                            <input type="text" style="height : 100%" class="form-control p-1" v-model="form_year">
+                                        </div>
+                                        <div class="col-5">
+                                            <button @click="form_year++" type="button" class="btn btn-secondary btn-sm"><i class="bi bi-caret-up"></i></button>
+                                            <button  @click="form_year--" type="button" class="btn btn-secondary btn-sm"><i class="bi bi-caret-down"></i></button>
+                                        </div>
+                                    </div>
+                        </div>
+
+                        <div>
+                          <button @click="duplicateDay(daterequired, form_year+'-'+form_month+'-'+form_day  )" type="button" class="m-4 btn btn-primary">duplicar</button>
+                        </div>
+                
+
+           
 
                    <!--
                         <div class="">
@@ -195,9 +240,9 @@ export default {
    data : function() {
         return {
             showModalDuplicateDay: false ,
-            form_day : null,
-            form_month : null,
-            form_year : null,
+            form_day : parseInt(this.daterequired.split("-")[2] )+1   , 
+            form_month : parseInt(this.daterequired.split("-")[1] ) ,
+            form_year : parseInt(this.daterequired.split("-")[0] ) ,
           }   
     },
    	
@@ -210,6 +255,28 @@ export default {
        },
 
 	methods :{
+
+
+	   async duplicateDay(origin,destination) {
+    	var r =confirm("Se procedera a duplicar al dia indicado");
+			if (r == true) {
+              const json = { 
+                  session_params : this.session_params, 
+                  origin : origin ,   
+                  destination : destination ,        
+              };
+                  
+        console.log ("duplicateDay :"+ JSON.stringify(json)  );
+        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_duplicate_day",json);
+        console.log ("duplicateDay RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+        //location.reload();
+        //this.agendas = response_json.data.rows;
+        //location.reload();
+       // this.$emit('updateAppList');
+        this.showModalDuplicateDay = false ;
+        }
+      },
+
         id2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
@@ -221,7 +288,19 @@ export default {
             if (temp != null) { return temp.name }
             else { return null }
 
-        }
+        },
+        transform_date(date)
+        {
+          let temp = date.split("-") ;
+          return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+        },
+        getShortMonthName(month)
+        {
+          console.log("MONTH:"+parseInt(month));
+          let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+          return months[parseInt(month)];
+
+        },
 
       },
 
