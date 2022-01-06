@@ -53,11 +53,13 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
                 </div>
        
-                <div v-else class="d-flex flex-row-reverse">
+                <div v-else class="d-flex justify-content-between">
 
-                    <div class="" >
-                         <!--  <i class="text-secondary bi bi-slash-circle"></i> -->
+                    <div  v-html="hour.symbol1" >
+                        
                     </div>
+                   
+
 
                     <div class="h1 m-2" >
                         <!-- <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>  -->
@@ -66,6 +68,9 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" >
                         <i class="bi bi-plus"></i> {{ hour.start_time.substring(0,5) }}
                     </div>
+
+                    
+
                 </div>
 
         <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />
@@ -153,30 +158,30 @@ export default {
                 this.appointments_day = [].concat(newValue);
 
             console.log("appointment_day:"+this.appointments_day);    
-            this.hours = [  { "start_time" : "00:00" },
-                            { "start_time" : "01:00" },
-                            { "start_time" : "02:00" },
-                            { "start_time" : "03:00" },   
-                            { "start_time" : "04:00" },
-                            { "start_time" : "05:00" },
-                            { "start_time" : "06:00" },
-                            { "start_time" : "07:00" },   
-                            { "start_time" : "08:00" },
-                            { "start_time" : "09:00" },
-                            { "start_time" : "10:00" },   
-                            { "start_time" : "11:00" },
-                            { "start_time" : "12:00" },
-                            { "start_time" : "13:00" },
-                            { "start_time" : "14:00" },   
-                            { "start_time" : "15:00" }, 
-                            { "start_time" : "16:00" }, 
-                            { "start_time" : "17:00" }, 
-                            { "start_time" : "18:00" }, 
-                            { "start_time" : "19:00" }, 
-                            { "start_time" : "20:00" }, 
-                            { "start_time" : "21:00" }, 
-                            { "start_time" : "22:00" }, 
-                            { "start_time" : "23:00" }, 
+            this.hours = [  { "start_time" : "00:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
+                            { "start_time" : "01:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
+                            { "start_time" : "02:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
+                            { "start_time" : "03:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },  
+                            { "start_time" : "04:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" },
+                            { "start_time" : "05:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" },
+                            { "start_time" : "06:00" , "symbol1" : "<i class='h2 bi bi-sunrise'></i>" },
+                            { "start_time" : "07:00" , "symbol1" : "<i class='h2 bi bi-sunrise'></i>" },   
+                            { "start_time" : "08:00" , "symbol1" : "<i class='h2 bi bi-sunrise'></i>" },
+                            { "start_time" : "09:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" },
+                            { "start_time" : "10:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" },   
+                            { "start_time" : "11:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" },
+                            { "start_time" : "12:00" , "symbol1" : "<i class='h1 bi bi-sun text-warning'></i>" },
+                            { "start_time" : "13:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" },
+                            { "start_time" : "14:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" },   
+                            { "start_time" : "15:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" }, 
+                            { "start_time" : "16:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" }, 
+                            { "start_time" : "17:00" , "symbol1" : "<i class='h2 bi bi-sunset'></i>" }, 
+                            { "start_time" : "18:00" , "symbol1" : "<i class='h2 bi bi-sunset'></i>" }, 
+                            { "start_time" : "19:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" },  
+                            { "start_time" : "20:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" }, 
+                            { "start_time" : "21:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
+                            { "start_time" : "22:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },  
+                            { "start_time" : "23:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
                             ];
 
             this.showModalCreateApp= true ;
