@@ -175,7 +175,7 @@ export default {
                             { "start_time" : "14:00" , "symbol1" : "<i class='h2 bi bi-sun text-warning'></i>" },   
                             { "start_time" : "15:00" , "symbol1" : "<i class='h2 bi bi-sun text-warning'></i>" }, 
                             { "start_time" : "16:00" , "symbol1" : "<i class='h2 bi bi-sun text-warning'></i>" }, 
-                            { "start_time" : "17:00" , "symbol1" : "<i class='h2 bi bi-sunset text-danger'></i>" }, 
+                            { "start_time" : "17:00" , "symbol1" : "<i class='h1 bi bi-sunset text-danger'></i>" }, 
                             { "start_time" : "18:00" , "symbol1" : "<i class='h2 bi bi-sunset'></i>" }, 
                             { "start_time" : "19:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" },  
                             { "start_time" : "20:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" }, 
