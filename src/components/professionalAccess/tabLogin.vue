@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-
+import loadProgress from '../loadProgress.vue'
 
 defineProps({
   session: Object
@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-    
+    <loadProgress  :active_spinner="active_spinner" > </loadProgress>
      <div class="border border-dark m-3 bg-light ">
 
             <div class="d-flex justify-content-between" >	
@@ -61,6 +61,8 @@ export default {
             form_token : "",
             form_email : "",
             form_pass : "",
+
+            active_spinner : false , 
         }   
     },
     emits: ['startSession'] ,
@@ -68,7 +70,8 @@ export default {
     methods: {
         //SEND LOGIN
         async sendLogin(event) {
-			const json = { 
+			this.active_spinner = true ; 
+            const json = { 
 			   form_email : this.form_email ,
 			   form_pass : this.form_pass ,  
 			   form_user_type : '1',			   
@@ -77,7 +80,8 @@ export default {
 			console.log ("REQUEST :"+ JSON.stringify(json)  );
 			
 			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_login",json);
-			console.log ("RESPONSE login:"+JSON.stringify(response_json.data)) ;
+		
+            console.log ("RESPONSE login:"+JSON.stringify(response_json.data)) ;
 			//this.response_json = response.data;
 			  if (response_json.data.result_code == 0 ) {
 					  console.log("Login Exitosos!!");
@@ -93,7 +97,8 @@ export default {
 					  else  {
 					  console.log("Login Fallido");
 					  this.login_message  = "Error Login " ;
-					  }				  
+					  }		
+               this.active_spinner = false ; 		  
 	        },
         //SET PARAM
             setParamFromJSONDATA(obj)
