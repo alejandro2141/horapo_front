@@ -3,12 +3,12 @@ import { ref } from 'vue'
 import axios from 'axios'
 import searchAppointmentForm  from './SearchAppointmentForm.vue' 
 import searchAppointmentResult  from './SearchAppointmentResult.vue'
-import loadProgress from './loadProgress.vue'
+import loadProgress from '../loadProgress.vue'
 
 </script>
 
 <template>
- <loadProgress  :active_spinner="active_spinner" > </loadProgress>
+  <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
    
     <div class="h2 bg-white p-2" >
    
