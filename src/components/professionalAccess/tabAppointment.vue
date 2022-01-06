@@ -6,12 +6,12 @@ import CalendarPickerMinimal from './calendarPickerMinimal.vue'
 import DateRequiredActions from './dateRequiredActions.vue'
 import ListAppointments from './listAppointments.vue'
 import FirstTimeLogin from './firstTimeLogin.vue'
-
+import loadProgress from '../loadProgress.vue'
 
 </script>
 
 <template>
-
+<loadProgress  :active_spinner="active_spinner" > </loadProgress>
       <div v-if='!session_params.first_time' >
 
             <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
@@ -41,14 +41,15 @@ data: function () {
 			//centers: null ,
             daterequired: null ,
             appointments: null, 
+            active_spinner : false , 
 		 }
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
   emits: ['switchView','switchToCenters' ] ,
     created () {
-        //this.daterequired="12-12-2021";
+            //this.daterequired="12-12-2021";
             //this.getCenters();
-            console.log("TAB APPOINTMENT session_params "+this.session_params.professional_id );   
+            console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );   
             this.daterequired = new Date().toISOString().split('T')[0] ;
             this.updateAppointmentList();
          },
@@ -72,16 +73,17 @@ data: function () {
             },
 
         async updateAppointmentList() {
-	        	
-				const json = { 
-				// agenda_id : this.par_agenda_id ,			 
-				 date : this.daterequired ,
-				 professional_id : this.session_params.professional_id , 
-						  };
-				console.log ("getAppointments REQUEST :"+ JSON.stringify(json)  );
-				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day",json);
-				console.log ("getAppointments RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
-				this.appointments = response_json.data.rows;		
+          this.active_spinner = true ;  	
+              const json = { 
+              // agenda_id : this.par_agenda_id ,			 
+              date : this.daterequired ,
+              professional_id : this.session_params.professional_id , 
+                    };
+              console.log ("getAppointments REQUEST :"+ JSON.stringify(json)  );
+              let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day",json);
+              console.log ("getAppointments RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+              this.appointments = response_json.data.rows;		
+          this.active_spinner = false ;  
 		    },
   },
 
