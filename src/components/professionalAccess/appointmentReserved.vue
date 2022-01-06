@@ -89,14 +89,15 @@ import axios from 'axios';
                             </text>
                             -->
             </div>
-
-            <div v-if="appointment.center_name != null " >
-                    {{appointment.center_name }}<br>
+             <div v-if="appointment.app_type_center" style=" font-size: 1.0em;" >
+                <i class="bi bi-building"> En Consulta  </i> <br>
+                    <div v-if="appointment.center_name != null " >
+                            {{appointment.center_name }}<br>
+                    </div>
+                    <div v-if="appointment.center_address != null ">
+                            {{appointment.center_address }}<br>
+                    </div>
             </div>
-             <div v-if="appointment.center_address != null ">
-                    {{appointment.center_address }}<br>
-            </div>
-
             
            
 
