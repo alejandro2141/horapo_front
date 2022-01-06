@@ -75,7 +75,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                         <div @click="form_show_home = !form_show_home; form_show_center = false ; form_show_remote = false ; "  class="p-2 h3"><i :class="{'bi':true , 'bi-circle':!form_show_home  , 'text-primary' : form_show_home , 'bi-circle-fill' : form_show_home }"></i> A Domicilio </div>
                                                      
                               <div v-if="form_show_home" class="border border-2 p-2"> 
-                                A domicilio comunas en las que atiende (Máximo 6). 
+                                Comunas en las que atiende a Domicilio (Máximo 6). 
                                 <!----
                                 <div class="text-start" v-for="(comuna) in form_comunas" :key="comuna.id"  > <i class="bi bi-geo-alt"></i> {{ comuna.name }}  
                                 </div>
