@@ -261,7 +261,7 @@ export default {
     	var r =confirm("Se procedera a duplicar al dia indicado");
 			if (r == true) {
               const json = { 
-                  session_params : this.session_params, 
+                  p_id : this.session_params.professional_id, 
                   origin : origin ,   
                   destination : destination ,        
               };
