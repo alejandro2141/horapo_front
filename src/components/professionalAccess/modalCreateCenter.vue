@@ -20,7 +20,7 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                     <form autocomplete="off">	
 
                     <div class="d-flex flex-row bd-highlight mb-1 display-3">
-                        <div class="p-1 bd-highlight">Crear Centro<br/>
+                        <div class="p-1 bd-highlight">Crear Consulta<br/>
                        </div>
                         <div class="p-1 bd-highlight"></div>
                          <div class="p-1 bd-highlight"><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalCreate = false" aria-label="Close"></i>
@@ -28,12 +28,12 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                     </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nombre de Nuevo centro de atención </label>
+                            <label for="exampleInputEmail1">Nombre de Nueva Consulta </label>
                             <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Direccion del centro</label>
+                            <label for="exampleInputPassword1">Direccion de su Consulta</label>
                             <input type="text" class="form-control" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
                             <small id="emailHelp" class="form-text text-muted">Esta direccion al que debe concurrir el paciente a su cita</small>		
                         </div>
@@ -62,7 +62,7 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
 
                         <text v-on:click="createNewCenter" class="text-primary text-center mt-3 p-3"> Agregar </text>
                       
-                        <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Centro </button>
+                        <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
                  
                       </form>
                         
