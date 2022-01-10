@@ -9,8 +9,9 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 </script>
 
 <template>
+ <div>
 <ModalPublicReserveConfirmation :searchParameters='searchParameters' v-on:updateLastSearch='updateLastSearch'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app'  ></ModalPublicReserveConfirmation>
-  <div>
+ 
   	<teleport to="body"   >
 
 		<div v-if="showModalPublicReserveForm" class="modal  bg-secondary scroll"    >
