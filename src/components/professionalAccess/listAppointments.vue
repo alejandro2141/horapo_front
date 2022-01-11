@@ -55,11 +55,9 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
        
                 <div v-else class="d-flex justify-content-between">
 
-                    <div  v-html="hour.symbol1" >
-                        
+                    <div  v-html="hour.symbol1" >     
                     </div>
                    
-
 
                     <div class="h1 m-2" >
                         <!-- <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>  -->
@@ -69,11 +67,10 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                         <i class="bi bi-plus"></i> {{ hour.start_time.substring(0,5) }}
                     </div>
 
-                    
-
                 </div>
 
-        <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />
+           <hr :style="{'width': calculateLineExtension(hour)+'rem'}" style="margin: 0rem; height:3px ; text-align:left; margin-left:0 ; border : 1px solid black; " >
+           <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />  
     </div>
 
     <!-- 
@@ -158,30 +155,30 @@ export default {
                 this.appointments_day = [].concat(newValue);
 
             console.log("appointment_day:"+this.appointments_day);    
-            this.hours = [  { "start_time" : "00:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
-                            { "start_time" : "01:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
-                            { "start_time" : "02:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
-                            { "start_time" : "03:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },  
-                            { "start_time" : "04:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" },
-                            { "start_time" : "05:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" },
-                            { "start_time" : "06:00" , "symbol1" : "<i class='h2 bi bi-sunrise'></i>" },
-                            { "start_time" : "07:00" , "symbol1" : "<i class='h2 bi bi-sunrise'></i>" },   
-                            { "start_time" : "08:00" , "symbol1" : "<i class='h2 bi bi-sunrise'></i>" },
-                            { "start_time" : "09:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" },
-                            { "start_time" : "10:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" },   
-                            { "start_time" : "11:00" , "symbol1" : "<i class='h2 bi bi-sun'></i>" },
-                            { "start_time" : "12:00" , "symbol1" : "<i class='h1 bi bi-sun text-warning'></i>" },
-                            { "start_time" : "13:00" , "symbol1" : "<i class='h2 bi bi-sun text-warning'></i>" },
-                            { "start_time" : "14:00" , "symbol1" : "<i class='h2 bi bi-sun text-warning'></i>" },   
-                            { "start_time" : "15:00" , "symbol1" : "<i class='h2 bi bi-sun text-warning'></i>" }, 
-                            { "start_time" : "16:00" , "symbol1" : "<i class='h2 bi bi-sun text-warning'></i>" }, 
-                            { "start_time" : "17:00" , "symbol1" : "<i class='h1 bi bi-sunset text-danger'></i>" }, 
-                            { "start_time" : "18:00" , "symbol1" : "<i class='h2 bi bi-sunset'></i>" }, 
-                            { "start_time" : "19:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" },  
-                            { "start_time" : "20:00" , "symbol1" : "<i class='h2 bi bi-moon'></i>" }, 
-                            { "start_time" : "21:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
-                            { "start_time" : "22:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },  
-                            { "start_time" : "23:00" , "symbol1" : "<i class='h2 bi bi-moon-stars'></i>" },
+            this.hours = [  { "start_time" : "00:00" , "symbol1" : "<i style='opacity: 0.5 ' class='h2 bi bi-moon-stars'></i> " },
+                            { "start_time" : "01:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
+                            { "start_time" : "02:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
+                            { "start_time" : "03:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },  
+                            { "start_time" : "04:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
+                            { "start_time" : "05:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>" },
+                            { "start_time" : "06:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>" },
+                            { "start_time" : "07:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sunrise text-danger'></i>" },   
+                            { "start_time" : "08:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun text-warning'></i>" },
+                            { "start_time" : "09:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun text-warning'></i>" },
+                            { "start_time" : "10:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun text-warning'></i>" },   
+                            { "start_time" : "11:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun text-warning'></i>" },
+                            { "start_time" : "12:00" , "symbol1" : "<i style='opacity: 0.5' class='h1 bi bi-sun text-warning'></i>" },
+                            { "start_time" : "13:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun text-warning'></i>" },
+                            { "start_time" : "14:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun text-warning'></i>" },   
+                            { "start_time" : "15:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun text-warning'></i>" }, 
+                            { "start_time" : "16:00" , "symbol1" : "<i style='opacity: 0.5'  class='h2 bi bi-sun text-warning'></i>" }, 
+                            { "start_time" : "17:00" , "symbol1" : "<i style='opacity: 0.5' class='h1 bi bi-sun text-warning'></i>" }, 
+                            { "start_time" : "18:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun text-warning'></i>" }, 
+                            { "start_time" : "19:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi-sunset text-danger'></i>" },  
+                            { "start_time" : "20:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>" }, 
+                            { "start_time" : "21:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>" },
+                            { "start_time" : "22:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },  
+                            { "start_time" : "23:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
                             ];
 
             this.showModalCreateApp= true ;
@@ -213,6 +210,30 @@ export default {
     },
 
 	methods :{
+
+        calculateLineExtension(hour){
+
+             let hour_number = parseInt(hour.start_time.substring(0,4) ) ;
+                
+                if (hour_number % 4 ==  0 )
+                { return 15 }
+                else {
+                return 4
+                    }
+// Expected output: The fourth item is free!!
+
+            /*
+            let hour_number = parseInt(hour.start_time.substring(0,3) ) ;
+            if ( hour_number <= 12)
+                { return  (hour_number + 2 ) ; }
+            else 
+                {
+                return  (24 - hour_number  +1  )
+                }       
+          */
+     
+         },
+
         duplicateDay(date){
             console.log("duplicate day in list appointments "+date) ; 
             console.log("Session Params "+JSON.stringify(this.session_params) ) ;
@@ -223,6 +244,7 @@ export default {
         switchView(){
             this.$emit('switchView');
          },
+
 
         showReserveModal(hour)
         {
