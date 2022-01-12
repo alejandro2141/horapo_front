@@ -18,13 +18,53 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 
                 <div class="modal-body mt-0" > 
                 
-                    <div class="d-flex flex-row bd-highlight mb-1 display-5">
-                            <div class="p-1 bd-highlight">Cita {{daterequired}} <br/>
+                  <div class="d-flex flex-row-reverse bd-highlight mb-1 display-5">
+                        
+                        <div class="p-1 bd-highlight"><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentDetais = false" aria-label="Close"></i>
                         </div>
-                            <div class="p-1 bd-highlight"></div>
-                            <div class="p-1 bd-highlight"><i class="display-1 bi bi-x "  v-on:click="showModalAppointmentDetais = false" aria-label="Close"></i>
+                        <div class="text-secondary">
+                          #{{hourDetails.app_id}}
                         </div>
+                  </div>
+
+                  <div class="d-flex flex-row border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
+                  
+                    <div class="m-0 p-2  bg-primary text-white" style=" border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > 
+                        <text class="display-5"> 
+                            {{ getShortMonthName(hourDetails.date.substring(5, 7) ) }}
+                        </text>
+                        <text class="display-1 d-flex align-items-center justify-content-center"> 
+                            {{hourDetails.date.substring(8, 10) }} 
+                        </text>  
                     </div>
+                    
+                    <div  class=" display-5 p-2" style="color:#1f9d94 ;" >
+                      <!--   {{ showSpecialtyName(hourDetails) }} -->
+
+                                    <text v-if=" hourDetails.specialty != null " >  
+                                         {{ id2name(hourDetails.specialty ) }} <br>
+                                    </text>
+                                    <text v-if=" hourDetails.specialty1 != null " >  
+                                         {{ id2name(hourDetails.specialty1 ) }} <br>
+                                    </text>
+                                    <text v-if=" hourDetails.specialty2 != null " >  
+                                         {{ id2name(hourDetails.specialty2 ) }} <br>
+                                    </text>
+                                    <text v-if=" hourDetails.specialty3 != null " >  
+                                        {{ id2name(hourDetails.specialty3 ) }} <br>
+                                    </text>
+                                    <text v-if=" hourDetails.specialty4 != null " >  
+                                        {{ id2name(hourDetails.specialty4 ) }} <br>
+                                    </text>
+                                    <text v-if=" hourDetails.specialty5 != null " >  
+                                        {{ id2name(hourDetails.specialty5 ) }} <br>
+                                    </text>
+                              
+                    </div> 
+                  
+                  </div>
+
+
 
                    <form autocomplete="off" class="p-2"  >	
                     
@@ -45,8 +85,41 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                                 <option value="205">3 Horas 45 Min</option>
                             </select>
                      
-                      
-                      <h3 class="">{{ hourDetails.specialty_name}}</h3>
+
+
+                        
+                        <div v-if="hourDetails.app_type_center"  >
+                             <i class="h3 bi bi-building"></i>  En Consulta <br>
+                          <i class="bi bi-geo-alt"  ></i>    {{hourDetails.center_address }}       
+                        </div>
+                        
+                        <div v-if="hourDetails.app_type_home" style=" font-size: 1.0em;" >
+                          <i class="h3 bi bi-house"> </i> A Domicilio Comunas <br>
+
+                            <text v-if=" hourDetails.location1 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location1) }} <br>
+                            </text>
+                            <text v-if=" hourDetails.location2 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location2) }} <br>
+                            </text>
+                            <text v-if=" hourDetails.location3 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location3) }} <br>
+                            </text>
+                            <text v-if=" hourDetails.location4 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location4) }} <br>
+                            </text>
+                            <text v-if=" hourDetails.location5 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location5) }} <br>
+                            </text>
+                            <text v-if=" hourDetails.location6 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location6) }} <br>
+                            </text>
+
+                        </div>
+                     
+
+
+
                       <h3 class="" > {{ hourDetails.center_name}} <text class="h5" > {{ hourDetails.center_address}} </text>  </h3>
                       <!-- <InputFormCenterProfessional v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" > </InputFormCenterProfessional> 
                      -->
@@ -178,7 +251,7 @@ export default {
           }   
     },
    	
-   props: ['daterequired','hourDetails', 'session_params' , 'openModalShowDetailsEvent' ],
+   props: ['daterequired','hourDetails', 'session_params' , 'openModalShowDetailsEvent', 'global_specialties', 'global_comunas' ],
    emits: ['updateAppList','showReserveModal'] , 
       
    	mounted () {
@@ -188,6 +261,31 @@ export default {
     },
 
 	methods :{
+    id2name(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+       },
+      id2comuna(id){
+            let temp= this.global_comunas.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        },
+
+  	getShortMonthName(month)
+		{
+			console.log("MONTH:"+parseInt(month));
+			let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+			return months[parseInt(month)];
+
+		},
+
+		showSpecialtyName(app)
+            {
+               return ("specialty" )
+            },
+
      
     reserveHour(hour)
     {
