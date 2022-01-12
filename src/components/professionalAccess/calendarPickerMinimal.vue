@@ -11,8 +11,8 @@ import axios from 'axios';
         <div class="display-5">
           {{calendar[parseInt(req_year)][parseInt(req_month)][parseInt(req_day)] }}
         </div>
-        <div class="display-5">
-            <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i>  {{req_day}} <i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
+        <div class="display-5 ">
+            <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i> <text v-on:click="openCalendarPicker()" class="text-primary" > {{req_day}}</text>  <i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
         </div>
         <div class="display-5">
             <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i> {{ calendar[parseInt(req_year)][parseInt(req_month)][0]  }} 20{{req_year}}<i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>
@@ -73,6 +73,11 @@ export default {
         },
 
 	methods :{
+        openCalendarPicker()
+        {
+        console.log("openCalendar ");
+        },
+
         nextDay()
         {
             if (this.calendar[this.req_year][this.req_month].length-2 < this.req_day)
