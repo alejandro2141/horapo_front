@@ -31,7 +31,7 @@ import loadProgress from '../loadProgress.vue'
                       <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
                     </div>
 
-					<div class=" d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
+					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
 						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(app.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{app.date.substring(8, 10) }} </text>  </div>
 					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app) }} </div> 
 					</div>
