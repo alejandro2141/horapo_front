@@ -49,7 +49,7 @@ export default {
                     else if (newValue == false)
                     {
                         console.log("Spinner Off");
-                        setTimeout( ()=> this.spinner_on = false , 1000 )
+                        setTimeout( ()=> this.spinner_on = false , 200 )
                         //this.spinner_on = false ;
                     }
                     else{
