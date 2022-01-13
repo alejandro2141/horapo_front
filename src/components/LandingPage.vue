@@ -38,6 +38,15 @@ export default {
     props: [], 
     emits: [],
 
+beforeCreate(){
+    console.log("Landing P , performance start,"+Date.now());
+},
+
+mounted() {
+   console.log("Landing P , performance end,"+Date.now());
+},
+
+
 }
 
 </script>
