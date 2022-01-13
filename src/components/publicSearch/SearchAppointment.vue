@@ -18,7 +18,7 @@ import loadProgress from '../loadProgress.vue'
       <div>
             <div>
             <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
-           
+            <text v-if="appointments.length>0" >En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados </text>
             <searchAppointmentResult  :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" > </searchAppointmentResult> 	    
             </div>
      </div>
@@ -52,6 +52,7 @@ export default {
             searchParameters : Object , 
 
             active_spinner : false ,
+            metric_search : 0,
     }
   },
 
@@ -76,6 +77,7 @@ methods: {
             },
 
         async searchAppointments(params) {	
+          let metric = Date.now();
                 this.active_spinner = true ; 
                 console.log("search Appointments input params :"+JSON.stringify(params) )
                 
@@ -104,7 +106,11 @@ methods: {
                 this.notificationMessage_alert=	false ;
                 this.searchParameters = params ;
                 this.params_bkp = params ; 
-                this.active_spinner = false ; 
+                this.active_spinner = false ;
+
+          metric = (Date.now() - metric ) ;     
+          this.metric_search = metric ;
+          console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
             },
 
             updateLastSearch()
