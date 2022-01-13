@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import axios from 'axios';
 import InputFormSpecialtyProfessional from './inputFormSpecialtyProfessional.vue';
 import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
+import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
 
 </script>
@@ -16,54 +17,19 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 			<div class="modal-container  m-1 p-1 modal-background">
  
 
-                <div class="modal-body mt-0" > 
+                <div class="modal-body " > 
                 
-                  <div class="d-flex flex-row-reverse bd-highlight mb-1 display-5">
-                        
-                        <div class="p-1 bd-highlight"><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentDetais = false" aria-label="Close"></i>
-                        </div>
+                  <div class="d-flex justify-content-between  mb-1 display-5">
                         <div class="text-secondary">
                           #{{hourDetails.app_id}}
                         </div>
+
+                        <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentDetais = false" aria-label="Close"></i>
+                        </div>
+                        
                   </div>
 
-                  <div class="d-flex flex-row border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
-                  
-                    <div class="m-0 p-2  bg-primary text-white" style=" border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > 
-                        <text class="display-5"> 
-                            {{ getShortMonthName(hourDetails.date.substring(5, 7) ) }}
-                        </text>
-                        <text class="display-1 d-flex align-items-center justify-content-center"> 
-                            {{hourDetails.date.substring(8, 10) }} 
-                        </text>  
-                    </div>
-                    
-                    <div  class=" display-5 p-2" style="color:#1f9d94 ;" >
-                      <!--   {{ showSpecialtyName(hourDetails) }} -->
-
-                                    <text v-if=" hourDetails.specialty != null " >  
-                                         {{ id2name(hourDetails.specialty ) }} <br>
-                                    </text>
-                                    <text v-if=" hourDetails.specialty1 != null " >  
-                                         {{ id2name(hourDetails.specialty1 ) }} <br>
-                                    </text>
-                                    <text v-if=" hourDetails.specialty2 != null " >  
-                                         {{ id2name(hourDetails.specialty2 ) }} <br>
-                                    </text>
-                                    <text v-if=" hourDetails.specialty3 != null " >  
-                                        {{ id2name(hourDetails.specialty3 ) }} <br>
-                                    </text>
-                                    <text v-if=" hourDetails.specialty4 != null " >  
-                                        {{ id2name(hourDetails.specialty4 ) }} <br>
-                                    </text>
-                                    <text v-if=" hourDetails.specialty5 != null " >  
-                                        {{ id2name(hourDetails.specialty5 ) }} <br>
-                                    </text>
-                              
-                    </div> 
-                  
-                  </div>
-
+                  <GenericBlockDateSpecialtyVue :day='hourDetails.date.substring(8, 10)' :month='getShortMonthName(hourDetails.date.substring(5, 7) )'  :specialties='id2name(hourDetails.specialty ) +" "+  id2name(hourDetails.specialty1 ) +" "+ id2name(hourDetails.specialty2 )+" "+ id2name(hourDetails.specialty3 )+" "+ id2name(hourDetails.specialty4 )+" "+ id2name(hourDetails.specialty5 )' ></GenericBlockDateSpecialtyVue>
 
 
                    <form autocomplete="off" class="p-2"  >	
@@ -83,54 +49,61 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                                 <option value="120">2 Horas</option>
                                 <option value="150">2 Horas 30 Min</option>
                                 <option value="205">3 Horas 45 Min</option>
-                            </select>
-                     
-
-
+                            </select>                 
                         
-                        <div v-if="hourDetails.app_type_center"  >
-                             <i class="h3 bi bi-building"></i>  En Consulta <br>
-                          <i class="bi bi-geo-alt"  ></i>    {{hourDetails.center_address }}       
+                        <div v-if="hourDetails.app_type_center"   >
+                                <div class="h3" style="color:#1f9d94 ;">
+                                    <i class="bi bi-building"  ></i>  En Consulta <br>
+                                </div>
+                                <div>
+                                    <i class="bi bi-geo-alt" style="color:#1f9d94 ;"  ></i>{{hourDetails.center_name }} :    {{hourDetails.center_address }}       
+                                </div>
                         </div>
                         
-                        <div v-if="hourDetails.app_type_home" style=" font-size: 1.0em;" >
-                          <i class="h3 bi bi-house"> </i> A Domicilio Comunas <br>
-
-                            <text v-if=" hourDetails.location1 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location1) }} <br>
+                        <div v-if="hourDetails.app_type_home" style="" >
+                            <text style="color:#1f9d94 ;">
+                              <i class="h1 bi bi-house"  > </i> A Domicilio Comunass <br>
                             </text>
-                            <text v-if=" hourDetails.location2 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location2) }} <br>
-                            </text>
-                            <text v-if=" hourDetails.location3 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location3) }} <br>
-                            </text>
-                            <text v-if=" hourDetails.location4 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location4) }} <br>
-                            </text>
-                            <text v-if=" hourDetails.location5 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location5) }} <br>
-                            </text>
-                            <text v-if=" hourDetails.location6 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location6) }} <br>
-                            </text>
+                            <div  style="color:#1f9d94 ;" >
+                                <text    v-if=" hourDetails.location1 != null " >  
+                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location1) }} <br>
+                                </text>
+                                <text v-if=" hourDetails.location2 != null " >  
+                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location2) }} <br>
+                                </text>
+                                <text v-if=" hourDetails.location3 != null " >  
+                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location3) }} <br>
+                                </text>
+                                <text v-if=" hourDetails.location4 != null " >  
+                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location4) }} <br>
+                                </text>
+                                <text v-if=" hourDetails.location5 != null " >  
+                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location5) }} <br>
+                                </text>
+                                <text v-if=" hourDetails.location6 != null " >  
+                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourDetails.location6) }} <br>
+                                </text>
+                            </div>
 
                         </div>
-                     
-
-
-
-                      <h3 class="" > {{ hourDetails.center_name}} <text class="h5" > {{ hourDetails.center_address}} </text>  </h3>
-                      <!-- <InputFormCenterProfessional v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" > </InputFormCenterProfessional> 
+                    
+                    <!-- <InputFormCenterProfessional v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" > </InputFormCenterProfessional> 
                      -->
                       
                      <div class="d-flex flex-row " >
-                        <div class="h4 p-2">Disponible Internet ? </div>
+                        <div class="h4 p-2">Publicada Online ? </div>
 
                         <div class="" v-on:click="form_public = !form_public">  
-
-                            <i v-if="form_public" class="display-1 bi bi-wifi text-success"><text class="h5">Si</text> </i>
-                            <i v-else  class="display-3 bi bi-wifi-off"> <text class="h5">No</text> </i>
+                            
+                            <div v-if="form_public">
+                                <text class="display-3 text-primary">SI</text> 
+                                <i class="display-1 bi bi-wifi text-success"></i>
+                            </div>
+                            <div v-else>
+                               <text class="display-3 text-primary">NO</text> 
+                                <i class="display-3 bi bi-wifi-off"></i>
+                            </div>
+                                      
                         </div>
                      </div>
                       <button type="button" @click="updateApp(hourDetails);" data-bs-dismiss="modal" class="btn btn-secondary m-2"><i class="bi bi-save"></i> Guardar Cambios</button>
@@ -139,12 +112,14 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
                       
                       <button type="button" @click="cancelHour(hourDetails);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Cancelar Hora</button>
 
-                      </form>			
+                      </form>		
+                       <div class="" style="height : 700px"> </div>	
         
                 </div>
         </div> 
         </div> 		
 		</div> 
+    
         </transition>
     	</div>
 	</teleport> 
@@ -153,34 +128,31 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 
 <style scoped>
 
-
 .modal {
-  position: absolute;
-  display: flex;
+	position: fixed; 
+  display: flex; 
 }
 
-.modal div {
-  display: flex;
-  flex-direction: column;
-}
-/*
-.modal-background {
-    background-color:#DAEFF3
-        }
-*/
-/************************* */
-
-
+div.scroll {
+       			margin:4px, 4px;
+                padding:4px;
+                background-color: green;
+                width: 100%; 
+                /* height: 190%;*/
+                overflow-x: auto;
+                overflow-y: auto;
+                text-align:justify;
+      }
 
 .modal-mask {
-  position: fixed;
+  /*position: fixed;*/
   z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+ /* display: table;*/
 }
 
 .modal-wrapper {
@@ -231,7 +203,7 @@ import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
   opacity: 0;
 }
 
-/************************ */
+
 </style>
 
 
@@ -264,12 +236,12 @@ export default {
     id2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
-            else { return null }
+            else { return "" }
        },
       id2comuna(id){
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
-            else { return null }
+            else { return "" }
 
         },
 
