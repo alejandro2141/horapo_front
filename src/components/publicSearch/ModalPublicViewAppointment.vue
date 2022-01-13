@@ -23,12 +23,15 @@ import loadProgress from '../loadProgress.vue'
 			<div class="modal-mask " v-if="app != null && showModalAux"  >
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background"    >
+
+
+				
               
                 <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168); " > 
  					<div class="d-flex flex-row justify-content-end ">
-                      <div class="display-4 " style="color:#1f9d94 ; margin-right: 1em;"  > 		 </div>
-                      <div class="" style="margin-right: 1em;" > </div>
-                      <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
+                      <div  > </div>
+                      <div  > </div>
+                      <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
                     </div>
 
 					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
@@ -38,7 +41,7 @@ import loadProgress from '../loadProgress.vue'
 
 
 				<div v-if="app.app_type_home" class="" >
-						<div class="h3" style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en : </div>
+						<div class="h3" style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en : 
 				
 							<div class="m-2">
 							<text v-if=" app.location1 != null " >  
@@ -60,6 +63,7 @@ import loadProgress from '../loadProgress.vue'
                                 <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location6) }} 
                             </text>	
 							</div>
+						</div>
 				</div>
 
 
@@ -75,8 +79,8 @@ import loadProgress from '../loadProgress.vue'
 					
 					
 
-				<div v-if="app.app_type_center" class="" >
-					<div  style="color:#2e5668"> <i class="bi bi-building  m-1"></i> <b>Cita en Centro</b><br> {{app.center_name }}</div>
+				<div v-if="app.app_type_center"  class="h3" style=" color:#1f9d94 "  >
+					<div > <i class="bi bi-building  m-1"></i> <b>Cita en Centro</b><br> {{app.center_name }}</div>
 					<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
 					<div class="">Direccion:  {{app.center_address }}</div>
 				<!--
@@ -100,7 +104,7 @@ import loadProgress from '../loadProgress.vue'
 	 <button type="button" @click="reserveHour(app);"  class="btn btn-primary m-4"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
     <br>
 	<br>
-	<text class="text-secondary" style="">#{{app.app_id}}</text>	
+	<text class="text-secondary" style="">#{{app.app_id}}</text>
 
                     </div>
         </div> 
