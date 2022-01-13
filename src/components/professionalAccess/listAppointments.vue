@@ -246,7 +246,7 @@ export default {
                 if (hour_number % 4 ==  0 )
                 { return 10 }
                 else {
-                return 4
+                return 0
                     }
 // Expected output: The fourth item is free!!
 
