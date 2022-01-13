@@ -135,25 +135,10 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 <style scoped>
 
 .modal {
-   /*position: static;  */
-   /*position: static; */
-	/*position: relative; */ 
-	/*position: absolute; */ 
 	position: fixed; 
-	/*position: sticky; */
- /* position: fixed;  */
- /* display: block; */ 
-   display: flex; 
-
-}
-
-/*
-.modal div {
   display: flex; 
-  flex-direction: column; 
-
 }
-*/
+
 
 div.scroll {
        			margin:4px, 4px;
@@ -166,12 +151,6 @@ div.scroll {
                 text-align:justify;
       }
 
-/*
-.modal-background {
-    background-color:#DAEFF3
-        }
-*/
-/************************* */
 
 
 
