@@ -18,11 +18,13 @@ import axios from 'axios'
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background " style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;">
               
+
+
                 <div class="modal-body " > 
 
-                  <div class="d-flex flex-row justify-content-end  m-1">
-                      <div class="display-4 " style="margin-right: 1em;  color:#1f9d94 "  >    Reserva Exitosa   </div>
-                      <div class="" style="margin-right: 1em;" > </div>
+                  <div class="d-flex flex-row justify-content-end">
+                      <div class="display-4 " style="  color:#1f9d94 "  >    Reserva Exitosa   </div>
+                      <div class=""  > </div>
                       <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalConfirmation = false ; this.updateSearchResult() " aria-label="Close"></i> </div>
                   </div>
 
