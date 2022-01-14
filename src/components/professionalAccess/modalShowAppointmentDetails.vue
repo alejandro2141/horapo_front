@@ -21,7 +21,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                 
                   <div class="d-flex justify-content-between  mb-1 display-5">
                         <div class="text-secondary">
-                          #{{hourDetails.app_id}}
+                         Disponible #{{hourDetails.app_id}}
                         </div>
 
                         <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentDetais = false" aria-label="Close"></i>
@@ -62,7 +62,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                         
                         <div v-if="hourDetails.app_type_home" style="" >
                             <text style="color:#1f9d94 ;">
-                              <i class="h1 bi bi-house"  > </i> A Domicilio Comunass <br>
+                              <i class="h1 bi bi-house"  > </i> A Domicilio Comunas <br>
                             </text>
                             <div  style="color:#1f9d94 ;" >
                                 <text    v-if=" hourDetails.location1 != null " >  
@@ -110,7 +110,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 <hr/>
                       <button type="button" @click="reserveHour(hourDetails);" data-bs-dismiss="modal" class="btn btn-primary m-2"> <i class="bi bi-person-square"></i> Reservar para un Paciente</button>
                       
-                      <button type="button" @click="cancelHour(hourDetails);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Cancelar Hora</button>
+                      <button type="button" @click="cancelHour(hourDetails);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Anular Hora</button>
 
                       </form>		
                        <div class="" style="height : 700px"> </div>	
