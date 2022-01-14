@@ -4,6 +4,7 @@ import axios from 'axios';
 import InputFormSpecialtyProfessional from './inputFormSpecialtyProfessional.vue';
 import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
+import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
 
 
@@ -19,21 +20,24 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 			<div class="modal-container  m-1 p-1 modal-background" style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" >
  
 
-                <div class="modal-header" >
-                    <div class="d-flex flex-row bd-highlight mb-1 display-3">
-                        <div class="p-1 bd-highlight">Crear Hora <br/>
-                       </div>
-                        <div class="p-1 bd-highlight"></div>
-                         <div class="p-1 bd-highlight"><i class="display-1 bi bi-x "  v-on:click="showModalCreateApp = false" aria-label="Close"></i>
-                       </div>
-                    </div>
+
+                <div class="modal-header">
+                        <div class="text-secondary  display-5">
+                        Crear Hora 
+                        </div>
+                        <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalCreateApp = false"  aria-label="Close"></i>
+                        </div>
                 </div>
+
+              
 
                 <div class="modal-body mt-0"  > 
                  
 
                    <form autocomplete="off"  >	
                      
+                      <GenericBlockDateSpecialtyVue :day='daterequired.substring(8, 10)' :month='getShortMonthName(daterequired.substring(5, 7) )'  :specialties='form_specialty_code_array' ></GenericBlockDateSpecialtyVue>
+
                       <p class="text-center h1">Dia {{daterequired}} </p>
                       <input class="form-control form-control-lg" type="hidden" placeholder="form_date" name="form_date"   value="par_required_day"  >
                       <h2> Hora Inicio: </h2>
@@ -248,7 +252,7 @@ export default {
         }   
     },
    	
-   props: ['daterequired','hourCreate', 'session_params', 'global_comunas' ,'openModalCreateAppEvent' ],
+   props: ['daterequired','hourCreate', 'session_params', 'global_comunas' ,'global_specialties' , 'openModalCreateAppEvent' ],
    emits: ['updateAppList','switchView'] , 
       
    	mounted () {
@@ -258,6 +262,13 @@ export default {
     },
 
 	methods :{
+    getShortMonthName(month)
+		{
+			console.log("MONTH:"+parseInt(month));
+			let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+			return months[parseInt(month)];
+
+		},
 
     selectedComunas(value)
     {
