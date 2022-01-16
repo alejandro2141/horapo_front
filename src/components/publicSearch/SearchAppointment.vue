@@ -17,7 +17,7 @@ import loadProgress from '../loadProgress.vue'
     </div>
       <div>
             <div>
-            <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
+            <searchAppointmentForm  v-on:searchAppointments="searchAppointments" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
             <text v-if="appointments.length>0" >En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados </text>
             <searchAppointmentResult  :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" > </searchAppointmentResult> 	    
             </div>
@@ -36,6 +36,7 @@ export default {
   data : function() {
     return {
             daterequired : null,
+            currentDate : null,
             specialty: null,
             location: null,
             insurance: null,
@@ -60,6 +61,7 @@ export default {
 
  mounted () {
              this.daterequired = new Date().toISOString().split('T')[0] ;
+             this.currentDate =  new Date().toISOString().split('T')[0] ;
              console.log('Search Appointment global_specialties'+this.global_specialties);
         },
 
@@ -89,8 +91,8 @@ methods: {
 
                  const json = { 
 				// agenda_id : this.par_agenda_id ,			 
-				 date : this.daterequired ,
-				 specialty : specialty_code ,
+				    date : params.date ,
+				    specialty : specialty_code ,
                  comuna : params.comuna ,
                  home_visit : params.home_visit,
                  type_home : params.type_home,
