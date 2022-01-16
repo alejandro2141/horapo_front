@@ -22,10 +22,7 @@ import loadProgress from '../loadProgress.vue'
 			<transition name="modal">
 			<div class="modal-mask " v-if="app != null && showModalAux"  >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background"    >
-
-
-				
+			<div class="modal-container  m-1 p-0 modal-background" > 
               
                 <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168); " > 
  					<div class="d-flex flex-row justify-content-end ">
@@ -39,9 +36,19 @@ import loadProgress from '../loadProgress.vue'
 					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app) }} </div> 
 					</div>
 
+			<div style="margin-top: 1em; margin-left: 1em;" class="h4">
+					<div class="" >
+						<i class="bi bi-smartwatch "></i>  {{ transform_date( app.date.substring(0, 10) ) }}   {{app.start_time.substring(0, 5) }} hrs  
+					</div>
+						<br>
+					<div class="">	
+						<i class="bi bi-person m-1"></i>Con :  {{app.name }} 
+					</div>
+						<br>
+			</div>
 
-				<div v-if="app.app_type_home" class="" >
-						<div class="h3" style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en : 
+				<div v-if="app.app_type_home" class="" style="color:#3399FF" >
+						<div class="h3" style="" ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en : 
 				
 							<div class="m-2">
 							<text v-if=" app.location1 != null " >  
@@ -67,22 +74,12 @@ import loadProgress from '../loadProgress.vue'
 				</div>
 
 
-			<div style="margin-top: 1em; margin-left: 1em;" class="h4">
-					<div class="" >
-						<i class="bi bi-smartwatch "></i>  {{ transform_date( app.date.substring(0, 10) ) }}   {{app.start_time.substring(0, 5) }} hrs  
-					</div>
-						<br>
-					<div class="">	
-						<i class="bi bi-person m-1"></i>Con :  {{app.name }} 
-					</div>
-						<br>
-					
-					
+
 
 				<div v-if="app.app_type_center"  class="h3" style=" color:#1f9d94 "  >
-					<div > <i class="bi bi-building  m-1"></i> <b>Cita en Centro</b><br> {{app.center_name }}</div>
+					<div > <i class="bi bi-building  m-1"></i> <b>Direccion de la cita: </b><br>"{{app.center_name }}"</div>
 					<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
-					<div class="">Direccion:  {{app.center_address }}</div>
+					<div class="">  {{app.center_address }}</div>
 				<!--
 						<hr>
 						<a v-if="imgLoaded" :href="app.url_map" >Mapa</a>
@@ -90,11 +87,6 @@ import loadProgress from '../loadProgress.vue'
 						<img   @load="imgLoaded = true" @error="imgLoaded = false"  :src="imgMapUrl" class="img-fluid" alt="center map">
 				-->
 				</div>
-
-
-
-			</div>
-
 
 <div>
 
