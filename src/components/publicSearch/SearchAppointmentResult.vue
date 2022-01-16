@@ -10,7 +10,7 @@ import LoadProgress from '../loadProgress.vue'
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
        <div  v-if="appointment_list != null && daterequired != null" >
-            <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small> 
+            <!-- <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  -->
          
             <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
                <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" > </patientAppointmentAvailable>            
