@@ -27,6 +27,15 @@ import inputFormComuna  from './InputFormComuna.vue'
                         <inputFormComuna position="true"  v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
                 </div>
+                
+                <!-- DATE  --> 
+                <div class="row  mb-1  border-secondary ">
+                    <div class="col">
+                        <input  v-model="form_current_date" :min="form_minimum_date" type="date" id="birthday" name="birthday" class="form-control form-control-lg border border-success" >
+                    </div>
+                </div>
+                <!-- --> 
+
 
                 <div class="bg-white">
                     <div class="d-flex justify-content-around h3"> 
@@ -87,6 +96,9 @@ export default {
             form_comuna_code  : null,
             form_insurance_code : null,
 
+            form_minimum_date : null,
+            form_current_date : null,
+            
             insurance_list : [],
             comuna_list : [],
             specialty_list : [ ] ,
@@ -94,12 +106,16 @@ export default {
             form_app_type_home : false ,
             form_app_type_center : false ,
             form_app_type_remote : false ,
+
+           // form_date : "30/12/2021" , 
     }
   },
 
- props: ['global_specialties','global_comunas'], 
+ props: ['global_specialties','global_comunas', 'currentDate'], 
 
-   mounted () {    
+   created () {    
+        this.form_minimum_date = new Date().toISOString().split('T')[0] ;
+        this.form_current_date = new Date().toISOString().split('T')[0] ; 
         },
 
     watch: {
@@ -135,6 +151,7 @@ export default {
                  type_home : this.form_app_type_home,
                  type_center : this.form_app_type_center,
                  type_remote : this.form_app_type_remote,
+                 date :  this.form_current_date ,  
                   		  };
 
             this.$emit("searchAppointments",search_params );
