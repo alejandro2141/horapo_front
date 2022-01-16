@@ -24,15 +24,15 @@ import { ref } from 'vue'
                     </div>       
                 </div>
            
-                <div class="display-5">
-                    <div style=" color:#1f9d94">	
+                <div class="display-5" style=" color:#1f9d94">
+                    <div >	
                     {{ showSpecialtyName(appointment) }} 
                     </div>       
                 </div>
  
                 <div class="">
                     <div v-if="appointment.app_type_center" class="">
-                       <i class="h1 bi bi-building"></i> En consulta 	
+                       <!-- <i class="h1 bi bi-building"></i> En consulta 	 -->
                         <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i> {{comuna_id2name(appointment.comuna) }} </div>
                             <div class="" style="color:#2e5668" >	
                                 <i class="fas fa-map-marker-alt "></i>   "{{ appointment.center_name }}"
@@ -41,8 +41,11 @@ import { ref } from 'vue'
                                 {{appointment.center_address }}
                             </div>
                     </div>
-                    <div v-if="appointment.app_type_home" class="">
-                       <i class="h1 bi bi-house"></i>  Consulta a Domicilio en : <br>
+                    <div v-if="appointment.app_type_home" style="color:#3399FF">
+                            <div class="display-5" >
+                                <i class=" bi bi-house"></i><text >  Visita a Domicilio:</text> <br>
+                            </div>
+
                             <text v-if=" appointment.location1 != null " >  
                                 <i class="bi bi-geo-alt"></i> {{ comuna_id2name(appointment.location1) }} 
                             </text>
@@ -118,7 +121,13 @@ methods: {
     transform_date(date)
     {
         let temp = date.split("-") ;
-        return (" "+temp[2]+"/"+temp[1]+"/"+temp[0])
+        return (""+temp[2]+" "+this.getShortMonthName(temp[1])+" "+temp[0])
+    },
+    getShortMonthName(month)
+    {
+              console.log("MONTH:"+parseInt(month));
+              let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+              return months[parseInt(month)];
     },
         
         
