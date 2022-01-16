@@ -23,7 +23,7 @@ import axios from 'axios'
                 <div class="modal-body " > 
 
                   <div class="d-flex flex-row justify-content-end">
-                      <div class="display-4 " style="  color:#1f9d94 "  >    Reserva Exitosa   </div>
+                      <div class="display-4 " style="  color:#1f9d94 "  >    Reserva Exitosa!! &nbsp;   </div>
                       <div class=""  > </div>
                       <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalConfirmation = false ; this.updateSearchResult() " aria-label="Close"></i> </div>
                   </div>
@@ -32,7 +32,7 @@ import axios from 'axios'
 
             	<div class=" d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
 						      <div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(appConfirmed.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{appConfirmed.date.substring(8, 10) }} </text>  </div>
-					        <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app) }} </div> 
+					        <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app) }} <br> <i class="bi bi-check-lg"></i> </div> 
 					    </div>
         
               <div class="h3" >
