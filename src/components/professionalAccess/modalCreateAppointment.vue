@@ -36,7 +36,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
                    <form autocomplete="off"  >	
                      
-                      <GenericBlockDateSpecialtyVue :day='daterequired.substring(8, 10)' :month='getShortMonthName(daterequired.substring(5, 7) )'  :specialties='form_specialty_code_array' ></GenericBlockDateSpecialtyVue>
+                      <GenericBlockDateSpecialtyVue :day='daterequired.substring(8, 10)' :month='getShortMonthName(daterequired.substring(5, 7) )'  :specialties='specialties_selected' ></GenericBlockDateSpecialtyVue>
 
                       <p class="text-center h1">Dia {{daterequired}} </p>
                       <input class="form-control form-control-lg" type="hidden" placeholder="form_date" name="form_date"   value="par_required_day"  >
@@ -249,6 +249,8 @@ export default {
             form_show_center : false ,
             form_show_remote : false ,
 
+            specialties_selected : "",
+
         }   
     },
    	
@@ -259,6 +261,7 @@ export default {
            this.auxHourCreate = ref(this.hourCreate) ;
            console.log("Modal Create Appointment Mounted !!!" );
          //  this.getCenters();
+        
     },
 
 	methods :{
@@ -279,6 +282,7 @@ export default {
              this.form_comunas_id.push( aux[i].id );
           }
           console.log("Comuna id array:"+this.form_comunas_id );
+    
     },
 
 //GET CENTERS      
@@ -295,11 +299,23 @@ export default {
     {
     let aux=JSON.parse(value) ;
     this.form_specialty_code_array= [] ;
+    this.specialties_selected = "" ;
           for (let i = 0 ; i < aux.length ; i++) {
              this.form_specialty_code_array.push( aux[i].id );
           }
           console.log("specialty id array:"+this.form_specialty_code_array);
+      
+      
+      this.form_specialty_code_array.forEach((v) => { this.specialties_selected += " "+this.id2specialtyName(v)   } ); 
+
+ 
      },
+
+      id2specialtyName(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return "" }
+       },
 
     selectedCenterCode(value)
     {
@@ -364,8 +380,10 @@ export default {
             this.form_start_time = newValue.start_time ; 
         },
         openModalCreateAppEvent(newApp, oldApp) {
-            console.log("openModalEvent Show App Taken Details !!!");
+           // console.log("openModalEvent Show App Taken Details !!!");
            this.showModalCreateApp= true;
+                  this.form_specialty_code_array= [] ;
+                  this.specialties_selected = "" ;
         },
 
         
