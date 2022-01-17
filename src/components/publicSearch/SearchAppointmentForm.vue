@@ -31,28 +31,30 @@ import inputFormComuna  from './InputFormComuna.vue'
                 <!-- DATE  --> 
                 <div class="row  mb-1  border-secondary ">
                     <div class="col">
-                        <input  v-model="form_current_date" :min="form_minimum_date" type="date" id="birthday" name="birthday" class="form-control form-control-lg border border-success" >
+                        <input  v-model="form_current_date" :min="form_minimum_date" type="date" id="birthday" name="birthday" class="form-control form-control-lg border border-primary" >
                     </div>
                 </div>
                 <!-- --> 
 
 
                 <div class="bg-white">
-                    <div class="d-flex justify-content-around h3"> 
+                    <div class="d-flex justify-content-around h5"> 
                         <!-- <div><i class="bi bi-camera-video"></i> </div> -->
-                        <div><i class="bi bi-building"></i> </div>
-                        <div><i class="bi bi-house-door"></i> </div>
+                        <div><i class="bi bi-building"></i>En Consulta </div>
+                        <div><i class="bi bi-house"></i>A Domicilio </div>
                     </div>
                     <div class="d-flex justify-content-around h1 m-0 p-0"> 
                        <!-- <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_remote" ></div> -->
                         <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_center"></div>
                         <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_home"></div>
                     </div>
+                    <!-- 
                     <div class="d-flex justify-content-around h6"> 
-                        <!-- <div>Tele Atención</div> -->
+                        <div>Tele Atención</div>
                         <div>En Consulta </div>
                         <div>A Domicilio</div>
                     </div>
+                     -->
                 </div>
                 <!--
                 <div @click="form_home_visit = !form_home_visit"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
@@ -118,8 +120,7 @@ export default {
         this.form_current_date = new Date().toISOString().split('T')[0] ; 
         },
 
-    watch: {
-        },
+ 
 
     methods: {
         //V-ON to capture selection 
