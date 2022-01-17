@@ -19,6 +19,11 @@ import axios from 'axios';
         </div>
     </div>
     
+    <div class="row  mb-1  border-secondary ">
+                    <div class="col">
+                        <input  v-model="form_required_date" :min="form_minimum_date" type="date" id="birthday" name="birthday" class="form-control form-control-lg border border-primary" >
+                    </div>
+    </div>
 
 </template>
 
@@ -40,6 +45,10 @@ export default {
         req_day : null,
         req_month : null,
         req_year : null,
+
+        form_minimum_date : null,
+        form_required_date : null,
+
         }   
     },
    	
@@ -50,6 +59,9 @@ export default {
 
 	created () {
         //this.setCalendar();
+        this.form_minimum_date = new Date().toISOString().split('T')[0] ;
+        this.form_required_date = new Date().toISOString().split('T')[0] ; 
+
 	    console.log("CALENDAR PICKER MINIMAL CREATED !!");
 		let tempDate=new Date().toISOString().split('T')[0].split('-');
 	    console.log("tempDate : "+tempDate);
@@ -271,7 +283,27 @@ export default {
 	}
    
 
-    }
+    },
+
+   watch: {
+         form_required_date(value, oldValue) 
+            {
+            console.log("New Value required date: "+value);
+            let tempDate=value.split('-');
+
+            this.req_day = parseInt(tempDate[2])  ;
+            this.req_month = parseInt(tempDate[1]) ;
+            this.req_year = parseInt(tempDate[0].substring(2,4)) ;
+
+            //this.$emit('set_daterequired', "20"+this.req_year+"-"+this.req_month+"-"+ this.req_day ) ;
+            this.$emit('set_daterequired', value ) ;
+
+
+
+            },
+        
+        },
+
 }
 </script>
 
