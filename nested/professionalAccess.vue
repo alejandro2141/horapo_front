@@ -7,12 +7,15 @@ import ProfesionalGeneralHeader from '../src/components/professionalAccess/Profe
 import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
 import TabCenter from '../src/components/professionalAccess/tabCenter.vue'
 import TabAppointment from '../src/components/professionalAccess/tabAppointment.vue'
+import TabTimeTable from '../src/components/professionalAccess/tabTimeTable.vue'
+
+
 
 </script>
 
 <template>
 
-    <ProfesionalGeneralHeader :session_params='session_params' v-on:switchView="switchView" > </ProfesionalGeneralHeader>
+    <ProfesionalGeneralHeader :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
    
 <div class='m-0'>
      
@@ -24,10 +27,14 @@ import TabAppointment from '../src/components/professionalAccess/tabAppointment.
         <TabCenter :session_params="session_params" :global_comunas="global_comunas"  >  </TabCenter> 	
     </div>
 
-
     <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
         <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
     </div>
+
+     <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
+        <TabTimeTable :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabTimeTable> 	
+    </div>
+
 </div>
 
 </template>
@@ -51,6 +58,7 @@ export default {
         visible_tab_assistants:'none', 
         visible_tab_appointments: 'none',
         visible_tab_login: 'block',
+        visible_tab_timetable: 'none',
         
 
         product : 'Socks',
@@ -72,6 +80,18 @@ created() {
 },
 
 methods: {
+
+    switchViewTo(val)
+    {
+        console.log("switchViewTo:"+val);
+            this.visible_tab_centers = 'none';
+            this.visible_tab_assistants ='none'; 
+            this.visible_tab_appointments = 'none';
+            this.visible_tab_login = 'none' ;
+            this.visible_tab_timetable = 'block';
+
+    },
+
     async loadGlobalSpecialties() {
                 console.log ("APP GET SPECIALTY LIST METHOD"); 
 				let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_specialty_list");
