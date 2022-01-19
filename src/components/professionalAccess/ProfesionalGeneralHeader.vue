@@ -15,12 +15,12 @@ import SwitchViewButton from './switchViewButton.vue'
 		</div>
 
 		<div class="text-primary " >
+			<text @click="switchViewTo(1)"> Horarios </text>
 		</div>
 
 		<div class="">	
 			<SwitchViewButton v-if="session_params['professional_name'] != null"  v-on:switchView="switchView" ></SwitchViewButton>
-		</div>
-				
+		</div>		
 
 	</div>
 
@@ -38,9 +38,15 @@ export default {
         }   
     },
     props : ['session_params'] ,
-	emits : ['switchView']  ,
+	emits : ['switchView', 'switchViewTo' ]  ,
 
     methods: {
+
+		switchViewTo(val)
+		{
+		this.$emit('switchViewTo',val);
+		},
+
 		switchView(){
 			console.log("switchView in Profesional General Header");
 			this.$emit('switchView');
