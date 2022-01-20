@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
+import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
+
 
 </script>
 
@@ -27,40 +29,79 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                 <div class="modal-body mt-0"  > 
                    
                   <text>Tiempo de este horario </text> 
-                   Hora de Inicio
-                   Hora de Fin
+                    
+                    <div class="form-group">
+                            <label for="exampleInputEmail1">Hora Inicio </label>
+                            <input type="text" class="form-control" autocomplete="off" id="form_start_time" name="form_start_time" v-model="form_start_time"  placeholder="ejemplo 14:30">
+                    </div>
+                    
+                    <div class="form-group">
+                            <label for="exampleInputEmail1">Hora Fin </label>
+                            <input type="text" class="form-control" autocomplete="off" id="form_end_time" name="form_end_time" v-model="form_end_time"  placeholder="ejemplo 19:30">
+                    </div>
+                    
+                    <div class="form-group">
+                            <label for="exampleInputEmail1">Especialidad </label>
+                            <input type="text" class="form-control" autocomplete="off" id="form_specialty" name="form_specialty" v-model="form_specialty"  placeholder="Ejemplo Kinesiologia">
+                    </div>
 
-                   Especialidad
-                   1.-
-                   2.-
-                   3.- 
+                    <br>
+                    <h2> Tiempo de atencion: </h2>
+                            <select class="form-select form-control-lg" aria-label="Default" id="time" name="timeextension" v-model="form_app_duration">
+                                <option value="15">15 Minutos </option>
+                                <option value="30">30 Minutos </option>
+                                <option value="45">45 Minutos </option>
+                                <option value="60">60 Min </option>
+                                <option value="75">1 Hora 15 Min</option>
+                                <option value="90">1 Hora 30 Min</option>
+                                <option value="105">1 Hora 45 Min</option>
+                                <option value="120">2 Horas</option>
+                                <option value="150">2 Horas 30 Min</option>
+                                <option value="205">3 Horas 45 Min</option>
+                            </select>
+                    <h2>  Tiempo traslado o descanso entre citas </h2>
+                            <select class="form-select form-control-lg" aria-label="Default" id="time" name="timeextension" v-model="form_app_duration">
+                                <option value="15">15 Minutos </option>
+                                <option value="30">30 Minutos </option>
+                                <option value="45">45 Minutos </option>
+                                <option value="60">60 Min </option>
+                                <option value="75">1 Hora 15 Min</option>
+                                <option value="90">1 Hora 30 Min</option>
+                                <option value="105">1 Hora 45 Min</option>
+                                <option value="120">2 Horas</option>
+                                <option value="150">2 Horas 30 Min</option>
+                                <option value="205">3 Horas 45 Min</option>
+                            </select>
+                   
+                  <h2>Recurrencia</h2>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Lunes</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Martes</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Miercoles</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Jueves</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Viernes</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Sabado</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Domingo</label>
 
-                   Tiempo de duracion de la cita
 
-                   Tiempo traslado o descanso entre citas. 
+                  <h2>Fecha Inicio de este horario</h2>
+                    <div class="row  mb-1  border-secondary ">
+                      <div class="col">
+                          <input  v-model="form_calendar_start" :min="form_minimum_date" type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
+                      </div>
+                    </div>
 
-                   Recurrencia
-                   Lunes
-                   Martes
-                   Miercoles
-                   Jueves 
-                   Viernes
-                   Sabado
-                   Domingo
+                  <h2>Fecha Fin de este horario</h2>
+                    <div class="row  mb-1  border-secondary ">
+                      <div class="col">
+                          <input  v-model="form_calendar_end" :min="form_minimum_date" type="date" id="form_calendar_end" name="form_calendar_end" class="form-control form-control-lg border border-primary" >
+                      </div>
+                    </div>
 
-                  Periodo tiempo activo de este horairo
-                  Fecha Inicio
-                  Fecha Fin 
-
-                  Direccion
-                  A domicio   En Consulta  VideoAtención
-
-
-
-
-
-
-
+                  <h2>Tipo de Cita:</h2>
+                  <label class="checkbox-inline"><input type="checkbox" value="">A Domicilio</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">En Consulta</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Tele Atención</label>
+                  
 
 							
                 </div>
@@ -190,6 +231,9 @@ export default {
 data: function () {
 		return {
 			      showModalCreateCalendar  : false ,
+            form_app_duration :null, 
+            form_start_time : null, 
+            form_end_time : null ,
            
             
 		 }
