@@ -47,7 +47,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
                     <br>
                     <h2> Tiempo de atencion: </h2>
-                            <select class="form-select form-control-lg" aria-label="Default" id="time" name="timeextension" v-model="form_app_duration">
+                            <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_duration" v-model="form_app_duration">
                                 <option value="15">15 Minutos </option>
                                 <option value="30">30 Minutos </option>
                                 <option value="45">45 Minutos </option>
@@ -59,8 +59,8 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                                 <option value="150">2 Horas 30 Min</option>
                                 <option value="205">3 Horas 45 Min</option>
                             </select>
-                    <h2>  Tiempo traslado o descanso entre citas </h2>
-                            <select class="form-select form-control-lg" aria-label="Default" id="time" name="timeextension" v-model="form_app_duration">
+                    <h3>Tiempo entre citas </h3>
+                            <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_time_between" v-model="form_app_time_between">
                                 <option value="15">15 Minutos </option>
                                 <option value="30">30 Minutos </option>
                                 <option value="45">45 Minutos </option>
@@ -98,12 +98,18 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                     </div>
 
                   <h2>Tipo de Cita:</h2>
-                  <label class="checkbox-inline"><input type="checkbox" value="">A Domicilio</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">En Consulta</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Tele Atención</label>
-                  
+                        <div class="radio">
+                          <label><input v-model="form_appointment_center" type="radio" name="optradio" checked>En Consulta</label>
+                        </div>
+                        <div class="radio">
+                          <label><input v-model="form_appointment_home" type="radio" name="optradio">A Domicilio</label>
+                        </div>
+                        <div class="radio disabled">
+                          <label><input v-model="form_appointment_remote" type="radio" name="optradio" disabled>Tele Atención</label>
+                        </div>
 
-							
+                       <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
+                 
                 </div>
 
             </div> 
@@ -234,8 +240,16 @@ data: function () {
             form_app_duration :null, 
             form_start_time : null, 
             form_end_time : null ,
-           
-            
+
+            form_specialty : null ,
+            form_app_duration : null ,
+            form_app_time_between : null ,
+            form_calendar_start: null ,
+            form_minimum_date : null ,
+            form_calendar_end: null ,
+            form_appointment_center: null ,
+            form_appointment_home : null ,
+            form_appointment_remote : null ,    
 		 }
 	},
 
@@ -246,11 +260,43 @@ data: function () {
          },
  
     methods: {
-      
+        createNewCalendar(){
+                console.log("create New Calendar send request JSON");
+                console.log ("createNewCenter :" );
+
+              const json = { 
+                app_duration : this.form_app_duration ,
+                start_time : this.form_start_time ,
+                end_time : this.form_end_time ,
+                form_specialty : this.form_specialty, 
+                form_app_duration : this.form_app_duration ,
+                form_app_time_between : this.form_app_time_between ,
+                form_calendar_start: this.form_calendar_start ,
+                form_minimum_date: this.form_minimum_date ,
+                form_calendar_end: this.form_calendar_end ,
+                form_appointment_center: this. form_appointment_center ,
+                form_appointment_home: this.form_appointment_home ,
+                form_appointment_remote: this.form_appointment_remote ,
+
+                          };
+
+              console.log("REQUEST :"+JSON.stringify(json));
+              /*
+              let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_center",json);
+              console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
+              this.$emit('updateCenterList');  
+              this.showModalCreate = false ;    
+              
+              let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
+              this.session_params.first_time = false ;   
+              */
+
+        },
+
 	    },
     
     watch : {
-
+        
         activatorCreateNewCalendar (newValue){
             console.log ("showModalCreateCalendar !!!"+newValue );  
             this.showModalCreateCalendar = true ;
