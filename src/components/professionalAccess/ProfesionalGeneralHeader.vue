@@ -15,7 +15,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		</div>
 
 		<div class="text-primary " >
-			<text @click="switchViewTo(1)"> Horarios </text>
+			<text v-if="session_params['professional_name'] != null"   @click="switchViewTo(1)"> Horarios </text>
 		</div>
 
 		<div class="">	
