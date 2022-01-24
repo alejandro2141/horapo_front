@@ -42,7 +42,12 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                     
                     <div class="form-group">
                             <label for="exampleInputEmail1">Especialidad </label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_specialty" name="form_specialty" v-model="form_specialty"  placeholder="Ejemplo Kinesiologia">
+                            {{ JSON.stringify(specialties) }}
+                            <select   v-model="form_specialty" class="form_specialty" id="form_specialty" >
+                                <option v-for="specialty in specialties" :key="specialty.id">
+                                  {{ specialty.name }}
+                                </option>
+                            </select>
                     </div>
 
                     <br>
@@ -206,15 +211,6 @@ div.scroll {
   margin-top: 1rem;
 }
 
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
 .modal-enter-active,
 .modal-leave-active {
   transition: opacity 0.5s ease;
@@ -249,7 +245,9 @@ data: function () {
             form_calendar_end: null ,
             form_appointment_center: null ,
             form_appointment_home : null ,
-            form_appointment_remote : null ,    
+            form_appointment_remote : null ,  
+            
+            specialties : [] , 
 		 }
 	},
 
@@ -257,12 +255,31 @@ data: function () {
     emits: ['updateCenterList'],
 
     created () {
+      console.log("created modalCreateCalendar");
+      this.getSpecialties(); 
+    },
+
+    mounted () {
+      console.log("mounted modalCreateCalendar");
          },
  
     methods: {
+        async getSpecialties(){
+                console.log ("getSpecialties :" );
+                const json = { 
+                  //professional_id: this.session_params.professional_id ,
+                   professional_id : 1 ,
+                   };
+
+                console.log("getSpecialties REQUEST :"+JSON.stringify(json));
+                let response_json = await axios.post("http://192.168.0.110:8080"+"/get_professional_specialty",json);
+                console.log ("getSpecialties  RESPONSE:"+JSON.stringify(response_json.data)) ;
+                this.specialties= response_json.data ; 
+        },
+
         createNewCalendar(){
-                console.log("create New Calendar send request JSON");
-                console.log ("createNewCenter :" );
+                console.log("createNewCalendar Request JSON");
+                console.log ("createNewCalendar :" );
 
               const json = { 
                 app_duration : this.form_app_duration ,
@@ -277,7 +294,8 @@ data: function () {
                 form_appointment_center: this. form_appointment_center ,
                 form_appointment_home: this.form_appointment_home ,
                 form_appointment_remote: this.form_appointment_remote ,
-
+                
+                professional_id: 1 ,
                           };
 
               console.log("REQUEST :"+JSON.stringify(json));
@@ -290,8 +308,8 @@ data: function () {
               let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
               this.session_params.first_time = false ;   
               */
-
         },
+
 
 	    },
     
@@ -300,6 +318,7 @@ data: function () {
         activatorCreateNewCalendar (newValue){
             console.log ("showModalCreateCalendar !!!"+newValue );  
             this.showModalCreateCalendar = true ;
+           this.specialties=this.getSpecialties();
         },
     },
     
