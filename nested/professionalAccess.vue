@@ -57,8 +57,8 @@ export default {
         visible_tab_centers: 'none',
         visible_tab_assistants:'none', 
         visible_tab_appointments: 'none',
-        visible_tab_login: 'none',
-        visible_tab_timetable: 'block',
+        visible_tab_login: 'none' ,
+        visible_tab_timetable: 'block' ,
         
 
         product : 'Socks',
@@ -88,8 +88,7 @@ methods: {
             this.visible_tab_assistants ='none'; 
             this.visible_tab_appointments = 'none';
             this.visible_tab_login = 'none' ;
-            this.visible_tab_timetable = 'block';
-
+            this.visible_tab_timetable = 'block' 
     },
 
     async loadGlobalSpecialties() {
