@@ -10,7 +10,7 @@ import ModalCreateCalendar from './modalCreateCalendar.vue';
 
         <div  class="mx-auto " style="width: 95%;" >
             
-            <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar' ></ModalCreateCalendar>
+            <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar' :session_params='session_params' ></ModalCreateCalendar>
 
             <text class="h4 center ">Calendarios en su agenda </text> 
             
@@ -60,16 +60,17 @@ data: function () {
     //GET CENTERS
         async getCalendars() {
                         const json = { 
-                        professional_id : this.session_params.professional_id ,			   
-                                        };
+                        //professional_id : this.session_params.professional_id ,			   
+                        professional_id : 1 ,			   
+                          
+                                    };
                         console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/rofessional_get_calendars",json);
+                        let response_json = await axios.post("http://192.168.0.110:8080"+"/rofessional_get_calendars",json);
                         this.calendars = response_json.data.rows;
                         console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
                     },	
 
         addNewCalendar(){
-                console.log("Add new Calendar action");
                 console.log("Add new Calendar action "+JSON.stringify(this.session_params) ) ;
                 this.activatorCreateNewCalendar = Math.random(); 
 
