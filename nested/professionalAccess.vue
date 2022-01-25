@@ -14,29 +14,30 @@ import TabTimeTable from '../src/components/professionalAccess/tabTimeTable.vue'
 </script>
 
 <template>
-
+<div>
     <ProfesionalGeneralHeader :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
-   
-<div class='m-0'>
-     
-    <div  :style="{display:  visible_tab_login }"  class=" position-relative " >	 
-        <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
-    </div>
+    
+    <div class='m-0'>
+        
+        <div  :style="{display:  visible_tab_login }"  class=" position-relative " >	 
+            <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
+        </div>
 
-    <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
-        <TabCenter :session_params="session_params" :global_comunas="global_comunas"  >  </TabCenter> 	
-    </div>
+        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
+            <TabCenter :session_params="session_params" :global_comunas="global_comunas"  >  </TabCenter> 	
+        </div>
 
-    <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
-        <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
-    </div>
+        <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
+            <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
+        </div>
 
-     <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
-        <TabTimeTable :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabTimeTable> 	
+        <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
+            <TabTimeTable :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabTimeTable> 	
+        </div>
+
     </div>
 
 </div>
-
 </template>
 
 <style scoped>
