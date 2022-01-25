@@ -41,10 +41,9 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                     </div>
                     
                     <div class="form-group">
-                            <label for="exampleInputEmail1">Especialidad </label>
-                            {{ JSON.stringify(specialties) }}
-                            <select   v-model="form_specialty" class="form_specialty" id="form_specialty" >
-                                <option v-for="specialty in specialties" :key="specialty.id">
+                            <label for="exampleInputEmail1">Especialidad </label><br>
+                                <select   v-model="form_specialty_id" class="form_specialty_id" id="form_specialty_id" >
+                                <option v-for="specialty in specialties" :key="specialty.id" :id="specialty.id">
                                   {{ specialty.name }}
                                 </option>
                             </select>
@@ -272,9 +271,9 @@ data: function () {
                    };
 
                 console.log("getSpecialties REQUEST :"+JSON.stringify(json));
-                let response_json = await axios.post("http://192.168.0.110:8080"+"/get_professional_specialty",json);
-                console.log ("getSpecialties  RESPONSE:"+JSON.stringify(response_json.data)) ;
-                this.specialties= response_json.data ; 
+                let response_json = await axios.post("http://localhost:8080"+"/get_professional_specialty",json);
+                console.log ("getSpecialties  RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+                this.specialties= response_json.data.rows ; 
         },
 
         createNewCalendar(){
