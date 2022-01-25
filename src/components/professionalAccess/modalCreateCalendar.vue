@@ -43,7 +43,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                     <div class="form-group">
                             <label for="exampleInputEmail1">Especialidad </label><br>
                                 <select   v-model="form_specialty_id" class="form_specialty_id" id="form_specialty_id" >
-                                <option v-for="specialty in specialties" :key="specialty.id" :id="specialty.id">
+                                <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
                                   {{ specialty.name }}
                                 </option>
                             </select>
@@ -78,13 +78,14 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                             </select>
                    
                   <h2>Recurrencia</h2>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Lunes</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Martes</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Miercoles</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Jueves</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Viernes</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Sabado</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="">Domingo</label>
+
+                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_mon"  >Lunes</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_tue" >Martes</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_wed" >Miercoles</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_thu" >Jueves</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_fri" >Viernes</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sat" >Sabado</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sun" >Domingo</label>
 
 
                   <h2>Fecha Inicio de este horario</h2>
@@ -103,15 +104,16 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
                   <h2>Tipo de Cita:</h2>
                         <div class="radio">
-                          <label><input v-model="form_appointment_center" type="radio" name="optradio" checked>En Consulta</label>
+                          <label><input v-model="form_appointment_center" type="radio" name="optradio" value="true" >En Consulta</label>
                         </div>
                         <div class="radio">
-                          <label><input v-model="form_appointment_home" type="radio" name="optradio">A Domicilio</label>
+                          <label><input v-model="form_appointment_home" type="radio" name="optradio" value="true" >A Domicilio</label>
                         </div>
+                        <!-- 
                         <div class="radio disabled">
-                          <label><input v-model="form_appointment_remote" type="radio" name="optradio" disabled>Tele Atención</label>
+                          <label><input v-model="form_appointment_remote" type="radio" name="optradio" value="true" disabled>Tele Atención</label>
                         </div>
-
+                        -->
                        <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
                  
                 </div>
@@ -232,21 +234,31 @@ export default {
 data: function () {
 		return {
 			      showModalCreateCalendar  : false ,
-            form_app_duration :null, 
-            form_start_time : null, 
-            form_end_time : null ,
 
-            form_specialty : null ,
+            form_start_time : '00:00', 
+            form_end_time : '00:00' ,
+
+            form_specialty_id : null ,
             form_app_duration : null ,
             form_app_time_between : null ,
             form_calendar_start: null ,
             form_minimum_date : null ,
             form_calendar_end: null ,
-            form_appointment_center: null ,
-            form_appointment_home : null ,
-            form_appointment_remote : null ,  
+            form_appointment_center: false ,
+            form_appointment_home : false ,
+            form_appointment_remote : false , 
+            //form_appoirntment_recurrency : [],
+            form_recurrency_mon : false  , 
+            form_recurrency_tue : false , 
+            form_recurrency_wed : false , 
+            form_recurrency_thu : false , 
+            form_recurrency_fri : false , 
+            form_recurrency_sat : false , 
+            form_recurrency_sun : false , 
             
             specialties : [] , 
+
+
 		 }
 	},
 
@@ -276,19 +288,27 @@ data: function () {
                 this.specialties= response_json.data.rows ; 
         },
 
-        createNewCalendar(){
+        async createNewCalendar(){
                 console.log("createNewCalendar Request JSON");
                 console.log ("createNewCalendar :" );
 
               const json = { 
-                app_duration : this.form_app_duration ,
-                start_time : this.form_start_time ,
-                end_time : this.form_end_time ,
-                form_specialty : this.form_specialty, 
+               
+                form_start_time : this.form_start_time ,
+                form_end_time : this.form_end_time ,
+                form_specialty_id : this.form_specialty_id, 
                 form_app_duration : this.form_app_duration ,
                 form_app_time_between : this.form_app_time_between ,
+
+                form_recurrency_mon : this.form_recurrency_mon, 
+                form_recurrency_tue : this.form_recurrency_tue , 
+                form_recurrency_wed : this.form_recurrency_wed , 
+                form_recurrency_thu : this.form_recurrency_thu , 
+                form_recurrency_fri : this.form_recurrency_fri , 
+                form_recurrency_sat : this.form_recurrency_sat , 
+                form_recurrency_sun : this.form_recurrency_sun , 
+
                 form_calendar_start: this.form_calendar_start ,
-                form_minimum_date: this.form_minimum_date ,
                 form_calendar_end: this.form_calendar_end ,
                 form_appointment_center: this. form_appointment_center ,
                 form_appointment_home: this.form_appointment_home ,
@@ -298,15 +318,17 @@ data: function () {
                           };
 
               console.log("REQUEST :"+JSON.stringify(json));
-              /*
-              let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_center",json);
-              console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
-              this.$emit('updateCenterList');  
-              this.showModalCreate = false ;    
               
+              let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_calendar",json);
+              console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
+              this.$emit('updateCalendarList');  
+              this.showModalCreateCalendar = false ;    
+              
+              /*
               let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
-              this.session_params.first_time = false ;   
-              */
+              this.session_params.first_time = false ;  
+              */ 
+              
         },
 
 
