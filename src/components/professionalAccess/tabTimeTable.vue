@@ -18,9 +18,30 @@ import ModalCreateCalendar from './modalCreateCalendar.vue';
                     <div v-for="calendar in calendars"  :key='calendar.id' >
                         <div class="card m-3 border border-secondary" style="width: 18rem; ">
                             <div class="card-body">
-                                <h5 class="card-title"><i class="bi bi-building display-2"></i> calendar_id {{calendar.id}} </h5>
-                                <p class="card-text">  aaaa </p>
-                                <b>bbbbb </b>
+                                <h5 class="card-title"><i class=""></i>   {{idSpecialty2name(calendar.specialty1) }} </h5>
+
+                                <p class="card-text">
+
+                                    Inicio {{calendar.start_time.substring(0,5)}} <br>
+                                    Fin   {{calendar.end_time.substring(0,5)}} <br>
+
+                                    <text v-if="calendar.center_visit"> En Consulta </text> <br>
+                                    <text v-if="calendar.home_visit"> A Domicilio </text> <br>
+
+                                    Fecha Inicio Calendario  <br> {{calendar.date_start.substring(0,10) }}<br>
+                                    Fecha Fin  Calendario <br> {{calendar.date_end.substring(0,10) }}<br>
+
+                                    Dias Recurrencia: <br>
+                                        <text v-if="calendar.monday"> Lunes <br> </text> 
+                                        <text v-if="calendar.tuestday"> Martes  <br> </text> 
+                                        <text v-if="calendar.wednesday"> Miercoles  <br> </text> 
+                                        <text v-if="calendar.thursday"> Jueves  <br> </text> 
+                                        <text v-if="calendar.friday"> Viernes <br> </text> 
+                                        <text v-if="calendar.saturday"> Sabado <br> </text> 
+                                        <text v-if="calendar.sunday"> Domingo <br> </text> 
+
+                                </p>
+                               
                                 <p class="text-end" > <text  class="text-primary">Ver</text>  </p>
                             </div>
                         </div>   
@@ -49,7 +70,7 @@ data: function () {
             activatorCreateNewCalendar : null ,
 		 }
 	},
-	props: ['session_params','global_comunas'],
+	props: ['session_params','global_comunas', 'global_specialties'],
 
     created () {    
         console.log("TAB Calendards this session_params"+this.session_params.professional_id);
@@ -57,6 +78,14 @@ data: function () {
          },
  
     methods: {
+
+        idSpecialty2name(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        },
+
     //GET CENTERS
         async getCalendars() {
                         const json = { 
