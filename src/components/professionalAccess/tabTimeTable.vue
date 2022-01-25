@@ -65,7 +65,7 @@ data: function () {
                           
                                     };
                         console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post("http://192.168.0.110:8080"+"/rofessional_get_calendars",json);
+                        let response_json = await axios.post("http://localhost:8080"+"/rofessional_get_calendars",json);
                         this.calendars = response_json.data.rows;
                         console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
                     },	
