@@ -8,6 +8,7 @@ import loadProgress from '../loadProgress.vue'
 </script>
 
 <template>
+  <div>
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
    
     <div class="h2 bg-white p-2" >
@@ -22,6 +23,8 @@ import loadProgress from '../loadProgress.vue'
             <searchAppointmentResult  :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" > </searchAppointmentResult> 	    
             </div>
      </div>
+
+  </div>
 </template>
 
 <style scoped>
@@ -99,10 +102,10 @@ methods: {
                  type_center : params.type_center,
                  type_remote : params.type_remote,
                   		  };
-				console.log ("searchAppointments input to send JSON :"+ JSON.stringify(json)  );
+				console.log ("searchAppointments2 input to send JSON :"+ JSON.stringify(json)  );
 				//let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
-				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day",json);
-				console.log ("getAppointments RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
+				console.log ("getAppointments2 RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
 				this.appointments = response_json.data.rows;
                // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                 this.notificationMessage_alert=	false ;
