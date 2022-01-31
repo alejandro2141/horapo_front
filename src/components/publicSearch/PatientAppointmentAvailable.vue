@@ -17,6 +17,54 @@ import { ref } from 'vue'
             </div>
             <div>
                 <div class="">
+                    <div class="display-5" style=" color:#2e5668">	 
+                   <b> {{ transform_date( appointment.date.substring(0, 10) ) }} </b>
+                    
+                 {{appointment.start_time}} <text style=" font-size: 0.6em;">hrs</text>  
+                    </div>       
+                </div>
+           
+                <div class="display-5" style=" color:#1f9d94">
+                    <div >	
+                    {{ showSpecialtyName(appointment.specialty1) }} 
+                    </div>       
+                </div>
+ 
+                <div class="">
+                    <div v-if="appointment.center_visit" class="">
+                 
+                        <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i> Visita Centro</div>
+                            <div class="" style="color:#2e5668" >	
+                                <i class="fas fa-map-marker-alt "></i>   "dddd"
+                            </div> 
+                            <div style="color:#2e5668">
+                                eeee
+                            </div>
+                    </div>
+                    <div v-if="appointment.home_visit" style="color:#3399FF">
+                            <div class="display-5" >
+                                <i class=" bi bi-house"></i><text >  Visita a Domicilio:</text> <br>
+                            </div>
+
+
+                    </div>
+                    <div v-if="appointment.app_type_remote" class="">
+                       <i class="bi bi-camera-video"></i> Tele Atención  	                       
+                    </div>
+
+                </div>
+            
+            </div>
+
+            </div>
+
+        <!--
+        <div id="app" class="m-0 d-flex  "  >	
+            <div class="">
+                     &nbsp;
+            </div>
+            <div>
+                <div class="">
                     <div class="display-5" style=" color:#2e5668">	
                    <b> {{ transform_date( appointment.date.substring(0, 10) ) }}</b>
                     
@@ -32,7 +80,7 @@ import { ref } from 'vue'
  
                 <div class="">
                     <div v-if="appointment.app_type_center" class="">
-                       <!-- <i class="h1 bi bi-building"></i> En consulta 	 -->
+                 
                         <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i> {{comuna_id2name(appointment.comuna) }} </div>
                             <div class="" style="color:#2e5668" >	
                                 <i class="fas fa-map-marker-alt "></i>   "{{ appointment.center_name }}"
@@ -76,6 +124,7 @@ import { ref } from 'vue'
             </div>
 
             </div>
+            -->
                
      <text style="color: #bbbbbb;" >#{{appointment.app_id}}</text> 
        </div>
@@ -97,12 +146,20 @@ export default {
             }
   },
   
-  props: ['appointment','searchParameters' , 'global_comunas' ],
+  props: ['appointment','searchParameters' , 'global_comunas' , 'global_specialties' ],
 
  mounted () {  
         },
 
 methods: {
+
+     showSpecialtyName(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        },
+    /*
     showSpecialtyName(app)
     {
         if (this.searchParameters.specialty != null)
@@ -111,6 +168,7 @@ methods: {
             return (app.specialty_name )
         }
     },
+    */
     comuna_id2name(id)
     {
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
