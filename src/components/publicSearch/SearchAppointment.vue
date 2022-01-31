@@ -20,7 +20,7 @@ import loadProgress from '../loadProgress.vue'
             <div>
             <searchAppointmentForm  v-on:searchAppointments="searchAppointments" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
             <text v-if="appointments.length>0" >En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados </text>
-            <searchAppointmentResult  :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" > </searchAppointmentResult> 	    
+            <searchAppointmentResult  :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
             </div>
      </div>
 
@@ -105,9 +105,11 @@ methods: {
 				console.log ("searchAppointments2 input to send JSON :"+ JSON.stringify(json)  );
 				//let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
 				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
-				console.log ("getAppointments2 RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
-				this.appointments = response_json.data.rows;
-               // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
+			
+				this.appointments = response_json.data;
+      	console.log ("getAppointments2 RESPONSE:"+JSON.stringify(this.appointments)) ;
+
+        // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                 this.notificationMessage_alert=	false ;
                 this.searchParameters = params ;
                 this.params_bkp = params ; 
