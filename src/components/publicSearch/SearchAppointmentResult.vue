@@ -7,13 +7,15 @@ import LoadProgress from '../loadProgress.vue'
 </script>
 
 <template>
+
+<div>
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
        <div  v-if="appointment_list != null && daterequired != null" >
             <!-- <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  -->
          
             <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
-               <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" > </patientAppointmentAvailable>            
+               <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
             </div>
                 <!-- Start make room for Modal data when it display-->
             <div style="height: 400px">
@@ -22,9 +24,9 @@ import LoadProgress from '../loadProgress.vue'
         </div>	
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
-        <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' > </modalPublicViewAppointment>
+        <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
         <!-- Modal Reserve and Confirm End -->
-          
+</div>     
 </template>
 
 <style scoped>
@@ -51,7 +53,7 @@ export default {
     }
   },
 
-   props: ['searchParameters','session_params','appointments','daterequired','global_comunas'],
+   props: ['searchParameters','session_params','appointments','daterequired','global_comunas', 'global_specialties'],
    emits: ["updateLastSearch"],
 
     beforeCreate(){
