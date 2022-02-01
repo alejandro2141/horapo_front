@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import axios from 'axios';
 import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
 import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
+import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
+import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
 
 </script>
@@ -104,18 +106,34 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
                   <h2>Tipo de Cita:</h2>
                         <div class="radio">
-                          <label><input v-model="form_appointment_center" type="radio" name="optradio" value="true" >En Consulta</label>
+                          <label><input v-model="form_appointment_center" type="checkbox"  @click="form_appointment_home = false;  form_appointment_center = true "   >En Consulta</label>
                         </div>
                         <div class="radio">
-                          <label><input v-model="form_appointment_home" type="radio" name="optradio" value="true" >A Domicilio</label>
+                          <label><input v-model="form_appointment_home" type="checkbox" @click="form_appointment_center = false; form_appointment_home = true "  >A Domicilio</label>
                         </div>
                         <!-- 
                         <div class="radio disabled">
                           <label><input v-model="form_appointment_remote" type="radio" name="optradio" value="true" disabled>Tele Atención</label>
                         </div>
                         -->
-                       <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
+                  
+                <div v-if="form_appointment_center" class="border border-2 p-2" >
+                        Seleccione Centro de Atencion 
+                        <InputFormCenterProfessional class="m-3" v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+                        <br>
+                </div>
+
+                <div v-if="form_appointment_home" class="border border-2 p-2" >
+                        Comunas en las que atiende a Domicilio (Máximo 6). 
+                        <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
+                        <br>  
+                </div>
+
+
+                <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
                  
+
+
                 </div>
 
             </div> 
@@ -255,15 +273,19 @@ data: function () {
             form_recurrency_fri : false , 
             form_recurrency_sat : false , 
             form_recurrency_sun : false , 
+
+            form_comunas_id : [] ,
+            form_center_code  : null ,
             
             specialties : [] , 
+            needsCreateCenter : null ,
 
 
 		 }
 	},
 
 	props: ['session_params','activatorCreateNewCalendar','global_comunas'],
-    emits: ['updateCenterList'],
+  emits: ['updateCenterList','switchView'],
 
     created () {
       console.log("created modalCreateCalendar");
@@ -275,6 +297,33 @@ data: function () {
          },
  
     methods: {
+      
+      switchView(){
+            this.$emit('switchView');
+      },
+
+      selectedCenterCode(value)
+      {
+      console.log("Center selected code: "+value);
+      this.form_center_code = value ;
+      },
+
+      selectedComunas(value)
+      {
+      console.log("capture emit comuna List "+JSON.stringify(value));
+      let aux=JSON.parse(value) ;
+      this.form_comunas_id = [] ;
+          for (let i = 0 ; i < aux.length ; i++) {
+             this.form_comunas_id.push( aux[i].id );
+          }
+          console.log("Comuna id array:"+this.form_comunas_id );
+      },
+
+      centersError(value) {
+      console.log("centersError In modal "+value);
+      this.needsCreateCenter = value ; 
+      },
+
         async getSpecialties(){
                 console.log ("getSpecialties :" );
                 const json = { 
@@ -313,21 +362,24 @@ data: function () {
                 form_appointment_center: this. form_appointment_center ,
                 form_appointment_home: this.form_appointment_home ,
                 form_appointment_remote: this.form_appointment_remote ,
+
+                form_appointment_home_locations: this.form_comunas_id ,
+                form_appointment_center_code: this.form_center_code ,
+
+              
                 
                 professional_id: 1 ,
                           };
 
               console.log("REQUEST :"+JSON.stringify(json));
               
+            /*
               let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_calendar",json);
               console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
               this.$emit('updateCalendarList');  
               this.showModalCreateCalendar = false ;    
-              
-              /*
-              let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
-              this.session_params.first_time = false ;  
-              */ 
+            */
+               
               
         },
 
