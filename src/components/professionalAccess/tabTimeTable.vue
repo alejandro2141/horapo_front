@@ -10,7 +10,7 @@ import ModalCreateCalendar from './modalCreateCalendar.vue';
 
         <div  class="mx-auto " style="width: 95%;" >
             
-            <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar' :session_params='session_params' ></ModalCreateCalendar>
+            <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar' :session_params='session_params' :global_comunas="global_comunas" ></ModalCreateCalendar>
 
             <text class="h4 center ">Calendarios en su agenda </text> 
             
