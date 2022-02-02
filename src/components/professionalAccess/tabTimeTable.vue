@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import ModalCreateCalendar from './modalCreateCalendar.vue';
+import ModalViewCalendar from './modalViewCalendar.vue';
+
 
 
 </script>
@@ -10,7 +12,8 @@ import ModalCreateCalendar from './modalCreateCalendar.vue';
 
         <div  class="mx-auto " style="width: 95%;" >
             
-            <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar' :session_params='session_params' :global_comunas="global_comunas" ></ModalCreateCalendar>
+            <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas"  :global_specialties="global_specialties"  ></ModalCreateCalendar>
+            <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
 
             <text class="h4 center ">Calendarios en su agenda </text> 
             
@@ -18,18 +21,31 @@ import ModalCreateCalendar from './modalCreateCalendar.vue';
                     <div v-for="calendar in calendars"  :key='calendar.id' >
                         <div class="card m-3 border border-secondary" style="width: 18rem; ">
                             <div class="card-body">
-                                <h5 class="card-title"><i class=""></i>   {{idSpecialty2name(calendar.specialty1) }} </h5>
+                                <h5 class="card-title"><i class=""></i>   {{idSpecialty2name(calendar.specialty1) }}  
+                                
+                                <text >Active: {{calendar.active }} </text> 
+                                
+                                </h5>
 
                                 <p class="card-text">
 
-                                    Inicio {{calendar.start_time.substring(0,5)}} <br>
-                                    Fin   {{calendar.end_time.substring(0,5)}} <br>
+                                Fecha Inicio : {{calendar.date_start.substring(0,10) }} <br>
+                                Fecha Fin : {{calendar.date_end.substring(0,10) }} <br>
+                                Hora  Inicio :{{calendar.start_time.substring(0,5)}} <br>
+                                Hora  Fin : {{calendar.end_time.substring(0,5)}} <br>
 
-                                    <text v-if="calendar.center_visit"> En Consulta </text> <br>
-                                    <text v-if="calendar.home_visit"> A Domicilio </text> <br>
-
-                                    Fecha Inicio Calendario  <br> {{calendar.date_start.substring(0,10) }}<br>
-                                    Fecha Fin  Calendario <br> {{calendar.date_end.substring(0,10) }}<br>
+                                Lugar:  
+                                    <text v-if="calendar.center_visit"> En Consulta 
+                                        <br> 
+                                        Incluir Nombre Consulta 
+                                    </text> <br>
+                                    
+                                    
+                                    <text v-if="calendar.home_visit"> A Domicilio 
+                                    <br>
+                                        Incluir Comunas     
+                                        
+                                    </text> <br>
 
                                     Dias Recurrencia: <br>
                                         <text v-if="calendar.monday"> Lunes <br> </text> 
@@ -42,7 +58,7 @@ import ModalCreateCalendar from './modalCreateCalendar.vue';
 
                                 </p>
                                
-                                <p class="text-end" > <text  class="text-primary">Ver</text>  </p>
+                                <p class="text-end" > <text  @click="viewCalendar(calendar)" class="text-primary">Ver</text>  </p>
                             </div>
                         </div>   
                     </div>
@@ -68,6 +84,8 @@ data: function () {
 		return {
             calendars : [] ,
             activatorCreateNewCalendar : null ,
+            activatorViewCalendar : null ,
+            calendar_details : null ,
 		 }
 	},
 	props: ['session_params','global_comunas', 'global_specialties'],
@@ -78,6 +96,18 @@ data: function () {
          },
  
     methods: {
+
+        viewCalendar(calendar)
+        {
+            console.log("Open view Calendar");
+            this.activatorViewCalendar = Math.random(); 
+            this.calendar_details = calendar ; 
+        },
+
+        updateCalendarList()
+        {
+            this.getCalendars();
+        },
 
         idSpecialty2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
