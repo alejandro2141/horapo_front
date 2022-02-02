@@ -11,6 +11,7 @@ import SearchAppointment from '../src/components/publicSearch/SearchAppointment.
 </script>
 
 <template>
+<div>
 
     <GeneralHeader></GeneralHeader>
     
@@ -18,6 +19,7 @@ import SearchAppointment from '../src/components/publicSearch/SearchAppointment.
         <SearchAppointment :global_specialties="global_specialties" :global_comunas="global_comunas" ></SearchAppointment>
     </div>
 
+</div>
 </template>
 
 
