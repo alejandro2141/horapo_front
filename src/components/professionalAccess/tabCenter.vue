@@ -6,7 +6,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 </script>
 
 <template>
-
+<div>
      <ModalViewCenterDetails  :session_params='session_params' :activatorViewCenterDetails='activatorViewCenterDetails' :centerToShowDetails='centerToShowDetails' v-on:updateCenterList="updateCenterList"  :global_comunas="global_comunas"   > </ModalViewCenterDetails>                    
      <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" >  </ModalCreateCenter>
       
@@ -47,6 +47,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         --> 
 </div>       
 
+</div>
 </template>
 
 <style scoped>
