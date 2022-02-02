@@ -284,8 +284,8 @@ data: function () {
 		 }
 	},
 
-	props: ['session_params','activatorCreateNewCalendar','global_comunas'],
-  emits: ['updateCenterList','switchView'],
+	props: ['session_params','activatorCreateNewCalendar','global_comunas' ],
+  emits: ['updateCalendarList','switchView'],
 
     created () {
       console.log("created modalCreateCalendar");
@@ -365,20 +365,18 @@ data: function () {
 
                 form_appointment_home_locations: this.form_comunas_id ,
                 form_appointment_center_code: this.form_center_code ,
-
-              
                 
                 professional_id: 1 ,
                           };
 
               console.log("REQUEST :"+JSON.stringify(json));
               
-            /*
+            
               let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_calendar",json);
               console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
               this.$emit('updateCalendarList');  
               this.showModalCreateCalendar = false ;    
-            */
+            
                
               
         },
