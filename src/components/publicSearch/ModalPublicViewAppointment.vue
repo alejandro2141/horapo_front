@@ -10,7 +10,7 @@ import loadProgress from '../loadProgress.vue'
 </script>
 
 <template>
-
+<div>
 <ModalPublicReserveAppForm   :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve'></ModalPublicReserveAppForm>
 
 	<teleport to="body"   >
@@ -106,7 +106,7 @@ import loadProgress from '../loadProgress.vue'
     	</div>
 	</teleport>
 
-
+</div>
 </template>
 
 <style scoped>
@@ -238,7 +238,7 @@ export default {
   },
 
 	emits: ["updateLastSearch"],
-	props: [ 'searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen' ],
+	props: [ 'searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen','global_specialties' ],
 
 
 computed: {
