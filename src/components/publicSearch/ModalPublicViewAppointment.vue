@@ -33,7 +33,7 @@ import loadProgress from '../loadProgress.vue'
 
 					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
 						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(app.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{app.date.substring(8, 10) }} </text>  </div>
-					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app) }} </div> 
+					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app.specialty1) }} </div> 
 					</div>
 
 			<div style="margin-top: 1em; margin-left: 1em;" class="h4">
@@ -42,32 +42,38 @@ import loadProgress from '../loadProgress.vue'
 					</div>
 						<br>
 					<div class="">	
-						<i class="bi bi-person m-1"></i>Con :  {{app.name }} 
+						<i class="bi bi-person m-1"></i>Con :  {{app.professional_name }} 
 					</div>
 						<br>
 			</div>
 
-				<div v-if="app.app_type_home" class="" style="color:#3399FF" >
+				<div v-if="app.home_visit" class="" style="color:#3399FF" >
 						<div class="h3" style="" ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en : 
 				
 							<div class="m-2">
-							<text v-if=" app.location1 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location1) }} 
+							<text v-if=" app.home_visit_location1 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location1) }} 
+								<br>
                             </text>
-                            <text v-if=" app.location2 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location2) }} 
+                            <text v-if=" app.home_visit_location2 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location2) }} 
+								<br>
                             </text>
-                            <text v-if=" app.location3 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location3) }}
+                            <text v-if=" app.home_visit_location3 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location3) }}
+								<br>
                             </text>
-                            <text v-if=" app.location4 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location4) }} 
-                            </text>
-                            <text v-if=" app.location5 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location5) }} 
-                            </text>
-                            <text v-if=" app.location6 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.location6) }} 
+                            <text v-if=" app.home_visit_location4 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location4) }} 
+                            	<br>
+							</text>
+                            <text v-if=" app.home_visit_location5 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location5) }} 
+                            	<br>
+							</text>
+                            <text v-if=" app.home_visit_location6 != null " >  
+                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location6) }} 
+								<br>
                             </text>	
 							</div>
 						</div>
@@ -76,7 +82,7 @@ import loadProgress from '../loadProgress.vue'
 
 
 
-				<div v-if="app.app_type_center"  class="h3" style=" color:#1f9d94 "  >
+				<div v-if="app.center_visit"  class="h3" style=" color:#1f9d94 "  >
 					<div > <i class="bi bi-building  m-1"></i> <b>Direccion de la cita: </b><br>"{{app.center_name }}"</div>
 					<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
 					<div class="">  {{app.center_address }}</div>
@@ -96,7 +102,7 @@ import loadProgress from '../loadProgress.vue'
 	 <button type="button" @click="reserveHour(app);"  class="btn btn-primary m-4"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
     <br>
 	<br>
-	<text class="text-secondary" style="">#{{app.app_id}}</text>
+	<text class="text-white" style="">#{{app.calendar_id}}</text>
 
                     </div>
         </div> 
@@ -237,9 +243,8 @@ export default {
         }
   },
 
-	emits: ["updateLastSearch"],
-	props: [ 'searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen','global_specialties' ],
-
+	props: [ 'searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen','global_comunas', 'global_specialties' ],
+	emits: [ "updateLastSearch" ],
 
 computed: {
 		showModalAux2() {
@@ -272,14 +277,12 @@ computed: {
 
 		},
 
-		showSpecialtyName(app)
-            {
-                if (this.searchParameters.specialty != null)
-                {return this.searchParameters.specialty.name }
-                else {
-                    return (app.specialty_name )
-                }
-            },
+		showSpecialtyName(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        },
 
 		reserveHour(hour)
 		{
