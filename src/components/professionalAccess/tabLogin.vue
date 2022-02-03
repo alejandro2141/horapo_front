@@ -10,6 +10,7 @@ defineProps({
 </script>
 
 <template>
+<div>
     <loadProgress  :active_spinner="active_spinner" > </loadProgress>
      <div class="border border-dark m-3 bg-light ">
 
@@ -45,7 +46,7 @@ defineProps({
             </div>
         </div>		
 
-
+</div>
 </template>
 
 <style scoped>
