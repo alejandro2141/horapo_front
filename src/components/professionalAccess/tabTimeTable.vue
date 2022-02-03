@@ -8,7 +8,6 @@ import ModalViewCalendar from './modalViewCalendar.vue';
 
 </script>
 <template>
- 
 
         <div  class="mx-auto " style="width: 95%;" >
             
@@ -120,7 +119,7 @@ data: function () {
         async getCalendars() {
                         const json = { 
                         //professional_id : this.session_params.professional_id ,			   
-                        professional_id : 1 ,			   
+                        professional_id : this.session_params.professional_id ,			   
                           
                                     };
                         console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
