@@ -261,7 +261,7 @@ export default {
         }
   },
 
- props: [ 'searchParameters', 'appToReserve','eventShowModalPubicReserve' ],
+ props: [ 'searchParameters', 'appToReserve','eventShowModalPubicReserve' ,'global_comunas', 'global_specialties' ],
  emits: ['updateAppList','updateLastSearch'] , 
       
 
@@ -292,11 +292,15 @@ computed: {
 			},
 		showSpecialtyName(app)
             {
+				/*
                 if (this.searchParameters.specialty != null)
                 {return this.searchParameters.specialty.name }
                 else {
                     return (app.specialty_name )
                 }
+				*/
+				app.specialty_name
+
             },
 		updateLastSearch()
             {
