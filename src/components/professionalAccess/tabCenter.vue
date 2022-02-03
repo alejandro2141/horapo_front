@@ -12,20 +12,22 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
       
 <div  class="mx-auto " style="width: 95%;" >
         <text class="h4 center ">Consultas en su agenda </text> 
-	
-        <div  id="search_result" v-if='centers.length > 0'  >
-            <div v-for="center in centers"  :key='center.id' >
-                <div class="card m-3 border border-secondary" style="width: 18rem; ">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-building display-2"></i> {{center.name}}</h5>
-                        <p class="card-text">{{center.address}} </p>
-                        <b>{{ comuna_list.find(o => o.id === center.comuna).name }} </b>
-                        <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p>
-                    </div>
-                </div>   
-            </div>
         
+        <div v-if='centers != null' >       
+            <div  id="search_result" v-if='centers.length > 0'  >
+                <div v-for="center in centers"  :key='center.id' >
+                    <div class="card m-3 border border-secondary" style="width: 18rem; ">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="bi bi-building display-2"></i> {{center.name}}</h5>
+                            <p class="card-text">{{center.address}} </p>
+                            <b>{{ comuna_list.find(o => o.id === center.comuna).name }} </b>
+                            <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p>
+                        </div>
+                    </div>   
+                </div>  
+            </div>
         </div>
+
 
         <div  v-else class=" m-2 p-2">
            <p> Algo de informacion antes de continuar: <br>
@@ -33,9 +35,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
             -La direccion de Consulta es donde el paciente debe asistir <br>
             -Siempre puede ver la lista de Consultas en el link  <text class="text-primary">"Ver Consultas"</text> <br>
            </p>
-         <p class="">Para crear su primera Consulta, por favor click en el link siguiente </p>
-           
-        
+            <p class="">Para crear su primera Consulta, por favor click en el link siguiente </p>
         </div>
 
         <div class="text-center p-3 m-3"> 
