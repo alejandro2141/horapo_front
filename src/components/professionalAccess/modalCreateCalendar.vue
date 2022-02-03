@@ -284,7 +284,7 @@ data: function () {
 		 }
 	},
 
-	props: ['session_params','activatorCreateNewCalendar','global_comunas' ],
+	props: ['session_params','activatorCreateNewCalendar','global_comunas' , 'global_specialties' ],
   emits: ['updateCalendarList','switchView'],
 
     created () {
@@ -327,8 +327,8 @@ data: function () {
         async getSpecialties(){
                 console.log ("getSpecialties :" );
                 const json = { 
-                  //professional_id: this.session_params.professional_id ,
-                   professional_id : 1 ,
+                   professional_id: this.session_params.professional_id ,
+                  // professional_id : 1 ,
                    };
 
                 console.log("getSpecialties REQUEST :"+JSON.stringify(json));
@@ -366,7 +366,7 @@ data: function () {
                 form_appointment_home_locations: this.form_comunas_id ,
                 form_appointment_center_code: this.form_center_code ,
                 
-                professional_id: 1 ,
+                professional_id: this.session_params.professional_id ,
                           };
 
               console.log("REQUEST :"+JSON.stringify(json));
