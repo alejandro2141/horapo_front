@@ -89,7 +89,10 @@ methods: {
             this.visible_tab_assistants ='none'; 
             this.visible_tab_appointments = 'none';
             this.visible_tab_login = 'none' ;
-            this.visible_tab_timetable = 'block' 
+            this.visible_tab_timetable = 'none' 
+        if (val == 1) { this.visible_tab_timetable = 'block' }
+        if (val == 2) { this.visible_tab_appointments = 'block' }
+        if (val == 3) { this.visible_tab_centers = 'block' }
     },
 
     async loadGlobalSpecialties() {
