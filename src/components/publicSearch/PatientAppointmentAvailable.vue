@@ -31,23 +31,32 @@ import { ref } from 'vue'
                 </div>
  
                 <div class="">
+
                     <div v-if="appointment.center_visit" class="">
                  
-                        <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i> Visita Centro</div>
+                        <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i>  {{appointment.center_name}} </div>
                             <div class="" style="color:#2e5668" >	
-                                <i class="fas fa-map-marker-alt "></i>   "dddd"
+                                <i class="fas fa-map-marker-alt "></i>  
                             </div> 
                             <div style="color:#2e5668">
-                                eeee
+                               {{appointment.center_address}}
                             </div>
                     </div>
+                    
                     <div v-if="appointment.home_visit" style="color:#3399FF">
                             <div class="display-5" >
                                 <i class=" bi bi-house"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
-
-
+                            <div style="" class="text-dark display-6" >
+                              {{  comuna_id2name(appointment.home_visit_location1) }}
+                              {{  comuna_id2name(appointment.home_visit_location2) }}
+                              {{  comuna_id2name(appointment.home_visit_location3) }}
+                              {{  comuna_id2name(appointment.home_visit_location4) }}
+                              {{  comuna_id2name(appointment.home_visit_location5) }}
+                              {{  comuna_id2name(appointment.home_visit_location6) }}
+                            </div>
                     </div>
+
                     <div v-if="appointment.app_type_remote" class="">
                        <i class="bi bi-camera-video"></i> Tele Atención  	                       
                     </div>
@@ -126,7 +135,7 @@ import { ref } from 'vue'
             </div>
             -->
                
-     <text style="color: #bbbbbb;" >#{{appointment.app_id}}</text> 
+     <text style="color: #ffffff;" >#{{appointment.calendar_id}}</text> 
        </div>
 
 </template>
