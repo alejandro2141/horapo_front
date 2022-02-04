@@ -25,13 +25,13 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                   
                   <div class="d-flex  justify-content-end  m-0">
 				
-                      <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ showSpecialtyName(appToReserve) }}  </div>
+                      <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ showSpecialtyName(appToReserve.specialty1) }}  </div>
                       <div class="" style="" > </div>
 
                       <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                   </div>
 
-				<div v-if="appToReserve.app_type_home" class="h3" >
+				<div v-if="appToReserve.home_visit" class="h3" >
 					<div style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> </div>
 				</div>
 
@@ -39,7 +39,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 						<i class="bi bi-smartwatch "></i>  {{ transform_date( appToReserve.date.substring(0, 10) ) }}   {{appToReserve.start_time.substring(0, 5) }} hrs  
 					</div>
 					<div class="">	
-						<i class="bi bi-person m-1"></i>Con :  {{appToReserve.name }} 
+						<i class="bi bi-person m-1"></i>Con :  {{appToReserve.professional_name }} 
 					</div>
 						<br>
 
@@ -141,7 +141,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                                 <button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
                             	
 								<br>
-								<text class="text-secondary" style=""><br>#{{appToReserve.app_id}}</text>	
+								<text class="text-secondary" style=""><br>#{{appToReserve.calendar_id}}</text>	
 								<div class="" style="height : 500px"> 
                 				</div>
 							
@@ -276,7 +276,13 @@ computed: {
       	},
 
 	methods: {
+	
+		showSpecialtyName(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
 
+        },
 
 		transform_date(date)
     	{
@@ -289,19 +295,8 @@ computed: {
 				let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
 				return months[parseInt(month)];
 
-			},
-		showSpecialtyName(app)
-            {
-				/*
-                if (this.searchParameters.specialty != null)
-                {return this.searchParameters.specialty.name }
-                else {
-                    return (app.specialty_name )
-                }
-				*/
-				app.specialty_name
+			},	
 
-            },
 		updateLastSearch()
             {
                 console.log (" update search Result. in Public Reserve Form ");
