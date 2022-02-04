@@ -16,10 +16,10 @@ import SwitchViewButton from './switchViewButton.vue'
 
 		<div class="text-primary " >
 			 <text v-if="session_params['professional_name'] != null"   @click="switchViewTo(2)"> 
-				<i class="bi bi-clipboard-plus display-5 "  ></i>
+				<i class="bi bi-card-list display-5 "  ></i>
 			 </text>
 		</div>
-		
+
 		<div class="text-primary " >
 			 <text v-if="session_params['professional_name'] != null"   @click="switchViewTo(1)"> 
 				<i class="bi bi-calendar display-5 "></i>
