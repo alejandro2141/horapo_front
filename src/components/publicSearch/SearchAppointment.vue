@@ -96,7 +96,7 @@ methods: {
 				// agenda_id : this.par_agenda_id ,			 
 				    date : params.date ,
 				    specialty : specialty_code ,
-                 comuna : params.comuna ,
+                 location : params.comuna ,
                  home_visit : params.home_visit,
                  type_home : params.type_home,
                  type_center : params.type_center,
