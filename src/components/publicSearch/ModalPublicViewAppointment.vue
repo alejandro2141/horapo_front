@@ -11,7 +11,7 @@ import loadProgress from '../loadProgress.vue'
 
 <template>
 <div>
-<ModalPublicReserveAppForm   :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve'></ModalPublicReserveAppForm>
+<ModalPublicReserveAppForm   :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve' :global_specialties='global_specialties' ></ModalPublicReserveAppForm>
 
 	<teleport to="body"   >
 
