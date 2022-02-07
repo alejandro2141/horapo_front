@@ -10,7 +10,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 <template>
  <div>
-<ModalPublicReserveConfirmation :searchParameters='searchParameters' v-on:updateLastSearch='updateLastSearch'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app'  ></ModalPublicReserveConfirmation>
+<ModalPublicReserveConfirmation :searchParameters='searchParameters' v-on:updateLastSearch='updateLastSearch'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app' :global_specialties='global_specialties' ></ModalPublicReserveConfirmation>
  
   	<teleport to="body"   >
 
