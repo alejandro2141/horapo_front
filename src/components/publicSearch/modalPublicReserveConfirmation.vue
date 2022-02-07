@@ -32,7 +32,7 @@ import axios from 'axios'
 
             	<div class=" d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
 						      <div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(appConfirmed.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{appConfirmed.date.substring(8, 10) }} </text>  </div>
-					        <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app) }} <br> <i class="bi bi-check-lg"></i> </div> 
+					        <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appConfirmed.appointment_specialty) }} <br> <i class="bi bi-check-lg"></i> </div> 
 					    </div>
         
               <div class="h3" >
@@ -168,7 +168,7 @@ export default {
         }
   },
 
- props: [ 'searchParameters', 'appConfirmed','eventShowModalConfirmation','app' ],
+ props: [ 'searchParameters', 'appConfirmed','eventShowModalConfirmation','app' , 'global_specialties' ],
  emits: ['updateLastSearch'] , 
           
 
@@ -183,13 +183,11 @@ computed: {
       	},
 
 	methods: {
-          showSpecialtyName(app)
-            {
-                if (this.searchParameters.specialty != null)
-                {return this.searchParameters.specialty.name }
-                else {
-                    return (app.specialty_name )
-                }
+    
+            showSpecialtyName(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
             },
 
            	transform_date(date)
