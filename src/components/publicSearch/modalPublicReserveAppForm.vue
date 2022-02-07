@@ -353,7 +353,24 @@ computed: {
 					var r =confirm("Desea continuar con la Reservar esta cita?");
 					  if (r == true) {
 						const json = { 
-						appointment_id : app.app_id,
+						appointment_calendar_id : this.appToReserve.calendar_id , 
+						appointment_date : this.appToReserve.date , 
+						appointment_start_time : this.appToReserve.start_time , 
+						appointment_duration : this.appToReserve.duration , 
+						appointment_specialty : this.appToReserve.specialty1 , 
+						appointment_type_center :  this.appToReserve.center_visit	 , 
+						appointment_center_name  :  this.appToReserve.center_name	, 
+						appointment_center_id  :  this.appToReserve.center_id	, 
+						appointment_type_home  :  this.appToReserve.home_visit	, 
+						appointment_professional_id  :  this.appToReserve.professional_id	, 
+
+						appointment_location1 : this.appToReserve.home_visit_location1	, 
+						appointment_location2 : this.appToReserve.home_visit_location1	, 
+						appointment_location3 :	this.appToReserve.home_visit_location1	, 
+						appointment_location4 : this.appToReserve.home_visit_location1	, 
+						appointment_location5 : this.appToReserve.home_visit_location1	, 
+						appointment_location6 : this.appToReserve.home_visit_location1	, 
+
 						patient_age : this.form_patient_age,
 						patient_name : this.form_patient_name,
 						patient_doc_id	: this.form_patient_doc_id,
@@ -361,11 +378,11 @@ computed: {
 						patient_phone	: this.form_patient_phone,
 						patient_address : this.form_patient_address , 
 							
-						specialty_reserved : specialty_reserved,
+						specialty_reserved : this.appToReserve.specialty1,
 
 						//patient_insurance:	this.form_patient_insurance_code,
 						patient_insurance :	9999 ,
-						form_public : app.available_public_search ,
+						form_public :  '1' ,
 						app_available : false 
 						};
 
