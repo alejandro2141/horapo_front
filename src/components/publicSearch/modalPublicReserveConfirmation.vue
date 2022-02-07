@@ -32,7 +32,7 @@ import axios from 'axios'
 
             	<div class=" d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
 						      <div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(appConfirmed.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{appConfirmed.date.substring(8, 10) }} </text>  </div>
-					        <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appConfirmed.appointment_specialty) }} <br> <i class="bi bi-check-lg"></i> </div> 
+					        <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appConfirmed.specialty_reserved) }} <br> <i class="bi bi-check-lg"></i> </div> 
 					    </div>
         
               <div class="h3" >
@@ -40,13 +40,13 @@ import axios from 'axios'
 				    	</div>
 				<br> 
 				      <div class="">	
-						        <i class="bi bi-person m-1"></i>Con :  {{app.name }} 
+						        <i class="bi bi-person m-1"></i>Con :  {{appConfirmed.patient_name }} 
 				    	</div>
         <br>
 				<!-- IF APP IN CENTER -->
         <div v-if="appConfirmed.app_type_center" class="" >
 					<div  style="color:#2e5668"> <i class="bi bi-building  m-1"></i> <b>Cita en Centro</b><br> {{appConfirmed.center_name }}</div>
-					<div class="">Direccion:  {{app.center_address }}</div>
+					<div class="">Direccion:  {{appConfirmed.center_address }}</div>
 				</div>  
         <!-- IF HOME VISIT -->
         <div v-if="app.app_type_home" class="" >
