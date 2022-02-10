@@ -13,7 +13,7 @@ import loadProgress from '../loadProgress.vue'
 <div>
 <ModalPublicReserveAppForm   :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve' :global_specialties='global_specialties' ></ModalPublicReserveAppForm>
 
-	<teleport to="body"   >
+	<teleport to="body" >
 
 		<loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
@@ -24,7 +24,7 @@ import loadProgress from '../loadProgress.vue'
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background" > 
               
-                <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168); " > 
+            <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168); " > 
  					<div class="d-flex flex-row justify-content-end ">
                       <div  > </div>
                       <div  > </div>
@@ -36,75 +36,68 @@ import loadProgress from '../loadProgress.vue'
 					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app.specialty1) }} </div> 
 					</div>
 
-			<div style="margin-top: 1em; margin-left: 1em;" class="h4">
-					<div class="" >
-						<i class="bi bi-smartwatch "></i>  {{ transform_date( app.date.substring(0, 10) ) }}   {{app.start_time.substring(0, 5) }} hrs  
-					</div>
-						<br>
-					<div class="">	
-						<i class="bi bi-person m-1"></i>Con :  {{app.professional_name }} 
-					</div>
-						<br>
-			</div>
-
-				<div v-if="app.home_visit" class="" style="color:#3399FF" >
-						<div class="h3" style="" ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> en : 
-				
-							<div class="m-2">
-							<text v-if=" app.home_visit_location1 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location1) }} 
-								<br>
-                            </text>
-                            <text v-if=" app.home_visit_location2 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location2) }} 
-								<br>
-                            </text>
-                            <text v-if=" app.home_visit_location3 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location3) }}
-								<br>
-                            </text>
-                            <text v-if=" app.home_visit_location4 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location4) }} 
-                            	<br>
-							</text>
-                            <text v-if=" app.home_visit_location5 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location5) }} 
-                            	<br>
-							</text>
-                            <text v-if=" app.home_visit_location6 != null " >  
-                                <i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location6) }} 
-								<br>
-                            </text>	
+					<div style="margin-top: 1em; " class="h4">
+							<div class="" >
+								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Fecha :  {{ transform_date( app.date.substring(0, 10) ) }}  </p>
+								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{app.start_time.substring(0, 5) }} hrs     </p>
+								<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
 							</div>
-						</div>
-				</div>
+					</div>
 
-
-
-
-				<div v-if="app.center_visit"  class="h3" style=" color:#1f9d94 "  >
-					<div > <i class="bi bi-building  m-1"></i> <b>Direccion de la cita: </b><br>"{{app.center_name }}"</div>
-					<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
-					<div class="">  {{app.center_address }}</div>
-				<!--
-						<hr>
-						<a v-if="imgLoaded" :href="app.url_map" >Mapa</a>
+					<div v-if="app.home_visit"  class="text-primary" >
+							<div class="h3" style="" ><i class="bi bi-house-fill m-1 display-5"></i> Visita a domicilio en : 
 						
-						<img   @load="imgLoaded = true" @error="imgLoaded = false"  :src="imgMapUrl" class="img-fluid" alt="center map">
-				-->
-				</div>
+									<div class="m-2">
+									<p  v-if=" app.home_visit_location1 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location1) }} 
+										<br>
+									</p>
+									<p v-if=" app.home_visit_location2 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location2) }} 
+										<br>
+									</p>
+									<p v-if=" app.home_visit_location3 != null " >  
+									&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location3) }}
+										<br>
+									</p>
+									<p v-if=" app.home_visit_location4 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location4) }} 
+										<br>
+									</p>
+									<p v-if=" app.home_visit_location5 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location5) }} 
+										<br>
+									</p>
+									<p v-if=" app.home_visit_location6 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location6) }} 
+										<br>
+									</p>	
+									</div>
+							</div>
+					</div>
 
-<div>
+					<div v-if="app.center_visit"  class="" style=" color:#1f9d94 "  >
+						<div > <i class="bi bi-geo-alt-fill display-5"></i>Direccion de la cita: <br>&nbsp;&nbsp;"{{app.center_name }}"</div>
+						<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
+						<div class=""> &nbsp;&nbsp;  {{app.center_address }}</div>
+					<!--
+							<hr>
+							<a v-if="imgLoaded" :href="app.url_map" >Mapa</a>
+							
+							<img   @load="imgLoaded = true" @error="imgLoaded = false"  :src="imgMapUrl" class="img-fluid" alt="center map">
+					-->
+					</div>
 
-	
+					
 
-</div>
-	 <button type="button" @click="reserveHour(app);"  class="btn btn-primary m-4"> <i class="bi bi-person-square"></i> Reservar esta Hora </button>
-    <br>
-	<br>
-	<text class="text-white" style="">#{{app.calendar_id}}</text>
+					<div class="d-flex justify-content-center m-5" >
+						<button type="button" @click="reserveHour(app);"  class="btn btn-primary p-4 btn-lg">  Reservar esta Hora </button>
+					</div> 
+						<br>
+						<br>
+						<text class="text-white" style="">#{{app.calendar_id}}</text>
 
-                    </div>
+            </div>
         </div> 
         </div> 		
 		</div> 
