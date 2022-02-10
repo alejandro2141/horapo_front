@@ -19,7 +19,8 @@ import loadProgress from '../loadProgress.vue'
       <div>
             <div>
             <searchAppointmentForm  v-on:searchAppointments="searchAppointments" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
-            <text v-if="appointments.length>0" >En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados </text>
+            <text v-if="appointments.length > 0" >En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados </text>
+            <p v-if="appointments.length == 0" class="text-center p-2"  > <i class="bi bi-emoji-dizzy display-1"></i><br>No hemos encontrado resultados. Por favor intente con otra fecha o ubicacion. Y nos tomo {{metric_search/1000}} Seg </p>
             <searchAppointmentResult  :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
             </div>
      </div>
