@@ -22,7 +22,44 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 			<div class="modal-container  m-1 p-0 modal-background "  style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" >
               
                 <div class="modal-body w-100" > 
-                  
+                
+				 	<div class="d-flex flex-row justify-content-end ">
+                      <div  > </div>
+                      <div  > </div>
+                      <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
+                    </div>
+
+					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
+						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(appToReserve.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{appToReserve.date.substring(8, 10) }} </text>  </div>
+					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appToReserve.specialty1) }} </div> 
+					</div>
+
+					<div style="margin-top: 1em; " class="h4">
+							<div class="" >
+								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Fecha :  {{ transform_date( appToReserve.date.substring(0, 10) ) }}  </p>
+								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{appToReserve.start_time.substring(0, 5) }} hrs     </p>
+								<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{appToReserve.professional_name }}  </p>
+							</div>
+					</div>
+
+					<div v-if="appToReserve.home_visit"  class="text-primary" >
+							<div class="h3" style="" ><i class="bi bi-house-fill m-1 display-5"></i> Visita a domicilio 
+							</div>
+					</div>
+
+					<div v-if="appToReserve.center_visit"  class="" style=" color:#1f9d94 "  >
+						<div > <i class="bi bi-geo-alt-fill display-5"></i>Direccion de la cita: <br>&nbsp;&nbsp;"{{appToReserve.center_name }}"</div>
+						<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
+						<div class=""> &nbsp;&nbsp;  {{appToReserve.center_address }}</div>
+					<!--
+							<hr>
+							<a v-if="imgLoaded" :href="app.url_map" >Mapa</a>
+							
+							<img   @load="imgLoaded = true" @error="imgLoaded = false"  :src="imgMapUrl" class="img-fluid" alt="center map">
+					-->
+					</div>
+<hr>
+				<!--
                   <div class="d-flex  justify-content-end  m-0">
 				
                       <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ showSpecialtyName(appToReserve.specialty1) }}  </div>
@@ -42,28 +79,23 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 						<i class="bi bi-person m-1"></i>Con :  {{appToReserve.professional_name }} 
 					</div>
 						<br>
-
+				-->
 				 
-                <div class="text-dark"> Datos del Paciente
+                <div class="text-dark"> 
+					<p class="display-4"> Datos del Paciente </p>
                 </div>							
                             <form autocomplete="off" method="POST" action="take_appointment.html">			
                                 <input class="form-control form-control-lg " type="hidden" placeholder="Token" name="token" value="AAAAA"  >
-                                <br>
-								<!--	
-                                <input class="form-control form-control-lg " type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
-                                <div v-if="error_msg_name" class="text-danger">Debe Indicar Nombre del paciente</div>
-                                <br>
-								-->
-
-								<div class="input-group mb-3">
+                               
+							   <div class="input-group mb-3">
+								   <div v-if="error_msg_name" class="text-danger w-100">Debe Indicar Nombre del paciente</div>
 									<input type="text" class="form-control" placeholder="Ej. Juan Alejandro Morales Miranda"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name" >
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">Nombre</span>
 									</div>
-								<div v-if="error_msg_name" class="text-danger">Debe Indicar Nombre del paciente</div>
+									
 								</div>
  								
-
 								<!--
                                 <input class="form-control form-control-lg" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
                                 <div v-if="error_msg_doc_id" class="text-danger">Debe Indicar RUT o Pasaporte del paciente</div>
@@ -71,12 +103,12 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 								-->
 
 								<div class="input-group mb-3">
-									<input type="text" class="form-control" placeholder="Ej. 13.909.371-3" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id" >
+									<div v-if="error_msg_doc_id" class="text-danger w-100">Debe Indicar RUT o Pasaporte del paciente</div>
+										<input type="text" class="form-control" placeholder="Ej. 13.909.371-3" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id" >
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">N°Cedula</span>
 									</div>
-									<div v-if="error_msg_doc_id" class="text-danger">Debe Indicar RUT o Pasaporte del paciente</div>
-								</div>
+										</div>
  								
 
 								<!--
@@ -88,11 +120,12 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 								-->
 
 								<div class="input-group mb-3">
+									<div v-if="error_msg_address" class="text-danger w-100">Debe Indicar Su Direccion de atencion a domicilio </div>
+							
 									<input type="text" class="form-control" placeholder="Ej. Tristan Cornejo 999, Independencia" name="form_patient_address" id="form_patient_address"  v-model="form_patient_address" >
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">Su Dirección</span>
 									</div>
-									<div v-if="error_msg_address" class="text-danger">Debe Indicar Su Direccion de atencion a domicilio </div>
 								</div>
  									
 								<!--
@@ -101,11 +134,11 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                                 <br/>
 								-->								
 								<div class="input-group mb-3">
+									<div v-if="error_msg_age" class="text-danger w-100">Debe Indicar Edad del paciente</div>
 									<input  type="number" class="form-control" placeholder="Ej. 31" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">edad</span>
 									</div>
-								<div v-if="error_msg_age" class="text-danger">Debe Indicar Edad del paciente</div>
 								</div>
 
 
@@ -115,11 +148,12 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                                 <br>
 								-->
 								<div class="input-group mb-3">
+									<div v-if="error_msg_email" class="text-danger w-100">Debe Indicar un correo valido</div>
 									<input type="text" class="form-control" placeholder="Ej. sucorreo@ejemplo.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">Email@</span>
 									</div>
-								<div v-if="error_msg_email" class="text-danger">Debe Indicar un correo valido</div>
+								
 								</div>
  								
 								<!--
@@ -129,17 +163,21 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 								-->
 
 								<div class="input-group mb-3">
+									<div v-if="error_msg_phone" class="text-danger w-100">Debe Indicar un Telefono de contacto</div>
 									<input type="text" class="form-control" placeholder="Ej. 975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone">
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">Telefono</span>
 									</div>
-								<div v-if="error_msg_phone" class="text-danger">Debe Indicar un Telefono de contacto</div>
+								
                               	</div>
  								
-															
-                                <input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
-                                <button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
-                            	
+								<div class="d-flex justify-content-center m-5" >
+									<input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
+                                	<button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary p-4 btn-lg" data-bs-dismiss="modal"   >Tomar esta Hora</button>
+                            	</div> 
+
+
+
 								<br>
 								<text class="text-secondary" style=""><br>#{{appToReserve.calendar_id}}</text>	
 								<div class="" style="height : 500px"> 
