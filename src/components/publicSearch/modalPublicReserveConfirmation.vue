@@ -18,8 +18,69 @@ import axios from 'axios'
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background " style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;">
               
+      <div class="modal-body w-100" > 
+                
+				 	<div class="d-flex flex-row justify-content-end ">
+                      <div  > </div>
+                      <div  > </div>
+                      <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalConfirmation = false ; this.updateSearchResult() " aria-label="Close"></i> </div>
+                    </div>
 
+					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
+						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(appConfirmed.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{appConfirmed.date.substring(8, 10) }} </text>  </div>
+					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appConfirmed.specialty_reserved) }} </div> 
+					</div>
 
+          <div class="text-dark mt-3 d-flex justify-content-center"> 
+					    <text class="display-5 "> RESERVA EXITOSA </text>
+          </div>	
+          <div class="text-dark d-flex justify-content-center"> 
+            <p> <i class="bi bi-check2-circle display-1"></i></p>
+          </div>
+          <div class="text-dark d-flex justify-content-center"> 
+            <p> <i class=""></i> Recuerde confirmar su asistencia respondiendo al correo enviado a: lalaqq12@nada.com  </p>
+          </div>
+
+					<div style="margin-top: 1em; " class="h4">
+							<div class="" >
+								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Fecha :  {{ transform_date( appConfirmed.date.substring(0, 10) ) }}  </p>
+								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{appConfirmed.start_time.substring(0, 5) }} hrs     </p>
+								<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
+							</div>
+					</div>
+
+					<div v-if="appConfirmed.home_visit"  class="text-primary" >
+							<div class="h3" style="" ><i class="bi bi-house-fill m-1 display-5"></i> Visita a domicilio 
+							</div>
+					</div>
+
+					<div v-if="appConfirmed.center_visit"  class="" style=" color:#1f9d94 "  >
+              <div > <i class="bi bi-geo-alt-fill display-5"></i>Direccion de la cita: <br>&nbsp;&nbsp;"{{appConfirmed.center_name }}"</div>
+              <!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
+              <div class=""> &nbsp;&nbsp;  {{appConfirmed.center_address }}</div>
+				  </div>
+          
+          <hr>
+			 
+          <div class="text-dark"> 
+					    <p class="display-4"> Datos del Paciente </p>
+
+              <div class="mt-0" >Nombre: {{appConfirmed.patient_name }}</div>
+              <div> Nº : {{appConfirmed.patient_doc_id }}</div>
+              <div> Email : {{appConfirmed.patient_email }}</div>
+              <div> Telefono : {{appConfirmed.patient_phone1 }}</div>
+              <div> Dirección :{{appConfirmed.patient_address }}</div>
+              <div> Edad : {{appConfirmed.patient_age }}</div>
+
+          </div>			
+
+          <div class="d-flex justify-content-center m-5" >
+							<input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
+             	<button type="button" @click="showModalConfirmation = false ; this.updateSearchResult() " class="btn btn-primary p-4 btn-lg" data-bs-dismiss="modal"> Finalizar</button>
+          </div> 				
+                            
+    </div>
+<!--
                 <div class="modal-body " > 
 
                   <div class="d-flex flex-row justify-content-end">
@@ -43,12 +104,12 @@ import axios from 'axios'
 						        <i class="bi bi-person m-1"></i>Con :  {{appConfirmed.patient_name }} 
 				    	</div>
         <br>
-				<!-- IF APP IN CENTER -->
+			
         <div v-if="appConfirmed.app_type_center" class="" >
 					<div  style="color:#2e5668"> <i class="bi bi-building  m-1"></i> <b>Cita en Centro</b><br> {{appConfirmed.center_name }}</div>
 					<div class="">Direccion:  {{appConfirmed.center_address }}</div>
 				</div>  
-        <!-- IF HOME VISIT -->
+       
         <div v-if="app.app_type_home" class="" >
 					<div><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b>  
           </div>
@@ -57,7 +118,7 @@ import axios from 'axios'
 							</div>
 				</div>
 
-							<!--	<p style="border-style: dotted;" class="p-2 bg-info text-white"> -->
+					
                 <div class="p-2 border border-2">
 								IMPORTANTE: <br>
 								Debe confirmar su asistencia 48 Hrs antes de su cita en el enlace que fue enviado a su correo {{appConfirmed.patient_email}} 
@@ -72,6 +133,10 @@ import axios from 'axios'
 	                      <div class="" style="height : 200px"> 
                 				</div>
                 </div>
+
+
+-->
+
                 	<br>
 	             
         </div> 
