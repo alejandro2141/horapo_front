@@ -119,7 +119,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 								</div>
 								-->
 
-								<div class="input-group mb-3">
+								<div v-if="appToReserve.home_visit" class="input-group mb-3">
 									<div v-if="error_msg_address" class="text-danger w-100">Debe Indicar Su Direccion de atencion a domicilio </div>
 							
 									<input type="text" class="form-control" placeholder="Ej. Tristan Cornejo 999, Independencia" name="form_patient_address" id="form_patient_address"  v-model="form_patient_address" >
