@@ -27,7 +27,7 @@ import axios from 'axios';
                         <text class="h3">Hora {{hourToReserve.start_time.substring(0, 5) }}  Hrs </text>
                         <text class=""> Con:  {{hourToReserve.name }} </text> 
                         <text class="">Nombre del centro: {{hourToReserve.center_name }}  </text>
-                        <text class="">Direccion: {{hourToReserve.center_address }} </text>
+                        <text v-if="hourToReserve.app_type_home" class="">Direccion: {{hourToReserve.center_address }} </text>
                                 
                         <div class="mt-2"> 
                           Datos del Paciente
