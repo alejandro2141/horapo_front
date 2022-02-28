@@ -79,7 +79,7 @@ import axios from 'axios'
              	<button type="button" @click="showModalConfirmation = false ; this.updateSearchResult() " class="btn btn-primary p-4 btn-lg" data-bs-dismiss="modal"> Finalizar</button>
           </div> 				
                             
-    </div>
+      </div>
 <!--
                 <div class="modal-body " > 
 
