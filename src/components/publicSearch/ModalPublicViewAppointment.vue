@@ -45,7 +45,7 @@ import loadProgress from '../loadProgress.vue'
 					</div>
 
 					<div v-if="app.home_visit"  class="text-primary" >
-							<div class="h3" style="" ><i class="bi bi-house-fill m-1 display-5"></i> Visita a domicilio en : 
+							<div class="h3" style="" ><i class="bi bi-geo-alt-fill m-1 display-5"></i> Visita a domicilio en : 
 						
 									<div class="m-2">
 									<p  v-if=" app.home_visit_location1 != null " >  
