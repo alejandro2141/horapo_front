@@ -31,13 +31,14 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
                    <GenericBlockDateSpecialtyVue :day='hourTaken.date.substring(8, 10)' :month='getShortMonthName(hourTaken.date.substring(5, 7) )'  :specialties='id2name(hourTaken.specialty_reserved )' ></GenericBlockDateSpecialtyVue>
 
+
                     <!-- APP IN CENTER -->
                     <div class="mt-2" v-if="hourTaken.app_type_center"   >
                                 <div class="h3" style="color:#1f9d94 ;">
-                                    <i class="bi bi-building"  ></i>  En Consulta <br>
+                                    <i class="bi bi-geo-alt-fill"  ></i>  En Consulta <br>
                                 </div>
                                 <div>
-                                    <i class="bi bi-geo-alt" style="color:#1f9d94 ;"  ></i>{{hourTaken.center_name }} :    {{hourTaken.center_address }}       
+                                    <i class="" style="color:#1f9d94 ;"  ></i>{{hourTaken.center_name }} :    {{hourTaken.center_address }}       
                                 </div>
                     </div>
                     <!-- APP HOME -->
@@ -68,15 +69,25 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                     </div>
 
 
+                    <div style="margin-top: 1em; " class="h4">
+                        <div class="" >
+                          <p> <i class="bi bi-circle-fill display-5 text-primary"></i> Fecha :  {{ transform_date( hourTaken.date.substring(0, 10) ) }}  </p>
+                          <p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{hourTaken.start_time.substring(0, 5) }} hrs     </p>
+                          <p> <i class="bi bi-person-circle display-4 text-primary"></i>  
+                            {{ hourTaken.patient_name}} <br> 
+                            ID:{{ hourTaken.patient_doc_id}}
+                          
+                          </p>
+                        </div>
+                    </div>
 
-                      <h3> Hora Inicio: {{hourTaken.start_time}} ({{hourTaken.duration}}Min ) </h3>          
-                      <h3> Fecha {{hourTaken.date.substring(0, 10)}} </h3>
 
-                      <h3><b> Informacion Paciente : </b></h3>
-                      <h3>  {{ hourTaken.patient_name}} <br> 
-                          ID:{{ hourTaken.patient_doc_id}} </h3>
+                    
+                    <text v-if="hourTaken.app_type_home">
                       <h2> Direccion: 
                       {{ hourTaken.patient_address}}  </h2>
+
+                    </text>
 
                       <h3 class="text-primary" > 
                             <a :href='"tel:+56"+hourTaken.patient_phone1'>
@@ -215,6 +226,14 @@ export default {
     },
 
 	methods :{
+
+
+    transform_date(date)
+    	{
+        let temp = date.split("-") ;
+        return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+    	},
+
     id2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
@@ -229,7 +248,7 @@ export default {
 	  getShortMonthName(month)
 		{
 			console.log("MONTH:"+parseInt(month));
-			let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+			let months = ['nodata','Ene.','Feb.' ,'Mar.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
 			return months[parseInt(month)];
 
 		},
