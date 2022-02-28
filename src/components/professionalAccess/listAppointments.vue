@@ -63,7 +63,8 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                         <!-- <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>  -->
                     </div>
                     
-                    <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" >
+                    <!-- <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" > -->
+                    <div class="text-secondary  display-5"  >
                         <i class="bi bi-plus"></i> {{ hour.start_time.substring(0,5) }}
                     </div>
 
@@ -182,8 +183,8 @@ export default {
                             { "start_time" : "23:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
                             ];
            
-           /*
-             this.hours = [  { "start_time" : "00:00" },
+                /*
+                this.hours = [  { "start_time" : "00:00" },
                             { "start_time" : "01:00"  },
                             { "start_time" : "02:00"  },
                             { "start_time" : "03:00"  },  
@@ -208,13 +209,12 @@ export default {
                             { "start_time" : "22:00"  },  
                             { "start_time" : "23:00"  },
                             ];
-*/
+                */
+
             this.showModalCreateApp= true ;
             console.log ("appointments change !!!");
             let poped = newValue.pop() ;
  
-            
-            console.log ("appointments change !!!");
             
             while ( poped != null )
             {  
@@ -223,6 +223,7 @@ export default {
             poped = newValue.pop() ;
             } 
             //this.hours.sort();
+            //paint based in Calendar Color. 
 
              this.hours.sort(function(a, b){
             let x = a.start_time;
