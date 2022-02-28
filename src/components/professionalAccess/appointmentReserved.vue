@@ -30,16 +30,19 @@ import axios from 'axios';
                 <div class="mt-2 w-100" >
                     <div class="d-flex justify-content-between " >
                         <div>
-                       <text class="text-success"  >{{ id2name(appointment.specialty_reserved ) }}  </text> 	
-                        <i v-if="appointment.available_public_search" style="margin-left: 1.0em;" class="bi bi-wifi text-success ">On Line</i>
+                       <text class="text-success display-5"  >{{ id2name(appointment.specialty_reserved ) }}  </text> 
+                       <!--	
+                        <i v-if="appointment.public" style="margin-left: 1.0em;" class="bi bi-wifi text-success ">On Line</i>
                         <br>
-
+                        -->
+                        <!--
                         <div class="text-danger" v-if="appointment.app_status == 1 ">
-                            Cita Cancelada 
+                            Cita Activa 
                         </div>
-
-                        <text class="bg-secondary text-white" v-if='appointment.confirmation_status == 0' >
-                            Reservada. Sin Confirmar </text>
+                        -->
+                        <text class="" v-if='appointment.confirmation_status == 0' >
+                          <br>  Reservada.<br> <text class="bg-secondary text-white" > Sin Confirmar </text>
+                        </text>
                        
                         </div>
                        
