@@ -69,7 +69,11 @@ import axios from 'axios';
             </div>
             
             <div v-if="appointment.app_type_home" style=" font-size: 1.0em;" >
-                          <i class="bi bi-house"> A Domicilio  </i> <br>
+                        <text style="color:#3399FF" >  
+                            <i class="bi bi-house">   </i> A Domicilio
+                        </text>
+                        <br>
+                         
                            Direccion Paciente:  {{appointment.patient_address }} <br>
                             <!--
                             <text v-if=" appointment.location1 != null " >  
