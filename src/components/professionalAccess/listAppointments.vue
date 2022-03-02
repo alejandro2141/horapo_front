@@ -47,13 +47,15 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     <div v-if="hour.app_available == false ">
                         <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentReserved>
                     </div>
+
                     <div v-else>
                         <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id"  :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentAvailable>
                     </div>
+                    
 
                 </div>
        
-                <div v-else class="d-flex justify-content-between">
+                <div v-else class="d-flex justify-content-between" :style="{ 'background-color' : hour.color  }" >
                    
                     <div  v-html="hour.symbol1" >     
                     </div>
@@ -144,7 +146,7 @@ export default {
         }   
     },
    	
-   props: ['daterequired','session_params','appointments','global_specialties', 'global_comunas'  ],
+   props: ['daterequired','session_params','appointments',  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: ['updateAppointmentList','switchView' ] , 
 	created () {
        // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
@@ -157,32 +159,72 @@ export default {
 
             console.log("appointment_day:"+this.appointments_day);  
             
-            this.hours = [  { "start_time" : "00:00" , "symbol1" : "<i style='opacity: 0.5 ' class='h2 bi bi-moon-stars'></i> " },
-                            { "start_time" : "01:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
-                            { "start_time" : "02:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
-                            { "start_time" : "03:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },  
-                            { "start_time" : "04:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
-                            { "start_time" : "05:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>" },
-                            { "start_time" : "06:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>" },
-                            { "start_time" : "07:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sunrise'></i>" },   
-                            { "start_time" : "08:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>" },
-                            { "start_time" : "09:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>" },
-                            { "start_time" : "10:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>" },   
-                            { "start_time" : "11:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>" },
-                            { "start_time" : "12:00" , "symbol1" : "<i style='opacity: 0.5' class='h1 bi bi-sun '></i>" },
-                            { "start_time" : "13:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>" },
-                            { "start_time" : "14:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>" },   
-                            { "start_time" : "15:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>" }, 
-                            { "start_time" : "16:00" , "symbol1" : "<i style='opacity: 0.5'  class='h2 bi bi-sun '></i>" }, 
-                            { "start_time" : "17:00" , "symbol1" : "<i style='opacity: 0.5' class='h1 bi bi-sun '></i>" }, 
-                            { "start_time" : "18:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>" }, 
-                            { "start_time" : "19:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi-sunset '></i>" },  
-                            { "start_time" : "20:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>" }, 
-                            { "start_time" : "21:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>" },
-                            { "start_time" : "22:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },  
-                            { "start_time" : "23:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" },
-                            ];
-           
+            this.hours = [       
+                            { "start_time" : "00:00" , "symbol1" : "<i style='opacity: 0.5 ' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff" },
+                            { "start_time" : "01:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "02:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "03:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>"  ,  "color" : "#ffffff" },  
+                            { "start_time" : "04:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>"  ,  "color" : "#ffffff"  },
+                            { "start_time" : "05:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "06:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "07:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sunrise'></i>",  "color" : "#ffffff" },   
+                            { "start_time" : "08:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>"  ,  "color" : "#ffffff"  },
+                            { "start_time" : "09:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "10:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>"  ,  "color" : "#ffffff" },   
+                            { "start_time" : "11:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "12:00" , "symbol1" : "<i style='opacity: 0.5' class='h1 bi bi-sun '></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "13:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "14:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>"  ,  "color" : "#ffffff" },   
+                            { "start_time" : "15:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>"  ,  "color" : "#ffffff" }, 
+                            { "start_time" : "16:00" , "symbol1" : "<i style='opacity: 0.5'  class='h2 bi bi-sun '></i>" ,  "color" : "#ffffff" }, 
+                            { "start_time" : "17:00" , "symbol1" : "<i style='opacity: 0.5' class='h1 bi bi-sun '></i>"  ,  "color" : "#ffffff" }, 
+                            { "start_time" : "18:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-sun '></i>"  ,  "color" : "#ffffff" }, 
+                            { "start_time" : "19:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi-sunset '></i>"  ,  "color" : "#ffffff" },  
+                            { "start_time" : "20:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>"  ,  "color" : "#ffffff" }, 
+                            { "start_time" : "21:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>"  ,  "color" : "#ffffff" },
+                            { "start_time" : "22:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff"},  
+                            { "start_time" : "23:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff"},
+                            
+                        ];
+
+                if (this.calendars_marks != null)
+                {
+                    for (let i = 0; i < this.calendars_marks.length; i++) 
+                        {
+                            console.log("Calendar startTime->"+this.calendars_marks[i].start_time+ " End Time->"+this.calendars_marks[i].end_time );
+                           
+                                 for (let x = 0; x < this.hours.length; x++) 
+                                 {
+                                    console.log("Hour to compare : "+ this.calendars_marks[i].start_time.substring(0,5) + " >  "+this.hours[x].start_time.substring(0,5)+ " > " + this.calendars_marks[i].end_time.substring(0,5)    ) ;
+                                        let aux_calStart =   new Date("1995-12-17T"+this.calendars_marks[i].start_time.substring(0,5)+":00")  ;
+                                        let aux_calEnd   =   new Date("1995-12-17T"+this.calendars_marks[i].end_time.substring(0,5)+":00") ;
+                                        let aux_hour     =   new Date("1995-12-17T"+this.hours[x].start_time.substring(0,5)+":00")   ;
+                                    console.log("Hour to compare : "+ aux_calStart + " <  "+aux_hour + " < " + aux_calEnd    ) ;
+                                     
+                                     if (  aux_calStart < aux_hour &&  aux_hour < aux_calEnd    )
+                                        {
+                                            this.hours[x].color = this.calendars_marks[i].color ; 
+                                            console.log("Painting hour to calendar color "+this.calendars_marks[i].color );
+                                        }
+                                 }
+
+                        }
+                }
+
+/*
+                this.calendars_marks.forEach( function(calendar)
+                {
+                    console.log("Calendar  startTime->"+calendar.start_time+ " End Time->"+calendar.end_time );
+
+                        this.hours.forEach( function(hour)
+                            {
+                                console.log("day startTime->"+hour.start_time);
+                            }
+                        );
+
+                }
+                );
+*/           
                 /*
                 this.hours = [  { "start_time" : "00:00" },
                             { "start_time" : "01:00"  },
