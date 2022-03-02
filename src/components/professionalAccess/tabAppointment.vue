@@ -11,21 +11,23 @@ import loadProgress from '../loadProgress.vue'
 </script>
 
 <template>
-<loadProgress  :active_spinner="active_spinner" > </loadProgress>
+<div>
+  <loadProgress  :active_spinner="active_spinner" > </loadProgress>
       <div v-if='!session_params.first_time' >
 
             <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> 
-           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
+           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
 
             <div id='footer' style='height : 800px'>
             </div>
 	    </div>
 
-      <div v-else>
-        <FirstTimeLogin v-on:switchToCenters='switchToCenters' ></FirstTimeLogin>
+      <div v-else >
+        <FirstTimeLogin v-on:switchToCenters='switchToCenters' > </FirstTimeLogin>
       </div>
 
+</div>
 </template>
 
 <style scoped>
@@ -42,6 +44,7 @@ data: function () {
             daterequired: null ,
             appointments: null, 
             active_spinner : false , 
+            calendars_marks : null ,
 		 }
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
@@ -82,9 +85,27 @@ data: function () {
               console.log ("getAppointments REQUEST :"+ JSON.stringify(json)  );
               let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day",json);
               console.log ("getAppointments RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
-              this.appointments = response_json.data.rows;		
+              this.appointments = response_json.data.rows;	
+              this.updateCalendarsMarks();
           this.active_spinner = false ;  
 		    },
+
+        async updateCalendarsMarks() {
+                        const json = { 
+                        //professional_id : this.session_params.professional_id ,			   
+                        professional_id : this.session_params.professional_id ,			   
+                                     };
+
+                        console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
+                        let response_json = await axios.post("http://localhost:8080"+"/rofessional_get_calendars",json);
+                        this.calendars_marks = response_json.data.rows;
+                        
+                        //console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
+                    },	
+
+
+
+
   },
 
 }
