@@ -20,19 +20,70 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
  
                 <div class="modal-header">
                         <div class="text-secondary  display-5">
-                        Detalles Horario
+                        Detalles Calendario 
                         </div>
                         <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalViewCalendar = false ; $emit('updateCalendarList'); "  aria-label="Close"></i>
                         </div>
                 </div>
 
                 <div class="modal-body mt-0"> 
-                  {{calendar_details.id}}
-                  {{ idSpecialty2name(calendar_details.specialty1) }}
-                  
+            
+                 <text class="text-secondary  display-5" > {{ idSpecialty2name(calendar_details.specialty1) }}</text> <br>
+                 
+                 <div  v-if="calendar_details.active"  class="d-flex justify-content-between text-primary">
+                   <text class="h2">ACTIVO</text>
+                   <text> </text>
+                   <i  class="bi bi-toggle-on display-1" @click="inactiveCalendar(calendar_details)" ></i>
+                 </div>
+
+                 <div  v-else  class="d-flex justify-content-between">
+                   <text class="h2">APAGADO</text>
+                   <text> </text>
+                   <i  class="bi bi-toggle-on display-1" @click="activeCalendar(calendar_details)" ></i>
+                 </div>
+
+                  <div  class="d-flex justify-content-between">
+                          <text> Fecha Inicio  </text>  
+                   
+                          <text>      {{calendar_details.date_start.substring(0,10) }}    </text>
+                  </div>
+
+                 <text> Fecha Inicio : {{calendar_details.date_start.substring(0,10) }}   </text>      <br>         
+                 <text> Fecha Fin : {{calendar_details.date_end.substring(0,10) }}    </text>     <br>
+                 <text> Hora  Inicio :{{calendar_details.start_time.substring(0,5)}}    </text>   <br>  
+                 <text> Hora  Fin : {{calendar_details.end_time.substring(0,5)}}   </text>     <br>
+                 <text> Lugar:  
+                      <text v-if="calendar_details.center_visit"> En Consulta 
+                        <br> 
+                      Incluir Nombre Consulta 
+                        <br>
+                      </text> 
+
+                      <text v-if="calendar_details.home_visit"> A Domicilio 
+                        <br>
+                         Incluir Comunas   
+                         <br>  
+                      </text> 
+                          
+                  </text>     
+
+                                    Dias Recurrencia: <br>
+                                        <text v-if="calendar_details.monday"> Lunes <br> </text> 
+                                        <text v-if="calendar_details.tuestday"> Martes  <br> </text> 
+                                        <text v-if="calendar_details.wednesday"> Miercoles  <br> </text> 
+                                        <text v-if="calendar_details.thursday"> Jueves  <br> </text> 
+                                        <text v-if="calendar_details.friday"> Viernes <br> </text> 
+                                        <text v-if="calendar_details.saturday"> Sabado <br> </text> 
+                                        <text v-if="calendar_details.sunday"> Domingo <br> </text> 
+
+                  <!--
                   <button v-if="calendar_details.active" @click="inactiveCalendar(calendar_details)" type="button" class="btn btn-primary  btn-danger ">Desactivar</button>
                   <button  v-else   @click="activeCalendar(calendar_details)" type="button" class="btn btn-primary btn-success ">Activar</button>
-                  
+                  -->
+
+                  <br>
+                  <text>  #{{calendar_details.id}} </text> 
+                  <br>
 
                 </div>
 
@@ -179,7 +230,10 @@ data: function () {
         async activeCalendar(calendar_details)
         {
           console.log("Activate Calendar")
-          
+         
+           var r =confirm("¿ ACTIVAR este Calendario? Si acepta, sus horas quedaran visibles para el publico. Ok para continuar");
+            if (r == true) {
+
                   const json = { 
                     professional_id: this.session_params.professional_id ,
                     calendar_id :  calendar_details.id,
@@ -189,21 +243,33 @@ data: function () {
                   let response_json = await axios.post("http://localhost:8080"+"/professional_activate_calendar",json);
                   console.log ("Activate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
+                  this.showModalViewCalendar = false ; 
+                  this.$emit('updateCalendarList'); 
+            }
+
+
         },
 
         async inactiveCalendar(calendar_details)
         {
           console.log("INActivate Calendar")
-          
-                  const json = { 
-                    professional_id: this.session_params.professional_id ,
-                    calendar_id :  calendar_details.id,
-                    };
+        var r =confirm("¿ DESACTIVAR este Calendario? Si acepta, sus horas ya no seran visibles para publico. Ok para continuar");
+            if (r == true) {
+              
+                      const json = { 
+                        professional_id: this.session_params.professional_id ,
+                        calendar_id :  calendar_details.id,
+                        };
 
-                  console.log("INActivate Calendar REQUEST :"+JSON.stringify(json));
-                  let response_json = await axios.post("http://localhost:8080"+"/professional_inactivate_calendar",json);
-                  console.log ("INActivate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
-                  let aux_resp = response_json.data.rows ; 
+                      console.log("INActivate Calendar REQUEST :"+JSON.stringify(json));
+                      let response_json = await axios.post("http://localhost:8080"+"/professional_inactivate_calendar",json);
+                      console.log ("INActivate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+                      let aux_resp = response_json.data.rows ; 
+                      
+                      this.showModalViewCalendar = false ;
+                      this.$emit('updateCalendarList'); 
+            }
+
         },
 
 
