@@ -18,45 +18,65 @@ import ModalViewCalendar from './modalViewCalendar.vue';
             
                 <div  id="search_result" v-if='calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
-                        <div class="card m-3 border border-secondary" style="width: 18rem; ">
+                        <div class="card m-3 border border-secondary" style="width: 18rem; "   >
                             <div class="card-body">
-                                <h5 class="card-title"><i class=""></i>   {{idSpecialty2name(calendar.specialty1) }}  
-                                
-                                <text >Active: {{calendar.active }} </text> 
-                                
+
+                                <h5 class="card-title h2 p-2" :style="{ 'background-color' : calendar.color   }" ><i class=""></i>   {{idSpecialty2name(calendar.specialty1) }}  
                                 </h5>
 
-                                <p class="card-text">
+                                <div  v-if="calendar.active"  class="d-flex justify-content-between text-primary">
+                                    <text>Estado</text>
+                                    <text>  ENCENDIDO </text>
+                                </div>
 
-                                Fecha Inicio : {{calendar.date_start.substring(0,10) }} <br>
-                                Fecha Fin : {{calendar.date_end.substring(0,10) }} <br>
-                                Hora  Inicio :{{calendar.start_time.substring(0,5)}} <br>
-                                Hora  Fin : {{calendar.end_time.substring(0,5)}} <br>
+                                <div  v-else  class="d-flex justify-content-between text-primary">
+                                    <text>Estado</text>
+                                    <text  class="text-danger">  APAGADO </text>
+                                </div>
 
-                                Lugar:  
-                                    <text v-if="calendar.center_visit"> En Consulta 
-                                        <br> 
-                                        Incluir Nombre Consulta 
-                                    </text> <br>
-                                    
-                                    
-                                    <text v-if="calendar.home_visit"> A Domicilio 
-                                    <br>
-                                        Incluir Comunas     
-                                        
-                                    </text> <br>
+                  <div  class="d-flex justify-content-between mt-0">
+                          <text> Fecha Inicio  </text>  
+                          <text> {{calendar.date_start.substring(0,10) }}    </text>
+                  </div>
 
-                                    Dias Recurrencia: <br>
-                                        <text v-if="calendar.monday"> Lunes <br> </text> 
-                                        <text v-if="calendar.tuestday"> Martes  <br> </text> 
-                                        <text v-if="calendar.wednesday"> Miercoles  <br> </text> 
-                                        <text v-if="calendar.thursday"> Jueves  <br> </text> 
-                                        <text v-if="calendar.friday"> Viernes <br> </text> 
-                                        <text v-if="calendar.saturday"> Sabado <br> </text> 
-                                        <text v-if="calendar.sunday"> Domingo <br> </text> 
+                  <div  class="d-flex justify-content-between mt-1">
+                          <text> Fecha Fin </text>  
+                          <text> {{calendar.date_end.substring(0,10) }} </text>
+                  </div>
 
-                                </p>
-                               
+                  <div  class="d-flex justify-content-between mt-1">
+                          <text> Hora  Inicio </text>  
+                          <text> {{calendar.start_time.substring(0,5)}} </text>
+                  </div>
+
+                  <div  class="d-flex justify-content-between mt-1">
+                          <text> Hora  Fin </text>  
+                          <text> {{calendar.end_time.substring(0,5)}} </text>
+                  </div>
+
+                  <div v-if="calendar.center_visit"  class="d-flex justify-content-between">
+                          <text> Lugar </text>  
+                          <text> En Consulta  </text>
+                  </div>
+
+                  <div v-else  class="d-flex justify-content-between mt-1 ">
+                          <text> Lugar </text>  
+                          <text> A Domicilio  </text>
+                  </div>
+
+                <div class="mt-1">
+                  Dias Recurrencia: <br>
+
+                                        <text class="d-flex justify-content-end" v-if="calendar.monday"> Lunes <br> </text> 
+                                        <text class="d-flex justify-content-end" v-if="calendar.tuestday"> Martes  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar.wednesday"> Miercoles  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar.thursday"> Jueves  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar.friday"> Viernes <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar.saturday"> Sabado <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar.sunday"> Domingo <br> </text> 
+                  </div>
+
+                               <br>
                                 <p class="text-end" > <text  @click="viewCalendar(calendar)" class="text-primary">Ver</text>  </p>
                             </div>
                         </div>   
