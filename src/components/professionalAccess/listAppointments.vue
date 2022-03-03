@@ -22,23 +22,29 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' :openModalShowDetailsEvent="openModalShowDetailsEvent" :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentDetails>
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties' > </ModalShowAppointmentTaken>
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' > </ModalProfessionalReserveAppointment>
-<hr>
+<hr> 
+
+ <!--
     <div class="d-flex justify-content-around  listHoursHeader" >
 
-
+      
             <div class="display-6" style="margin-left : 1em" >
-               <!-- <i class="text-secondary bi bi-smartwatch"></i> -->
+             
             </div>
             
             <div>
             </div>
         
+            
             <div @click="duplicateDay(daterequired)" class=" text-primary"  >
              Duplicar dia  <i class="bi bi-box-arrow-right"></i>
             </div>
+          
 
     </div>
 <hr>
+-->
+
 
     <div v-for="(hour) in hours" :key="hour"  >
       
@@ -201,9 +207,16 @@ export default {
                                         let aux_hour     =   new Date("1995-12-17T"+this.hours[x].start_time.substring(0,5)+":00")   ;
                                     console.log("Hour to compare : "+ aux_calStart + " <  "+aux_hour + " < " + aux_calEnd    ) ;
                                      
-                                     if (  aux_calStart < aux_hour &&  aux_hour < aux_calEnd    )
+                                     if ( ( aux_calStart <= aux_hour ) &&  (aux_hour <= aux_calEnd)    )
                                         {
+                                            if (this.calendars_marks[i].active)
+                                            {
                                             this.hours[x].color = this.calendars_marks[i].color ; 
+                                            }
+                                            else
+                                            {
+                                            this.hours[x].color = "#dddddd" ; 
+                                            }
                                             console.log("Painting hour to calendar color "+this.calendars_marks[i].color );
                                         }
                                  }
