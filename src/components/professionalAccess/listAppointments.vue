@@ -58,7 +58,6 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                         <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id"  :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentAvailable>
                     </div>
                     
-
                 </div>
        
                 <div v-else class="d-flex justify-content-between" :style="{ 'background-color' : hour.color  }" >
@@ -67,8 +66,8 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     </div>
                    
 
-                    <div class="h1 m-2" >
-                        <!-- <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>  -->
+                    <div class=" m-2" >
+                       {{specialtyId2name(hour.specialty)}} <!-- <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>  -->
                     </div>
                     
                     <!-- <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" > -->
@@ -130,9 +129,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
 </style>
 
-
 <script>
-
 export default {
    data : function() {
         return {
@@ -163,9 +160,10 @@ export default {
                 //copy array including only app to be display in Modal duplicate day
                 this.appointments_day = [].concat(newValue);
 
-            console.log("appointment_day:"+this.appointments_day);  
+            console.log("appointment_day:"+JSON.stringify(this.appointments_day));  
             
-            this.hours = [       
+            this.hours = [  
+                            
                             { "start_time" : "00:00" , "symbol1" : "<i style='opacity: 0.5 ' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff" },
                             { "start_time" : "01:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>"  ,  "color" : "#ffffff" },
                             { "start_time" : "02:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>"  ,  "color" : "#ffffff" },
@@ -189,10 +187,10 @@ export default {
                             { "start_time" : "20:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>"  ,  "color" : "#ffffff" }, 
                             { "start_time" : "21:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>"  ,  "color" : "#ffffff" },
                             { "start_time" : "22:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff"},  
-                            { "start_time" : "23:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff"},
-                            
-                        ];
-
+                            { "start_time" : "23:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff"},  
+                       
+                       ];
+/*
                 if (this.calendars_marks != null)
                 {
                     for (let i = 0; i < this.calendars_marks.length; i++) 
@@ -215,7 +213,7 @@ export default {
                                             }
                                             else
                                             {
-                                            this.hours[x].color = "#dddddd" ; 
+                                            this.hours[x].color = "#aaaaaa" ; 
                                             }
                                             console.log("Painting hour to calendar color "+this.calendars_marks[i].color );
                                         }
@@ -223,7 +221,7 @@ export default {
 
                         }
                 }
-
+*/
 /*
                 this.calendars_marks.forEach( function(calendar)
                 {
@@ -238,42 +236,15 @@ export default {
                 }
                 );
 */           
-                /*
-                this.hours = [  { "start_time" : "00:00" },
-                            { "start_time" : "01:00"  },
-                            { "start_time" : "02:00"  },
-                            { "start_time" : "03:00"  },  
-                            { "start_time" : "04:00"  },
-                            { "start_time" : "05:00"  },
-                            { "start_time" : "06:00"  },
-                            { "start_time" : "07:00"  },   
-                            { "start_time" : "08:00"  },
-                            { "start_time" : "09:00"  },
-                            { "start_time" : "10:00"  },   
-                            { "start_time" : "11:00"  },
-                            { "start_time" : "12:00"  },
-                            { "start_time" : "13:00"  },
-                            { "start_time" : "14:00"  },   
-                            { "start_time" : "15:00"  }, 
-                            { "start_time" : "16:00"  }, 
-                            { "start_time" : "17:00"  }, 
-                            { "start_time" : "18:00"  }, 
-                            { "start_time" : "19:00"  },  
-                            { "start_time" : "20:00"  }, 
-                            { "start_time" : "21:00"  },
-                            { "start_time" : "22:00"  },  
-                            { "start_time" : "23:00"  },
-                            ];
-                */
+ 
 
             this.showModalCreateApp= true ;
             console.log ("appointments change !!!");
             let poped = newValue.pop() ;
- 
-            
+      
             while ( poped != null )
             {  
-            this.hours.push( poped )    
+            this.hours.push(  { "start_time" : poped.start_time , "symbol1" : "<i style='opacity: 0.5 ' class='h2 bi bi-moon-stars'></i>" ,  "color" : poped.color , "specialty" :  poped.specialty1  , "app_available" : poped.app_available  }  )    
             console.log( "StartTime POP="+JSON.stringify(poped.start_time ) ) 
             poped = newValue.pop() ;
             } 
@@ -288,6 +259,7 @@ export default {
             return 0;
             });
 
+            console.log("HOURS="+JSON.stringify(this.hours) ) 
             
 
         }
@@ -376,6 +348,13 @@ export default {
             //  this.prevCenterName=center;
             }
         },  
+
+        specialtyId2name(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+
+        },
 
  
 
