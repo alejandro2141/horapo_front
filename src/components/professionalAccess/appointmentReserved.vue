@@ -23,9 +23,9 @@ import axios from 'axios';
                     <div class="text-muted">
                    {{appointment.duration }}min.  
                     </div>
-
                  
                 </div>
+                
                 
                 <div class="mt-2 w-100" >
                     <div class="d-flex justify-content-between " >
@@ -45,14 +45,9 @@ import axios from 'axios';
                         </text>
                        
                         </div>
-                       
-
+                    
                     </div>
                     
-                    
-                    
-                    
-                   
                      <div class="text-danger" v-if="appointment.app_blocked == 1 ">
                      Espacio de tiempo Bloqueado
                      </div>
