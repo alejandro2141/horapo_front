@@ -50,13 +50,15 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
       
                 <div v-if="hour.app_available != null" >
                 
-                    <div v-if="hour.app_available == false ">
+                    <div v-if="!hour.app_available">
                         <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentReserved>
                     </div>
-
+                    
+                    <!--
                     <div v-else>
                         <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id"  :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentAvailable>
                     </div>
+                    -->
                     
                 </div>
        
@@ -237,14 +239,41 @@ export default {
                 );
 */           
  
-
             this.showModalCreateApp= true ;
             console.log ("appointments change !!!");
             let poped = newValue.pop() ;
       
             while ( poped != null )
             {  
-            this.hours.push(  { "start_time" : poped.start_time , "symbol1" : "<i style='opacity: 0.5 ' class='h2 bi bi-moon-stars'></i>" ,  "color" : poped.color , "specialty" :  poped.specialty1  , "app_available" : poped.app_available  }  )    
+            
+             let appointment_taken = {
+                  id :  poped.id ,
+                 date : poped.date ,
+                 start_time :  poped.start_time , 
+                 duration : poped.duration ,
+                 pattient_doc_id : poped.pattient_doc_id ,
+                 pattient_name : poped.pattient_name ,
+                 pattient_email : poped.pattient_email ,
+                 patient_phone1 : poped.patient_phone1 ,
+                 patient_phone2 : poped.patient_phone2 ,
+                 app_status : poped.app_status , 
+
+                 patient_notification_email_reserved : poped.patient_notification_email_reserved ,
+                 patient_address : poped.patient_address , 
+                 patient_age  : poped.patient_age ,  
+                 specialty : poped.specialty1 , 
+            
+                  home_visit : poped.app_type_home ,
+                  center_visit :poped.app_type_center ,
+            
+                  center_id :poped.center_id ,
+                  color : '#ff0000' ,
+                  app_available : poped.app_available , 
+                  symbol1 : ""
+                }
+            
+            
+            this.hours.push( appointment_taken )    
             console.log( "StartTime POP="+JSON.stringify(poped.start_time ) ) 
             poped = newValue.pop() ;
             } 
