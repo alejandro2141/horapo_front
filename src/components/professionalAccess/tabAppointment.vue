@@ -82,10 +82,10 @@ data: function () {
               date : this.daterequired ,
               professional_id : this.session_params.professional_id , 
                     };
-              console.log ("getAppointments REQUEST :"+ JSON.stringify(json)  );
+              console.log ("professional_get_appointments_day2 REQUEST :"+ JSON.stringify(json)  );
               let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day2",json);
               console.log ("/professional_get_appointments_day2 RESPONSE:"+JSON.stringify(response_json.data)) ;
-              this.updateCalendarsMarks();
+              //this.updateCalendarsMarks();
               this.appointments = response_json.data;	
             
           this.active_spinner = false ;  
@@ -102,7 +102,7 @@ data: function () {
                         this.calendars_marks = response_json.data.rows;
                         
                         //console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
-                    },	
+        },	
 
 
 
