@@ -64,7 +64,13 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
        
                 <div v-else class="d-flex justify-content-between" :style="{ 'background-color' : hour.color  }" >
                    
-                    <div  v-html="hour.symbol1" >     
+                    <div class="mr-3" >
+                        <div v-if="hour.center_visit" style=" font-size: 1.0em;" >
+                             <i class="bi bi-building">   </i>   
+                        </div>
+                        <div v-if="hour.home_visit" style=" font-size: 1.0em;" >
+                             <i class="bi bi-house" > </i>  
+                        </div>                    
                     </div>
                    
 
@@ -79,7 +85,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
                 </div>
 
-           <hr :style="{'width': calculateLineExtension(hour)+'rem'}" style="margin: 0rem; height:0.5px ; text-align:left; margin-left:0 ; border : 1px solid black; " >
+       <!--    <hr :style="{'width': calculateLineExtension(hour)+'rem'}" style="margin: 0rem; height:0.5px ; text-align:left; margin-left:0 ; border : 1px solid black; " > -->
            <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />  
     </div>
 
@@ -165,7 +171,7 @@ export default {
             console.log("appointment_day:"+JSON.stringify(this.appointments_day));  
             
             this.hours = [  
-                            
+                         /*   
                             { "start_time" : "00:00" , "symbol1" : "<i style='opacity: 0.5 ' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff" },
                             { "start_time" : "01:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>"  ,  "color" : "#ffffff" },
                             { "start_time" : "02:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>"  ,  "color" : "#ffffff" },
@@ -190,7 +196,7 @@ export default {
                             { "start_time" : "21:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon'></i>"  ,  "color" : "#ffffff" },
                             { "start_time" : "22:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff"},  
                             { "start_time" : "23:00" , "symbol1" : "<i style='opacity: 0.5' class='h2 bi bi-moon-stars'></i>" ,  "color" : "#ffffff"},  
-                       
+                       */
                        ];
 /*
                 if (this.calendars_marks != null)
@@ -247,13 +253,14 @@ export default {
             {  
             
              let appointment_taken = {
-                  id :  poped.id ,
+                 id :  poped.id ,
+                 calendar_id : poped.calendar_id,
                  date : poped.date ,
                  start_time :  poped.start_time , 
                  duration : poped.duration ,
-                 pattient_doc_id : poped.pattient_doc_id ,
-                 pattient_name : poped.pattient_name ,
-                 pattient_email : poped.pattient_email ,
+                 patient_doc_id : poped.patient_doc_id ,
+                 patient_name : poped.patient_name ,
+                 patient_email : poped.patient_email ,
                  patient_phone1 : poped.patient_phone1 ,
                  patient_phone2 : poped.patient_phone2 ,
                  app_status : poped.app_status , 
@@ -263,11 +270,11 @@ export default {
                  patient_age  : poped.patient_age ,  
                  specialty : poped.specialty1 , 
             
-                  home_visit : poped.app_type_home ,
-                  center_visit :poped.app_type_center ,
+                  home_visit : poped.home_visit ,
+                  center_visit :poped.center_visit ,
             
                   center_id :poped.center_id ,
-                  color : '#ff0000' ,
+                  color : poped.color ,
                   app_available : poped.app_available , 
                   symbol1 : ""
                 }
