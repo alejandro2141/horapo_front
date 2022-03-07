@@ -7,8 +7,8 @@ import axios from 'axios';
 
 <template>
      
-    <div   class="mb-2  bg-white " data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
-    <text class="text-secondary" style="">#{{appointment.app_id}}</text>
+    <div  :style="{ 'background-color' : appointment.color  }"  class=" " data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
+    <text class="text-secondary" style="">#{{appointment.id}} </text>
         <div id="app " class="m-0 d-flex  "  >			
                 
                 <div class="m-0 border-bottom" :style="{'background-color' : '#'+appointment.center_color }" >
@@ -26,11 +26,11 @@ import axios from 'axios';
                  
                 </div>
                 
-                
+
                 <div class="mt-2 w-100" >
                     <div class="d-flex justify-content-between " >
                         <div>
-                       <text class="text-success display-5"  >{{ id2name(appointment.specialty_reserved ) }}  </text> 
+                       <text class="text-success display-5"  >{{ id2name(appointment.specialty ) }}  </text> 
                        <!--	
                         <i v-if="appointment.public" style="margin-left: 1.0em;" class="bi bi-wifi text-success ">On Line</i>
                         <br>
@@ -63,7 +63,7 @@ import axios from 'axios';
                     Edad:{{appointment.patient_age }} 
             </div>
             
-            <div v-if="appointment.app_type_home" style=" font-size: 1.0em;" >
+            <div v-if="appointment.home_visit" style=" font-size: 1.0em;" >
                         <text style="color:#3399FF" >  
                             <i class="bi bi-house">   </i> A Domicilio
                         </text>
@@ -91,7 +91,7 @@ import axios from 'axios';
                             </text>
                             -->
             </div>
-             <div v-if="appointment.app_type_center" style=" font-size: 1.0em;" >
+             <div v-if="appointment.center_visit" style=" font-size: 1.0em;" >
                 <i class="bi bi-building"> En Consulta  </i> <br>
                     <div v-if="appointment.center_name != null " >
                             {{appointment.center_name }}<br>
