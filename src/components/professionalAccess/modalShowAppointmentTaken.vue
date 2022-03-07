@@ -21,7 +21,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
                 <div class="modal-header">
                         <div class="text-secondary  display-5">
-                         Reservada #{{hourTaken.app_id}}
+                         Reservada #{{hourTaken.id}}
                         </div>
                         <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
                         </div>
@@ -29,7 +29,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
                 <div class="modal-body " > 
 
-                   <GenericBlockDateSpecialtyVue :day='hourTaken.date.substring(8, 10)' :month='getShortMonthName(hourTaken.date.substring(5, 7) )'  :specialties='id2name(hourTaken.specialty_reserved )' ></GenericBlockDateSpecialtyVue>
+                   <GenericBlockDateSpecialtyVue :day='hourTaken.date.substring(8, 10)' :month='getShortMonthName(hourTaken.date.substring(5, 7) )'  :specialties='id2name(hourTaken.specialty)' ></GenericBlockDateSpecialtyVue>
 
 
                     <!-- APP IN CENTER -->
