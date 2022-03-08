@@ -9,26 +9,30 @@ import SwitchViewButton from './switchViewButton.vue'
 
     <div v-if="session_params['professional_name'] != null"  class="d-flex p-1 justify-content-around bg-white "> 
 		
-		<div> 
-			<a HREF="/index.html" class="text-primary text-decoration-none"> 
-			<i class="bi bi-arrow-left-square"></i> Salir </a> 
+		<div class="text-primary " >
+				<a HREF="/index.html" class="text-primary text-decoration-none"> 
+				 	<i class="bbi bi-arrow-left-square display-5 "  ></i> SALIR
+				</a>
+			 
 		</div>
+
+
 
 		<div class="text-primary " >
 			 <text v-if="session_params['professional_name'] != null"   @click="switchViewTo(2)"> 
-				<i class="bi bi-card-list display-5 "  ></i>
+				<i class="bi bi-card-list display-5 "  ></i> Citas
 			 </text>
 		</div>
 
 		<div class="text-primary " >
 			 <text v-if="session_params['professional_name'] != null"   @click="switchViewTo(1)"> 
-				<i class="bi bi-calendar display-5 "></i>
+				<i class="bi bi-calendar display-5 "></i> Calendario 
 			 </text>
 		</div>	
 
 		<div class="text-primary " >
 			 <text v-if="session_params['professional_name'] != null"   @click="switchViewTo(3)"> 
-				<i class="bi bi-geo-alt display-5 "></i>
+				<i class="bi bi-geo-alt display-5 "></i> Consultas
 			 </text>
 		</div>
 					<!--
