@@ -12,22 +12,58 @@ import axios from 'axios';
           {{calendar[parseInt(req_year)][parseInt(req_month)][parseInt(req_day)] }}
         </div>
         <div class="display-5 ">
-            <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i> <text v-on:click="openCalendarPicker()" class="text-primary" > {{req_day}}</text>  <i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
+        
+            <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i> 
+        
+            <text class="text-primary pl-2 pr-2"  @click="openCalendarPicker()" > {{req_day}}   
+              
+            </text>  
+            
+            <i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
+        
         </div>
+
         <div class="display-5">
             <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i> {{ calendar[parseInt(req_year)][parseInt(req_month)][0]  }} 20{{req_year}}<i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>
         </div>
+
+        <div  v-if="show_date_picker" class="row  mb-1  border-secondary ">
+                    <div class="col">
+                        <input  v-model="form_required_date" :min="form_minimum_date" type="date" id="calendar-picker" name="calendar-picker"  class="datepicker-input"  >
+                    </div>
+        </div>
+
     </div>
     
-    <div class="row  mb-1  border-secondary ">
-                    <div class="col">
-                        <input  v-model="form_required_date" :min="form_minimum_date" type="date" id="birthday" name="birthday" class="form-control form-control-lg border border-primary" >
-                    </div>
-    </div>
+  
 
 </template>
 
 <style scoped>
+/* 
+.datepicker-input {
+ position: absolute;
+  left: 0;
+  top: 0;
+  
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.datepicker-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+*/
+
 </style>
 
 
@@ -48,6 +84,7 @@ export default {
 
         form_minimum_date : null,
         form_required_date : null,
+        show_date_picker : false ,
 
         }   
     },
@@ -88,6 +125,18 @@ export default {
         openCalendarPicker()
         {
         console.log("openCalendar ");
+        //this.show_date_picker = true ; 
+        $('#calendar-picker').datepicker();
+ 
+      
+        $('#calendar-picker').datepicker('show');
+      
+/*
+        let element = document.getElementById("calendar-picker");
+        //element.datepicker('show') //Show on click of button
+        console.log("element:"+element);
+*/
+
         },
 
         nextDay()
