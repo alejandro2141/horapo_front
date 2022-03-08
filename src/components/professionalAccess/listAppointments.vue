@@ -49,34 +49,30 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
     <div v-for="(hour) in hours" :key="hour"  >
       
                 <div v-if="hour.app_available != null" >
-                
                     <div v-if="!hour.app_available">
                         <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentReserved>
                     </div>
-                    
                     <!--
                     <div v-else>
                         <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id"  :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentAvailable>
                     </div>
                     -->
-                    
                 </div>
        
                 <div v-else class="d-flex justify-content-between" :style="{ 'background-color' : hour.color  }" >
-                   
-                    <div class="mr-3" >
-                        <div v-if="hour.center_visit" style=" font-size: 1.0em;" >
-                             <i class="bi bi-building">   </i>   
+                    
+                    <div class="mr-2 pr-2" style="marginLeft : 10px">
+                        <div v-if="hour.center_visit"  >
+                           <i class="h5 bi bi-geo-alt"></i> {{specialtyId2name(hour.specialty)}}     
                         </div>
-                        <div v-if="hour.home_visit" style=" font-size: 1.0em;" >
-                             <i class="bi bi-house" > </i>  
-                        </div>                    
+                        <div v-if="hour.home_visit"  >
+                             <i class="h5 bi bi-house" > </i>   {{specialtyId2name(hour.specialty)}}     
+                        </div>   
+                      
                     </div>
                    
 
-                    <div class=" m-2" >
-                       {{specialtyId2name(hour.specialty)}} <!-- <i class="text-primary bi bi-clipboard-plus" v-on:click="displayModalCreateApp(hour)" > </i>  -->
-                    </div>
+                    
                     
                     <!-- <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" > -->
                     <div class="text-secondary  display-5"  >
