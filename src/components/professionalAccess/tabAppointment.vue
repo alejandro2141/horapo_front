@@ -15,7 +15,7 @@ import loadProgress from '../loadProgress.vue'
   <loadProgress  :active_spinner="active_spinner" > </loadProgress>
       <div v-if='!session_params.first_time' >
 
-            <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
+           <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> 
            <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
 
