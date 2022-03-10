@@ -354,9 +354,6 @@ export default {
 
             //this.$emit('set_daterequired', "20"+this.req_year+"-"+this.req_month+"-"+ this.req_day ) ;
             this.$emit('set_daterequired', value ) ;
-
-
-
             },
 
            date(newDate,oldDate)
@@ -369,6 +366,8 @@ export default {
             //this.req_year = parseInt( auxDate.getFullYear().substring(2,4) ) ;
            
                this.$emit('set_daterequired', auxDate.getFullYear()+"-"+(auxDate.getMonth()+1)+"-"+ auxDate.getDate() ) ;
+           this.show_date_picker = false ; 
+           
            }  
         
         },
