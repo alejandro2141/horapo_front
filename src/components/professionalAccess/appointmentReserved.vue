@@ -56,6 +56,7 @@ import axios from 'axios';
                         <li v-if="appointment.home_visit" class="list-group-item" style="color:#3399FF"> A Domicilio :  {{appointment.patient_address }} </li>
                         <li v-if="appointment.center_visit" class="list-group-item"> En Consulta   </li>
                     </ul>
+                    {{appointment.message1 }}
 
             </div>
             
