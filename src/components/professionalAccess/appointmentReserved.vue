@@ -7,7 +7,7 @@ import axios from 'axios';
 
 <template>
      
-    <div  :style="{ 'background-color' : appointment.color  }"  class=" " data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
+    <div  :style="{ 'background-color' : appointment.color   }"  style="border-radius: 25px;"   class=" " data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
     
         <div class="d-flex justify-content-between" >
             
@@ -59,9 +59,9 @@ import axios from 'axios';
                     {{appointment.message1 }}
 
             </div>
-            
+           
+            <text class="text-secondary" style="">#{{appointment.id}} </text>   
 
-      <text class="text-secondary" style="">#{{appointment.id}} </text>      	
     </div>
 
 </template>
