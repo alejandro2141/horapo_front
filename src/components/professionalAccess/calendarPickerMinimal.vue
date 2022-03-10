@@ -362,7 +362,12 @@ export default {
            date(newDate,oldDate)
            {
                console.log("DatePIcker chagne to:"+ newDate );
-               let auxDate=new Date (newDate)
+            let auxDate=new Date (newDate)
+            
+            this.req_day = auxDate.getDate()  ;
+            this.req_month = (auxDate.getMonth()+1) ;  
+            //this.req_year = parseInt( auxDate.getFullYear().substring(2,4) ) ;
+           
                this.$emit('set_daterequired', auxDate.getFullYear()+"-"+(auxDate.getMonth()+1)+"-"+ auxDate.getDate() ) ;
            }  
         
