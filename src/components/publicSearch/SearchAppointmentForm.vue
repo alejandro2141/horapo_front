@@ -35,27 +35,25 @@ import inputFormComuna  from './InputFormComuna.vue'
                     </div>
                 </div>
                 <!-- --> 
+    
+                <button type="button" @click="form_app_type_center=!form_app_type_center ; form_app_type_home= false" class=" m-1 btn"  :class="{ 'btn-primary' : form_app_type_center , 'btn-secondary' : !form_app_type_center , 'btn-lg' : form_app_type_center }" >  En Consulta  </button>
+                <button type="button" @click="form_app_type_home=!form_app_type_home ; form_app_type_center= false "     class=" m-1 btn " :class="{ 'btn-primary' : form_app_type_home   , 'btn-secondary' : !form_app_type_home , 'btn-lg' : form_app_type_home     }" > A Domicilio </button>
+              
 
-
-                <div class="bg-white">
-                    <div class="d-flex justify-content-around h5"> 
-                        <!-- <div><i class="bi bi-camera-video"></i> </div> -->
+                <!--
+                <div class="bg-white  ">
+                    <div class="d-flex justify-content-around h5  "> 
+            
                         <div><i class="bi bi-building"></i>En Consulta </div>
                         <div><i class="bi bi-house"></i>A Domicilio </div>
                     </div>
-                    <div class="d-flex justify-content-around h1 m-0 p-0"> 
-                       <!-- <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_remote" ></div> -->
-                        <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_center"></div>
+                    <div class="d-flex justify-content-around h1 m-0 p-0 "> 
+                         <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_center"></div>
                         <div><input class="form-check-input border-primary" type="checkbox" id="inlineCheckbox1" value="true" v-model="form_app_type_home"></div>
                     </div>
-                    <!-- 
-                    <div class="d-flex justify-content-around h6"> 
-                        <div>Tele Atención</div>
-                        <div>En Consulta </div>
-                        <div>A Domicilio</div>
-                    </div>
-                     -->
+                
                 </div>
+                -->
                 <!--
                 <div @click="form_home_visit = !form_home_visit"  class="bg-white  border border-primary text-primary rounded d-flex justify-content-between form-control form-control-lg border">
                     <div>Visita a Domicilio <i class="bi bi-house-door"></i> </div>
@@ -108,6 +106,8 @@ export default {
             form_app_type_home : false ,
             form_app_type_center : false ,
             form_app_type_remote : false ,
+
+            
 
            // form_date : "30/12/2021" , 
     }
