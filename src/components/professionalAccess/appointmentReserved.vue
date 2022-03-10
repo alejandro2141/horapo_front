@@ -7,22 +7,22 @@ import axios from 'axios';
 
 <template>
      
-    <div  :style="{ 'background-color' : appointment.color   }"  style="border-radius: 25px;"   class=" " data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
+    <div  :style="{ 'background-color' : appointment.color   }"  style="border-radius: 25px;"  class="mt-1 border border-secondary" data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
     
-        <div class="d-flex justify-content-between" >
+        <div class="d-flex justify-content-between p-2" >
             
             <div class="mr-2 pr-2" style="marginLeft : 5px">
                 <div v-if="appointment.center_visit"  >
-                    <i class="h5 bi bi-geo-alt"></i> <text class="text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
+                    <i class="h2 bi bi-geo-alt"></i> <text class="text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
                 </div>
                 <div v-if="appointment.home_visit">
-                    <i class="h5 bi bi-house" > </i> <text class="text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
+                    <i class="h2 bi bi-house" > </i> <text class="text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
                 </div>  
                                
             </div>   
 
             
-            <div class="display-4">
+            <div class="display-4 ">
                 <p>{{appointment.start_time.substring(0, 5) }} <text class="text-muted h6 mt-0"> {{appointment.duration }}m </text> </p>
             </div>
         
@@ -60,7 +60,7 @@ import axios from 'axios';
 
             </div>
            
-            <text class="text-secondary" style="">#{{appointment.id}} </text>   
+            <text class="text-secondary p-2 m-2" style="">#{{appointment.id}} </text>   
 
     </div>
 
