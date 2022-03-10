@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
+import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
 </script>
 
@@ -32,38 +33,80 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                             <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Direccion de su Consulta</label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
-                            <small id="emailHelp" class="form-text text-muted">Esta direccion al que debe concurrir el paciente a su cita</small>		
-                        </div>
+                      <div class="mt-3"> Seleccione un Tipo de Consulta:</div>
+                     
+                      <div >
+                          <button type="button" class="btn btn-outline-primary m-1" @click="app_type_home=true ; app_type_center=false ; app_type_tele=false ;" >
+                              <i class="h2 bi bi-house-door"></i><br>
+                              A Domicilio
+                          </button>
+                          
+                          <button type="button" class="btn btn-outline-primary m-1"  @click="app_type_home=false ; app_type_center=true ; app_type_tele=false ;" >
+                              <i class="h2 bi bi-building"></i><br>
+                              En Consulta
+                          </button>
+                          
+                          <button type="button" class="btn btn-outline-primary m-1" @click="app_type_home=false ; app_type_center=false; app_type_tele=true ;" >
+                              <i class="h2 bi bi-camera-video"></i><br>
+                              Tele Atencion 
+                          </button>
 
-                        <div class="form-group">
-                        <label for="exampleInputPassword1">Comuna</label>
-                        
-                        <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
-                        
-                        </div>
-<!--
-                        <div class="form-group">
-                            <label for="formRegion">Region</label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_region" name="form_center_region" v-model="form_center_region"  placeholder="Seleccione Region...">
-                            <small id="helpFormRegion" class="form-text text-muted">Region donde se ubica este centro</small>		
-                        </div>
--->
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Telefono1</label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_phone1" name="form_center_phone1" v-model="form_center_phone1" placeholder="569763522">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Telefono2</label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
-                        </div>
+                      </div>
 
-                        <text v-on:click="createNewCenter" class="text-primary text-center mt-3 p-3"> Agregar </text>
-                      
-                        <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
+                      <div v-if="app_type_home"  class="form-group mt-3" >
+                            <p> <text class="h2"> Atencion a domicilio.</text><br>   Comunas en las que atiende a Domicilio (Máximo 6). </p>
+                            <div  class="border border-2 p-2" >
+                                    <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
+                                    <br>  
+                            </div>
+                            <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
+
+                      </div>
+
+                      <div v-if="app_type_center"  class="form-group mt-3" >
+                            <div class="form-group mt-3">
+                                <label for="exampleInputPassword1">Direccion de su Consulta</label>
+                                <input type="text" class="form-control" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
+                                <small id="emailHelp" class="form-text text-muted">Esta direccion al que debe concurrir el paciente a su cita</small>		
+                            </div>
+
+                            <div class="form-group">
+                            <label for="exampleInputPassword1">Comuna</label>
+                            
+                            <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
+                            
+                            </div>
+    <!--
+                            <div class="form-group">
+                                <label for="formRegion">Region</label>
+                                <input type="text" class="form-control" autocomplete="off" id="form_center_region" name="form_center_region" v-model="form_center_region"  placeholder="Seleccione Region...">
+                                <small id="helpFormRegion" class="form-text text-muted">Region donde se ubica este centro</small>		
+                            </div>
+    -->
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Telefono1</label>
+                                <input type="text" class="form-control" autocomplete="off" id="form_center_phone1" name="form_center_phone1" v-model="form_center_phone1" placeholder="569763522">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Telefono2</label>
+                                <input type="text" class="form-control" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
+                            </div>
+
+                            <text v-on:click="createNewCenter" class="text-primary text-center mt-3 p-3"> Agregar </text>
+                            <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
                  
+                      </div>
+
+                      <div v-if="app_type_tele"  class="form-group mt-3" >
+
+                          <p class="text-center">
+                              Aún no implementado <br>
+                              <i class="h1 bi bi-emoji-expressionless"></i>
+                          </p>
+                      </div>
+
+
+                       
                       </form>
                         
                       	<div class="" style="height : 700px"> 
@@ -113,6 +156,7 @@ div.scroll {
                 overflow-x: auto;
                 overflow-y: auto;
                 text-align:justify;
+
       }
 
 /*
@@ -205,8 +249,14 @@ data: function () {
             form_center_phone1 : null,
             form_center_phone2 : null,
             form_specialty : null,
+
+            app_type_home :  false ,
+            app_type_center : false ,
+            app_type_tele : false , 
             
-		 }
+            form_comunas_id : [] ,
+		      }
+
 	},
 
 	props: ['session_params','activatorCreateNewCenter','centerToShowDetails','global_comunas'],
@@ -216,11 +266,22 @@ data: function () {
          },
  
     methods: {
+
+      selectedComunas(value)
+      {
+      console.log("capture emit comuna List "+JSON.stringify(value));
+      let aux=JSON.parse(value) ;
+      this.form_comunas_id = [] ;
+          for (let i = 0 ; i < aux.length ; i++) {
+             this.form_comunas_id.push( aux[i].id );
+          }
+          console.log("Comuna id array:"+this.form_comunas_id );
+      },
                  
-        selectedComunaCode(comunaCode){
+      selectedComunaCode(comunaCode){
               console.log("Seected comuna Code "+comunaCode); 
               this.form_center_comuna_code = comunaCode ;
-        },
+      },
 
         //CREATE New Center
  	    async createNewCenter() {
