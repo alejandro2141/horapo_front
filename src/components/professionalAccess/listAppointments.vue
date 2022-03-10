@@ -48,7 +48,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
     <div v-for="(hour) in hours" :key="hour"  >
       
-                <div v-if="hour.app_available != null" class="mt-2 border " >
+                <div v-if="hour.app_available != null"  >
                     <div v-if="!hour.app_available">
                         <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentReserved>
                     </div>
@@ -59,14 +59,14 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     -->
                 </div>
        
-                <div v-else class="d-flex justify-content-between mt-2" :style="{ 'background-color' : hour.color  }"  style="border-radius: 15px;" >
+                <div v-else class="d-flex justify-content-between mt-1   border border-secondary" :style="{ 'background-color' : hour.color  }"  style="border-radius: 15px;" >
                     
-                    <div class="mr-2 pr-2" style="marginLeft : 10px">
+                    <div class="mr-2 pr-2 p-2" style="marginLeft : 10px">
                         <div v-if="hour.center_visit"  >
-                           <i class="h5 bi bi-geo-alt"></i> {{specialtyId2name(hour.specialty)}}     
+                           <i class="h2 bi bi-geo-alt"></i> {{specialtyId2name(hour.specialty)}}     
                         </div>
                         <div v-if="hour.home_visit"  >
-                             <i class="h5 bi bi-house" > </i>   {{specialtyId2name(hour.specialty)}}     
+                             <i class="h2 bi bi-house" > </i>   {{specialtyId2name(hour.specialty)}}     
                         </div>   
                       
                     </div>
@@ -75,7 +75,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     
                     
                     <!-- <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" > -->
-                    <div class="text-secondary  display-5"  >
+                    <div class="text-secondary  display-5 p-2"  >
                         <i class="bi bi-plus"></i> {{ hour.start_time.substring(0,5) }}
                     </div>
 
@@ -85,6 +85,17 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
          <!--   <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />   -->
     </div>
 
+
+    <div v-if="hours.length == 0 " class="d-flex justify-content-between mt-1   border border-secondary"  style="border-radius: 15px;" >
+            
+                <div class="p-4 text-center" >    
+                    <i class="display-1 bi bi-emoji-expressionless"></i><br>
+                  No existen Citas Reservadas o Calendarios Activos para este dia
+                </div>
+
+    </div>
+    
+    
     <!-- 
     <div v-for="(hour) in hours" :key="hour.id" >
 
