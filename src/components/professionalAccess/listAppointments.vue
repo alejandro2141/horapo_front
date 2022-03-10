@@ -272,7 +272,8 @@ export default {
                   center_id :poped.center_id ,
                   color : poped.color ,
                   app_available : poped.app_available , 
-                  symbol1 : ""
+                  symbol1 : "" ,
+                  message1 : poped.message1 
                 }
             
             
