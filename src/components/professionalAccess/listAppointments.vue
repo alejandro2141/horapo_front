@@ -48,7 +48,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
     <div v-for="(hour) in hours" :key="hour"  >
       
-                <div v-if="hour.app_available != null" >
+                <div v-if="hour.app_available != null" class="mt-2 border " >
                     <div v-if="!hour.app_available">
                         <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentReserved>
                     </div>
@@ -59,7 +59,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     -->
                 </div>
        
-                <div v-else class="d-flex justify-content-between" :style="{ 'background-color' : hour.color  }" >
+                <div v-else class="d-flex justify-content-between mt-2" :style="{ 'background-color' : hour.color  }"  style="border-radius: 15px;" >
                     
                     <div class="mr-2 pr-2" style="marginLeft : 10px">
                         <div v-if="hour.center_visit"  >
@@ -82,7 +82,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                 </div>
 
        <!--    <hr :style="{'width': calculateLineExtension(hour)+'rem'}" style="margin: 0rem; height:0.5px ; text-align:left; margin-left:0 ; border : 1px solid black; " > -->
-           <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />  
+         <!--   <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />   -->
     </div>
 
     <!-- 
