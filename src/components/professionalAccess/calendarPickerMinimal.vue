@@ -2,11 +2,14 @@
 import { ref } from 'vue'
 import axios from 'axios';
 
+  import Datepicker from 'vue3-date-time-picker';
+  import 'vue3-date-time-picker/dist/main.css'
+    
 
 </script>
 
 <template>
-    
+    <div>
     <div class="text-center">
         <div class="display-5">
           {{calendar[parseInt(req_year)][parseInt(req_month)][parseInt(req_day)] }}
@@ -15,27 +18,34 @@ import axios from 'axios';
         
             <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i> 
         
-            <text class="text-primary pl-2 pr-2"  @click="openCalendarPicker()" > {{req_day}}   
+            <text class="text-primary pl-2 pr-2"  @click="this.show_date_picker =!this.show_date_picker" > {{req_day}}   
               
             </text>  
             
             <i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
         
         </div>
-
+        
         <div class="display-5">
             <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i> {{ calendar[parseInt(req_year)][parseInt(req_month)][0]  }} 20{{req_year}}<i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>
         </div>
 
-        <div  v-if="show_date_picker" class="row  mb-1  border-secondary ">
+        <!--
+        <div  v-if="true" class="row  mb-1  border-secondary ">
                     <div class="col">
                         <input  v-model="form_required_date" :min="form_minimum_date" type="date" id="calendar-picker" name="calendar-picker"  class="datepicker-input"  >
                     </div>
         </div>
+        -->
 
     </div>
+
+    <div>
+          <Datepicker v-if="show_date_picker"  v-model="date" inline autoApply />
+    </div>
+
     
-  
+  </div>
 
 </template>
 
@@ -85,10 +95,12 @@ export default {
         form_minimum_date : null,
         form_required_date : null,
         show_date_picker : false ,
+         date: null,
 
         }   
     },
-   	
+   	components: { Datepicker },
+
     props: ['required_day'],
     
     emits: ['set_daterequired'] ,
@@ -125,12 +137,8 @@ export default {
         openCalendarPicker()
         {
         console.log("openCalendar ");
-        //this.show_date_picker = true ; 
-        $('#calendar-picker').datepicker();
- 
-      
-        $('#calendar-picker').datepicker('show');
-      
+        this.show_date_picker = true ; 
+              
 /*
         let element = document.getElementById("calendar-picker");
         //element.datepicker('show') //Show on click of button
@@ -350,6 +358,13 @@ export default {
 
 
             },
+
+           date(newDate,oldDate)
+           {
+               console.log("DatePIcker chagne to:"+ newDate );
+               let auxDate=new Date (newDate)
+               this.$emit('set_daterequired', auxDate.getFullYear()+"-"+(auxDate.getMonth()+1)+"-"+ auxDate.getDate() ) ;
+           }  
         
         },
 
