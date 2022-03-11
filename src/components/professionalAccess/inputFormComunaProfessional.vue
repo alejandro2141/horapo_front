@@ -9,7 +9,7 @@ import axios from 'axios';
 <template>
        <div class="" >
 
-            <div class="text-start" v-for="(comuna) in comuna_list" :key="comuna.id"  > <i class="bi bi-geo-alt"></i> {{ comuna.name }}  
+            <div class="text-start" v-for="(comuna) in comuna_list" :key="comuna.id"  > <i class="bi bi-heart-fill"></i> {{ comuna.name }}  
             </div>
             <p class="text-danger  text-end"  @click="comuna_list.pop()">Eliminar</p>
 
