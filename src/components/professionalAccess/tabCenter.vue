@@ -11,22 +11,60 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
      <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" >  </ModalCreateCenter>
       
 <div  class="mx-auto " style="width: 95%;" >
-        <text class="h4 center ">Consultas en su agenda </text> 
-        
+
+            <p class="text-center h4 mt-3">Consultas en su Agenda</p>
+            
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
                     <div class="card m-3 border border-secondary" style="width: 18rem; ">
                         <div class="card-body">
-                            <h5 class="card-title"><i class="bi bi-building display-2"></i> {{center.name}}</h5>
-                            <p class="card-text">{{center.address}} </p>
-                            <b>{{ comuna_list.find(o => o.id === center.comuna).name }} </b>
+                            
+                                <div v-if="center.type == 1" >
+                                    <h5 class="card-title"><i class="bi bi-building display-2"></i> {{center.name}} </h5>
+                                         <p>Tipo: Cita a En Centro </p>
+                                        <p class="card-text">{{center.address}}  </p>
+                                        <p>{{ comunaId2Name(center.comuna)  }} </p> 
+                                </div>
+
+                                <div v-if="center.type == 2" >
+                                    <h5 class="card-title"><i class="bi bi-house-door"></i> {{center.name}} </h5>
+                                            <p>Tipo: Cita a Domicilio </p>
+                                            <p>Comunas: <br>
+                                                {{ comunaId2Name(center.home_comuna1)  }} <br>
+                                                {{ comunaId2Name(center.home_comuna2)  }} <br>
+                                                {{ comunaId2Name(center.home_comuna3)  }} <br>
+                                                {{ comunaId2Name(center.home_comuna4)  }} <br>
+                                                {{ comunaId2Name(center.home_comuna5)  }} <br>
+                                                {{ comunaId2Name(center.home_comuna6)  }} <br>
+                                            </p>
+                                             <p>Telefono Contacto: <br>
+                                                  {{ center.phone1  }} -
+                                                  {{ center.phone2  }}
+                                             </p>
+                                </div>
+
+                                <div v-if="center.type == 3" >
+                                        <p>Tipo: Tele Atención </p>
+                                </div>
+
                             <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p>
                         </div>
                     </div>   
                 </div>  
             </div>
+
+            <div v-else class="d-flex justify-content-between mt-1   border border-secondary"  style="border-radius: 15px;" >
+                        <div class="p-4 text-center" >    
+                        <i class="display-1 bi bi-emoji-expressionless"></i><br>
+                        Aun No existen Direcciones 
+                        </div>
+            </div>
+
+
+
         </div>
+
 
 
         <div  v-else class=" m-2 p-2">
@@ -81,6 +119,26 @@ data: function () {
          },
  
     methods: {
+        comunaId2Name(comuna_id)
+        {
+            if (comuna_id != null)
+            {
+            let aux = this.comuna_list.find(o => o.id === comuna_id)
+                if (aux != null)
+                {
+                    return  aux.name
+                }
+                else
+                {
+                    return "not found" ;  
+                }
+            }
+            else
+            {
+            return null ; 
+            }
+
+        },
         addNewCenter()
         {
             console.log("Add Center");
