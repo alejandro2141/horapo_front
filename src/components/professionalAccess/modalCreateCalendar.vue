@@ -54,6 +54,9 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     <br>
                     <h2> Tiempo de atencion: </h2>
                             <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_duration" v-model="form_app_duration">
+                                <option value="0">0 Minutos </option>
+                                <option value="5">5 Minutos </option>
+                                <option value="10">10 Minutos </option>
                                 <option value="15">15 Minutos </option>
                                 <option value="30">30 Minutos </option>
                                 <option value="45">45 Minutos </option>
