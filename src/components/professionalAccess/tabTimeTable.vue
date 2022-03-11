@@ -14,7 +14,9 @@ import ModalViewCalendar from './modalViewCalendar.vue';
             <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas"  :global_specialties="global_specialties"  ></ModalCreateCalendar>
             <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
 
-            <text class="h4 center ">Calendarios en su agenda </text> 
+      
+                <p class="text-center h4 mt-3">Horarios en su agenda</p>
+
             
                 <div  id="search_result" v-if='calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
@@ -81,6 +83,15 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                             </div>
                         </div>   
                     </div>
+                </div>
+
+
+                <div v-else class="mt-1   border border-secondary"  style="border-radius: 15px;" >
+                        <p class="p-4 text-center" >    
+                            <i class="display-1 bi bi-emoji-expressionless"></i><br>
+                        Aun No existen Calendarios 
+                        </p>
+
                 </div>
 
             <div class="text-center p-3 m-3"> 
