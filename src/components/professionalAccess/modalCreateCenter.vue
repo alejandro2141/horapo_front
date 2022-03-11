@@ -28,42 +28,46 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                        </div>
                     </div>
 
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Nombre de Nueva Consulta </label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
-                        </div>
-
-                      <div class="mt-3"> Seleccione un Tipo de Consulta:</div>
-                     
+                      <div class="mt-3 h3">1) Seleccione un Tipo de Consulta:</div>
                       <div >
-                          <button type="button" class="btn btn-outline-primary m-1" @click="app_type_home=true ; app_type_center=false ; app_type_tele=false ;" >
-                              <i class="h2 bi bi-house-door"></i><br>
-                              A Domicilio
-                          </button>
                           
-                          <button type="button" class="btn btn-outline-primary m-1"  @click="app_type_home=false ; app_type_center=true ; app_type_tele=false ;" >
+                          <button type="button" class="btn btn-outline-primary m-1"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
                               <i class="h2 bi bi-building"></i><br>
                               En Consulta
                           </button>
                           
-                          <button type="button" class="btn btn-outline-primary m-1" @click="app_type_home=false ; app_type_center=false; app_type_tele=true ;" >
+                          <button type="button" class="btn btn-outline-primary m-1" @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ;" >
+                              <i class="h2 bi bi-house-door"></i><br>
+                              A Domicilio
+                          </button>
+                          
+                          <button type="button" class="btn btn-outline-primary m-1" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
                               <i class="h2 bi bi-camera-video"></i><br>
                               Tele Atencion 
                           </button>
-
                       </div>
 
+
+                        <div class="form-group">
+                         <label for="exampleInputEmail1" class="h3" > 2) Nombre de Nueva Consulta </label>
+                            <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
+                        </div>
+
+
+
                       <div v-if="app_type_home"  class="form-group mt-3" >
-                            <p> <text class="h2"> Atencion a domicilio.</text><br>   Comunas en las que atiende a Domicilio (Máximo 6). </p>
-                            <div  class="border border-2 p-2" >
+                            <p>  <text class="h3"> 3) Atencion a domicilio.</text><br>   Comunas atiende a Domicilio (Máximo 6). </p>
+                            <div  class="b p-2" >
                                     <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
                                     <br>  
                             </div>
                             <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
-
                       </div>
 
+
                       <div v-if="app_type_center"  class="form-group mt-3" >
+                            <p> <text class="h3"> 3) Información de Consulta</text> <br> </p>
+                           
                             <div class="form-group mt-3">
                                 <label for="exampleInputPassword1">Direccion de su Consulta</label>
                                 <input type="text" class="form-control" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
@@ -98,7 +102,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                       </div>
 
                       <div v-if="app_type_tele"  class="form-group mt-3" >
-
+                        <text class="h3"> 3) Tele Atención</text>
                           <p class="text-center">
                               Aún no implementado <br>
                               <i class="h1 bi bi-emoji-expressionless"></i>
@@ -255,6 +259,7 @@ data: function () {
             app_type_tele : false , 
             
             form_comunas_id : [] ,
+            form_app_type : null
 		      }
 
 	},
@@ -294,8 +299,12 @@ data: function () {
            center_phone1 : this.form_center_phone1 ,
            center_phone2 : this.form_center_phone2 ,
            professional_id: this.session_params.professional_id ,
+           app_type       : this.form_app_type , 
+
+           comunas_ids    : this.form_comunas_id        
            
-                        };
+           };
+
         console.log("REQUEST :"+JSON.stringify(json));
         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_center",json);
         console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
