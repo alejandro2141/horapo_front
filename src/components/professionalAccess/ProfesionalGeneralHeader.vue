@@ -22,11 +22,11 @@ import SwitchViewButton from './switchViewButton.vue'
 		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1)"  type="button" class="btn btn-outline-primary" >	
-			<i class="bi bi-calendar display-5 "  ></i> Calendario	
+			<i class="bi bi-calendar display-5 "  ></i> Horario	
 		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(3)"  type="button" class="btn btn-outline-primary" >	
-			<i class="bi bi-geo-alt display-5 "  ></i> Direcciones	
+			<i class="bi bi-geo-alt display-5 "  ></i> Consultas	
 		</button>
 		
 <!--
