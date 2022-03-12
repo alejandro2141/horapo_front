@@ -60,8 +60,6 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                    <div class="mt-3"> 
                             <h3> Tiempo de atencion: </h3>
                             <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_duration" v-model="form_app_duration">
-                                <option value="0">0 Minutos </option>
-                                <option value="5">5 Minutos </option>
                                 <option value="10">10 Minutos </option>
                                 <option value="15">15 Minutos </option>
                                 <option value="30">30 Minutos </option>
@@ -80,6 +78,9 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     <div class="mt-3">
                         <h3>Tiempo entre citas </h3>
                             <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_time_between" v-model="form_app_time_between">
+                                <option value="0">0 Minutos </option>
+                                <option value="5">5 Minutos </option>
+                                <option value="10">10 Minutos </option>
                                 <option value="15">15 Minutos </option>
                                 <option value="30">30 Minutos </option>
                                 <option value="45">45 Minutos </option>
@@ -123,7 +124,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                           <input  v-model="form_calendar_end" :min="form_minimum_date" type="date" id="form_calendar_end" name="form_calendar_end" class="form-control form-control-lg border border-primary" >
                       </div>
                     </div>
-
+<!--
                   <h2>Tipo de Cita:</h2>
                         <div class="radio">
                           <label><input v-model="form_appointment_center" type="checkbox"  @click="form_appointment_home = false;  form_appointment_center = true "   >En Consulta</label>
@@ -131,11 +132,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                         <div class="radio">
                           <label><input v-model="form_appointment_home" type="checkbox" @click="form_appointment_center = false; form_appointment_home = true "  >A Domicilio</label>
                         </div>
-                        <!-- 
-                        <div class="radio disabled">
-                          <label><input v-model="form_appointment_remote" type="radio" name="optradio" value="true" disabled>Tele Atención</label>
-                        </div>
-                        -->
+                       
                   
                 <div v-if="form_appointment_center" class="border border-2 p-2" >
                         Seleccione Centro de Atencion 
@@ -149,7 +146,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                         <br>  
                 </div>
 
-
+-->
                 <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
                  
 
