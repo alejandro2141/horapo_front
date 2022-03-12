@@ -29,30 +29,36 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                 </div>
 
                 <div class="modal-body mt-0"  > 
-                   
-                  <text>Tiempo de este horario </text> 
                     
-                    <div class="form-group">
-                            <label for="exampleInputEmail1">Hora Inicio </label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_start_time" name="form_start_time" v-model="form_start_time"  placeholder="ejemplo 14:30">
-                    </div>
-                    
-                    <div class="form-group">
-                            <label for="exampleInputEmail1">Hora Fin </label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_end_time" name="form_end_time" v-model="form_end_time"  placeholder="ejemplo 19:30">
-                    </div>
-                    
-                    <div class="form-group">
+                  <div class="form-group mt-3 h3">
                             <label for="exampleInputEmail1">Especialidad </label><br>
-                                <select   v-model="form_specialty_id" class="form_specialty_id" id="form_specialty_id" >
+                                <select   v-model="form_specialty_id" class="form_specialty_id form-control " id="form_specialty_id" >
                                 <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
                                   {{ specialty.name }}
                                 </option>
-                            </select>
-                    </div>
+                                 </select>
+                  </div>
 
-                    <br>
-                    <h2> Tiempo de atencion: </h2>
+                  <div class="form-group mt-3 h3">
+                            <label for="exampleInputEmail1">Lugar de atencion ( X Y Z) </label>
+                            <InputFormCenterProfessional  v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+                  </div>
+
+                  <div class="mt-2"> 
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Hora Inicio </label>
+                                <input type="text" class="form-control" autocomplete="off" id="form_start_time" name="form_start_time" v-model="form_start_time"  placeholder="ejemplo 14:30">
+                        </div>
+                        
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Hora Fin </label>
+                                <input type="text" class="form-control" autocomplete="off" id="form_end_time" name="form_end_time" v-model="form_end_time"  placeholder="ejemplo 19:30">
+                        </div>
+                  </div>  
+                   
+
+                   <div class="mt-3"> 
+                            <h3> Tiempo de atencion: </h3>
                             <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_duration" v-model="form_app_duration">
                                 <option value="0">0 Minutos </option>
                                 <option value="5">5 Minutos </option>
@@ -68,7 +74,11 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                 <option value="150">2 Horas 30 Min</option>
                                 <option value="205">3 Horas 45 Min</option>
                             </select>
-                    <h3>Tiempo entre citas </h3>
+                    </div>
+
+
+                    <div class="mt-3">
+                        <h3>Tiempo entre citas </h3>
                             <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_time_between" v-model="form_app_time_between">
                                 <option value="15">15 Minutos </option>
                                 <option value="30">30 Minutos </option>
@@ -81,24 +91,31 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                 <option value="150">2 Horas 30 Min</option>
                                 <option value="205">3 Horas 45 Min</option>
                             </select>
-                   
-                  <h2>Recurrencia</h2>
+                    </div>
 
-                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_mon"  >Lunes</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_tue" >Martes</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_wed" >Miercoles</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_thu" >Jueves</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_fri" >Viernes</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sat" >Sabado</label>
-                  <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sun" >Domingo</label>
+                    <div class="mt-3">
 
+                        <h2>Dias Recurrencia</h2>
 
+                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_mon"  >Lunes</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_tue" >Martes</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_wed" >Miercoles</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_thu" >Jueves</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_fri" >Viernes</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sat" >Sabado</label>
+                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sun" >Domingo</label>
+                    </div>
+
+                  <div class="mt-3">
                   <h2>Fecha Inicio de este horario</h2>
                     <div class="row  mb-1  border-secondary ">
                       <div class="col">
                           <input  v-model="form_calendar_start" :min="form_minimum_date" type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
                       </div>
                     </div>
+                  </div>
+
+
 
                   <h2>Fecha Fin de este horario</h2>
                     <div class="row  mb-1  border-secondary ">
@@ -282,6 +299,9 @@ data: function () {
             
             specialties : [] , 
             needsCreateCenter : null ,
+            
+            //required by timepicker
+            time : null ,
 
 
 		 }
