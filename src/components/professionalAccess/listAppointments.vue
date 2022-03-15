@@ -62,17 +62,13 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                 <div v-else class="d-flex justify-content-between mt-1   border border-secondary" :style="{ 'background-color' : hour.color  }"  style="border-radius: 15px;" >
                     
                     <div class="mr-2 pr-2 p-2" style="marginLeft : 10px">
-                        <div v-if="hour.center_visit"  >
-                           <i class="h2 bi bi-geo-alt"></i> {{specialtyId2name(hour.specialty)}}     
-                        </div>
-                        <div v-if="hour.home_visit"  >
-                             <i class="h2 bi bi-house" > </i>   {{specialtyId2name(hour.specialty)}}     
-                        </div>   
-                      
+                            <div v-if="hour.center_visit"  >
+                            <i class="h2 bi bi-geo-alt"></i> {{specialtyId2name(hour.specialty)}}     
+                            </div>
+                            <div v-if="hour.home_visit"  >
+                                <i class="h2 bi bi-house" > </i>   {{specialtyId2name(hour.specialty)}}     
+                            </div>               
                     </div>
-                   
-
-                    
                     
                     <!-- <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" > -->
                     <div class="text-secondary  display-5 p-2"  >
