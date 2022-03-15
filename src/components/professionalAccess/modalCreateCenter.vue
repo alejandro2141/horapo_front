@@ -96,8 +96,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                 <input type="text" class="form-control" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
                             </div>
 
-                            <text v-on:click="createNewCenter" class="text-primary text-center mt-3 p-3"> Agregar </text>
-                            <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
+                             <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
                  
                       </div>
 
