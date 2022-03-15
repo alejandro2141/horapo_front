@@ -34,7 +34,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                   <h5 class="card-title h2 p-2"  >   {{idSpecialty2name(calendar_details.specialty1) }}  
                   </h5>
 -->
-                 <div  v-if="calendar_details.active"  class="d-flex justify-content-between ">
+                 <div  v-if="calendar_details.calendar_active"  class="d-flex justify-content-between ">
                    <text class=" mt-2" >Estado</text>
                    
                    <text>
@@ -271,7 +271,7 @@ data: function () {
 
                   const json = { 
                     professional_id: this.session_params.professional_id ,
-                    calendar_id :  calendar_details.id,
+                    calendar_id :  calendar_details.calendar_id,
                     };
 
                   console.log("Activate Calendar REQUEST :"+JSON.stringify(json));
@@ -293,7 +293,7 @@ data: function () {
               
                       const json = { 
                         professional_id: this.session_params.professional_id ,
-                        calendar_id :  calendar_details.id,
+                        calendar_id :  calendar_details.calendar_id,
                         };
 
                       console.log("INActivate Calendar REQUEST :"+JSON.stringify(json));
