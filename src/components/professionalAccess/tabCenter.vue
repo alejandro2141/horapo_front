@@ -20,14 +20,14 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                     <div class="card m-3 border border-secondary" style="width: 18rem; ">
                         <div class="card-body">
                             
-                                <div v-if="center.type == 1" >
+                                <div v-if="center.center_visit" >
                                     <h5 class="card-title"><i class="bi bi-building display-2"></i> {{center.name}} </h5>
                                          <p>Tipo: Cita a En Centro </p>
                                         <p class="card-text">{{center.address}}  </p>
                                         <p>{{ comunaId2Name(center.comuna)  }} </p> 
                                 </div>
 
-                                <div v-if="center.type == 2" >
+                                <div v-if="center.home_visit" >
                                     <h5 class="card-title"><i class="bi bi-house-door"></i> {{center.name}} </h5>
                                             <p>Tipo: Cita a Domicilio </p>
                                             <p>Comunas: <br>
@@ -44,7 +44,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                              </p>
                                 </div>
 
-                                <div v-if="center.type == 3" >
+                                <div v-if="center.remote_care" >
                                         <p>Tipo: Tele Atención </p>
                                 </div>
 
@@ -54,11 +54,13 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                 </div>  
             </div>
 
-            <div v-else class="d-flex justify-content-between mt-1   border border-secondary"  style="border-radius: 15px;" >
-                        <div class="p-4 text-center" >    
-                        <i class="display-1 bi bi-emoji-expressionless"></i><br>
-                        Aun No existen Direcciones 
-                        </div>
+            <div v-else class="mt-1   border border-secondary"  style="border-radius: 15px;" >
+                       
+                         <p class="p-4 text-center" >    
+                            <i class="display-1 bi bi-emoji-expressionless"></i><br>
+                            Aun No existen Direcciones 
+                        </p>
+                       
             </div>
 
 
