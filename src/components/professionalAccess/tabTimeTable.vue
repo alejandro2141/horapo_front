@@ -23,10 +23,27 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                         <div class="card m-3 border border-secondary" style="width: 18rem; "   >
                             <div class="card-body">
 
-                                <h5 class="card-title h2 p-2" :style="{ 'background-color' : calendar.color   }" ><i class=""></i>   {{idSpecialty2name(calendar.specialty1) }}  
+                                <h5 class="card-title h2 p-2" :style="{ 'background-color' : calendar.color   }" >
+                                    <i class=""></i>   {{idSpecialty2name(calendar.specialty1) }}  
                                 </h5>
 
-                                <div  v-if="calendar.active"  class="d-flex justify-content-between text-primary">
+
+                                <div v-if="calendar.center_visit"  class="d-flex justify-content-between">
+                                    <text> Lugar </text>  
+                                    <text> En Consulta  </text>  
+                                </div>
+
+                                <div v-if="calendar.home_visit"  class="d-flex justify-content-between mt-1 ">
+                                    <text> Lugar </text>  
+                                    <text> A Domicilio  </text>
+                                </div>
+                                
+                                <div  class="d-flex justify-content-between">
+                                    <text> {{calendar.name}} </text>  
+                                    
+                                </div>
+
+                                <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between text-primary">
                                     <text>Estado</text>
                                     <text>  ENCENDIDO </text>
                                 </div>
@@ -35,6 +52,8 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                                     <text>Estado</text>
                                     <text  class="text-danger">  APAGADO </text>
                                 </div>
+
+                 
 
                   <div  class="d-flex justify-content-between mt-0">
                           <text> Fecha Inicio  </text>  
@@ -56,15 +75,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                           <text> {{calendar.end_time.substring(0,5)}} </text>
                   </div>
 
-                  <div v-if="calendar.center_visit"  class="d-flex justify-content-between">
-                          <text> Lugar </text>  
-                          <text> En Consulta  </text>
-                  </div>
-
-                  <div v-else  class="d-flex justify-content-between mt-1 ">
-                          <text> Lugar </text>  
-                          <text> A Domicilio  </text>
-                  </div>
+                
 
                 <div class="mt-1">
                   Dias Recurrencia: <br>
@@ -80,6 +91,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
 
                                <br>
                                 <p class="text-end" > <text  @click="viewCalendar(calendar)" class="text-primary">Ver</text>  </p>
+                         <p class="text-muted">C#{{calendar.calendar_id}} </p>
                             </div>
                         </div>   
                     </div>
