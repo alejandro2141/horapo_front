@@ -13,10 +13,10 @@ import axios from 'axios';
             
             <div class="mr-2 pr-2" style="marginLeft : 5px">
                 <div v-if="appointment.center_visit"  >
-                    <i class="h2 bi bi-geo-alt"></i> <text class="text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
+                    <i class="h2 bi bi-geo-alt"></i> <text class=" h2 text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
                 </div>
                 <div v-if="appointment.home_visit">
-                    <i class="h2 bi bi-house" > </i> <text class="text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
+                    <i class="h2 bi bi-house" > </i> <text class="h2 text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
                 </div>  
                                
             </div>   
