@@ -17,44 +17,46 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
-                    <div class="card m-3 border border-secondary" style="width: 18rem; ">
+                    <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px;">
                         <div class="card-body">
                             
+                                <div class="card-title ">
+                                    <i class="bi bi-geo-alt display-5 "></i> <text class="h3"> {{center.name}} </text>
+                                </div>
+
                                 <div v-if="center.center_visit" >
-                                    <h5 class="card-title"><i class="bi bi-building display-2"></i> {{center.name}} </h5>
-                                         <p>Tipo: Cita a En Centro </p>
-                                        <p class="card-text">{{center.address}}  </p>
-                                        <p>{{ comunaId2Name(center.comuna)  }} </p> 
+                                    <p class="card-title"><i class="bi bi-building display-5"></i> Cita a en Consulta </p>
+                                      
+                                        <p class="card-text">{{center.address}}  , 
+                                         {{ comunaId2Name(center.comuna)  }} </p> 
                                 </div>
 
                                 <div v-if="center.home_visit" >
-                                    <h5 class="card-title"><i class="bi bi-house-door"></i> {{center.name}} </h5>
-                                            <p>Tipo: Cita a Domicilio </p>
-                                            <p>Comunas: <br>
-                                                {{ comunaId2Name(center.home_comuna1)  }} <br>
-                                                {{ comunaId2Name(center.home_comuna2)  }} <br>
-                                                {{ comunaId2Name(center.home_comuna3)  }} <br>
-                                                {{ comunaId2Name(center.home_comuna4)  }} <br>
-                                                {{ comunaId2Name(center.home_comuna5)  }} <br>
-                                                {{ comunaId2Name(center.home_comuna6)  }} <br>
-                                            </p>
-                                             <p>Telefono Contacto: <br>
-                                                  {{ center.phone1  }} -
-                                                  {{ center.phone2  }}
-                                             </p>
+                                    <p class="card-title"> <i class="bi bi-house-door display-5"></i>  Cita a Domicilio en Comunas: </p>
+                                             
+                                                <text v-if="comunaId2Name(center.home_comuna1)!=null" > {{ comunaId2Name(center.home_comuna1)  }} &nbsp; <br></text> 
+                                                <text v-if="comunaId2Name(center.home_comuna2)!=null"> {{ comunaId2Name(center.home_comuna2)  }} &nbsp;  <br></text> 
+                                                <text v-if="comunaId2Name(center.home_comuna3)!=null"> {{ comunaId2Name(center.home_comuna3)  }} &nbsp; <br></text> 
+                                                <text v-if="comunaId2Name(center.home_comuna4)!=null"> {{ comunaId2Name(center.home_comuna4)  }} &nbsp; <br></text> 
+                                                <text v-if="comunaId2Name(center.home_comuna5)!=null"> {{ comunaId2Name(center.home_comuna5)  }} &nbsp; <br></text> 
+                                                <text v-if="comunaId2Name(center.home_comuna6)!=null"> {{ comunaId2Name(center.home_comuna6)  }} &nbsp; <br></text> 
+                                        
                                 </div>
 
                                 <div v-if="center.remote_care" >
-                                        <p>Tipo: Tele Atención </p>
+                                        <p>Tipo: Tele Atención No Implementado </p>
                                 </div>
 
-                            <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p>
+                               
+
+                            <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p> 
+                            <p class="text-end text-muted mt-2"> #{{ center.id }} </p>
                         </div>
                     </div>   
                 </div>  
             </div>
 
-            <div v-else class="mt-1   border border-secondary"  style="border-radius: 15px;" >
+            <div v-else class="mt-1  "  style="border-radius: 15px;" >
                        
                          <p class="p-4 text-center" >    
                             <i class="display-1 bi bi-emoji-expressionless"></i><br>
