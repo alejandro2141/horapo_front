@@ -98,7 +98,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                 </div>
 
 
-                <div v-else class="mt-1   border border-secondary"  style="border-radius: 15px;" >
+                <div v-else class="mt-1   "  style="border-radius: 15px;" >
                         <p class="p-4 text-center" >    
                             <i class="display-1 bi bi-emoji-expressionless"></i><br>
                         Aun No existen Calendarios 
