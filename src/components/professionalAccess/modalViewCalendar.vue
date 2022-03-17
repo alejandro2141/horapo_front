@@ -19,8 +19,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 			<div class="modal-container  m-1 p-1 modal-background ">
  
                 <div class="modal-header " :style="{ 'background-color' : calendar_details.color   }" >
-                        <div class="h4">Detalles calendario<br>
-                        <text class="h3 m-2"> {{idSpecialty2name(calendar_details.specialty1) }} </text>
+                        <div class="h4">  <p> <i class="bi bi-wrench display-1"></i> Configuracion  Calendario</p>
                         </div>
                         
                         <div></div>
@@ -33,83 +32,48 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
             <!--
                   <h5 class="card-title h2 p-2"  >   {{idSpecialty2name(calendar_details.specialty1) }}  
                   </h5>
--->
-                 <div  v-if="calendar_details.calendar_active"  class="d-flex justify-content-between ">
-                   <text class=" mt-2" >Estado</text>
-                   
-                   <text>
-                     <text class="mt-2 text-primary" >  ENCENDIDO </text><br>
-                    <i  class="bi bi-toggle-on display-1 text-primary" @click="inactiveCalendar(calendar_details)" ></i>
-                   </text>
+            -->
+
+<i class="bi bi-exclamation-circle"></i> Pacientes Solo pueden agendar Citas  en Horarios ENCENDIDOS. 
+
+                <div  v-if="calendar_details.calendar_active"  class="d-flex justify-content-between text-success">
+                      <text>
+                       <br>
+                       
+                      </text>
+                      <button type="button" class="btn btn-danger"  @click="inactiveCalendar(calendar_details)" > APAGAR HORARIO </button>
                  </div>
+            
+             
 
-                 <div  v-else  class="d-flex justify-content-between ">
-                   <text class="mt-2">Estado</text>
-                  
-                   <text>
-                     <text class="mt-2 text-danger"> APAGADO </text><br>
-                     <i  class="bi bi-toggle-off display-1 text-primary" @click="activeCalendar(calendar_details)" ></i>
-                   </text>
+                <div  v-else  class="d-flex justify-content-between text-danger">
+                      <text>
+                      <br> 
+                       
+                      </text>
+                      <button type="button" class="btn btn-success"  @click="activeCalendar(calendar_details)"  >ENCENDER HORARIO</button>
+                </div>
 
-                 </div>
-
-
-                  <div  class="d-flex justify-content-between mt-0">
-                          <text> Fecha Inicio  </text>  
-                          <text> {{calendar_details.date_start.substring(0,10) }}    </text>
-                  </div>
-
-                  <div  class="d-flex justify-content-between mt-1">
-                          <text> Fecha Fin </text>  
-                          <text> {{calendar_details.date_end.substring(0,10) }} </text>
-                  </div>
-
-                  <div  class="d-flex justify-content-between mt-1">
-                          <text> Hora  Inicio </text>  
-                          <text> {{calendar_details.start_time.substring(0,5)}} </text>
-                  </div>
-
-                  <div  class="d-flex justify-content-between mt-1">
-                          <text> Hora  Fin </text>  
-                          <text> {{calendar_details.end_time.substring(0,5)}} </text>
-                  </div>
-
-                  <div v-if="calendar_details.center_visit"  class="d-flex justify-content-between">
-                          <text> Lugar </text>  
-                          <text> En Consulta  </text>
-                  </div>
-
-                  <div v-else  class="d-flex justify-content-between mt-1 ">
-                          <text> Lugar </text>  
-                          <text> A Domicilio  </text>
-                  </div>
-
-                  <div class="mt-1">
-                  Dias Recurrencia: <br>
-
-                                        <text class="d-flex justify-content-end" v-if="calendar_details.monday"> Lunes <br> </text> 
-                                        <text class="d-flex justify-content-end" v-if="calendar_details.tuestday"> Martes  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.wednesday"> Miercoles  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.thursday"> Jueves  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.friday"> Viernes <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.saturday"> Sabado <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.sunday"> Domingo <br> </text> 
-                  </div>
+               <br>
+               <hr>
+               <br>
+               
 
 
-                  <!--
-                  <button v-if="calendar_details.active" @click="inactiveCalendar(calendar_details)" type="button" class="btn btn-primary  btn-danger ">Desactivar</button>
-                  <button  v-else   @click="activeCalendar(calendar_details)" type="button" class="btn btn-primary btn-success ">Activar</button>
-                  -->
-<br>
-                  <div v-if="!calendar_details.active"  class="d-flex justify-content-between">
-                          <text> Eliminar  ?  </text>  
-                          <text> <i class="bi bi-trash text-danger h3"  @click="deleteCalendar(calendar_details)" ></i>  </text>
-                  </div>
+                <div   class="d-flex justify-content-between">
+                          <text> <i class="bi bi-exclamation-circle"></i> Eliminar este Horario  ?  </text>  
+
+                          <button v-if="!calendar_details.calendar_active" type="button" @click="deleteCalendar(calendar_details)" class="btn btn-outline-danger"> <i class="bi bi-trash text-danger h1 p-2 m-2"></i> </button>    
+                </div>
+<i class="bi bi-exclamation-circle"></i>Solo puede eliminar calendarios que esten APAGADOS. <br>
+<i class="bi bi-exclamation-circle"></i>Una vez eliminado este calendario ya no estará disponible en el sistema 
+
 
                  <br>
+                 <br>
+                 <p>
                   <text @click="showModalViewCalendar = false ; $emit('updateCalendarList');"  aria-label="Close" class="text-primary mt-3">Regresar</text>
-                 
+                 </p>
 
                   <br>
                   <text class="text-white" >  ID#{{calendar_details.id}} </text> 
@@ -247,8 +211,25 @@ data: function () {
  
     methods: {
 
-      deleteCalendar(calendar_details){
-        console.log("deleteCalendar");
+       async deleteCalendar(calendar_details){
+          console.log("Professional delete Calendar")
+         
+           var r =confirm("¿ Esta seguro que desea eliminar este HORARIO? Ok para continuar");
+            if (r == true) {
+
+                  const json = { 
+                    professional_id: this.session_params.professional_id ,
+                    calendar_id :  calendar_details.calendar_id,
+                    };
+
+                  console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
+                  let response_json = await axios.post("http://localhost:8080"+"/professional_delete_calendar",json);
+                  console.log ("Activate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+                  let aux_resp = response_json.data.rows ; 
+                  this.showModalViewCalendar = false ; 
+                  this.$emit('updateCalendarList'); 
+            }
+
 
       },
 
