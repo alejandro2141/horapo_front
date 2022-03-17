@@ -25,14 +25,14 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                 </div>
 
                                 <div v-if="center.center_visit" >
-                                    <p class="card-title"><i class="bi bi-building display-5"></i> Cita a en Consulta </p>
+                                    <p class="card-title"> <b> Cita a en Consulta <i class="bi bi-building"></i> </b> Direccion: </p>
                                       
                                         <p class="card-text">{{center.address}}  , 
                                          {{ comunaId2Name(center.comuna)  }} </p> 
                                 </div>
 
                                 <div v-if="center.home_visit" >
-                                    <p class="card-title"> <i class="bi bi-house-door display-5"></i>  Cita a Domicilio en Comunas: </p>
+                                    <p class="card-title"> <b> Cita a Domicilio <i class="bi bi-house-door"></i>  </b> en Comunas: </p>
                                              
                                                 <text v-if="comunaId2Name(center.home_comuna1)!=null" > {{ comunaId2Name(center.home_comuna1)  }} &nbsp; <br></text> 
                                                 <text v-if="comunaId2Name(center.home_comuna2)!=null"> {{ comunaId2Name(center.home_comuna2)  }} &nbsp;  <br></text> 
