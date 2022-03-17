@@ -20,37 +20,44 @@ import ModalViewCalendar from './modalViewCalendar.vue';
             
                 <div  id="search_result" v-if='calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
-                        <div class="card m-3 border border-secondary" style="width: 18rem; "   >
+                        <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px; "   >
                             <div class="card-body">
 
                                 <h5 class="card-title h2 p-2" :style="{ 'background-color' : calendar.color   }" >
-                                    <i class=""></i>   {{idSpecialty2name(calendar.specialty1) }}  
+                                  <i class="bi bi-calendar"></i>  {{idSpecialty2name(calendar.specialty1) }}  
                                 </h5>
 
+                               
+                                    <div class="d-flex justify-content-between">
+                                        <div> 
+                                            Consulta 
+                                        </div>
+                                        <div>
+                                            <i class="bi bi-geo-alt"></i> {{calendar.name}} 
+            
 
-                                <div v-if="calendar.center_visit"  class="d-flex justify-content-between">
-                                    <text> Lugar </text>  
-                                    <text> En Consulta  </text>  
-                                </div>
+                                        </div>
+                                    </div>
 
-                                <div v-if="calendar.home_visit"  class="d-flex justify-content-between mt-1 ">
-                                    <text> Lugar </text>  
-                                    <text> A Domicilio  </text>
-                                </div>
-                                
-                                <div  class="d-flex justify-content-between">
-                                    <text> {{calendar.name}} </text>  
-                                    
-                                </div>
-
-                                <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between text-primary">
+                                    <div v-if="calendar.center_visit">
+                                            <text> En Consulta  </text>  
+                                    </div>
+                                    <div v-if="calendar.home_visit">
+                                            <text> A Domicilio  </text>
+                                    </div>
+                                    <div v-if="calendar.remote_care">
+                                            <text> Tele Atencion </text>
+                                    </div>
+                                <br>
+                             
+                                <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between text-success">
                                     <text>Estado</text>
                                     <text>  ENCENDIDO </text>
                                 </div>
 
-                                <div  v-else  class="d-flex justify-content-between text-primary">
+                                <div  v-else  class="d-flex justify-content-between text-danger">
                                     <text>Estado</text>
-                                    <text  class="text-danger">  APAGADO </text>
+                                    <text >  APAGADO </text>
                                 </div>
 
                  
@@ -90,7 +97,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                   </div>
 
                                <br>
-                                <p class="text-end" > <text  @click="viewCalendar(calendar)" class="text-primary">Ver</text>  </p>
+                                <p class="text-end" > <text  @click="viewCalendar(calendar)" class="text-primary"> <i class="bi bi-wrench"></i> Configurar</text>  </p>
                          <p class="text-muted">C#{{calendar.calendar_id}} </p>
                             </div>
                         </div>   
