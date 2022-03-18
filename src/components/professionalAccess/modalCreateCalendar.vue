@@ -30,7 +30,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
                 <div class="modal-body mt-0"  > 
                 
-                    <div v-if='centers_found_flag' >
+                    <div v-if="true" >
                 
                           <div class="form-group mt-3 h3">
                                     <label for="exampleInputEmail1">Especialidad </label><br>
