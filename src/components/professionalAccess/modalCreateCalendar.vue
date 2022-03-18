@@ -29,127 +29,132 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                 </div>
 
                 <div class="modal-body mt-0"  > 
-                    
-                  <div class="form-group mt-3 h3">
-                            <label for="exampleInputEmail1">Especialidad </label><br>
-                                <select   v-model="form_specialty_id" class="form_specialty_id form-control " id="form_specialty_id" >
-                                <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
-                                  {{ specialty.name }}
-                                </option>
-                                 </select>
-                  </div>
+                
+                    <div v-if='centers_found_flag' >
+                
+                          <div class="form-group mt-3 h3">
+                                    <label for="exampleInputEmail1">Especialidad </label><br>
+                                        <select   v-model="form_specialty_id" class="form_specialty_id form-control " id="form_specialty_id" >
+                                        <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
+                                          {{ specialty.name }}
+                                        </option>
+                                        </select>
+                          </div>
 
-                  <div class="form-group mt-3 h3">
-                            <label for="exampleInputEmail1">Lugar de atencion ( X Y Z) </label>
-                            <InputFormCenterProfessional  v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
-                  </div>
+                          <div class="form-group mt-3 h3">
+                                    <label for="exampleInputEmail1">Lugar de atencion ( X Y Z) </label>
+                                    <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+                          </div>
 
-                  <div class="mt-2"> 
-                        <div class="form-group">
-                                <label for="exampleInputEmail1">Hora Inicio </label>
-                                <input type="text" class="form-control" autocomplete="off" id="form_start_time" name="form_start_time" v-model="form_start_time"  placeholder="ejemplo 14:30">
+                          <div class="mt-2"> 
+                                <div class="form-group">
+                                        <label for="exampleInputEmail1">Hora Inicio </label>
+                                        <input type="text" class="form-control" autocomplete="off" id="form_start_time" name="form_start_time" v-model="form_start_time"  placeholder="ejemplo 14:30">
+                                </div>
+                                
+                                <div class="form-group">
+                                        <label for="exampleInputEmail1">Hora Fin </label>
+                                        <input type="text" class="form-control" autocomplete="off" id="form_end_time" name="form_end_time" v-model="form_end_time"  placeholder="ejemplo 19:30">
+                                </div>
+                          </div>  
+                          
+
+                          <div class="mt-3"> 
+                                    <h3> Tiempo de atencion: </h3>
+                                    <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_duration" v-model="form_app_duration">
+                                        <option value="10">10 Minutos </option>
+                                        <option value="15">15 Minutos </option>
+                                        <option value="30">30 Minutos </option>
+                                        <option value="45">45 Minutos </option>
+                                        <option value="60">60 Min </option>
+                                        <option value="75">1 Hora 15 Min</option>
+                                        <option value="90">1 Hora 30 Min</option>
+                                        <option value="105">1 Hora 45 Min</option>
+                                        <option value="120">2 Horas</option>
+                                        <option value="150">2 Horas 30 Min</option>
+                                        <option value="205">3 Horas 45 Min</option>
+                                    </select>
+                            </div>
+
+
+                            <div class="mt-3">
+                                <h3>Tiempo entre citas </h3>
+                                    <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_time_between" v-model="form_app_time_between">
+                                        <option value="0">0 Minutos </option>
+                                        <option value="5">5 Minutos </option>
+                                        <option value="10">10 Minutos </option>
+                                        <option value="15">15 Minutos </option>
+                                        <option value="30">30 Minutos </option>
+                                        <option value="45">45 Minutos </option>
+                                        <option value="60">60 Min </option>
+                                        <option value="75">1 Hora 15 Min</option>
+                                        <option value="90">1 Hora 30 Min</option>
+                                        <option value="105">1 Hora 45 Min</option>
+                                        <option value="120">2 Horas</option>
+                                        <option value="150">2 Horas 30 Min</option>
+                                        <option value="205">3 Horas 45 Min</option>
+                                    </select>
+                            </div>
+
+                            <div class="mt-3">
+
+                                <h2>Dias Recurrencia</h2>
+
+                                <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_mon"  >Lunes</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_tue" >Martes</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_wed" >Miercoles</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_thu" >Jueves</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_fri" >Viernes</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sat" >Sabado</label>
+                                <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sun" >Domingo</label>
+                            </div>
+
+                          <div class="mt-3">
+                          <h2>Fecha Inicio de este horario</h2>
+                            <div class="row  mb-1  border-secondary ">
+                              <div class="col">
+                                  <input  v-model="form_calendar_start" :min="form_minimum_date" type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
+                              </div>
+                            </div>
+                          </div>
+
+
+
+                          <h2>Fecha Fin de este horario</h2>
+                            <div class="row  mb-1  border-secondary ">
+                              <div class="col">
+                                  <input  v-model="form_calendar_end" :min="form_minimum_date" type="date" id="form_calendar_end" name="form_calendar_end" class="form-control form-control-lg border border-primary" >
+                              </div>
+                            </div>
+        <!--
+                          <h2>Tipo de Cita:</h2>
+                                <div class="radio">
+                                  <label><input v-model="form_appointment_center" type="checkbox"  @click="form_appointment_home = false;  form_appointment_center = true "   >En Consulta</label>
+                                </div>
+                                <div class="radio">
+                                  <label><input v-model="form_appointment_home" type="checkbox" @click="form_appointment_center = false; form_appointment_home = true "  >A Domicilio</label>
+                                </div>
+                              
+                          
+                        <div v-if="form_appointment_center" class="border border-2 p-2" >
+                                Seleccione Centro de Atencion 
+                                <InputFormCenterProfessional class="m-3" v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+                                <br>
                         </div>
+
+                        <div v-if="form_appointment_home" class="border border-2 p-2" >
+                                Comunas en las que atiende a Domicilio (Máximo 6). 
+                                <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
+                                <br>  
+                        </div>
+
+        -->
+                        <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
                         
-                        <div class="form-group">
-                                <label for="exampleInputEmail1">Hora Fin </label>
-                                <input type="text" class="form-control" autocomplete="off" id="form_end_time" name="form_end_time" v-model="form_end_time"  placeholder="ejemplo 19:30">
-                        </div>
-                  </div>  
-                   
-
-                   <div class="mt-3"> 
-                            <h3> Tiempo de atencion: </h3>
-                            <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_duration" v-model="form_app_duration">
-                                <option value="10">10 Minutos </option>
-                                <option value="15">15 Minutos </option>
-                                <option value="30">30 Minutos </option>
-                                <option value="45">45 Minutos </option>
-                                <option value="60">60 Min </option>
-                                <option value="75">1 Hora 15 Min</option>
-                                <option value="90">1 Hora 30 Min</option>
-                                <option value="105">1 Hora 45 Min</option>
-                                <option value="120">2 Horas</option>
-                                <option value="150">2 Horas 30 Min</option>
-                                <option value="205">3 Horas 45 Min</option>
-                            </select>
                     </div>
-
-
-                    <div class="mt-3">
-                        <h3>Tiempo entre citas </h3>
-                            <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_time_between" v-model="form_app_time_between">
-                                <option value="0">0 Minutos </option>
-                                <option value="5">5 Minutos </option>
-                                <option value="10">10 Minutos </option>
-                                <option value="15">15 Minutos </option>
-                                <option value="30">30 Minutos </option>
-                                <option value="45">45 Minutos </option>
-                                <option value="60">60 Min </option>
-                                <option value="75">1 Hora 15 Min</option>
-                                <option value="90">1 Hora 30 Min</option>
-                                <option value="105">1 Hora 45 Min</option>
-                                <option value="120">2 Horas</option>
-                                <option value="150">2 Horas 30 Min</option>
-                                <option value="205">3 Horas 45 Min</option>
-                            </select>
+                    <div v-else>
+                        Debe primero crear una Consulta
                     </div>
-
-                    <div class="mt-3">
-
-                        <h2>Dias Recurrencia</h2>
-
-                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_mon"  >Lunes</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_tue" >Martes</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_wed" >Miercoles</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_thu" >Jueves</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_fri" >Viernes</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sat" >Sabado</label>
-                        <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sun" >Domingo</label>
-                    </div>
-
-                  <div class="mt-3">
-                  <h2>Fecha Inicio de este horario</h2>
-                    <div class="row  mb-1  border-secondary ">
-                      <div class="col">
-                          <input  v-model="form_calendar_start" :min="form_minimum_date" type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
-                      </div>
-                    </div>
-                  </div>
-
-
-
-                  <h2>Fecha Fin de este horario</h2>
-                    <div class="row  mb-1  border-secondary ">
-                      <div class="col">
-                          <input  v-model="form_calendar_end" :min="form_minimum_date" type="date" id="form_calendar_end" name="form_calendar_end" class="form-control form-control-lg border border-primary" >
-                      </div>
-                    </div>
-<!--
-                  <h2>Tipo de Cita:</h2>
-                        <div class="radio">
-                          <label><input v-model="form_appointment_center" type="checkbox"  @click="form_appointment_home = false;  form_appointment_center = true "   >En Consulta</label>
-                        </div>
-                        <div class="radio">
-                          <label><input v-model="form_appointment_home" type="checkbox" @click="form_appointment_center = false; form_appointment_home = true "  >A Domicilio</label>
-                        </div>
-                       
-                  
-                <div v-if="form_appointment_center" class="border border-2 p-2" >
-                        Seleccione Centro de Atencion 
-                        <InputFormCenterProfessional class="m-3" v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
-                        <br>
-                </div>
-
-                <div v-if="form_appointment_home" class="border border-2 p-2" >
-                        Comunas en las que atiende a Domicilio (Máximo 6). 
-                        <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
-                        <br>  
-                </div>
-
--->
-                <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
-                 
-
 
                 </div>
 
@@ -300,6 +305,8 @@ data: function () {
             //required by timepicker
             time : null ,
 
+            centers_found_flag : false ,
+
 
 		 }
 	},
@@ -317,6 +324,11 @@ data: function () {
          },
  
     methods: {
+      centers_found_flag_emit(val)
+      {
+      console.log("centers_found_flag_emit : "+val);
+      this.centers_found_flag=val
+      },
       
       switchView(){
             this.$emit('switchView');
