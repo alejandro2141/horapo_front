@@ -18,7 +18,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                 <p class="text-center h4 mt-3">Horarios en su agenda</p>
 
             
-                <div  id="search_result" v-if='calendars.length > 0'  >
+                <div  id="search_result" v-if='calendars!=null &&  calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
                         <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px; "   >
                             <div class="card-body">
