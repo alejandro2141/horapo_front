@@ -37,12 +37,19 @@ export default {
    	
     props: ['required_day','session_params'],
     
-    emits: ['selectedCenterCode','switchView','centersError'] ,
+    emits: ['selectedCenterCode','switchView','centersError','centers_found_flag_emit'] ,
 
 	created () {
       this.getCenters() ;
       console.log("inputFormCenterProfessiona  MOUNTED ");
-      
+        if (this.center_list.length > 0 )
+        {
+        this.$emit("centers_found_flag_emit", true ); 
+        }
+        else
+        {
+        this.$emit("centers_found_flag_emit", false ); 
+        }
 
     },
 
@@ -70,6 +77,10 @@ export default {
 			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
 			console.log ("getCenters RESPONSE :"+JSON.stringify(response_json.data.rows)) ;
 			this.center_list = response_json.data.rows;
+
+            console.log ("InputFOrmCenterProfessional  EMIT  :"+ (this.center_list.length >0)  );
+            this.$emit("centers_found_flag_emit", (this.center_list.length >0) );
+
             //this.prevCenterName="noset";
 			},
 
