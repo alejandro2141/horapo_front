@@ -10,12 +10,17 @@ import LoadProgress from '../loadProgress.vue'
 
 <div>
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
- 
+ <br>{{filter_center }}<br> {{ filter_home }} <br> {{filter_remote}}<br>
+
        <div  v-if="appointment_list != null && daterequired != null" >
             <!-- <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  -->
          
             <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
+
+            
                <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+            
+            
             </div>
                 <!-- Start make room for Modal data when it display-->
             <div style="height: 400px">
@@ -53,8 +58,10 @@ export default {
     }
   },
 
-   props: ['searchParameters','session_params','appointments','daterequired','global_comunas', 'global_specialties'],
+   props: ['searchParameters','session_params','appointments','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
    emits: ["updateLastSearch"],
+
+ 
 
     beforeCreate(){
        console.log("showloader progress BEFORE CREATE !!!");
