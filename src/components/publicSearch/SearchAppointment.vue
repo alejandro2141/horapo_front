@@ -12,16 +12,15 @@ import loadProgress from '../loadProgress.vue'
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
    
     <div class="h2 bg-white p-2" >
-   
-
     Busca tu Hora 
     </div>
+        
       <div>
             <div>
-            <searchAppointmentForm  v-on:searchAppointments="searchAppointments" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
+            <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  v-on:form_app_type_center_emit="form_app_type_center_emit" v-on:form_app_type_home_emit="form_app_type_home_emit" v-on:form_app_type_remote_emit="form_app_type_remote_emit"    :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
             <text v-if="appointments.length > 0" >En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados </text>
             <p v-if="appointments.length == 0" class="text-center p-2"  > <i class="bi bi-emoji-dizzy display-1"></i><br>No hemos encontrado resultados. Por favor intente con otra fecha o ubicacion. Y nos tomo {{metric_search/1000}} Seg </p>
-            <searchAppointmentResult  :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+            <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
             </div>
      </div>
 
@@ -58,6 +57,10 @@ export default {
 
             active_spinner : false ,
             metric_search : 0,
+
+            filter_center : false ,
+            filter_home : false ,
+            filter_remote: false ,
     }
   },
 
@@ -70,6 +73,29 @@ export default {
         },
 
 methods: {
+
+        ///debo incluir los metodos para capturar los eventos de
+/*
+      form_app_type_center_emit 
+      form_app_type_home_emit
+      form_app_type_remote_emit
+*/
+        form_app_type_center_emit(value)
+        {
+          this. filter_center = value
+        },
+
+        form_app_type_home_emit(value)
+        {
+           this. filter_home = value
+        },
+
+        form_app_type_remote_emit(value)
+        {
+           this. filter_remote = value
+        },
+
+
         show_modal_appointment_confirm(param)
         {
             console.log("Modal Confirmation: show_modal_appointment_confirm:"+JSON.stringify(param) )
@@ -126,6 +152,8 @@ methods: {
                 console.log ("update Last Search") ;
                 this.searchAppointments(this.params_bkp);
             }
+
+
 
 
         },
