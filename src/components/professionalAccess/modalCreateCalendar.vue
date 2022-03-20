@@ -30,7 +30,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
                 <div class="modal-body mt-0"  > 
                 
-                    <div v-if="true" >
+                    <div v-if="centers_found_flag" >
                 
                           <div class="form-group mt-3 h3">
                                     <label for="exampleInputEmail1">Especialidad </label><br>
@@ -153,7 +153,9 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                         
                     </div>
                     <div v-else>
-                        Debe primero crear una Consulta
+                      <i class="bi bi-exclamation-circle display-1"></i>
+                      <br>
+                        Para crear un Horario debe existir al menos una Consulta. <i class="bi bi-geo-alt"></i>
                     </div>
 
                 </div>
@@ -305,7 +307,7 @@ data: function () {
             //required by timepicker
             time : null ,
 
-            centers_found_flag : false ,
+            centers_found_flag : true ,
 
 
 		 }
@@ -326,7 +328,7 @@ data: function () {
     methods: {
       centers_found_flag_emit(val)
       {
-      console.log("centers_found_flag_emit : "+val);
+      console.log("MODAL CREATE CALENDAR centers_found_flag_emit : "+val);
       this.centers_found_flag=val
       },
       
