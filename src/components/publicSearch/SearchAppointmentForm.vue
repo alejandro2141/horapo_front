@@ -131,7 +131,10 @@ export default {
     }
   },
 
- props: ['global_specialties','global_comunas', 'currentDate'], 
+ props: [ 'global_specialties','global_comunas', 'currentDate' ], 
+ emits: [ 'searchAppointments' ,'form_app_type_center_emit' , 'form_app_type_home_emit' , 'form_app_type_remote_emit'  ],
+ 
+
 
    created () {    
         this.form_minimum_date = new Date().toISOString().split('T')[0] ;
@@ -177,6 +180,26 @@ export default {
             }
 
         },
+    
+    watch : {
+        
+        form_app_type_center(newValue){
+            this.$emit("form_app_type_center_emit",newValue );
+        },
+         
+        form_app_type_home(newValue){
+            this.$emit("form_app_type_home_emit",newValue );
+        },
+         
+        form_app_type_remote(newValue){
+            this.$emit("form_app_type_remote_emit",newValue );
+        },
+
+
+
+    },
+
+
 
 }
 </script>
