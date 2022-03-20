@@ -13,6 +13,7 @@ import SwitchViewButton from './switchViewButton.vue'
    	  <select class="form-select form-control-lg" aria-label="Default" id="form_center"  v-model="form_center"  name="form_center">
             <option selected v-for="(center) in center_list" :value="center.id" :key="center.id" > {{center.name}} </option>	
       </select>
+     auch
     </div>
     <div v-else >
           <SwitchViewButton v-if="session_params['professional_name']"  v-on:switchView="switchView" ></SwitchViewButton>
@@ -41,16 +42,7 @@ export default {
 
 	created () {
       this.getCenters() ;
-      console.log("inputFormCenterProfessiona  MOUNTED ");
-        if (this.center_list.length > 0 )
-        {
-        this.$emit("centers_found_flag_emit", true ); 
-        }
-        else
-        {
-        this.$emit("centers_found_flag_emit", false ); 
-        }
-
+     
     },
 
     mounted() {   
@@ -77,11 +69,10 @@ export default {
 			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
 			console.log ("getCenters RESPONSE :"+JSON.stringify(response_json.data.rows)) ;
 			this.center_list = response_json.data.rows;
-
-            console.log ("InputFOrmCenterProfessional  EMIT  :"+ (this.center_list.length >0)  );
-            this.$emit("centers_found_flag_emit", (this.center_list.length >0) );
-
             //this.prevCenterName="noset";
+            console.log("inputFormCenterProfessiona  MOUNTED ");
+            this.$emit("centers_found_flag_emit", (this.center_list.length > 0 ) );
+
 			},
 
 
