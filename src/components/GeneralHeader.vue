@@ -12,7 +12,7 @@ import { ref } from 'vue'
 			123Hora  
 			</a> 
 		</div>
-		<div class="text-muted">	Las mejores consultas privadas en un solo lugar
+		<div class="text-muted">	Las mejores consultas de salud en un solo lugar
 		</div>
 		<hr>
 	</div>
