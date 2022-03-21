@@ -52,7 +52,7 @@ import inputFormComuna  from './InputFormComuna.vue'
 
                     <button type="button" @click="form_app_type_remote=!form_app_type_remote  "  class="m-1 btn btn-outline-primary" > 
                        <i class="h2 bi bi-camera-video"></i><br>
-                        A Domicilio 
+                        Tele Atención 
                     </button>
 
             </div>
