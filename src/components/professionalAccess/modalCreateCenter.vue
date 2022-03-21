@@ -28,7 +28,12 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                        </div>
                     </div>
 
-                      <div class="mt-3 h3">1) Seleccione un Tipo de Consulta:</div>
+                      <div class="form-group">
+                         <label for="exampleInputEmail1" class="h3" > 1)Asigne Nombre a Nueva Consulta </label>
+                            <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
+                      </div>
+
+                      <div class="mt-3 h3">2 ) Que tipo de consulta ?</div>
                       <div >
                           
                           <button type="button" class="btn btn-outline-primary m-1"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
@@ -48,10 +53,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                       </div>
 
 
-                        <div class="form-group">
-                         <label for="exampleInputEmail1" class="h3" > 2) Nombre de Nueva Consulta </label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
-                        </div>
+                       
 
 
 
@@ -61,7 +63,6 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                     <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
                                     <br>  
                             </div>
-                            <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
                       </div>
 
 
@@ -96,19 +97,22 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                 <input type="text" class="form-control" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
                             </div>
 
-                             <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
-                 
+                            
                       </div>
 
                       <div v-if="app_type_tele"  class="form-group mt-3" >
-                        <text class="h3"> 3) Tele Atención</text>
-                          <p class="text-center">
-                              Aún no implementado <br>
-                              <i class="h1 bi bi-emoji-expressionless"></i>
-                          </p>
+                          <text class="h3"> 3) Tele Atención</text>
+<!--
+                          <div class="form-group">
+                                <label for="exampleInputPassword1">Telefono Atencion Video Llamada</label>
+                                <input type="text" class="form-control" autocomplete="off" id="remote_care_phone1" name="remote_care_phone1" v-model="form_remote_care_phone1" placeholder="+569763522">
+                          En caso que quiera informar al cliente del telefono donde se realizara su llamada 
+                          </div>
+-->
                       </div>
 
-
+                      <button type="button" @click="createNewCenter" class="btn btn-primary m-3" >Crear Consulta </button>
+                 
                        
                       </form>
                         
