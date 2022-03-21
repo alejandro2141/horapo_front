@@ -10,16 +10,22 @@ import LoadProgress from '../loadProgress.vue'
 
 <div>
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
- <br>{{filter_center }}<br> {{ filter_home }} <br> {{filter_remote}}<br>
-
+ 
        <div  v-if="appointment_list != null && daterequired != null" >
             <!-- <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  -->
          
             <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
-
-            
-               <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
-            
+                
+                <div v-if=" filter_center == false &&  filter_home == false && filter_remote == false " >
+                    <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                </div>
+                
+                <div v-else >
+                    <div v-if="filter_center == appointment.center_visit || filter_home == appointment.home_visit || filter_remote == appointment.remote_care" >
+                        <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                    </div>
+                   
+                </div>
             
             </div>
                 <!-- Start make room for Modal data when it display-->
