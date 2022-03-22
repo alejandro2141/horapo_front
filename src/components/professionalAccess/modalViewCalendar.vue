@@ -223,7 +223,7 @@ data: function () {
                     };
 
                   console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
-                  let response_json = await axios.post("http://localhost:8080"+"/professional_delete_calendar",json);
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_delete_calendar",json);
                   console.log ("Activate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
                   this.showModalViewCalendar = false ; 
@@ -256,7 +256,7 @@ data: function () {
                     };
 
                   console.log("Activate Calendar REQUEST :"+JSON.stringify(json));
-                  let response_json = await axios.post("http://localhost:8080"+"/professional_activate_calendar",json);
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_activate_calendar",json);
                   console.log ("Activate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
                   this.showModalViewCalendar = false ; 
@@ -278,7 +278,7 @@ data: function () {
                         };
 
                       console.log("INActivate Calendar REQUEST :"+JSON.stringify(json));
-                      let response_json = await axios.post("http://localhost:8080"+"/professional_inactivate_calendar",json);
+                      let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_inactivate_calendar",json);
                       console.log ("INActivate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                       let aux_resp = response_json.data.rows ; 
                       
