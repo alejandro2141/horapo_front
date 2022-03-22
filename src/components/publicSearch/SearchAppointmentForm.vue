@@ -40,17 +40,17 @@ import inputFormComuna  from './InputFormComuna.vue'
                 <button type="button" @click="form_app_type_home=!form_app_type_home ; form_app_type_center= false "     class=" m-1 btn " :class="{ 'btn-primary' : form_app_type_home   , 'btn-secondary' : !form_app_type_home , 'btn-lg' : form_app_type_home     }" > A Domicilio </button>
             --> 
             <div class="bg-light" >
-                    <button type="button" @click="form_app_type_center=!form_app_type_center ;form_app_type_home=false; form_app_type_remote=false " class="m-1 btn btn-outline-primary" :class="{ 'active' : form_app_type_center }" > 
-                        <i class="h2 bi bi-building"></i><br>
+                    <button type="button" @click="form_app_type_center=!form_app_type_center ;form_app_type_home=false; form_app_type_remote=false " class="m-1 btn btn-outline-primary border-3" :class="{ 'active' : form_app_type_center }" style="border-color: #781ED1" > 
+                        <i  class="h2 bi bi-building"></i><br>
                         En Consulta  
                     </button>
 
-                    <button type="button" @click="form_app_type_home=!form_app_type_home ;form_app_type_center=false; form_app_type_remote=false   "  class="m-1 btn btn-outline-primary" :class="{ 'active' : form_app_type_home }"  > 
+                    <button type="button" @click="form_app_type_home=!form_app_type_home ;form_app_type_center=false; form_app_type_remote=false   "  class="m-1 btn btn-outline-primary border-3" :class="{ 'active' : form_app_type_home }" style="border-color:#3399FF" > 
                         <i class="h2 bi bi-house-door"></i><br>
                         A Domicilio 
                     </button>
 
-                    <button type="button" @click="form_app_type_remote=!form_app_type_remote ;form_app_type_center=false; form_app_type_home=false  "  class="m-1 btn btn-outline-primary" :class="{ 'active' : form_app_type_remote }" > 
+                    <button type="button" @click="form_app_type_remote=!form_app_type_remote ;form_app_type_center=false; form_app_type_home=false  "  class="m-1 btn btn-outline-primary border-3" :class="{ 'active' : form_app_type_remote }"  style="border-color:#b36b00 " > 
                        <i class="h2 bi bi-camera-video"></i><br>
                         Tele Atención 
                     </button>
@@ -177,6 +177,11 @@ export default {
                   		  };
             
             this.$emit("searchAppointments",search_params );
+
+                this.form_app_type_home = false ; 
+                this.form_app_type_center = false ; 
+                this.form_app_type_remote = false ; 
+
             }
 
         },
