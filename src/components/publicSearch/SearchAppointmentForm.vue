@@ -40,17 +40,17 @@ import inputFormComuna  from './InputFormComuna.vue'
                 <button type="button" @click="form_app_type_home=!form_app_type_home ; form_app_type_center= false "     class=" m-1 btn " :class="{ 'btn-primary' : form_app_type_home   , 'btn-secondary' : !form_app_type_home , 'btn-lg' : form_app_type_home     }" > A Domicilio </button>
             --> 
             <div class="bg-light" >
-                    <button type="button" @click="form_app_type_center=!form_app_type_center " class="m-1 btn btn-outline-primary" > 
+                    <button type="button" @click="form_app_type_center=!form_app_type_center ;form_app_type_home=false; form_app_type_remote=false " class="m-1 btn btn-outline-primary" :class="{ 'active' : form_app_type_center }" > 
                         <i class="h2 bi bi-building"></i><br>
                         En Consulta  
                     </button>
 
-                    <button type="button" @click="form_app_type_home=!form_app_type_home  "  class="m-1 btn btn-outline-primary" > 
+                    <button type="button" @click="form_app_type_home=!form_app_type_home ;form_app_type_center=false; form_app_type_remote=false   "  class="m-1 btn btn-outline-primary" :class="{ 'active' : form_app_type_home }"  > 
                         <i class="h2 bi bi-house-door"></i><br>
                         A Domicilio 
                     </button>
 
-                    <button type="button" @click="form_app_type_remote=!form_app_type_remote  "  class="m-1 btn btn-outline-primary" > 
+                    <button type="button" @click="form_app_type_remote=!form_app_type_remote ;form_app_type_center=false; form_app_type_home=false  "  class="m-1 btn btn-outline-primary" :class="{ 'active' : form_app_type_remote }" > 
                        <i class="h2 bi bi-camera-video"></i><br>
                         Tele Atención 
                     </button>
@@ -175,7 +175,7 @@ export default {
                  type_remote : this.form_app_type_remote,
                  date :  this.form_current_date ,  
                   		  };
-
+            
             this.$emit("searchAppointments",search_params );
             }
 
