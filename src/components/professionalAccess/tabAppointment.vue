@@ -98,7 +98,7 @@ data: function () {
                                      };
 
                         console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post("http://localhost:8080"+"/rofessional_get_calendars",json);
+                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/rofessional_get_calendars",json);
                         this.calendars_marks = response_json.data.rows;
                         
                         //console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
