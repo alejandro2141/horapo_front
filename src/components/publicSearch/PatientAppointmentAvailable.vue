@@ -34,9 +34,12 @@ import { ref } from 'vue'
 
                     <div v-if="appointment.center_visit" class="">
                  
-                        <div class="display-6" style=" color:#1f9d94"> <i class="h5 text-center bi bi-geo-alt"></i>  {{appointment.center_name}} </div>
+                        <div class="display-6" style="">  
+                            <div style="color: #781ED1" >
+                            <i class="h1 bi bi-building"></i> En Consulta  </div>
+                            </div>
                             <div class="" style="color:#2e5668" >	
-                                <i class="fas fa-map-marker-alt "></i>  
+                                {{appointment.center_name}}
                             </div> 
                             <div style="color:#2e5668">
                                {{appointment.center_address}}
@@ -45,7 +48,7 @@ import { ref } from 'vue'
                     
                     <div v-if="appointment.home_visit" style="color:#3399FF">
                             <div class="display-5" >
-                                <i class=" bi bi-house"></i><text >  Visita a Domicilio:</text> <br>
+                                <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
                             <div style="" class="text-dark display-6" >
                               {{  comuna_id2name(appointment.home_visit_location1) }}
@@ -57,8 +60,10 @@ import { ref } from 'vue'
                             </div>
                     </div>
 
-                    <div v-if="appointment.app_type_remote" class="">
-                       <i class="bi bi-camera-video"></i> Tele Atención  	                       
+                    <div v-if="appointment.remote_care" class="">
+                         <div class="display-5" style="color:#b36b00" >
+                               <i class="bi bi-camera-video"></i> Tele Atención  	                       
+                        </div>
                     </div>
 
                 </div>
