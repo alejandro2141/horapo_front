@@ -13,10 +13,18 @@ import axios from 'axios';
             
             <div class="mr-2 pr-2" style="marginLeft : 5px">
                 <div v-if="appointment.center_visit"  >
-                    <i class="h2 bi bi-geo-alt"></i> <text class=" h2 text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
+                    <i class="h1 bi bi-building"></i> 
+                    <text class=" h2 text-success "  >&nbsp;&nbsp;{{ id2name(appointment.specialty ) }}  </text> 
                 </div>
+
                 <div v-if="appointment.home_visit">
-                    <i class="h2 bi bi-house" > </i> <text class="h2 text-success "  >{{ id2name(appointment.specialty ) }}  </text> 
+                    <i class="h2 bi bi-house-door" > </i> 
+                    <text class="h2 text-success "  >&nbsp;&nbsp; {{ id2name(appointment.specialty ) }}  </text> 
+                </div>  
+                
+                <div v-if="appointment.remote_care">
+                       <i class="h2 bi bi-camera-video"></i>
+                       <text class="h2 text-success "  >&nbsp;&nbsp; {{ id2name(appointment.specialty ) }}  </text> 
                 </div>  
                                
             </div>   
@@ -53,8 +61,9 @@ import axios from 'axios';
                         <li class="list-group-item " >{{appointment.patient_name }}</li>
                         <li class="list-group-item"> id:{{appointment.patient_doc_id }} </li>
                         <li class="list-group-item">Edad:{{appointment.patient_age }} </li>
-                        <li v-if="appointment.home_visit" class="list-group-item" style="color:#3399FF"> A Domicilio :  {{appointment.patient_address }} </li>
-                        <li v-if="appointment.center_visit" class="list-group-item"> En Consulta   </li>
+                        <li v-if="appointment.home_visit" class="list-group-item" style="color:#3399FF"> A Domicilio <br>  {{appointment.patient_address }} </li>
+                        <li v-if="appointment.center_visit" class="list-group-item"> En Consulta <br> Incluye direccion centro  </li>
+                        <li v-if="appointment.remote_care" class="list-group-item"> Atención Remota  </li>
                     </ul>
                     {{appointment.message1 }}
 
