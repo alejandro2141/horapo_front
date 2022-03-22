@@ -13,7 +13,7 @@ import LoadProgress from '../loadProgress.vue'
  
        <div  v-if="appointment_list != null && daterequired != null" >
             <!-- <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  -->
-         
+        {{filter_center }} - {{filter_home}} - {{filter_remote}} 
             <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
                 
                 <div v-if=" filter_center == false &&  filter_home == false && filter_remote == false " >
@@ -21,9 +21,17 @@ import LoadProgress from '../loadProgress.vue'
                 </div>
                 
                 <div v-else >
-                    <div v-if="filter_center == appointment.center_visit || filter_home == appointment.home_visit || filter_remote == appointment.remote_care" >
+                    <div v-if="filter_center == true &&  appointment.center_visit == true " >
                         <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
                     </div>
+                    <div v-if="filter_home == true &&  appointment.home_visit == true " >
+                        <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                    </div>
+                    <div v-if="filter_remote == true &&  appointment.remote_care == true " >
+                        <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                    </div>
+
+
                    
                 </div>
             
