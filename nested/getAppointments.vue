@@ -8,7 +8,8 @@ import RecoverAppointmentsForm from '../src/components/RecoverAppointmentsForm.v
 </script>
 
 <template>
-<GeneralHeader></GeneralHeader>
+<div>
+    <GeneralHeader></GeneralHeader>
     <div id="app" class="text-center p-4 bg-light" >     
    
         Ingrese su correo y le enviaremos sus horas ya agendadas. 
@@ -17,7 +18,7 @@ import RecoverAppointmentsForm from '../src/components/RecoverAppointmentsForm.v
         <br>
 
     </div>
-
+</div>
 </template>
 
 
