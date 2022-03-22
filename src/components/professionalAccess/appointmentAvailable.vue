@@ -64,7 +64,7 @@ import axios from 'axios';
                         </div>
                         
                         <div v-if="appointment.app_type_home" style=" font-size: 1.0em;" >
-                          <i class="bi bi-house"> A Domicilio Comunas </i> <br>
+                          <i class="bi bi-house-door"> A Domicilio Comunas </i> <br>
 
                             <text v-if=" appointment.location1 != null " >  
                                 <i class="bi bi-geo-alt"></i> {{ id2comuna(appointment.location1) }} <br>
