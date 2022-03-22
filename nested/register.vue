@@ -7,9 +7,11 @@ import RegisterForm from '../src/components/RegisterForm.vue'
 </script>
 
 <template>
-<GeneralHeader></GeneralHeader>
+<div>
+    <GeneralHeader></GeneralHeader>
     <RegisterForm></RegisterForm>
 
+</div>
 </template>
 
 
