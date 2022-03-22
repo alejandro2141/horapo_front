@@ -63,11 +63,17 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     
                     <div class="mr-2 pr-2 p-2" style="marginLeft : 10px">
                             <div v-if="hour.center_visit"  >
-                            <i class="h2 bi bi-geo-alt"></i> {{specialtyId2name(hour.specialty)}}     
+                                <i class="h1 bi bi-building"></i> {{specialtyId2name(hour.specialty)}}     
                             </div>
                             <div v-if="hour.home_visit"  >
-                                <i class="h2 bi bi-house" > </i>   {{specialtyId2name(hour.specialty)}}     
-                            </div>               
+                                <i class="h2 bi bi-house-door" > </i>   {{specialtyId2name(hour.specialty)}}     
+                            </div>    
+                            <div v-if="hour.remote_care"  >
+                                <i class="h2 bi bi-camera-video"></i>   {{specialtyId2name(hour.specialty)}}     
+                            </div>   
+
+                            
+                                       
                     </div>
                     
                     <!-- <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" > -->
@@ -275,6 +281,7 @@ export default {
             
                   home_visit : poped.home_visit ,
                   center_visit :poped.center_visit ,
+                  remote_care : poped.remote_care ,
             
                   center_id :poped.center_id ,
                   color : poped.color ,
