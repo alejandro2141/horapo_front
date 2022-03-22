@@ -400,6 +400,7 @@ computed: {
 						appointment_center_name  :  this.appToReserve.center_name	, 
 						appointment_center_id  :  this.appToReserve.center_id	, 
 						appointment_type_home  :  this.appToReserve.home_visit	, 
+						appointment_type_remote : this.appToReserve.remote_care ,
 						appointment_professional_id  :  this.appToReserve.professional_id	, 
 
 						appointment_location1 : this.appToReserve.home_visit_location1	, 
