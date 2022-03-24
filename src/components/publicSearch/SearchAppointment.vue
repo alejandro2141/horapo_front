@@ -8,18 +8,28 @@ import loadProgress from '../loadProgress.vue'
 </script>
 
 <template>
-  <div>
+  <div class="bg-white p-2">
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
    
-    <div class="h2 bg-white p-2" >
-    Busca tu Hora 
-    </div>
-        
+      <div class="display-4 bg-white p-2 pb-4 text-center"  > 
+        <a HREF="/index.html" class="text-decoration-none" style="color :#2e5668"> 
+        <i class="bi bi-arrow-left-square"></i> 
+        123Hora  
+        </a> 
+      </div> 
+
       <div>
             <div>
             <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  v-on:form_app_type_center_emit="form_app_type_center_emit" v-on:form_app_type_home_emit="form_app_type_home_emit" v-on:form_app_type_remote_emit="form_app_type_remote_emit"    :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
-            <text v-if="appointments.length > 0" >En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados </text>
-            <p v-if="appointments.length == 0" class="text-center p-2"  > <i class="bi bi-emoji-dizzy display-1"></i><br>No hemos encontrado resultados. Por favor intente con otra fecha o ubicacion. Y nos tomo {{metric_search/1000}} Seg </p>
+            <text v-if="appointments !=null && appointments.length > 0" >En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados </text>
+            
+            <p v-if="appointments !=null && appointments.length == 0" class="text-center p-2"  > 
+                <i class="bi bi-emoji-dizzy display-1">
+                </i>
+                <br>
+                No hemos encontrado resultados. Por favor intente con otra fecha o ubicacion. Y nos tomo {{metric_search/1000}} Seg 
+            </p>
+            
             <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
             </div>
      </div>
@@ -45,7 +55,7 @@ export default {
             insurance: null,
             params_bkp: null, 
            
-            appointments : [] ,
+            appointments : null ,
             appointment : null ,
             show_modal : null ,
             appointment_confirm : null ,
