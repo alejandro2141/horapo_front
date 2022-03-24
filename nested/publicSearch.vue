@@ -12,10 +12,10 @@ import SearchAppointment from '../src/components/publicSearch/SearchAppointment.
 
 <template>
 <div>
-
+<!--
     <GeneralHeader></GeneralHeader>
-    
-    <div id="app" class="m-3" >       
+    -->
+    <div id="app" class="p-3 bg-white" >       
         <SearchAppointment :global_specialties="global_specialties" :global_comunas="global_comunas" ></SearchAppointment>
     </div>
 
