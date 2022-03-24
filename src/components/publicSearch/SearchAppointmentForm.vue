@@ -31,7 +31,7 @@ import inputFormComuna  from './InputFormComuna.vue'
                 <!-- DATE  --> 
                 <div class="row  mb-1  border-secondary ">
                     <div class="col">
-                        <input  v-model="form_current_date" :min="form_minimum_date" type="date" id="birthday" name="birthday" class="form-control form-control-lg border border-primary" >
+                        <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="birthday" name="birthday" class="form-control form-control-lg border border-primary" >
                     </div>
                 </div>
                 <!-- --> 
@@ -39,18 +39,18 @@ import inputFormComuna  from './InputFormComuna.vue'
                 <button type="button" @click="form_app_type_center=!form_app_type_center ; form_app_type_home= false" class=" m-1 btn"  :class="{ 'btn-primary' : form_app_type_center , 'btn-secondary' : !form_app_type_center , 'btn-lg' : form_app_type_center }" >  En Consulta  </button>
                 <button type="button" @click="form_app_type_home=!form_app_type_home ; form_app_type_center= false "     class=" m-1 btn " :class="{ 'btn-primary' : form_app_type_home   , 'btn-secondary' : !form_app_type_home , 'btn-lg' : form_app_type_home     }" > A Domicilio </button>
             --> 
-            <div class="bg-light" >
-                    <button type="button" @click="form_app_type_center=!form_app_type_center ;form_app_type_home=false; form_app_type_remote=false " class="m-1 btn btn-outline-primary border-3" :class="{ 'active' : form_app_type_center }" style="border-color: #781ED1" > 
+            <div class="bg-light d-flex justify-content-between" >
+                    <button type="button" @click="form_app_type_center=!form_app_type_center ;form_app_type_home=false; form_app_type_remote=false " class="m-1 btn btn-outline-primary border-2 " :class="{ 'active' : form_app_type_center }" style="border-color: #781ED1; border-radius: 25px;" > 
                         <i  class="h2 bi bi-building"></i><br>
                         En Consulta  
                     </button>
 
-                    <button type="button" @click="form_app_type_home=!form_app_type_home ;form_app_type_center=false; form_app_type_remote=false   "  class="m-1 btn btn-outline-primary border-3" :class="{ 'active' : form_app_type_home }" style="border-color:#3399FF" > 
+                    <button type="button" @click="form_app_type_home=!form_app_type_home ;form_app_type_center=false; form_app_type_remote=false   "  class="m-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_home }" style="border-color:#3399FF; border-radius: 25px;" > 
                         <i class="h2 bi bi-house-door"></i><br>
                         A Domicilio 
                     </button>
 
-                    <button type="button" @click="form_app_type_remote=!form_app_type_remote ;form_app_type_center=false; form_app_type_home=false  "  class="m-1 btn btn-outline-primary border-3" :class="{ 'active' : form_app_type_remote }"  style="border-color:#b36b00 " > 
+                    <button type="button" @click="form_app_type_remote=!form_app_type_remote ;form_app_type_center=false; form_app_type_home=false  "  class="m-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_remote }"  style="border-color:#b36b00; border-radius: 25px; " > 
                        <i class="h2 bi bi-camera-video"></i><br>
                         Tele Atención 
                     </button>
@@ -88,7 +88,7 @@ import inputFormComuna  from './InputFormComuna.vue'
 
                 <p></p>
                 <div class="text-center">
-                <button type="button" v-on:click="sendFormSearch()" class="btn btn-primary btn-lg m-2"> Buscar una Hora</button>
+                <button type="button" v-on:click="sendFormSearch()" class="btn btn-primary btn-lg m-2">  <i class="display-6  bi bi-search  text-muted m-0"  ></i> Buscar una Hora</button>
                 </div>
              <!--       <i  type="submit" v-on:click="sendFormSearch()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%;"  >{{ search_button_message }}</i>-->
                 </form> 
