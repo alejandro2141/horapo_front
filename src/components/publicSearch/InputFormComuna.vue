@@ -14,11 +14,11 @@ const count = ref(0)
                 <div class="col " style="position: relative;" >
 
                     <div  style="position: absolute; z-index: 9; top : 6px ; left : 3px " class="mb-2  rounded" > 
-                        <i class="display-6  bi bi-search  text-muted m-0"  ></i>
+                        <i class="display-6  bi bi-geo-alt  text-muted m-0"  ></i>                        
                     </div>
 
                     <div>
-                        <input style=" z-index: 9;  padding-left : 40px ;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   placeholder="Ciudad o Comuna o Zona" >
+                        <input style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   placeholder="Ciudad o Comuna o Zona" >
                     </div>
                     
                     <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
