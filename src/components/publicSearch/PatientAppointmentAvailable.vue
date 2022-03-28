@@ -9,7 +9,7 @@ import { ref } from 'vue'
 <template>
     
     
-    <div v-if="appointment != null"   style="border: 3px solid rgb(168, 168, 168); border-radius: 10px;"  class="bg-white p-0 mb-1 ">
+    <div v-if="appointment != null"   style="border: 3px solid rgb(168, 168, 168); border-radius: 30px;"  class="bg-white p-0 mb-1 ">
         
         <div id="app" class="m-0 d-flex  "  >	
             <div class="">
@@ -18,7 +18,7 @@ import { ref } from 'vue'
             <div>
                 <div class="">
                     <div class="display-5" style=" color:#2e5668">	 
-                   <b> {{ transform_date( appointment.date.substring(0, 10) ) }} </b>
+                   <b>  {{ transform_date( appointment.date.substring(0, 10) ) }} </b>
                     
                  {{appointment.start_time}} <text style=" font-size: 0.6em;">hrs</text>  
                     </div>       
