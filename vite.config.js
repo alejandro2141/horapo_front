@@ -21,10 +21,13 @@ module.exports = defineConfig({
         getappointments: resolve(__dirname, './nested/getAppointments.html'),
         publicsearch: resolve(__dirname, './nested/publicSearch.html'),
         professionalaccess: resolve(__dirname, './nested/professionalAccess.html'),
-        
       }
     }
   },
   plugins: [vue()]
 })
+
+
+
+
 
