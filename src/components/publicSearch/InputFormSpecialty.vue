@@ -11,8 +11,8 @@ import { BKND_CONFIG } from '../../../config123.js'
 
                 <div class="col" style="position: relative;" >
 
-                    <div  style="position: absolute; z-index: 9; top : 1px ; left : 3px " class="mb-2  rounded" > 
-                       <i class="display-6 bi bi-vector-pen text-muted"></i>
+                    <div  style="position: absolute; z-index: 9; top : 1px ; left : 3px " class="mt-0  rounded" > 
+                       <i class="display-6 bi bi-vector-pen text-muted  mt-2"></i>
                     </div>
 
                     <div>
