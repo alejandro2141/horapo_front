@@ -11,7 +11,7 @@ import loadProgress from '../loadProgress.vue'
   <div class="bg-white p-2">
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
    
-      <div class="display-4 bg-white p-2 pb-4 text-center"  > 
+      <div class="display-4 bg-white  pb-4 text-center"  > 
         <a HREF="/index.html" class="text-decoration-none" style="color :#2e5668"> 
         <i class="bi bi-arrow-left-square"></i> 
         123Hora  
