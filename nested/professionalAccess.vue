@@ -8,6 +8,7 @@ import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
 import TabCenter from '../src/components/professionalAccess/tabCenter.vue'
 import TabAppointment from '../src/components/professionalAccess/tabAppointment.vue'
 import TabTimeTable from '../src/components/professionalAccess/tabTimeTable.vue'
+import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vue'
 
 
 
@@ -33,6 +34,10 @@ import TabTimeTable from '../src/components/professionalAccess/tabTimeTable.vue'
 
         <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-light">
             <TabTimeTable :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabTimeTable> 	
+        </div>
+
+        <div v-if="visible_tab_userconfig == 'block'" :style="{display:  visible_tab_userconfig }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-light">
+            <TabUserConfig :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabUserConfig> 	
         </div>
 
     </div>
@@ -69,7 +74,7 @@ export default {
         visible_tab_appointments: 'none',
         visible_tab_login: 'block' ,
         visible_tab_timetable: 'none' ,
-        
+        visible_tab_userconfig : 'none' , 
 
         product : 'Socks',
         some : './assets/images/socks_blue.jpg',
@@ -77,6 +82,7 @@ export default {
         muestrame: true,
         personas: ['juan', 'pedro' , 'gonzalo' ],
         counter : 0,
+       
     }
   },
 
@@ -98,10 +104,14 @@ methods: {
             this.visible_tab_assistants ='none'; 
             this.visible_tab_appointments = 'none';
             this.visible_tab_login = 'none' ;
-            this.visible_tab_timetable = 'none' 
+            this.visible_tab_timetable = 'none' ;
+            this.visible_tab_userconfig = 'none' ;
+
         if (val == 1) { this.visible_tab_timetable = 'block' }
         if (val == 2) { this.visible_tab_appointments = 'block' }
         if (val == 3) { this.visible_tab_centers = 'block' }
+        if (val == 4) { this.visible_tab_userconfig = 'block' }
+
     },
 
     async loadGlobalSpecialties() {
