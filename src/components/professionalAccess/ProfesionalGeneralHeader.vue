@@ -6,16 +6,13 @@ import SwitchViewButton from './switchViewButton.vue'
 </script>
 
 <template>
+	<div>
 
     <div v-if="session_params['professional_name'] != null"  class="d-flex p-1 justify-content-around bg-white "> 
-		
-		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); header_menu_exit = true ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0"  :class="{ active: header_menu_exit }" >	
-			<a HREF="/index.html" class="text-secondary text-decoration-none"> 
-				<i class="bbi bi-arrow-left-square display-5 "  ></i> 
-				SALIR
-			</a>	
-		</button>
 
+		<button v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;"  type="button" class="btn btn-outline-primary border border-0"  :class="{ active: showUserMenu }" >	
+			<i class="bi bi-key display-5"></i>	
+		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); header_menu_exit = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_appointments }"  >	
 			<i class="bi bi-card-list display-5 "  ></i> Citas	
@@ -29,33 +26,21 @@ import SwitchViewButton from './switchViewButton.vue'
 			<i class="bi bi-geo-alt display-5 "  ></i> Consultas	
 		</button>
 		
-<!--
-		<div class="text-primary " >
-			 <text v-if="session_params['professional_name'] != null"   @click="switchViewTo(2)"> 
-				<i class="bi bi-card-list display-5 "  ></i> Citas
-			 </text>
+	</div>
+
+
+	<div v-if="showUserMenu" class="bg-secondary text-white bg-secondary">
+		<div class="list-group list-group-flush bg-secondary">
+			<a HREF="/index.html" class="h3 bg-secondary text-white text-decoration-none">  SALIR </a>
+			<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="h3 bg-secondary text-white text-decoration-none"> Configuracion de Usuario </a>
+			
 		</div>
-
-		<div class="text-primary " >
-			 <text v-if="session_params['professional_name'] != null"   @click="switchViewTo(1)"> 
-				<i class="bi bi-calendar display-5 "></i> Calendario 
-			 </text>
-		</div>	
+	</div>
 
 
 
 
-		<div class="text-primary " >
-			 <text v-if="session_params['professional_name'] != null"   @click="switchViewTo(3)"> 
-				<i class="bi bi-geo-alt display-5 "></i> Consultas
-			 </text>
-		</div>
--->
-					<!--
-					<div class="">	
-						<SwitchViewButton v-if="session_params['professional_name'] != null"  v-on:switchView="switchView" ></SwitchViewButton>
-					</div>	
-					-->	
+
 	</div>
 
 </template>
@@ -73,6 +58,7 @@ export default {
 			header_menu_appointments : true ,
 			header_menu_calendars : false ,
 			header_menu_centers : false ,
+			showUserMenu : false, 
 
 
         }   
