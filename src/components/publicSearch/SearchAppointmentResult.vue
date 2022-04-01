@@ -9,14 +9,16 @@ import LoadProgress from '../loadProgress.vue'
 <template>
 
 <div>
+  
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
-       <div  v-if="appointment_list != null && daterequired != null" >
+       <div  v-if="appointments!= null" >
+         
             <!--
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  -->
       
-            <div class="mt-0 "  v-for="appointment in appointment_list" :key="appointment.id" >
+            <div class="mt-0 "  v-for="appointment in appointments" :key="appointment.id" >
                 
                 <div v-if=" filter_center == false &&  filter_home == false && filter_remote == false " >
                     <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
