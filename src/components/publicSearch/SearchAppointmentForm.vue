@@ -87,9 +87,11 @@ import inputFormComuna  from './InputFormComuna.vue'
                 -->
 
                 <p></p>
+                <!--
                 <div class="text-center">
                 <button type="button" v-on:click="sendFormSearch()" class="btn btn-primary btn-lg m-2">  <i class="display-6  bi bi-search   m-0"  ></i> Buscar una Hora</button>
                 </div>
+                -->
              <!--       <i  type="submit" v-on:click="sendFormSearch()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%;"  >{{ search_button_message }}</i>-->
                 </form> 
             </div>	
@@ -149,18 +151,21 @@ export default {
         {
         console.log("Comuna Code:"+code);
         this.form_comuna_code = code;
+        this.sendFormSearch() ; 
         },
 
         selectedSpecialtyCode(code)
         {
         console.log("Specialty Code:"+JSON.stringify(code));
         this.form_specialty = code;
+        this.sendFormSearch() ; 
         },
 
         selectedInsuranceCode(code)
         {
         console.log("Insurance Code:"+code);
         this.form_insurance_code = code;
+      
         },
 
         //SEND FORM 
@@ -188,6 +193,15 @@ export default {
     
     watch : {
         
+        form_current_date(oldValue, newValue)
+        {
+            console.log("DATE  CHANGE :"+oldValue+ " New Value"+newValue );
+            if (newValue !=null)
+            {
+                this.sendFormSearch() ; 
+            }
+        },
+
         form_app_type_center(newValue){
             this.$emit("form_app_type_center_emit",newValue );
         },
