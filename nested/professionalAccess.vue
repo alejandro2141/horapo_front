@@ -65,6 +65,7 @@ export default {
     return {
         global_specialties : [],
         global_comunas : [],  
+        global_professional_specialties : [] ,
 
         session : "sesionname",
         session_params : [] ,
@@ -93,6 +94,7 @@ created() {
         console.log("NESTED PROFESSIONAL ACCESS SEARCH Fill Global variables");
         this.loadGlobalSpecialties();
         this.loadGlobalComunas();
+      //  this.loadProfessionalEspecialties();
 },
 
 methods: {
@@ -128,6 +130,20 @@ methods: {
                 console.log("APP Comuna list: "+JSON.stringify(this.global_comunas) );
 
             },
+
+    async loadProfessionalEspecialties() {             
+                console.log ("getSpecialties :" );
+                const json = { 
+                   professional_id: this.session_params.professional_id ,
+                  // professional_id : 1 ,
+                   };
+
+                console.log("REQUEST get_professional_specialty :"+JSON.stringify(json));
+                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/get_professional_specialty",json);
+                console.log ("RESPONSE  get_professional_specialty:"+JSON.stringify(response_json.data.rows)) ;
+                this.global_professional_specialties= response_json.data.rows ; 
+            },
+
 
     switchView(){
         console.log("SwitchView in professional access ");
