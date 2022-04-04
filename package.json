@@ -9,6 +9,7 @@
   "dependencies": {
     "@bundled-es-modules/axios": "^0.21.1",
     "axios": "^0.21.4",
+    "boostrap": "^2.0.0",
     "bootstrap": "^5.1.1",
     "bootstrap-icons": "^1.5.0",
     "vue": "^3.2.6",
@@ -19,7 +20,8 @@
     "@vitejs/plugin-vue": "^1.6.1",
     "@vue/compiler-sfc": "^3.2.6",
     "vite": "^2.5.4"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
-
-  
 }
