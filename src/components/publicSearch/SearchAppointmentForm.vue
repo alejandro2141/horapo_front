@@ -14,33 +14,32 @@ import inputFormComuna  from './InputFormComuna.vue'
                 <input  v-model="form_token" id="form_token" name="form_token" type="hidden"  > 
 
 <!--FORM INPUT SPECIALTY -->                   
-                <div class="w-100 mb-1">
+                <div v-if="show_input_specialty()"  class="w-100 mb-1"  >
                     <div class="">
                         <inputFormSpecialty  v-on:selectedSpecialtyCode="selectedSpecialtyCode" :global_specialties="global_specialties" > </inputFormSpecialty> 
                     </div>
                 </div>
                
 <!--FORM INPUT  APP TYPE -->
-                <div v-if="show_app_type()" class=" d-flex justify-content-between border " style=" border-radius: 25px;"  >
-                    <button type="button" @click="form_app_type_center=!form_app_type_center ;form_app_type_home=false; form_app_type_remote=false " class="m-1 btn btn-outline-primary border-2 " :class="{ 'active' : form_app_type_center }" style="border-color: #781ED1; border-radius: 25px;" > 
-                        <i  class="h4 bi bi-building m-0 p-0"></i><br>
-                        Consulta  
+                <div v-if="show_app_type()" class=" border border-primary" style=" border-radius: 15px;"  >
+                    <button type="button" @click="form_app_type_center=!form_app_type_center ;form_app_type_home=false; form_app_type_remote=false;  " class="m-1 p-1  btn btn-outline-primary border-2 " :class="{ 'active' : form_app_type_center }" style="border-color: #781ED1; border-radius: 15px;" > 
+                        <i  class="h5 bi bi-building m-0 p-0"></i><br>
+                       <text class="m-0 p-0"> Consulta </text>  
                     </button>
 
-                    <button type="button" @click="form_app_type_home=!form_app_type_home ;form_app_type_center=false; form_app_type_remote=false   "  class="m-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_home }" style="border-color:#3399FF; border-radius: 25px;" > 
-                        <i class="h4 bi bi-house-door m-0 p-0"></i><br>
-                        Domicilio 
+                    <button type="button" @click="form_app_type_home=!form_app_type_home ;form_app_type_center=false; form_app_type_remote=false  ;  "  class="m-1 p-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_home }" style="border-color:#3399FF; border-radius: 15px;" > 
+                        <i class="h5 bi bi-house-door m-0 p-0"></i><br>
+                        <text> Domicilio </text> 
                     </button>
 
-                    <button type="button" @click="form_app_type_remote=!form_app_type_remote ;form_app_type_center=false; form_app_type_home=false  "  class="m-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_remote }"  style="border-color:#b36b00; border-radius: 25px; " > 
-                       <i class="h4 bi bi-camera-video m-0 p-0"></i><br>
-                        Remota 
+                    <button type="button" @click="form_app_type_remote=!form_app_type_remote ;form_app_type_center=false; form_app_type_home=false ;   "  class="m-1 p-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_remote }"  style="border-color:#b36b00; border-radius: 15px; " > 
+                       <i class="h5 bi bi-camera-video m-0 p-0"></i><br>
+                       <text> Remota </text> 
                     </button>
 
-                    <span class="align-middle mt-2">
-                        <i class="display-1 m-1  bi bi-x  text-muted "></i>
+                    <span class="">
+                        <i class="display-1 m-1   bi bi-x  text-muted "></i>
                     </span>
-                    
                 </div>
 
 <!-- FORM INPUT LOCATION-->
@@ -141,7 +140,7 @@ export default {
   },
 
  props: [ 'global_specialties','global_comunas', 'currentDate','n_appointments_found' ], 
- emits: [ 'searchAppointments' ,'form_app_type_center_emit' , 'form_app_type_home_emit' , 'form_app_type_remote_emit'  ],
+ emits: [ 'searchBySpecialty' ,   ],
  
 
 
@@ -153,6 +152,11 @@ export default {
  
 
     methods: {
+
+        show_input_specialty()
+        {   
+            return true 
+        },
 
         show_input_location()
         {   if ( this.form_app_type_center || this.form_app_type_home   )
@@ -177,27 +181,27 @@ export default {
 
 
         //V-ON to capture selection 
-        selectedComunaCode(code)
-        {
-        console.log("Comuna Code:"+code);
-        this.form_comuna_code = code;
-        this.sendFormSearch() ; 
-        },
-
         selectedSpecialtyCode(code)
         {
         console.log("Specialty Code:"+JSON.stringify(code));
         this.form_specialty = code;
-        this.sendFormSearch() ; 
-        },
 
-        selectedInsuranceCode(code)
+        const search_params = { 
+				 specialty : this.form_specialty ,
+                 date :  this.form_current_date ,  
+                  		  };
+        this.$emit("searchBySpecialty",search_params );
+
+        },
+        
+        selectedComunaCode(code)
         {
-        console.log("Insurance Code:"+code);
-        this.form_insurance_code = code;
-      
+        console.log("Comuna Code:"+code);
+        this.form_comuna_code = code;
+       
         },
-
+       
+/*
         //SEND FORM 
         sendFormSearch(){
            
@@ -218,6 +222,8 @@ export default {
                 this.form_app_type_remote = false ; 
 
             }
+            */
+            
 
         },
     
@@ -227,9 +233,10 @@ export default {
         {
             console.log("DATE  CHANGE :"+ oldValue+ " To New Value : "+newValue );
             if (newValue !=null)
-            {  this.sendFormSearch() ; }
+            {   }
         },
-
+        
+        /*
         form_app_type_center(newValue){
             this.$emit("form_app_type_center_emit",newValue );
         },
@@ -241,8 +248,7 @@ export default {
         form_app_type_remote(newValue){
             this.$emit("form_app_type_remote_emit",newValue );
         },
-
-
+        */  
 
     },
 
