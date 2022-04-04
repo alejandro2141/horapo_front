@@ -21,25 +21,23 @@ import suggestedSearch from './SuggestedSearch.vue'
 
       <div>
             <div>
-            <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  v-on:form_app_type_center_emit="form_app_type_center_emit" v-on:form_app_type_home_emit="form_app_type_home_emit" v-on:form_app_type_remote_emit="form_app_type_remote_emit"    :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" :n_appointments_found="n_appointments_found"></searchAppointmentForm>
+            <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty"  :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" :n_appointments_found="n_appointments_found"></searchAppointmentForm>
             
             <div v-if="appointments !=null && appointments.length > 0">
                 
                 En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados
-                
+                <!--
                 <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
-           
+                -->
+                <searchAppointmentResult   :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="filtered_appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+
             </div>
 
-           
             <p v-if="appointments !=null && appointments.length == 0" class="text-center p-2"  > 
-                <i class="bi bi-emoji-dizzy display-1">
-                </i>
-                <br>
-                Sin horas disponibles. Quizas mas tarde se generen nuevos cupos.    
-                {{metric_search/1000}} Seg 
-              <hr>
-            <suggestedSearch></suggestedSearch>
+               
+              <i class="bi bi-emoji-dizzy display-1"> </i> Sin horas disponibles por ahora. <br>
+              <!-- {{metric_search/1000}} Seg  -->
+              <suggestedSearch></suggestedSearch>
             </p>
 
             <p v-if="appointments == null">
@@ -88,6 +86,7 @@ export default {
             filter_remote: false ,
 
             n_appointments_found : 0 ,
+            filtered_appointments : [] 
     }
   },
 
@@ -101,27 +100,57 @@ export default {
 
 methods: {
 
+     
         ///debo incluir los metodos para capturar los eventos de
 /*
       form_app_type_center_emit 
       form_app_type_home_emit
       form_app_type_remote_emit
 */
-     
+     /*
         form_app_type_center_emit(value)
         {
-          this. filter_center = value
+          console.log("emit capture, form app type CENTER ");
+          this.temp_appointments = [] ;
+          for(var i = 0; i < this.appointments.length ; i++){
+              //console.log (" center visit = "+this.appointments[i].center_visit+" " )
+              if (this.appointments[i].center_visit) 
+              {
+                this.temp_appointments.push(this.appointments[i]) ; 
+              }
+        }
+
+        console.log("CENTERs in the list : "+this.temp_appointments.length);
         },
 
         form_app_type_home_emit(value)
         {
-           this. filter_home = value
+          console.log("emit capture, form app type HOME ");
+         this.temp_appointments = [] ; 
+          for(var i = 0; i < this.appointments.length ; i++){
+              //console.log (" HOME visit = "+this.appointments[i].center_visit+" " )
+              if (this.appointments[i].home_visit) 
+              {
+                this.temp_appointments.push(this.appointments[i]) ; 
+              }
+          }
+        console.log("HOME in the list : "+this.temp_appointments.length);
         },
 
         form_app_type_remote_emit(value)
         {
-           this. filter_remote = value
+          console.log("emit capture, form app type REMOTE ");
+          this.temp_appointments = [] ; 
+          for(var i = 0; i < this.appointments.length ; i++){
+              //console.log (" HOME visit = "+this.appointments[i].center_visit+" " )
+              if (this.appointments[i].remote_care) 
+              {
+                this.temp_appointments.push(this.appointments[i]) ; 
+              }
+          }
+          console.log("HOME in the list : "+this.temp_appointments.length);
         },
+        */
 
 
         show_modal_appointment_confirm(param)
@@ -136,65 +165,74 @@ methods: {
             this.daterequired = year_month_day ;
             },
 
-        async searchAppointments(params) {	
+
+
+            searchBySpecialty()
+            {
+              console.log ("search By Specialty")
+            },
+
+
+//SEARCH APPOINTMENTS GENERIC
+        async  searchAppointments(params) {	
          
-     if (  params.specialty != null)
-                { 
-                  
-                let metric = Date.now();
-                this.active_spinner = true ; 
-                console.log("search Appointments input params :"+JSON.stringify(params) )
+              if (  params.specialty != null )
+              { 
+                            
+                          let metric = Date.now();
+                          this.active_spinner = true ; 
+                          console.log("search Appointments input params :"+JSON.stringify(params) )
+                          
+                          let specialty_code = null ;
+                          specialty_code = params.specialty.id ; 
+                        
+
+                          const json = { 
+                  // agenda_id : this.par_agenda_id ,			 
+                          date : params.date ,
+                          specialty : specialty_code ,
+                          location : params.comuna ,
+                          home_visit : params.home_visit,
+                          type_home : params.type_home,
+                          type_center : params.type_center,
+                          type_remote : params.type_remote,
+                                  };
+
+                  console.log ("searchAppointments2 input to send JSON :"+ JSON.stringify(json)  );
+                  //let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
                 
-                let specialty_code = null ;
-                specialty_code = params.specialty.id ; 
-               
+                  this.appointments = response_json.data;
+                  console.log ("getAppointments2 RESPONSE:"+JSON.stringify(this.appointments)) ;
 
-                 const json = { 
-				// agenda_id : this.par_agenda_id ,			 
-				    date : params.date ,
-				    specialty : specialty_code ,
-                 location : params.comuna ,
-                 home_visit : params.home_visit,
-                 type_home : params.type_home,
-                 type_center : params.type_center,
-                 type_remote : params.type_remote,
-                  		  };
-				console.log ("searchAppointments2 input to send JSON :"+ JSON.stringify(json)  );
-				//let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
-				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
-			
-				this.appointments = response_json.data;
-      	console.log ("getAppointments2 RESPONSE:"+JSON.stringify(this.appointments)) ;
+                  // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
+                          this.notificationMessage_alert=	false ;
+                          this.searchParameters = params ;
+                          this.params_bkp = params ; 
+                          this.active_spinner = false ;
 
-        // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
-                this.notificationMessage_alert=	false ;
-                this.searchParameters = params ;
-                this.params_bkp = params ; 
-                this.active_spinner = false ;
+                    metric = (Date.now() - metric ) ;     
+                    this.metric_search = metric ;
+                    console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
+                    
+                                  if (this.appointments != null)
+                                  {
+                                    this.n_appointments_found = this.appointments.length ;
+                                    this.filtered_appointments = this.appointments
+                                  }
+                                  else
+                                  {
+                                    this.n_appointments_found = 0 ;
+                                  }
 
-          metric = (Date.now() - metric ) ;     
-          this.metric_search = metric ;
-          console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
-           
-                        if (this.appointments != null)
-                        {
-                          this.n_appointments_found = this.appointments.length ;
-                        }
-                        else
-                        {
-                          this.n_appointments_found = 0 ;
-                        }
-
-
-           
-            }
-                else 
-                {
+              }
+              else 
+              {
                   this.appointments = null;
                   this.n_appointments_found = 0 ;
-                }
-           
-           
+              }
+                    
+                    
            },
 
 
