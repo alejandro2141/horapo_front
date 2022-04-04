@@ -4,6 +4,7 @@ import axios from 'axios'
 import searchAppointmentForm  from './SearchAppointmentForm.vue' 
 import searchAppointmentResult  from './SearchAppointmentResult.vue'
 import loadProgress from '../loadProgress.vue'
+import suggestedSearch from './SuggestedSearch.vue'
 
 </script>
 
@@ -20,11 +21,12 @@ import loadProgress from '../loadProgress.vue'
 
       <div>
             <div>
-            <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  v-on:form_app_type_center_emit="form_app_type_center_emit" v-on:form_app_type_home_emit="form_app_type_home_emit" v-on:form_app_type_remote_emit="form_app_type_remote_emit"    :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" ></searchAppointmentForm>
+            <searchAppointmentForm  v-on:searchAppointments="searchAppointments"  v-on:form_app_type_center_emit="form_app_type_center_emit" v-on:form_app_type_home_emit="form_app_type_home_emit" v-on:form_app_type_remote_emit="form_app_type_remote_emit"    :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" :n_appointments_found="n_appointments_found"></searchAppointmentForm>
             
             <div v-if="appointments !=null && appointments.length > 0">
                 
                 En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados
+                
                 <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
            
             </div>
@@ -34,7 +36,14 @@ import loadProgress from '../loadProgress.vue'
                 <i class="bi bi-emoji-dizzy display-1">
                 </i>
                 <br>
-                No hemos encontrado resultados. Por favor intente con otra fecha o ubicacion. Y nos tomo {{metric_search/1000}} Seg 
+                Sin horas disponibles. Quizas mas tarde se generen nuevos cupos.    
+                {{metric_search/1000}} Seg 
+              <hr>
+            <suggestedSearch></suggestedSearch>
+            </p>
+
+            <p v-if="appointments == null">
+                <suggestedSearch></suggestedSearch>
             </p>
             
             </div>
@@ -77,6 +86,8 @@ export default {
             filter_center : false ,
             filter_home : false ,
             filter_remote: false ,
+
+            n_appointments_found : 0 ,
     }
   },
 
@@ -96,6 +107,7 @@ methods: {
       form_app_type_home_emit
       form_app_type_remote_emit
 */
+     
         form_app_type_center_emit(value)
         {
           this. filter_center = value
@@ -125,15 +137,17 @@ methods: {
             },
 
         async searchAppointments(params) {	
-          let metric = Date.now();
+         
+     if (  params.specialty != null)
+                { 
+                  
+                let metric = Date.now();
                 this.active_spinner = true ; 
                 console.log("search Appointments input params :"+JSON.stringify(params) )
                 
                 let specialty_code = null ;
-                if (  params.specialty != null)
-                { 
-                    specialty_code = params.specialty.id ; 
-                }
+                specialty_code = params.specialty.id ; 
+               
 
                  const json = { 
 				// agenda_id : this.par_agenda_id ,			 
@@ -161,7 +175,33 @@ methods: {
           metric = (Date.now() - metric ) ;     
           this.metric_search = metric ;
           console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
-            },
+           
+                        if (this.appointments != null)
+                        {
+                          this.n_appointments_found = this.appointments.length ;
+                        }
+                        else
+                        {
+                          this.n_appointments_found = 0 ;
+                        }
+
+
+           
+            }
+                else 
+                {
+                  this.appointments = null;
+                  this.n_appointments_found = 0 ;
+                }
+           
+           
+           },
+
+
+
+
+
+
 
             updateLastSearch()
             {
