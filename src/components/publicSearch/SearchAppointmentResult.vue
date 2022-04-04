@@ -20,25 +20,8 @@ import LoadProgress from '../loadProgress.vue'
       
             <div class="mt-0 "  v-for="appointment in appointments" :key="appointment.id" >
                 
-                <div v-if=" filter_center == false &&  filter_home == false && filter_remote == false " >
                     <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
-                </div>
-                
-                <div v-else >
-                    <div v-if="filter_center == true &&  appointment.center_visit == true " >
-                        <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
-                    </div>
-                    <div v-if="filter_home == true &&  appointment.home_visit == true " >
-                        <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
-                    </div>
-                    <div v-if="filter_remote == true &&  appointment.remote_care == true " >
-                        <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
-                    </div>
-
-
-                   
-                </div>
-            
+             
             </div>
                 <!-- Start make room for Modal data when it display-->
             <div style="height: 400px">
