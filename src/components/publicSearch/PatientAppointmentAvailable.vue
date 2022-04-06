@@ -38,12 +38,16 @@ import { ref } from 'vue'
                             <div style="color: #781ED1" >
                             <i class="h1 bi bi-building"></i> En Consulta  </div>
                             </div>
+                            <div style="" class="text-dark display-6" >
+                               {{comuna_id2name(appointment.center_visit_location)}}
+                            </div>
                             <div class="" style="color:#2e5668" >	
                                 {{appointment.center_name}}
                             </div> 
                             <div style="color:#2e5668">
                                {{appointment.center_address}}
                             </div>
+                            
                     </div>
                     
                     <div v-if="appointment.home_visit" style="color:#3399FF">
@@ -62,7 +66,10 @@ import { ref } from 'vue'
 
                     <div v-if="appointment.remote_care" class="">
                          <div class="display-5" style="color:#b36b00" >
-                               <i class="bi bi-camera-video"></i> Tele Atención  	                       
+                               <i class="bi bi-camera-video"></i> Tele Atención  	 
+                              <div style="" class="text-dark display-6" >
+                              (Todas las comunas) 
+                              </div>                      
                         </div>
                     </div>
 
