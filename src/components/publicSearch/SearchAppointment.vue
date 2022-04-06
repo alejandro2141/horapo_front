@@ -21,11 +21,11 @@ import suggestedSearch from './SuggestedSearch.vue'
 
       <div>
             <div>
-            <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty"  :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas" :n_appointments_found="n_appointments_found"></searchAppointmentForm>
+            <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="filtered_appointments.length" ></searchAppointmentForm>
             
             <div v-if="appointments !=null && appointments.length > 0">
                 
-                En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados
+                En {{metric_search/1000}} Seg encontramos {{filtered_appointments.length}} resultados
                 <!--
                 <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                 -->
@@ -166,15 +166,81 @@ methods: {
             },
 
 
-
-            searchBySpecialty()
+//SEARCH BY SPECIALTY
+            searchBySpecialty(params)
             {
-              console.log ("search By Specialty")
+              console.log ("search By Specialty"+JSON.stringify(params))
+              //generate search by Specialty and Date
+              this.searchAppointments(params)
+              this.filtered_appointments = this.appointments ; 
+              
+
+            },
+//SEARCH BY TYPE_CENTER
+            searchByTypeCenter(params)
+            {
+              console.log ("search By Type Center"+JSON.stringify(params))
+              this.filtered_appointments = this.appointments.filter(appointment => appointment.center_visit == true);
+              if (params.location != null)
+                    {
+              this.filtered_appointments = this.filtered_appointments.filter(appointment => [appointment.center_visit_location, appointment.home_visit_location1, appointment.home_visit_location2, appointment.home_visit_location3 , appointment.home_visit_location4, appointment.home_visit_location5 , appointment.home_visit_location6 ].includes(params.location)  );
+                    }
+              //this.searchAppointments(params)
+            },
+//SEARCH BY TYPE_HOME
+            searchByTypeHome(params)
+            {
+              console.log ("search By Type Home"+JSON.stringify(params))
+              this.filtered_appointments = this.appointments.filter(appointment => appointment.home_visit == true);
+              if (params.location != null)
+                    {
+              this.filtered_appointments = this.filtered_appointments.filter(appointment => [appointment.center_visit_location, appointment.home_visit_location1, appointment.home_visit_location2, appointment.home_visit_location3 , appointment.home_visit_location4, appointment.home_visit_location5 , appointment.home_visit_location6 ].includes(params.location)  );
+                    }
+            },
+//SEARCH BY TYPE_REMOTE
+            searchByTypeRemote(params)
+            {
+              console.log ("search By Type Remote"+JSON.stringify(params))
+              this.filtered_appointments = this.appointments.filter(appointment => appointment.remote_care == true);
+             //Does Not require search by Location. 
+
+            },
+//SEARCH BY LOCATION
+            searchByLocation(params)
+            {
+              console.log ("search By Location"+JSON.stringify(params))
+              // Now we should filter previos resulset 
+                let temp_appointments = this.appointments ;
+
+                if (params.type_center == true)
+                { 
+                  temp_appointments = temp_appointments.filter(appointment => appointment.center_visit == true);
+                }
+                if (params.type_home == true)
+                { 
+                  temp_appointments = temp_appointments.filter(appointment => appointment.home_visit == true);
+                }
+                if (params.type_remote == true)
+                { 
+                    temp_appointments = this.appointments ;
+                    return            
+                }
+                temp_appointments = temp_appointments.filter(appointment => ( [appointment.center_visit_location, appointment.home_visit_location1, appointment.home_visit_location2, appointment.home_visit_location3 , appointment.home_visit_location4, appointment.home_visit_location5 , appointment.home_visit_location6 ].includes(params.location) ) );             
+
+               this.filtered_appointments = temp_appointments ;
+               //this.searchAppointments(params)
+            },
+
+          searchByDate(params)
+            {
+              console.log("Search BY DATE: "+JSON.stringify(params));
+              this.searchAppointments(params);
+
             },
 
 
-//SEARCH APPOINTMENTS GENERIC
-        async  searchAppointments(params) {	
+//SEARCH GENERIC
+        async searchAppointments(params) {	
          
               if (  params.specialty != null )
               { 
@@ -217,19 +283,19 @@ methods: {
                     
                                   if (this.appointments != null)
                                   {
-                                    this.n_appointments_found = this.appointments.length ;
-                                    this.filtered_appointments = this.appointments
+                                   // this.filtered_appointments = this.appointments
                                   }
                                   else
                                   {
                                     this.n_appointments_found = 0 ;
                                   }
+                   
 
               }
               else 
               {
                   this.appointments = null;
-                  this.n_appointments_found = 0 ;
+             
               }
                     
                     
