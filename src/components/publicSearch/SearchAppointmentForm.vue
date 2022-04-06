@@ -21,29 +21,27 @@ import inputFormComuna  from './InputFormComuna.vue'
                 </div>
                
 <!--FORM INPUT  APP TYPE -->
-                <div v-if="show_app_type()" class=" border border-primary" style=" border-radius: 15px;"  >
-                    <button type="button" @click="form_app_type_center=!form_app_type_center ;form_app_type_home=false; form_app_type_remote=false;  " class="m-1 p-1  btn btn-outline-primary border-2 " :class="{ 'active' : form_app_type_center }" style="border-color: #781ED1; border-radius: 15px;" > 
+                <div v-if="show_app_type()" class=" border border-primary mb-1" style=" border-radius: 15px;"  >
+                    
+                    <button type="button" @click="selectedTypeCenter()" class="m-1 p-1  btn btn-outline-primary border-2 " :class="{ 'active' : form_app_type_center }" style="border-color: #781ED1; border-radius: 15px;" > 
                         <i  class="h5 bi bi-building m-0 p-0"></i><br>
                        <text class="m-0 p-0"> Consulta </text>  
                     </button>
 
-                    <button type="button" @click="form_app_type_home=!form_app_type_home ;form_app_type_center=false; form_app_type_remote=false  ;  "  class="m-1 p-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_home }" style="border-color:#3399FF; border-radius: 15px;" > 
+                    <button type="button" @click="selectedTypeHome()"  class="m-1 p-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_home }" style="border-color:#3399FF; border-radius: 15px;" > 
                         <i class="h5 bi bi-house-door m-0 p-0"></i><br>
                         <text> Domicilio </text> 
                     </button>
 
-                    <button type="button" @click="form_app_type_remote=!form_app_type_remote ;form_app_type_center=false; form_app_type_home=false ;   "  class="m-1 p-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_remote }"  style="border-color:#b36b00; border-radius: 15px; " > 
+                    <button type="button" @click="selectedTypeRemote()"  class="m-1 p-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_remote }"  style="border-color:#b36b00; border-radius: 15px; " > 
                        <i class="h5 bi bi-camera-video m-0 p-0"></i><br>
                        <text> Remota </text> 
                     </button>
-
-                    <span class="">
-                        <i class="display-1 m-1   bi bi-x  text-muted "></i>
-                    </span>
+                   
                 </div>
 
 <!-- FORM INPUT LOCATION-->
-                <div v-if="show_input_location()"  class="row  mb-1  border-secondary ">
+                <div   class="row  mb-1  border-secondary " :style="{visibility: show_input_location() ? 'visible' : 'hidden'}"  >
                     <div class="col">
                         <inputFormComuna position="true"  v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
@@ -119,7 +117,7 @@ export default {
 
             form_token : null,
             form_specialty : null,
-            form_comuna_code  : null,
+            form_location_code  : null,
             form_insurance_code : null,
 
             form_minimum_date : null,
@@ -139,8 +137,8 @@ export default {
     }
   },
 
- props: [ 'global_specialties','global_comunas', 'currentDate','n_appointments_found' ], 
- emits: [ 'searchBySpecialty' ,   ],
+ props: [ 'global_specialties','global_comunas', 'currentDate','n_app_filtered' ], 
+ emits: [ 'searchBySpecialty','searchByTypeCenter','searchByTypeHome' ,'searchByTypeRemote' ,'searchByLocation' ,'searchByDate' ],
  
 
 
@@ -157,48 +155,119 @@ export default {
         {   
             return true 
         },
+        
+        show_app_type()
+        {   if ( this.form_specialty != null  )
+            { return true } 
+            else
+            { return false }
+        },
 
         show_input_location()
-        {   if ( this.form_app_type_center || this.form_app_type_home   )
+        {   if ( ( (this.form_specialty != null || this.form_app_type_center || this.form_app_type_home ))   )
             { return true } 
             else
             { return false }
         },
 
         show_input_date()
-        {   if ( this.form_specialty != null &&  this.form_comuna_code != null )
+        {   if ( this.form_specialty != null &&  this.form_location_code != null )
             {   return true } 
             else
             { return false }
         },
 
-        show_app_type()
-        {   if ( this.form_specialty != null && this.n_appointments_found>0 )
-            { return true } 
-            else
-            { return false }
-        },
 
 
-        //V-ON to capture selection 
+//SELECTED IN FORM TO EMIT  FOR SEARCH 
+        //SELECTED SPECIALTY comes from V-ON event component
         selectedSpecialtyCode(code)
         {
         console.log("Specialty Code:"+JSON.stringify(code));
         this.form_specialty = code;
+        
+            this.form_app_type_center=false ;
+            this.form_app_type_home=false; 
+            this.form_app_type_remote=false;
 
         const search_params = { 
 				 specialty : this.form_specialty ,
                  date :  this.form_current_date ,  
                   		  };
         this.$emit("searchBySpecialty",search_params );
-
         },
-        
+
+        // SELECTED TYPE_CENTER
+        selectedTypeCenter(){
+            this.form_app_type_center=!this.form_app_type_center ;
+            this.form_app_type_home=false; 
+            this.form_app_type_remote=false;
+                
+                const search_params = { 
+				        specialty : this.form_specialty ,
+                        type_center : this.form_app_type_center,
+                        location : this.form_location_code ,
+                        date :  this.form_current_date ,  
+                  		  };
+
+            this.$emit("searchByTypeCenter",search_params );
+        },
+         // SELECTED TYPE_HOME
+        selectedTypeHome(){
+            this.form_app_type_center=false ;
+            this.form_app_type_home=!this.form_app_type_home; 
+            this.form_app_type_remote=false;
+                
+                const search_params = { 
+				        specialty : this.form_specialty ,
+                        type_home : this.form_app_type_home,
+                        location : this.form_location_code ,
+                        date :  this.form_current_date ,  
+                  		  };
+
+            this.$emit("searchByTypeHome",search_params );
+        },
+         // SELECTED TYPE_REMOTE
+        selectedTypeRemote(){
+            this.form_app_type_center=false ;
+            this.form_app_type_home=false ; 
+            this.form_app_type_remote=!this.form_app_type_remote ;
+                const search_params = { 
+				        specialty : this.form_specialty ,
+                        type_remote : this.form_app_type_remote,
+                        location : this.form_location_code ,
+                        date :  this.form_current_date ,  
+                  		  };
+            this.$emit("searchByTypeRemote",search_params );
+        },
+        //SELECTED COMUNA 
         selectedComunaCode(code)
         {
-        console.log("Comuna Code:"+code);
-        this.form_comuna_code = code;
-       
+            this.form_location_code = code ; 
+                const search_params = { 
+				        specialty : this.form_specialty ,
+                        type_center : this.form_app_type_center,
+                        type_home : this.form_app_type_home,
+                        type_remote : this.form_app_type_remote,
+                    //   app type no set
+                        location : this.form_location_code ,
+                        date :  this.form_current_date ,  
+                  		  };
+            this.$emit("searchByLocation",search_params );
+        },
+        //SELECTED DATE 
+        selectedDate(date)
+        {
+                const search_params = { 
+				        specialty : this.form_specialty ,
+                        type_center : this.form_app_type_center,
+                        type_home : this.form_app_type_home,
+                        type_remote : this.form_app_type_remote,
+                    //   app type no set
+                        location : this.form_location_code ,
+                        date :  date ,  
+                  		  };
+            this.$emit("searchByDate",search_params );
         },
        
 /*
@@ -233,7 +302,9 @@ export default {
         {
             console.log("DATE  CHANGE :"+ oldValue+ " To New Value : "+newValue );
             if (newValue !=null)
-            {   }
+            {  
+                this.selectedDate(newValue)
+            }
         },
         
         /*
