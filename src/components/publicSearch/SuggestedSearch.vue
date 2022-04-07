@@ -6,7 +6,7 @@ import axios from 'axios';
 <template>
        <div class="" >
            <hr>
-           <p   >Busquedas mas comunes</p>
+           <p>Busquedas mas comunes</p>
            <hr>
             
             <p class="text-start"> <text class="display-5"> Kinesiologia </text><br> <text class="text-muted"> A domicilio, Santiago </text> </p> 
