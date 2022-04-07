@@ -11,6 +11,8 @@ import inputFormComuna  from './InputFormComuna.vue'
 
             <div id="formSearch" class="mx-auto "  >
                 <form autocomplete="off" >
+
+
                 <input  v-model="form_token" id="form_token" name="form_token" type="hidden"  > 
 
 <!--FORM INPUT SPECIALTY -->                   
@@ -164,14 +166,14 @@ export default {
         },
 
         show_input_location()
-        {   if ( ( (this.form_specialty != null || this.form_app_type_center || this.form_app_type_home ))   )
+        {   if ( this.form_specialty != null )
             { return true } 
             else
             { return false }
         },
 
         show_input_date()
-        {   if ( this.form_specialty != null &&  this.form_location_code != null )
+        {   if ( this.form_specialty != null  )
             {   return true } 
             else
             { return false }
