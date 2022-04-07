@@ -24,11 +24,11 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                 <div class="modal-body w-100" > 
                 
 				 	<div class="d-flex flex-row justify-content-end ">
-                      <div  > </div>
+                      <div  >  </div>
                       <div  > </div>
                       <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                     </div>
-
+<!--
 					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
 						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(appToReserve.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{appToReserve.date.substring(8, 10) }} </text>  </div>
 					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appToReserve.specialty1) }} </div> 
@@ -49,40 +49,14 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 					<div v-if="appToReserve.center_visit"  class="" style=" color:#1f9d94 "  >
 						<div > <i class="bi bi-geo-alt-fill display-5"></i>Direccion de la cita: <br>&nbsp;&nbsp;"{{appToReserve.center_name }}"</div>
-						<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
 						<div class=""> &nbsp;&nbsp;  {{appToReserve.center_address }}</div>
-					<!--
-							<hr>
-							<a v-if="imgLoaded" :href="app.url_map" >Mapa</a>
-							
-							<img   @load="imgLoaded = true" @error="imgLoaded = false"  :src="imgMapUrl" class="img-fluid" alt="center map">
-					-->
+					
 					</div>
-<hr>
-				<!--
-                  <div class="d-flex  justify-content-end  m-0">
-				
-                      <div class="display-4 " style="margin-right: 1em; color:#1f9d94 " >  {{ showSpecialtyName(appToReserve.specialty1) }}  </div>
-                      <div class="" style="" > </div>
 
-                      <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
-                  </div>
-
-				<div v-if="appToReserve.home_visit" class="h3" >
-					<div style=" color:#1f9d94 " ><i class="bi bi-house m-1 "></i> <b>Cita a domicilio</b> </div>
-				</div>
-
-					<div class="" >
-						<i class="bi bi-smartwatch "></i>  {{ transform_date( appToReserve.date.substring(0, 10) ) }}   {{appToReserve.start_time.substring(0, 5) }} hrs  
-					</div>
-					<div class="">	
-						<i class="bi bi-person m-1"></i>Con :  {{appToReserve.professional_name }} 
-					</div>
-						<br>
 				-->
-				 
+<hr>				 
                 <div class="text-dark"> 
-					<p class="display-4"> Datos del Paciente </p>
+					<p class="display-5"> Datos del Paciente </p>
                 </div>							
                             <form autocomplete="off" method="POST" action="take_appointment.html">			
                                 <input class="form-control form-control-lg " type="hidden" placeholder="Token" name="token" value="AAAAA"  >
@@ -173,14 +147,15 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
  								
 								<div class="d-flex justify-content-center m-5" >
 									<input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
-                                	<button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary p-4 btn-lg" data-bs-dismiss="modal"   >Tomar esta Hora</button>
+                                	<button type="button" @click="sendReserveAppointment(appToReserve); modalOpen = false" class="btn btn-primary p-2 btn-lg" data-bs-dismiss="modal"   >Tomar esta Cita</button>
                             	</div> 
 
 
 
 								<br>
-								<text class="text-secondary" style=""><br>#{{appToReserve.calendar_id}}</text>	
-								<div class="" style="height : 500px"> 
+								<div class="" style="height : 250px"> 
+								<!-- <text class="text-secondary" style=""><br>#{{appToReserve.calendar_id}}</text>	 -->
+								
                 				</div>
 							
 							</form> 
