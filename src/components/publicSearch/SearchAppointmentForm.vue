@@ -23,34 +23,34 @@ import inputFormComuna  from './InputFormComuna.vue'
                 </div>
                
 <!--FORM INPUT  APP TYPE -->
-                <div v-if="show_app_type()" class=" border border-primary mb-1" style=" border-radius: 15px;"  >
+                <div v-if="show_app_type()" class="d-flex justify-content-around   mb-1" style=" border-radius: 15px;"  >
                     
-                    <button type="button" @click="selectedTypeCenter()" class="m-1 p-1  btn btn-outline-primary border-2 " :class="{ 'active' : form_app_type_center }" style="border-color: #781ED1; border-radius: 15px;" > 
-                        <i  class="h5 bi bi-building m-0 p-0"></i><br>
+                    <button type="button" @click="selectedTypeCenter()" class="m-1 p-1  btn btn-outline-primary border-1 " :class="{ 'active' : form_app_type_center }" style=" border-radius: 15px;" > 
+                        <i  class="h5 bi bi-building m-0 p-0" style="color: #781ED1;"></i><br>
                        <text class="m-0 p-0"> Consulta </text>  
                     </button>
 
-                    <button type="button" @click="selectedTypeHome()"  class="m-1 p-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_home }" style="border-color:#3399FF; border-radius: 15px;" > 
-                        <i class="h5 bi bi-house-door m-0 p-0"></i><br>
+                    <button type="button" @click="selectedTypeHome()"  class="m-1 p-1 btn btn-outline-primary border-1 " :class="{ 'active' : form_app_type_home }" style=" border-radius: 15px;" > 
+                        <i class="h5 bi bi-house-door m-0 p-0" style="color:#3399FF;"></i><br>
                         <text> Domicilio </text> 
                     </button>
 
-                    <button type="button" @click="selectedTypeRemote()"  class="m-1 p-1 btn btn-outline-primary border-2" :class="{ 'active' : form_app_type_remote }"  style="border-color:#b36b00; border-radius: 15px; " > 
-                       <i class="h5 bi bi-camera-video m-0 p-0"></i><br>
+                    <button type="button" @click="selectedTypeRemote()"  class="m-1 p-1 btn btn-outline-primary border-1" :class="{ 'active' : form_app_type_remote }"  style=" border-radius: 15px; " > 
+                       <i class="h5 bi bi-camera-video m-0 p-0" style="color:#b36b00;"  ></i><br>
                        <text> Remota </text> 
                     </button>
                    
                 </div>
 
 <!-- FORM INPUT LOCATION-->
-                <div   class="row  mb-1  border-secondary " :style="{visibility: show_input_location() ? 'visible' : 'hidden'}"  >
+                <div  v-if="show_input_date()"  class="row  mb-1   "  >
                     <div class="col">
                         <inputFormComuna position="true"  v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
                 </div>
 
 <!-- FORM INPUT DATE -->
-                <div v-if="show_input_date()"  class="row  mb-1  border-secondary ">
+                <div v-if="show_input_date()"  class="row  mb-1  ">
                     <div class="col">
                         <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
                     </div>
@@ -60,9 +60,6 @@ import inputFormComuna  from './InputFormComuna.vue'
                 <button type="button" @click="form_app_type_center=!form_app_type_center ; form_app_type_home= false" class=" m-1 btn"  :class="{ 'btn-primary' : form_app_type_center , 'btn-secondary' : !form_app_type_center , 'btn-lg' : form_app_type_center }" >  En Consulta  </button>
                 <button type="button" @click="form_app_type_home=!form_app_type_home ; form_app_type_center= false "     class=" m-1 btn " :class="{ 'btn-primary' : form_app_type_home   , 'btn-secondary' : !form_app_type_home , 'btn-lg' : form_app_type_home     }" > A Domicilio </button>
             --> 
-           
-
-
                 <!--
                 <div class="bg-white  ">
                     <div class="d-flex justify-content-around h5  "> 
@@ -101,6 +98,7 @@ import inputFormComuna  from './InputFormComuna.vue'
                 </form> 
                
             </div>	
+            <hr>
         </div>			
 
 </template>
