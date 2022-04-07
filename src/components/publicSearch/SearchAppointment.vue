@@ -9,41 +9,44 @@ import suggestedSearch from './SuggestedSearch.vue'
 </script>
 
 <template>
-  <div class="bg-white p-2">
+  <div class="bg-white p-0">
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
-   
-      <div class="display-4 bg-white  pb-4 text-center"  > 
-        <a HREF="/index.html" class="text-decoration-none" style="color :#2e5668"> 
-        <i class="bi bi-arrow-left-square"></i> 
-        123Hora  
-        </a> 
-      </div> 
+  
+      <div v-if="appointments == null" class="d-flex justify-content-between "> 
+        <text  class="text-muted" >Informaciones</text>
+        <text class="text-muted">&nbsp;</text>
+        <text class="text-muted" >Recuperar mis Horas</text>
+      </div>
 
+      <div class=" bg-white  pb-4 text-center"  > 
+        <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
+      	<i class="bi bi-clipboard-pulse" style="font-size: 2rem; color: cornflowerblue;"></i>
+        <text class="display-4"> 123Hora</text>  
+        </a> 
+      <small v-if="appointments == null" class="text-muted"> <br> Las mejores consultas en un solo lugar </small>
+      </div> 
+ 
       <div>
             <div>
             <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
             
-            <div v-if="appointments !=null && appointments.length > 0">
-                
+            <div v-if="appointments !=null && appointments.length > 0">                
                 En {{metric_search/1000}} Seg encontramos {{n_appointments_found}} resultados
                 <!--
                 <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                 -->
                 <searchAppointmentResult   :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="filtered_appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
-
             </div>
 
             <p v-if="appointments !=null && appointments.length == 0" class="text-center p-2"  > 
-               
               <i class="bi bi-emoji-dizzy display-1"> </i> Sin horas disponibles por ahora. <br>
               <!-- {{metric_search/1000}} Seg  -->
-              <suggestedSearch></suggestedSearch>
             </p>
 
             <p v-if="appointments == null">
                 <suggestedSearch></suggestedSearch>
             </p>
-            
+         
             </div>
      </div>
 
