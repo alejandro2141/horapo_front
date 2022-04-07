@@ -22,23 +22,108 @@ import loadProgress from '../loadProgress.vue'
 			<transition name="modal">
 			<div class="modal-mask " v-if="app != null && showModalAux"  >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background" > 
+			<div class="modal-container  m-1 p-0 modal-background"  style="border-radius: 20px;" > 
               
-            <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168); " > 
+            <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168);border-radius: 20px; " > 
  					<div class="d-flex flex-row justify-content-end ">
                       <div  > </div>
                       <div  > </div>
                       <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
                     </div>
 
+
+
+			<div>
+                <div class="">
+                    <div class="display-5" style=" color:#2e5668">	 
+                   <b>  {{ transform_date( app.date.substring(0, 10) ) }} </b>
+                    
+                 {{app.start_time}} <text style=" font-size: 0.6em;">hrs</text>  
+                    </div>       
+                </div>
+           
+                <div class="display-5" style=" color:#1f9d94">
+                    <div >	
+                    {{ showSpecialtyName(app.specialty1) }} 
+                    </div>       
+                </div>
+ 
+                <div class="">
+
+                    <div v-if="app.center_visit" class="">
+                 
+                        <div class="display-6" style="">  
+                            <div style="color: #781ED1" >
+                            <i class="h1 bi bi-building"></i> En Consulta  </div>
+                            </div>
+                            <div style="" class="text-dark display-6" >
+                               {{comuna_id2name(app.center_visit_location)}}
+                            </div>
+                            <div class="" style="color:#2e5668" >	
+                                {{app.center_name}}
+                            </div> 
+                            <div style="color:#2e5668">
+                               {{app.center_address}}
+                            </div>
+                            
+                    </div>
+                    
+                    <div v-if="app.home_visit" style="color:#3399FF">
+                            <div class="display-5" >
+                                <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
+                            </div>
+                            <div style="" class="text-dark display-6" >
+                              {{  comuna_id2name(app.home_visit_location1) }}
+                              {{  comuna_id2name(app.home_visit_location2) }}
+                              {{  comuna_id2name(app.home_visit_location3) }}
+                              {{  comuna_id2name(app.home_visit_location4) }}
+                              {{  comuna_id2name(app.home_visit_location5) }}
+                              {{  comuna_id2name(app.home_visit_location6) }}
+                            </div>
+                    </div>
+
+                    <div v-if="app.remote_care" class="">
+                         <div class="display-5" style="color:#b36b00" >
+                               <i class="bi bi-camera-video"></i> Tele Atención  	 
+                              <div style="" class="text-dark display-6" >
+                              (Todas las comunas) 
+                              </div>                      
+                        </div>
+                    </div>
+
+                </div>
+            
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
 						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(app.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{app.date.substring(8, 10) }} </text>  </div>
 					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app.specialty1) }} </div> 
 					</div>
+					
+				<div class="">
+                    <div class="display-5" style=" color:#2e5668">	 
+                 	 Fecha: <b>  {{ transform_date2( app.date.substring(0, 10) ) }} </b><br>
+                   	 Hora : {{app.start_time}} <text style=" font-size: 0.6em;">hrs</text>  
+                    </div>       
+                </div>
+
+					<div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app.specialty1) }} </div> 
 
 					<div style="margin-top: 1em; " class="h4">
 							<div class="" >
-								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Fecha :  {{ transform_date( app.date.substring(0, 10) ) }}  </p>
+								<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Fecha :  {{ transform_date( app.date.substring(0, 10) ) }}  </p>
 								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{app.start_time.substring(0, 5) }} hrs     </p>
 								<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
 							</div>
@@ -308,6 +393,12 @@ computed: {
         let temp = date.split("-") ;
         return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
     	},
+		
+		transform_date2(date)
+		{
+			let temp = date.split("-") ;
+			return (""+temp[2]+" "+this.getShortMonthName(temp[1])+" "+temp[0])
+		},
         
 
 
