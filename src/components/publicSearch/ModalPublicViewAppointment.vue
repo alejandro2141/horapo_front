@@ -30,23 +30,44 @@ import loadProgress from '../loadProgress.vue'
                       <div  > </div>
                       <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
                     </div>
+<!-- -->
 
 
 
-			<div>
-                <div class="">
-                    <div class="display-5" style=" color:#2e5668">	 
-                   <b>  {{ transform_date( app.date.substring(0, 10) ) }} </b>
-                    
-                 {{app.start_time}} <text style=" font-size: 0.6em;">hrs</text>  
-                    </div>       
-                </div>
-           
-                <div class="display-5" style=" color:#1f9d94">
+    <div v-if="app != null"   style="border: 3px solid rgb(168, 168, 168); border-radius: 30px;"  class="bg-white p-0 mb-1 ">
+        
+        <div id="app" class="m-0 d-flex  "  >	
+            <div class="">
+                     &nbsp;
+            </div>
+            <div>
+
+ 				<div class="display-4 p-2" style=" color:#1f9d94">
                     <div >	
                     {{ showSpecialtyName(app.specialty1) }} 
                     </div>       
                 </div>
+
+                <div class="">
+					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Fecha : 
+						<text class="" style="font-size: 1.2em; color:#2e5668">	 
+						<b>  {{ transform_date( app.date.substring(0, 10) ) }} </b>
+						</text>       
+					
+					</p>
+				</div>
+
+
+				<div class="">
+					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Hora : 
+						<text class="" style="font-size: 1.2em; color:#2e5668">	 
+						{{app.start_time}} <text >hrs</text>  
+						</text>       
+					
+					</p>
+				</div>
+
+
  
                 <div class="">
 
@@ -56,14 +77,15 @@ import loadProgress from '../loadProgress.vue'
                             <div style="color: #781ED1" >
                             <i class="h1 bi bi-building"></i> En Consulta  </div>
                             </div>
+							
                             <div style="" class="text-dark display-6" >
-                               {{comuna_id2name(app.center_visit_location)}}
+                               <i class="bi bi-geo-alt display-4"></i> {{comuna_id2name(app.center_visit_location)}}
                             </div>
                             <div class="" style="color:#2e5668" >	
-                                {{app.center_name}}
+                             Centro :   {{app.center_name}}
                             </div> 
                             <div style="color:#2e5668">
-                               {{app.center_address}}
+                             Direccion:  {{app.center_address}}
                             </div>
                             
                     </div>
@@ -72,66 +94,7 @@ import loadProgress from '../loadProgress.vue'
                             <div class="display-5" >
                                 <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
-                            <div style="" class="text-dark display-6" >
-                              {{  comuna_id2name(app.home_visit_location1) }}
-                              {{  comuna_id2name(app.home_visit_location2) }}
-                              {{  comuna_id2name(app.home_visit_location3) }}
-                              {{  comuna_id2name(app.home_visit_location4) }}
-                              {{  comuna_id2name(app.home_visit_location5) }}
-                              {{  comuna_id2name(app.home_visit_location6) }}
-                            </div>
-                    </div>
-
-                    <div v-if="app.remote_care" class="">
-                         <div class="display-5" style="color:#b36b00" >
-                               <i class="bi bi-camera-video"></i> Tele Atención  	 
-                              <div style="" class="text-dark display-6" >
-                              (Todas las comunas) 
-                              </div>                      
-                        </div>
-                    </div>
-
-                </div>
-            
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
-						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(app.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{app.date.substring(8, 10) }} </text>  </div>
-					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app.specialty1) }} </div> 
-					</div>
-					
-				<div class="">
-                    <div class="display-5" style=" color:#2e5668">	 
-                 	 Fecha: <b>  {{ transform_date2( app.date.substring(0, 10) ) }} </b><br>
-                   	 Hora : {{app.start_time}} <text style=" font-size: 0.6em;">hrs</text>  
-                    </div>       
-                </div>
-
-					<div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(app.specialty1) }} </div> 
-
-					<div style="margin-top: 1em; " class="h4">
-							<div class="" >
-								<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Fecha :  {{ transform_date( app.date.substring(0, 10) ) }}  </p>
-								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{app.start_time.substring(0, 5) }} hrs     </p>
-								<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
-							</div>
-					</div>
-
-					<div v-if="app.home_visit"  class="text-primary" >
-							<div class="h3" style="" ><i class="bi bi-geo-alt-fill m-1 display-5"></i> Visita a domicilio en : 
-						
+                            
 									<div class="m-2">
 									<p  v-if=" app.home_visit_location1 != null " >  
 										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location1) }} 
@@ -158,22 +121,32 @@ import loadProgress from '../loadProgress.vue'
 										<br>
 									</p>	
 									</div>
-							</div>
-					</div>
+                    </div>
 
-					<div v-if="app.center_visit"  class="" style=" color:#1f9d94 "  >
-						<div > <i class="bi bi-geo-alt-fill display-5"></i>Direccion de la cita: <br>&nbsp;&nbsp;"{{app.center_name }}"</div>
-						<!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
-						<div class=""> &nbsp;&nbsp;  {{app.center_address }}</div>
-					<!--
-							<hr>
-							<a v-if="imgLoaded" :href="app.url_map" >Mapa</a>
+                    <div v-if="app.remote_care" class="">
+                         <div class="display-5" style="color:#b36b00" >
+                               <i class="bi bi-camera-video"></i> Tele Atención  	 
+                              <div style="" class="text-dark display-6" >
+                              (Todas las comunas) 
+                              </div>                      
+                        </div>
+                    </div>
+
+					<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
 							
-							<img   @load="imgLoaded = true" @error="imgLoaded = false"  :src="imgMapUrl" class="img-fluid" alt="center map">
-					-->
-					</div>
 
-					
+                </div>
+            
+            </div>
+
+            </div>
+
+               
+     <text style="color: #ffffff;" >#{{app.calendar_id}}</text> 
+       </div>
+
+<!-- -->
+			
 
 					<div class="d-flex justify-content-center m-5" >
 						<button type="button" @click="reserveHour(app);"  class="btn btn-primary p-4 btn-lg">  Reservar esta Hora </button>
