@@ -133,7 +133,8 @@ import loadProgress from '../loadProgress.vue'
                     </div>
 
 					<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
-							
+
+					Include here a map		
 
                 </div>
             
