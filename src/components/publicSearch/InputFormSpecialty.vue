@@ -28,7 +28,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                 <div >
                      <div class=" h3 m-0 p-2 text-primary " v-for="specialty in specialty_filtered" :key="specialty.id" > 
                         <div  @click="form_specialty = specialty.name ; $emit('selectedSpecialtyCode', specialty); clearfiltered = true ; ">
-                             <i class="display-6  text-muted" ></i> - {{ specialty.name }} 
+                             <i class="display-6  text-muted" ></i> <i class="bi bi-vector-pen text-black-50"></i> {{ specialty.name }} 
                         </div>
                      </div>
                 </div>   
