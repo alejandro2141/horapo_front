@@ -15,17 +15,17 @@ const count = ref(0)
 			<!-- Grid container -->
 			<div class="container p-0 pb-0">
 			<!-- Section: Social media -->
-			<section class="text-primary ">
+			<section class="d-flex justify-content-between ">
 				<!-- button 1 -->
-				<a href="./nested/aboutUs.html" class="m-2 text-secondary  text-decoration-none btn-floating m-1"  role="button">
-					<i class="text-primary">Que es 123hora?</i>
+				<a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
+					<i class="text-primary">123hora?</i>
 				</a>
 				<!-- button 1 -->
-				<a HREF="./nested/professionalAccess.html" class=" m-2  text-secondary  text-decoration-none btn-floating m-1"  role="button">
-					<i class="text-primary text-decoration-none">Acceso Profesional</i>
+				<a HREF="/nested/professionalAccess.html" class=" m-1  text-secondary  text-decoration-none btn-floating "  role="button">
+					<i class="text-primary text-decoration-none">Profesionales</i>
 				</a>
 				<!-- button 1 -->
-				<a HREF="./nested/register.html" class=" m-2  text-secondary  text-decoration-none btn-floating m-1"  role="button">
+				<a HREF="/nested/register.html" class="text-secondary  text-decoration-none btn-floating m-1"  role="button">
 					<i class="text-primary text-decoration-none">Registrate</i>
 				</a>
 			
