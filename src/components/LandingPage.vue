@@ -5,19 +5,22 @@ import LandingContent from './LandingContent.vue'
 import FooterContent from './FooterContent.vue'
 
 
-defineProps({
-  nameTitle : String
-})
+  window.location.href = "/nested/publicSearch.html";
 
-const count = ref(0)
 </script>
 
 <template>
+<!--
     <GeneralHeader></GeneralHeader>
     <div id="main-content">
     <LandingContent></LandingContent>
     </div>
     <FooterContent></FooterContent>
+    -->
+    <div>
+Being redirected based in Browser options<br>
+DDOS filter protection
+    </div>
 </template>
 
 <style scoped>
