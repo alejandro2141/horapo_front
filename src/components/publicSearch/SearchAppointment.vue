@@ -5,6 +5,8 @@ import searchAppointmentForm  from './SearchAppointmentForm.vue'
 import searchAppointmentResult  from './SearchAppointmentResult.vue'
 import loadProgress from '../loadProgress.vue'
 import suggestedSearch from './SuggestedSearch.vue'
+import FooterContent from '../FooterContent.vue'
+
 
 </script>
 
@@ -12,10 +14,16 @@ import suggestedSearch from './SuggestedSearch.vue'
   <div class="bg-white p-0">
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
   
-      <div v-if="appointments == null" class="d-flex justify-content-between "> 
-        <text  class="text-muted" >Informaciones</text>
+      <div  class="d-flex justify-content-between  mt-0 pt-0"> 
+
         <text class="text-muted">&nbsp;</text>
-        <text class="text-muted" >Recuperar mis Horas</text>
+        <text class="text-muted">&nbsp;</text>
+
+
+        <a HREF="/nested/getAppointments.html"   class=" ">
+          Recordar mis Horas  
+        </a>
+
       </div>
 
       <div class=" bg-white  pb-4 text-center"  > 
@@ -23,7 +31,7 @@ import suggestedSearch from './SuggestedSearch.vue'
       	<i class="bi bi-clipboard-pulse" style="font-size: 2rem; color: cornflowerblue;"></i>
         <text class="display-4"> 123Hora</text>  
         </a> 
-      <small v-if="appointments == null" class="text-muted"> <br> Las mejores consultas en un solo lugar </small>
+      <small  class="text-muted"> <br> Las mejores consultas en un solo lugar </small>
       </div> 
  
       <div>
@@ -44,13 +52,17 @@ import suggestedSearch from './SuggestedSearch.vue'
             </p>
 
             <p v-if="appointments == null">
-                <suggestedSearch></suggestedSearch>
+           <!--     <suggestedSearch></suggestedSearch>
+           -->
             </p>
          
             </div>
      </div>
-
+  <FooterContent v-if="appointments == null"  ></FooterContent>
   </div>
+
+  
+
 </template>
 
 <style scoped>
