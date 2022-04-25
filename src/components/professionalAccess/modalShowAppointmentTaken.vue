@@ -15,7 +15,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background">
+			<div class="modal-container  m-1 p-0 modal-background" style="border-radius: 25px;">
  
 
 
@@ -27,7 +27,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                         </div>
                 </div>
 
-                <div class="modal-body " > 
+                <div class="modal-body border boder-1 m-2" style="border-radius: 25px;" > 
 
                    <GenericBlockDateSpecialtyVue :day='hourTaken.date.substring(8, 10)' :month='getShortMonthName(hourTaken.date.substring(5, 7) )'  :specialties='id2name(hourTaken.specialty)' ></GenericBlockDateSpecialtyVue>
 
