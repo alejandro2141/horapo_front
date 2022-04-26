@@ -27,87 +27,150 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                         </div>
                 </div>
 
-                <div class="modal-body border boder-1 m-2" style="border-radius: 25px;" > 
+<!------------------ ----> 
+    <div v-if="hourTaken != null"    class=" p-0 mb-0 ">
+        
+        <div id="app" class="m-0 d-flex  "  >	
+            <div class="">
+                     &nbsp;
+            </div>
+            <div>
 
-                   <GenericBlockDateSpecialtyVue :day='hourTaken.date.substring(8, 10)' :month='getShortMonthName(hourTaken.date.substring(5, 7) )'  :specialties='id2name(hourTaken.specialty)' ></GenericBlockDateSpecialtyVue>
+ 				<div class="display-4 p-1" style=" color:#1f9d94">
+                    <div >	
+                    {{ id2name(hourTaken.specialty) }} 
+                    </div>       
+                </div>
 
+                <div class="">
+					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Fecha : 
+						<text class="" style="font-size: 1.2em; color:#2e5668">	 
+						<b>  {{ transform_date( hourTaken.date.substring(0, 10) ) }} </b>
+						</text>       
+					
+					</p>
+				</div>
 
-                    <!-- APP IN CENTER -->
-                    <div class="mt-2" v-if="hourTaken.app_type_center"   >
-                                <div class="h3" style="color:#1f9d94 ;">
-                                    <i class="bi bi-geo-alt-fill"  ></i>  En Consulta <br>
-                                </div>
-                                <div>
-                                    <i class="" style="color:#1f9d94 ;"  ></i>{{hourTaken.center_name }} :    {{hourTaken.center_address }}       
-                                </div>
-                    </div>
-                    <!-- APP HOME -->
-                    <div v-if="hourTaken.app_type_home" style="" >
-                            <text style="color:#1f9d94 ;">
-                              <i class="h1 bi bi-house"  > </i> A Domicilio Comunas <br>
-                            </text>
-                            <div  style="color:#1f9d94 ;" >
-                                <text v-if="hourTaken.location1 != null " >  
-                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.location1) }} <br>
-                                </text>
-                                <text v-if="hourTaken.location2 != null " >  
-                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.location2) }} <br>
-                                </text>
-                                <text v-if="hourTaken.location3 != null " >  
-                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.location3) }} <br>
-                                </text>
-                                <text v-if="hourTaken.location4 != null " >  
-                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.location4) }} <br>
-                                </text>
-                                <text v-if="hourTaken.location5 != null " >  
-                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.location5) }} <br>
-                                </text>
-                                <text v-if="hourTaken.location6 != null " >  
-                                    <i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.location6) }} <br>
-                                </text>
+				<div class="">
+					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Hora : 
+						<text class="" style="font-size: 1.2em; color:#2e5668">	 
+						{{hourTaken.start_time}} <text >hrs</text>  
+						</text>       
+					
+					</p>
+				</div>
+ 
+                <div class="">
+           <!-- TYPE CENTER --> 
+                    <div v-if="hourTaken.center_visit" class="">
+                 
+                        <div class="display-6" style="">  
+                            <div style="color: #781ED1" >
+                            <i class="h1 bi bi-building"></i> En Consulta  </div>
+                        </div>
+							
+                            <div style="" class="text-dark display-6" >
+                               <i class="bi bi-geo-alt display-4"></i> {{id2comuna(hourTaken.center_visit_location)}}
                             </div>
+                            <div class="" style="color:#2e5668" >	
+                             Centro :   {{hourTaken.center_name}}
+                            </div> 
+                            <div style="color:#2e5668">
+                             Direccion:  {{hourTaken.center_address}}
+                            </div>                          
                     </div>
 
+          <!-- TYPE HOME -->  
+                    <div v-if="hourTaken.home_visit" style="color:#3399FF">
+                            <div class="display-5" >
+                                <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
+                            </div>
 
-                    <div style="margin-top: 1em; " class="h4">
-                        <div class="" >
-                          <p> <i class="bi bi-circle-fill display-5 text-primary"></i> Fecha :  {{ transform_date( hourTaken.date.substring(0, 10) ) }}  </p>
-                          <p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{hourTaken.start_time.substring(0, 5) }} hrs     </p>
-                          <p> <i class="bi bi-person-circle display-4 text-primary"></i>  
-                            {{ hourTaken.patient_name}} <br> 
-                            ID:{{ hourTaken.patient_doc_id}}
-                          
-                          </p>
+                              <h2> Direccion: 
+                              {{ hourTaken.patient_address}}  </h2>
+                           
+                              <!--           
+                                <div class="m-2">
+                                <p  v-if=" hourTaken.home_visit_location1 != null " >  
+                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location1) }} 
+                                  <br>
+                                </p>
+                                <p v-if=" hourTaken.home_visit_location2 != null " >  
+                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location2) }} 
+                                  <br>
+                                </p>
+                                <p v-if=" hourTaken.home_visit_location3 != null " >  
+                                &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location3) }}
+                                  <br>
+                                </p>
+                                <p v-if=" hourTaken.home_visit_location4 != null " >  
+                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location4) }} 
+                                  <br>
+                                </p>
+                                <p v-if=" hourTaken.home_visit_location5 != null " >  
+                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location5) }} 
+                                  <br>
+                                </p>
+                                <p v-if=" hourTaken.home_visit_location6 != null " >  
+                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(hourTaken.home_visit_location6) }} 
+                                  <br>
+                                </p>	
+                                </div>
+                                -->
+                    </div>
+
+          <!-- TYPE REMOTE  --> 
+                    <div v-if="hourTaken.remote_care" class="">
+                         <div class="display-5" style="color:#b36b00" >
+                               <i class="bi bi-camera-video"></i> Tele Atención  	 
+                              <div style="" class="text-dark display-6" >
+                              (Todas las comunas) 
+                              </div>                      
                         </div>
                     </div>
 
+					<p> <i class="bi bi-person display-4 text-primary"></i> 
+                            Con : {{ hourTaken.patient_name}} 
+                             ( Id:{{ hourTaken.patient_doc_id}} )
+          
+           </p>
 
-                    
-                    <text v-if="hourTaken.app_type_home">
-                      <h2> Direccion: 
-                      {{ hourTaken.patient_address}}  </h2>
-
-                    </text>
-
-                      <h3 class="text-primary" > 
+            <p class="text-primary h3" > 
                             <a :href='"tel:+56"+hourTaken.patient_phone1'>
                                 <i class="bi bi-telephone"></i>  {{ hourTaken.patient_phone1}}
                             </a>
-                      </h3>             
-                      <h3 class="text-primary" > 
+            </p>             
+            
+            <p class="text-primary h3" > 
                           <a :href ='"mailto:"+hourTaken.patient_email'><i class="bi bi-envelope"></i> {{ hourTaken.patient_email}} 
                           </a>     
-                      </h3>
-                      
+            </p>
+            
+            
 
-                      <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
-                      <button  v-if='hourTaken.confirmation_status == 1' type="button"   data-bs-dismiss="modal" class="btn btn-success m-2"><i class="bi bi-person-check"></i> Paciente Confirmado</button>
-                     
-                      <button type="button" @click="cancelAppointment(hourTaken);"  class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Cancelar Cita con Paciente</button>
-                     
-                     
-        
+          
+
+				
+
                 </div>
+            
+            </div>
+
+            </div>
+
+               
+          <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
+          <button  v-if='hourTaken.confirmation_status == 1' type="button"   data-bs-dismiss="modal" class="btn btn-success m-2"><i class="bi bi-person-check"></i> Paciente Confirmado</button>
+                     
+          <button type="button" @click="cancelAppointment(hourTaken);"  class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Cancelar Cita con Paciente</button>
+                     
+
+     <text style="color: #ffffff;" >#{{hourTaken.calendar_id}}</text> 
+       </div>
+
+
+<!---- ------------------------------>
+
         </div> 
         </div> 		
 		</div> 
