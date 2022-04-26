@@ -66,6 +66,7 @@ export default {
         global_specialties : [],
         global_comunas : [],  
         global_professional_specialties : [] ,
+        global_professional_centers : [] ,
 
         session : "sesionname",
         session_params : [] ,
@@ -94,6 +95,7 @@ created() {
         console.log("NESTED PROFESSIONAL ACCESS SEARCH Fill Global variables");
         this.loadGlobalSpecialties();
         this.loadGlobalComunas();
+    
       //  this.loadProfessionalEspecialties();
 },
 
@@ -113,7 +115,6 @@ methods: {
         if (val == 2) { this.visible_tab_appointments = 'block' }
         if (val == 3) { this.visible_tab_centers = 'block' }
         if (val == 4) { this.visible_tab_userconfig = 'block' }
-
     },
 
     async loadGlobalSpecialties() {
@@ -128,9 +129,9 @@ methods: {
 				let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_comuna_list");
                 this.global_comunas = response_json.data.rows;
                 console.log("APP Comuna list: "+JSON.stringify(this.global_comunas) );
-
             },
 
+/*
     async loadProfessionalEspecialties() {             
                 console.log ("getSpecialties :" );
                 const json = { 
@@ -143,26 +144,35 @@ methods: {
                 console.log ("RESPONSE  get_professional_specialty:"+JSON.stringify(response_json.data.rows)) ;
                 this.global_professional_specialties= response_json.data.rows ; 
             },
-
+*/
+/*
+    async loadProfessionalCenters() {             
+                const json = { 
+                professional_id : this.session_params.professional_id ,			   
+                            };
+                console.log ("GET CENTERS REQUEST :"+ JSON.stringify(json)  );
+                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+                this.global_professional_centers = response_json.data.rows;
+                console.log ("RESPONSE CENTERS:"+JSON.stringify(this.global_professional_centers)) ;                       
+            },
+*/
 
     switchView(){
-        console.log("SwitchView in professional access ");
-        if ( this.visible_tab_centers == 'none' ){ 
-                //this.visible_tab_centers = 'block' ; 
-                //this.visible_tab_appointments = 'none';
-                this.switchToCenters();
-        }
-        else {
-                this.visible_tab_centers = 'none' ; 
-                this.visible_tab_appointments = 'block';
-            }
-
+                console.log("SwitchView in professional access ");
+                if ( this.visible_tab_centers == 'none' ){ 
+                        //this.visible_tab_centers = 'block' ; 
+                        //this.visible_tab_appointments = 'none';
+                        this.switchToCenters();
+                }
+                else {
+                        this.visible_tab_centers = 'none' ; 
+                        this.visible_tab_appointments = 'block';
+                    }
     },
 
     switchToCenters(){
                 this.visible_tab_centers = 'block' ; 
                 this.visible_tab_appointments = 'none';
-                
     },
 
 //Start Session
@@ -174,6 +184,7 @@ methods: {
     //switch to view appointments
     this.switchViewToAppointments();
     },
+
 //SET Session Params From JSON 
     setSessionParamsFromJSON(obj)
 	{
@@ -183,6 +194,7 @@ methods: {
 			console.log(key + " -> " + obj[key]);
 			this.session_params[key] = obj[key];
 			}
+        
         console.log("session iniciada para:"+this.session_params['professional_name'] );
 	},
 //Set View
