@@ -87,15 +87,14 @@ export default {
 			  if (response_json.data.result_code == 0 ) {
 					  console.log("Login Exitosos!!");
 					   //this.url_param: ["token"]=""
-                       this.login_message="Login Exitoso !!!"
+                      this.login_message="Login Exitoso !!!"
 					  this.setParamFromJSONDATA(response_json.data);
-
-					   //TODO Aqui ponemos el emit con los datos de la sesion
-                       console.log("enviando emit");
+                        //TODO Aqui ponemos el emit con los datos de la sesion
+                       //console.log("enviando emit");
                        this.$emit('startSession', response_json.data );
 					  //window.location.replace("professional_day_v2.html"+this.getUrlParam());
 					  }
-					  else  {
+			    else  {
 					  console.log("Login Fallido");
 					  this.login_message  = "Error Login " ;
 					  }		
@@ -119,6 +118,20 @@ export default {
 				{urla+=key+"="+this.url_param[key]+"&" ;}	
 				return urla ;
 	        },
+        //GET PROFESSIONA CENTERS
+        /*
+        async loadProfessionalCenters() {             
+                const json = { 
+                professional_id : this.session_params.professional_id ,			   
+                            };
+                console.log ("GET CENTERS REQUEST :"+ JSON.stringify(json)  );
+                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+                this.global_professional_centers = response_json.data.rows;
+                console.log ("RESPONSE CENTERS:"+JSON.stringify(this.global_professional_centers)) ;                       
+            },
+            */
+
+
         },
 
 }
