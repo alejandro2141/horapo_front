@@ -62,7 +62,10 @@ import axios from 'axios';
                         <li class="list-group-item"> id:{{appointment.patient_doc_id }} </li>
                         <li class="list-group-item">Edad:{{appointment.patient_age }} </li>
                         <li v-if="appointment.home_visit" class="list-group-item" style="color:#3399FF"> A Domicilio <br>  {{appointment.patient_address }} </li>
-                        <li v-if="appointment.center_visit" class="list-group-item"> En Consulta <br> Incluye direccion centro  </li>
+                        
+                        <li v-if="appointment.center_visit" class="list-group-item"> En Consulta <br> {{appointment.center_id }}  </li>
+                        
+                        
                         <li v-if="appointment.remote_care" class="list-group-item"> Atención Remota  </li>
                     </ul>
                     {{appointment.message1 }}
