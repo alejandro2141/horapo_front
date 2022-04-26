@@ -67,6 +67,7 @@ export default {
         global_comunas : [],  
         global_professional_specialties : [] ,
         global_professional_centers : [] ,
+        global_session_data : [] ,
 
         session : "sesionname",
         session_params : [] ,
@@ -145,7 +146,7 @@ methods: {
                 this.global_professional_specialties= response_json.data.rows ; 
             },
 */
-/*
+
     async loadProfessionalCenters() {             
                 const json = { 
                 professional_id : this.session_params.professional_id ,			   
@@ -155,7 +156,7 @@ methods: {
                 this.global_professional_centers = response_json.data.rows;
                 console.log ("RESPONSE CENTERS:"+JSON.stringify(this.global_professional_centers)) ;                       
             },
-*/
+
 
     switchView(){
                 console.log("SwitchView in professional access ");
@@ -193,9 +194,10 @@ methods: {
 			{
 			console.log(key + " -> " + obj[key]);
 			this.session_params[key] = obj[key];
-			}
-        
+			}  
         console.log("session iniciada para:"+this.session_params['professional_name'] );
+        
+       
 	},
 //Set View
     switchViewToAppointments()
