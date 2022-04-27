@@ -70,14 +70,16 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                         </div>
 							
                             <div style="" class="text-dark display-6" >
-                               <i class="bi bi-geo-alt display-4"></i> {{id2comuna(hourTaken.center_visit_location)}}
+                               <i class="bi bi-geo-alt display-4"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
                             </div>
                             <div class="" style="color:#2e5668" >	
-                             Centro :   {{hourTaken.center_name}}
+                             Centro :   {{getCenter(hourTaken.center_id).name}}
                             </div> 
                             <div style="color:#2e5668">
-                             Direccion:  {{hourTaken.center_address}}
-                            </div>                          
+                             Direccion:  {{getCenter(hourTaken.center_id).address}}
+                            </div>
+
+
                     </div>
 
           <!-- TYPE HOME -->  
@@ -339,6 +341,13 @@ export default {
     {
     console.log("request confirmation to customer : "+hour.patient_email);
     },
+
+    getCenter(id){
+            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp }
+            else { return null }
+        },
+
 /*
     async updateApp(hour)
     {
