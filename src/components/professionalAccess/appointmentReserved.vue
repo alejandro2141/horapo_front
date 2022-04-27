@@ -63,7 +63,8 @@ import axios from 'axios';
                         <li class="list-group-item">Edad:{{appointment.patient_age }} </li>
                         <li v-if="appointment.home_visit" class="list-group-item" style="color:#3399FF"> A Domicilio <br>  {{appointment.patient_address }} </li>
                         
-                        <li v-if="appointment.center_visit" class="list-group-item"> En Consulta <br> {{appointment.center_id }}  </li>
+                        <li v-if="appointment.center_visit" class="list-group-item"> En Consulta <br>
+                         {{getCenter(appointment.center_id).name }}  </li>
                         
                         
                         <li v-if="appointment.remote_care" class="list-group-item"> Atención Remota  </li>
@@ -90,7 +91,7 @@ export default {
         }   
     },
    	
-    props: ['daterequired','appointment','index','global_specialties', 'global_comunas'],
+    props: ['daterequired','appointment','index','global_specialties', 'global_comunas', 'session_params' ],
 
 	created () {
 	},
@@ -100,15 +101,18 @@ export default {
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
-
         },
 
         id2comuna(id){
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
-
-        }
+        },
+        getCenter(id){
+            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp }
+            else { return null }
+        },
 
     }
 }
