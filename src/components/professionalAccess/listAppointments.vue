@@ -20,9 +20,10 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
 <ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" :global_specialties='global_specialties'  :openModalCreateAppEvent='openModalCreateAppEvent' > </ModalCreateAppointment>
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' :openModalShowDetailsEvent="openModalShowDetailsEvent" :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentDetails>
-<ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties' > </ModalShowAppointmentTaken>
+<ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' > </ModalProfessionalReserveAppointment>
 <hr> 
+
 
  <!--
     <div class="d-flex justify-content-around  listHoursHeader" >
@@ -50,7 +51,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
       
                 <div v-if="hour.app_available != null"  >
                     <div v-if="!hour.app_available">
-                        <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentReserved>
+                        <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
                     </div>
                     <!--
                     <div v-else>
@@ -70,10 +71,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                             </div>    
                             <div v-if="hour.remote_care"  >
                                 <i class="h2 bi bi-camera-video"></i>   {{specialtyId2name(hour.specialty)}}     
-                            </div>   
-
-                            
-                                       
+                            </div>                   
                     </div>
                     
                     <!-- <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" > -->
