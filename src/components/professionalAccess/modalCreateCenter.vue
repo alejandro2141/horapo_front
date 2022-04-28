@@ -293,17 +293,31 @@ data: function () {
 
         //CREATE New Center
  	    async createNewCenter() {
+
+
+        //define color for this center
+        var colorArray = [
+              "#FFE6E6",
+              "#FFFAE6",
+              "#EEFFE6",
+              "#E6F5FF",
+              "#F6E6FF",      
+              "#FFE6EE",
+            ];
+        var randomColor = colorArray[Math.floor(Math.random()*colorArray.length)];
+
+
         console.log ("createNewCenter :" );
         const json = { 
-           center_name : this.form_center_name ,
+           center_name    : this.form_center_name ,
            center_address : this.form_center_address ,
-           center_comuna : this.form_center_comuna_code ,
-           center_region : this.form_center_region, 
-           center_phone1 : this.form_center_phone1 ,
-           center_phone2 : this.form_center_phone2 ,
+           center_comuna  : this.form_center_comuna_code ,
+           center_region  :  this.form_center_region, 
+           center_phone1  : this.form_center_phone1 ,
+           center_phone2  : this.form_center_phone2 ,
            professional_id: this.session_params.professional_id ,
            app_type       : this.form_app_type , 
-
+           center_color   : randomColor ,
            comunas_ids    : this.form_comunas_id        
            
            };
