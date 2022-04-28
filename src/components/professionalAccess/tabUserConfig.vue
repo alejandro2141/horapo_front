@@ -5,9 +5,9 @@ import axios from 'axios';
 </script>
 
 <template>
-    <div class="p-3 mb-2 bg-light text-dark">
-    <p class="text-center"> <i class="bi bi-person-circle display-4 "></i> </p>
-         <p class="h4 text-center"> Su Información</p>
+    <div class="p-3 mb-2 bg-light text-dark border border-dark " style="border-radius: 15px;">
+    <p class="text-center " > <i class="bi bi-person-circle display-1 text-primary"></i> </p>
+         <p class="h4 text-center text-primary"> Su Información</p>
         <p class=""> Nombre : <br> {{ professional_data.name }} </p>
         <p class=""> Numero Doc :  {{ professional_data.document_number }} </p>
         <p class=""> license_number :  {{ professional_data.license_number }} </p>
