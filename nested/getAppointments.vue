@@ -10,7 +10,7 @@ import RecoverAppointmentsForm from '../src/components/RecoverAppointmentsForm.v
 <template>
 <div>
     <GeneralHeader></GeneralHeader>
-    <div id="app" class="text-center p-4 bg-light" >     
+    <div id="app" class="text-center border p-4 bg-white " style="border-radius: 25px;" >     
    
         Ingrese su correo y le enviaremos sus horas ya agendadas. 
 
