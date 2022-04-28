@@ -16,20 +16,20 @@ defineProps({
 
 
 <template>
-<div class="p-0" id="form"><form autocomplete="off">
+    <div class="p-0" id="form"><form autocomplete="off">
     
-    <div class="form-row"><div class="form-group col-md-6">
-        <label for="inputNames"></label>
+        <div class="form-row"><div class="form-group col-md-6">
+            <label for="inputNames"></label>
 
-        <input  type="text" placeholder="Ej: Email " v-model='user_email' ></div></div>
-        
-        <div class="pt-2 text-center m-2 p-2"><a class="btn btn-outline-secondary m-2 p-2" HREF="/index.html" type="button">Regresar</a>
-        
-        <button class="btn btn-success m-2 p-2" v-on:click="sendRecoverApp()" type="button">Enviar</button>
-        </div>
-        </form>
+            <input  type="text" placeholder="Ej: Email " v-model='user_email' ></div></div>
+            
+            <div class="pt-2 text-center m-2 p-2"><a class="btn btn-outline-secondary m-2 p-2" HREF="/index.html" type="button">Regresar</a>
+            
+            <button class="btn btn-success m-2 p-2" v-on:click="sendRecoverApp()" type="button">Enviar</button>
+            </div>
+            </form>
        
-        </div>
+    </div>
 
 </template>
 
