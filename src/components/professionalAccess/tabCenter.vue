@@ -17,8 +17,8 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
-                    <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px;">
-                        <div class="card-body">
+                    <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px;"  :style="{ 'background-color' : center.center_color  }">
+                        <div class="card-body"  >
                             
                                 <div class="card-title ">
                                     <div v-if="center.center_visit" >
@@ -47,9 +47,6 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                     </div>
                                 
                                 </div>
-
-                              
-                               
 
                             <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p> 
                             <p class="text-end text-muted mt-2"> #{{ center.id }} </p>
