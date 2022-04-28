@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import loadProgress from '../loadProgress.vue'
+import generalHeader from '../GeneralHeader.vue'
+
 
 defineProps({
   session: Object
@@ -11,20 +13,18 @@ defineProps({
 
 <template>
 <div>
+    <generalHeader></generalHeader>
     <loadProgress  :active_spinner="active_spinner" > </loadProgress>
-     <div class="border border-dark m-3 bg-light ">
+     
+     
+     <div class="border border-3 m-3 bg-white " style=" border-radius: 15px;">
 
             <div class="d-flex justify-content-between" >	
                 <div class="m-2">
-         
                 </div>
                 
-                <div class="h3">
-            
+                <div class="display-5 m-3 ">
             Acceso Profesionales
-            
-            
-
                 </div>
                 
                 <div class="m-2">
@@ -35,12 +35,12 @@ defineProps({
             <div id="formLogin" class="mx-auto p-3"  style="width: 95%;">
                 <form autocomplete="on" >
                    <input  v-model="form_token" id="form_token" name="form_token" type="hidden"  > 
-                   <input class="autocomplete form-control form-control-lg ml-2" v-model="form_email" id="form_email" name="form_email" type="text" placeholder="Usuario ejemplo@correo.com" aria-label=".form-control-lg example"   >
+                   <input class="autocomplete form-control form-control-lg ml-2" v-model="form_email" id="form_email" name="form_email" type="text" placeholder="Usuario ejemplo@correo.com" aria-label=".form-control-lg example"   style=" border-radius: 15px;" >
                    <br/>
-                   <input class="form-control form-control-lg" v-model="form_pass" id="form_pass" name="form_pass"  type="text" placeholder="Su contraseña" aria-label=".form-control-lg example" >
+                   <input class="form-control form-control-lg" v-model="form_pass" id="form_pass" name="form_pass"  type="text" placeholder="Su contraseña" aria-label=".form-control-lg example"  style=" border-radius: 15px;" >
                     <br/> 
 
-                    <i  type="submit" v-on:click="sendLogin()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%;"  >{{ login_message }}</i>
+                    <i  type="submit" v-on:click="sendLogin()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%; border-radius: 15px;"  >{{ login_message }}</i>
                 </form> 
                   
             </div>
