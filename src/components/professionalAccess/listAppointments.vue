@@ -67,7 +67,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                                 <i class="h1 bi bi-building"></i> {{specialtyId2name(hour.specialty)}}     
                             </div>
                             <div v-if="hour.home_visit"  >
-                                <i class="h2 bi bi-house-door" > </i>   {{specialtyId2name(hour.specialty)}}     
+                                <i class="h2 bi bi-house-door" > </i>   {{specialtyId2name(hour.specialty)}}                                
                             </div>    
                             <div v-if="hour.remote_care"  >
                                 <i class="h2 bi bi-camera-video"></i>   {{specialtyId2name(hour.specialty)}}     
