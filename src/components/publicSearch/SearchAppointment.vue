@@ -14,17 +14,8 @@ import FooterContent from '../FooterContent.vue'
   <div class="bg-white p-0">
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
   
-      <div  class="d-flex justify-content-between  mt-0 pt-0"> 
-
-        <text class="text-muted">&nbsp;</text>
-        <text class="text-muted">&nbsp;</text>
 
 
-        <a HREF="/nested/getAppointments.html"   class=" ">
-          Recordar mis Horas  
-        </a>
-
-      </div>
 
       <div class=" bg-white  pb-4 text-center"  > 
         <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
