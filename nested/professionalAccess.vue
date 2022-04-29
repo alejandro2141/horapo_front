@@ -24,19 +24,19 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
             <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
         </div>
 
-        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-light">
+        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class="position-relative bg-white ">
             <TabCenter :session_params="session_params" :global_comunas="global_comunas"  >  </TabCenter> 	
         </div>
 
-        <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-light">
+        <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-white">
             <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
         </div>
 
-        <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-light">
+        <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-white">
             <TabTimeTable :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabTimeTable> 	
         </div>
 
-        <div v-if="visible_tab_userconfig == 'block'" :style="{display:  visible_tab_userconfig }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-light">
+        <div v-if="visible_tab_userconfig == 'block'" :style="{display:  visible_tab_userconfig }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-white">
             <TabUserConfig :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabUserConfig> 	
         </div>
 
