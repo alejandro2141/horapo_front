@@ -12,7 +12,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
       
 <div  class="mx-auto " style="width: 95%;" >
 
-            <p class="text-center h4 mt-3">Consultas en su Agenda</p>
+            <p class="text-center h4 mt-3 mb-3 ">Consultas</p>
             
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
