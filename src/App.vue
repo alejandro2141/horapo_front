@@ -18,7 +18,8 @@ import { BKND_CONFIG } from '../config123.js'
 
 <style scoped>
 body {
- background-image : url(assets/images/background_patient.JPG); height: 100%; width: 100%; border: 0px solid black
+/* background-image : url(assets/images/background_patient.JPG); height: 100%; width: 100%; border: 0px solid black
+*/
 }
 
 </style>
