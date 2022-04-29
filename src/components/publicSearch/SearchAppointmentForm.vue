@@ -22,25 +22,6 @@ import inputFormComuna  from './InputFormComuna.vue'
                     </div>
                 </div>
                
-<!--FORM INPUT  APP TYPE -->
-                <div v-if="show_app_type()" class="d-flex justify-content-around   mb-1" style=" border-radius: 15px;"  >
-                    
-                    <button type="button" @click="selectedTypeCenter()" class="m-1 p-1  btn btn-outline-primary border-1 " :class="{ 'active' : form_app_type_center }" style=" border-radius: 15px;" > 
-                        <i  class="h5 bi bi-building m-0 p-0" style="color: #781ED1;"></i><br>
-                       <text class="m-0 p-0"> Consulta </text>  
-                    </button>
-
-                    <button type="button" @click="selectedTypeHome()"  class="m-1 p-1 btn btn-outline-primary border-1 " :class="{ 'active' : form_app_type_home }" style=" border-radius: 15px;" > 
-                        <i class="h5 bi bi-house-door m-0 p-0" style="color:#3399FF;"></i><br>
-                        <text> Domicilio </text> 
-                    </button>
-
-                    <button type="button" @click="selectedTypeRemote()"  class="m-1 p-1 btn btn-outline-primary border-1" :class="{ 'active' : form_app_type_remote }"  style=" border-radius: 15px; " > 
-                       <i class="h5 bi bi-camera-video m-0 p-0" style="color:#b36b00;"  ></i><br>
-                       <text> Remota </text> 
-                    </button>
-                   
-                </div>
 
 <!-- FORM INPUT LOCATION-->
                 <div  v-if="show_input_date()"  class="row  mb-1   "  >
@@ -56,6 +37,44 @@ import inputFormComuna  from './InputFormComuna.vue'
                     </div>
                 </div>
                  
+
+<!--FORM INPUT  APP TYPE -->
+                <div v-if="show_app_type()" class="d-flex justify-content-around   mb-1" style=" border-radius: 15px;"  >
+                    
+                     <text  @click="selectedTypeCenter()" class="m-1 p-1" :class="{ 'fs-4 text' : form_app_type_center }" style=" " > 
+                        <i  class="h5 bi bi-building m-0 p-0" style="color: #781ED1;"></i>
+                       <text class="m-0 p-0"> Consulta </text>  
+                    </text>
+
+                    <text  @click="selectedTypeHome()"  class="m-1 p-1 " :class="{ 'fs-4 text' : form_app_type_home }" style="" > 
+                        <i class="h5 bi bi-house-door m-0 p-0" style="color:#3399FF;"></i>
+                        <text> Domicilio </text> 
+                    </text>
+
+                    <text  @click="selectedTypeRemote()"  class="m-1 p-1 " :class="{ 'fs-4 text' : form_app_type_remote }"  style="" > 
+                       <i class="h5 bi bi-camera-video m-0 p-0" style="color:#b36b00;"  ></i>
+                       <text> Remota </text> 
+                    </text>
+
+                    <!--
+                    <button type="button" @click="selectedTypeCenter()" class="m-1 p-1  btn btn-outline-primary border-1 " :class="{ 'active' : form_app_type_center }" style=" border-radius: 15px;" > 
+                        <i  class="h5 bi bi-building m-0 p-0" style="color: #781ED1;"></i><br>
+                       <text class="m-0 p-0"> Consulta </text>  
+                    </button>
+                    
+                    <button type="button" @click="selectedTypeHome()"  class="m-1 p-1 btn btn-outline-primary border-1 " :class="{ 'active' : form_app_type_home }" style=" border-radius: 15px;" > 
+                        <i class="h5 bi bi-house-door m-0 p-0" style="color:#3399FF;"></i><br>
+                        <text> Domicilio </text> 
+                    </button>
+
+                    <button type="button" @click="selectedTypeRemote()"  class="m-1 p-1 btn btn-outline-primary border-1" :class="{ 'active' : form_app_type_remote }"  style=" border-radius: 15px; " > 
+                       <i class="h5 bi bi-camera-video m-0 p-0" style="color:#b36b00;"  ></i><br>
+                       <text> Remota </text> 
+                    </button>
+                    -->
+                   
+                </div>
+
             <!--
                 <button type="button" @click="form_app_type_center=!form_app_type_center ; form_app_type_home= false" class=" m-1 btn"  :class="{ 'btn-primary' : form_app_type_center , 'btn-secondary' : !form_app_type_center , 'btn-lg' : form_app_type_center }" >  En Consulta  </button>
                 <button type="button" @click="form_app_type_home=!form_app_type_home ; form_app_type_center= false "     class=" m-1 btn " :class="{ 'btn-primary' : form_app_type_home   , 'btn-secondary' : !form_app_type_home , 'btn-lg' : form_app_type_home     }" > A Domicilio </button>
@@ -88,7 +107,7 @@ import inputFormComuna  from './InputFormComuna.vue'
                 </div>
                 -->
 
-                <p></p>
+                
                 <!--
                 <div class="text-center">
                 <button type="button" v-on:click="sendFormSearch()" class="btn btn-primary btn-lg m-2">  <i class="display-6  bi bi-search   m-0"  ></i> Buscar una Hora</button>
@@ -157,7 +176,7 @@ export default {
         },
         
         show_app_type()
-        {   if ( this.form_specialty != null  )
+        {   if ( this.form_specialty != null   )
             { return true } 
             else
             { return false }
