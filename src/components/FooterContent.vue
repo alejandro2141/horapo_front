@@ -10,7 +10,7 @@ const count = ref(0)
 
 <template>
    <div class="fixed-bottom bg-light" >
-		<hr>
+		
 			<div class=" text-center  ">
 			<!-- Grid container -->
 			<div class="container p-0 pb-0">
