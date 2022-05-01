@@ -29,26 +29,26 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     </div>
 
                       <div class="form-group">
-                         <label for="exampleInputEmail1" class="h3" > 1)Asigne Nombre a Nueva Consulta </label>
+                         <label for="exampleInputEmail1" class="h3" >Nombre de su Consulta </label>
                             <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
                       </div>
 
-                      <div class="mt-3 h3">2 ) Que tipo de consulta ?</div>
+                      <div class="mt-3 h3">Tipo de consulta</div>
                       <div >
                           
-                          <button type="button" class="btn btn-outline-primary m-1"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
-                              <i class="h2 bi bi-building"></i><br>
-                              En Consulta
+                          <button type="button" class="btn btn-outline-primary m-0"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
+                              <i class="h3 bi bi-building m-0 p-0"></i><br>
+                              <text class="fs-6 m-0 p-0">En Consulta</text> 
                           </button>
                           
                           <button type="button" class="btn btn-outline-primary m-1" @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ;" >
-                              <i class="h2 bi bi-house-door"></i><br>
-                              A Domicilio
+                              <i class="h3 bi bi-house-door m-0 p-0"></i><br>
+                               <text class="fs-6 m-0 p-0">A Domicilio</text> 
                           </button>
                           
-                          <button type="button" class="btn btn-outline-primary m-1" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
-                              <i class="h2 bi bi-camera-video"></i><br>
-                              Tele Atencion 
+                          <button type="button" class="btn btn-outline-primary m-0" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
+                              <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
+                              <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
                           </button>
                       </div>
 
@@ -58,7 +58,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
 
                       <div v-if="app_type_home"  class="form-group mt-3" >
-                            <p>  <text class="h3"> 3) Atencion a domicilio.</text><br>   Comunas atiende a Domicilio (Máximo 6). </p>
+                            <p>  <text class="h3">Atencion a domicilio.</text><br>   Comunas atiende a Domicilio (Máximo 6). </p>
                             <div  class="b p-2" >
                                     <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
                                     <br>  
@@ -67,7 +67,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
 
                       <div v-if="app_type_center"  class="form-group mt-3" >
-                            <p> <text class="h3"> 3) Información de Consulta</text> <br> </p>
+                            <p> <text class="h3">Información de Consulta</text> <br> </p>
                            
                             <div class="form-group mt-3">
                                 <label for="exampleInputPassword1">Direccion de su Consulta</label>
@@ -101,7 +101,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                       </div>
 
                       <div v-if="app_type_tele"  class="form-group mt-3" >
-                          <text class="h3"> 3) Tele Atención</text>
+                          <text class="h3">Tele Atención</text>
 <!--
                           <div class="form-group">
                                 <label for="exampleInputPassword1">Telefono Atencion Video Llamada</label>
