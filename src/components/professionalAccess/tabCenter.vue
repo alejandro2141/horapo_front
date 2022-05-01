@@ -12,7 +12,10 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
       
 <div  class="mx-auto " style="width: 95%;" >
 
-            <p class="text-center h4 mt-3 mb-3 ">Consultas</p>
+            <p class="text-center  mt-3 mb-3 lead">Consultas/Direcciones<br>
+            <small>Puede asociarlas a un Horario</small>
+
+            </p>
             
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
@@ -22,36 +25,41 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                             
                                 <div class="card-title ">
                                     <div v-if="center.center_visit" >
-                                           <i class="h1 bi bi-building"></i> <text class="h3"> {{center.name}} </text>
-                                            <p class="card-title"> <b> Cita a en Consulta </b><br> 
-                                            Direccion: </p>
-                                            <p class="card-text">{{center.address}}  , 
-                                            {{ comunaId2Name(center.comuna)  }} 
+                                            <p><i class="h1 bi bi-building"></i> <text class="h3"> {{center.name}} </text> </p>
+                                            <p class="card-title mt-2"> Tipo:<b> Cita a en Consulta </b> </p>
+                                            <p>En Direccion: <br>
+                                            <text class="card-text">{{center.address}}  , 
+                                            {{ comunaId2Name(center.comuna)  }}  </text>
                                             </p> 
                                     
                                     </div>
                                     <div v-if="center.home_visit" >
-                                           <i class="h1 bi bi-house-door"></i>  <text class="h3"> {{center.name}} </text>
-                                                <p class="card-title"> <b> Cita a Domicilio  </b> <br>En Comunas: </p>
+                                          <p> <i class="h1 bi bi-house-door"></i>  <text class="h3"> {{center.name}} </text></p>
+                                                <p class="card-title">Tipo: <b> Cita a Domicilio  </b> </p>
+                                                
+                                                <p> En Comunas: <br>
                                                 <text v-if="comunaId2Name(center.home_comuna1)!=null" > {{ comunaId2Name(center.home_comuna1)  }} &nbsp; <br></text> 
                                                 <text v-if="comunaId2Name(center.home_comuna2)!=null"> {{ comunaId2Name(center.home_comuna2)  }} &nbsp;  <br></text> 
                                                 <text v-if="comunaId2Name(center.home_comuna3)!=null"> {{ comunaId2Name(center.home_comuna3)  }} &nbsp; <br></text> 
                                                 <text v-if="comunaId2Name(center.home_comuna4)!=null"> {{ comunaId2Name(center.home_comuna4)  }} &nbsp; <br></text> 
                                                 <text v-if="comunaId2Name(center.home_comuna5)!=null"> {{ comunaId2Name(center.home_comuna5)  }} &nbsp; <br></text> 
                                                 <text v-if="comunaId2Name(center.home_comuna6)!=null"> {{ comunaId2Name(center.home_comuna6)  }} &nbsp; <br></text> 
-                         
+                                                 </p>
                                     </div>
                                     <div v-if="center.remote_care" >
-                                            <i class="h1 bi bi-camera-video"></i> <text class="h3"> {{center.name}} </text>
-                                            <p>Tele Atención  </p>
+                                            <p><i class="h1 bi bi-camera-video"></i> <text class="h3"> {{center.name}} </text></p>
+                                            <p>Tipo: <b>Tele Atención</b>  </p>
+                                              <p> En Telefono: <br>
+                                               9999999 (No visible a Pacientes)
+                                              </p>
                                     </div>
                                 
                                 </div>
+                                    <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p> 
 
-                            <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p> 
-                            <p class="text-end text-muted mt-2"> #{{ center.id }} </p>
+                         <!--   <p class="text-end text-muted mt-2"> #{{ center.id }} </p> -->
                         </div>
-                    </div>   
+                                            </div>   
                 </div>  
             </div>
 
@@ -59,7 +67,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                        
                          <p class="p-4 text-center" >    
                             <i class="display-1 bi bi-emoji-expressionless"></i><br>
-                            Aun No existen Direcciones 
+                            No existen Consultas o Direcciones para sus servicios
                         </p>
                        
             </div>
@@ -82,7 +90,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         <div class="text-center p-3 m-3"> 
             <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text>
         </div>
-
+<p><br></p>
         <!--
         <ModalCreateNewCenter  :session_params="session_params" v-on:updateCenterList="updateCenterList" > </ModalCreateNewCenter>
         --> 
