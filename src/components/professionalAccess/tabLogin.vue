@@ -41,7 +41,7 @@ defineProps({
                    <input class="form-control form-control-lg" v-model="form_pass" id="form_pass" name="form_pass"  type="text" placeholder="Contraseña" aria-label=".form-control-lg example"  style=" border-radius: 15px;" >
                     <br/> 
 
-                    <i  type="submit" v-on:click="sendLogin()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%; border-radius: 15px;"  >{{ login_message }}</i>
+                    <i  type="submit" v-on:click="sendLogin()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%; border-radius: 15px;"  >{{ login_message }} <i class="m-2 p-2 bi bi-arrow-right-square"></i> </i>
                 </form>   
             </div>
             
@@ -61,7 +61,7 @@ defineProps({
 export default {
    data : function() {
         return {
-            login_message : "Ingrese sus credenciales",
+            login_message : "Ingresar ",
             url_param : [] ,
             form_token : "",
             form_email : "",
