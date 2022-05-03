@@ -28,9 +28,9 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                                 </h5>
 
                                
-                                    <div class="d-flex justify-content-between">
+                                    <div class="d-flex justify-content-between mb-2">
                                         <div> 
-                                            Consulta 
+                                            Lugar de <br>Consulta 
                                         </div>
                                         <div>
                                             <i class="bi bi-geo-alt"></i> {{calendar.name}} 
@@ -39,14 +39,14 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                                         </div>
                                     </div>
 
-                                    <div v-if="calendar.center_visit">
-                                            <text> Tipo: En Consulta  </text>  
+                                    <div v-if="calendar.center_visit" class="d-flex justify-content-between mb-2" >
+                                            <text> Tipo: </text> <text> En Consulta  </text>  
                                     </div>
-                                    <div v-if="calendar.home_visit">
-                                            <text> Tipo: A Domicilio  </text>
+                                    <div v-if="calendar.home_visit" class="d-flex justify-content-between mb-2">
+                                             <text> Tipo: </text> <text> A Domicilio  </text>
                                     </div>
-                                    <div v-if="calendar.remote_care">
-                                            <text> Tipo: Tele Atencion </text>
+                                    <div v-if="calendar.remote_care" class="d-flex justify-content-between mb-2">
+                                            <text> Tipo: </text> <text> Tele Atencion </text>
                                     </div>
                                 <br>
                              
