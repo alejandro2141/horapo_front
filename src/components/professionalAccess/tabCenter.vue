@@ -14,7 +14,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 
     <div class="d-flex justify-content-between mt-3">
         
-         <i class="bi bi-geo-alt display-1 y"></i>
+         <i class="bi bi-geo-alt display-3 "></i>
          <p class="h4 text-center  mt-3">
             Sus Consultas
          </p>
@@ -23,7 +23,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
     </div>
 
             <p class="text-center lead">
-            <small>Consultas y direccion,  que  puede asociarlas a un Horario para habilitar sus citas</small>
+            <small>Direcciones de sus Consultas, donde el paciente debe asistir</small>
             </p>
 
 
