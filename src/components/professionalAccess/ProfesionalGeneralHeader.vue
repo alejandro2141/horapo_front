@@ -16,7 +16,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_appointments }"  >	
-			 HOY<br> <h4>{{day}} {{getMonthName(month)}}</h4>
+			<text class="h5"> HOY</text><br> <text class="h3">{{day}} {{getMonthName(month)}}</text>
 		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_calendars }"  >	
