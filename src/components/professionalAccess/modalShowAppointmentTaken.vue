@@ -19,16 +19,16 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
  
 
 
-                <div class="modal-header">
-                        <div class="text-secondary  display-5">
-                         Reservada #{{hourTaken.id}}
+                <div class="modal-header mb-0">
+                        <div class="text-secondary  h3">
+                         Cita Reserva #{{hourTaken.id}}
                         </div>
                         <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
                         </div>
                 </div>
 
 <!------------------ ----> 
-    <div v-if="hourTaken != null"  style="border: 3px solid rgb(168, 168, 168); border-radius: 30px;"   class=" p-0 mb-0 ">
+    <div v-if="hourTaken != null"   class="m-0 ">
         
         <div id="app" class="m-0 d-flex  "  >	
             <div class="">
@@ -36,51 +36,49 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
             </div>
             <div>
 
- 				<div class="display-4 p-1" style=" color:#1f9d94">
+ 				<div class="display-4 p-1" >
                     <div >	
                     {{ id2name(hourTaken.specialty) }} 
                     </div>       
         </div>
 
                 <div class="">
-					<p class="h3"> 
-            <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Fecha : 
-						<text  style="color:#2e5668">	 
+					<p class="h5"> 
+            <i class="bi bi-circle-fill display-5 text-primary"  ></i> Fecha : 
+						<text  >	 
 						<b>  {{ transform_date( hourTaken.date.substring(0, 10) ) }} </b>
 						</text>       
 					</p>
 
 				</div>
 
-				<div class="h3">
-					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Hora : 
-						<text class="" style="color:#2e5668">	 
-						{{hourTaken.start_time}} <text >hrs</text>  
+				<div class="h5">
+					<p> <i class="bi bi-circle-fill display-5 text-primary"    ></i> Hora : 
+						<text class="" >	 
+						<b>{{hourTaken.start_time}}</b> <text >hrs</text>  
 						</text>       
 					
 					</p>
 				</div>
  
-                <div class="">
+          <div class="">
            <!-- TYPE CENTER --> 
                     <div v-if="hourTaken.center_visit" class="">
                  
-                        <div class="h2" style="">  
+                        <div class="h5" style="">  
                             <p style="color: #781ED1" >
                               <i class="h1 bi bi-building"></i> En Consulta  
                             </p>
                         </div>
 							
-                            <p style="" class="text-dark h2" >
+                            <p style="" class="text-dark h5" >
                                <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
                             </p>
 
                             <p class="h5" style="color:#2e5668">
-                             
                               Centro :   {{getCenter(hourTaken.center_id).name}}
                               <br>
                               Direccion:  {{getCenter(hourTaken.center_id).address}}
-                              
                             </p>
 
                     </div>
@@ -91,66 +89,40 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                                 <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
 
-                              <h2> Direccion: 
-                              {{ hourTaken.patient_address}}  </h2>
+                              <h5> Direccion: 
+                              {{ hourTaken.patient_address}}  </h5>
                            
-                              <!--           
-                                <div class="m-2">
-                                <p  v-if=" hourTaken.home_visit_location1 != null " >  
-                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location1) }} 
-                                  <br>
-                                </p>
-                                <p v-if=" hourTaken.home_visit_location2 != null " >  
-                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location2) }} 
-                                  <br>
-                                </p>
-                                <p v-if=" hourTaken.home_visit_location3 != null " >  
-                                &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location3) }}
-                                  <br>
-                                </p>
-                                <p v-if=" hourTaken.home_visit_location4 != null " >  
-                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location4) }} 
-                                  <br>
-                                </p>
-                                <p v-if=" hourTaken.home_visit_location5 != null " >  
-                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(hourTaken.home_visit_location5) }} 
-                                  <br>
-                                </p>
-                                <p v-if=" hourTaken.home_visit_location6 != null " >  
-                                  &nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(hourTaken.home_visit_location6) }} 
-                                  <br>
-                                </p>	
-                                </div>
-                                -->
+                              
                     </div>
 
           <!-- TYPE REMOTE  --> 
                     <div v-if="hourTaken.remote_care" >
-                         <p class="h3" style="color:#b36b00" >
+                         <p class="h5" style="color:#b36b00" >
                                <i class="h1 bi bi-camera-video"></i> 
                                Tele Atención  	 
                               <br>
-                              <text class="h4">(Todas las comunas)</text>                  
+                              <text class="h5">(Todas las comunas)</text>                  
                         </p>
                     </div>
-
+        </div>
 					
-          <p class="h3"> 
-                <i class="bi bi-person  text-primary h1"></i> 
-                <text class="h5">
-                            Con : {{ hourTaken.patient_name}} 
-                             ( Id:{{ hourTaken.patient_doc_id}} )
+          <p class="h5"> 
+                 <i class="bi bi-circle-fill display-5 text-primary"  ></i>
+                <text class="">
+                 <b> Paciente: </b> <br>
+                           {{ hourTaken.patient_name}} <br>
+                            Id:{{ hourTaken.patient_doc_id}} 
                 </text>
           </p>
     <!--PATIENT  -->
-            <p class="text-primary h3" > 
-                            <a :href='"tel:+56"+hourTaken.patient_phone1'>
+            <p class="text-primary h5 " > 
+                            <a :href='"tel:+56"+hourTaken.patient_phone1' class="text-decoration-none" >
                                 <i class="h1 bi bi-telephone"></i>  {{ hourTaken.patient_phone1}}
                             </a>
             </p>             
             
-            <p class="text-primary h3" > 
-                          <a :href ='"mailto:"+hourTaken.patient_email'><i class="h1 bi bi-envelope"></i> {{ hourTaken.patient_email}} 
+            <p class="text-primary h5 " > 
+                          <a :href ='"mailto:"+hourTaken.patient_email' class="text-decoration-none"  ><i class="h1 bi bi-envelope"></i> {{ hourTaken.patient_email}} 
                           </a>     
             </p>
     <!--END PATIENT  -->
@@ -161,7 +133,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
 				
 
-                </div>
+              
             
             </div>
 
