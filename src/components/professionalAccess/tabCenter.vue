@@ -12,11 +12,21 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
       
 <div  class="mx-auto " style="width: 95%;" >
 
-            <p class="text-center  mt-3 mb-3 lead">Consultas/Direcciones<br>
-            <small>Puede asociarlas a un Horario</small>
+    <div class="d-flex justify-content-between mt-3">
+        
+         <i class="bi bi-geo-alt display-1 y"></i>
+         <p class="h4 text-center  mt-3">
+            Sus Consultas
+         </p>
+         <i class="display-1 bi bi-x-lg ml-0 text-primary" aria-label="Close" v-on:click="closeTabCenter()" ></i> 
+    
+    </div>
 
+            <p class="text-center lead">
+            <small>Consultas y direccion,  que  puede asociarlas a un Horario para habilitar sus citas</small>
             </p>
-            
+
+
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
@@ -118,7 +128,10 @@ data: function () {
             activatorViewCenterDetails : null ,
 		 }
 	},
+
 	props: ['session_params','global_comunas'],
+  	emits : ['switchViewTo'] ,
+
 
     created () {
         console.log("TAB CENTER this session_params"+this.session_params.professional_id);
@@ -130,6 +143,13 @@ data: function () {
          },
  
     methods: {
+
+        closeTabCenter()
+        {
+            console.log("close Center Tab")
+            this.$emit('switchViewTo',2 ) ;
+        },
+
         comunaId2Name(comuna_id)
         {
             if (comuna_id != null)
