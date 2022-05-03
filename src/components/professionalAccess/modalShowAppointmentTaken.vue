@@ -80,7 +80,6 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                               <br>
                               Direccion:  {{getCenter(hourTaken.center_id).address}}
                             </p>
-
                     </div>
 
           <!-- TYPE HOME -->  
