@@ -16,11 +16,11 @@ import SwitchViewButton from './switchViewButton.vue'
 		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_appointments }"  >	
-			 HOY<br> <h4>{{day}}</h4> {{month}} 	
+			 HOY<br> <h4>{{day}} {{getMonthName(month)}}</h4>
 		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_calendars }"  >	
-			<i class="bi bi-calendar display-5 "  ></i> <br> Horario	
+			<i class="bi bi-calendar display-5 "  ></i> <br> Calendarios	
 		</button>
 		<!--
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_centers }"  >	
@@ -41,7 +41,7 @@ import SwitchViewButton from './switchViewButton.vue'
 			<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="h4  text-decoration-none"> &nbsp; <i class="display-5 bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información </a><hr>
 
 			<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="text-decoration-none"  >	
-				<i class="bi bi-geo-alt display-5 "></i> <text class="h4">Sus Consultas y Direcciones </text>	
+				&nbsp; <i class="bi bi-geo-alt display-5 "></i> <text class="h4">&nbsp;  Sus Direcciones de Consultas </text>	
 			</a>
 
 			<hr>
@@ -93,6 +93,12 @@ export default {
     },
 
     methods: {
+		getMonthName(month)
+		{	
+			let month_name = ["Ene","Feb","Marz","Abr","May","Jun","Jul","Ago","Sept","Oct","Nov","Dic"]
+			return month_name[month-1] ; 
+
+		},
 
 		switchViewTo(val)
 		{
