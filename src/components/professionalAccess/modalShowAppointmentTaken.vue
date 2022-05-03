@@ -249,10 +249,7 @@ div.scroll {
 }
 
 
-
-
 </style>
-
 
 <script>
 
