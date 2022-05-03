@@ -23,8 +23,17 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
     </div>
 
             <p class="text-center lead">
-            <small>Direcciones de sus Consultas, donde el paciente debe asistir</small>
+            <small>Direcciones de sus Consultas, donde el paciente debe asistir <i  @click="showInfoCreate=!showInfoCreate" class="bi bi-info-circle-fill text-primary"></i> </small> 
             </p>
+            
+            <div  v-if='showInfoCreate' class="alert alert-info p-2" >
+                - Puede crear cuantas consultas usted quiera. <br>
+                - Estas quedan disponibles para sus horarios.<br>
+                - La direccion de consulta es donde el paciente debe asistir a su cita<br>
+                - En caso de dudas el paciente puede llamarle al telefono de la consulta<br>
+                
+            </div>
+            
 
 
         <div v-if='centers != null' >       
@@ -33,7 +42,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                     <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px;"  :style="{ 'background-color' : center.center_color  }">
                         <div class="card-body"  >
                             
-                                <div class="card-title ">
+                                <div >
                                     <div v-if="center.center_visit" >
                                             <p><i class="h1 bi bi-building"></i> <text class="h3"> {{center.name}} </text> </p>
                                             <p class="card-title mt-2"> Tipo:<b> Cita a en Consulta </b> </p>
@@ -45,16 +54,28 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                     </div>
                                     <div v-if="center.home_visit" >
                                           <p> <i class="h1 bi bi-house-door"></i>  <text class="h3"> {{center.name}} </text></p>
-                                                <p class="card-title">Tipo: <b> Cita a Domicilio  </b> </p>
-                                                
-                                                <p> En Comunas: <br>
-                                                <text v-if="comunaId2Name(center.home_comuna1)!=null" > {{ comunaId2Name(center.home_comuna1)  }} &nbsp; <br></text> 
-                                                <text v-if="comunaId2Name(center.home_comuna2)!=null"> {{ comunaId2Name(center.home_comuna2)  }} &nbsp;  <br></text> 
-                                                <text v-if="comunaId2Name(center.home_comuna3)!=null"> {{ comunaId2Name(center.home_comuna3)  }} &nbsp; <br></text> 
-                                                <text v-if="comunaId2Name(center.home_comuna4)!=null"> {{ comunaId2Name(center.home_comuna4)  }} &nbsp; <br></text> 
-                                                <text v-if="comunaId2Name(center.home_comuna5)!=null"> {{ comunaId2Name(center.home_comuna5)  }} &nbsp; <br></text> 
-                                                <text v-if="comunaId2Name(center.home_comuna6)!=null"> {{ comunaId2Name(center.home_comuna6)  }} &nbsp; <br></text> 
-                                                 </p>
+                                               
+                                             
+                                            <div class="d-flex justify-content-between">
+                                                <text>Tipo : </text><text>Cita a Domicilio </text>
+                                            </div>
+
+
+
+                                            <div class="d-flex justify-content-between">
+                                                    <text> En Comunas: </text>         
+                                                    <text>
+                                                        <text v-if="comunaId2Name(center.home_comuna1)!=null" > {{ comunaId2Name(center.home_comuna1)  }} &nbsp; <br></text> 
+                                                        <text v-if="comunaId2Name(center.home_comuna2)!=null"> {{ comunaId2Name(center.home_comuna2)  }} &nbsp;  <br></text> 
+                                                        <text v-if="comunaId2Name(center.home_comuna3)!=null"> {{ comunaId2Name(center.home_comuna3)  }} &nbsp; <br></text> 
+                                                        <text v-if="comunaId2Name(center.home_comuna4)!=null"> {{ comunaId2Name(center.home_comuna4)  }} &nbsp; <br></text> 
+                                                        <text v-if="comunaId2Name(center.home_comuna5)!=null"> {{ comunaId2Name(center.home_comuna5)  }} &nbsp; <br></text> 
+                                                        <text v-if="comunaId2Name(center.home_comuna6)!=null"> {{ comunaId2Name(center.home_comuna6)  }} &nbsp; <br></text> 
+                                                    </text>
+
+                                             </div>
+
+                                   
                                     </div>
                                     <div v-if="center.remote_care" >
                                             <p><i class="h1 bi bi-camera-video"></i> <text class="h3"> {{center.name}} </text></p>
@@ -126,6 +147,7 @@ data: function () {
             centerToShowDetails : Object ,
             activatorCreateNewCenter : null ,
             activatorViewCenterDetails : null ,
+            showInfoCreate : false 
 		 }
 	},
 
