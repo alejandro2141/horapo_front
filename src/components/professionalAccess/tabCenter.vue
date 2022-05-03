@@ -30,8 +30,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                 - Puede crear cuantas consultas usted quiera. <br>
                 - Estas quedan disponibles para sus horarios.<br>
                 - La direccion de consulta es donde el paciente debe asistir a su cita<br>
-                - En caso de dudas el paciente puede llamarle al telefono de la consulta<br>
-                
+                - En caso de dudas el paciente puede llamarle al telefono de la consulta<br> 
             </div>
             
 
@@ -39,32 +38,46 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
-                    <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px;"  :style="{ 'background-color' : center.center_color  }">
+                    <div class="card m-2 border border-secondary" style="width: 18rem; border-radius: 15px;"  :style="{ 'background-color' : center.center_color  }">
                         <div class="card-body"  >
                             
                                 <div >
+                                    <!-- CENTER VISIT -->
                                     <div v-if="center.center_visit" >
-                                            <p><i class="h1 bi bi-building"></i> <text class="h3"> {{center.name}} </text> </p>
-                                            <p class="card-title mt-2"> Tipo:<b> Cita a en Consulta </b> </p>
-                                            <p>En Direccion: <br>
-                                            <text class="card-text">{{center.address}}  , 
-                                            {{ comunaId2Name(center.comuna)  }}  </text>
-                                            </p> 
-                                    
+                                        <div class="d-flex justify-content-between ">
+                                                <text class="h5">{{center.name}} </text>
+                                                <text class=""></text>  
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between mt-0">
+                                                <text>Tipo:</text>
+                                                <text class="text-end"><i class="h1 bi bi-building"></i> <br> En Consulta</text>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-3">
+                                                <text>Direccion: </text>
+                                                <text class="text-end">{{ comunaId2Name(center.comuna)  }} <br> {{center.address}} </text>
+                                        </div>                                      
                                     </div>
+
+                                    <!-- A DOMICILIO -->
                                     <div v-if="center.home_visit" >
-                                          <p> <i class="h1 bi bi-house-door"></i>  <text class="h3"> {{center.name}} </text></p>
-                                               
-                                             
-                                            <div class="d-flex justify-content-between">
-                                                <text>Tipo : </text><text>Cita a Domicilio </text>
+
+                                            <div class="d-flex justify-content-between ">
+                                                <text class="h5">Nombre: {{center.name}} </text>
+                                                <text class=""> </text>  
                                             </div>
-
-
-
-                                            <div class="d-flex justify-content-between">
+                                           <hr>
+                                            <div class="d-flex justify-content-between mt-2">
+                                                <text>Tipo : </text>
+                                                <text></text>
+                                                <text class="text-end"> <i class="h1 bi bi-house-door"></i> <br>A Domicilio </text>
+                                                
+                                            </div>
+                                           
+                                            <div class="d-flex justify-content-between mt-3">
                                                     <text> En Comunas: </text>         
-                                                    <text>
+                                                    <text></text>
+                                                    <text class="text-start">
                                                         <text v-if="comunaId2Name(center.home_comuna1)!=null" > {{ comunaId2Name(center.home_comuna1)  }} &nbsp; <br></text> 
                                                         <text v-if="comunaId2Name(center.home_comuna2)!=null"> {{ comunaId2Name(center.home_comuna2)  }} &nbsp;  <br></text> 
                                                         <text v-if="comunaId2Name(center.home_comuna3)!=null"> {{ comunaId2Name(center.home_comuna3)  }} &nbsp; <br></text> 
@@ -72,21 +85,32 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                                         <text v-if="comunaId2Name(center.home_comuna5)!=null"> {{ comunaId2Name(center.home_comuna5)  }} &nbsp; <br></text> 
                                                         <text v-if="comunaId2Name(center.home_comuna6)!=null"> {{ comunaId2Name(center.home_comuna6)  }} &nbsp; <br></text> 
                                                     </text>
-
+                                                    
                                              </div>
-
-                                   
                                     </div>
+
+                                    <!-- REMOTE CARE  -->
                                     <div v-if="center.remote_care" >
-                                            <p><i class="h1 bi bi-camera-video"></i> <text class="h3"> {{center.name}} </text></p>
-                                            <p>Tipo: <b>Tele Atención</b>  </p>
-                                              <p> En Telefono: <br>
-                                               9999999 (No visible a Pacientes)
-                                              </p>
+                                        <div class="d-flex justify-content-between ">
+                                            <text class="h5">Nombre: </text>
+                                            <text class="h5">{{center.name}} </text>  
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mt-0">
+                                            <text> Tipo: </text>
+                                            <text> </text>
+                                            <text class="text-start">  <i class="h1 bi bi-camera-video"></i>  <br> Tele Atención</text>
+                                            
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-1">
+                                            <text> En Telefono: </text>
+                                          
+                                            <text> 9999999</text>
+                                        </div>
                                     </div>
                                 
                                 </div>
-                                    <p class="text-end" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p> 
+                                    <p class="text-end mt-3" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p> 
 
                          <!--   <p class="text-end text-muted mt-2"> #{{ center.id }} </p> -->
                         </div>
