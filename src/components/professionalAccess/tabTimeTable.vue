@@ -15,7 +15,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
             <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
 
       
-                <p class="text-center h4 mt-3">Horarios en su agenda </p>
+                <p class="text-center h4 mt-3">Calendarios</p>
 
             
                 <div  id="search_result" v-if='calendars!=null &&  calendars.length > 0'  >
