@@ -11,7 +11,7 @@ import SwitchViewButton from './switchViewButton.vue'
 
     <div v-if="center_list.length > 0" >
    	  <select class="form-select form-control-lg" aria-label="Default" id="form_center"  v-model="form_center"  name="form_center">
-            <option selected v-for="(center) in center_list" :value="center.id" :key="center.id" > {{center.name}} </option>	
+            <option selected v-for="(center) in center_list" :value="center.id" :key="center.id" >{{center.name}}-[{{getCenterType(center)}}]</option>	
       </select>
      auch
     </div>
@@ -56,6 +56,15 @@ export default {
     },//end watch
 
 	methods :{
+        getCenterType(center)
+        {
+            if (center.center_visit)
+            {return "En Centro"}
+            if (center.home_visit)
+            {return "A Domicilio"}
+            if (center.remote_care)
+            {return "Remota"}
+        },
 
         switchView(){
             this.$emit('switchView');
