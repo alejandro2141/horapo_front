@@ -40,13 +40,13 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                                     </div>
 
                                     <div v-if="calendar.center_visit">
-                                            <text> En Consulta  </text>  
+                                            <text> Tipo: En Consulta  </text>  
                                     </div>
                                     <div v-if="calendar.home_visit">
-                                            <text> A Domicilio  </text>
+                                            <text> Tipo: A Domicilio  </text>
                                     </div>
                                     <div v-if="calendar.remote_care">
-                                            <text> Tele Atencion </text>
+                                            <text> Tipo: Tele Atencion </text>
                                     </div>
                                 <br>
                              
