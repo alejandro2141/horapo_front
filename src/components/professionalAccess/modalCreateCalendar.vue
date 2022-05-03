@@ -22,7 +22,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
                 <div class="modal-header">
                         <div class="text-secondary  display-5">
-                        Crear Horario
+                        Crear Calendario
                         </div>
                         <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalCreateCalendar = false"  aria-label="Close"></i>
                         </div>
