@@ -16,11 +16,11 @@ import SwitchViewButton from './switchViewButton.vue'
 		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_appointments }"  >	
-			<i class="bi bi-card-list display-5 "  ></i> Citas	
+			<i class="bi bi-card-list display-5 "  ></i> <br> Citas	
 		</button>
 
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_calendars }"  >	
-			<i class="bi bi-calendar display-5 "  ></i> Horario	
+			<i class="bi bi-calendar display-5 "  ></i> <br> Horario	
 		</button>
 		<!--
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_centers }"  >	
@@ -41,7 +41,7 @@ import SwitchViewButton from './switchViewButton.vue'
 			<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="h4  text-decoration-none"> &nbsp; <i class="display-5 bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información </a><hr>
 
 			<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="text-decoration-none"  >	
-			<i class="bi bi-geo-alt display-5 "></i> <text class="h4"> Consultas y Direcciones de  {{session_params.professional_name.split(" ")[0] }}  </text>	
+			<i class="bi bi-geo-alt display-5 "></i> <text class="h4">Sus Consultas y Direcciones </text>	
 			</a>
 			<hr>
 
