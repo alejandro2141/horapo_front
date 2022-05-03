@@ -7,11 +7,12 @@ import axios from 'axios';
 
 <template>
      
-    <div  :style="{ 'background-color' : appointment.color   }"  style="border-radius: 25px;"  class="mt-1 border border-secondary" data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
+    <div  :style="{ 'background-color' : getCenter(appointment.center_id).center_color   }"  style="border-radius: 25px;"  class="mt-1 border border-secondary" data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
     
-        <div class="d-flex justify-content-between p-2" >
+        <div class="d-flex justify-content-between ml-4" >
             
             <div class="mr-2 pr-2" style="marginLeft : 5px">
+     
                 <div v-if="appointment.center_visit"  >
                     <i class="h1 bi bi-building"></i> 
                     <text class=" h2 text-success "  >&nbsp;&nbsp;{{ id2name(appointment.specialty ) }}  </text> 
@@ -31,7 +32,7 @@ import axios from 'axios';
 
             
             <div class="display-4 ">
-                <p>{{appointment.start_time.substring(0, 5) }} <text class="text-muted h6 mt-0"> {{appointment.duration }}m </text> </p>
+               {{appointment.start_time.substring(0, 5) }} <text class="text-muted h6 mt-0"> {{appointment.duration }}m </text> 
             </div>
         
         </div>
@@ -55,20 +56,19 @@ import axios from 'axios';
                 </div>
         </div>
 -->
-            <div style=" marginRight : 15px;  " >
-
-                    <ul class="list-group-flush "  style="border-radius: 15px;">
-                        <li class="list-group-item " >{{appointment.patient_name }}</li>
-                        <li class="list-group-item"> id:{{appointment.patient_doc_id }} </li>
-                        <li class="list-group-item">Edad:{{appointment.patient_age }} </li>
-                        <li v-if="appointment.home_visit" class="list-group-item" style="color:#3399FF"> A Domicilio <br>  {{appointment.patient_address }} </li>
+            <div class="">
+                        <text >{{appointment.patient_name }}</text><br>
+                        <text > id:{{appointment.patient_doc_id }} </text><br>
+                        <text >Edad:{{appointment.patient_age }} </text><br>
+                        <text v-if="appointment.home_visit" class="list-group-item" style="color:#3399FF"> A Domicilio <br> 
+                         {{appointment.patient_address }} </text>
                         
-                        <li v-if="appointment.center_visit" class="list-group-item"> En Consulta <br>
-                         {{getCenter(appointment.center_id).name }}  </li>
+                        <text v-if="appointment.center_visit">  En Consulta <br>
+                         {{getCenter(appointment.center_id).name }}  </text>
                         
                         
-                        <li v-if="appointment.remote_care" class="list-group-item"> Atención Remota  </li>
-                    </ul>
+                        <text v-if="appointment.remote_care" > Atención Remota  </text>
+                    
                     {{appointment.message1 }}
 
             </div>
