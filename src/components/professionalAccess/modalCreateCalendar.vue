@@ -36,7 +36,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                     <label for="exampleInputEmail1">Especialidad </label><br>
                                         <select   v-model="form_specialty_id" class="form_specialty_id form-control " id="form_specialty_id" >
                                         <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
-                                          {{ specialty.name }}
+                                          {{ specialty.name }} 
                                         </option>
                                         </select>
                           </div>
