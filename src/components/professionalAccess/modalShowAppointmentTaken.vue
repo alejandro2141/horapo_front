@@ -17,16 +17,15 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background" style="border-radius: 25px;">
  
-
-
                 <div class="modal-header mb-0">
-                        <div class="text-secondary  h3">
-                         Cita Reserva #{{hourTaken.id}}
-                        </div>
-                        <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
-                        </div>
+                    
+                      <div class="display-4 p-1 text-success" >	
+                        {{ id2name(hourTaken.specialty) }} 
+                      </div>       
+                    
+                      <div class="pr-1  "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
+                      </div>
                 </div>
-
 <!------------------ ----> 
     <div v-if="hourTaken != null"   class="m-0 ">
         
@@ -36,20 +35,17 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
             </div>
             <div>
 
- 				<div class="display-4 p-1" >
-                    <div >	
-                    {{ id2name(hourTaken.specialty) }} 
-                    </div>       
-        </div>
+ 			  <p>	
+          Reserva #{{hourTaken.id}}
+        </p>
 
-                <div class="">
+        <div class="">
 					<p class="h5"> 
             <i class="bi bi-circle-fill display-5 text-primary"  ></i> Fecha : 
 						<text  >	 
 						<b>  {{ transform_date( hourTaken.date.substring(0, 10) ) }} </b>
 						</text>       
 					</p>
-
 				</div>
 
 				<div class="h5">
@@ -61,21 +57,21 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 					</p>
 				</div>
  
-          <div class="">
+          <div class="border-start  border-primary border-5 m-2 p-3" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }"   >
            <!-- TYPE CENTER --> 
                     <div v-if="hourTaken.center_visit" class="">
                  
                         <div class="h5" style="">  
-                            <p style="color: #781ED1" >
+                            <p  >
                               <i class="h1 bi bi-building"></i> En Consulta  
                             </p>
                         </div>
 							
-                            <p style="" class="text-dark h5" >
+                            <p style="" class=" h5" >
                                <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
                             </p>
 
-                            <p class="h5" style="color:#2e5668">
+                            <p class="h5" style="">
                               Centro :   {{getCenter(hourTaken.center_id).name}}
                               <br>
                               Direccion:  {{getCenter(hourTaken.center_id).address}}
