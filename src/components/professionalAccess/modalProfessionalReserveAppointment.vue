@@ -11,22 +11,94 @@ import axios from 'axios';
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-1 modal-background">
+			<div class="modal-container  m-1 p-1 modal-background" style="border-radius: 25px;">
  
 
-                <div class="modal-body mt-0" > 
+                 
+                <div class="modal-header mb-0">
+                      <div class="display-4 p-1 text-success" >	
+                         {{ idSpecialty2name(hourToReserve.specialty) }}
+                      </div>       
+                    
+                      <div class="pr-1  "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalReserveAppointment = false" aria-label="Close"></i>
+                      </div>
+                </div>
+
+                <div class="modal-body mt-0"  >                   
+
                     <div class="d-flex flex-row bd-highlight mb-1 display-5">
-                        <div class="p-1 bd-highlight">{{ hourToReserve.specialty_name}} <br/>
-                        </div>
                         
-                            <div class="p-1 bd-highlight"></div>
-                            <div class="p-1 bd-highlight"><i class="display-1 bi bi-x "  v-on:click="showModalReserveAppointment = false" aria-label="Close"></i>
-                        </div>
                     </div>
-                        <text class="h3">Fecha {{daterequired}}</text>
-                        <text class="h3">Hora {{hourToReserve.start_time.substring(0, 5) }}  Hrs </text>
-                        <text class=""> Con:  {{hourToReserve.name }} </text> 
-                        <text class="">Nombre del centro: {{hourToReserve.center_name }}  </text>
+
+                        <div class="">
+                          <p class="h5"> 
+                            <i class="bi bi-circle-fill display-5 text-primary"  ></i> Fecha : 
+                            <text  >	 
+                            <b>  {{ transform_date( hourToReserve.date.substring(0, 10) ) }} </b>
+                            </text>       
+                          </p>
+                        </div>
+
+                        <div class="h5">
+                          <p> <i class="bi bi-circle-fill display-5 text-primary"    ></i> Hora : 
+                            <text class="" >	 
+                            <b>{{hourToReserve.start_time}}</b> <text >hrs</text>  
+                            </text>       
+                          </p>
+                        </div>
+
+          <div class="border-start  border-primary border-5 m-2 p-3" :style="{ 'background-color' : getCenter(hourToReserve.center_id).center_color  }"   >
+            <text class="h5">En : {{ getCenter(hourToReserve.center_id).name }}  </text>
+           <!-- TYPE CENTER --> 
+                    <div v-if="hourToReserve.center_visit" class="">
+                 
+                        <div class="h5" style="">  
+                            <p  >
+                              <i class="h1 bi bi-building"></i> En Consulta  
+                            </p>
+                        </div>
+							
+                            <p style="" class=" h5" >
+                               <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourToReserve.center_id).comuna)}}
+                            </p>
+
+                            <p class="h5" style="">
+                              Centro :   {{getCenter(hourToReserve.center_id).name}}
+                              <br>
+                              Direccion:  {{getCenter(hourToReserve.center_id).address}}
+                            </p>
+                    </div>
+
+          <!-- TYPE HOME -->  
+                    <div v-if="hourToReserve.home_visit" style="color:#3399FF">
+                            <div class="display-5" >
+                                <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
+                            </div>
+
+                              <h5> Zonas de atención:
+                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna1) }} 
+                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna2) }} 
+                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna3) }} 
+                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna4) }} 
+                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna5) }} 
+                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna6) }} 
+                            
+                             </h5>
+                           
+                              
+                    </div>
+
+          <!-- TYPE REMOTE  --> 
+                    <div v-if="hourToReserve.remote_care" >
+                         <p class="h5" style="color:#b36b00" >
+                               <i class="h1 bi bi-camera-video"></i> 
+                               Tele Atención  	 
+                              <br>
+                              <text class="h5">(Todas las comunas)</text>                  
+                        </p>
+                    </div>
+        </div>
+
                         <text v-if="hourToReserve.app_type_home" class="">Direccion: {{hourToReserve.center_address }} </text>
                                 
                         <div class="mt-2"> 
@@ -36,9 +108,13 @@ import axios from 'axios';
                                 <input class="mt-1 form-control form-control-lg" type="hidden" placeholder="Token" name="token" value="AAAAA"  >
                                 <input class="mt-1 form-control form-control-lg" type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
                                 <input class="mt-1  form-control form-control-lg" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
+                               
+                                <input v-if="hourToReserve.home_visit" class="mt-1  form-control form-control-lg" type="text" placeholder="Su Direccion" name="form_patient_address" id="form_patient_address" v-model="form_patient_address"  >
+                               
                                 <input  type="number" class="mt-1 form-control form-control-lg"  placeholder="Edad" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
                                 <input class="mt-1 form-control form-control-lg" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
                                 <input class="mt-1  form-control form-control-lg" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
+
                                 <button type="button" @click="sendReserveAppointment(hourToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
                             </form> 
 
@@ -61,32 +137,30 @@ import axios from 'axios';
 
 
 .modal {
-  position: absolute;
-  display: flex;
+	position: fixed; 
+  display: flex; 
 }
 
-.modal div {
-  display: flex;
-  flex-direction: column;
-}
-/*
-.modal-background {
-    background-color:#DAEFF3
-        }
-*/
-/************************* */
-
-
+div.scroll {
+       			margin:4px, 4px;
+                padding:4px;
+                background-color: green;
+                width: 100%; 
+                /* height: 190%;*/
+                overflow-x: auto;
+                overflow-y: auto;
+                text-align:justify;
+      }
 
 .modal-mask {
-  position: fixed;
+  /*position: fixed;*/
   z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+ /* display: table;*/
 }
 
 .modal-wrapper {
@@ -110,7 +184,7 @@ import axios from 'axios';
 }
 
 .modal-body {
-  margin: 20px 0;
+  margin: 0px 0;
 }
 
 .modal-default-button {
@@ -137,7 +211,7 @@ import axios from 'axios';
   opacity: 0;
 }
 
-/************************ */
+
 </style>
 
 
@@ -154,6 +228,7 @@ export default {
 		      form_patient_phone : null ,
 		      form_patient_insurance_code : null ,
 		      form_patient_age : null, 
+          form_patient_address : null, 
 
           error_msg_name : false,
           error_msg_age : false,
@@ -165,13 +240,45 @@ export default {
           }   
     },
    	
-   props: ['daterequired','hourToReserve', 'session_params', 'openModalReserveAppEvent' ],
+   props: ['daterequired','hourToReserve', 'session_params', 'openModalReserveAppEvent','global_specialties', 'global_comunas' ],
    emits: ['updateAppList','reserveUpdateAppList'] , 
       
    	mounted () {
            },
 
 	methods :{
+
+     id2comuna(id){
+            let temp= this.global_comunas.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return "" }
+
+        },
+      getCenter(id){
+            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp }
+            else { return null }
+      },
+
+      transform_date(date)
+    	{
+        let temp = date.split("-") ;
+        return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+    	},
+
+    getShortMonthName(month)
+		{
+			console.log("MONTH:"+parseInt(month));
+			let months = ['nodata','Ene.','Feb.' ,'Mar.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+			return months[parseInt(month)];
+
+		},
+
+     idSpecialty2name(id){
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return "" }
+       },
      
     async  sendReserveAppointment(hour)
     {
@@ -189,10 +296,10 @@ export default {
 						patient_insurance:	9999 ,
 						form_public : hour.available_public_search ,
 						app_available : false 
+              };
 
-								};
 						console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
-						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_take_appointment",json );
+						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_take_appointment",json );
 					//  console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
 						console.log ("RESPONSE save_appointment data raw :"+JSON.stringify(response_json.data)) ;
 						console.log ("RESPONSE save_appointment patient name :"+response_json.data.patient_name ) ;
@@ -210,12 +317,15 @@ export default {
 
     },
     watch : {
-        hourToReserve(newValue){
-        //     this.showModalReserveAppointment= true ;openModalReserveAppEvent
-            console.log ("hourToReserve!!!"+newValue+ " hourToReserve ="+ this.showModalReserveAppointment );
-        },
-        openModalReserveAppEvent(newApp, oldApp) {
-          console.log("openModalEvent Reserve App  !!!");
+        /*
+          hourToReserve(newValue){
+          //     this.showModalReserveAppointment= true ;openModalReserveAppEvent
+              console.log ("hourToReserve!!!"+newValue+ " hourToReserve ="+ this.showModalReserveAppointment );
+          },
+        */
+      
+        openModalReserveAppEvent(variable) {
+          console.log("openModalEvent Reserve App  Event !!!");
           this.showModalReserveAppointment= true ; 
         },
 
