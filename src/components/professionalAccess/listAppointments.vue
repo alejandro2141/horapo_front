@@ -20,9 +20,10 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
 <ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" :global_specialties='global_specialties'  :openModalCreateAppEvent='openModalCreateAppEvent' > </ModalCreateAppointment>
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' :openModalShowDetailsEvent="openModalShowDetailsEvent" :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentDetails>
-<ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
-<ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' > </ModalProfessionalReserveAppointment>
 
+<ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'> </ModalProfessionalReserveAppointment>
+
+<ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
 
  <!--
@@ -60,7 +61,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     -->
                 </div>
        
-                <div v-else class="d-flex justify-content-between mt-1   border border-secondary" :style="{ 'background-color' : hour.center_color  }"  style="border-radius: 15px;" >
+                <div v-else class="d-flex justify-content-between mt-1   border border-secondary" :style="{ 'background-color' : hour.center_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)" >
                     
                     <div class="mr-2 pr-2 p-2" style="marginLeft : 10px">
                             <div v-if="hour.center_visit"  >
@@ -238,41 +239,22 @@ export default {
     },
 
 	methods :{
-
-        calculateLineExtension(hour){
-
-             let hour_number = parseInt(hour.start_time.substring(0,4) ) ;
-                
-                if (hour_number % 4 ==  0 )
-                { return 10 }
-                else {
-                return 0
-                    }
-// Expected output: The fourth item is free!!
-
-            /*
-            let hour_number = parseInt(hour.start_time.substring(0,3) ) ;
-            if ( hour_number <= 12)
-                { return  (hour_number + 2 ) ; }
-            else 
-                {
-                return  (24 - hour_number  +1  )
-                }       
-          */
-     
-         },
+        displayModalAppAvailable(hour)
+        {
+            console.log("display Modal App Available Start TIme: "+hour.start_time.substring(0,5));
+            this.hourToReserve=hour;
+            this.openModalReserveAppEvent = Math.random();
+        },
 
         duplicateDay(date){
             console.log("duplicate day in list appointments "+date) ; 
             console.log("Session Params "+JSON.stringify(this.session_params) ) ;
             this.openModalDuplicateDay= Math.random(); 
-
-
         },
+
         switchView(){
             this.$emit('switchView');
          },
-
 
         showReserveModal(hour)
         {
