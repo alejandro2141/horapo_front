@@ -61,24 +61,22 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     -->
                 </div>
        
-                <div v-else class="d-flex justify-content-between mt-1   border border-secondary" :style="{ 'background-color' : hour.center_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)" >
+                <div v-else class="d-flex justify-content-between mt-1  text-secondary border border-secondary" :style="{ 'background-color' : hour.center_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)" >
                     
-                    <div class="mr-2 pr-2 p-2" style="marginLeft : 10px">
-                            <div v-if="hour.center_visit"  >
-                                <i class="h1 bi bi-building"></i> {{specialtyId2name(hour.specialty)}}     
-                            </div>
-                            <div v-if="hour.home_visit"  >
-                                <i class="h2 bi bi-house-door" > </i>   {{specialtyId2name(hour.specialty)}}                                
-                            </div>    
-                            <div v-if="hour.remote_care"  >
-                                <i class="h2 bi bi-camera-video"></i>   {{specialtyId2name(hour.specialty)}}     
-                            </div>                   
-                    </div>
-                    
-                    <!-- <div class="text-primary  display-5" v-on:click="displayModalCreateApp(hour)" > -->
-                    <div class="text-secondary  display-5 p-2"  >
-                        <i class="bi bi-plus"></i> {{ hour.start_time.substring(0,5) }}
-                    </div>
+                    <div class="d-flex justify-content-start display-6"  >
+                             <text class="p-1" >
+                                        <i v-if="hour.center_visit" class=" bi bi-building"></i>      
+                                        <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
+                                        <i v-if="hour.remote_care" class=" bi bi-camera-video"></i> 
+                             </text> 
+                             <text class="p-1  "> {{ hour.start_time.substring(0,5) }} </text>
+                             
+                             <text class="p-1  "><small> {{specialtyId2name(hour.specialty)}} </small> </text>
+                     </div>    
+
+                    <text></text>        
+
+                    <i class="display-4 bi bi-plus"></i>
 
                 </div>
 
