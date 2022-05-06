@@ -286,17 +286,50 @@ export default {
       	var r =confirm("Desea continuar con la Reservar esta cita?");
 					  if (r == true) {
 						const json = { 
-						appointment_id : hour.app_id,
-						patient_age : this.form_patient_age,
-						patient_name : this.form_patient_name,
+						appointment_calendar_id : this.hourToReserve.calendar_id , 
+						appointment_date : this.hourToReserve.date , 
+						appointment_start_time : this.hourToReserve.start_time , 
+						appointment_duration : this.hourToReserve.duration , 
+						appointment_specialty : this.hourToReserve.specialty , 
+						appointment_type_center :  this.hourToReserve.center_visit	 , 
+						appointment_center_name  :  this.hourToReserve.center_name	, 
+						appointment_center_id  :  this.hourToReserve.center_id	, 
+						appointment_type_home  :  this.hourToReserve.home_visit	, 
+						appointment_type_remote : this.hourToReserve.remote_care ,
+						appointment_professional_id  :  this.session_params.professional_id	, 
+
+            /*
+						appointment_location1 : null 	, 
+						appointment_location2 : this.hourToReserve.home_visit_location1	, 
+						appointment_location3 :	this.hourToReserve.home_visit_location1	, 
+						appointment_location4 : this.hourToReserve.home_visit_location1	, 
+						appointment_location5 : this.hourToReserve.home_visit_location1	, 
+						appointment_location6 : this.hourToReserve.home_visit_location1	, 
+						*/
+            appointment_location1 : this.getCenter(this.hourToReserve.center_id).home_comuna1 	, 
+						appointment_location2 : null 	, 
+						appointment_location3 :	null 	, 
+						appointment_location4 : null 	, 
+						appointment_location5 : null 	, 
+						appointment_location6 : null 	, 
+
+            patient_name : this.form_patient_name,
 						patient_doc_id	: this.form_patient_doc_id,
+						patient_address : this.form_patient_address , 
+
+            patient_age : this.form_patient_age,
 						patient_email	: this.form_patient_email,
-						patient_phone	:	this.form_patient_phone,
+						patient_phone	: this.form_patient_phone,
+						
+							
+						specialty_reserved : this.hourToReserve.specialty1,
+
 						//patient_insurance:	this.form_patient_insurance_code,
-						patient_insurance:	9999 ,
-						form_public : hour.available_public_search ,
-						app_available : false 
-              };
+						patient_insurance :	9999 ,
+						form_public :  '1' ,
+						app_available : false ,
+            app_reserved_by_professional : true ,
+						};
 
 						console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
 						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_take_appointment",json );
