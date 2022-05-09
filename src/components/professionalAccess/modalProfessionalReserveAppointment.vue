@@ -106,13 +106,13 @@ import axios from 'axios';
                         							
                             <form autocomplete="off" method="POST" action="take_appointment.html">			
                                 <input class="mt-1 form-control form-control-lg" type="hidden" placeholder="Token" name="token" value="AAAAA"  >
-                                <input class="mt-1 form-control form-control-lg" type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
-                                <input class="mt-1  form-control form-control-lg" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
+                                <input class="mt-1 form-control form-control-lg text-uppercase" type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
+                                <input class="mt-1  form-control form-control-lg  text-uppercase" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
                                
-                                <input v-if="hourToReserve.home_visit" class="mt-1  form-control form-control-lg" type="text" placeholder="Su Direccion" name="form_patient_address" id="form_patient_address" v-model="form_patient_address"  >
+                                <input v-if="hourToReserve.home_visit" class="mt-1  form-control form-control-lg text-uppercase" type="text" placeholder="Su Direccion" name="form_patient_address" id="form_patient_address" v-model="form_patient_address"  >
                                
                                 <input  type="number" class="mt-1 form-control form-control-lg"  placeholder="Edad" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
-                                <input class="mt-1 form-control form-control-lg" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
+                                <input class="mt-1 form-control form-control-lg  text-uppercase" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
                                 <input class="mt-1  form-control form-control-lg" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
 
                                 <button type="button" @click="sendReserveAppointment(hourToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
