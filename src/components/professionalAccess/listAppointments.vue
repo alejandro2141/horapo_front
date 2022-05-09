@@ -60,25 +60,33 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     </div>
                     -->
                 </div>
+
+                <div v-else class="text-secondary border border-secondary mb-2" :style="{ 'background-color' : hour.center_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)">
        
-                <div v-else class="d-flex justify-content-between mt-1  text-secondary border border-secondary" :style="{ 'background-color' : hour.center_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)" >
-                    
-                    <div class="d-flex justify-content-start display-6"  >
-                             <text class="p-1" >
-                                        <i v-if="hour.center_visit" class=" bi bi-building"></i>      
-                                        <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
-                                        <i v-if="hour.remote_care" class=" bi bi-camera-video"></i> 
-                             </text> 
-                             <text class="p-1  "> {{ hour.start_time.substring(0,5) }} </text>
-                             
-                             <text class="p-1  "><small> {{specialtyId2name(hour.specialty)}} </small> </text>
-                     </div>    
+                    <div  class="d-flex justify-content-between mt-1 mb-0 " >
+                       
+                            <div class="d-flex justify-content-start display-6"  >
+                                    <text class="p-1" >
+                                                <i v-if="hour.center_visit" class=" bi bi-building"></i>      
+                                                <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
+                                                <i v-if="hour.remote_care" class=" bi bi-camera-video"></i> 
+                                                <br>
+                                                
+                                    </text> 
+                                    <text class="p-1  "> {{ hour.start_time.substring(0,5) }} </text>
+                                    
+                                    <text class="p-1  "><small> {{specialtyId2name(hour.specialty)}} </small> </text>
+                            
+                            </div>    
+                            <text></text>        
+                            <i class="display-4 bi bi-plus"></i>
+                            
+                    </div>
+                    <div class="display-6 mb-2 mt-0 ">
+                         &nbsp;&nbsp; &nbsp; <small> <small> {{ getCenter(hour.center_id).name }} </small> </small>
+                    </div>
+                 </div>
 
-                    <text></text>        
-
-                    <i class="display-4 bi bi-plus"></i>
-
-                </div>
 
        <!--    <hr :style="{'width': calculateLineExtension(hour)+'rem'}" style="margin: 0rem; height:0.5px ; text-align:left; margin-left:0 ; border : 1px solid black; " > -->
          <!--   <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />   -->
@@ -237,6 +245,12 @@ export default {
     },
 
 	methods :{
+
+        getCenter(id){
+            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp }
+            else { return null }
+        },
         displayModalAppAvailable(hour)
         {
             console.log("display Modal App Available Start TIme: "+hour.start_time.substring(0,5));
