@@ -95,14 +95,14 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                             <text class="h5">Nombre: </text>
                                             <text class="h5">{{center.name}} </text>  
                                         </div>
-
+                                        <hr>
                                         <div class="d-flex justify-content-between mt-0">
                                             <text> Tipo: </text>
                                             <text> </text>
-                                            <text class="text-start">  <i class="h1 bi bi-camera-video"></i>  <br> Tele Atención</text>
+                                            <text class="text-end">  <i class="h1 bi bi-camera-video"></i>  <br> Tele Atención</text>
                                             
                                         </div>
-                                        <div class="d-flex justify-content-between mt-1">
+                                        <div class="d-flex justify-content-between mt-2">
                                             <text> En Telefono: </text>
                                           
                                             <text> 9999999</text>
