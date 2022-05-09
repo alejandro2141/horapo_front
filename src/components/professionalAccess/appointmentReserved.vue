@@ -7,11 +7,11 @@ import axios from 'axios';
 
 <template>
      
-    <div  :style="{ 'background-color' : getCenter(appointment.center_id).center_color   }"  style="border-radius: 25px;"  class="mt-1 border border-secondary text-muted" data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
+    <div  :style="{ 'background-color' : getCenter(appointment.center_id).center_color   }"  style="border-radius: 25px;"  class="mb-2 border border-secondary text-muted" data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
     
-        <div class="d-flex justify-content-between ml-4" >
+        <div class=" ml-4" >
 
-             <div class="d-flex justify-content-start display-6"  >
+             <div class="d-flex justify-content-start display-6 mb-0"  >
                              <text class="p-1" >
                                         <i v-if="appointment.center_visit" class=" bi bi-building"></i>      
                                         <i v-if="appointment.home_visit"  class=" bi bi-house-door" > </i>                                  
@@ -21,7 +21,7 @@ import axios from 'axios';
                              
                              <text class="p-1  "><small> {{ id2name(appointment.specialty)}} </small> </text>
              </div>    
-
+            <p class="display-6 mb-2 mt-0 "> <small><small>&nbsp;&nbsp;&nbsp; {{getCenter(appointment.center_id).name }} </small> </small>   </p>
 
             <!--
             <div class="mr-2 pr-2" style="marginLeft : 5px">
@@ -71,24 +71,25 @@ import axios from 'axios';
                 </div>
         </div>
 -->
-            <p class="ml-5">
-                        <text >{{appointment.patient_name }}</text><br>
-                        <text > id:{{appointment.patient_doc_id }} </text><br>
-                        <text >Edad:{{appointment.patient_age }} </text><br>
-                        <text v-if="appointment.home_visit" class="list-group-item" style="color:#3399FF"> A Domicilio <br> 
-                         {{appointment.patient_address }} </text>
+            <div class="">
+                        <text >&nbsp;&nbsp;&nbsp;- {{appointment.patient_name }}</text><br>
+                        <text >&nbsp;&nbsp;&nbsp;- id:{{appointment.patient_doc_id }} </text><br>
+                        <text >&nbsp;&nbsp;&nbsp;- Edad:{{appointment.patient_age }} </text><br>
+                        <text v-if="appointment.home_visit"  >&nbsp;&nbsp;&nbsp;- A Domicilio <br> 
+                        &nbsp;&nbsp;&nbsp;- {{appointment.patient_address }} </text>
                         
-                        <text v-if="appointment.center_visit">  En Consulta <br>
-                         {{getCenter(appointment.center_id).name }}  </text>
+                        <text v-if="appointment.center_visit">&nbsp;&nbsp;&nbsp;-  En Consulta <br>
+                        </text>
                         
                         
-                        <text v-if="appointment.remote_care" > Atención Remota  </text>
+                        <text v-if="appointment.remote_care" >&nbsp;&nbsp;&nbsp;- Atención Remota  </text>
                     
-                    {{appointment.message1 }}
+                   {{appointment.message1 }} 
+                   <p></p>
 
-            </p>
+            </div>
            
-            <text class="text-secondary p-2 m-2" style="">#{{appointment.id}} </text>   
+           <!-- <text class="text-secondary p-2 m-2" style="">#{{appointment.id}} </text>    -->
 
     </div>
 
