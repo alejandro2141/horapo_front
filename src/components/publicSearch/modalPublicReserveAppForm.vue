@@ -63,7 +63,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                                
 							   <div class="input-group mb-3">
 								   <div v-if="error_msg_name" class="text-danger w-100">Debe Indicar Nombre del paciente</div>
-									<input type="text" class="form-control" placeholder="Ej. Juan Alejandro Morales Miranda"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name" >
+									<input type="text" class="form-control text-uppercase" placeholder="Ej. Juan Alejandro Morales Miranda"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name" >
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">Nombre</span>
 									</div>
@@ -78,7 +78,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 								<div class="input-group mb-3">
 									<div v-if="error_msg_doc_id" class="text-danger w-100">Debe Indicar RUT o Pasaporte del paciente</div>
-										<input type="text" class="form-control" placeholder="Ej. 13.909.371-3" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id" >
+										<input type="text" class="form-control text-uppercase" placeholder="Ej. 13.909.371-3" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id" >
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">N°Cedula</span>
 									</div>
@@ -96,7 +96,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 								<div v-if="appToReserve.home_visit" class="input-group mb-3">
 									<div v-if="error_msg_address" class="text-danger w-100">Debe Indicar Su Direccion de atencion a domicilio </div>
 							
-									<input type="text" class="form-control" placeholder="Ej. Tristan Cornejo 999, Independencia" name="form_patient_address" id="form_patient_address"  v-model="form_patient_address" >
+									<input type="text" class="form-control text-uppercase" placeholder="Ej. Tristan Cornejo 999, Independencia" name="form_patient_address" id="form_patient_address"  v-model="form_patient_address" >
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">Su Dirección</span>
 									</div>
@@ -123,7 +123,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 								-->
 								<div class="input-group mb-3">
 									<div v-if="error_msg_email" class="text-danger w-100">Debe Indicar un correo valido</div>
-									<input type="text" class="form-control" placeholder="Ej. sucorreo@ejemplo.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
+									<input type="text" class="form-control text-uppercase" placeholder="Ej. sucorreo@ejemplo.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
 									<div class="input-group-append">
 										<span class="input-group-text" id="basic-addon2">Email@</span>
 									</div>
