@@ -313,12 +313,12 @@ export default {
 						appointment_location5 : null 	, 
 						appointment_location6 : null 	, 
 
-            patient_name : this.form_patient_name,
-						patient_doc_id	: this.form_patient_doc_id,
-						patient_address : this.form_patient_address , 
+            patient_name : this.form_patient_name ,
+						patient_doc_id	: this.form_patient_doc_id ,
+						patient_address : this.form_patient_address  , 
 
             patient_age : this.form_patient_age,
-						patient_email	: this.form_patient_email,
+						patient_email	: this.form_patient_email ,
 						patient_phone	: this.form_patient_phone,
 						
 							
