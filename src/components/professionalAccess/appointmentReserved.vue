@@ -17,9 +17,9 @@ import axios from 'axios';
                                         <i v-if="appointment.home_visit"  class=" bi bi-house-door" > </i>                                  
                                         <i v-if="appointment.remote_care" class=" bi bi-camera-video"></i> 
                              </text> 
-                             <text class="p-1  "> {{ appointment.start_time.substring(0,5) }} </text>
+                             <text class="p-1 text-success "> {{ appointment.start_time.substring(0,5) }} </text>
                              
-                             <text class="p-1  "><small> {{ id2name(appointment.specialty)}} </small> </text>
+                             <text class="p-1 text-success "><small> {{ id2name(appointment.specialty)}} </small> </text>
              </div>    
             <p class="display-6 mb-2 mt-0 "> <small><small>&nbsp;&nbsp;&nbsp; {{getCenter(appointment.center_id).name }} </small> </small>   </p>
 
@@ -72,17 +72,17 @@ import axios from 'axios';
         </div>
 -->
             <div class="">
-                        <text >&nbsp;&nbsp;&nbsp;- {{appointment.patient_name }}</text><br>
-                        <text >&nbsp;&nbsp;&nbsp;- id:{{appointment.patient_doc_id }} </text><br>
-                        <text >&nbsp;&nbsp;&nbsp;- Edad:{{appointment.patient_age }} </text><br>
-                        <text v-if="appointment.home_visit"  >&nbsp;&nbsp;&nbsp;- A Domicilio <br> 
+                        <text >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> {{appointment.patient_name }}</text><br>
+                        <text >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> id:{{appointment.patient_doc_id }} </text><br>
+                        <text >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> Edad:{{appointment.patient_age }} </text><br>
+                        <text v-if="appointment.home_visit"  >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> A Domicilio <br> 
                         &nbsp;&nbsp;&nbsp;- {{appointment.patient_address }} </text>
                         
-                        <text v-if="appointment.center_visit">&nbsp;&nbsp;&nbsp;-  En Consulta <br>
+                        <text v-if="appointment.center_visit">&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i>  En Consulta <br>
                         </text>
                         
                         
-                        <text v-if="appointment.remote_care" >&nbsp;&nbsp;&nbsp;- Atención Remota  </text>
+                        <text v-if="appointment.remote_care" >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> Atención Remota  </text>
                     
                    {{appointment.message1 }} 
                    <p></p>
