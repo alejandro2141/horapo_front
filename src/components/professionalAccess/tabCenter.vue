@@ -45,7 +45,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                     <!-- CENTER VISIT -->
                                     <div v-if="center.center_visit" >
                                         <div class="d-flex justify-content-between ">
-                                                <text class="h5">{{center.name}} </text>
+                                                <text class="h5">Nombre: {{center.name}} </text>
                                                 <text class=""></text>  
                                         </div>
                                         <hr>
