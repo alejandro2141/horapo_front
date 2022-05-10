@@ -34,28 +34,16 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                      &nbsp;
             </div>
             <div>
+        
+        <text class="display-5"> Hora :  <text class="p-1 text-success "> {{ hourTaken.start_time.substring(0,5) }} </text> </text>
+        <br>
+        <text class="display-5"> Fecha :  <text class="p-1 text-success "> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> </text>
+
 
  			  <p>	
-          Reserva #{{hourTaken.id}}
+        <!--   Reserva #{{hourTaken.id}} -->
         </p>
 
-        <div class="">
-					<p class="h5"> 
-            <i class="bi bi-circle-fill display-5 text-primary"  ></i> Fecha : 
-						<text  >	 
-						<b>  {{ transform_date( hourTaken.date.substring(0, 10) ) }} </b>
-						</text>       
-					</p>
-				</div>
-
-				<div class="h5">
-					<p> <i class="bi bi-circle-fill display-5 text-primary"    ></i> Hora : 
-						<text class="" >	 
-						<b>{{hourTaken.start_time}}</b> <text >hrs</text>  
-						</text>       
-					
-					</p>
-				</div>
  
           <div class="border-start  border-primary border-5 m-2 p-3" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }"   >
            <!-- TYPE CENTER --> 
@@ -102,9 +90,9 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
         </div>
 					
           <p class="h5"> 
-                 <i class="bi bi-circle-fill display-5 text-primary"  ></i>
+                 
                 <text class="">
-                 <b> Paciente: </b> <br>
+                 <b class="display-5" > Paciente: </b> <br>
                            {{ hourTaken.patient_name}} <br>
                             Id:{{ hourTaken.patient_doc_id}} 
                 </text>
@@ -307,7 +295,7 @@ export default {
 
         const json_input = {  
               //only variable
-              appointment_id : hour.app_id,
+              appointment_id : hour.id,
                         }
                       
         console.log ("Professional Cancel Appoitnment :"+ JSON.stringify(json_input)  );
