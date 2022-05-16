@@ -21,6 +21,7 @@ import axios from 'axios';
                              
                              <text class="p-1 text-success "><small> {{ id2name(appointment.specialty)}} </small> </text>
              </div>    
+
             <p class="display-6 mb-2 mt-0 "> <small><small>&nbsp;&nbsp;&nbsp; {{getCenter(appointment.center_id).name }} </small> </small>   </p>
 
             <!--
@@ -51,6 +52,10 @@ import axios from 'axios';
             -->
         
         </div>
+
+
+
+        
   <!--
         <div id="app " class="m-0 d-flex  "  >			
                 
