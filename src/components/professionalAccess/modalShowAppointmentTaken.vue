@@ -31,6 +31,8 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                           
                           <text class="p-1 "> {{ id2name(hourTaken.specialty) }}  </text>
 
+<i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
+
 
                       </div>       
                     
