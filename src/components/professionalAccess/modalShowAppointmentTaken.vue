@@ -15,12 +15,23 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background" style="border-radius: 25px;">
- 
+			<div class="modal-container  m-1 p-0 modal-background border border-secondary text-muted" style="border-radius: 25px;" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }">
+
                 <div class="modal-header mb-0">
                     
-                      <div class="display-4 p-1 text-success" >	
-                        {{ id2name(hourTaken.specialty) }} 
+                      <div class="display-4  text-success" >	
+
+                          <text class="p-1" >
+                            <i v-if="hourTaken.center_visit" class=" bi bi-building"></i>      
+                            <i v-if="hourTaken.home_visit"  class=" bi bi-house-door" > </i>                                  
+                            <i v-if="hourTaken.remote_care" class=" bi bi-camera-video"></i> 
+                          </text> 
+
+                          <text class="p-1 "> {{ hourTaken.start_time.substring(0,5) }} </text>
+                          
+                          <text class="p-1 "> {{ id2name(hourTaken.specialty) }}  </text>
+
+
                       </div>       
                     
                       <div class="pr-1  "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
@@ -35,9 +46,8 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
             </div>
             <div>
         
-        <text class="display-5"> Hora :  <text class="p-1 text-success "> {{ hourTaken.start_time.substring(0,5) }} </text> </text>
-        <br>
-        <text class="display-5"> Fecha :  <text class="p-1 text-success "> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> </text>
+        
+        <text class=""> Fecha :  <text class="p-1 "> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> </text>
 
 
  			  <p>	
@@ -45,21 +55,21 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
         </p>
 
  
-          <div class="border-start  border-primary border-5 m-2 p-3" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }"   >
+          <div class="display-5"    >
            <!-- TYPE CENTER --> 
                     <div v-if="hourTaken.center_visit" class="">
                  
-                        <div class="h5" style="">  
+                        <div class="" style="">  
                             <p  >
-                              <i class="h1 bi bi-building"></i> En Consulta  
+                               En Consulta  
                             </p>
                         </div>
 							
-                            <p style="" class=" h5" >
+                            <p style="" class="" >
                                <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
                             </p>
 
-                            <p class="h5" style="">
+                            <p class="" style="">
                               Centro :   {{getCenter(hourTaken.center_id).name}}
                               <br>
                               Direccion:  {{getCenter(hourTaken.center_id).address}}
@@ -68,8 +78,8 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
           <!-- TYPE HOME -->  
                     <div v-if="hourTaken.home_visit" style="color:#3399FF">
-                            <div class="display-5" >
-                                <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
+                            <div class="" >
+                                <text >  Visita a Domicilio:</text> <br>
                             </div>
 
                               <h5> Direccion: 
@@ -80,31 +90,31 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
           <!-- TYPE REMOTE  --> 
                     <div v-if="hourTaken.remote_care" >
-                         <p class="h5" style="color:#b36b00" >
-                               <i class="h1 bi bi-camera-video"></i> 
+                         <p class="" style="color:#b36b00" >
+                               
                                Tele Atención  	 
-                              <br>
-                              <text class="h5">(Todas las comunas)</text>                  
+                             
+                                      
                         </p>
                     </div>
         </div>
 					
-          <p class="h5"> 
+          <p class="display-5"> 
                  
                 <text class="">
-                 <b class="display-5" > Paciente: </b> <br>
+                 <b class="" > Paciente: </b> <br>
                            {{ hourTaken.patient_name}} <br>
                             Id:{{ hourTaken.patient_doc_id}} 
                 </text>
           </p>
     <!--PATIENT  -->
-            <p class="text-primary h5 " > 
+            <p class="text-primary display-5 " > 
                             <a :href='"tel:+56"+hourTaken.patient_phone1' class="text-decoration-none" >
                                 <i class="h1 bi bi-telephone"></i>  {{ hourTaken.patient_phone1}}
                             </a>
             </p>             
             
-            <p class="text-primary h5 " > 
+            <p class="text-primary  " > 
                           <a :href ='"mailto:"+hourTaken.patient_email' class="text-decoration-none"  ><i class="h1 bi bi-envelope"></i> {{ hourTaken.patient_email}} 
                           </a>     
             </p>
