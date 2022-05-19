@@ -68,7 +68,7 @@ import { ref } from 'vue'
                          <div class="display-5" style="color:#b36b00" >
                                <i class="bi bi-camera-video"></i> Tele Atención  	 
                               <div style="" class="text-dark display-6" >
-                              (Todas las comunas) 
+                               Todas las comunas 
                               </div>                      
                         </div>
                     </div>
