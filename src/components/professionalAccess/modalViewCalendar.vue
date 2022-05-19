@@ -31,38 +31,25 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                   <h5 class="card-title h2 p-2"  >   {{idSpecialty2name(calendar_details.specialty1) }}  
                   </h5>
             -->
+                <h5 class="card-title h2 p-2"  >
+                                  <i class="bi bi-calendar"></i> {{idSpecialty2name(calendar_details.specialty1) }}  
+                </h5>
 
-
-                <div  v-if="calendar_details.calendar_active"  >
+                <div>
                     <div class="d-flex justify-content-between"> 
-                          <text class=""> Estado  Actual</text>   <text class="text-success">  ENCENDIDO </text>
+                          <text class=""> Estado  Actual</text>   
+                       
+                          <text class="text-success" @click="form_calendar_active=!form_calendar_active">  {{form_calendar_active}} </text>
                     </div>
-                    <br>   
-                    <button type="button" class="btn btn-danger"  @click="inactiveCalendar(calendar_details)" > Apagar Calendario</button>
-                    <br>
+                   
+                    <!--
                     <text class="text-dark">
                         <i class="bi bi-exclamation-circle"></i> Si apaga este calendario, los pacientes ya no podran agendar Citas en este calendario.
                     </text>
+                    -->
                 </div>
             
              
-                <!-- APAGADO -->
-                <div  v-else  >
-                  <div>
-                        <div class="d-flex justify-content-between mb-2"> 
-                          <text class=""> Estado  Actual</text>   <text class="text-danger"> APAGADO </text>
-                        </div>
-                        
-                        <div class="d-flex justify-content-between"> 
-                          <text></text>
-                          <button type="button" class="btn btn-success"  @click="activeCalendar(calendar_details)"  >Encender Calendario</button>
-                        </div>
-                        
-                        <text class="text-dark">
-                        <i class="bi bi-exclamation-circle"></i> Este calendario debe estar encendido para que pacientes puedan agendar citas en este calendario.
-                        </text>
-                  </div>
-                </div>
                   
                   <div class="d-flex justify-content-between mt-2">
                     
@@ -71,81 +58,91 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     </text>
                     
                     <text class="text-primary" @click="showCenters=!showCenters">
-                    <i class="bi bi-geo-alt"></i> {{calendar_details.name}} 
+                    <i class="bi bi-geo-alt"></i> {{form_center_name}} 
                      </text>
                   </div>  
+                                    
+
  
-                  <div v-if="showCenters" class="bg-light p-2 border border-1" >
-                      <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
-
-                    <p class="text-end text-primary">
-                      <text @click="showCenters=!showCenters">Guardar</text>
-                    </p>
-
+                  <div v-if="showCenters" class="alert alert-info"  >
+                    
+                        <div v-for="center in session_params.centers"  :key='center.id' >
+                          <p class=" mb-2" @click="form_center_id=center.id ; form_center_name=center.name; showCenters=false;"><i class="bi bi-dot"></i> {{center.name}} 
+                            <text v-if="center.home_visit"> [A Domicilio] </text>
+                            <text v-if="center.center_visit">[En Consulta]</text>
+                            <text v-if="center.remote_care"> [Remota] </text>
+                            
+                          </p> 
+                        </div>
+                      
                   </div>  
-
-
-
 
                   <div class="d-flex justify-content-between mt-2">
                     <text>
                     Fecha Inicio 
                     </text>
                     <text class="text-primary" @click="showSaveStartDate=!showSaveStartDate">
-                    {{calendar_details.date_start.substring(0,10) }} 
+                    {{form_date_start.substring(0,10) }} 
                     </text>
                   </div>
-
-                  <div v-if="showSaveStartDate" class="bg-light p-2 border border-1" >
-                    <p class="text-end text-primary">
-                      <text @click="showSaveStartDate=!showSaveStartDate">Guardar</text>
-                    </p>
-
-                  </div> 
-
-
+                   <input  v-model="form_date_start"  type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
+                              
+                  
                   <div class="d-flex justify-content-between mt-2">
                     <text>
                     Fecha Fin
                     </text>
                     <text class="text-primary">
-                    {{calendar_details.date_end.substring(0,10) }} 
+                    {{form_date_end.substring(0,10) }} 
                     </text>
                   </div>
+                  <input  v-model="form_date_end"  type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
+                    
 
                   <div class="d-flex justify-content-between mt-2">
                     <text>
                     Hora Inicio
                     </text>
                     <text class="text-primary">
-                    {{calendar_details.start_time.substring(0,5)}}
+                    {{form_time_start.substring(0,5)}}
                     </text>
                   </div>
+                  <input v-model="form_time_start"  type="time" id="appt" name="appt"  min="09:00" max="18:00" required>
 
                   <div class="d-flex justify-content-between mt-2">
                     <text>
                     Hora Fin
                     </text>
                     <text class="text-primary">
-                    {{calendar_details.end_time.substring(0,5)}}
+                    {{form_time_end}}
                     </text>
-                  </div>                 
+                  </div>  
+                   <input type="time" id="appt" name="appt"  min="09:00" max="18:00" required>               
                  
 
                 <div class="mt-1">
                   Dias Recurrencia: <br>
 
-                                        <text class="d-flex justify-content-end" v-if="calendar_details.monday"> Lunes <br> </text> 
-                                        <text class="d-flex justify-content-end" v-if="calendar_details.tuestday"> Martes  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.wednesday"> Miercoles  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.thursday"> Jueves  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.friday"> Viernes <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.saturday"> Sabado <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar_details.sunday"> Domingo <br> </text> 
+                                        <text class="d-flex justify-content-end" v-if="from_day_mon"> Lunes <br> </text> 
+                                        <text class="d-flex justify-content-end" v-if="from_day_mon"> Martes  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Miercoles  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Jueves  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Viernes <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Sabado <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Domingo <br> </text> 
                   </div>
 
 
                <br>
+
+              <text type="button" class="btn btn-primary">
+                Guardar los cambios
+              </text>
+
+              <text type="button" class="btn btn-primary">
+               Cancelar
+              </text>
+
                <hr>
                
                
@@ -285,9 +282,28 @@ export default {
 
 data: function () {
 		return {
-			      showModalViewCalendar  : false ,
+
+            showModalViewCalendar  : false ,
+            
+            showActiveCalendar : false,
             showCenters : false, 
             showSaveStartDate : false,
+
+            form_calendar_active : null,
+            form_center_id : null,
+            form_center_name : null,
+            form_date_start : null,
+            form_date_end: null,
+            form_time_start: null,
+            from_time_end: null,
+            from_day_mon: null ,
+            from_day_tue: null ,
+            from_day_wed: null ,
+            from_day_thu: null ,
+            from_day_fri: null ,
+            from_day_sat: null ,
+            from_day_sun: null , 
+
 		 }
 	},
 
@@ -384,8 +400,23 @@ data: function () {
     
     watch : {
         activatorViewCalendar(newValue){
-            console.log ("showModalViewCalendar !!!"+newValue );  
+            console.log ("showModalViewCalendar !!!"+ JSON.stringify(this.calendar_details) );  
             this.showModalViewCalendar = true ;
+            // Set  form values
+            this.form_calendar_active = this.calendar_details.calendar_active ; 
+            this.form_center_name       = this.calendar_details.name ; 
+            this.form_date_start   = this.calendar_details.date_start
+            this.form_date_end     = this.calendar_details.date_end
+            this.form_time_start   = this.calendar_details.start_time
+            this.from_time_end     = this.calendar_details.end_time
+            this.from_day_mon = this.calendar_details.monday
+            this.from_day_tue = this.calendar_details.tuesday
+            this.from_day_wed = this.calendar_details.wednesday
+            this.from_day_thu = this.calendar_details.thursday
+            this.from_day_fri = this.calendar_details.friday
+            this.from_day_sat = this.calendar_details.saturday
+            this.from_day_sun = this.calendar_details.sunday
+
             console.log(" Show Calendar : "+JSON.stringify(this.calendar_details) );
 
 
