@@ -27,57 +27,60 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                                   <i class="bi bi-calendar"></i>  {{idSpecialty2name(calendar.specialty1) }}  
                                 </h5>
 
-                               
-                                    <div class="d-flex justify-content-between mb-2">
+
+                                <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between">
+                                    <text>Estado Actual </text>
+                                    <text class="text-success"  > Encendido </text>
+                                   
+                                </div>
+
+                                <div  v-else  class="d-flex justify-content-between">
+                                    <text>Estado Actual </text>
+                                    <text class="text-danger"> Apagado </text>
+                                    
+                                </div>
+
+                                <div class="mt-2">
+                                    <text>Lugar de Consulta </text>
+                                    <div class="d-flex justify-content-between ">
                                         <div> 
-                                            Lugar de <br>Consulta 
+                                            
                                         </div>
-                                        <div>
+                                        <div  >
                                             <i class="bi bi-geo-alt"></i> {{calendar.name}} 
-            
-
                                         </div>
                                     </div>
-
-                                    <div v-if="calendar.center_visit" class="d-flex justify-content-between mb-2" >
-                                            <text> Tipo: </text> <text> En Consulta  </text>  
-                                    </div>
-                                    <div v-if="calendar.home_visit" class="d-flex justify-content-between mb-2">
-                                             <text> Tipo: </text> <text> A Domicilio  </text>
-                                    </div>
-                                    <div v-if="calendar.remote_care" class="d-flex justify-content-between mb-2">
-                                            <text> Tipo: </text> <text> Tele Atencion </text>
-                                    </div>
-                                <br>
-                             
-                                <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between text-success">
-                                    <text>Estado</text>
-                                    <text>  ENCENDIDO </text>
                                 </div>
-
-                                <div  v-else  class="d-flex justify-content-between text-danger">
-                                    <text>Estado</text>
-                                    <text >  APAGADO </text>
-                                </div>
-
+                                   
+                                    <p v-if="calendar.center_visit" class="text-muted text-end" >
+                                            <text>  </text> <text> En Consulta  </text>  
+                                    </p>
+                                    <p v-if="calendar.home_visit" class="text-muted text-end">
+                                             <text>  </text> <text> A Domicilio  </text>
+                                    </p>
+                                    <p v-if="calendar.remote_care" class="text-muted text-end">
+                                            <text>  </text> <text> Tele Atencion </text>
+                                    </p>
+                               
+                               
                  
 
-                  <div  class="d-flex justify-content-between mt-0">
+                  <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Inicio  </text>  
                           <text> {{calendar.date_start.substring(0,10) }}    </text>
                   </div>
 
-                  <div  class="d-flex justify-content-between mt-1">
+                  <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Fin </text>  
                           <text> {{calendar.date_end.substring(0,10) }} </text>
                   </div>
 
-                  <div  class="d-flex justify-content-between mt-1">
+                  <div  class="d-flex justify-content-between mt-2">
                           <text> Hora  Inicio </text>  
                           <text> {{calendar.start_time.substring(0,5)}} </text>
                   </div>
 
-                  <div  class="d-flex justify-content-between mt-1">
+                  <div  class="d-flex justify-content-between mt-2">
                           <text> Hora  Fin </text>  
                           <text> {{calendar.end_time.substring(0,5)}} </text>
                   </div>
@@ -97,7 +100,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                   </div>
 
                                <br>
-                                <p class="text-center" > <text  @click="viewCalendar(calendar)" class="text-primary">  Configurar</text>  </p>
+                                <p class="text-center" > <text  @click="viewCalendar(calendar)" class="text-primary"> Modificar </text>  </p>
                          <p class="text-white">C#{{calendar.calendar_id}} </p>
                             </div>
                         </div>   
@@ -135,6 +138,11 @@ data: function () {
             activatorCreateNewCalendar : null ,
             activatorViewCalendar : null ,
             calendar_details : null ,
+
+            showCenters : false ,
+            showOnOffCalendar: false, 
+
+            calendar_active : true ,
 		 }
 	},
 	props: ['session_params','global_comunas', 'global_specialties'],
