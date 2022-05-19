@@ -49,9 +49,9 @@ import loadProgress from '../loadProgress.vue'
                 </div>
 
                 <div class="">
-					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Fecha : 
-						<text class="" style="font-size: 1.2em; color:#2e5668">	 
-						<b>  {{ transform_date( app.date.substring(0, 10) ) }} </b>
+					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" " ></i> Fecha : 
+						<text class="" style="">	 
+						  {{ transform_date( app.date.substring(0, 10) ) }} 
 						</text>       
 					
 					</p>
@@ -59,8 +59,8 @@ import loadProgress from '../loadProgress.vue'
 
 
 				<div class="">
-					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" color:#2e5668" ></i> Hora : 
-						<text class="" style="font-size: 1.2em; color:#2e5668">	 
+					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" " ></i> Hora : 
+						<text class="" style="">	 
 						{{app.start_time}} <text >hrs</text>  
 						</text>       
 					
@@ -79,7 +79,7 @@ import loadProgress from '../loadProgress.vue'
                             </div>
 							
                             <div style="" class="text-dark display-6" >
-                               <i class="bi bi-geo-alt display-4"></i> {{comuna_id2name(app.center_visit_location)}}
+                               {{comuna_id2name(app.center_visit_location)}}
                             </div>
                             <div class="" style="color:#2e5668" >	
                              Centro :   {{app.center_name}}
@@ -123,11 +123,11 @@ import loadProgress from '../loadProgress.vue'
 									</div>
                     </div>
 
-                    <div v-if="app.remote_care" class="">
+                    <div v-if="app.remote_care" class="mb-3">
                          <div class="display-5" style="color:#b36b00" >
                                <i class="bi bi-camera-video"></i> Tele Atención  	 
                               <div style="" class="text-dark display-6" >
-                              (Todas las comunas) 
+                              Todas las comunas 
                               </div>                      
                         </div>
                     </div>
