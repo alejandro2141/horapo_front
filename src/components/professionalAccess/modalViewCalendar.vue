@@ -19,11 +19,9 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 			<div class="modal-container  m-1 p-1 modal-background ">
  
                 <div class="modal-header " :style="{ 'background-color' : calendar_details.color   }" >
-                        <div class="h4">  <p> <i class="bi bi-wrench display-1"></i> Configuracion  Calendario</p>
+                        <div class="h4">  <p> Configuracion  Calendario</p>
                         </div>
                         
-                        <div></div>
-
                         <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalViewCalendar = false ; $emit('updateCalendarList'); "  aria-label="Close"></i>
                         </div>
                 </div>
@@ -34,39 +32,130 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                   </h5>
             -->
 
-<i class="bi bi-exclamation-circle"></i> Pacientes Solo pueden agendar Citas  en Horarios ENCENDIDOS. 
 
-                <div  v-if="calendar_details.calendar_active"  class="d-flex justify-content-between text-success">
-                      <text>
-                       <br>
-                       
-                      </text>
-                      <button type="button" class="btn btn-danger"  @click="inactiveCalendar(calendar_details)" > APAGAR HORARIO </button>
-                 </div>
+                <div  v-if="calendar_details.calendar_active"  >
+                    <div class="d-flex justify-content-between"> 
+                          <text class=""> Estado  Actual</text>   <text class="text-success">  ENCENDIDO </text>
+                    </div>
+                    <br>   
+                    <button type="button" class="btn btn-danger"  @click="inactiveCalendar(calendar_details)" > Apagar Calendario</button>
+                    <br>
+                    <text class="text-dark">
+                        <i class="bi bi-exclamation-circle"></i> Si apaga este calendario, los pacientes ya no podran agendar Citas en este calendario.
+                    </text>
+                </div>
             
              
-
-                <div  v-else  class="d-flex justify-content-between text-danger">
-                      <text>
-                      <br> 
-                       
-                      </text>
-                      <button type="button" class="btn btn-success"  @click="activeCalendar(calendar_details)"  >ENCENDER HORARIO</button>
+                <!-- APAGADO -->
+                <div  v-else  >
+                  <div>
+                        <div class="d-flex justify-content-between mb-2"> 
+                          <text class=""> Estado  Actual</text>   <text class="text-danger"> APAGADO </text>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between"> 
+                          <text></text>
+                          <button type="button" class="btn btn-success"  @click="activeCalendar(calendar_details)"  >Encender Calendario</button>
+                        </div>
+                        
+                        <text class="text-dark">
+                        <i class="bi bi-exclamation-circle"></i> Este calendario debe estar encendido para que pacientes puedan agendar citas en este calendario.
+                        </text>
+                  </div>
                 </div>
+                  
+                  <div class="d-flex justify-content-between mt-2">
+                    
+                    <text>
+                      Lugar de Consulta
+                    </text>
+                    
+                    <text class="text-primary" @click="showCenters=!showCenters">
+                    <i class="bi bi-geo-alt"></i> {{calendar_details.name}} 
+                     </text>
+                  </div>  
+ 
+                  <div v-if="showCenters" class="bg-light p-2 border border-1" >
+                      <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+
+                    <p class="text-end text-primary">
+                      <text @click="showCenters=!showCenters">Guardar</text>
+                    </p>
+
+                  </div>  
+
+
+
+
+                  <div class="d-flex justify-content-between mt-2">
+                    <text>
+                    Fecha Inicio 
+                    </text>
+                    <text class="text-primary" @click="showSaveStartDate=!showSaveStartDate">
+                    {{calendar_details.date_start.substring(0,10) }} 
+                    </text>
+                  </div>
+
+                  <div v-if="showSaveStartDate" class="bg-light p-2 border border-1" >
+                    <p class="text-end text-primary">
+                      <text @click="showSaveStartDate=!showSaveStartDate">Guardar</text>
+                    </p>
+
+                  </div> 
+
+
+                  <div class="d-flex justify-content-between mt-2">
+                    <text>
+                    Fecha Fin
+                    </text>
+                    <text class="text-primary">
+                    {{calendar_details.date_end.substring(0,10) }} 
+                    </text>
+                  </div>
+
+                  <div class="d-flex justify-content-between mt-2">
+                    <text>
+                    Hora Inicio
+                    </text>
+                    <text class="text-primary">
+                    {{calendar_details.start_time.substring(0,5)}}
+                    </text>
+                  </div>
+
+                  <div class="d-flex justify-content-between mt-2">
+                    <text>
+                    Hora Fin
+                    </text>
+                    <text class="text-primary">
+                    {{calendar_details.end_time.substring(0,5)}}
+                    </text>
+                  </div>                 
+                 
+
+                <div class="mt-1">
+                  Dias Recurrencia: <br>
+
+                                        <text class="d-flex justify-content-end" v-if="calendar_details.monday"> Lunes <br> </text> 
+                                        <text class="d-flex justify-content-end" v-if="calendar_details.tuestday"> Martes  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar_details.wednesday"> Miercoles  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar_details.thursday"> Jueves  <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar_details.friday"> Viernes <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar_details.saturday"> Sabado <br> </text> 
+                                        <text class="d-flex justify-content-end"  v-if="calendar_details.sunday"> Domingo <br> </text> 
+                  </div>
+
 
                <br>
                <hr>
-               <br>
+               
                
 
-
-                <div   class="d-flex justify-content-between">
-                          <text> <i class="bi bi-exclamation-circle"></i> Eliminar este Horario  ?  </text>  
-
-                          <button v-if="!calendar_details.calendar_active" type="button" @click="deleteCalendar(calendar_details)" class="btn btn-outline-danger"> <i class="bi bi-trash text-danger h1 p-2 m-2"></i> </button>    
+                <div   class="">
+                  <button v-if="!calendar_details.calendar_active" type="button" @click="deleteCalendar(calendar_details)" class="btn btn-danger"> <i class="bi bi-trash "></i> Eliminar Calendario </button>    
+                  <br>
+                  <i class="bi bi-exclamation-circle"></i>Si elimina, este calendario ya no estará disponible en el sistema 
                 </div>
-<i class="bi bi-exclamation-circle"></i>Solo puede eliminar calendarios que esten APAGADOS. <br>
-<i class="bi bi-exclamation-circle"></i>Una vez eliminado este calendario ya no estará disponible en el sistema 
+
 
 
                  <br>
@@ -197,6 +286,8 @@ export default {
 data: function () {
 		return {
 			      showModalViewCalendar  : false ,
+            showCenters : false, 
+            showSaveStartDate : false,
 		 }
 	},
 
