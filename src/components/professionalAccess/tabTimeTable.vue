@@ -97,8 +97,8 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                   </div>
 
                                <br>
-                                <p class="text-end" > <text  @click="viewCalendar(calendar)" class="text-primary"> <i class="bi bi-wrench"></i> Configurar</text>  </p>
-                         <p class="text-muted">C#{{calendar.calendar_id}} </p>
+                                <p class="text-center" > <text  @click="viewCalendar(calendar)" class="text-primary">  Configurar</text>  </p>
+                         <p class="text-white">C#{{calendar.calendar_id}} </p>
                             </div>
                         </div>   
                     </div>
