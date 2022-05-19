@@ -25,53 +25,60 @@ import axios from 'axios'
                       <div  > </div>
                       <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalConfirmation = false ; this.updateSearchResult() " aria-label="Close"></i> </div>
                     </div>
-
+<!--
 					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
 						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(appConfirmed.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{appConfirmed.date.substring(8, 10) }} </text>  </div>
 					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appConfirmed.specialty_reserved) }} </div> 
 					</div>
-
-          <div class="text-dark mt-3 d-flex justify-content-center"> 
+-->
+          <div class="mt-3 d-flex justify-content-center"> 
 					    <text class="display-5 "> RESERVA EXITOSA </text>
           </div>	
           <div class="text-dark d-flex justify-content-center"> 
             <p> <i class="bi bi-check2-circle display-1"></i></p>
           </div>
           <div class="text-dark d-flex justify-content-center"> 
-            <p> <i class=""></i> Recuerde confirmar su asistencia respondiendo al correo enviado a: lalaqq12@nada.com  </p>
+            <p> <i class=""></i> Recuerde confirmar su asistencia respondiendo al mensaje que enviamos a su correo  lalaqq12@nada.com  </p>
           </div>
-
-					<div style="margin-top: 1em; " class="h4">
+<hr>
+					<div  class="h4">
+              <div  class=" display-4 mb-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appConfirmed.specialty_reserved) }} </div> 
 							<div class="" >
-								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Fecha :  {{ transform_date( appConfirmed.date.substring(0, 10) ) }}  </p>
-								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{appConfirmed.start_time.substring(0, 5) }} hrs     </p>
-								<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
-							</div>
+								<p> <i class="bi bi-circle-fill"  ></i>  Fecha :  {{ transform_date( appConfirmed.date.substring(0, 10) ) }}  </p>
+								<p> <i class="bi bi-circle-fill  "></i> Hora  :  {{appConfirmed.start_time.substring(0, 5) }} hrs     </p>
+								<p> <i class="bi bi-person-circle "></i> Con :  {{app.professional_name }}  </p>
+              
+                <p>  
+                     <text v-if="appConfirmed.app_type_remote" >  <i class=" h1 bi bi-camera-video "></i> Atencion Remota:<br>Profesional le llamara directamente a su Telefono: <b>{{appConfirmed.patient_phone1 }}</b></text>  
+                     <text v-if="appConfirmed.app_type_center" > <i class="  h1 bi bi-building "> </i> En {{app.center_name }} <br>{{app.center_address }} </text>  
+                     <text v-if="appConfirmed.app_type_home" > <i class="    h1 bi bi-house-door "></i> a Domicilio en dirección paciente: <br> {{appConfirmed.patient_address }}</text> 
+                </p>
+                
+  
+              </div>
 					</div>
-
-					<div v-if="appConfirmed.home_visit"  class="text-primary" >
+<!--
+					<div v-if="appConfirmed.app_type_home"  class="text-primary" >
 							<div class="h3" style="" ><i class="bi bi-house-fill m-1 display-5"></i> Visita a domicilio 
 							</div>
 					</div>
 
-					<div v-if="appConfirmed.center_visit"  class="" style=" color:#1f9d94 "  >
+					<div v-if="appConfirmed.app_type_center"  class="" style=" color:#1f9d94 "  >
               <div > <i class="bi bi-geo-alt-fill display-5"></i>Direccion de la cita: <br>&nbsp;&nbsp;"{{appConfirmed.center_name }}"</div>
-              <!-- <div class="display-6" style=" color:#1f9d94"> {{comuna_id2name(app.comuna) }}  </div> -->
-              <div class=""> &nbsp;&nbsp;  {{appConfirmed.center_address }}</div>
+                <div class=""> &nbsp;&nbsp;  {{appConfirmed.center_address }}</div>
 				  </div>
-          
+ -->         
           <hr>
 			 
           <div class="text-dark"> 
-					    <p class="display-4"> Datos del Paciente </p>
+					    <p class="display-4" style="color:#1f9d94 ;"> Datos del Paciente </p>
 
-              <div class="mt-0" >Nombre: {{appConfirmed.patient_name }}</div>
-              <div> Nº : {{appConfirmed.patient_doc_id }}</div>
-              <div> Email : {{appConfirmed.patient_email }}</div>
-              <div> Telefono : {{appConfirmed.patient_phone1 }}</div>
-              <div> Dirección :{{appConfirmed.patient_address }}</div>
-              <div> Edad : {{appConfirmed.patient_age }}</div>
-
+              <div class="mt-0" > <i class="bi bi-circle-fill text-muted"  ></i> {{appConfirmed.patient_name }}</div>
+              <div> <i class="bi bi-circle-fill text-muted"></i> Id : {{appConfirmed.patient_doc_id }}</div>
+              <div> <i class="bi bi-circle-fill text-muted"></i> {{appConfirmed.patient_email }}</div>
+              <div> <i class="bi bi-circle-fill text-muted"></i> Telefono: {{appConfirmed.patient_phone1 }}</div>
+              <div v-if="appConfirmed.patient_address != 'null'"> <i class="bi bi-circle-fill text-muted"></i> Dirección :{{appConfirmed.patient_address }}</div>
+              <div> <i class="bi bi-circle-fill text-muted"></i> {{appConfirmed.patient_age }} años.</div>
           </div>			
 
           <div class="d-flex justify-content-center m-5" >
