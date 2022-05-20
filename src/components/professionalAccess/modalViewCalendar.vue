@@ -39,7 +39,14 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     <div class="d-flex justify-content-between"> 
                           <text class=""> Estado  Actual</text>   
                        
-                          <text class="text-success" @click="form_calendar_active=!form_calendar_active">  {{form_calendar_active}} </text>
+                          <text v-if="form_calendar_active" class="text-primary" @click="form_calendar_active=!form_calendar_active">  Encendido </text>
+
+                          
+                          <text v-else class="text-primary" @click="form_calendar_active=!form_calendar_active"> <i class="bi bi-exclamation-octagon text-danger"></i>
+                            Apagado </text>
+                    
+                            
+
                     </div>
                    
                     <!--
@@ -82,10 +89,10 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     Fecha Inicio 
                     </text>
                     <text class="text-primary" @click="showSaveStartDate=!showSaveStartDate">
-                    {{form_date_start.substring(0,10) }} 
+                    <input v-model="form_date_start"   type="date" id="form_calendar_start" name="form_calendar_start" class="form-control  border border-primary" >
+                  
                     </text>
                   </div>
-                   <input  v-model="form_date_start"  type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
                               
                   
                   <div class="d-flex justify-content-between mt-2">
@@ -93,55 +100,79 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     Fecha Fin
                     </text>
                     <text class="text-primary">
-                    {{form_date_end.substring(0,10) }} 
+                    <input  v-model="form_date_end"  type="date" id="form_calendar_start" name="form_calendar_start" class="form-control border border-primary" >
+                  
                     </text>
                   </div>
-                  <input  v-model="form_date_end"  type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
-                    
+                   
 
                   <div class="d-flex justify-content-between mt-2">
                     <text>
                     Hora Inicio
                     </text>
                     <text class="text-primary">
-                    {{form_time_start.substring(0,5)}}
-                    </text>
+                   <input v-model="form_time_start"  type="time" id="appt" name="appt"  min="09:00" max="18:00" required>
+                   </text>
                   </div>
-                  <input v-model="form_time_start"  type="time" id="appt" name="appt"  min="09:00" max="18:00" required>
-
+                 
                   <div class="d-flex justify-content-between mt-2">
                     <text>
                     Hora Fin
                     </text>
                     <text class="text-primary">
-                    {{form_time_end}}
+                    <input v-model="form_time_end" type="time" id="appt" name="appt"   required>               
+                 
                     </text>
                   </div>  
-                   <input type="time" id="appt" name="appt"  min="09:00" max="18:00" required>               
-                 
+                  
 
                 <div class="mt-1">
                   Dias Recurrencia: <br>
+                                                                 
+                                        <p class="d-flex justify-content-end">  
+                                           <label class="form-check-label" for="form_day_mon">Monday</label> &nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox" class="form-check-input " name="form_day_mon" v-model="form_day_mon" >  
+                                        </p>
+                                        <p class="d-flex justify-content-end">  
+                                           <label class="form-check-label" for="form_day_tue">Tuesday</label> &nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox" class="form-check-input " name="form_day_tue" v-model="form_day_tue" >  
+                                        </p>
+                                        <p class="d-flex justify-content-end">  
+                                           <label class="form-check-label" for="form_day_wed">Wednesday</label> &nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox" class="form-check-input " name="form_day_wed" v-model="form_day_wed" >  
+                                        </p>
+                                        <p class="d-flex justify-content-end">  
+                                           <label class="form-check-label" for="form_day_thu">Thursday</label> &nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox" class="form-check-input " name="form_day_thu" v-model="form_day_thu" >  
+                                        </p>
+                                        <p class="d-flex justify-content-end">  
+                                           <label class="form-check-label" for="form_day_fri">Friday</label> &nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox" class="form-check-input " name="form_day_fri" v-model="form_day_fri" >  
+                                        </p>
+                                        <p class="d-flex justify-content-end">  
+                                           <label class="form-check-label" for="form_day_sat">Saturday</label> &nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox" class="form-check-input " name="form_day_sat" v-model="form_day_sat" >  
+                                        </p>
+                                        <p class="d-flex justify-content-end">  
+                                           <label class="form-check-label" for="form_day_sun">Sunday</label> &nbsp;&nbsp;&nbsp;
+                                           <input type="checkbox" class="form-check-input " name="form_day_sun" v-model="form_day_sun" >  
+                                        </p>
+                                         
 
-                                        <text class="d-flex justify-content-end" v-if="from_day_mon"> Lunes <br> </text> 
-                                        <text class="d-flex justify-content-end" v-if="from_day_mon"> Martes  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Miercoles  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Jueves  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Viernes <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Sabado <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="from_day_mon"> Domingo <br> </text> 
-                  </div>
+              </div>
 
 
                <br>
+              
+              <p class="d-flex justify-content-between">
+                  <text  @click="saveCalendarChanges()" type="button" class="btn btn-primary">
+                    Guardar los cambios
+                  </text>
 
-              <text type="button" class="btn btn-primary">
-                Guardar los cambios
-              </text>
-
-              <text type="button" class="btn btn-primary">
-               Cancelar
-              </text>
+                  <text type="button" class="btn btn-primary">
+                  Cancelar
+                  </text>
+              </p>
 
                <hr>
                
@@ -200,6 +231,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
 }
 */
+ checkbox {width: 30px; height: 30px;}
 
 div.scroll {
        			margin:4px, 4px;
@@ -295,14 +327,14 @@ data: function () {
             form_date_start : null,
             form_date_end: null,
             form_time_start: null,
-            from_time_end: null,
-            from_day_mon: null ,
-            from_day_tue: null ,
-            from_day_wed: null ,
-            from_day_thu: null ,
-            from_day_fri: null ,
-            from_day_sat: null ,
-            from_day_sun: null , 
+            form_time_end: null,
+            form_day_mon: null ,
+            form_day_tue: null ,
+            form_day_wed: null ,
+            form_day_thu: null ,
+            form_day_fri: null ,
+            form_day_sat: null ,
+            form_day_sun: null , 
 
 		 }
 	},
@@ -317,6 +349,11 @@ data: function () {
          },
  
     methods: {
+
+        saveCalendarChanges()
+        {
+          console.log("Save Calendar Changes");
+        },
 
        async deleteCalendar(calendar_details){
           console.log("Professional delete Calendar")
@@ -405,17 +442,17 @@ data: function () {
             // Set  form values
             this.form_calendar_active = this.calendar_details.calendar_active ; 
             this.form_center_name       = this.calendar_details.name ; 
-            this.form_date_start   = this.calendar_details.date_start
-            this.form_date_end     = this.calendar_details.date_end
-            this.form_time_start   = this.calendar_details.start_time
-            this.from_time_end     = this.calendar_details.end_time
-            this.from_day_mon = this.calendar_details.monday
-            this.from_day_tue = this.calendar_details.tuesday
-            this.from_day_wed = this.calendar_details.wednesday
-            this.from_day_thu = this.calendar_details.thursday
-            this.from_day_fri = this.calendar_details.friday
-            this.from_day_sat = this.calendar_details.saturday
-            this.from_day_sun = this.calendar_details.sunday
+            this.form_date_start   = this.calendar_details.date_start.substring(0,10)
+            this.form_date_end     = this.calendar_details.date_end.substring(0,10)
+            this.form_time_start   = this.calendar_details.start_time.substring(0,5)
+            this.form_time_end     = this.calendar_details.end_time.substring(0,5)
+            this.form_day_mon = this.calendar_details.monday
+            this.form_day_tue = this.calendar_details.tuesday
+            this.form_day_wed = this.calendar_details.wednesday
+            this.form_day_thu = this.calendar_details.thursday
+            this.form_day_fri = this.calendar_details.friday
+            this.form_day_sat = this.calendar_details.saturday
+            this.form_day_sun = this.calendar_details.sunday
 
             console.log(" Show Calendar : "+JSON.stringify(this.calendar_details) );
 
