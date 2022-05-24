@@ -53,27 +53,22 @@ import axios from 'axios';
                           
                            <i class="display-1 text-primary bi bi-x-lg p-1 "  v-on:click="showModalReserveAppointment = false" aria-label="Close"></i>
         </div>
-        <text class="display-6"> 
+        <div class="display-6 mt-3"> 
             <text class="p-1 "> {{ transform_date(hourToReserve.date.substring(0, 10) ) }} </text> <br>
             <text class="" ><b>{{hourToReserve.start_time}}</b> </text >hrs
-        </text>
+        </div>
        
-          <div  >
+          <div class="mt-4" >
 
            <!-- TYPE CENTER --> 
-                    <div v-if="hourToReserve.center_visit" class="">
-                 
-                        
-							
-                            <p style="" class=" h5" >
-                             <!-- En Consulta<br> -->
-                               <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourToReserve.center_id).comuna)}}
-                            </p>
+                    <div v-if="hourToReserve.center_visit" class="" style="color: rgb(120, 30, 209);">
 
                             <p class="h5" style="">
-                              Centro :   {{getCenter(hourToReserve.center_id).name}}
+                              En Consulta<br>
+                              <text class="display-5">{{getCenter(hourToReserve.center_id).name}}</text>
                               <br>
                               Direccion:  {{getCenter(hourToReserve.center_id).address}}
+                              ,{{id2comuna(getCenter(hourToReserve.center_id).comuna)}}
                             </p>
                     </div>
 
@@ -96,10 +91,9 @@ import axios from 'axios';
 
           <!-- TYPE REMOTE  --> 
                     <div v-if="hourToReserve.remote_care" >
-                         <p class="h5" style="color:#b36b00" >
+                         <p class="h5 mt-2" style="color:#b36b00" >
                               
-                               Tele Atención. Lamada a Telefono del Paciente  	 
-                            
+                             <text class="display-5">  Tele Atención. </text> <br> Requiere llamar directamente al telefono registrado del paciente. 
                         </p>
                     </div>
         </div>
