@@ -20,10 +20,10 @@ import ModalViewCalendar from './modalViewCalendar.vue';
             
                 <div  id="search_result" v-if='calendars!=null &&  calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
-                        <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px; "   >
-                            <div class="card-body">
+                        <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px; " :style="{ 'background-color' : calendar.color   }"  >
+                            <div class="card-body" >
 
-                                <h5 class="card-title h2 p-2" :style="{ 'background-color' : calendar.color   }" >
+                                <h5 class="card-title h2 p-2"  >
                                   <i class="bi bi-calendar"></i>  {{idSpecialty2name(calendar.specialty1) }}  
                                 </h5>
 
