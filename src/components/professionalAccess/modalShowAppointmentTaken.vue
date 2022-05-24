@@ -15,36 +15,41 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background border border-secondary text-muted" style="border-radius: 25px;" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }">
+			<div class="modal-container m-2 p-0 modal-background " style="border-radius: 25px;" >
 
     <!------------------ ----> 
-    <div v-if="hourTaken != null"   class="m-0 text-body mr-3">
+    <div v-if="hourTaken != null"   class=" text-body h5">
         
-        <div id="app" class="m-0 d-flex  "  >	
+        <div id="app" class="d-flex  "  >	
             <div class="" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }">
-                     &nbsp; &nbsp; 
+                     &nbsp; &nbsp; &nbsp; &nbsp;
                      <!-- only in case want to show left bar color --> 
             </div>
             <div>
-        
+        <!--
         <p class="text-end m-2" >
           <i class="display-1 text-primary bi bi-x-lg p-1 m-2"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
         </p>
+        -->
 
-        <div class="display-4  text-success" >	
+        <div class="display-4  text-success d-flex justify-content-between mt-2" >	
 
-                          <text class="p-1 text-dark" >
+                          <text class=" text-dark" >
                             <i v-if="hourTaken.center_visit" class=" bi bi-building"></i>      
                             <i v-if="hourTaken.home_visit"  class=" bi bi-house-door" > </i>                                  
                             <i v-if="hourTaken.remote_care" class=" bi bi-camera-video"></i> 
+                            <text class="p-1 text-success "> {{ id2name(hourTaken.specialty) }}  </text>
+                         
                           </text> 
-
-                          <text class="p-1 "> {{ hourTaken.start_time.substring(0,5) }} </text>
-                          
-                          <text class="p-1 "> {{ id2name(hourTaken.specialty) }}  </text>
+                    <!--      <text class="p-1 "> {{ hourTaken.start_time.substring(0,5) }} </text> -->
+                          <i class="display-1 text-primary bi bi-x-lg p-1 "  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
+      
         </div>
         
-        <text class="display-6"> <text class="p-1 "> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> </text>
+        <text class="display-6 p-1 "> 
+          <text class=""> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> <br>
+            <b>{{hourTaken.start_time}}</b> <text >hrs</text>  
+        </text>
 
 
  			  <p>	
@@ -117,13 +122,20 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
             </p>
     <!--END PATIENT  -->
             
-            
 
-          
+      
+      
+      <p class="mt-2">
+          <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
+          <button  v-if='hourTaken.confirmation_status == 1' type="button"   data-bs-dismiss="modal" class="btn btn-success m-2"><i class="bi bi-person-check"></i> Paciente Confirmado</button>
+                     
+          <button type="button" @click="cancelAppointment(hourTaken);"  class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Cancelar Cita con Paciente</button>
+      </p>
+      <text style="color: #ffffff;" >#{{hourTaken.calendar_id}}</text> 
+      
+       
 
-				
 
-              
             
             </div>
 
@@ -132,21 +144,12 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                
                   
 
-     <text style="color: #ffffff;" >#{{hourTaken.calendar_id}}</text> 
-       </div>
+    
+    </div>
   
-     <br>
 
-     <p class="m-3">
-          <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
-          <button  v-if='hourTaken.confirmation_status == 1' type="button"   data-bs-dismiss="modal" class="btn btn-success m-2"><i class="bi bi-person-check"></i> Paciente Confirmado</button>
-                     
-          <button type="button" @click="cancelAppointment(hourTaken);"  class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Cancelar Cita con Paciente</button>
-    </p>
+
      
-     <p class="m-3 p-3">
-
-     </p>
     
          
 
