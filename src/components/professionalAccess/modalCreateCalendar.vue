@@ -110,22 +110,46 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                             </div>
 
                           <div class="mt-3">
-                          <h2>Fecha Inicio de este horario</h2>
+                          <h2>Fechas Calendario</h2>
                             <div class="row  mb-1  border-secondary ">
+                              <div class="col-3 h5">
+                              Inicio
+                              </div>
                               <div class="col">
                                   <input  v-model="form_calendar_start" :min="form_minimum_date" type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
                               </div>
                             </div>
                           </div>
 
-
-
-                          <h2>Fecha Fin de este horario</h2>
+                      
                             <div class="row  mb-1  border-secondary ">
+                               <div class="col-3 h5">
+                              Fin
+                              </div>
                               <div class="col">
                                   <input  v-model="form_calendar_end" :min="form_minimum_date" type="date" id="form_calendar_end" name="form_calendar_end" class="form-control form-control-lg border border-primary" >
                               </div>
                             </div>
+
+                            <div class="row  mb-1  border-secondary ">
+                                <div class="col-3 h5">
+                                  Color
+                                </div>
+                                <div  class="col-9 border border-primary" :style="{ 'background-color' : form_calendar_color  }" >
+                                  <p @click="showColorSelection=!showColorSelection" class="text-end pt-2 h5"> &nbsp;Editar </p>
+                                </div>
+                            
+                            </div>
+                            <!--Select Color -->
+                            <div v-if="showColorSelection">
+                                <div v-for="color in calendarColorArray" :key="color" :value="color">
+                                         <p @click="form_calendar_color=color ; showColorSelection=false" class="text-end"  > <text class="p-4 " :style="{ 'background-color' : color  }"> {{ color }} </text> </p> 
+                                </div>
+                            </div>
+
+                          
+
+
         <!--
                           <h2>Tipo de Cita:</h2>
                                 <div class="radio">
@@ -300,7 +324,8 @@ data: function () {
 
             form_comunas_id : [] ,
             form_center_code  : null ,
-            
+            form_calendar_color : null ,
+
             specialties : [] , 
             needsCreateCenter : null ,
             
@@ -309,6 +334,8 @@ data: function () {
 
             centers_found_flag : true ,
 
+            calendarColorArray : ["#FFE6E6","#FFFAE6", "#EEFFE6","#E6F5FF","#F6E6FF","#FFE6EE"],
+            showColorSelection : false ,
 
 		 }
 	},
@@ -400,7 +427,10 @@ data: function () {
                 form_appointment_home_locations: this.form_comunas_id ,
                 form_appointment_center_code: this.form_center_code ,
                 
+                form_calendar_color : this.form_calendar_color ,
+
                 professional_id: this.session_params.professional_id ,
+                
                           };
 
               console.log("REQUEST :"+JSON.stringify(json));
@@ -421,7 +451,10 @@ data: function () {
         activatorCreateNewCalendar (newValue){
             console.log ("showModalCreateCalendar !!!"+newValue );  
             this.showModalCreateCalendar = true ;
-           this.specialties=this.getSpecialties();
+            
+            this.form_calendar_color = this.calendarColorArray[Math.floor(Math.random() * 6)]
+ 
+            this.specialties=this.getSpecialties();
         },
     },
     
