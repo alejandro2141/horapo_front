@@ -17,11 +17,23 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background border border-secondary text-muted" style="border-radius: 25px;" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }">
 
-                <div class="modal-header mb-0">
-                    
-                      <div class="display-4  text-success" >	
+    <!------------------ ----> 
+    <div v-if="hourTaken != null"   class="m-0 text-body mr-3">
+        
+        <div id="app" class="m-0 d-flex  "  >	
+            <div class="" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }">
+                     &nbsp; &nbsp; 
+                     <!-- only in case want to show left bar color --> 
+            </div>
+            <div>
+        
+        <p class="text-end m-2" >
+          <i class="display-1 text-primary bi bi-x-lg p-1 m-2"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
+        </p>
 
-                          <text class="p-1" >
+        <div class="display-4  text-success" >	
+
+                          <text class="p-1 text-dark" >
                             <i v-if="hourTaken.center_visit" class=" bi bi-building"></i>      
                             <i v-if="hourTaken.home_visit"  class=" bi bi-house-door" > </i>                                  
                             <i v-if="hourTaken.remote_care" class=" bi bi-camera-video"></i> 
@@ -30,26 +42,9 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                           <text class="p-1 "> {{ hourTaken.start_time.substring(0,5) }} </text>
                           
                           <text class="p-1 "> {{ id2name(hourTaken.specialty) }}  </text>
-
-<i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
-
-
-                      </div>       
-                    
-                      <div class="pr-1  "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
-                      </div>
-                </div>
-<!------------------ ----> 
-    <div v-if="hourTaken != null"   class="m-0 ">
+        </div>
         
-        <div id="app" class="m-0 d-flex  "  >	
-            <div class="">
-                     &nbsp;
-            </div>
-            <div>
-        
-        
-        <text class=""> Fecha :  <text class="p-1 "> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> </text>
+        <text class="display-6"> <text class="p-1 "> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> </text>
 
 
  			  <p>	
@@ -57,21 +52,21 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
         </p>
 
  
-          <div class="display-5"    >
+          <div class=""    >
            <!-- TYPE CENTER --> 
                     <div v-if="hourTaken.center_visit" class="">
-                 
+                 <!--
                         <div class="" style="">  
                             <p  >
                                En Consulta  
                             </p>
                         </div>
-							
-                            <p style="" class="" >
+							-->
+                            <p style="" class="mb-0" >
                                <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
                             </p>
 
-                            <p class="" style="">
+                            <p class="mt-0" style="">
                               Centro :   {{getCenter(hourTaken.center_id).name}}
                               <br>
                               Direccion:  {{getCenter(hourTaken.center_id).address}}
@@ -101,7 +96,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                     </div>
         </div>
 					
-          <p class="display-5"> 
+          <p class=""> 
                  
                 <text class="">
                  <b class="" > Paciente: </b> <br>
@@ -110,7 +105,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                 </text>
           </p>
     <!--PATIENT  -->
-            <p class="text-primary display-5 " > 
+            <p class="text-primary  " > 
                             <a :href='"tel:+56"+hourTaken.patient_phone1' class="text-decoration-none" >
                                 <i class="h1 bi bi-telephone"></i>  {{ hourTaken.patient_phone1}}
                             </a>
