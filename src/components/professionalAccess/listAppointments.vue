@@ -62,28 +62,35 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                 </div>
 
                 <div v-else class="text-secondary border border-secondary mb-2" :style="{ 'background-color' : hour.center_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)">
-       
-                    <div  class="d-flex justify-content-between mt-1 mb-0 " >
-                       
-                            <div class="d-flex justify-content-start display-6"  >
-                                    <text class="p-1" >
-                                                <i v-if="hour.center_visit" class=" bi bi-building"></i>      
-                                                <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
-                                                <i v-if="hour.remote_care" class=" bi bi-camera-video"></i> 
-                                                <br>
-                                                
-                                    </text> 
-                                    <text class="p-1  "> {{ hour.start_time.substring(0,5) }} </text>
+                    <div class="d-flex flex-row">
+                        
+                        <div class="patron2" >
+                           &nbsp; &nbsp; &nbsp;
+                        </div>
+                        <div>
+                            <div  class="d-flex justify-content-between mt-1 mb-0 " >
+                            
+                                    <div class="d-flex justify-content-start display-6"  >
+                                            <text class="p-1" >
+                                                        <i v-if="hour.center_visit" class=" bi bi-building"></i>      
+                                                        <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
+                                                        <i v-if="hour.remote_care" class=" bi bi-camera-video"></i> 
+                                                        <br>
+                                                        
+                                            </text> 
+                                            <text class="p-1  "> {{ hour.start_time.substring(0,5) }} </text>
+                                            
+                                            <text class="p-1  "><small> {{specialtyId2name(hour.specialty)}} </small> </text>
                                     
-                                    <text class="p-1  "><small> {{specialtyId2name(hour.specialty)}} </small> </text>
-                            
-                            </div>    
-                            <text></text>        
-                            <i class="display-5 bi bi-wifi-2 text-body"></i>
-                            
-                    </div>
-                    <div class="display-6 mb-2 mt-0 ">
-                         &nbsp;&nbsp; &nbsp; <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
+                                    </div>    
+                                    <text></text>        
+                                    <i class="display-5 bi bi-wifi-2 text-body"></i>
+                                    
+                            </div>
+                            <div class="display-6 mb-2 mt-0 ">
+                                &nbsp;&nbsp; &nbsp; <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
+                            </div>
+                        </div>
                     </div>
                  </div>
 
@@ -147,7 +154,20 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
     .listHoursHeader {
     background-color:#ffffff
-        }
+    }
+
+.patron1 {
+    background:url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAADdJREFUKFNjZCASMCKrm7635D8yP9O5By4PZ6ArgmmAKQYrxKUIWfFAK8TnThTPwBxNVPAQCncADZ8gC5x6AJ4AAAAASUVORK5CYII=       )
+              }
+
+
+.patron2 {
+    background:url(
+data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAADBJREFUKFNjZCASMKKrm7635D9ILNO5B0WORgph1uFyLsgZYKuJVohsEp09Q0yYAwDC8CALmx4W/gAAAABJRU5ErkJggg==)
+              }
+
+
 
 </style>
 
