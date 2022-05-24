@@ -11,10 +11,10 @@ import axios from 'axios';
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-1 modal-background" style="border-radius: 25px;">
+			<div class="modal-container  m-2 p-0 modal-background" style="border-radius: 25px;">
  
 
-                 
+                 <!--
                 <div class="modal-header mb-0">
                       <div class="display-4 p-1 text-success" >	
                          {{ idSpecialty2name(hourToReserve.specialty) }}
@@ -23,42 +23,50 @@ import axios from 'axios';
                       <div class="pr-1  "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalReserveAppointment = false" aria-label="Close"></i>
                       </div>
                 </div>
+                -->
 
-                <div class="modal-body mt-0"  >                   
 
-                    <div class="d-flex flex-row bd-highlight mb-1 display-5">
-                        
-                    </div>
+                <div class="modal-body mt-0 p-0"  >                   
+        
+            <div id="app" class="m-0 d-flex  "  >	
+                  <div class="" :style="{ 'background-color' : getCenter(hourToReserve.center_id).center_color  }">
+                          &nbsp; &nbsp; &nbsp; &nbsp;
+                          <!-- only in case want to show left bar color --> 
+                  </div>
+                  <div>
+        
 
-                        <div class="">
-                          <p class="h5"> 
-                            <i class="bi bi-circle-fill display-5 text-primary"  ></i> Fecha : 
-                            <text  >	 
-                            <b>  {{ transform_date( hourToReserve.date.substring(0, 10) ) }} </b>
-                            </text>       
-                          </p>
-                        </div>
 
-                        <div class="h5">
-                          <p> <i class="bi bi-circle-fill display-5 text-primary"    ></i> Hora : 
-                            <text class="" >	 
-                            <b>{{hourToReserve.start_time}}</b> <text >hrs</text>  
-                            </text>       
-                          </p>
-                        </div>
+        <div class="display-4  text-success d-flex justify-content-between mt-2" >	
 
-          <div class="border-start  border-primary border-5 m-2 p-3" :style="{ 'background-color' : getCenter(hourToReserve.center_id).center_color  }"   >
-            <text class="h5">En : {{ getCenter(hourToReserve.center_id).name }}  </text>
+                          <text class="p-1 text-dark" >
+                            <i v-if="hourToReserve.center_visit" class=" bi bi-building"></i>      
+                            <i v-if="hourToReserve.home_visit"  class=" bi bi-house-door" > </i>                                  
+                            <i v-if="hourToReserve.remote_care" class=" bi bi-camera-video"></i> 
+                          
+                          <text class="p-1">   {{ idSpecialty2name(hourToReserve.specialty) }}  </text>
+
+                          </text> 
+
+                       <!--   <text class="p-1 "> {{ hourToReserve.start_time.substring(0,5) }} </text> -->
+                          
+                          
+                           <i class="display-1 text-primary bi bi-x-lg p-1 "  v-on:click="showModalReserveAppointment = false" aria-label="Close"></i>
+        </div>
+        <text class="display-6"> 
+            <text class="p-1 "> {{ transform_date(hourToReserve.date.substring(0, 10) ) }} </text> <br>
+            <text class="" ><b>{{hourToReserve.start_time}}</b> </text >hrs
+        </text>
+       
+          <div  >
+
            <!-- TYPE CENTER --> 
                     <div v-if="hourToReserve.center_visit" class="">
                  
-                        <div class="h5" style="">  
-                            <p  >
-                              <i class="h1 bi bi-building"></i> En Consulta  
-                            </p>
-                        </div>
+                        
 							
                             <p style="" class=" h5" >
+                             <!-- En Consulta<br> -->
                                <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourToReserve.center_id).comuna)}}
                             </p>
 
@@ -75,7 +83,7 @@ import axios from 'axios';
                                 <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
 
-                              <h5> Zonas de atención:
+                            <h5> Zonas de atención:
                                  {{id2comuna(getCenter(hourToReserve.center_id).home_comuna1) }} 
                                  {{id2comuna(getCenter(hourToReserve.center_id).home_comuna2) }} 
                                  {{id2comuna(getCenter(hourToReserve.center_id).home_comuna3) }} 
@@ -83,28 +91,25 @@ import axios from 'axios';
                                  {{id2comuna(getCenter(hourToReserve.center_id).home_comuna5) }} 
                                  {{id2comuna(getCenter(hourToReserve.center_id).home_comuna6) }} 
                             
-                             </h5>
-                           
-                              
+                            </h5>   
                     </div>
 
           <!-- TYPE REMOTE  --> 
                     <div v-if="hourToReserve.remote_care" >
                          <p class="h5" style="color:#b36b00" >
-                               <i class="h1 bi bi-camera-video"></i> 
-                               Tele Atención  	 
-                              <br>
-                              <text class="h5">(Todas las comunas)</text>                  
+                              
+                               Tele Atención. Lamada a Telefono del Paciente  	 
+                            
                         </p>
                     </div>
         </div>
-
                         <text v-if="hourToReserve.app_type_home" class="">Direccion: {{hourToReserve.center_address }} </text>
-                                
-                        <div class="mt-2"> 
-                          Datos del Paciente
+                        
+                        <button type="button" class="btn btn-primary m-3 " @click="show_patient_form=!show_patient_form" >Reservar</button>
+                        <div v-if="show_patient_form" class="mt-3"> 
+                             <text class="h5"> Ingrese Datos del Paciente</text>
                         							
-                            <form autocomplete="off" method="POST" action="take_appointment.html">			
+                            <form autocomplete="off" method="POST" action="take_appointment.html" class="m-2 ml-0">			
                                 <input class="mt-1 form-control form-control-lg" type="hidden" placeholder="Token" name="token" value="AAAAA"  >
                                 <input class="mt-1 form-control form-control-lg text-uppercase" type="text" placeholder="Nombre"  id="form_patient_name"   name="form_patient_name" v-model="form_patient_name">
                                 <input class="mt-1  form-control form-control-lg  text-uppercase" type="text" placeholder="Rut" name="form_patient_doc_id" id="form_patient_doc_id" v-model="form_patient_doc_id"  >
@@ -113,15 +118,15 @@ import axios from 'axios';
                                
                                 <input  type="number" class="mt-1 form-control form-control-lg"  placeholder="Edad" name="form_patient_age" id="form_patient_age"  v-model="form_patient_age" >
                                 <input class="mt-1 form-control form-control-lg  text-uppercase" type="email" placeholder="email@somedomain.com" name="form_patient_email" id="form_patient_email" v-model="form_patient_email">
-                                <input class="mt-1  form-control form-control-lg" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
+                                <input class="mt-1  form-control form-control-lg mb-3" type="text" placeholder="Telefono Ej 56975397201" name="form_patient_phone" id="form_patient_phone" v-model="form_patient_phone" >
 
-                                <button type="button" @click="sendReserveAppointment(hourToReserve); modalOpen = false" class="btn btn-primary" data-bs-dismiss="modal"   >Tomar esta Hora</button>
+                                <button type="button" @click="sendReserveAppointment(hourToReserve); modalOpen = false" class="btn btn-primary mb-3" data-bs-dismiss="modal"   >Tomar esta Hora</button>
                             </form> 
-
                         </div>  
 
-
-
+                 </div>
+                 </div>
+                <!-- End Body-->
                 </div>
 
         </div> 
@@ -221,7 +226,9 @@ export default {
    data : function() {
         return {
             showModalReserveAppointment: false ,
- 
+
+          show_patient_form : false ,
+
           form_patient_name : null ,
     		  form_patient_doc_id : null ,
 		      form_patient_email : null ,
@@ -236,6 +243,8 @@ export default {
           error_msg_email : false, 
           error_msg_phone : false,
           error_msg_insurance_code : false,
+
+
 
           }   
     },
