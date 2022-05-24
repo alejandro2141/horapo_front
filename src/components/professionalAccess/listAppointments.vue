@@ -79,11 +79,11 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                             
                             </div>    
                             <text></text>        
-                            <i class="display-4 bi bi-plus"></i>
+                            <i class="display-5 bi bi-wifi-2 text-body"></i>
                             
                     </div>
                     <div class="display-6 mb-2 mt-0 ">
-                         &nbsp;&nbsp; &nbsp; <small> <small> {{ getCenter(hour.center_id).name }} </small> </small>
+                         &nbsp;&nbsp; &nbsp; <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
                     </div>
                  </div>
 
@@ -250,6 +250,11 @@ export default {
             let temp= this.session_params.centers.find(elem => elem.id ==  id  )
             if (temp != null) { return temp }
             else { return null }
+        },
+        getCenterName(id){
+            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return "No Existe Centro" }
         },
         displayModalAppAvailable(hour)
         {
