@@ -157,9 +157,23 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                            <label class="form-check-label" for="form_day_sun">Sunday</label> &nbsp;&nbsp;&nbsp;
                                            <input type="checkbox" class="form-check-input " name="form_day_sun" v-model="form_day_sun" >  
                                         </p>
-                                         
-
+                         
               </div>
+
+                    <div class="row  mb-1  border-secondary ">
+                          <div class="col-3 h5">
+                              Color
+                          </div>
+                          <div  class="col-9 border border-primary" :style="{ 'background-color' : form_calendar_color  }" >
+                              <p @click="showColorSelection=!showColorSelection" class="text-end pt-2 h5"> &nbsp;Editar </p>
+                          </div>      
+                    </div>
+                            <!--Select Color -->
+                    <div v-if="showColorSelection">
+                          <div v-for="color in calendarColorArray" :key="color" :value="color">
+                            <p @click="form_calendar_color=color ; showColorSelection=false" class="text-end"  > <text class="p-4 " :style="{ 'background-color' : color  }"> {{ color }} </text> </p> 
+                          </div>
+                    </div>
 
 
                <br>
@@ -314,12 +328,12 @@ export default {
 
 data: function () {
 		return {
-
             showModalViewCalendar  : false ,
             
             showActiveCalendar : false,
             showCenters : false, 
             showSaveStartDate : false,
+            showColorSelection : false ,
 
             form_calendar_active : null,
             form_center_id : null,
@@ -335,7 +349,8 @@ data: function () {
             form_day_fri: null ,
             form_day_sat: null ,
             form_day_sun: null , 
-
+            form_calendar_color : null,
+            calendarColorArray : ["#FFE6E6","#FFFAE6", "#EEFFE6","#E6F5FF","#F6E6FF","#FFE6EE"],
 		 }
 	},
 
@@ -373,6 +388,7 @@ data: function () {
                     form_day_fri: this.form_day_fri ,
                     form_day_sat: this.form_day_sat ,
                     form_day_sun: this.form_day_sun , 
+                    form_calendar_color : this.form_calendar_color , 
 
                     professional_id: this.session_params.professional_id ,
                     calendar_id :  calendar_details.calendar_id,
@@ -488,6 +504,7 @@ data: function () {
             this.form_day_fri = this.calendar_details.friday
             this.form_day_sat = this.calendar_details.saturday
             this.form_day_sun = this.calendar_details.sunday
+            this.form_calendar_color  = this.calendar_details.color
 
             console.log(" Show Calendar : "+JSON.stringify(this.calendar_details) );
 
