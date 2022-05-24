@@ -19,7 +19,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 			<div class="modal-container  m-1 p-1 modal-background ">
  
                 <div class="modal-header " :style="{ 'background-color' : calendar_details.color   }" >
-                        <div class="h4">  <p> Configuracion  Calendario</p>
+                        <div class="h4">  <p> Configurar Calendario</p>
                         </div>
                         
                         <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalViewCalendar = false ; $emit('updateCalendarList'); "  aria-label="Close"></i>
@@ -165,7 +165,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                <br>
               
               <p class="d-flex justify-content-between">
-                  <text  @click="saveCalendarChanges()" type="button" class="btn btn-primary">
+                  <text  @click="saveCalendarChanges(calendar_details)" type="button" class="btn btn-primary">
                     Guardar los cambios
                   </text>
 
@@ -350,15 +350,50 @@ data: function () {
  
     methods: {
 
-        saveCalendarChanges()
+        async saveCalendarChanges(calendar_details)
         {
           console.log("Save Calendar Changes");
+          
+           var r =confirm("¿ Esta seguro que desea Actualizar este Calendario? Ok para continuar");
+            if (r == true) {
+
+                  const json = { 
+
+                    form_calendar_active : this.form_calendar_active ,
+                    form_center_id : this.form_center_id,
+                    form_center_name : this.form_center_name,
+                    form_date_start : this.form_date_start ,
+                    form_date_end: this.form_date_end,
+                    form_time_start: this.form_time_start,
+                    form_time_end: this.form_time_end,
+                    form_day_mon: this.form_day_mon ,
+                    form_day_tue: this.form_day_tue ,
+                    form_day_wed: this.form_day_wed ,
+                    form_day_thu: this.form_day_thu ,
+                    form_day_fri: this.form_day_fri ,
+                    form_day_sat: this.form_day_sat ,
+                    form_day_sun: this.form_day_sun , 
+
+                    professional_id: this.session_params.professional_id ,
+                    calendar_id :  calendar_details.calendar_id,
+                    };
+
+                  console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_update_calendar",json);
+                  console.log ("Update Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+                  let aux_resp = response_json.data.rows ; 
+                  this.showModalViewCalendar = false ; 
+                  this.$emit('updateCalendarList'); 
+            }
+
+
+
         },
 
        async deleteCalendar(calendar_details){
           console.log("Professional delete Calendar")
          
-           var r =confirm("¿ Esta seguro que desea eliminar este HORARIO? Ok para continuar");
+           var r =confirm("¿ Esta seguro que desea ELIMINAR este Calendario?  Ok para continuar");
             if (r == true) {
 
                   const json = { 
