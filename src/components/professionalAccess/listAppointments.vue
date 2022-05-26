@@ -15,7 +15,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
 <template>
 
- <div id="search_result" class="border">
+ <div id="search_result" class="">
 <ModalDuplicateDay :session_params='session_params' :daterequired='daterequired' :openModalDuplicateDay='openModalDuplicateDay' :appointments_day='appointments_day' :global_comunas='global_comunas' :global_specialties='global_specialties' > </ModalDuplicateDay>
 
 <ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" :global_specialties='global_specialties'  :openModalCreateAppEvent='openModalCreateAppEvent' > </ModalCreateAppointment>
@@ -26,30 +26,11 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
 
- <!--
-    <div class="d-flex justify-content-around  listHoursHeader" >
-
-      
-            <div class="display-6" style="margin-left : 1em" >
-             
-            </div>
-            
-            <div>
-            </div>
-        
-            
-            <div @click="duplicateDay(daterequired)" class=" text-primary"  >
-             Duplicar dia  <i class="bi bi-box-arrow-right"></i>
-            </div>
-          
-
-    </div>
-<hr>
--->
-
 
     <div v-for="(hour) in hours" :key="hour"  >
       
+            <div>
+
                 <div v-if="hour.app_available != null"  >
                     <div v-if="!hour.app_available">
                         <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
@@ -61,12 +42,8 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     -->
                 </div>
 
-                <div v-else class="text-secondary border border-secondary mb-2" :style="{ 'background-color' : hour.center_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)">
-                    <div class="d-flex flex-row">
-                        
-                        <div class="patron2" >
-                           &nbsp; &nbsp; &nbsp;
-                        </div>
+                <div v-else class="text-secondary border border-secondary mb-2" :style="{ 'background-color' : hour.calendar_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)">
+                    
                         <div>
                             <div  class="d-flex justify-content-between mt-1 mb-0 " >
                             
@@ -82,23 +59,29 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                                             
                                             <text class="p-1  "><small> {{specialtyId2name(hour.specialty)}} </small> </text>
                                     
-                                    </div>    
-                                    <text></text>        
-                                    <i class="display-5 bi bi-wifi-2 text-body"></i>
+                                            
+                                            
+                                    </div>  
+                                    
+                                    
+
+                                    <div>        
+                                            <i class="display-5 bi bi-wifi-2 text-body"></i>
+                                    </div>
                                     
                             </div>
                             <div class="display-6 mb-2 mt-0 ">
                                 &nbsp;&nbsp; &nbsp; <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
                             </div>
                         </div>
-                    </div>
+                    
                  </div>
 
+            </div>
 
-       <!--    <hr :style="{'width': calculateLineExtension(hour)+'rem'}" style="margin: 0rem; height:0.5px ; text-align:left; margin-left:0 ; border : 1px solid black; " > -->
-         <!--   <hr style="margin-top: 0.0rem; margin-bottom: 0.1rem;" />   -->
+      
+
     </div>
-
 
     <div v-if="hours.length == 0 " class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >
             
@@ -108,44 +91,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                 </div>
 
     </div>
-    
-    
-    <!-- 
-    <div v-for="(hour) in hours" :key="hour.id" >
-
-        <div v-if="hour.app_available != null" >
-           
-            <div v-if="hour.app_available == false ">
-                <AppointmentReserved :appointment='hour' :index="hour.id" > </AppointmentReserved>
-            </div>
-            <div v-else>
-                <AppointmentAvailable :appointment='hour' :index="hour.id" > </AppointmentAvailable>
-            </div>
-
-        </div>
-    -->
-<!--
-    <ModalAppointmentDetails :appointment="appointment" :index="index"></ModalAppointmentDetails> 
-    <ModalReserve :appointment="appointment" :index="index"></ModalReserve> 
--->
    
-<!--
-	<div class="mt-3 d-flex justify-content-between" >	
-			<div class="m-2">
-			</div>
-			
-			<div class="m-2 display-3 bg-success p-2 text-white"   data-bs-toggle="modal" data-bs-target="#add_hours_agenda"  >
-			    <i class="bi bi-clipboard-plus" ></i> Agregar Horas
-			</div>
-			
-			<div class="m-2">
-			</div>
-	</div>
-    -->
-    <!--
-    <ModalAddHours :session_params="session_params" :centers="centers"  :daterequired="daterequired" ></ModalAddHours> 
-	<ModalDuplicateDay :session_params="session_params"  :daterequired="daterequired" > </ModalDuplicateDay> 
-	-->
 </div>
 
 </template>
@@ -237,6 +183,8 @@ export default {
             
                   center_id :poped.center_id ,
                   center_color : poped.center_color ,
+                  calendar_color : poped.calendar_color ,
+
                   app_available : poped.app_available , 
                   symbol1 : "" ,
                   message1 : poped.message1 
