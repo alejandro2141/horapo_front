@@ -38,17 +38,19 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
-                    <div class="card m-2 border border-secondary" style="width: 18rem; border-radius: 15px;"  :style="{ 'background-color' : center.center_color  }">
+
+                    <div class="card m-2 border border-secondary" style="width: 18rem; border-radius: 15px;"  >
                         <div class="card-body"  >
                             
                                 <div >
                                     <!-- CENTER VISIT -->
                                     <div v-if="center.center_visit" >
                                         <div class="d-flex justify-content-between ">
-                                                <text class="h5">Nombre: {{center.name}} </text>
+                                                <text class="h5">{{center.name}} </text>
                                                 <text class=""></text>  
                                         </div>
-                                        <hr>
+                                        <hr class="m-0">
+                                        
                                         <div class="d-flex justify-content-between mt-0">
                                                 <text>Tipo:</text>
                                                 <text class="text-end"><i class="h1 bi bi-building"></i> <br> En Consulta</text>
@@ -63,10 +65,10 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                     <div v-if="center.home_visit" >
 
                                             <div class="d-flex justify-content-between ">
-                                                <text class="h5">Nombre: {{center.name}} </text>
+                                                <text class="h5">{{center.name}} </text>
                                                 <text class=""> </text>  
                                             </div>
-                                           <hr>
+                                            <hr class="m-0">
                                             <div class="d-flex justify-content-between mt-2">
                                                 <text>Tipo : </text>
                                                 <text></text>
@@ -92,10 +94,9 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                     <!-- REMOTE CARE  -->
                                     <div v-if="center.remote_care" >
                                         <div class="d-flex justify-content-between ">
-                                            <text class="h5">Nombre: </text>
                                             <text class="h5">{{center.name}} </text>  
                                         </div>
-                                        <hr>
+                                         <hr class="m-0">
                                         <div class="d-flex justify-content-between mt-0">
                                             <text> Tipo: </text>
                                             <text> </text>
@@ -114,7 +115,8 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 
                          <!--   <p class="text-end text-muted mt-2"> #{{ center.id }} </p> -->
                         </div>
-                                            </div>   
+                    </div>
+
                 </div>  
             </div>
 
