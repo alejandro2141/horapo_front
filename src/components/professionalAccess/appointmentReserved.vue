@@ -7,7 +7,7 @@ import axios from 'axios';
 
 <template>
      
-    <div  :style="{ 'background-color' : getCenter(appointment.center_id).center_color   }"  style="border-radius: 25px;"  class="mb-2 border border-secondary text-muted" data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
+    <div  :style="{ 'background-color' : appointment.calendar_color   }"  style="border-radius: 25px;"  class="mb-2 border border-secondary text-muted" data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
     
         <div class=" ml-4" >
 
