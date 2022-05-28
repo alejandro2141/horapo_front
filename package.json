@@ -14,7 +14,8 @@
     "bootstrap-icons": "^1.8.1",
     "vue": "^3.2.6",
     "vue-axios": "^3.3.7",
-    "vue3-date-time-picker": "^2.7.0"
+    "vue3-date-time-picker": "^2.7.0",
+    "vuejs3-datepicker": "^1.0.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.6.1",
