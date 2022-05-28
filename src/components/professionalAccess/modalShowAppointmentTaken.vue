@@ -21,7 +21,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
     <div v-if="hourTaken != null"   class=" text-body h5">
         
         <div id="app" class="d-flex  "  >	
-            <div class="" :style="{ 'background-color' : getCenter(hourTaken.center_id).center_color  }">
+            <div class="" :style="{ 'background-color' : hourTaken.calendar_color  }">
                      &nbsp; &nbsp; &nbsp; &nbsp;
                      <!-- only in case want to show left bar color --> 
             </div>
