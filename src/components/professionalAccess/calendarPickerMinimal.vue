@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-
+/*
   import Datepicker from 'vue3-date-time-picker';
   import 'vue3-date-time-picker/dist/main.css'
-    
+  */ 
+import Datepicker from 'vuejs3-datepicker';
 
 </script>
 
@@ -16,16 +17,27 @@ import axios from 'axios';
         </div>
         <div class="display-5 ">
         
-            <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i> 
+            <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i> &nbsp;&nbsp;
         
-            <text class="text-primary pl-2 pr-2"  @click="this.show_date_picker =!this.show_date_picker" > {{req_day}}   
+            <text class="text-primary pl-2 pr-2"  @click="show_date_picker =!show_date_picker" > {{req_day}}   
               
             </text>  
             
-            <i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
+            &nbsp;&nbsp;<i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
         
         </div>
-        
+    
+        <div v-if="show_date_picker">
+            <datepicker    inline="true" :value="state.date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+        </div>
+
+
+            
+
+
+
+
+
         <div class="display-5">
             <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i> {{ calendar[parseInt(req_year)][parseInt(req_month)][0]  }} 20{{req_year}}<i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>
         </div>
@@ -40,10 +52,7 @@ import axios from 'axios';
 
     </div>
 
-    <div>
-          <Datepicker v-if="show_date_picker"  v-model="date" inline autoApply />
-    </div>
-
+    
     
   </div>
 
@@ -73,11 +82,17 @@ import axios from 'axios';
   cursor: pointer;
 }
 */
+bigText 
+{
+  font-size: 40px;  
+}
 
 </style>
 
 
 <script>
+
+  
 
 export default {
    data : function() {
@@ -96,6 +111,11 @@ export default {
         form_required_date : null,
         show_date_picker : false ,
          date: null,
+
+        state : { date: new Date()} ,
+        dateSelected :  ref(new Date())
+      
+      
 
         }   
     },
@@ -137,8 +157,9 @@ export default {
         openCalendarPicker()
         {
         console.log("openCalendar ");
-        this.show_date_picker = true ; 
-              
+        //this.show_date_picker = true ; 
+        let element = document.getElementById("calendar-picker");
+        element.datepicker();
 /*
         let element = document.getElementById("calendar-picker");
         //element.datepicker('show') //Show on click of button
