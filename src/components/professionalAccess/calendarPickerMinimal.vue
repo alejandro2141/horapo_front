@@ -26,10 +26,28 @@ import Datepicker from 'vuejs3-datepicker';
             &nbsp;&nbsp;<i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
         
         </div>
-    
+       state.date = {{state.date}}  <br>
+       
+       
         <div v-if="show_date_picker">
-            <datepicker    inline="true" :value="state.date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+            <datepicker    monday-first="true" inline="true" v-model="state.date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
         </div>
+     
+  
+       <!--
+        <div v-if="show_date_picker">
+            <datepicker 
+            inline="true"
+            monday-first="true" 
+            placeholder="Select Date"
+                :highlighted="{
+                to: new Date(2020, 11, 16),
+                from: new Date(2020, 10, 17),
+                }"
+            >
+            </datepicker>
+        </div>
+       -->
 
 
             
@@ -132,7 +150,10 @@ export default {
         this.form_required_date = new Date().toISOString().split('T')[0] ; 
 
 	    console.log("CALENDAR PICKER MINIMAL CREATED !!");
-		let tempDate=new Date().toISOString().split('T')[0].split('-');
+        let tempDate = new Date()
+        this.state.date=tempDate ;
+		
+        tempDate=new Date().toISOString().split('T')[0].split('-');
 	    console.log("tempDate : "+tempDate);
         this.today_day = parseInt(tempDate[2])
         this.today_month = parseInt(tempDate[1])
