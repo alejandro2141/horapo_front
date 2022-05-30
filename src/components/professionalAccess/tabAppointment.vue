@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 
-import CalendarPickerMinimal from './calendarPickerMinimal.vue'
+import CalendarPickerMinimal2 from './calendarPickerMinimal2.vue'
 import DateRequiredActions from './dateRequiredActions.vue'
 import ListAppointments from './listAppointments.vue'
 import FirstTimeLogin from './firstTimeLogin.vue'
@@ -15,7 +15,7 @@ import loadProgress from '../loadProgress.vue'
   <loadProgress  :active_spinner="active_spinner" > </loadProgress>
       <div v-if='!session_params.first_time' >
 
-           <CalendarPickerMinimal  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal>
+           <CalendarPickerMinimal2  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal2>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> <br>
            <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
 
