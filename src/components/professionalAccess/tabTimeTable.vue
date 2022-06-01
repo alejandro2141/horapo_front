@@ -28,6 +28,19 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                                 </h5>
 
 
+                    <div class="d-flex justify-content-between"> 
+                          <text class=""> Estado  Actual</text>   
+                          
+                          <div v-if="evaluateCalendarStatus(calendar.date_end)==3">
+                              <text class="text-danger"> EXPIRADO </text>
+                          </div>
+                          <div v-else>
+                              <text v-if="calendar.calendar_active" class="text-primary" >  Encendido </text>
+                              <text v-else class="text-primary" > <i class="bi bi-exclamation-octagon text-danger"></i>
+                                Apagado </text>
+                          </div>
+                    </div>
+<!--
                                 <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between">
                                     <text>Estado Actual </text>
                                     <text class="text-success"  > Encendido </text>
@@ -39,7 +52,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                                     <text class="text-danger"> Apagado </text>
                                     
                                 </div>
-
+-->
                                 <div class="mt-2">
                                     <text>Lugar de Consulta </text>
                                     <div class="d-flex justify-content-between ">
@@ -153,6 +166,23 @@ data: function () {
          },
  
     methods: {
+
+        evaluateCalendarStatus(date_end)
+        {
+          let aux_date_end=new Date(date_end);
+          let aux_date_current = new Date ();
+          aux_date_current.setHours(0,0,0);
+
+          console.log("aux_date_end "+aux_date_end)
+          console.log("aux_date_current "+aux_date_current)
+            if (aux_date_end < aux_date_current)
+            {
+              //Expired
+              return 3 ;
+            }
+        
+
+        },
 
         viewCalendar(calendar)
         {
