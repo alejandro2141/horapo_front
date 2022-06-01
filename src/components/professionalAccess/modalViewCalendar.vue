@@ -38,12 +38,15 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                 <div>
                     <div class="d-flex justify-content-between"> 
                           <text class=""> Estado  Actual</text>   
-                       
-                          <text v-if="form_calendar_active" class="text-primary" @click="form_calendar_active=!form_calendar_active">  Encendido </text>
-
                           
-                          <text v-else class="text-primary" @click="form_calendar_active=!form_calendar_active"> <i class="bi bi-exclamation-octagon text-danger"></i>
-                            Apagado </text>
+                          <div v-if="evaluateCalendarStatus()==3">
+                              <text class="text-danger"> EXPIRADO </text>
+                          </div>
+                          <div v-else>
+                              <text v-if="form_calendar_active" class="text-primary" @click="form_calendar_active=!form_calendar_active">  Encendido </text>
+                              <text v-else class="text-primary" @click="form_calendar_active=!form_calendar_active"> <i class="bi bi-exclamation-octagon text-danger"></i>
+                                Apagado </text>
+                          </div>
                     
                             
 
@@ -364,6 +367,22 @@ data: function () {
          },
  
     methods: {
+
+        evaluateCalendarStatus()
+        {
+          let aux_date_end=new Date(this.calendar_details.date_end);
+          let aux_date_current = new Date ();
+          aux_date_current.setHours(0,0,0);
+
+          console.log("aux_date_end "+aux_date_end)
+          console.log("aux_date_current "+aux_date_current)
+            if (aux_date_end  < aux_date_current.getDate())
+            {
+              //Expired
+              return 3 ;
+            }
+
+        },
 
         async saveCalendarChanges(calendar_details)
         {
