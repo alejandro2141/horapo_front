@@ -29,7 +29,7 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
         </div>
 
         <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-white">
-            <TabAppointment :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
+            <TabAppointment  :key="forceRender" :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
         </div>
 
         <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style="margin-left: 1.5em; margin-right: 1.5em;"  class=" bg-white">
@@ -85,6 +85,8 @@ export default {
         muestrame: true,
         personas: ['juan', 'pedro' , 'gonzalo' ],
         counter : 0,
+
+        forceRender:0 ,
        
     }
   },
@@ -113,7 +115,7 @@ methods: {
             this.visible_tab_userconfig = 'none' ;
 
         if (val == 1) { this.visible_tab_timetable = 'block' }
-        if (val == 2) { this.visible_tab_appointments = 'block' }
+        if (val == 2) { this.visible_tab_appointments = 'block'; this.forceRender +=1 }
         if (val == 3) { this.visible_tab_centers = 'block' }
         if (val == 4) { this.visible_tab_userconfig = 'block' }
     },
