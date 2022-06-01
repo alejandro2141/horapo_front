@@ -54,7 +54,7 @@ data: function () {
             //this.getCenters();
             console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );   
             this.daterequired = new Date().toISOString().split('T')[0] ;
-           // this.updateAppointmentList();
+            this.updateAppointmentList();
          },
  
     methods: {
