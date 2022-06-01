@@ -11,61 +11,26 @@ import Datepicker from 'vuejs3-datepicker';
 
 <template>
     <div>
-    <div class="text-center">
-        <div class="display-5">
-        algo 
-        </div>
-        <div class="display-5 ">
-        
-            <i v-on:click="prevDay()" class="text-primary bi bi-caret-left"></i> &nbsp;&nbsp;
-        
-            <text class="text-primary pl-2 pr-2"  @click="show_date_picker =!show_date_picker" >    
-              {{ req_day }}
-            </text>  
-            
-            &nbsp;&nbsp;<i  v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>
-        
-        </div>
-       state.date soy 2 = {{state.date}}  <br>
-       
-       
-        <div v-if="show_date_picker">
-            <datepicker    monday-first="true" inline="true" v-model="state.date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+
+
+        <div class="d-flex justify-content-around text-primary"> 
+                <div class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
+                <div class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
+                        {{ getSelectedDayName() }} <br> {{ calendar_date.getDate() }}           
+
+                        <div class="display-5" v-if="!show_date_picker" >
+                            <!--  <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i>   -->
+                            <text :forceUpdate="forceUpdateCalendar" >  {{ getMonthName( calendar_date.getMonth() ) }}  {{calendar_date.getFullYear()}} </text>
+                            <!--   <i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>  -->
+                        </div>
+                </div>
+                <div class="display-1 d-flex align-items-center">   <i v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>   </div>
         </div>
      
-  
-       <!--
-        <div v-if="show_date_picker">
-            <datepicker 
-            inline="true"
-            monday-first="true" 
-            placeholder="Select Date"
-                :highlighted="{
-                to: new Date(2020, 11, 16),
-                from: new Date(2020, 10, 17),
-                }"
-            >
-            </datepicker>
-        </div>
-       -->
+      <div v-if="show_date_picker" class="text-center "> 
+            <datepicker :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+      </div>
 
-
-        <div class="display-5">
-            <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i>  {{calendar_date.getMonth() }} <i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>
-        </div>
-
-        <!--
-        <div  v-if="true" class="row  mb-1  border-secondary ">
-                    <div class="col">
-                        <input  v-model="form_required_date" :min="form_minimum_date" type="date" id="calendar-picker" name="calendar-picker"  class="datepicker-input"  >
-                    </div>
-        </div>
-        -->
-
-    </div>
-
-    
-    
   </div>
 
 </template>
@@ -124,8 +89,14 @@ export default {
         show_date_picker : false ,
         calendar_date: null,
 
-        state : { date: new Date()} ,
-        dateSelected :  ref(new Date())
+     //   state : { date: new Date()} ,
+        dateSelected :  ref(new Date()),
+
+        month_name: ["Enero", "Febrero","Marzo","Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ] ,
+        day_name: ["Domingo","Lunes", "Martes","Miercoles","Jueves", "Viernes", "Sabado"],
+
+        componentKey : 0 ,
+        forceUpdateCalendar : 0 ,
         }   
     },
    	components: { Datepicker },
@@ -138,10 +109,12 @@ export default {
         console.log("CALENDAR PICKER MINIMAL 2 CREATED !!");
         this.calendar_date = new Date()
 		
+        /*
         this.req_day = this.calendar_date.getDate() ,
         this.req_month = this.calendar_date.getMonth(),
         this.req_year = this.calendar_date.getFullYear(),
-	        
+	     */
+
         console.log("CALENDAR PICKER MINIMAL 2 CREATED END !!");
     },
 
@@ -162,28 +135,55 @@ export default {
         },
 */
 
+        handleSelectDate(date)
+        {
+        console.log("date Selected en emit :"+date);
+        this.show_date_picker =false ;
+        this.forceUpdateCalendar += 1 ; 
+        },
+
+        getMonthName(n)
+        {
+            return this.month_name[n];
+        },
+        getSelectedDayName()
+        {
+            //this.calendar_date.getDay()
+            return this.day_name[this.calendar_date.getDay()];
+        },
+        getSelectedDayNumber()
+        {
+            //this.calendar_date.getDay()
+            return this.calendar_date.getDay();
+        },
+
+
         nextDay()
         {
-            console.log("Next Date");
-            this.calendar_date.setDate( this.calendar_date.getDate() + 1)
-            console.log("Next Date set to "+this.calendar_date.getDate() );
-            this.req_day = this.calendar_date.getDate() 
+           console.log("Next Day");
+           this.calendar_date.setDate( this.calendar_date.getDate() + 1 ) 
+           this.forceUpdateCalendar += 1 ; 
         },
         prevDay()
         {
-             console.log("Prev Date");
-             this.calendar_date.setDate( this.calendar_date.getDate() - 1)
-              console.log("PRev Date set to "+this.calendar_date.getDate() );
+           console.log("Prev Day");
+           this.calendar_date.setDate( this.calendar_date.getDate() - 1 ) 
+          this.forceUpdateCalendar += 1 ; 
         },
+            
         nextMonth()
         {   
-           
+           console.log("Next Month");
+           this.calendar_date.setDate( this.calendar_date.getDate() + 31 ) 
+           this.forceUpdateCalendar += 1 ; 
            
         },
+
         prevMonth()
         {
-            
-       
+           console.log("Prev Month");
+           this.calendar_date.setDate( this.calendar_date.getDate() - 31 ) 
+           this.forceUpdateCalendar += 1 ; 
         },
     //********* GO TO DAY
 	
@@ -194,7 +194,12 @@ export default {
 
    watch: {
  
-        
+            forceUpdateCalendar(newValue)
+            {
+                console.log("Date Change So EMIT:"+newValue);
+                this.$emit('set_daterequired', this.calendar_date.getFullYear()+"-"+(this.calendar_date.getMonth()+1)+"-"+ this.calendar_date.getDate() ) ;
+            }
+
         },
 
 }
