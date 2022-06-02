@@ -11,24 +11,24 @@ import { BKND_CONFIG } from '../../../config123.js'
 
                 <div class="col" style="position: relative;" >
 
-                    <div  style="position: absolute; z-index: 9; top : 1px ; left : 3px " class="mt-0  rounded" > 
-                       <i class="display-6 bi bi-vector-pen text-muted  mt-2"></i>
+                    <div  style="position: absolute; z-index: 9; top : 7px ; left : 3px " class="mt-0  rounded" > 
+                            <i class="display-6 bi bi-vector-pen text-muted  "></i>
                     </div>
 
                     <div>
-                        <input autocomplete="off" type="text" style=" z-index: 9;  padding-left : 40px ; padding-right : 50px; border-radius: 25px;"  class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Psicologia, Kinesiología, Nutri..." aria-label=".form-control-lg example"  >
+                        <input autocomplete="off" autocorrect="off" type="text" style=" z-index: 9;  padding-left : 40px ; padding-right : 50px; border-radius: 25px;"  class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Psicologia, Kinesiología, Nutri..." aria-label=".form-control-lg example"  >
                     </div>
                     
                      <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
-                        <i class="display-2 m-1  bi bi-x  text-muted "  @click="form_specialty = null; display_error = false ; $emit('selectedSpecialtyCode', null) " ></i>
+                        <i class="display-2 m-1  bi bi-x  text-muted border-start"  @click="form_specialty = null; display_error = false ; $emit('selectedSpecialtyCode', null) " ></i>
                     </div>
                     
                 </div> 
                 
-                <div >
+                <div>
                      <div class=" h3 m-0 p-2 text-primary " v-for="specialty in specialty_filtered" :key="specialty.id" > 
                         <div  @click="form_specialty = specialty.name ; $emit('selectedSpecialtyCode', specialty); clearfiltered = true ; ">
-                             <i class="display-6  text-muted" ></i> <i class="bi bi-vector-pen text-black-50"></i> {{ specialty.name }} 
+                             <i class="display-6  text-muted" ></i> <i class="bi bi-vector-pen text-black-50 border-start"></i> {{ specialty.name }} 
                         </div>
                      </div>
                 </div>   
@@ -78,7 +78,7 @@ watch: {
             let tempfiltered = this.global_specialties.filter(item => item.name.substring(0,value.length)  ===  value );
             if (tempfiltered.length >= 1 )
                 {
-                this.specialty_filtered = this.global_specialties.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name > b.name) ? 1 : -1);
+                this.specialty_filtered = this.global_specialties.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name < b.name) ? 1 : -1);
                 //this.specialty_filtered.sort() ;  
                 }
             else
