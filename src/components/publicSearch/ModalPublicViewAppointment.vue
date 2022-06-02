@@ -34,7 +34,7 @@ import loadProgress from '../loadProgress.vue'
 
 
 
-    <div v-if="app != null"   style="border: 3px solid rgb(168, 168, 168); border-radius: 30px;"  class="bg-white p-0 mb-1 ">
+    <div v-if="app != null"     class="bg-white p-0 mb-1 ">
         
         <div id="app" class="m-0 d-flex  "  >	
             <div class="">
@@ -134,15 +134,13 @@ import loadProgress from '../loadProgress.vue'
 
 					<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
 
-					Include here a map		
+					<!-- Include here a map -->
 
                 </div>
             
             </div>
 
-            </div>
-
-               
+            </div>              
      <text style="color: #ffffff;" >#{{app.calendar_id}}</text> 
        </div>
 
@@ -152,8 +150,7 @@ import loadProgress from '../loadProgress.vue'
 					<div class="d-flex justify-content-center m-5" >
 						<button type="button" @click="reserveHour(app);"  class="btn btn-primary p-4 btn-lg">  Reservar esta Hora </button>
 					</div> 
-						<br>
-						<br>
+						
 						<text class="text-white" style="">#{{app.calendar_id}}</text>
 
             </div>
