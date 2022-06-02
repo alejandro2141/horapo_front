@@ -9,7 +9,7 @@ import { ref } from 'vue'
 <template>
     
     
-    <div v-if="appointment != null"   style="border: 3px solid rgb(168, 168, 168); border-radius: 30px;"  class="bg-white p-0 mb-1 ">
+    <div v-if="appointment != null"   style="border: 2px solid rgb(168, 168, 168); border-radius: 15px;"  class="bg-white p-0 mb-1 ">
         
         <div id="app" class="m-0 d-flex  "  >	
             <div class="">
