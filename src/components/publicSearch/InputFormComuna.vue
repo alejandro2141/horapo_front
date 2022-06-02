@@ -22,7 +22,7 @@ const count = ref(0)
                     </div>
                     
                     <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
-                        <i class="display-2 m-1  bi bi-x  text-muted" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
+                        <i class="display-2 m-1  bi bi-x  text-muted border-start" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
                     </div>
 
                 </div>    
@@ -30,7 +30,7 @@ const count = ref(0)
                 <div >
                      <div class="h3 m-3 text-primary " v-for="location in location_filtered" :key="location.id" > 
                         <div @click="form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); clearfiltered = true">
-                             <i class="display-6  text-muted" ></i> - {{ location.name }} 
+                             <i class="display-6  text-muted " ></i> - {{ location.name }} 
                         </div>
                      </div>
                 </div>   
