@@ -25,7 +25,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                     
                 </div> 
                 
-                <div>
+                <div :key="forceUpdate" >
                      <div class=" h3 m-0 p-2 text-primary " v-for="specialty in specialty_filtered" :key="specialty.id" > 
                         <div  @click="form_specialty = specialty.name ; $emit('selectedSpecialtyCode', specialty); clearfiltered = true ; ">
                              <i class="display-6  text-muted" ></i> <i class="bi bi-vector-pen text-black-50 border-start"></i> {{ specialty.name }} 
@@ -54,6 +54,8 @@ export default {
             display_error : false ,
             ready_input : false , 
             clearfiltered : false ,  
+
+            forceUpdate : 0 ,
         }
     },  
     props: ['global_specialties'], 
@@ -70,7 +72,7 @@ mounted(){
 watch: {
     //WATCHER PREDICTOR SPECIALTY
     form_specialty(value, oldValue) {
-        if (value !=null && value.length >= 0 && !this.clearfiltered )
+        if (value !=null && value.length >= 2 && !this.clearfiltered )
         {
             value = value.charAt(0).toUpperCase() + value.slice(1) ; 
 
@@ -78,7 +80,7 @@ watch: {
             let tempfiltered = this.global_specialties.filter(item => item.name.substring(0,value.length)  ===  value );
             if (tempfiltered.length >= 1 )
                 {
-                this.specialty_filtered = this.global_specialties.filter(item => item.name.substring(0,value.length)  ===  value ).sort((a, b) => (a.name < b.name) ? 1 : -1);
+                this.specialty_filtered = tempfiltered.sort((a, b) => (a.name < b.name) ? 1 : -1);
                 //this.specialty_filtered.sort() ;  
                 }
             else
@@ -91,13 +93,16 @@ watch: {
            // this.ready_input = false;
            this.specialty_filtered = null
            this.clearfiltered = false ; 
-        }        
+        }     
+        
+        this.forceUpdate += 1 ;
 
     },
 
     },//end watch
 
     methods: {
+        /*
         async  getSpecialtyList() {
             console.log ("GET SPECIALTY LIST METHOD"); 
 				const json = { 
@@ -110,6 +115,7 @@ watch: {
                 this.specialty_list.sort();	
                 console.log("Specialty list: "+JSON.stringify(this.specialty_list) );
             },
+        */
         },
 
 }
