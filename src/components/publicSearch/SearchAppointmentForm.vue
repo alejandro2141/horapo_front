@@ -41,17 +41,17 @@ import inputFormComuna  from './InputFormComuna.vue'
 <!--FORM INPUT  APP TYPE -->
                 <div v-if="show_app_type()" class="d-flex justify-content-around   mb-1" style=" border-radius: 15px;"  >
                     
-                     <text  @click="selectedTypeCenter()" class="m-1 p-1" :class="{ 'fs-4 text' : form_app_type_center }" style=" " > 
+                     <text  @click="selectedTypeCenter()" class="m-1 p-1" :class="{ 'text-decoration-underline' : form_app_type_center }" style=" " > 
                         <i  class="h5 bi bi-building m-0 p-0" style="color: #781ED1;"></i>
                        <text class="m-0 p-0"> Consulta </text>  
                     </text>
 
-                    <text  @click="selectedTypeHome()"  class="m-1 p-1 " :class="{ 'fs-4 text' : form_app_type_home }" style="" > 
+                    <text  @click="selectedTypeHome()"  class="m-1 p-1 " :class="{ 'text-decoration-underline' : form_app_type_home }" style="" > 
                         <i class="h5 bi bi-house-door m-0 p-0" style="color:#3399FF;"></i>
                         <text> Domicilio </text> 
                     </text>
 
-                    <text  @click="selectedTypeRemote()"  class="m-1 p-1 " :class="{ 'fs-4 text' : form_app_type_remote }"  style="" > 
+                    <text  @click="selectedTypeRemote()"  class="m-1 p-1 " :class="{ 'text-decoration-underline' : form_app_type_remote }"  style="" > 
                        <i class="h5 bi bi-camera-video m-0 p-0" style="color:#b36b00;"  ></i>
                        <text> Remota </text> 
                     </text>
