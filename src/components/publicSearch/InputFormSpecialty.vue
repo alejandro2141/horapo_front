@@ -16,7 +16,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                     </div>
 
                     <div>
-                        <input autocomplete="off" autocorrect="off" type="text" style=" z-index: 9;  padding-left : 40px ; padding-right : 50px; border-radius: 25px;"  class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Psicologia, Kinesiología, Nutri..." aria-label=".form-control-lg example"  >
+                        <input autocomplete="off" autocorrect="off" spellcheck="false" type="text" style=" z-index: 9;  padding-left : 40px ; padding-right : 50px; border-radius: 25px;"  class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty" placeholder="Psicologia, Kinesiología, Nutri..." aria-label=".form-control-lg example"  >
                     </div>
                     
                      <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
