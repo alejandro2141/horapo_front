@@ -18,7 +18,7 @@ const count = ref(0)
                     </div>
 
                     <div>
-                        <input style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   placeholder="Ciudad o Comuna o Zona" >
+                        <input @keyup="captureSeachLetter" style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   placeholder="Ciudad o Comuna o Zona" >
                     </div>
                     
                     <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
@@ -97,6 +97,13 @@ mounted() {
         },
 
     methods: {
+
+         captureSeachLetter(e)
+         {
+             console.log("even keyUp capture"+e.target.value )
+             this.form_comuna = e.target.value 
+         }
+
         /*
         async  getComunaList() {
                 console.log ("GET COMUNA LIST METHOD"); 
