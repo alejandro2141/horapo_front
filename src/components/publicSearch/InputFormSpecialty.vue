@@ -16,7 +16,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                     </div>
 
                     <div>
-                        <input autocomplete="off" autocorrect="off" spellcheck="false" placeholder  type="text" style=" z-index: 9;  padding-left : 40px ; padding-right : 50px; border-radius: 25px;"  class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }" v-model="form_specialty" id="form_specialty" name="form_specialty"  aria-label=".form-control-lg example"  >
+                        <input @keyup="captureSeachLetter" autocomplete="off" autocorrect="off" spellcheck="false" placeholder  type="text" style=" z-index: 9;  padding-left : 40px ; padding-right : 50px; border-radius: 25px;"  class="form-control form-control-lg border " :class="{'border-success' : ready_input , 'border-primary' : !ready_input , 'text-success' : ready_input }"  id="form_specialty" name="form_specialty"  aria-label=".form-control-lg example"  >
                     </div>
                     
                      <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
@@ -34,7 +34,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                 </div>   
                 
                 <div>
-                 vmodel variable={{form_specialty}} {{form_specialty}}
+                 vmodel variable={{form_specialty}} 
                 </div>
                 javascript variable=<input id="test1" type="text"> 
                
@@ -116,6 +116,13 @@ watch: {
     },//end watch
 
     methods: {
+        captureSeachLetter(e)
+         {
+             console.log("even keyUp capture"+e.target.value )
+             this.form_specialty = e.target.value 
+         }
+
+
         /*
         async  getSpecialtyList() {
             console.log ("GET SPECIALTY LIST METHOD"); 
