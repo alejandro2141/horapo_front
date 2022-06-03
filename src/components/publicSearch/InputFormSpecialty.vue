@@ -33,10 +33,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                      </div>
                 </div>   
                 
-                <div>
-                 vmodel variable={{form_specialty}} 
-                </div>
-                javascript variable=<input id="test1" type="text"> 
+                
                
             </div>
         </div>
@@ -49,11 +46,7 @@ import { BKND_CONFIG } from '../../../config123.js'
 
 <script>
 //const showForm = ref(false)
-window.onkeyup = keyup;
 
-function keyup(e) {
-document.getElementById('test1').value=e.target.value ;
-}
 /*let aux1 = document.getElementById('form_specialty').value ;
 
 document.getElementById('test1').value=aux1 ;
