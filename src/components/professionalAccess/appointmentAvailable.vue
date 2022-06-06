@@ -10,11 +10,11 @@ import axios from 'axios';
   <text class="text-secondary" style="">#{{appointment.app_id}}</text>
 
                         <div id="app" class="d-flex justify-content-start"  >	
-                            <!--
-                            <div class="m-0"  :style="{'background-color' : '#'+appointment.center_color }"  >
-                                &nbsp;&nbsp;&nbsp;
+                            
+                            <div class="m-0"    >
+                                  {{appointment.start_time.substring(0, 5) }}
                             </div>
-                            -->
+                            
                             <div class="">
 
                                 <div class="display-4 "  style="margin-left: 0.2em;">
