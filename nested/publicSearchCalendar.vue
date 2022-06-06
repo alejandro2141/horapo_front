@@ -1,0 +1,30 @@
+<script setup>
+// This starter template is using Vue 3 <script setup> SFCs
+// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
+
+import GeneralHeader from '../src/components/GeneralHeader.vue'
+
+</script>
+
+<template>
+<div>
+    <GeneralHeader></GeneralHeader>
+    <div id="app" class="text-center p-5 bg-light" >     
+   
+        
+        PUBLIC SEARCH in CALENDAR
+        <div class="mt-4 pt-4">
+        
+        <hr>
+            <a HREF="/index.html" type="button" class="btn btn-outline-secondary">Regresar</a>
+        </div>
+    </div>
+    
+</div>
+</template>
+
+
+<style scoped>
+
+
+</style>
