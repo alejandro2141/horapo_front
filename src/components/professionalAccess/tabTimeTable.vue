@@ -3,40 +3,45 @@ import { ref } from 'vue'
 import axios from 'axios';
 import ModalCreateCalendar from './modalCreateCalendar.vue';
 import ModalViewCalendar from './modalViewCalendar.vue';
-
+import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatient.vue'
 
 
 </script>
 <template>
 
-        <div  class="mx-auto " style="width: 95%;" >
+        <div    >
             
             <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas"  :global_specialties="global_specialties"  ></ModalCreateCalendar>
             <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
-
+            <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
       
                 <p class="text-center h4 mt-3">Calendarios</p>
 
             
                 <div  id="search_result" v-if='calendars!=null &&  calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
-                        <div class="card m-3 border border-secondary" style="width: 18rem; border-radius: 15px; " :style="{ 'background-color' : calendar.color   }"  >
+                        <div class="card mt-3 border border-secondary w-100" style="width: 18rem; border-radius: 15px; " :style="{ 'background-color' : calendar.color   }"  >
                             <div class="card-body" >
-
-                                <h5 class="card-title h2 p-2"  >
+                    
+                    <div class="d-flex justify-content-between">
+                                <text class=" h5 card-title  mt-0 pt-0"  >
                                   <i class="bi bi-calendar"></i>  {{idSpecialty2name(calendar.specialty1) }}  
-                                </h5>
+                                </text>
 
+                                <text class="text-primary h3">
+                                    <i @click="displayShareCalendar(calendar)" class="bi bi-share"></i>
+                                </text>
+                    </div>
 
-                    <div class="d-flex justify-content-between"> 
+                    <div class="d-flex justify-content-between mt-2"> 
                           <text class=""> Estado  Actual</text>   
                           
                           <div v-if="evaluateCalendarStatus(calendar.date_end)==3">
-                              <text class="text-danger"> EXPIRADO </text>
+                              <text class="text-danger fw-bold"> EXPIRADO </text>
                           </div>
                           <div v-else>
-                              <text v-if="calendar.calendar_active" class="text-primary" >  Encendido </text>
-                              <text v-else class="text-primary" > <i class="bi bi-exclamation-octagon text-danger"></i>
+                              <text v-if="calendar.calendar_active" class="text-success fw-bold" >  Encendido </text>
+                              <text v-else class="text-danger fw-bold" > <i class="bi bi-exclamation-octagon text-danger"></i>
                                 Apagado </text>
                           </div>
                     </div>
@@ -54,7 +59,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
                                 </div>
 -->
                                 <div class="mt-2">
-                                    <text>Lugar de Consulta </text>
+                                    <text>En Consulta </text>
                                     <div class="d-flex justify-content-between ">
                                         <div> 
                                             
@@ -114,7 +119,7 @@ import ModalViewCalendar from './modalViewCalendar.vue';
 
                                <br>
                                 <p class="text-center" > <text  @click="viewCalendar(calendar)" class="text-primary"> Modificar </text>  </p>
-                         <p class="text-white">C#{{calendar.calendar_id}} </p>
+                     <!--    <p class="text-white">C#{{calendar.calendar_id}} </p> -->
                             </div>
                         </div>   
                     </div>
@@ -156,6 +161,12 @@ data: function () {
             showOnOffCalendar: false, 
 
             calendar_active : true ,
+            
+            //for modal Share Calendar
+            calendarToShare :null ,
+            activatorShareCalendar : null,
+
+
 		 }
 	},
 	props: ['session_params','global_comunas', 'global_specialties'],
@@ -166,6 +177,12 @@ data: function () {
          },
  
     methods: {
+        displayShareCalendar(calendar)
+        {
+        console.log("display share calendar");
+        this.calendarToShare = calendar ;
+        this.activatorShareCalendar = Math.random();
+        },
 
         evaluateCalendarStatus(date_end)
         {
