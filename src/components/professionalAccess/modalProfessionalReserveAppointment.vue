@@ -11,7 +11,7 @@ import axios from 'axios';
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-2 p-0 modal-background" style="border-radius: 25px;">
+			<div class="modal-container  m-2 p-0 modal-background" style="border-radius: 15px;" :style="{ 'background-color' : hourToReserve.calendar_color  }">
  
 
                  <!--
@@ -28,16 +28,20 @@ import axios from 'axios';
 
                 <div class="modal-body mt-0 p-0"  >                   
         
-            <div id="app" class="m-0 d-flex  "  >	
-                  <div class="" :style="{ 'background-color' : getCenter(hourToReserve.center_id).center_color  }">
+            <div id="app" class="m-0 d-flex p-3 "  >	
+
+              <!--
+                  <div class="" :style="{ 'background-color' : hourToReserve.calendar_color  }">
                           &nbsp; &nbsp; &nbsp; &nbsp;
-                          <!-- only in case want to show left bar color --> 
+                         
                   </div>
+              -->
+              
                   <div>
         
 
 
-        <div class="display-4  text-success d-flex justify-content-between mt-2" >	
+        <div class="display-4  text-success d-flex justify-content-between m-1"  >	
 
                           <text class="p-1 text-dark" >
                             <i v-if="hourToReserve.center_visit" class=" bi bi-building"></i>      
