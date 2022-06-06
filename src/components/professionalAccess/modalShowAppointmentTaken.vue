@@ -15,24 +15,25 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container m-2 p-0 modal-background " style="border-radius: 25px;" >
+			<div class="modal-container m-2 p-0 modal-background " style="border-radius: 15px;" >
 
     <!------------------ ----> 
     <div v-if="hourTaken != null"   class=" text-body h5">
         
         <div id="app" class="d-flex  "  >	
-            <div class="" :style="{ 'background-color' : hourTaken.calendar_color  }">
-                     &nbsp; &nbsp; &nbsp; &nbsp;
+            <div class="p-2" style="border-radius: 15px;" :style="{ 'background-color' : hourTaken.calendar_color  }" >
+                    
                      <!-- only in case want to show left bar color --> 
             </div>
-            <div>
+
+            <div class="p-3">
         <!--
         <p class="text-end m-2" >
           <i class="display-1 text-primary bi bi-x-lg p-1 m-2"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
         </p>
         -->
 
-        <div class="display-4  text-success d-flex justify-content-between mt-2" >	
+        <div class="display-4  text-success d-flex justify-content-between mt-2 " >	
 
                           <text class=" text-dark" >
                             <i v-if="hourTaken.center_visit" class=" bi bi-building"></i>      
@@ -50,12 +51,9 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
           <text class=""> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> <br>
             <b>{{hourTaken.start_time}}</b> <text >hrs</text>  
         </text>
-
-
  			  <p>	
         <!--   Reserva #{{hourTaken.id}} -->
         </p>
-
  
           <div class=""    >
            <!-- TYPE CENTER --> 
@@ -292,7 +290,7 @@ export default {
 	  getShortMonthName(month)
 		{
 			console.log("MONTH:"+parseInt(month));
-			let months = ['nodata','Ene.','Feb.' ,'Mar.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+			let months = ['nodata','Enero','Febrero' ,'Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre' ]
 			return months[parseInt(month)];
 
 		},
