@@ -20,18 +20,22 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
             
                 <div  id="search_result" v-if='calendars!=null &&  calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
-                        <div class="card mt-3 border border-secondary w-100" style="width: 18rem; border-radius: 15px; " :style="{ 'background-color' : calendar.color   }"  >
-                            <div class="card-body" >
+                        
+                    <div class="card mb-5  w-100" style="width: 18rem; border-radius: 15px; " :style="{ 'background-color' : calendar.color   }"  >
+                    <div class="card-body p-0 m-0" >
                     
-                    <div class="d-flex justify-content-between">
-                                <text class=" h5 card-title  mt-0 pt-0"  >
-                                  <i class="bi bi-calendar"></i>  {{idSpecialty2name(calendar.specialty1) }}  
+                    <div class="d-flex justify-content-between p-2 w-100" :style="{ 'background-color' : calendar.color   }" style="width: 18rem; border-radius: 15px; " >
+                                <text class="card-title display-6 text-white mt-0 pt-0"   >
+                                  <i class="bi bi-calendar "></i>  {{idSpecialty2name(calendar.specialty1) }}  
                                 </text>
 
-                                <text class="text-primary h3">
+                                <text class="text-primary fs-1 ">
                                     <i @click="displayShareCalendar(calendar)" class="bi bi-share"></i>
                                 </text>
                     </div>
+
+                <div class="bg-white w-100 pt-2 pl-2 pr-2">
+                    <div class="m-2 ">
 
                     <div class="d-flex justify-content-between mt-2"> 
                           <text class=""> Estado  Actual</text>   
@@ -121,7 +125,15 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                                 <p class="text-center" > <text  @click="viewCalendar(calendar)" class="text-primary"> Modificar </text>  </p>
                      <!--    <p class="text-white">C#{{calendar.calendar_id}} </p> -->
                             </div>
+                            </div>
+
+                        </div>
+                    
+                    <!-- end card -->
                         </div>   
+                    
+                    
+                    
                     </div>
                 </div>
 
