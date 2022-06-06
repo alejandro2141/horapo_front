@@ -10,8 +10,8 @@ import axios from 'axios';
     <div class="d-flex justify-content-between mb-3">
                     
         <div class="p-2">
-            <text class="fs-1 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
-            <text class="fs-3 fw-lighter" >
+            <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
+            <text class="fs-3 fw-light" >
                 <i v-if="appointment.center_visit" class=" bi bi-building"></i>      
                 <i v-if="appointment.home_visit"  class=" bi bi-house-door" > </i>                                  
                 <i v-if="appointment.remote_care" class=" bi bi-camera-video"></i>                         
