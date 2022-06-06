@@ -11,9 +11,8 @@ import axios from 'axios';
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-2 p-0 modal-background" style="border-radius: 15px;" :style="{ 'background-color' : hourToReserve.calendar_color  }">
+			<div class="modal-container  m-2 p-0 modal-background" style="border-radius: 15px;" >
  
-
                  <!--
                 <div class="modal-header mb-0">
                       <div class="display-4 p-1 text-success" >	
@@ -25,23 +24,19 @@ import axios from 'axios';
                 </div>
                 -->
 
-
-                <div class="modal-body mt-0 p-0"  >                   
+      <div class="modal-body mt-0 p-0"  >                   
         
-            <div id="app" class="m-0 d-flex p-3 "  >	
-
-              <!--
-                  <div class="" :style="{ 'background-color' : hourToReserve.calendar_color  }">
-                          &nbsp; &nbsp; &nbsp; &nbsp;
-                         
-                  </div>
-              -->
-              
-                  <div>
+      <div id="app" class="m-0 p-0 d-flex" style="border-radius: 15px;" >	
+             
+              <div class="m-0 p-2" :style="{ 'background-color' : hourToReserve.calendar_color  }" style="border-radius: 15px;" >
+                       
+              </div>
+                            
+              <div class="m-2">
         
 
 
-        <div class="display-4  text-success d-flex justify-content-between m-1"  >	
+        <div class="display-4  text-success d-flex justify-content-between "  >	
 
                           <text class="p-1 text-dark" >
                             <i v-if="hourToReserve.center_visit" class=" bi bi-building"></i>      
@@ -59,16 +54,16 @@ import axios from 'axios';
         </div>
         <div class="display-6 mt-3"> 
             <text class="p-1 "> {{ transform_date(hourToReserve.date.substring(0, 10) ) }} </text> <br>
-            <text class="" ><b>{{hourToReserve.start_time}}</b> </text >hrs
+            <text class="" ><b>{{hourToReserve.start_time}}</b> </text > hrs
         </div>
        
-          <div class="mt-4" >
+          <div class="mt-3" >
 
            <!-- TYPE CENTER --> 
-                    <div v-if="hourToReserve.center_visit" class="" style="color: rgb(120, 30, 209);">
+                    <div v-if="hourToReserve.center_visit" class="" >
 
                             <p class="h5" style="">
-                              En Consulta<br>
+                              <text class="display-5"> En Consulta<br> </text>
                               <text class="display-5">{{getCenter(hourToReserve.center_id).name}}</text>
                               <br>
                               Direccion:  {{getCenter(hourToReserve.center_id).address}}
@@ -77,9 +72,9 @@ import axios from 'axios';
                     </div>
 
           <!-- TYPE HOME -->  
-                    <div v-if="hourToReserve.home_visit" style="color:#3399FF">
+                    <div v-if="hourToReserve.home_visit" >
                             <div class="display-5" >
-                                <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
+                               <text >  Visita a Domicilio:</text> <br>
                             </div>
 
                             <h5> Zonas de atención:
@@ -95,11 +90,12 @@ import axios from 'axios';
 
           <!-- TYPE REMOTE  --> 
                     <div v-if="hourToReserve.remote_care" >
-                         <p class="h5 mt-2" style="color:#b36b00" >
+                         <p class="h5"  >
                               
                              <text class="display-5">  Tele Atención. </text> <br> Requiere llamar directamente al telefono registrado del paciente. 
                         </p>
                     </div>
+
         </div>
                         <text v-if="hourToReserve.app_type_home" class="">Direccion: {{hourToReserve.center_address }} </text>
                         
@@ -123,9 +119,11 @@ import axios from 'axios';
                         </div>  
 
                  </div>
-                 </div>
-                <!-- End Body-->
-                </div>
+        
+        <!-- End APP-->
+        </div>
+        <!-- End Body-->
+        </div>
 
         </div> 
         </div> 		
@@ -276,7 +274,7 @@ export default {
     getShortMonthName(month)
 		{
 			console.log("MONTH:"+parseInt(month));
-			let months = ['nodata','Ene.','Feb.' ,'Mar.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+			let months = ['nodata','Enero','Febrero' ,'Marzo','Abril','Mayo','Junio','Julio','Agost','Septiembre','Octubre','Noviembre','Diciembre' ]
 			return months[parseInt(month)];
 
 		},
