@@ -353,7 +353,7 @@ data: function () {
             form_day_sat: null ,
             form_day_sun: null , 
             form_calendar_color : null,
-            calendarColorArray : ["#FFE6E6","#FFFAE6", "#EEFFE6","#E6F5FF","#F6E6FF","#FFE6EE"],
+            calendarColorArray : ["#BD87BB","#58C3BB","#F29A86", "#EEFFE6","#E6F5FF","#F6E6FF","#FFE6EE","#BD87BB"],
 		 }
 	},
 
