@@ -333,8 +333,9 @@ data: function () {
             time : null ,
 
             centers_found_flag : true ,
-
-            calendarColorArray : ["#FFE6E6","#FFFAE6", "#EEFFE6","#E6F5FF","#F6E6FF","#FFE6EE"],
+            
+            calendarColorArray : ["#1E3E72","#D88DBC","#F37336", "#5ABA4A", "#484848", "#921D1D"],
+            
             showColorSelection : false ,
 
 		 }
