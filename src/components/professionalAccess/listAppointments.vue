@@ -42,38 +42,33 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     -->
                 </div>
 
-                <div v-else class="text-secondary border border-secondary mb-2" :style="{ 'background-color' : hour.calendar_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)">
+                <div v-else class="text-secondary  b-2" >
                     
-                        <div>
-                            <div  class="d-flex justify-content-between mt-1 mb-0 " >
-                            
-                                    <div class="d-flex justify-content-start display-6"  >
-                                            <text class="p-1" >
-                                                        <i v-if="hour.center_visit" class=" bi bi-building"></i>      
-                                                        <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
-                                                        <i v-if="hour.remote_care" class=" bi bi-camera-video"></i> 
-                                                        <br>
-                                                        
-                                            </text> 
-                                            <text class="p-1  "> {{ hour.start_time.substring(0,5) }} </text>
-                                            
-                                            <text class="p-1  "><small> {{specialtyId2name(hour.specialty)}} </small> </text>
-                                    
-                                            
-                                            
-                                    </div>  
-                                    
-                                    
-
-                                    <div>        
-                                            <i class="display-5 bi bi-wifi-2 text-body"></i>
-                                    </div>
-                                    
-                            </div>
-                            <div class="display-6 mb-2 mt-0 ">
-                                &nbsp;&nbsp; &nbsp; <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
-                            </div>
+                    <div class="d-flex justify-content-between mb-3">
+                    
+                        <div class="display-6 p-2">
+                            <text class=""> {{ hour.start_time.substring(0,5) }} </text><br>
+                            <text class="" >
+                                <i v-if="hour.center_visit" class=" bi bi-building"></i>      
+                                <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
+                                <i v-if="hour.remote_care" class=" bi bi-camera-video"></i>                         
+                            </text> 
                         </div>
+                    
+                        <div  class="w-100 text-white display-6 pl-2" :style="{ 'background-color' : hour.calendar_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)" >
+                            
+                            <div class=""  >
+                                &nbsp;&nbsp; <text class="p-1  ">{{specialtyId2name(hour.specialty)}} </text>
+                            </div>  
+                           
+                            <div class="">
+                                &nbsp;&nbsp; <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
+                            </div>
+                            
+                        </div>
+
+
+                    </div>
                     
                  </div>
 
