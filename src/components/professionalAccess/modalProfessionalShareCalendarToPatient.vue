@@ -46,13 +46,13 @@ import axios from 'axios';
                     
 
                     <li class="list-group-item text-primary">
-                        <a href="whatsapp://send?text=texto%20con%20URL"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a> 
+                        <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a> 
                     </li>
-                  
+                  <!--
                     <li class="list-group-item text-primary">
                         <a href="https://api.whatsapp.com/send?text=texto_codificado"> Compartir via Whatsapp   <i class="bi bi-whatsapp"></i></a>
                     </li>
-                  
+                  -->
                   
 
                   
