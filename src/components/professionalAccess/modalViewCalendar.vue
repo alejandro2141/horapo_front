@@ -165,16 +165,16 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
                     <div class="row  mb-1  border-secondary ">
                           <div class="col-3 h5">
-                              Color
+                            
                           </div>
-                          <div  class="col-9 border border-primary" :style="{ 'background-color' : form_calendar_color  }" >
-                              <p @click="showColorSelection=!showColorSelection" class="text-end pt-2 h5"> &nbsp;Editar </p>
+                          <div  class="col-9 border border-primary text-white" :style="{ 'background-color' : form_calendar_color  }" >
+                              <p @click="showColorSelection=!showColorSelection" class="text-end pt-2 h5"> &nbsp;Color Referencia </p>
                           </div>      
                     </div>
                             <!--Select Color -->
                     <div v-if="showColorSelection">
                           <div v-for="color in calendarColorArray" :key="color" :value="color">
-                            <p @click="form_calendar_color=color ; showColorSelection=false" class="text-end"  > <text class="p-4 " :style="{ 'background-color' : color  }"> {{ color }} </text> </p> 
+                            <p @click="form_calendar_color=color ; showColorSelection=false" class="text-end text-white"  > <text class="p-2 m-1 " :style="{ 'background-color' : color  }"> {{ color }} </text> </p> 
                           </div>
                     </div>
 
@@ -353,7 +353,7 @@ data: function () {
             form_day_sat: null ,
             form_day_sun: null , 
             form_calendar_color : null,
-            calendarColorArray : ["#BD87BB","#58C3BB","#F29A86", "#EEFFE6","#E6F5FF","#F6E6FF","#FFE6EE","#BD87BB"],
+            calendarColorArray : ["#1E3E72","#D88DBC","#F37336", "#5ABA4A", "#484848", "#921D1D"],
 		 }
 	},
 
