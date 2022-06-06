@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import AppointmentAvailable from './appointmentAvailable.vue'
+import AppointmentAvailable from './appointmentAvailable2.vue'
 import AppointmentReserved from  './appointmentReserved.vue'
 import ModalCreateAppointment from './modalCreateAppointment.vue';
 import ModalShowAppointmentDetails from './modalShowAppointmentDetails.vue';
@@ -42,34 +42,35 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                     -->
                 </div>
 
-                <div v-else class="text-secondary  b-2" >
-                    
+                <div v-else >
+                        <AppointmentAvailable @click="displayModalAppAvailable(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
+                  
+                    <!--
                     <div class="d-flex justify-content-between mb-3">
                     
-                        <div class="display-6 p-2">
-                            <text class=""> {{ hour.start_time.substring(0,5) }} </text><br>
-                            <text class="" >
+                        <div class="p-2">
+                            <text class="fs-1"> {{ hour.start_time.substring(0,5) }} </text><br>
+                            <text class="fs-5" >
                                 <i v-if="hour.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
                                 <i v-if="hour.remote_care" class=" bi bi-camera-video"></i>                         
                             </text> 
                         </div>
                     
-                        <div  class="w-100 text-white display-6 pl-2" :style="{ 'background-color' : hour.calendar_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)" >
+                        <div  class="w-100 text-white display-6 p-2" :style="{ 'background-color' : hour.calendar_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)" >
                             
                             <div class=""  >
-                                &nbsp;&nbsp; <text class="p-1  ">{{specialtyId2name(hour.specialty)}} </text>
+                                <text class="" ><small> {{specialtyId2name(hour.specialty)}} </small> </text>
                             </div>  
                            
                             <div class="">
-                                &nbsp;&nbsp; <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
+                                <text class="" > 
+                                     <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
+                                </text>
                             </div>
-                            
                         </div>
-
-
                     </div>
-                    
+                    -->
                  </div>
 
             </div>
