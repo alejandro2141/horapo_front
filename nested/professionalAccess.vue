@@ -197,10 +197,9 @@ methods: {
 			console.log(key + " -> " + obj[key]);
 			this.session_params[key] = obj[key];
 			}  
-        console.log("session iniciada para:"+this.session_params['professional_name'] );
-        
-       
+        console.log("session iniciada para:"+this.session_params['professional_name'] );           
 	},
+
 //Set View
     switchViewToAppointments()
     {
