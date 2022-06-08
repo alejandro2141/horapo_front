@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import LoadProgress from '../loadProgress.vue'
+import axios from 'axios'
+
+
 /*
 import patientAppointmentAvailable  from '../publicSearch/PatientAppointmentAvailable.vue'
 import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue'
@@ -21,6 +24,9 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                         <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
                     </div>
                 </div>
+
+                <button @click="searchAppointmentsCalendar()" type="button" class="btn btn-primary"> Ver Calendario </button>
+
 
         <!--
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
@@ -50,15 +56,14 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 export default {
  data : function() {
     return {
-
             cal_id : null ,
             token : null ,
             appointments : null ,
 
             date : null ,
+
             form_current_date: null ,
             form_minimum_date : null ,
-
 
             active_spinner : false ,
 
@@ -91,9 +96,12 @@ export default {
    mounted () {    
         let uri = window.location.search.substring(1); 
         let params = new URLSearchParams(uri);
-        this.cal_id=params.get("cal_id")
+       
+        this.date ='19-30-2022'
         this.token=params.get("token")
-        console.log("URL PARAMETROS : cal_id:"+this.cal_id+ " Token:"+this.token  )
+        this.cal_id=params.get("cal_id")
+    
+        console.log("URL PARAMETROS : cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
         },
 
     beforeUpdate(){
@@ -122,25 +130,20 @@ export default {
 
     methods: {
 
-        async searchAppointmentsCalendar(params) {	
+        async searchAppointmentsCalendar() {	
          
-              if (  params.specialty != null )
-              { 
-                            
+              if (  this.cal_id != null )
+              {    
                           let metric = Date.now();
                           this.active_spinner = true ; 
-                          console.log("searchAppointmentsCalendar input params :"+JSON.stringify(params) )
-                          
-                          let specialty_code = null ;
-                          specialty_code = params.specialty.id ; 
-                        
+                                                
                           const json = { 
-                            date : params.date ,
+                            date : this.date ,
                             token : this.token , 
                             cal_id :  this.cal_id,
                                 };
 
-                  console.log ("searchAppointmentsCalendar input to send JSON :"+ JSON.stringify(json)  );
+                  console.log ("searchAppointmentsCalendar INPUT send JSON :"+ JSON.stringify(json)  );
                   let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_calendar",json);
                 
                   this.appointments = response_json.data;
