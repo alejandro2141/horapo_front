@@ -24,23 +24,22 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
             Especialidad 
         </text>
 
-        <button @click="showSearch=!showSearch" type="button" class="mt-3 btn btn-primary"> Buscar Hora Disponible </button>
+        <button @click="showSearch=!showSearch;searchAppointmentsCalendar()" type="button" class="mt-3 btn btn-primary"> Buscar Hora Disponible </button>
     </p>
        
        <!-- FORM INPUT DATE -->
 
-        
-            <div v-if="showSearch"  class="mt-4 d-flex justify-content-around">
+        <div v-if="showSearch" class="mt-4 ">
+            <div   class="mt-4 d-flex justify-content-around">
                     
-                    <text class="display-6"><small>Citas Desde</small></text>
+                    <text class="fs-3"><small>Citas Desde</small></text>
                     <div class="">
                         <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
                     </div>
                 
             </div>
-            
-            <button @click="searchAppointmentsCalendar()" type="button" class="btn btn-primary"> Acceder </button>
-       
+        </div>
+           
 
         <!--
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
