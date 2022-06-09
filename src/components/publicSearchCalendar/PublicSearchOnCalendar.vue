@@ -82,6 +82,7 @@ export default {
 
             showSearch : false,
 
+            metric_search : null ,
             /*
             app : null , 
             showModal : false , 
@@ -165,9 +166,7 @@ export default {
                   console.log ("searchAppointmentsCalendar RESPONSE:"+JSON.stringify(this.appointments)) ;
 
                   // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
-                          this.notificationMessage_alert=	false ;
-                          this.searchParameters = params ;
-                          this.params_bkp = params ; 
+                         
                           this.active_spinner = false ;
 
                     metric = (Date.now() - metric ) ;     
