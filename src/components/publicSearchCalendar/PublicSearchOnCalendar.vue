@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import LoadProgress from '../loadProgress.vue'
 import axios from 'axios'
-
+import GeneralHeader from '../GeneralHeader.vue'
 
 /*
 import patientAppointmentAvailable  from '../publicSearch/PatientAppointmentAvailable.vue'
@@ -13,20 +13,34 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
 <template>
     <div>
-  
-        <p>
-            Component GET PARAMETERS
-        </p>
+        <loadProgress  :active_spinner="active_spinner" > </loadProgress>
+        <GeneralHeader></GeneralHeader>
+    
+    <p class="text-center">
+        <text class="display-6 m-3">
+            Juan Perez Gomez
+        </text>
+        <text class="display-6 m-3">
+            Especialidad 
+        </text>
+
+        <button @click="showSearch=!showSearch" type="button" class="mt-3 btn btn-primary"> Buscar Hora Disponible </button>
+    </p>
        
        <!-- FORM INPUT DATE -->
-                <div v-if="true"  class="row  mb-1  ">
-                    <div class="col">
+
+        
+            <div v-if="showSearch"  class="mt-4 d-flex justify-content-around">
+                    
+                    <text class="display-6"><small>Citas Desde</small></text>
+                    <div class="">
                         <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
                     </div>
-                </div>
-
-                <button @click="searchAppointmentsCalendar()" type="button" class="btn btn-primary"> Ver Calendario </button>
-
+                
+            </div>
+            
+            <button @click="searchAppointmentsCalendar()" type="button" class="btn btn-primary"> Acceder </button>
+       
 
         <!--
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
@@ -66,6 +80,8 @@ export default {
             form_minimum_date : null ,
 
             active_spinner : false ,
+
+            showSearch : false,
 
             /*
             app : null , 
