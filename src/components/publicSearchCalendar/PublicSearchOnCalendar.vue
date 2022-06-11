@@ -18,32 +18,38 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         <GeneralHeader></GeneralHeader>
     
     <p class="text-center">
+
         <text class="display-6 m-3">
-            Juan Perez Gomez
+             {{ cal_professional }}
         </text>
         <text class="display-6 m-3">
-            Especialidad 
+           {{ cal_specialty }}
         </text>
 
-        <button @click="showSearch=!showSearch;searchAppointmentsCalendar()" type="button" class="mt-3 btn btn-primary"> Buscar Hora Disponible </button>
-    </p>
-       
-       <!-- FORM INPUT DATE -->
+        <text class="display-6 m-3">
+           {{ center_name }}
+        </text>
 
+    </p>&nbsp; 
         <div v-if="showSearch" class="mt-4 ">
             <div   class="mt-4 d-flex justify-content-around">
                     
                     <text class="fs-3"><small>Citas Desde</small></text>
                     <div class="">
-                        <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
+                        <input style="border-radius: 25px;" v-model="form_search_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
                     </div>
                 
             </div>
         </div>
-           
+
+        <p class="text-center" v-if="!showSearch">
+        <button @click="showSearch=!showSearch;searchAppointmentsCalendar()" type="button" class="mt-3 btn btn-primary"> Ver Citas Disponibles </button>
+        </p>
+        
+           <hr>
+
        <div  v-for="appointment in appointments" :key="appointment.id" class="mt-3">
-                <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>            
-             
+                <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>                  
         </div>
 
         <!--
@@ -77,10 +83,12 @@ export default {
             cal_id : null ,
             token : null ,
             appointments : null ,
-
+            center_id : null , 
+            professional_id : null ,
             date : null ,
+            center_name : null ,
 
-            form_current_date: null ,
+            form_search_date: null ,
             form_minimum_date : null ,
 
             active_spinner : false ,
@@ -118,12 +126,18 @@ export default {
         let uri = window.location.search.substring(1); 
         let params = new URLSearchParams(uri);
        
-        this.date ='19-30-2022'
+        this.date = new Date() 
         this.token=params.get("token")
         this.cal_id=params.get("cal_id")
+        this.cal_specialty = null 
+        this.cal_professional = null 
     
         console.log("URL PARAMETROS : cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
-        },
+   
+      // this.getProfessionalData();
+      // this.getCenterData();
+     
+       },
 
     beforeUpdate(){
         /*
@@ -150,7 +164,9 @@ export default {
         },
 
     methods: {
+        
 
+       
         async searchAppointmentsCalendar() {	
          
               if (  this.cal_id != null )
@@ -166,36 +182,44 @@ export default {
 
                   console.log ("searchAppointmentsCalendar INPUT send JSON :"+ JSON.stringify(json)  );
                   let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_calendar",json);
-                
+                  
                   this.appointments = response_json.data;
                   console.log ("searchAppointmentsCalendar RESPONSE:"+JSON.stringify(this.appointments)) ;
 
                   // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
-                         
+                    this.center_id = this.appointments[0].center_id;
+                    this.get_center() ; 
+
                           this.active_spinner = false ;
 
                     metric = (Date.now() - metric ) ;     
                     this.metric_search = metric ;
                     console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
                     
-                                  if (this.appointments != null)
-                                  {
-                                   // this.filtered_appointments = this.appointments
-                                   //this.n_appointments_found=this.appointments.length
-                                  }
-                                  else
-                                  {
-                                    this.n_appointments_found = 0 ;
-                                  }
+                                
                    
               }
               else 
               {
                   this.appointments = null;
               }
-                    
-                    
+                        
            },
+
+          async get_center()
+           {
+
+                const json_center = { 
+                    center_id : this.appointments[0].center_id,
+                    };
+               console.log("get Center REQUEST "+json_center);
+               let center = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_center",json_center).data;
+               console.log("get Center RESPONSE "+JSON.stringify(this.center) );
+               this.center_name = center.name ;
+
+
+
+           }
 
 
 
@@ -223,6 +247,18 @@ export default {
             */
 
         },
+  
+    watch : {
+        form_search_date(newValue)
+        {
+            console.log("Date New Value:"+newValue);
+            this.date = new Date(newValue);
+            this.searchAppointmentsCalendar() ;
+        }
+
+    }
+
+
 
 }
 
