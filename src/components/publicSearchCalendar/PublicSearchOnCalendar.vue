@@ -27,9 +27,29 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         </text>
 
         <text class="display-6 m-3">
-           {{ center_name }}
+           {{ center.name }}
+        </text>
+        <text v-if="center.home_visit" class="display-6 m-3">
+           Visita a Domicilio<br>
+           {{center.home_comuna1}} 
+           {{center.home_comuna2}} 
+           {{center.home_comuna3}}
+           {{center.home_comuna4}}
+           {{center.home_comuna5}}
+           {{center.home_comuna6}}
+          
+        </text>
+         <text v-if="center.center_visit" class="display-6 m-3">
+           En Centro <br>
+            {{center.address}}<br>
+            {{center.comuna}}
+        </text>
+         <text v-if="center.remote_care" class="display-6 m-3">
+           Atencion Remota
         </text>
 
+
+       
     </p>&nbsp; 
         <div v-if="showSearch" class="mt-4 ">
             <div   class="mt-4 d-flex justify-content-around">
@@ -86,7 +106,7 @@ export default {
             center_id : null , 
             professional_id : null ,
             date : null ,
-            center_name : null ,
+            center : null ,
 
             form_search_date: null ,
             form_minimum_date : null ,
@@ -188,7 +208,7 @@ export default {
 
                   // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                     this.center_id = this.appointments[0].center_id;
-                    this.get_center() ; 
+                  
 
                           this.active_spinner = false ;
 
@@ -197,7 +217,7 @@ export default {
                     console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
                     
                                 
-                   
+                    this.get_center() ;  
               }
               else 
               {
@@ -212,10 +232,11 @@ export default {
                 const json_center = { 
                     center_id : this.appointments[0].center_id,
                     };
-               console.log("get Center REQUEST "+json_center);
-               let center = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_center",json_center).data;
+               console.log("get Center REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_center",json_center);
+               this.center = response.data
                console.log("get Center RESPONSE "+JSON.stringify(this.center) );
-               this.center_name = center.name ;
+              
 
 
 
