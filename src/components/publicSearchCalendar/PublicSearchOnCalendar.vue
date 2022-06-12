@@ -13,11 +13,15 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 </script>
 
 <template>
-    <div>
+<div>
+    
+    
+    <div >
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
         <GeneralHeader></GeneralHeader>
     
-    <p class="">
+
+    <p  class="" >
 
         <text class="display-6 m-3">
              {{ cal_professional }}
@@ -48,10 +52,13 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
          <text v-if="center.remote_care" class="display-6 m-3">
            Atencion Remota
         </text>
-      
+         
+    </p>
+    
 
-       
-    </p>&nbsp; 
+    
+    &nbsp; 
+
         <div v-if="showSearch" class="mt-4 ">
             <div   class="mt-4 d-flex justify-content-around">
                     
@@ -89,6 +96,8 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
         -->
     </div>     
+
+</div>
 </template>
 
 <style scoped>
@@ -107,7 +116,7 @@ export default {
             center_id : null , 
             professional_id : null ,
             date : null ,
-            center : null ,
+            center : null  ,
 
             form_search_date: null ,
             form_minimum_date : null ,
