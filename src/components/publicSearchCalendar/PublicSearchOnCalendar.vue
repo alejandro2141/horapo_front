@@ -17,18 +17,19 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
         <GeneralHeader></GeneralHeader>
     
-    <p class="text-center">
+    <p class="">
 
         <text class="display-6 m-3">
              {{ cal_professional }}
         </text>
-        <text class="display-6 m-3">
+        <text class="display-6 m-3 text-center">
            {{ cal_specialty }}
         </text>
 
         <text class="display-6 m-3">
            {{ center.name }}
         </text>
+      
         <text v-if="center.home_visit" class="display-6 m-3">
            Visita a Domicilio<br>
            {{center.home_comuna1}} 
@@ -47,7 +48,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
          <text v-if="center.remote_care" class="display-6 m-3">
            Atencion Remota
         </text>
-
+      
 
        
     </p>&nbsp; 
