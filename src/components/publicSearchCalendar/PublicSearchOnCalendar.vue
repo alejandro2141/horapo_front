@@ -21,7 +21,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         <GeneralHeader></GeneralHeader>
     
 
-    <p  class="" >
+    <p  v-if="center != null" class="" >
 
         <text class="display-6 m-3">
              {{ cal_professional }}
@@ -52,6 +52,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
          <text v-if="center.remote_care" class="display-6 m-3">
            Atencion Remota
         </text>
+      
          
     </p>
     
@@ -117,6 +118,9 @@ export default {
             professional_id : null ,
             date : null ,
             center : null  ,
+
+            cal_professional : null ,
+            cal_specialty : null ,
 
             form_search_date: null ,
             form_minimum_date : null ,
@@ -198,12 +202,11 @@ export default {
 
        
         async searchAppointmentsCalendar() {	
-         
+            this.active_spinner = true ; 
               if (  this.cal_id != null )
               {    
                           let metric = Date.now();
-                          this.active_spinner = true ; 
-                                                
+                                                   
                           const json = { 
                             date : this.date ,
                             token : this.token , 
@@ -215,30 +218,30 @@ export default {
                   
                   this.appointments = response_json.data;
                   console.log ("searchAppointmentsCalendar RESPONSE:"+JSON.stringify(this.appointments)) ;
+                  if (this.appointments.length > 0)
+                    {
 
                   // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                     this.center_id = this.appointments[0].center_id;
                   
-
-                          this.active_spinner = false ;
-
                     metric = (Date.now() - metric ) ;     
                     this.metric_search = metric ;
                     console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
-                    
                                 
                     this.get_center() ;  
+                    }
               }
               else 
               {
                   this.appointments = null;
               }
-                        
+            
+            this.active_spinner = false ;         
+           
            },
 
           async get_center()
            {
-
                 const json_center = { 
                     center_id : this.appointments[0].center_id,
                     };
@@ -246,13 +249,7 @@ export default {
                let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_center",json_center);
                this.center = response.data
                console.log("get Center RESPONSE "+JSON.stringify(this.center) );
-              
-
-
-
            }
-
-
 
           /*
             setModalReserve(appointment)
