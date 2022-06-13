@@ -40,14 +40,14 @@ import axios from 'axios';
 
 
                   <ol class="list-group list-group-numbered w-100 ">
-                    <li @click="shareWhatsApp()"  class="list-group-item text-primary">Compartir via Whatsapp  <i class="bi bi-whatsapp"></i> </li>
-                    
-                    <li @click="shareEmail()"  class="list-group-item text-primary">Compartir via Correo  <i class="bi bi-envelope"></i></li>
-                    
-
+                                      
                     <li class="list-group-item text-primary">
-                        <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a> 
+                       <!-- <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a>  -->
+                       <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a> 
                     </li>
+                  
+                   <li @click="shareEmail()"  class="list-group-item text-primary">Compartir via Correo  <i class="bi bi-envelope"></i></li>
+                   
                   <!--
                     <li class="list-group-item text-primary">
                         <a href="https://api.whatsapp.com/send?text=texto_codificado"> Compartir via Whatsapp   <i class="bi bi-whatsapp"></i></a>
