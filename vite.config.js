@@ -22,6 +22,7 @@ module.exports = defineConfig({
         publicsearch: resolve(__dirname, './nested/publicSearch.html'),
         professionalaccess: resolve(__dirname, './nested/professionalAccess.html'),
         publicSearchCalendar: resolve(__dirname, './nested/publicSearchCalendar.html'),
+        publicSiteProfessional: resolve(__dirname, './nested/publicSiteProfessional.html'),
       }
     }
   },
