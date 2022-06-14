@@ -4,7 +4,7 @@ import LoadProgress from '../loadProgress.vue'
 import axios from 'axios'
 import GeneralHeader from '../GeneralHeader.vue'
 import appointmentAvailableSearchCalendar from './AppointmentAvailableSearchCalendar.vue'
-
+import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue';
 /*
 import patientAppointmentAvailable  from '../publicSearch/PatientAppointmentAvailable.vue'
 import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue'
@@ -14,69 +14,91 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
 <template>
 <div>
-    
+     <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
+     
     
     <div >
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
         <GeneralHeader></GeneralHeader>
     
+    <p class="text-center">
+    Busqueda en Agenda Profesional
+    </p>
 
-    <p  v-if="center != null" class="" >
+    <p  v-if="center != null" class="fs-3" >
+       
+        <text class=" m-3 display-5" style="color: rgb(31, 157, 148);" >
+           {{  getSpecialtyName() }}
+        </text>
+        <br>
+        <text class=" m-3">
+            {{ professional.name }}
+        </text>
+        <br>
 
-        <text class="display-6 m-3">
-             {{ cal_professional }}
-        </text>
-        <text class="display-6 m-3 text-center">
-           {{ cal_specialty }}
-        </text>
 
-        <text class="display-6 m-3">
-           {{ center.name }}
+        <!--
+        <text class=" m-3">
+           {{ center.name}}
+        <br>
+        </text> -->
+        
+        <text v-if="center.home_visit" class=" m-3" >
+            <text style="color: rgb(51, 153, 255);">  
+                <i class="bi bi-house-door" ></i>  
+                Visita a Domicilio
+            <br>
+            </text>
+            {{id2comunaName(center.home_comuna1)}} &nbsp;
+            {{id2comunaName(center.home_comuna2)}} &nbsp;
+            {{id2comunaName(center.home_comuna3)}} &nbsp;
+            {{id2comunaName(center.home_comuna4)}} &nbsp;
+            {{id2comunaName(center.home_comuna5)}} &nbsp;
+            {{id2comunaName(center.home_comuna6)}} &nbsp;
+           <br>
+            
+            
+
         </text>
-      
-        <text v-if="center.home_visit" class="display-6 m-3">
-           Visita a Domicilio<br>
-           {{center.home_comuna1}} 
-           {{center.home_comuna2}} 
-           {{center.home_comuna3}}
-           {{center.home_comuna4}}
-           {{center.home_comuna5}}
-           {{center.home_comuna6}}
-          
-        </text>
-         <text v-if="center.center_visit" class="display-6 m-3">
-           En Centro <br>
+       
+         <text v-if="center.center_visit" class=" m-3"  >
+         <text style="color: rgb(120, 30, 209);"> <i class="h1 bi bi-building"  > </i> En Centro <br>  </text>
+        
             {{center.address}}<br>
             {{center.comuna}}
+            <br> 
         </text>
-         <text v-if="center.remote_care" class="display-6 m-3">
-           Atencion Remota
+        
+         <text v-if="center.remote_care" class=" m-3" style="color: rgb(179, 107, 0);" >
+             <i class="bi bi-camera-video"  ></i>Tele Atencion 
+            <br>
         </text>
-      
+         
          
     </p>
     
 
-    
-    &nbsp; 
-
-        <div v-if="showSearch" class="mt-4 ">
-            <div   class="mt-4 d-flex justify-content-around">
+        <div v-if="showSearch" class="mt-1 ">
+            <div   class="mt-1 d-flex justify-content-around">
                     
-                    <text class="fs-3"><small>Citas Desde</small></text>
+                    <text class="fs-3"><small>Buscar Desde</small></text>
                     <div class="">
-                        <input style="border-radius: 25px;" v-model="form_search_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
+                        <input style="border-radius: 25px;" v-model="form_search_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control border border-primary" >
                     </div>
                 
             </div>
         </div>
 
         <p class="text-center" v-if="!showSearch">
-        <button @click="showSearch=!showSearch;searchAppointmentsCalendar()" type="button" class="mt-3 btn btn-primary"> Ver Citas Disponibles </button>
+        <button @click="showSearch=!showSearch;searchAppointmentsCalendar()" type="button" class="mt-3 btn btn-primary"> Mostrar Horas Disponibles </button>
         </p>
         
            <hr>
 
+        <p v-if="appointments != null ">   
+        Horas disponibles más proximas:  
+        </p>
+       
        <div  v-for="appointment in appointments" :key="appointment.id" class="mt-3">
                 <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>                  
         </div>
@@ -116,11 +138,18 @@ export default {
             appointments : null ,
             center_id : null , 
             professional_id : null ,
-            date : null ,
-            center : null  ,
+            date :null ,
+            center : null, 
+            professional : {name : 'Not Set'} ,
+            specialty : "No Set",
+            global_specialties : [] ,
+            global_comunas : [] ,
+            //APP set for modal View Appointment
+            app : null ,
+            openModalEvent : null , 
 
-            cal_professional : null ,
-            cal_specialty : null ,
+            searchParameters : null ,
+
 
             form_search_date: null ,
             form_minimum_date : null ,
@@ -145,7 +174,7 @@ export default {
     }
   },
 
-   props: ['searchParameters','session_params','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
+   props: ['session_params','daterequired', 'filter_center' , 'filter_home' , 'filter_remote' ],
    emits: ["updateLastSearch"],
 
  
@@ -159,12 +188,20 @@ export default {
    mounted () {    
         let uri = window.location.search.substring(1); 
         let params = new URLSearchParams(uri);
-       
-        this.date = new Date() 
+        
+        let aux_date = new Date();
+
+        this.date = new Date().setDate(aux_date.getDate()+1) 
+        this.form_search_date = null 
+        //new Date(this.date.getDate() +1 ).toISOString().split("T")[0];
+
         this.token=params.get("token")
         this.cal_id=params.get("cal_id")
         this.cal_specialty = null 
         this.cal_professional = null 
+
+        this.form_minimum_date = new Date().setDate(aux_date.getDate()+1) 
+        
     
         console.log("URL PARAMETROS : cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
    
@@ -228,7 +265,12 @@ export default {
                     this.metric_search = metric ;
                     console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
                                 
-                    this.get_center() ;  
+                    this.get_center();  
+                   
+                    this.get_professional_data();
+                    this.get_specialties() ;
+                    this.get_locations() ; 
+
                     }
               }
               else 
@@ -249,17 +291,103 @@ export default {
                let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_center",json_center);
                this.center = response.data
                console.log("get Center RESPONSE "+JSON.stringify(this.center) );
-           }
+           },
 
-          /*
+           async get_professional_data()
+           {
+                const json_center = { 
+                    professional_id : this.appointments[0].professional_id,
+                    };
+               console.log("get_professional_data REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_professional",json_center);
+               this.professional= response.data
+               console.log("get_professional_data RESPONSE "+JSON.stringify(this.professional) );
+           },
+
+            async get_specialties()
+           {
+                const json_center = { 
+                    token : 123,
+                    };
+               console.log("get_specialties REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_specialty_list",json_center);
+               console.log("get_specialties RESPONSE "+JSON.stringify(response.data.rows) );
+              
+              this.global_specialties =  JSON.parse(JSON.stringify(response.data.rows))
+             
+
+           },
+
+          
+           async get_locations()
+           {
+                const json_center = { 
+                    token : 123,
+                    };
+               console.log("get_locations REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json_center);
+               console.log("get_locations RESPONSE "+JSON.stringify(response.data.rows) );
+              
+              this.global_comunas=  JSON.parse(JSON.stringify(response.data.rows))
+             
+           },
+
+            getSpecialtyName()
+            {
+                if (this.appointments != null && this.appointments.length > 0 )
+                {
+                    let temp= this.global_specialties.find(elem => elem.id ==  this.appointments[0].specialty  )
+                    if (temp != null) { return temp.name }
+                    else { return null }
+
+                }
+                else { return null }
+            },
+
+            id2comunaName(id)
+            {
+            let temp= this.global_comunas.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+            },
+         
             setModalReserve(appointment)
             {
                 console.log("Set Modal Reserve method in SearchApp Resutl"+JSON.stringify(appointment));
-                this.app=appointment;
-                //this.modalOpen = true; 
-                this.openModalEvent = Math.random();
+                
+              //  {"calendar_id":"136","date":"2022-06-14","professional_name":"Juanito Cura Los Dolores Pies","specialty1":144,"duration":60,"professional_id":"1","home_visit":true,"home_visit_location1":1662,"home_visit_location2":1511,"home_visit_location3":null,"home_visit_location4":null,"home_visit_location5":null,"home_visit_location6":null,"center_visit_location":null,"center_visit":false,"center_id":149,"center_name":"Kines a domicilio","center_address":null,"remote_care":false,"status":1,"start_time":"02:00"}
+              //  {"calendar_id":"136","date":"2022-06-15                                                    ","specialty" :144,"duration":60,                                                                                                                                                                                                                                                                  "center_id":149,                                                                                       "start_time":"1:0","time_between":0,"professional_id":"1"}
+                this.app = appointment;
+                this.app['professional_name']=this.professional.name ; 
+                this.app['specialty1']=new String(this.app.specialty) ; 
+                this.app['home_visit']=this.center.home_visit ; 
+                this.app['center_visit']=this.center.center_visit ; 
+                
+                this.app['center_name']=this.center.name ; 
+                this.app['center_address']=this.center.address ; 
+
+                this.app['remote_care']=this.center.remote_care ; 
+
+               this.app['home_visit_location1']=this.center.home_comuna1 ; 
+               this.app['home_visit_location2']=this.center.home_comuna2 ; 
+               this.app['home_visit_location3']=this.center.home_comuna3 ; 
+               this.app['home_visit_location4']=this.center.home_comuna4 ; 
+               this.app['home_visit_location5']=this.center.home_comuna5 ; 
+               this.app['home_visit_location6']=this.center.home_comuna6 ; 
+               
+               this.app['center_visit_location']=this.center.comuna ; 
+                
+               this.searchParameters=this.app.specialty ;
+
+
+                console.log("Set Modal Reserve method in app for modal"+JSON.stringify(this.app));
+                
+               //this.searchParameters = { 'specialty' : this.appointments[0].specialty } 
+               //this.modalOpen = true; 
+               this.openModalEvent = Math.random() ;
             },
           
+          /* 
             updateLastSearch()
             {
                 console.log (" update search Result. ");
