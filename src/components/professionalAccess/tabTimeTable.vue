@@ -240,7 +240,7 @@ data: function () {
                           
                                     };
                         console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/rofessional_get_calendars",json);
+                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_calendars",json);
                         this.calendars = response_json.data.rows;
                         console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
                     },	
