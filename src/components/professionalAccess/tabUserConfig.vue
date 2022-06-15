@@ -29,6 +29,25 @@ import axios from 'axios';
         <p class=""> Primer Login  :  {{ professional_data.first_time }} </p>
         
 
+        <div class="d-flex justify-content-between"> 
+
+            <a class="mt-4" target="_blank" rel="noopener noreferrer" :href="'/nested/publicSiteProfessional.html?prof_id='+professional_data.id">Ver Su Sitio Profesional</a>
+            <text class="">
+                <text class="text-center">Compartir </text>
+                <p>
+               &nbsp; <i class="text-primary fs-1 bi bi-whatsapp "> </i> &nbsp; &nbsp;
+               &nbsp; <i class="text-primary fs-1 bi bi-facebook"></i> &nbsp;
+                </p>
+            </text>
+
+        </div>
+
+        <p>
+            
+        </p>
+        <p>
+            
+        </p>
 
           <hr>
         <p> Especialidades Registradas  :  
