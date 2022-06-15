@@ -32,21 +32,21 @@ import axios from 'axios';
 
                 <div class="modal-body m-2 p-2"  >        
 
-
               <div v-if="showDestinationEmail">
                 Enviar al Siguiente Correo
                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> 
               </div>
 
-
-                  <ol class="list-group list-group-numbered w-100 ">
+                  <div class="w-100 ">
                                       
-                    <li class="list-group-item text-primary">
+                    <div class="m-2">
                        <!-- <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a>  -->
-                       <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a> 
-                    </li>
+                       <a :href="'whatsapp://send?text='+this.BKND_CONFIG.BKND_HOST+'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a> 
+                    </div>
                   
-                   <li @click="shareEmail()"  class="list-group-item text-primary">Compartir via Correo  <i class="bi bi-envelope"></i></li>
+                   <div @click="shareEmail()"  class="m-2">
+                     Compartir via Correo  <i class="bi bi-envelope"></i>
+                   </div>
                    
                   <!--
                     <li class="list-group-item text-primary">
@@ -56,7 +56,7 @@ import axios from 'axios';
                   
 
                   
-                  </ol>
+                  </div>
 
                 </div>
 
