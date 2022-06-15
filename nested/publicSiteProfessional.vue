@@ -14,8 +14,9 @@ import PublicSiteProfessional from '../src/components/publicSiteProfessional/Pub
 
 <template>
 <div>
+
     <div id="app" class="p-3" >    
-        <PublicSiteProfessional :condata="condata" ></PublicSiteProfessional>
+        <PublicSiteProfessional :session_data="session_data" > </PublicSiteProfessional>
     </div>
 
 </div>
@@ -34,19 +35,19 @@ export default {
         return {
             global_specialties : [],
             global_comunas : [],  
+            session_data : [] ,
         }
     },  
     props: [], 
     emits: [],
 
 created() {
-/*
-        console.log("NESTED PUBLIC SEARCH Fill Global variables");
-        this.loadGlobalSpecialties();
-        this.loadGlobalComunas();
-*/
+    this.session_data=JSON.parse(JSON.stringify(BKND_CONFIG)) ;
 },
-mounted() {},
+mounted() {
+    this.session_data=JSON.parse(JSON.stringify(BKND_CONFIG)) ;
+
+},
 
 watch: {
     },//end watch
