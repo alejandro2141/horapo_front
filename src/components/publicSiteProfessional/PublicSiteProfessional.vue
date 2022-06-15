@@ -20,12 +20,55 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
         <GeneralHeader></GeneralHeader>
     
-    <p class="text-center">
-    Bienvenido al sitio del profesional
-    
+            <p class="fs-3 text-center">
+            Sitio del profesional
+            </p>
+
+            <div class="d-flex justify-content-start">
+                <i class="display-1 m-4 bi bi-person-bounding-box"></i>
+                <text class="mt-4">
+                    {{ professional.name }} <br>
+                    Activo:{{ professional.active }}
+                </text>
+            </div>
+
+            <p class="fs-3 mt-4 pt-4">
+            Calendarios por Especialidad
+            </p>
 
 
-    </p>
+             <div class="d-flex justify-content-between mt-3">
+                 <text></text>
+                 <text class=""><small> Ver horas </small> </text>
+             </div>
+             <hr>
+
+            <div v-for="calendar in calendars" :key="calendar.calendar_id" >
+
+                <div class="d-flex justify-content-between mt-3">
+                    <div>
+                        <text class="fs-3 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
+                        <text v-if="calendar.home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> </text>
+                        <text v-if="calendar.center_visit" > Cita en Consulta <i class="h1 bi bi-building"></i> </text>
+                        <text v-if="calendar.remote_care" > Atención Remota <i class="h1 bi bi-camera-video"></i> </text>
+                        
+                       <br> {{ calendar.address}}
+                    </div>
+
+                    <div>
+                       <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendar.calendar_id"> <i  class="fs-2 text-primary p-2 bi bi-arrow-right-square"></i> </a>
+                    </div>
+                    
+                  
+
+                </div>
+<hr>
+
+            </div>
+
+            <div class="mt-5 pt-5">
+               
+            </div>
       
     </div>     
 
@@ -33,15 +76,16 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 </template>
 
 <style scoped>
-
 </style>
 
-
 <script>
-
 export default {
  data : function() {
     return {
+            professional : {name : 'Not Set'} ,
+            calendars : null ,
+
+
             prof_id : null ,
             token : null ,
             appointments : null ,
@@ -49,7 +93,7 @@ export default {
             professional_id : null ,
             date :null ,
             center : null, 
-            professional : {name : 'Not Set'} ,
+           
             specialty : "No Set",
             global_specialties : [] ,
             global_comunas : [] ,
@@ -70,7 +114,7 @@ export default {
         }
   },
 
-   props: [],
+   props: ['session_data'],
    emits: [],
 
     beforeCreate(){
@@ -84,9 +128,8 @@ export default {
         let params = new URLSearchParams(uri);
         this.token=params.get("token")
         this.prof_id=params.get("prof_id")
-        
-       
-
+        console.log("URL PARAMETROS : cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
+    
         let aux_date = new Date();
 
         this.date = new Date().setDate(aux_date.getDate()+1) 
@@ -97,9 +140,10 @@ export default {
         this.cal_professional = null 
 
         this.form_minimum_date = new Date().setDate(aux_date.getDate()+1) 
-            
-        console.log("URL PARAMETROS : cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
-     
+        this.get_professional_data(this.prof_id);        
+        this.get_professional_calendars(this.prof_id);        
+        this.get_specialties() ;
+
        },
 
     beforeUpdate(){
@@ -127,9 +171,17 @@ export default {
         },
 
     methods: {
-        
 
-       
+        viewCalendar(id)
+        {
+            console.log("viewCalendar id:"+id)
+        },
+
+        updateLastSearch()
+        {
+
+        },
+ /*      
         async searchAppointmentsCalendar() {	
             this.active_spinner = true ; 
               if (  this.cal_id != null )
@@ -143,7 +195,7 @@ export default {
                                 };
 
                   console.log ("searchAppointmentsCalendar INPUT send JSON :"+ JSON.stringify(json)  );
-                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_calendar",json);
+                  let response_json = await axios.post(this.session_data.BKND_HOST+"/patient_get_appointments_calendar",json);
                   
                   this.appointments = response_json.data;
                   console.log ("searchAppointmentsCalendar RESPONSE:"+JSON.stringify(this.appointments)) ;
@@ -173,28 +225,44 @@ export default {
             this.active_spinner = false ;         
            
            },
-
+*/
+/*
           async get_center()
            {
                 const json_center = { 
                     center_id : this.appointments[0].center_id,
                     };
                console.log("get Center REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_center",json_center);
+               let response = await axios.post(this.session_data.BKND_HOST+"/patient_get_center",json_center);
                this.center = response.data
                console.log("get Center RESPONSE "+JSON.stringify(this.center) );
            },
-
-           async get_professional_data(id)
+*/
+            async get_professional_data(id)
            {
                 const json_center = { 
                     professional_id : id,
                     };
                console.log("get_professional_data REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_professional",json_center);
+               let response = await axios.post(this.session_data.BKND_HOST+"/patient_get_professional",json_center);
                this.professional= response.data
                console.log("get_professional_data RESPONSE "+JSON.stringify(this.professional) );
            },
+
+            async get_professional_calendars(id)
+           {
+                const json_center = { 
+                    professional_id : id,
+                    };
+               console.log("get_professional_data REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.session_data.BKND_HOST+"/patient_get_professional_calendars",json_center);
+               this.calendars= response.data.rows
+               console.log("get_professional_data RESPONSE "+JSON.stringify(this.calendars) );
+           },
+
+
+
+
 
             async get_specialties()
            {
@@ -202,7 +270,7 @@ export default {
                     token : 123,
                     };
                console.log("get_specialties REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_specialty_list",json_center);
+               let response = await axios.post(this.session_data.BKND_HOST+"/common_get_specialty_list",json_center);
                console.log("get_specialties RESPONSE "+JSON.stringify(response.data.rows) );
               
               this.global_specialties =  JSON.parse(JSON.stringify(response.data.rows))
@@ -217,7 +285,7 @@ export default {
                     token : 123,
                     };
                console.log("get_locations REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json_center);
+               let response = await axios.post(this.session_data.BKND_HOST+"/common_get_comuna_list",json_center);
                console.log("get_locations RESPONSE "+JSON.stringify(response.data.rows) );
               
               this.global_comunas=  JSON.parse(JSON.stringify(response.data.rows))
@@ -242,6 +310,14 @@ export default {
             if (temp != null) { return temp.name }
             else { return null }
             },
+
+            id2specialtyName(id)
+            {
+            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+            },
+         
          
             setModalReserve(appointment)
             {
