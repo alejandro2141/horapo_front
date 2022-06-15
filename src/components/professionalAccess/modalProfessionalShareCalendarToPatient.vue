@@ -41,11 +41,18 @@ import axios from 'axios';
                                       
                     <div class="m-2">
                        <!-- <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a>  -->
-                       <a :href="'whatsapp://send?text='+this.BKND_CONFIG.BKND_HOST+'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a> 
+                       <!-- <a :href="'whatsapp://send?text='+this.BKND_CONFIG.BKND_HOST+'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="fs-2 bi bi-whatsapp"></i> </a>  -->
+                      <a :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="fs-2 bi bi-whatsapp"></i> </a>  -->
+                    
+                    </div>
+
+                    <div class="m-2">
+                       <!-- <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a>  -->
+                       <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Ir al sitio del calendario  </a> 
                     </div>
                   
                    <div @click="shareEmail()"  class="m-2">
-                     Compartir via Correo  <i class="bi bi-envelope"></i>
+                     Compartir via Correo  <i class="fs-2 bi bi-envelope"></i>
                    </div>
                    
                   <!--
