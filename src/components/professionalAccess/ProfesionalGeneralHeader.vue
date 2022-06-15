@@ -44,6 +44,7 @@ import SwitchViewButton from './switchViewButton.vue'
 				&nbsp; <i class="bi bi-geo-alt display-5 "></i> <text class="h4">&nbsp;  Sus Direcciones de Consultas </text>	
 			</a>
 
+		
 			<hr>
 
 			<div  style="width: 00px; height: 600px;" >		
