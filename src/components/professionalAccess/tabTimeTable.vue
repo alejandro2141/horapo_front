@@ -8,18 +8,16 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
 
 </script>
 <template>
-
-        <div    >
-            
+        <div>  
             <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas"  :global_specialties="global_specialties"  ></ModalCreateCalendar>
             <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
             <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
       
-                <p class="text-center h4 mt-3">Calendarios</p>
+                <p class="text-center display-5 m-4">Calendarios</p>
 
-            
                 <div  id="search_result" v-if='calendars!=null &&  calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
+                    <div class="m-2">
                         
                     <div class="card mb-5  w-100" style="width: 18rem; border-radius: 15px; " :style="{ 'background-color' : calendar.color   }"  >
                     <div class="card-body p-0 m-0" >
@@ -28,10 +26,16 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                                 <text class="card-title display-6 text-white mt-0 pt-0"   >
                                   <i class="bi bi-calendar "></i>  {{idSpecialty2name(calendar.specialty1) }}  
                                 </text>
-
-                                <text class="text-primary fs-1 ">
-                                    <i @click="displayShareCalendar(calendar)" class="bi bi-share"></i>
-                                </text>
+                                <!--
+                                <div class="fs-1 bg-light text-primary" style="background-color: #D4D4D4;  border-radius: 15px;">
+                                    <p @click="displayShareCalendar(calendar)" class="text-center p-1"  >
+                                        
+                                        <text class="fs-6" > Compartir
+                                        </text><br>
+                                        <i  class="fs-4 bi bi-share"></i>
+                                    </p>
+                                </div>
+                                -->
                     </div>
 
                 <div class="bg-white w-100 pt-2 pl-2 pr-2">
@@ -107,7 +111,15 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                           <text> {{calendar.end_time.substring(0,5)}} </text>
                   </div>
 
+                <div  class="d-flex justify-content-between mt-2">
+                          <text> Tiempo Atención </text>  
+                          <text> {{calendar.duration}} Min </text>
+                </div>
                 
+                <div  class="d-flex justify-content-between mt-2">
+                          <text> Entre Tiempo </text>  
+                          <text> {{calendar.time_between}} Min </text>
+                </div>
 
                 <div class="mt-1">
                   Dias Recurrencia: <br>
@@ -119,11 +131,27 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                                         <text class="d-flex justify-content-end"  v-if="calendar.friday"> Viernes <br> </text> 
                                         <text class="d-flex justify-content-end"  v-if="calendar.saturday"> Sabado <br> </text> 
                                         <text class="d-flex justify-content-end"  v-if="calendar.sunday"> Domingo <br> </text> 
-                  </div>
+                </div>
 
-                               <br>
-                                <p class="text-center" > <text  @click="viewCalendar(calendar)" class="text-primary"> Modificar </text>  </p>
+                <div  class="d-flex justify-content-between mt-2">
+                
+                            <text> Redes Sociales </text>  
+                            
+                            <div class="text-primary">
+                                    <p @click="displayShareCalendar(calendar)" class="text-end p-1"  >
+                                            
+                                            <text class="fs-6" > Compartir
+                                            </text><br>
+                                            <i  class="fs-4 bi bi-share"></i>
+                                    </p>
+                            </div>
+
+                </div>
+                              
+                               
+                                <p class="text-center fs-4" > <text  @click="viewCalendar(calendar)" class="text-primary"> Modificar </text>  </p>
                      <!--    <p class="text-white">C#{{calendar.calendar_id}} </p> -->
+                            <br>
                             </div>
                             </div>
 
@@ -133,8 +161,11 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                         </div>   
                     
                     
-                    
                     </div>
+
+                    </div>
+
+
                 </div>
 
 
@@ -184,8 +215,10 @@ data: function () {
 	props: ['session_params','global_comunas', 'global_specialties'],
 
     created () {    
-        console.log("TAB Calendards this session_params"+this.session_params.professional_id);
-        this.getCalendars();
+          this.active_spinner = true ;  	
+              console.log("TAB Calendards this session_params"+this.session_params.professional_id);
+              this.getCalendars();
+          this.active_spinner = false ;  	
          },
  
     methods: {
