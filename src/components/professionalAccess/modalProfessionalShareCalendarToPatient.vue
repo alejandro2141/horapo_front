@@ -10,60 +10,49 @@ import axios from 'axios';
 		<div  v-if="showModalShareCalendarToPatient"  class="modal bg-secondary w-100"    >
 		    <transition name="modal">
 			<div class="modal-mask "   >
-			<div class="modal-wrapper w-100">
-			<div class="modal-container   w-100 modal-background" style="border-radius: 15px;" >
+			<div class="modal-wrapper">
+			<div class="modal-container w-100  p-1 m-1 modal-background" style="border-radius: 15px;" >
  
                  <!--
                 <div class="modal-header mb-0">
                 </div>
                 -->
-                <div class="modal-header m-0" >
-                  <div class="d-flex justify-content-between">
+                <div class="modal-header m-0 " >
+                      <div class="h4 ">Compartir Calendario en Redes Sociales
+                      </div>
 
-                        <div class="h4 m-2">  Compartir Calendario 
-                        </div>
-
-                        <div> </div>
+                      <div> </div>
                         
-                        <div class="ml-2"><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalShareCalendarToPatient = false ; "  aria-label="Close"></i>
-                        </div>
-                  </div>
+                      <div class=""><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalShareCalendarToPatient = false ; "  aria-label="Close"></i>
+                      </div>
                 </div>
 
-                <div class="modal-body m-2 p-2"  >        
+                <div class="modal-body m-1 p-1"  >     
 
-              <div v-if="showDestinationEmail">
-                Enviar al Siguiente Correo
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"> 
+              <div class="d-flex justify-content-between p-3" > 
+                <div> 
+                  <a href="mailto:user@example.com?subject=Hola Te comparto mi calendario para agendar horas&body=Hola Te comparto mi calendario para agendar horas, en el siguiente link puedes acceder directamente a mi agenda para encontrar la hora que mejor se ajuste a tu disponibilidad de tiempo">Email<br> 
+                  <i class="display-1  bi bi-envelope"></i> </a> 
+                </div>
+                
+                <div>
+                    <div  data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                    Facebook <br>
+                    <i class="display-1 bi bi-facebook"></i>
+                    
+                    </a></div>
+                </div>
+                
+                <div> 
+                  <a :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id">
+                   WhatsApp <br>
+                   <i class="display-1 bi bi-whatsapp"></i> </a>  
+                </div>
+
               </div>
 
-                  <div class="w-100 ">
-                                      
-                    <div class="m-2">
-                       <!-- <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a>  -->
-                       <!-- <a :href="'whatsapp://send?text='+this.BKND_CONFIG.BKND_HOST+'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="fs-2 bi bi-whatsapp"></i> </a>  -->
-                      <a :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="fs-2 bi bi-whatsapp"></i> </a>  
-                    
-                    </div>
 
-                    <div class="m-2">
-                       <!-- <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a>  -->
-                       <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Ir al sitio del calendario  </a> 
-                    </div>
-                  
-                   <div @click="shareEmail()"  class="m-2">
-                     Compartir via Correo  <i class="fs-2 bi bi-envelope"></i>
-                   </div>
-                   
-                  <!--
-                    <li class="list-group-item text-primary">
-                        <a href="https://api.whatsapp.com/send?text=texto_codificado"> Compartir via Whatsapp   <i class="bi bi-whatsapp"></i></a>
-                    </li>
-                  -->
-                  
-
-                  
-                  </div>
+            
 
                 </div>
 
