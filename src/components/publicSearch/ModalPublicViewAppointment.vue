@@ -31,7 +31,7 @@ import loadProgress from '../loadProgress.vue'
 
     <div v-if="app != null"     class="bg-white p-0 mb-1 ">
         
-		<div class="d-flex justify-content-between ">
+		<div class="d-flex justify-content-between mb-3">
                       <div  class="display-4 p-2" style=" color:#1f9d94">  {{ showSpecialtyName(app.specialty1) }}  </div>
                       <div  > </div>
                       <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
