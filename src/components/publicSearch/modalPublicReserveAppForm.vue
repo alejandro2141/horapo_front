@@ -54,6 +54,13 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 					</div>
 
 				-->
+
+				<div style="margin-top: 1em; " class="h4">
+							<div class="" >
+								<p> {{ transform_date( appToReserve.date.substring(0, 10) ) }}, a las {{appToReserve.start_time.substring(0, 5) }} hrs </p>
+							</div>
+				</div>
+
 <hr>				 
                 <div class="text-dark"> 
 					<p class="display-5"> Datos del Paciente </p>
