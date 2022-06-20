@@ -7,7 +7,7 @@ import axios from 'axios';
 
 <template>
 
-    <div class="d-flex justify-content-between mb-3">
+    <div class="d-flex justify-content-between m-1" style="background-color: #D4D4D4;  border-radius: 15px;" >
                     
         <div class="p-2">
             <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
