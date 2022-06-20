@@ -25,28 +25,23 @@ import loadProgress from '../loadProgress.vue'
 			<div class="modal-container  m-1 p-0 modal-background"  style="border-radius: 20px;" > 
               
             <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168);border-radius: 20px; " > 
- 					<div class="d-flex flex-row justify-content-end ">
-                      <div  > </div>
-                      <div  > </div>
-                      <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
-                    </div>
+ 					
 <!-- -->
-
 
 
     <div v-if="app != null"     class="bg-white p-0 mb-1 ">
         
-        <div id="app" class="m-0 d-flex  "  >	
+		<div class="d-flex justify-content-between ">
+                      <div  class="display-4 p-2" style=" color:#1f9d94">  {{ showSpecialtyName(app.specialty1) }}  </div>
+                      <div  > </div>
+                      <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
+        </div>
+        
+		<div id="app" class="m-0 d-flex  "  >	
             <div class="">
                      &nbsp;
             </div>
             <div>
-
- 				<div class="display-4 p-2" style=" color:#1f9d94">
-                    <div >	
-                    {{ showSpecialtyName(app.specialty1) }} 
-                    </div>       
-                </div>
 
                 <div class="">
 					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" " ></i> Fecha : 
