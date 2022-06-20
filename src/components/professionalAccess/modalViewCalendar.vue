@@ -18,8 +18,8 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-1 modal-background ">
  
-                <div class="modal-header " :style="{ 'background-color' : calendar_details.color   }" >
-                        <div class="h4">  <p> Configurar Calendario</p>
+                <div class="modal-header " >
+                        <div class="fs-2">  <p> Configurar Calendario</p>
                         </div>
                         
                         <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalViewCalendar = false ; $emit('updateCalendarList'); "  aria-label="Close"></i>
