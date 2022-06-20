@@ -15,7 +15,7 @@ import loadProgress from '../loadProgress.vue'
   <loadProgress  :active_spinner="active_spinner" > </loadProgress>
       <div v-if='!session_params.first_time' >
 
-           <CalendarPickerMinimal2  v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal2>
+           <CalendarPickerMinimal2 class="mt-3" v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal2>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> <br>
            <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
 
@@ -50,11 +50,13 @@ data: function () {
 	props: ['session_params','global_specialties', 'global_comunas' ],
   emits: ['switchView','switchToCenters' ] ,
     created () {
+         this.active_spinner = true ;  	
             //this.daterequired="12-12-2021";
             //this.getCenters();
             console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );   
             this.daterequired = new Date().toISOString().split('T')[0] ;
             this.updateAppointmentList();
+         this.active_spinner = false ;  	
          },
  
     methods: {
