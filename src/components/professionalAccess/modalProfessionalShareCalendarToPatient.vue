@@ -42,7 +42,7 @@ import axios from 'axios';
                     <div class="m-2">
                        <!-- <a href="whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html"> Compartir via Whatsapp <i class="bi bi-whatsapp"></i> </a>  -->
                        <!-- <a :href="'whatsapp://send?text='+this.BKND_CONFIG.BKND_HOST+'/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="fs-2 bi bi-whatsapp"></i> </a>  -->
-                      <a :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="fs-2 bi bi-whatsapp"></i> </a>  -->
+                      <a :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html?cal_id='+calendarToShare.calendar_id"> Compartir via Whatsapp <i class="fs-2 bi bi-whatsapp"></i> </a>  
                     
                     </div>
 
