@@ -170,10 +170,14 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
 
 
                 <div v-else class="mt-1   "  style="border-radius: 15px;" >
-                        <p class="p-4 text-center" >    
+
+                        <div v-if="calendars == null ">
+                             <p class="p-4 text-center" >    
                             <i class="display-1 bi bi-emoji-expressionless"></i><br>
-                        Aun No existen Calendarios 
-                        </p>
+                            NULL Aun No existen Calendarios 
+                            </p>
+                        </div>
+
 
                 </div>
 
