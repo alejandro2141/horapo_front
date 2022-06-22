@@ -80,11 +80,12 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
     </div>
 
     <div v-if="hours.length == 0  && !this.showSpinner" class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >
-            
+                <!--
                 <div class="p-4 text-center" >    
                     <i class="display-1 bi bi-emoji-expressionless"></i><br>
                   No existen Horarios o  Citas Reservadas para este dia
                 </div>
+                -->
 
     </div>
 
