@@ -103,12 +103,12 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Hora  Inicio </text>  
-                          <text> {{calendar.start_time.substring(0,5)}} </text>
+                          <text> {{calendar.start_time.substring(0,5)}} Hrs </text>
                   </div>
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Hora  Fin </text>  
-                          <text> {{calendar.end_time.substring(0,5)}} </text>
+                          <text> {{calendar.end_time.substring(0,5)}} Hrs </text>
                   </div>
 
                 <div  class="d-flex justify-content-between mt-2">
@@ -159,8 +159,6 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
 
               </div>
 
-
-
                               
                                <hr>
                                 <p class="text-center fs-4" > <text  @click="viewCalendar(calendar)" class="text-primary"> Modificar </text>  </p>
@@ -194,10 +192,16 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
 
 
                 </div>
-
+            <!--
             <div class="text-center p-3 m-3"> 
                 <text @click="addNewCalendar()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nuevo Calendario </text>
             </div>
+            -->
+
+            <div class="text-center p-3 m-3"> 
+                <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
+            </div>
+
 
 
         </div>       
