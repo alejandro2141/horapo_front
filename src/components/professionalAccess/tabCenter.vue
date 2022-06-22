@@ -12,25 +12,31 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
       
 <div  class="mx-auto " style="width: 95%;" >
 
-    <div class="d-flex justify-content-between mt-3">
+    <div class="d-flex justify-content-between mb-0 ">
         
-         <i class="bi bi-geo-alt display-3 "></i>
-         <p class="h4 text-center  mt-3">
-            Sus Consultas
+         <!-- <i class="bi bi-geo-alt display-3 "></i> -->
+         <text></text>
+         <p class="display-5 text-center mt-4  ">
+            Consultas
          </p>
-         <i class="display-1 bi bi-x-lg ml-0 text-primary" aria-label="Close" v-on:click="closeTabCenter()" ></i> 
+         <i class="mt-4 display-1 bi bi-x-lg  text-primary" aria-label="Close" v-on:click="closeTabCenter()" ></i> 
     
     </div>
 
-            <p class="text-center lead">
-            <small>Direcciones de sus Consultas, donde el paciente debe asistir <i  @click="showInfoCreate=!showInfoCreate" class="bi bi-info-circle-fill text-primary"></i> </small> 
+            <p class="lead mb-0 pb-0 text-center">
+            <small>Direcciónes de sus consultas <i  @click="showInfoCreate=!showInfoCreate" class="bi bi-info-circle-fill text-primary"></i> </small> 
             </p>
             
-            <div  v-if='showInfoCreate' class="alert alert-info p-2" >
-                - Puede crear cuantas consultas usted quiera. <br>
-                - Estas quedan disponibles para sus horarios.<br>
-                - La direccion de consulta es donde el paciente debe asistir a su cita<br>
-                - En caso de dudas el paciente puede llamarle al telefono de la consulta<br> 
+            <div  v-if='showInfoCreate' class="alert alert-info p-0 m-0 p-3" style=" border-radius: 15px;" >
+                i - Las Consultas pueden luego ser seleccionadas en Calendarios.<br>
+                ii - Puede crear cuantas Consultas usted desee. <br>
+                iii - La direccion de la consulta es donde el paciente debe asisitir para citas de tipo "<i class="bi bi-building"></i> En Consulta".<br>
+                iv - Existe tres tipos de consultas: <br>
+                    &nbsp;&nbsp;<i class="bi bi-building"></i>  "En Consulta"  <br>
+                    &nbsp;&nbsp;<i class="bi bi-house-door"></i> "A domicilio" <br>
+                    &nbsp;&nbsp;<i class="bi bi-camera-video"></i> "Atencion Remota"<br> 
+                v  - El telefono que registra para la consulta es public para el paciente, por lo que usted podria recibir llamadas del paciente al telefono registrado <br> 
+                vi - Para crear una nueva consulta, debe hacer click en <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text> <br> 
             </div>
             
 
@@ -39,15 +45,15 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
 
-                    <div class="card m-2 border border-secondary" style="width: 18rem; border-radius: 15px;"  >
+                    <div class="card m-4  bg-light" style=" border-radius: 15px;"  >
                         <div class="card-body"  >
                             
                                 <div >
                                     <!-- CENTER VISIT -->
                                     <div v-if="center.center_visit" >
                                         <div class="d-flex justify-content-between ">
-                                                <text class="h5">{{center.name}} </text>
-                                                <text class=""></text>  
+                                                <text class="h5"><i class="text-muted bi bi-geo-alt"></i> {{center.name}} </text>
+                                                <text class="display-4"></text>  
                                         </div>
                                         <hr class="m-0">
                                         
@@ -65,7 +71,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                     <div v-if="center.home_visit" >
 
                                             <div class="d-flex justify-content-between ">
-                                                <text class="h5">{{center.name}} </text>
+                                                <text class="h5"><i class="text-muted bi bi-geo-alt"></i> {{center.name}} </text>
                                                 <text class=""> </text>  
                                             </div>
                                             <hr class="m-0">
@@ -94,7 +100,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                     <!-- REMOTE CARE  -->
                                     <div v-if="center.remote_care" >
                                         <div class="d-flex justify-content-between ">
-                                            <text class="h5">{{center.name}} </text>  
+                                            <text class="h5"><i class="text-muted bi bi-geo-alt"></i> {{center.name}} </text>  
                                         </div>
                                          <hr class="m-0">
                                         <div class="d-flex justify-content-between mt-0">
@@ -111,8 +117,12 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                     </div>
                                 
                                 </div>
-                                    <p class="text-end mt-3" > <text @click="showCenter(center)" class="text-primary">Ver</text>  </p> 
 
+
+                                <p class="text-center fs-4 mt-3 mb-0" > <text  @click="showCenter(center)" class="text-primary"> Modificar </text>  </p>
+                
+
+                                   
                          <!--   <p class="text-end text-muted mt-2"> #{{ center.id }} </p> -->
                         </div>
                     </div>
@@ -145,9 +155,24 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         </div>
 
         <div class="text-center p-3 m-3"> 
-            <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text>
+            <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
         </div>
-<p><br></p>
+
+       
+        <p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+        </p>
         <!--
         <ModalCreateNewCenter  :session_params="session_params" v-on:updateCenterList="updateCenterList" > </ModalCreateNewCenter>
         --> 
