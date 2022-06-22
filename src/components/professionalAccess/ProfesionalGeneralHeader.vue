@@ -31,25 +31,25 @@ import SwitchViewButton from './switchViewButton.vue'
 	</div>
 
 
-	<div v-if="showUserMenu" class="bg-secondary text-primary bg-white border  border-1 border-primary ml-1 mr-1" >
-		<div class="  ">
+	<div v-if="showUserMenu"  class=" " >
+		<div class="pb-5 bg-light text-white  border  border-bottom border-primary  w-100" style="position: absolute; z-index: 999999;">
 			
 			<hr>
 
 			<a HREF="/index.html" class="h4  text-decoration-none"> &nbsp; <i class="bi bi-arrow-left-circle display-5"></i> &nbsp; Salir </a><hr>
 			
 			<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="h4  text-decoration-none"> &nbsp; <i class="display-5 bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información </a><hr>
-
+			
 			<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="text-decoration-none"  >	
-				&nbsp; <i class="bi bi-geo-alt display-5 "></i> <text class="h4">&nbsp;  Sus Direcciones de Consultas </text>	
+				&nbsp; <i class="bi bi-geo-alt display-5 "></i> <text class="h4">&nbsp; Direcciones y Consultas </text>	
 			</a>
 
 		
 			<hr>
-
+			<!--
 			<div  style="width: 00px; height: 600px;" >		
 			</div>
-			
+			-->
 		</div>
 
 	</div>
