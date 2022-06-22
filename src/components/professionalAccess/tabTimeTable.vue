@@ -134,21 +134,35 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                 </div>
 
                 <div  class="d-flex justify-content-between mt-2">
-                
-                            <text> Redes Sociales </text>  
-                            
-                            <div class="text-primary">
-                                    <p @click="displayShareCalendar(calendar)" class="text-end p-1"  >
-                                            
-                                            <text class="fs-6" > Compartir
-                                            </text><br>
-                                            <i  class="fs-4 bi bi-share"></i>
-                                    </p>
-                            </div>
-
+                            <text @click="displayShareCalendar()" class="" >Compartir en Redes Sociales  </text>  
                 </div>
+
+              <div v-if="showShareSocial" class="d-flex justify-content-between p-3" > 
+                <div> 
+                  <a href="mailto:user@example.com?subject=Hola Te comparto mi calendario para agendar horas&body=Hola Te comparto mi calendario para agendar horas, en el siguiente link puedes acceder directamente a mi agenda para encontrar la hora que mejor se ajuste a tu disponibilidad de tiempo">Email<br> 
+                  <i class="display-1  bi bi-envelope"></i> </a> 
+                </div>
+                
+                <div>
+                    <div  data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">
+                    Facebook <br>
+                    <i class="display-1 bi bi-facebook"></i>
+                    
+                    </a></div>
+                </div>
+                
+                <div> 
+                  <a :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html?cal_id='+calendar.calendar_id">
+                   WhatsApp <br>
+                   <i class="display-1 bi bi-whatsapp"></i> </a>  
+                </div>
+
+              </div>
+
+
+
                               
-                               
+                               <hr>
                                 <p class="text-center fs-4" > <text  @click="viewCalendar(calendar)" class="text-primary"> Modificar </text>  </p>
                      <!--    <p class="text-white">C#{{calendar.calendar_id}} </p> -->
                             <br>
@@ -213,6 +227,8 @@ data: function () {
             calendarToShare :null ,
             activatorShareCalendar : null,
 
+            showShareSocial : true, 
+
 
 		 }
 	},
@@ -226,11 +242,17 @@ data: function () {
          },
  
     methods: {
+        /*
         displayShareCalendar(calendar)
         {
         console.log("display share calendar");
         this.calendarToShare = calendar ;
         this.activatorShareCalendar = Math.random();
+        }, */
+        
+        displayShareCalendar()
+        {
+       // this.showShareSocial = !this.showShareSocial ;
         },
 
         evaluateCalendarStatus(date_end)
