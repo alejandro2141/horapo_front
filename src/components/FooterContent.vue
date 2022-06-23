@@ -12,23 +12,23 @@ const count = ref(0)
 
 	<div class="fixed-bottom">
 
-    <div  class="d-flex justify-content-between  mt-0 pt-0 bg-dark p-2"> 
+    <div  class="d-flex justify-content-between   bg-dark pt-3 pb-3 "> 
 
       <text class="">
 			<a href="/nested/aboutUs.html" class="m-1   text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;&nbsp;&nbsp;	<i class="text-white  text-decoration-none">123hora?</i>
+				&nbsp;&nbsp;&nbsp;&nbsp;	<text class="text-secondary text-decoration-none">123hora?</text>
 			</a>
 	  </text>
 
       <text class="">
 			<a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-					<i class="text-white text-decoration-none">Profesionales</i>
+					<text class="text-secondary text-decoration-none">Profesionales</text>
 			</a>
 	  </text>
 
 	  <text>
 			<a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-					<i class="text-white text-decoration-none">Registrate</i>&nbsp;&nbsp;&nbsp;&nbsp;
+					<text class="text-muted text-decoration-none">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
 			</a>
 	  </text>
 
