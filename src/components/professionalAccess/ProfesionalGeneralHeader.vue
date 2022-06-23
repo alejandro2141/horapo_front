@@ -8,10 +8,11 @@ import SwitchViewButton from './switchViewButton.vue'
 <template>
 	<div>
 
-    <div v-if="session_params['professional_name'] != null"  class="d-flex p-0 justify-content-around bg-secondary border-bottom "> 
+    <div v-if="session_params['professional_name'] != null"  class="d-flex pt-2 pb-2 justify-content-around bg-secondary border-bottom "> 
 
 		<text v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "   class="text-white border border-0 "  :class="{ 'fw-bold' : showUserMenu }" >	
-			<i class="fs-4 bi bi-list"></i>
+			<i v-if="!showUserMenu " class="fs-4 bi bi-list"></i>
+			<i v-else class="bi bi-x-lg fs-5"></i>
 			<!--
 			<i class="fs-5 bi bi-person"></i><br>
 			<small>{{session_params.professional_name.split(" ")[0] }} </small>
@@ -23,7 +24,8 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 
 		<text v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false "  class="text-white border border-0" :class="{ 'fw-bold': header_menu_calendars }"  >	
-			<i class="bi bi-calendar-week fs-5"></i> <!--< i class="bi bi-calendar fs-5 "  ></i>  <br>  <small> Calendarios </small>	  -->
+			<i  class="bi bi-calendar-week fs-5"></i> <!--< i class="bi bi-calendar fs-5 "  ></i>  <br>  <small> Calendarios </small>	  -->
+			 <!--< i class="bi bi-calendar fs-5 "  ></i>  <br>  <small> Calendarios </small>	  -->
 		</text>
 		<!--
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_centers }"  >	
@@ -34,7 +36,7 @@ import SwitchViewButton from './switchViewButton.vue'
 	</div>
 
 
-	<div v-if="showUserMenu"  class="" >
+	<div v-if="showUserMenu"  class="" style="" >
 		<div class=" bg-secondary p-3  w-100 h-100" style="position: absolute; z-index: 999999;">
 			<hr class="text-white">
 		
