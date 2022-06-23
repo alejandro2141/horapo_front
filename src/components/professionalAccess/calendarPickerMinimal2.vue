@@ -13,7 +13,7 @@ import Datepicker from 'vuejs3-datepicker';
     <div>
 
         <div class="d-flex justify-content-around text-primary"> 
-                <div class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
+                <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
                 <div class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
                        <text class="text-dark"> {{ getSelectedDayName() }} </text> <br> {{ calendar_date.getDate() }}           
 
@@ -23,7 +23,7 @@ import Datepicker from 'vuejs3-datepicker';
                             <!--   <i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>  -->
                         </div>
                 </div>
-                <div class="display-1 d-flex align-items-center">   <i v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>   </div>
+                <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>   </div>
         </div>
      
       <div v-if="show_date_picker" class="text-center "> 
