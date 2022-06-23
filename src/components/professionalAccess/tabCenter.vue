@@ -44,8 +44,8 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
-
-                    <div class="card m-4  bg-light" style=" border-radius: 15px;"  >
+<hr>
+                    <div class="card m-4  bg-light " style=" border-radius: 15px;"  >
                         <div class="card-body"  >
                             
                                 <div >
@@ -59,12 +59,14 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                         
                                         <div class="d-flex justify-content-between mt-0">
                                                 <text>Tipo:</text>
-                                                <text class="text-end"><i class="h1 bi bi-building"></i> <br> En Consulta</text>
+                                                <text class="text-end"> En Consulta <i class="h1 bi bi-building"></i> </text>
                                         </div>
-                                        <div class="d-flex justify-content-between mt-3">
-                                                <text>Direccion: </text>
-                                                <text class="text-end">{{ comunaId2Name(center.comuna)  }} <br> {{center.address}} </text>
-                                        </div>                                      
+                                        
+                                        <p class="mt-3">
+                                            <text >Direccion: </text><br>
+                                            <text class="text-end">{{ comunaId2Name(center.comuna)  }}, {{center.address}} </text>
+                                        </p>
+
                                     </div>
 
                                     <!-- A DOMICILIO -->
@@ -78,7 +80,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                             <div class="d-flex justify-content-between mt-2">
                                                 <text>Tipo : </text>
                                                 <text></text>
-                                                <text class="text-end"> <i class="h1 bi bi-house-door"></i> <br>A Domicilio </text>
+                                                <text class="text-end"> A Domicilio <i class="h1 bi bi-house-door"></i> </text>
                                                 
                                             </div>
                                            
@@ -106,7 +108,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                         <div class="d-flex justify-content-between mt-0">
                                             <text> Tipo: </text>
                                             <text> </text>
-                                            <text class="text-end">  <i class="h1 bi bi-camera-video"></i>  <br> Tele Atención</text>
+                                            <text class="text-end"> Tele Atención <i class="h1 bi bi-camera-video"></i></text>
                                             
                                         </div>
                                         <div class="d-flex justify-content-between mt-2">
@@ -126,8 +128,11 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                          <!--   <p class="text-end text-muted mt-2"> #{{ center.id }} </p> -->
                         </div>
                     </div>
-
+                
+                
+                
                 </div>  
+                
             </div>
 
             <div v-else class="mt-1  "  style="border-radius: 15px;" >
@@ -153,6 +158,9 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
            </p>
             <p class="">Para crear su primera Consulta, por favor click en el link siguiente </p>
         </div>
+
+
+<hr>
 
         <div class="text-center p-3 m-3"> 
             <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
