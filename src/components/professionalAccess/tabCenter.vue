@@ -24,19 +24,21 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
     </div>
 
             <p class="lead mb-0 pb-0 text-center">
-            <small>Direcciónes de sus consultas <i  @click="showInfoCreate=!showInfoCreate" class="bi bi-info-circle-fill text-primary"></i> </small> 
+            <small class="text-secondary">  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info text-primary"></i> </small>Direcciónes de sus consultas 
+               
             </p>
             
             <div  v-if='showInfoCreate' class="alert alert-info p-0 m-0 p-3" style=" border-radius: 15px;" >
-                i - Las Consultas pueden luego ser seleccionadas en Calendarios.<br>
-                ii - Puede crear cuantas Consultas usted desee. <br>
-                iii - La direccion de la consulta es donde el paciente debe asisitir para citas de tipo "<i class="bi bi-building"></i> En Consulta".<br>
-                iv - Existe tres tipos de consultas: <br>
+                i - Una Consulta es  el lugar "Virtual" o "Fisico" donde usted entrega sus servicios profesionales.<br>
+                ii - Una Consulta debe ser seleccionada para cada Calendario.<br>
+                iii - Puede crear cuantas Consultas usted desee. <br>
+                iv - La direccion de la Consulta es donde el paciente debe asisitir para citas en un lugar "Fisico" de tipo "<i class="bi bi-building"></i> En Consulta".<br>
+                v - Existe tres tipos de consultas: <br>
                     &nbsp;&nbsp;<i class="bi bi-building"></i>  "En Consulta"  <br>
                     &nbsp;&nbsp;<i class="bi bi-house-door"></i> "A domicilio" <br>
                     &nbsp;&nbsp;<i class="bi bi-camera-video"></i> "Atencion Remota"<br> 
-                v  - El telefono que registra para la consulta es public para el paciente, por lo que usted podria recibir llamadas del paciente al telefono registrado <br> 
-                vi - Para crear una nueva consulta, debe hacer click en <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text> <br> 
+                vi  - El telefono que registra para la consulta es public para el paciente, por lo que usted podria recibir llamadas del paciente al telefono registrado <br> 
+                vii - Para crear una nueva consulta, debe hacer click en <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text> <br> 
             </div>
             
 
@@ -58,8 +60,8 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                         <hr class="m-0">
                                         
                                         <div class="d-flex justify-content-between mt-0">
-                                                <text>Tipo:</text>
-                                                <text class="text-end"> En Consulta <i class="h1 bi bi-building"></i> </text>
+                                                <text class="mt-2">Tipo:</text>
+                                                <text class="text-end"> En Consulta <i class="text-muted h1 bi bi-building"></i> </text>
                                         </div>
                                         
                                         <p class="mt-3">
@@ -78,9 +80,9 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                             </div>
                                             <hr class="m-0">
                                             <div class="d-flex justify-content-between mt-2">
-                                                <text>Tipo : </text>
+                                                <text class="mt-2">Tipo : </text>
                                                 <text></text>
-                                                <text class="text-end"> A Domicilio <i class="h1 bi bi-house-door"></i> </text>
+                                                <text class="text-end"> A Domicilio <i class="text-muted h1 bi bi-house-door"></i> </text>
                                                 
                                             </div>
                                            
@@ -106,9 +108,9 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                         </div>
                                          <hr class="m-0">
                                         <div class="d-flex justify-content-between mt-0">
-                                            <text> Tipo: </text>
+                                            <text class="mt-2"> Tipo: </text>
                                             <text> </text>
-                                            <text class="text-end"> Tele Atención <i class="h1 bi bi-camera-video"></i></text>
+                                            <text class="text-end"> Tele Atención <i class="text-muted h1 bi bi-camera-video"></i></text>
                                             
                                         </div>
                                         <div class="d-flex justify-content-between mt-2">
