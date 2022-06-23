@@ -8,19 +8,22 @@ import SwitchViewButton from './switchViewButton.vue'
 <template>
 	<div>
 
-    <div v-if="session_params['professional_name'] != null"  class="d-flex p-0 justify-content-around bg-dark border-bottom "> 
+    <div v-if="session_params['professional_name'] != null"  class="d-flex p-0 justify-content-around bg-secondary border-bottom "> 
 
-		<button v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "  type="button" class="btn btn-outline-secondary border border-0 "  :class="{ active: showUserMenu }" >	
+		<button v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "  type="button" class="btn btn-outline-light border border-0 "  :class="{ active: showUserMenu }" >	
+			<i class="fs-4 bi bi-list"></i>
+			<!--
 			<i class="fs-5 bi bi-person"></i><br>
 			<small>{{session_params.professional_name.split(" ")[0] }} </small>
+			-->
 		</button>
 
-		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-secondary border border-0" :class="{ active: header_menu_appointments }"  >	
-			<text class="fs-6"> HOY</text>  <br> <small><text class="">{{day}} {{getMonthName(month)}}</text> </small> 
+		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-light border border-0" :class="{ active: header_menu_appointments }"  >	
+			<text class="fs-6"> HOY</text>  <small><text class="">{{day}} {{getMonthName(month)}}</text> </small> 
 		</button>
 
-		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false  "  type="button" class="btn btn-outline-secondary border border-0" :class="{ active: header_menu_calendars }"  >	
-			<i class="bi bi-calendar fs-5 "  ></i> <br>  <small> Calendarios </small>	 
+		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false  "  type="button" class="btn btn-outline-light border border-0" :class="{ active: header_menu_calendars }"  >	
+			<i class="bi bi-calendar-week fs-5"></i> <!--< i class="bi bi-calendar fs-5 "  ></i>  <br>  <small> Calendarios </small>	  -->
 		</button>
 		<!--
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_centers }"  >	
@@ -32,7 +35,7 @@ import SwitchViewButton from './switchViewButton.vue'
 
 
 	<div v-if="showUserMenu"  class="" >
-		<div class=" bg-dark p-3  w-100 h-100" style="position: absolute; z-index: 999999;">
+		<div class=" bg-secondary p-3  w-100 h-100" style="position: absolute; z-index: 999999;">
 			<hr class="text-white">
 		
 			<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light "> 
