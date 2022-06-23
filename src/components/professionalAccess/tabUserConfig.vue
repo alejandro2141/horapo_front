@@ -24,6 +24,9 @@ import axios from 'axios';
         <p class=""> Numero Doc :  {{ professional_data.document_number }} </p>
         <p class=""> license_number :  {{ professional_data.license_number }} </p>
         <p class=""> Dirección Personal : <br> {{ professional_data.address }} </p>
+
+        <p class=""> Información Certificada Professional : <br> To be completed </p>
+
         <p class=""> Teléfono :  {{ professional_data.phone }} </p>
         <p class=""> Activo :  {{ professional_data.active }} </p>
         <p class=""> Primer Login  :  {{ professional_data.first_time }} </p>
