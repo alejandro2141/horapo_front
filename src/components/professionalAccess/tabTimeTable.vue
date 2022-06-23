@@ -238,12 +238,40 @@ data: function () {
 	},
 	props: ['session_params','global_comunas', 'global_specialties'],
 
-    created () {    
+    beforeCreate () {
+         console.log("TAB Time Table Before Created");  
+         this.active_spinner = true ;  
+        },
+
+    created () {  
+          console.log("TAB Time Table Created");  
           this.active_spinner = true ;  	
               console.log("TAB Calendards this session_params"+this.session_params.professional_id);
               this.getCalendars();
           this.active_spinner = false ;  	
          },
+    
+    beforeMount () {
+        console.log("TAB Time Table Before MOunt");
+        },
+
+    mounted () {
+        console.log("TAB Time Table Mounted");
+        },
+
+    beforeUpdate () {
+        console.log("TAB Time Table Before Update");
+        },
+
+    updated () {
+        console.log("TAB Time Table Updated");
+        this.active_spinner = false ;  
+        },
+
+    destroyed() {
+        console.log("TAB Time Table Destroyed");
+    },
+
  
     methods: {
         /*
