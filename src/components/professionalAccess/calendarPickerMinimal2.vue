@@ -12,13 +12,12 @@ import Datepicker from 'vuejs3-datepicker';
 <template>
     <div>
 
-
         <div class="d-flex justify-content-around text-primary"> 
                 <div class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
                 <div class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
-                        {{ getSelectedDayName() }} <br> {{ calendar_date.getDate() }}           
+                       <text class="text-dark"> {{ getSelectedDayName() }} </text> <br> {{ calendar_date.getDate() }}           
 
-                        <div class="display-5" v-if="!show_date_picker" >
+                        <div class="display-5 text-dark" v-if="!show_date_picker" >
                             <!--  <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i>   -->
                             <text :forceUpdate="forceUpdateCalendar" >  {{ getMonthName( calendar_date.getMonth() ) }}  {{calendar_date.getFullYear()}} </text>
                             <!--   <i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>  -->
