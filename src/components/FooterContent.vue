@@ -12,7 +12,7 @@ const count = ref(0)
 
 	<div class="fixed-bottom">
 
-    <div  class="d-flex justify-content-between   bg-dark pt-3 pb-3 "> 
+    <div  class="d-flex justify-content-between   bg-dark pt-1 pb-1 "> 
 
       <text class="">
 			<a href="/nested/aboutUs.html" class="m-1   text-decoration-none btn-floating "  role="button">
