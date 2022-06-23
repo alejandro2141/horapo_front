@@ -10,21 +10,21 @@ import SwitchViewButton from './switchViewButton.vue'
 
     <div v-if="session_params['professional_name'] != null"  class="d-flex p-0 justify-content-around bg-secondary border-bottom "> 
 
-		<button v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "  type="button" class="btn btn-outline-light border border-0 "  :class="{ active: showUserMenu }" >	
+		<text v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "   class="text-white border border-0 "  :class="{ 'fw-bold' : showUserMenu }" >	
 			<i class="fs-4 bi bi-list"></i>
 			<!--
 			<i class="fs-5 bi bi-person"></i><br>
 			<small>{{session_params.professional_name.split(" ")[0] }} </small>
 			-->
-		</button>
+		</text>
 
-		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-light border border-0" :class="{ active: header_menu_appointments }"  >	
-			<text class="fs-6"> HOY</text>  <small><text class="">{{day}} {{getMonthName(month)}}</text> </small> 
-		</button>
+		<text v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false "  class="text-white p-1" :class="{ 'fw-bold' : header_menu_appointments }"  >	
+			<text class="fs-6 "> HOY</text> <small><text class="">{{day}} {{getMonthName(month)}}</text> </small> 
+		</text>
 
-		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false  "  type="button" class="btn btn-outline-light border border-0" :class="{ active: header_menu_calendars }"  >	
+		<text v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false "  class="text-white border border-0" :class="{ 'fw-bold': header_menu_calendars }"  >	
 			<i class="bi bi-calendar-week fs-5"></i> <!--< i class="bi bi-calendar fs-5 "  ></i>  <br>  <small> Calendarios </small>	  -->
-		</button>
+		</text>
 		<!--
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_centers }"  >	
 			<i class="bi bi-geo-alt display-5 "  ></i> Consultas	
