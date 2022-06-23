@@ -8,19 +8,19 @@ import SwitchViewButton from './switchViewButton.vue'
 <template>
 	<div>
 
-    <div v-if="session_params['professional_name'] != null"  class="d-flex p-0 justify-content-around bg-white border-bottom "> 
+    <div v-if="session_params['professional_name'] != null"  class="d-flex p-0 justify-content-around bg-dark border-bottom "> 
 
-		<button v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "  type="button" class="btn btn-outline-primary border border-0 "  :class="{ active: showUserMenu }" >	
-			<i class="display-5 bi bi-person"></i><br>
-			{{session_params.professional_name.split(" ")[0] }}
+		<button v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "  type="button" class="btn btn-outline-secondary border border-0 "  :class="{ active: showUserMenu }" >	
+			<i class="fs-5 bi bi-person"></i><br>
+			<small>{{session_params.professional_name.split(" ")[0] }} </small>
 		</button>
 
-		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_appointments }"  >	
-			<text class="h5"> HOY</text><br> <text class="h3">{{day}} {{getMonthName(month)}}</text>
+		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false  "  type="button" class="btn btn-outline-secondary border border-0" :class="{ active: header_menu_appointments }"  >	
+			<text class="fs-6"> HOY</text>  <br> <small><text class="">{{day}} {{getMonthName(month)}}</text> </small> 
 		</button>
 
-		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false  "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_calendars }"  >	
-			<i class="bi bi-calendar display-5 "  ></i> <br> Calendarios	
+		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false  "  type="button" class="btn btn-outline-secondary border border-0" :class="{ active: header_menu_calendars }"  >	
+			<i class="bi bi-calendar fs-5 "  ></i> <br>  <small> Calendarios </small>	 
 		</button>
 		<!--
 		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_centers }"  >	
@@ -31,21 +31,25 @@ import SwitchViewButton from './switchViewButton.vue'
 	</div>
 
 
-	<div v-if="showUserMenu"  class=" " >
-		<div class="pb-5 bg-light text-white  border  border-bottom border-primary  w-100" style="position: absolute; z-index: 999999;">
-			
-			<hr>
-
-			<a HREF="/index.html" class="h4  text-decoration-none"> &nbsp; <i class="bi bi-arrow-left-circle display-5"></i> &nbsp; Salir </a><hr>
-			
-			<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="h4  text-decoration-none"> &nbsp; <i class="display-5 bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información </a><hr>
-			
-			<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="text-decoration-none"  >	
-				&nbsp; <i class="bi bi-geo-alt display-5 "></i> <text class="h4">&nbsp; Direcciones y Consultas </text>	
-			</a>
-
+	<div v-if="showUserMenu"  class="" >
+		<div class=" bg-dark p-3  w-100 h-100" style="position: absolute; z-index: 999999;">
+			<hr class="text-white">
 		
-			<hr>
+			<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light "> 
+				&nbsp; <i class="pl-5 bi bi-arrow-left-circle fs-5 "></i> &nbsp; Salir 
+			</a>
+		 
+		<hr class="text-white">
+			<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light"> 
+				&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información 
+				
+			</a>
+			<hr class="text-white">
+			<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="fs-3  text-decoration-none"  >	
+				&nbsp; <i class=" btn-outline-light bi bi-geo-alt fs-5 "></i> <text class="fs-5 btn-outline-light">&nbsp; Direcciones y Consultas </text>	
+			</a>
+			<hr class="text-white">
+
 			<!--
 			<div  style="width: 00px; height: 600px;" >		
 			</div>
