@@ -19,89 +19,92 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
     
     <div >
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
-        <GeneralHeader></GeneralHeader>
+       <!--  <GeneralHeader></GeneralHeader> -->
     
     <p class="text-center">
-    Busqueda en Agenda Profesional
+
     </p>
 
-    <p  v-if="center != null" class="fs-3" >
+    <div v-if="center != null" class="fs-3" >
        
-        <text class=" m-3 display-5" style="color: rgb(31, 157, 148);" >
-           {{  getSpecialtyName() }}
-        </text>
-        <br>
-        <text class=" m-3">
+        <p class="text-center">
+        
+            <text class=" m-3">
+           
             {{ professional.name }}
-        </text>
-        <br>
+            <br> <text class="text-secondary"> <small> Agenda Profesional</small> </text>
+            </text>
+            <br>
+            <text class=" m-3 display-5" style="color: rgb(31, 157, 148);" >
+            {{  specialty }}
+            </text>
+            <!-- HOME VISIT -->
+            <text v-if="center.home_visit" class=" m-3" >
+                <br>
+                <text style="color: rgb(51, 153, 255);">  
+                    <i class="bi bi-house-door" ></i>  
+                    Visita a Domicilio
+                <br>
+                </text>
+                {{id2comunaName(center.home_comuna1)}} &nbsp;
+                {{id2comunaName(center.home_comuna2)}} &nbsp;
+                {{id2comunaName(center.home_comuna3)}} &nbsp;
+                {{id2comunaName(center.home_comuna4)}} &nbsp;
+                {{id2comunaName(center.home_comuna5)}} &nbsp;
+                {{id2comunaName(center.home_comuna6)}} &nbsp;
+            </text>
+            <!-- REMOTE CARE -->
+            <text v-if="center.remote_care" class=" m-3" style="color: rgb(179, 107, 0);" >
+                <br><i class="bi bi-camera-video"  ></i>Tele Atencion 
+                
+            </text>
+            <!-- CENTER VISIT -->
+            <text v-if="center.center_visit" class=" m-3"  >
+                <br>
+                <text style="color: rgb(120, 30, 209);"> 
+                    <i class="h1 bi bi-building"  > </i> En Centro <br>  
+                </text>
+            
+                {{center.address}}<br>
+                {{center.comuna}}
+                 
+            </text>
 
+        
+        </p>
 
-        <!--
+         <!--
         <text class=" m-3">
            {{ center.name}}
         <br>
         </text> -->
-        
-        <text v-if="center.home_visit" class=" m-3" >
-            <text style="color: rgb(51, 153, 255);">  
-                <i class="bi bi-house-door" ></i>  
-                Visita a Domicilio
-            <br>
-            </text>
-            {{id2comunaName(center.home_comuna1)}} &nbsp;
-            {{id2comunaName(center.home_comuna2)}} &nbsp;
-            {{id2comunaName(center.home_comuna3)}} &nbsp;
-            {{id2comunaName(center.home_comuna4)}} &nbsp;
-            {{id2comunaName(center.home_comuna5)}} &nbsp;
-            {{id2comunaName(center.home_comuna6)}} &nbsp;
-           <br>
-            
-            
-
-        </text>
-       
-         <text v-if="center.center_visit" class=" m-3"  >
-         <text style="color: rgb(120, 30, 209);"> <i class="h1 bi bi-building"  > </i> En Centro <br>  </text>
-        
-            {{center.address}}<br>
-            {{center.comuna}}
-            <br> 
-        </text>
-        
-         <text v-if="center.remote_care" class=" m-3" style="color: rgb(179, 107, 0);" >
-             <i class="bi bi-camera-video"  ></i>Tele Atencion 
-            <br>
-        </text>
          
-         
-    </p>
+    </div>
     
 
         <div v-if="showSearch" class="mt-1 ">
-            <div   class="mt-1 d-flex justify-content-around">
-                    
-                    <text class="fs-3"><small>Buscar Desde</small></text>
-                    <div class="">
-                        <input style="border-radius: 25px;" v-model="form_search_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control border border-primary" >
-                    </div>
-                
+            <div   class="mt-1 d-flex justify-content-between">
+                <input style="border-radius: 25px;" v-model="form_search_date" :min="form_minimum_date"   type="date" id="app_date" name="app_date" class="form-control form-control border border-primary" >
             </div>
         </div>
 
         <p class="text-center" v-if="!showSearch">
-        <button @click="showSearch=!showSearch;searchAppointmentsCalendar()" type="button" class="mt-3 btn btn-primary"> Mostrar Horas Disponibles </button>
+        <button @click="showSearch=!showSearch;searchAppointmentsCalendar();" type="button" class="mt-3 btn btn-primary"> 123Hora <br> Ver Horas Disponibles </button>
         </p>
-        
-           <hr>
+         
 
-        <p v-if="appointments != null ">   
-        Horas disponibles más proximas:  
+        <p v-if="appointments != null " class="mt-3">   
+          horas disponibles en Fecha seleccionada
         </p>
        
        <div  v-for="appointment in appointments" :key="appointment.id" class="mt-3">
                 <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>                  
         </div>
+
+       
+
+
+
 
         <!--
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
@@ -159,6 +162,8 @@ export default {
             showSearch : false,
 
             metric_search : null ,
+
+            specialty : null ,
             /*
             app : null , 
             showModal : false , 
@@ -200,8 +205,14 @@ export default {
         this.cal_specialty = null 
         this.cal_professional = null 
 
-        this.form_minimum_date = new Date().setDate(aux_date.getDate()+1) 
-        
+        let aux_date2 = new Date();
+        aux_date2.setDate(aux_date.getDate()+1) ;
+       
+        this.form_minimum_date = aux_date2.getFullYear() +"-"+String(aux_date2.getMonth()+1).padStart(2,0) + "-"+String(aux_date2.getDate()).padStart(2,0)  ;
+        this.date =  this.form_minimum_date ;
+        console.log(" FormMinimumDate: "+ this.form_minimum_date );
+       
+
     
         console.log("URL PARAMETROS : cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
    
@@ -271,6 +282,8 @@ export default {
                     this.get_specialties() ;
                     this.get_locations() ; 
 
+                   
+
                     }
               }
               else 
@@ -279,7 +292,7 @@ export default {
               }
             
             this.active_spinner = false ;         
-           
+            
            },
 
           async get_center()
@@ -314,7 +327,7 @@ export default {
                console.log("get_specialties RESPONSE "+JSON.stringify(response.data.rows) );
               
               this.global_specialties =  JSON.parse(JSON.stringify(response.data.rows))
-             
+              this.setSpecialtyName() ;
 
            },
 
@@ -332,16 +345,16 @@ export default {
              
            },
 
-            getSpecialtyName()
+            setSpecialtyName()
             {
                 if (this.appointments != null && this.appointments.length > 0 )
                 {
                     let temp= this.global_specialties.find(elem => elem.id ==  this.appointments[0].specialty  )
-                    if (temp != null) { return temp.name }
-                    else { return null }
+                    if (temp != null) { this.specialty= temp.name }
+                    else { this.specialty= null }
 
                 }
-                else { return null }
+                else { this.specialty= null }
             },
 
             id2comunaName(id)
