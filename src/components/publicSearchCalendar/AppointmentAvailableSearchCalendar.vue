@@ -13,7 +13,7 @@ import { ref } from 'vue'
         
         <div class="">
             <div>
-                <text class="fs-3"> {{day_name[ new Date(appointment.date).getDay()] }} &nbsp; </text>
+                <text class="fs-3"> {{day_name[ new Date(appointment.date).getDay()+1] }} &nbsp; </text>
                 <text class="fs-3"> {{ appointment.date.split("-")[2].substring(0,2) }} de {{ month_name[parseInt(appointment.date.split("-")[1]-1 ) ] }} </text>
                 <text class="fs-3">&nbsp;  {{appointment.date.split("-")[0] }}   </text>   
             </div>    
