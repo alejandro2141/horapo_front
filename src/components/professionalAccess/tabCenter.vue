@@ -123,7 +123,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                 </div>
 
 
-                                <p class="text-center fs-4 mt-3 mb-0" > <text  @click="showCenter(center)" class="text-primary"> Modificar </text>  </p>
+                                <p class="text-center fs-5 mt-3 mb-0" > <text  @click="showCenter(center)" class="text-primary"> Modificar </text>  </p>
                 
 
                                    
