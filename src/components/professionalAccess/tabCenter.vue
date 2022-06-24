@@ -41,12 +41,12 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                 vii - Para crear una nueva consulta, debe hacer click en <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text> <br> 
             </div>
             
-
+<hr>
 
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
-<hr>
+
                     <div class="card m-4  bg-light " style=" border-radius: 15px;"  >
                         <div class="card-body"  >
                             
@@ -68,6 +68,16 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                             <text >Direccion: </text><br>
                                             <text class="text-end">{{ comunaId2Name(center.comuna)  }}, {{center.address}} </text>
                                         </p>
+
+                                        <div class="d-flex justify-content-between mt-2">
+                                                <text class="">Telefono 1:</text>
+                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between mt-2">
+                                                <text class="">Telefono 2:</text>
+                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text>
+                                        </div>
 
                                     </div>
 
@@ -99,6 +109,17 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                                     </text>
                                                     
                                              </div>
+
+                                            <div class="d-flex justify-content-between mt-2">
+                                                <text class="">Telefono 1:</text>
+                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between mt-2">
+                                                <text class="">Telefono 2:</text>
+                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text>
+                                            </div>
+
                                     </div>
 
                                     <!-- REMOTE CARE  -->
@@ -116,8 +137,9 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                         <div class="d-flex justify-content-between mt-2">
                                             <text> En Telefono: </text>
                                           
-                                            <text> 9999999</text>
+                                            <text> <i class="text-muted h3 bi bi-telephone"></i> 9999999</text>
                                         </div>
+
                                     </div>
                                 
                                 </div>
@@ -132,17 +154,14 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                     </div>
                 
                 
-                
+                <hr class="m-4">
                 </div>  
                 
             </div>
 
             <div v-else class="mt-1  "  style="border-radius: 15px;" >
                        
-                         <p class="p-4 text-center" >    
-                            <i class="display-1 bi bi-emoji-expressionless"></i><br>
-                            No existen Consultas o Direcciones para sus servicios
-                        </p>
+                         Loading...
                        
             </div>
 
@@ -162,7 +181,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         </div>
 
 
-<hr>
+
 
         <div class="text-center p-3 m-3"> 
             <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
