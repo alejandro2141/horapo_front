@@ -36,34 +36,38 @@ import SwitchViewButton from './switchViewButton.vue'
 	</div>
 
 
-	<div v-if="showUserMenu"  class="" style="" >
-		<div class=" bg-secondary p-3  w-100 h-100" style="position: absolute; z-index: 999999;">
+	<Transition duration="1050" name="nested">
+	
+		<div v-if="showUserMenu"  class="bg-secondary" style="" >
+			<div class="bg-secondary w-100 p-4" style="position: absolute; z-index: 9999; height:600px"  >
+			<div class="bg-secondary" >
+				<hr class="text-white">
+			
+				<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light "> 
+					&nbsp; <i class="pl-5 bi bi-arrow-left-circle fs-5 "></i> &nbsp; Salir 
+				</a>
+			
 			<hr class="text-white">
-		
-			<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light "> 
-				&nbsp; <i class="pl-5 bi bi-arrow-left-circle fs-5 "></i> &nbsp; Salir 
-			</a>
-		 
-		<hr class="text-white">
-			<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light"> 
-				&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información 
-				
-			</a>
-			<hr class="text-white">
-			<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="fs-3  text-decoration-none"  >	
-				&nbsp; <i class=" btn-outline-light bi bi-geo-alt fs-5 "></i> <text class="fs-5 btn-outline-light">&nbsp; Direcciones y Consultas </text>	
-			</a>
-			<hr class="text-white">
+				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light"> 
+					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información 
+					
+				</a>
+				<hr class="text-white">
+				<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="fs-3  text-decoration-none"  >	
+					&nbsp; <i class=" btn-outline-light bi bi-geo-alt fs-5 "></i> <text class="fs-5 btn-outline-light">&nbsp; Direcciones y Consultas </text>	
+				</a>
+				<hr class="text-white">
 
-			<!--
-			<div  style="width: 00px; height: 600px;" >		
+				<!--
+				<div  style="width: 00px; height: 600px;" >		
+				</div>
+				-->
 			</div>
-			-->
+			
+			</div>
 		</div>
-
-	</div>
-
-
+	
+	</Transition>
 
 
 
@@ -72,6 +76,41 @@ import SwitchViewButton from './switchViewButton.vue'
 </template>
 
 <style scoped>
+
+.nested-enter-active, .nested-leave-active {
+	transition: all 0.3s ;
+}
+/* delay leave of parent element */
+.nested-leave-active {
+  transition-delay: 0.25s;
+}
+
+.nested-enter-from,
+.nested-leave-to {
+  transform: translateY(0px);
+  opacity: 0;
+}
+
+/* we can also transition nested elements using nested selectors */
+.nested-enter-active .inner,
+.nested-leave-active .inner { 
+  transition: all 0.3s ease-in-out;
+}
+/* delay enter of nested element */
+.nested-enter-active .inner {
+	transition-delay: 0.25s;
+}
+
+.nested-enter-from .inner,
+.nested-leave-to .inner {
+  transform: translateX(0px);
+  /*
+  	Hack around a Chrome 96 bug in handling nested opacity transitions.
+    This is not needed in other browsers or Chrome 99+ where the bug
+    has been fixed.
+  */
+  opacity: 0.001;
+}
 
 </style>
 
@@ -87,7 +126,9 @@ export default {
 			showUserMenu : false, 
 			day : null ,
 			month : null ,
-			year : null
+			year : null ,
+
+			transitionHigth : 0 ,
 
 
         }   
