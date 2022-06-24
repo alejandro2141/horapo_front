@@ -202,6 +202,9 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                 <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
             </div>
 
+        <div style="height: 200px;">
+        </div>  
+
 
 
         </div>       
