@@ -39,7 +39,7 @@ import SwitchViewButton from './switchViewButton.vue'
 	<Transition duration="1050" name="nested">
 	
 		<div v-if="showUserMenu"  class="bg-secondary" style="" >
-			<div class="bg-secondary w-100 p-4" style="position: absolute; z-index: 9999; height:600px"  >
+			<div class="bg-secondary w-100 p-4" style="position: absolute; z-index: 99999; height:600px"  >
 			<div class="bg-secondary" >
 				<hr class="text-white">
 			
