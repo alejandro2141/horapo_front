@@ -47,7 +47,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
 
-                    <div class="card m-4  bg-light " style=" border-radius: 15px;"  >
+                    <div class="card m-1  bg-light " style=" border-radius: 15px;"  >
                         <div class="card-body"  >
                             
                                 <div >
@@ -63,21 +63,23 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                                 <text class="mt-2">Tipo:</text>
                                                 <text class="text-end"> En Consulta <i class="text-muted h1 bi bi-building"></i> </text>
                                         </div>
+
                                         
                                         <p class="mt-3">
                                             <text >Direccion: </text><br>
-                                            <text class="text-end">{{ comunaId2Name(center.comuna)  }}, {{center.address}} </text>
+                                            <text class="text-end">{{center.address}}, {{ comunaId2Name(center.comuna)  }} </text>
                                         </p>
 
-                                        <div class="d-flex justify-content-between mt-2">
-                                                <text class="">Telefono 1:</text>
-                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text>
+                                        <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
+                                            <text class="">Telefono 1:</text>
+                                            <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text>
                                         </div>
 
-                                        <div class="d-flex justify-content-between mt-2">
-                                                <text class="">Telefono 2:</text>
-                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text>
+                                        <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
+                                            <text class="">Telefono 2:</text>
+                                            <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text>
                                         </div>
+
 
                                     </div>
 
@@ -110,12 +112,12 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                                     
                                              </div>
 
-                                            <div class="d-flex justify-content-between mt-2">
+                                            <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
                                                 <text class="">Telefono 1:</text>
                                                 <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text>
                                             </div>
 
-                                            <div class="d-flex justify-content-between mt-2">
+                                            <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
                                                 <text class="">Telefono 2:</text>
                                                 <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text>
                                             </div>
@@ -223,7 +225,7 @@ data: function () {
 			//centers: null ,
             daterequired: null ,
             centers: [], 
-            comuna_list: [] ,
+            
             centerToShowDetails : Object ,
             activatorCreateNewCenter : null ,
             activatorViewCenterDetails : null ,
@@ -256,7 +258,7 @@ data: function () {
         {
             if (comuna_id != null)
             {
-            let aux = this.comuna_list.find(o => o.id === comuna_id)
+            let aux = this.global_comunas.find(o => o.id === comuna_id)
                 if (aux != null)
                 {
                     return  aux.name
