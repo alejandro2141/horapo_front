@@ -70,7 +70,12 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                                             <text class="text-end">{{center.address}}, {{ comunaId2Name(center.comuna)  }} </text>
                                         </p>
 
-                                        <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
+                                        <div class="mt-2 d-flex justify-content-between" >
+                                            <text >Comuna : </text><br>
+                                            <text class="text-end"> {{ comunaId2Name(center.comuna)  }} </text>
+                                        </div>
+
+                                        <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-3">
                                             <text class="">Telefono 1:</text>
                                             <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text>
                                         </div>
