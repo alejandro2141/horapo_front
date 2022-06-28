@@ -18,7 +18,7 @@ const count = ref(0)
                     </div>
 
                     <div>
-                        <input @keyup="captureSeachLetter" style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   placeholder="Ciudad o Comuna o Zona" >
+                        <input @keyup="captureSeachLetter" style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="origComunaName" >
                     </div>
                     
                     <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
@@ -56,17 +56,20 @@ export default {
             display_error : false  ,
             location_filtered : []  , 
             clearfiltered : false ,
+
+            origComunaName :"Comuna, Zona Geografica" ,
         }
     },  
  
-   props: ['global_comunas'], 
+   props: ['global_comunas','location_id'], 
    emits: ["selectedComunaCode"],
 
 mounted() {   
-       //this.getComunaList();
-      // console.log("BKND GLOBAL COMUNA APP.CONFIG="+JSON.stringify( GLOBAL_COMUNAS )) ;
-       //this.comuna_list =  this.GLOBAL_COMUNAS ;
-       },
+        console.log("COMUNA ID orig:"+this.location_id);
+        this.origComunaName=this.comunaId2Name(this.location_id)
+        console.log("COMUNA ID orig Name:"+ this.origComunaName);
+        
+        },
 
     watch: {
         //WATCHER PREDICTOR COMUNA
@@ -97,6 +100,28 @@ mounted() {
         },
 
     methods: {
+            
+            
+        comunaId2Name(comuna_id)
+          {
+            if (comuna_id != null)
+            {
+            let aux = this.global_comunas.find(o => o.id === comuna_id)
+                if (aux != null)
+                {
+                    return  aux.name
+                }
+                else
+                {
+                    return "not found" ;  
+                }
+            }
+            else
+            {
+            return null ; 
+            }
+
+          },
 
          captureSeachLetter(e)
          {
