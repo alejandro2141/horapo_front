@@ -5,7 +5,7 @@ import axios from 'axios'
 import { BKND_CONFIG } from '../config123.js'
 import ProfesionalGeneralHeader from '../src/components/professionalAccess/ProfesionalGeneralHeader.vue'
 import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
-import TabCenter from '../src/components/professionalAccess/tabCenter.vue'
+import TabCenter from '../src/components/professionalAccess/tabCenter_dark.vue'
 import TabAppointment from '../src/components/professionalAccess/tabAppointment.vue'
 import TabTimeTable from '../src/components/professionalAccess/tabTimeTable.vue'
 import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vue'
@@ -24,19 +24,19 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
             <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
         </div>
 
-        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style="margin-left: 0.5em; margin-right: 0.5em;"  class="position-relative bg-white ">
+        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style=""  class="position-relative bg-white ">
             <TabCenter :session_params="session_params" :global_comunas="global_comunas" v-on:switchViewTo="switchViewTo" >  </TabCenter> 	
         </div>
 
-        <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style="margin-left: 0.0em; margin-right: 0.5em;"  class=" bg-white">
+        <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style=""  class=" bg-white">
             <TabAppointment  :key="forceRender" :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
         </div>
 
-        <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style="margin-left: 0.5em; margin-right: 0.5em;"  class=" bg-white">
+        <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style=""  class=" bg-white">
             <TabTimeTable :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabTimeTable> 	
         </div>
 
-        <div v-if="visible_tab_userconfig == 'block'" :style="{display:  visible_tab_userconfig }"  style="margin-left: 0.5em; margin-right: 0.5em;"  class=" bg-white">
+        <div v-if="visible_tab_userconfig == 'block'" :style="{display:  visible_tab_userconfig }"  style=""  class=" bg-white">
             <TabUserConfig :session_params="session_params" v-on:switchViewTo="switchViewTo" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabUserConfig> 	
         </div>
 
