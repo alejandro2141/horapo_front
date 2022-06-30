@@ -8,32 +8,56 @@ import SwitchViewButton from './switchViewButton.vue'
 <template>
 	<div>
 
+
+	<div v-if="session_params['professional_name'] != null"  class="border border-1 text-white d-flex pt-2 pb-2 justify-content-around bg-secondary border-bottom "> 
+
+		<text >	
+			<i v-if="showTopMenu" class="fs-4 bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
+			<i v-if="show_close_list" class="display-1 bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+		</text>
+
+		<text>
+			<text v-if="showTopMenu" > | </text>
+		</text>
+
+		<text>	
+			<i v-if="showTopMenu" class="fs-4 bi bi-bullseye" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;" ></i>
+		</text>
+
+		<text>
+			<text v-if="showTopMenu">|</text>
+		</text>
+
+		<text>	
+			<i v-if="showTopMenu" class="fs-4 bi bi-calendar-week" @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;" ></i>
+			<i v-if="show_close_calendars" class="display-1 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
+			<i v-if="show_close_centers" class="display-1 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
+	
+		</text>
+		
+	</div>
+
+	<!--
     <div v-if="session_params['professional_name'] != null"  class="d-flex pt-2 pb-2 justify-content-around bg-secondary border-bottom "> 
 
 		<text v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "   class="text-white border border-0 "  :class="{ 'fw-bold' : showUserMenu }" >	
-			<i v-if="!showUserMenu " class="fs-4 bi bi-list"></i>
+			<i v-if="!showUserMenu || header_menu_calendars" class="fs-4 bi bi-list"></i>
 			<i v-else class="bi bi-x-lg fs-5"></i>
-			<!--
-			<i class="fs-5 bi bi-person"></i><br>
-			<small>{{session_params.professional_name.split(" ")[0] }} </small>
-			-->
+			
 		</text>
 
-		<text v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false "  class="text-white p-1" :class="{ 'fw-bold' : header_menu_appointments }"  >	
+		<text v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false "  class="text-white border border-0 " :class="{ 'fw-bold' : header_menu_appointments }"  >	
 			<text class="fs-6 "> HOY</text> <small><text class="">{{day}} {{getMonthName(month)}}</text> </small> 
 		</text>
 
-		<text v-if="session_params['professional_name'] != null"   @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false "  class="text-white border border-0" :class="{ 'fw-bold': header_menu_calendars }"  >	
-			<i  class="bi bi-calendar-week fs-5"></i> <!--< i class="bi bi-calendar fs-5 "  ></i>  <br>  <small> Calendarios </small>	  -->
-			 <!--< i class="bi bi-calendar fs-5 "  ></i>  <br>  <small> Calendarios </small>	  -->
+		<text v-if="session_params['professional_name'] != null"  class="text-white border border-0 " >	
+			<i  v-if="!header_menu_calendars" class="bi bi-calendar-week fs-5" @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false "    ></i> 
+			<i v-else class="bi bi-x-lg fs-5"  @click="switchViewTo(2); header_menu_calendars=false" ></i>
+		
 		</text>
-		<!--
-		<button v-if="session_params['professional_name'] != null"   @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "  type="button" class="btn btn-outline-primary border border-0" :class="{ active: header_menu_centers }"  >	
-			<i class="bi bi-geo-alt display-5 "  ></i> Consultas	
-		</button>
-		-->
 		
 	</div>
+	-->
 
 
 	<Transition duration="1050" name="nested">
@@ -121,16 +145,19 @@ export default {
         return {
 			header_menu_exit : false ,
 			header_menu_appointments : true ,
-			header_menu_calendars : false ,
-			header_menu_centers : false ,
-			showUserMenu : false, 
+
+			showTopMenu : true ,
+			show_close_list : false ,
+			show_close_centers : false ,
+			show_close_calendars : false , 
+
+			showUserMenu : false ,
+
 			day : null ,
 			month : null ,
 			year : null ,
 
 			transitionHigth : 0 ,
-
-
         }   
     },
     props : ['session_params'] ,

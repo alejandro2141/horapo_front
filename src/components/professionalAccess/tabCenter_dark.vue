@@ -3,32 +3,37 @@ import { ref } from 'vue'
 import axios from 'axios';
 import ModalCreateCenter from './modalCreateCenter.vue'
 import ModalViewCenterDetails from './modalViewCenterDetails.vue'
+import ConsultancyCenter from './consultancy_center.vue'
+import ConsultancyHome from './consultancy_home.vue'
+import ConsultancyRemote from './consultancy_remote.vue'
+
+
 </script>
 
 <template>
-<div>
+<div class="text-white bg-secondary w-100" >
      <ModalViewCenterDetails  :session_params='session_params' :activatorViewCenterDetails='activatorViewCenterDetails' :centerToShowDetails='centerToShowDetails' v-on:updateCenterList="updateCenterList"  :global_comunas="global_comunas"   > </ModalViewCenterDetails>                    
      <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" >  </ModalCreateCenter>
       
-<div  class="mx-auto " style="width: 95%;" >
+<div  class="w-100" style="width: 100%;" >
 
     <div class="d-flex justify-content-between mb-0 ">
         
          <!-- <i class="bi bi-geo-alt display-3 "></i> -->
          <text></text>
-         <p class="display-5 text-center mt-4  ">
-            Consultas
+         <p class="display-5 text-center mt-4  text-white ">
+            Consultas <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info"></i> 
          </p>
          <text></text>
          <!--
          <i class="mt-4 display-1 bi bi-x-lg  text-primary" aria-label="Close" v-on:click="closeTabCenter()" ></i> 
         -->
     </div>
-
+            <!--
             <p class="lead mb-0 pb-0 text-center">
-            <small class="text-secondary">  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info text-primary"></i> </small>Direcciónes de sus consultas 
-               
-            </p>
+            <small class="text-white">  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info text-primary"></i> </small>Direcciónes de sus consultas 
+           </p>
+           -->
             
             <div  v-if='showInfoCreate' class="alert alert-info p-0 m-0 p-3" style=" border-radius: 15px;" >
                 i - Una Consulta es  el lugar "Virtual" o "Fisico" donde usted entrega sus servicios profesionales.<br>
@@ -43,65 +48,37 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                 vii - Para crear una nueva consulta, debe hacer click en <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text> <br> 
             </div>
             
-<hr>
+
 
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
 
-                    <div class="card m-1  bg-light " style=" border-radius: 15px;"  >
+                    <div class="card m-4  bg-secondary border  border-2 border-white  " style=" border-radius: 15px;"  >
                         <div class="card-body"  >
                             
                                 <div >
                                     <!-- CENTER VISIT -->
                                     <div v-if="center.center_visit" >
-                                        <div class="d-flex justify-content-between ">
-                                                <text class="h5"><i class="text-muted bi bi-geo-alt"></i> {{center.name}} </text>
-                                                <text class="display-4"></text>  
-                                        </div>
-                                        <hr class="m-0">
-                                        
-                                        <div class="d-flex justify-content-between mt-0">
-                                                <text class="mt-2">Tipo:</text>
-                                                <text class="text-end"> En Consulta <i class="text-muted h1 bi bi-building"></i> </text>
-                                        </div>
-
-                                        
-                                        <p class="mt-3">
-                                            <text >Direccion: </text><br>
-                                            <text class="text-end">{{center.address}}, {{ comunaId2Name(center.comuna)  }} </text>
-                                        </p>
-
-                                        <div class="mt-2 d-flex justify-content-between" >
-                                            <text >Comuna : </text><br>
-                                            <text class="text-end"> {{ comunaId2Name(center.comuna)  }} </text>
-                                        </div>
-
-                                        <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-3">
-                                            <text class="">Telefono 1:</text>
-                                            <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text>
-                                        </div>
-
-                                        <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
-                                            <text class="">Telefono 2:</text>
-                                            <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text>
-                                        </div>
-
+                                        <ConsultancyCenter :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </ConsultancyCenter> 
 
                                     </div>
 
                                     <!-- A DOMICILIO -->
                                     <div v-if="center.home_visit" >
+                                        <ConsultancyHome :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </ConsultancyHome> 
+
+                                        <!--
 
                                             <div class="d-flex justify-content-between ">
-                                                <text class="h5"><i class="text-muted bi bi-geo-alt"></i> {{center.name}} </text>
+                                                <text class="h5"><i class="text-white bi bi-geo-alt"></i> {{center.name}} </text>
                                                 <text class=""> </text>  
                                             </div>
                                             <hr class="m-0">
                                             <div class="d-flex justify-content-between mt-2">
                                                 <text class="mt-2">Tipo : </text>
                                                 <text></text>
-                                                <text class="text-end"> A Domicilio <i class="text-muted h1 bi bi-house-door"></i> </text>
+                                                <text class="text-end"> A Domicilio <i class="text-white h1 bi bi-house-door"></i> </text>
                                                 
                                             </div>
                                            
@@ -126,36 +103,42 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 
                                             <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
                                                 <text class="">Telefono 2:</text>
-                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text>
+                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text> 
                                             </div>
+                                            -->
 
                                     </div>
 
                                     <!-- REMOTE CARE  -->
                                     <div v-if="center.remote_care" >
+                                        <ConsultancyRemote :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </ConsultancyRemote> 
+
+                                        <!--
                                         <div class="d-flex justify-content-between ">
-                                            <text class="h5"><i class="text-muted bi bi-geo-alt"></i> {{center.name}} </text>  
+                                            <text class="h5"><i class="text-white bi bi-geo-alt"></i> {{center.name}} </text>  
                                         </div>
                                          <hr class="m-0">
                                         <div class="d-flex justify-content-between mt-0">
                                             <text class="mt-2"> Tipo: </text>
                                             <text> </text>
-                                            <text class="text-end"> Tele Atención <i class="text-muted h1 bi bi-camera-video"></i></text>
+                                            <text class="text-end"> Tele Atención <i class="text-white h1 bi bi-camera-video"></i></text>
                                             
                                         </div>
                                         <div class="d-flex justify-content-between mt-2">
                                             <text> En Telefono: </text>
                                           
-                                            <text> <i class="text-muted h3 bi bi-telephone"></i> 9999999</text>
+                                            <text> <i class="text-white h3 bi bi-telephone"></i> 9999999</text>
                                         </div>
+                                        -->
 
                                     </div>
                                 
                                 </div>
 
-
-                                <p class="text-center fs-5 mt-3 mb-0" > <text  @click="showCenter(center)" class="text-primary"> Modificar </text>  </p>
-                
+                                
+<!--
+                                <p class="text-center fs-5 mt-3 mb-0" > <text  @click="showCenter(center)" class="text-white"> <i class="bi bi-pencil"></i>  </text>  </p>
+ -->               
 
                                    
                          <!--   <p class="text-end text-muted mt-2"> #{{ center.id }} </p> -->
@@ -163,7 +146,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
                     </div>
                 
                 
-                <hr class="m-4">
+               
                 </div>  
                 
             </div>
@@ -193,7 +176,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 
 
         <div class="text-center p-3 m-3"> 
-            <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
+            <text @click="addNewCenter()"  class="m-3 btn btn-dark" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
         </div>
 
        
