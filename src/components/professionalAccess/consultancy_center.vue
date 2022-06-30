@@ -48,7 +48,7 @@ import axios from 'axios';
                                         
                                         <div v-if="showEditOptions" class="mt-2 d-flex justify-content-between" >
                                             <text @click="showEditOptions=false;showEditButton=true;resetData()" >CANCELAR  </text><br>
-                                            <text @click="saveChanges()" >GUARDAR </text>
+                                            <text @click="saveChanges();showEditOptions=false;showEditButton=true;" >GUARDAR </text>
                                         </div>
 
     </div>
