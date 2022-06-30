@@ -9,7 +9,7 @@ import SwitchViewButton from './switchViewButton.vue'
 	<div>
 
 
-	<div v-if="session_params['professional_name'] != null"  class="border border-1 text-white d-flex pt-2 pb-2 justify-content-around bg-secondary border-bottom "> 
+	<div v-if="session_params['professional_name'] != null"  class="text-white d-flex pt-2 pb-2 justify-content-around bg-secondary  "> 
 
 		<text >	
 			<i v-if="showTopMenu" class="fs-4 bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
