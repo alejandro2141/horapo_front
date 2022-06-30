@@ -19,8 +19,10 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
          <p class="display-5 text-center mt-4  ">
             Consultas
          </p>
+         <text></text>
+         <!--
          <i class="mt-4 display-1 bi bi-x-lg  text-primary" aria-label="Close" v-on:click="closeTabCenter()" ></i> 
-    
+        -->
     </div>
 
             <p class="lead mb-0 pb-0 text-center">
