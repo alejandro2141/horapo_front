@@ -45,7 +45,7 @@ import axios from 'axios';
                                            <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="phone2" style="z-index: 9;  border-radius: 25px; width:40%;  text-align: right; ">
                                         </div>
 <hr>
-                                        <p v-if="showEditButton" class="text-center fs-5 mt-3 mb-0" >  <i @click="showEditOptions=true;showEditButton=false" class="text-white bi bi-pencil"></i>    </p>
+                                        <p v-if="showEditButton" class="text-end fs-5 mt-3 mb-0" >  <i @click="showEditOptions=true;showEditButton=false" class="text-white bi bi-pencil"></i>    </p>
                                         
                                         <div v-if="showEditOptions" class="mt-2 d-flex justify-content-between" >
                                             <text @click="showEditOptions=false;showEditButton=true;resetData()" >CANCELAR  </text><br>
