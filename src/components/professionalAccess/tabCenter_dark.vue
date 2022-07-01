@@ -21,8 +21,8 @@ import ConsultancyRemote from './consultancy_remote.vue'
         
          <!-- <i class="bi bi-geo-alt display-3 "></i> -->
          <text></text>
-         <p class="display-5 text-center mt-4  text-white ">
-            Consultas <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info"></i> 
+         <p class="display-6 text-center mt-1  text-white ">
+            Tus Consultas <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2 border-white " style=" border-radius: 15px;" ></i> 
          </p>
          <text></text>
          <!--
@@ -54,8 +54,8 @@ import ConsultancyRemote from './consultancy_remote.vue'
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
 
-                    <div class="card m-4  bg-secondary border  border-2 border-white  " style=" border-radius: 15px;"  >
-                        <div class="card-body"  >
+                    <div class="card m-4 mt-0  bg-secondary border  border-2 border-white  " style=" border-radius: 15px;"  >
+                        <div class="card-body pb-1"  >
                             
                                 <div >
                                     <!-- CENTER VISIT -->
