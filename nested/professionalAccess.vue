@@ -16,36 +16,65 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
 
 <template>
 <div>
+    
     <ProfesionalGeneralHeader :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
     
+    
     <div class='m-0'>
-        
+       
+
+      
+   
+
+       <transition> 
         <div  :style="{display:  visible_tab_login }"  class=" position-relative " >	 
             <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
         </div>
-
-        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style=""  class="position-relative bg-white ">
+        </transition>
+        
+ 
+        <transition>  
+        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style=""  class="position-relative bg-secondary ">
             <TabCenter :session_params="session_params" :global_comunas="global_comunas" v-on:switchViewTo="switchViewTo" >  </TabCenter> 	
         </div>
-
+        </transition>
+        
+        <transition>
         <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style=""  class=" bg-white">
             <TabAppointment  :key="forceRender" :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
         </div>
+        </transition>
 
-        <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style=""  class=" bg-white">
+        <transition>
+        <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style=""  class="bg-secondary">
             <TabTimeTable :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabTimeTable> 	
         </div>
-
+        </transition>
+        
+        <transition>
         <div v-if="visible_tab_userconfig == 'block'" :style="{display:  visible_tab_userconfig }"  style=""  class=" bg-white">
             <TabUserConfig :session_params="session_params" v-on:switchViewTo="switchViewTo" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabUserConfig> 	
         </div>
+        </transition>
+        
 
     </div>
-
+   
+   
 </div>
 </template>
 
 <style scoped>
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
 
 
@@ -58,6 +87,7 @@ export default {
         
         return {
             date,
+           
         }
     },
 
@@ -87,6 +117,8 @@ export default {
         counter : 0,
 
         forceRender:0 ,
+
+         showme: false ,
        
     }
   },
@@ -103,6 +135,7 @@ created() {
 },
 
 methods: {
+    
 
     switchViewTo(val)
     {

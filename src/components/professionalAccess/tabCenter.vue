@@ -7,6 +7,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 
 <template>
 <div>
+
      <ModalViewCenterDetails  :session_params='session_params' :activatorViewCenterDetails='activatorViewCenterDetails' :centerToShowDetails='centerToShowDetails' v-on:updateCenterList="updateCenterList"  :global_comunas="global_comunas"   > </ModalViewCenterDetails>                    
      <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" >  </ModalCreateCenter>
       
@@ -17,7 +18,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
          <!-- <i class="bi bi-geo-alt display-3 "></i> -->
          <text></text>
          <p class="display-5 text-center mt-4  ">
-            Consultas
+            Tus Consultas
          </p>
          <text></text>
          <!--
@@ -216,6 +217,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
         --> 
 </div>       
 
+  
 </div>
 </template>
 

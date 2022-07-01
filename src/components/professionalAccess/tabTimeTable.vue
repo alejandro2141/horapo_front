@@ -4,7 +4,7 @@ import axios from 'axios';
 import ModalCreateCalendar from './modalCreateCalendar.vue';
 import ModalViewCalendar from './modalViewCalendar.vue';
 import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatient.vue'
-
+import CalendarProfessional from './calendar_professional.vue'
 
 </script>
 <template>
@@ -13,10 +13,13 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
             <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
             <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
       
-                <p class="text-center display-5 m-4">Calendarios</p>
+                <p class="text-center display-5 pt-1 text-white">Tus Calendarios</p>
 
                 <div  id="search_result" v-if='calendars!=null &&  calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
+
+                        <CalendarProfessional :calendar="calendar"  :global_specialties="global_specialties" :global_comunas="global_comunas"> </CalendarProfessional> 
+ <!--
                     <div class="m-2">
                         
                     <div class="card mb-5  w-100" style="width: 18rem; border-radius: 15px; " :style="{ 'background-color' : calendar.color   }"  >
@@ -26,16 +29,7 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                                 <text class="card-title display-6 text-white mt-0 pt-0"   >
                                   <i class="bi bi-calendar "></i>  {{idSpecialty2name(calendar.specialty1) }}  
                                 </text>
-                                <!--
-                                <div class="fs-1 bg-light text-primary" style="background-color: #D4D4D4;  border-radius: 15px;">
-                                    <p @click="displayShareCalendar(calendar)" class="text-center p-1"  >
-                                        
-                                        <text class="fs-6" > Compartir
-                                        </text><br>
-                                        <i  class="fs-4 bi bi-share"></i>
-                                    </p>
-                                </div>
-                                -->
+  
                     </div>
 
                 <div class="bg-white w-100 pt-2 pl-2 pr-2">
@@ -53,19 +47,7 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                                 Apagado </text>
                           </div>
                     </div>
-<!--
-                                <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between">
-                                    <text>Estado Actual </text>
-                                    <text class="text-success"  > Encendido </text>
-                                   
-                                </div>
 
-                                <div  v-else  class="d-flex justify-content-between">
-                                    <text>Estado Actual </text>
-                                    <text class="text-danger"> Apagado </text>
-                                    
-                                </div>
--->
                                 <div class="mt-2">
                                     <text>En Consulta </text>
                                     <div class="d-flex justify-content-between ">
@@ -158,23 +140,21 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
                 </div>
 
               </div>
-
                               
                                <hr>
                                 <p class="text-center fs-4" > <text  @click="viewCalendar(calendar)" class="text-primary"> Modificar </text>  </p>
-                     <!--    <p class="text-white">C#{{calendar.calendar_id}} </p> -->
                             <br>
                             </div>
                             </div>
 
                         </div>
                     
-                    <!-- end card -->
+                   
                         </div>   
                     
                     
                     </div>
-
+-->
                     </div>
 
 
@@ -212,12 +192,14 @@ import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatie
 </template>
 
 <style scoped>
+
 </style>
 
 
 <script>
 
 export default {
+ 
 data: function () {
 		return {
             calendars : [] ,
@@ -290,6 +272,7 @@ data: function () {
        // this.showShareSocial = !this.showShareSocial ;
         },
 
+        /*
         evaluateCalendarStatus(date_end)
         {
           let aux_date_end=new Date(date_end);
@@ -303,9 +286,8 @@ data: function () {
               //Expired
               return 3 ;
             }
-        
-
         },
+        */
 
         viewCalendar(calendar)
         {
@@ -318,13 +300,14 @@ data: function () {
         {
             this.getCalendars();
         },
-
+/*
         idSpecialty2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
 
         },
+        */
 
     //GET CENTERS
         async getCalendars() {
