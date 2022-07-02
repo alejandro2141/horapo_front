@@ -21,7 +21,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 
 		<text>	
-			<i v-if="showTopMenu" class="fs-4 bi bi-bullseye" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;" ></i>
+			<i v-if="!show_close_centers && !show_close_list" class="fs-4 bi bi-bullseye" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
 		    <i v-if="show_close_centers" class="fs-3 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
 	
 		</text>
@@ -31,7 +31,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 
 		<text>	
-			<i v-if="showTopMenu || show_close_centers" class="fs-4 bi bi-calendar-week" @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;" ></i>
+			<i v-if="!show_close_calendars && !show_close_list" class="fs-4 bi bi-calendar-week" @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" ></i>
 			<i v-if="show_close_calendars" class="fs-3 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
 			
 		</text>
