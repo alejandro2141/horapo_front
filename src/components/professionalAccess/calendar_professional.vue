@@ -40,8 +40,8 @@ import axios from 'axios';
                           </div>
                           <div v-else>
                               <text v-if="calendar_active" class="text-success fw-bold bg-white p-1" >  Encendido </text>
-                              <text v-else class="text-danger fw-bold" > <i class="bi bi-exclamation-octagon bg-white text-danger p-1"></i>
-                                Apagado </text>
+                              <text v-else class="text-danger fw-bold bg-white p-1" > <i class="bi bi-exclamation-octagon bg-white text-danger p-1"></i>
+                                APAGADO </text>
                           </div>
                     </div>
 <!--
@@ -69,13 +69,13 @@ import axios from 'axios';
                                     </div>
                                 </div>
                                    
-                                    <p v-if="calendar.center_visit" class="text-muted text-end" >
+                                    <p v-if="calendar.center_visit" class="text-white text-end" >
                                             <text>  </text> <text> En Consulta  </text>  
                                     </p>
-                                    <p v-if="calendar.home_visit" class="text-muted text-end">
+                                    <p v-if="calendar.home_visit" class="text-white text-end">
                                              <text>  </text> <text> A Domicilio  </text>
                                     </p>
-                                    <p v-if="calendar.remote_care" class="text-muted text-end">
+                                    <p v-if="calendar.remote_care" class="text-white text-end">
                                             <text>  </text> <text> Tele Atencion </text>
                                     </p>
                                
@@ -84,36 +84,56 @@ import axios from 'axios';
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Inicio  </text>  
-                          <text> {{date_start.substring(0,10) }}    </text>
+                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_start" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                                       
                   </div>
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Fin </text>  
-                          <text> {{date_end.substring(0,10) }} </text>
+                         
+                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_end" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                         
                   </div>
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Hora  Inicio </text>  
-                          <text> {{start_time.substring(0,5)}} Hrs </text>
+                          <input :disabled="!showEdit"  type="time" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="start_time" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                         
                   </div>
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Hora  Fin </text>  
-                          <text> {{end_time.substring(0,5)}} Hrs </text>
+                          <input :disabled="!showEdit"  type="time" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="end_time" style=" border-radius: 25px; width:40%;  text-align: right; ">
                   </div>
 
                 <div  class="d-flex justify-content-between mt-2">
-                          <text> Tiempo Atención </text>  
-                          <text> {{duration}} Min </text>
+                          <text> Minutos de Atención </text>  
+                          <input :disabled="!showEdit"  type="number" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="duration" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                
                 </div>
                 
                 <div  class="d-flex justify-content-between mt-2">
-                          <text> Entre Tiempo </text>  
-                          <text> {{time_between}} Min </text>
+                          <text> Minutos Tiempo </text>  
+                          <input :disabled="!showEdit"  type="number" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="time_between" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                
                 </div>
 
                 <div class="mt-1">
                   Dias Recurrencia: <br>
+
+                <div class="d-flex justify-content-start fs-3 m-2">
+                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.monday  }" >Lu</div>
+                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.tuesday }" >Ma</div>
+                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.wednesday }" >Mi</div>
+                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.thursday }">Ju</div>
+                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.friday }">Vie</div>
+
+                </div> 
+                <div class="d-flex justify-content-start fs-3 m-2">
+                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.saturday }">Sa</div>
+                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.sunday }">Do</div>
+                </div>
+
 
                                         <text class="d-flex justify-content-end" v-if="calendar.monday"> Lunes <br> </text> 
                                         <text class="d-flex justify-content-end" v-if="calendar.tuestday"> Martes  <br> </text> 
@@ -211,10 +231,10 @@ export default {
         this.calendar_active = this.calendar.calendar_active
         this.specialty_code = this.calendar.specialty1 ; 
 
-        this.date_start = this.calendar.date_start ;
-        this.date_end = this.calendar.date_end  ;
-        this.start_time = this.calendar.start_time  ;
-        this.end_time = this.calendar.end_time  ;
+        this.date_start = this.calendar.date_start.substring(0,10) ;
+        this.date_end = this.calendar.date_end.substring(0,10)  ;
+        this.start_time = this.calendar.start_time.substring(0,5)  ;
+        this.end_time = this.calendar.end_time.substring(0,5)  ;
         this.duration = this.calendar.duration  ;
         this.time_between = this.calendar.time_between  ;
         this.monday = this.calendar.monday  ;
