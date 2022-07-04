@@ -15,13 +15,37 @@ import SwitchViewButton from './switchViewButton.vue'
 			<i v-if="showTopMenu" class="fs-4 bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
 			<i v-if="show_close_list" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
 		</text>
+		<text>
+			<text v-if="showTopMenu" class="text-white-50">  </text>
+		</text>
+		<text>
+			<text v-if="showTopMenu" class="text-white-50">  </text>
+		</text>
+		<text>
+			<text v-if="showTopMenu" class="text-white-50"> </text>
+		</text>
+		<text>
+			<text v-if="showTopMenu" class="text-white-50"> </text>
+		</text>
+		
+		<text>	
+			<i v-if="showTopMenu" class="fs-4 bi bi-geo-alt" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
+		    <i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
+	
+		</text>
 
 		<text>
-			<text v-if="showTopMenu" class="text-white-50"> | </text>
+			<text v-if="true" class="text-white-50" >|</text>
 		</text>
 
 		<text>	
-			<i v-if="!show_close_centers && !show_close_list" class="fs-4 bi bi-bullseye" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
+			<i v-if="showTopMenu" class="fs-4 bi bi-calendar-week" @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" ></i>
+			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
+			
+		</text>
+		<!--
+		<text>	
+			<i v-if="!show_close_centers && !show_close_list" class="fs-4 bi bi-geo-alt" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
 		    <i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
 	
 		</text>
@@ -35,6 +59,7 @@ import SwitchViewButton from './switchViewButton.vue'
 			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
 			
 		</text>
+		-->
 		
 	</div>
 
