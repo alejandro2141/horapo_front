@@ -16,21 +16,21 @@ import axios from 'axios';
                                 <i v-if="appointment.remote_care" class=" bi bi-camera-video"></i>                         
                             </text> 
                         </div>
-                    
-                        <div  class="w-100 text-white display-6 p-2" :style="{ 'background-color' : appointment.calendar_color  }"  style="border-radius: 15px;"  >
-                            
-                            <div class=""  >
-                                <text class="" ><small> {{specialtyId2name(appointment.specialty)}} </small> </text>
-                            </div>  
-                           
-                            <div class="">
-                                <text class="" > 
-                                     <small> <small> {{ getCenterName(appointment.center_id) }} </small> </small>
-                                </text>
-                            </div>
-                            
-                        </div>
-
+                       
+                                <div  class="w-100 text-white display-6 p-2" :style="[ {'background-color' : appointment.calendar_color} , days_expired==true ? { 'opacity': '0.6' }:{ 'opacity': '1' }  ]"  style="border-radius: 15px;"  >
+                                    
+                                    <div class=""  >
+                                        <text class="" ><small> {{specialtyId2name(appointment.specialty)}} </small> </text>
+                                    </div>  
+                                
+                                    <div class="">
+                                        <text class="" > 
+                                            <small> <small> {{ getCenterName(appointment.center_id) }} </small> </small>
+                                        </text>
+                                    </div>
+                                    
+                                </div>
+                        
 
                     </div>
 
@@ -48,7 +48,7 @@ export default {
         }   
     },
    	
-    props: ['daterequired','appointment','index','global_specialties', 'global_comunas', 'session_params' ],
+    props: ['days_expired','daterequired','appointment','index','global_specialties', 'global_comunas', 'session_params' ],
 
 	created () {
 	},
@@ -65,6 +65,7 @@ export default {
             if (temp != null) { return temp.name }
             else { return "No Existe Centro" }
         },
+       
 
     }
 }
