@@ -32,32 +32,26 @@ import axios from 'axios';
                 <div class="bg-secondary  text-white w-100 pt-2 pl-2 pr-2">
                     <div class="m-2 ">
 
-                    <div class="d-flex justify-content-between mt-2"> 
-                          <text class=""> Estado  Actual</text>   
-                          
-                          <div v-if="evaluateCalendarStatus(date_end)==3"    >
-                             <i class="display-1 text-white bi bi-toggle-off" @click="switchCalendarActive()"  :class="{ 'bg-dark': showEdit }"  ></i><br> 
-                              <text class="text-danger bg-white p-1"> EXPIRADO </text>
-                          </div>
+                    <div class="d-flex justify-content-between mt-0 p-1"> 
+                                                  
+                        <div v-if="evaluateCalendarStatus(date_end)==3" class="bg-white"  :class="{ 'bg-dark': showEdit }" style=" border-radius: 15px; "  >
+                              <text class="text-danger  p-1"> Expirado </text> 
+                        </div>
 
-                          <div v-else>
-                              <text v-if="calendar_active" class="p-1" >  
-                                <i class="text-white display-1 bi bi-toggle-on" @click="switchCalendarActive()" :class="{ 'bg-dark': showEdit }"></i> <br>
-                                <text class="text-success bg-white">
-                                    Encendido 
+                        <div v-else   >
+                                <text v-if="calendar_active"  >  
+                                  <text class="text-white ">Encendido</text>
                                 </text>
-                                 
-                              </text>
-                              
-                              <text v-else class="p-1" > 
-                                <i class="text-white display-1 bi bi-toggle-off" @click="switchCalendarActive()" :class="{ 'bg-dark': showEdit }"></i> <br>
-                                <text class="text-danger bg-white"> 
-                                    APAGADO 
+                                <text v-else > 
+                                    <text class="text-white">Apagado<i class="text-danger display-4 bi bi-slash-circle-fill"></i></text>
                                 </text>
-                                
-                               </text>
+                        </div>
 
-                          </div>
+                        <text class=""> </text>  
+
+                        <div :class="{ 'bg-dark': showEdit }" class="text-center" style="width: 4rem; border-radius: 15px; "  >
+                            <i class="display-1 text-white pl-3 pr-3" @click="switchCalendarActive()"  :class="{ 'bi bi-toggle-off':!calendar_active , 'bi bi-toggle-on':calendar_active   }"  ></i>
+                        </div>                        
                     </div>
 <!--
                                 <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between">
@@ -72,41 +66,43 @@ import axios from 'axios';
                                     
                                 </div>
 -->
-                                <div class="mt-2">
-                                    <text>En Consulta </text>
-                                    <div class="d-flex justify-content-between ">
-                                        <div> 
-                                            
-                                        </div>
-                                        <div  >
-                                            <i class="bi bi-geo-alt"></i> {{name}} 
-                                        </div>
+                                <div class="mt-2 mb-2 d-flex justify-content-between">
+                                    <text>Lugar de Atencion  <br>
+                                   
+                                    </text>
+                                    
+                                    <div>
+                                        <p v-if="calendar.center_visit" class="text-white text-end" >
+                                            <text>  </text> <text> En Consulta  </text>  
+                                        </p>
+                                        <p v-if="calendar.home_visit" class="text-white text-end">
+                                                        <text>  </text> <text> A Domicilio  </text>
+                                        </p>
+                                        <p v-if="calendar.remote_care" class="text-white text-end">
+                                                        <text>  </text> <text> Tele Atencion </text>
+                                        </p>
+                                        
+                                          <i class="bi bi-geo-alt text-white"></i> {{name}} 
                                     </div>
                                 </div>
-                                   
-                                    <p v-if="calendar.center_visit" class="text-white text-end" >
-                                            <text>  </text> <text> En Consulta  </text>  
-                                    </p>
-                                    <p v-if="calendar.home_visit" class="text-white text-end">
-                                             <text>  </text> <text> A Domicilio  </text>
-                                    </p>
-                                    <p v-if="calendar.remote_care" class="text-white text-end">
-                                            <text>  </text> <text> Tele Atencion </text>
-                                    </p>
-                               
-                               
-                 
+                                
+                                
+                                
 
+                                    
+                               
+                               
+            
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Inicio  </text>  
-                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_start" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_start" style=" border-radius: 25px; width:60%;  text-align: right;  ">
                                        
                   </div>
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Fin </text>  
                          
-                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_end" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_end" style=" border-radius: 25px; width:60%;  text-align: right; color: #fff; ">
                          
                   </div>
 
@@ -128,31 +124,31 @@ import axios from 'axios';
                 </div>
                 
                 <div  class="d-flex justify-content-between mt-2">
-                          <text> Minutos Tiempo </text>  
+                          <text>Minutos entre citas </text>  
                           <input :disabled="!showEdit"  type="number" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="time_between" style=" border-radius: 25px; width:40%;  text-align: right; ">
                 
                 </div>
 
+               
+
                 <div class="mt-1">
                   Dias Recurrencia: <br>
 
-                <div class="d-flex justify-content-start fs-3 m-2">
-                    <div class="border border-1 border-white m-2 p-2"  @click="activateMonday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':monday  }" >Lu</div>
-                    <div class="border border-1 border-white m-2 p-2"  @click="activateTuesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':tuesday }" >Ma</div>
-                    <div class="border border-1 border-white m-2 p-2"  @click="activateWednesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':wednesday }" >Mi</div>
-                    <div class="border border-1 border-white m-2 p-2"  @click="activateThursday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':thursday }">Ju</div>
-                    <div class="border border-1 border-white m-2 p-2"  @click="activateFriday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':friday }">Vie</div>
-                </div> 
-
-                <div class="d-flex justify-content-start fs-3 m-2">
-                    <div class="border border-1 border-white m-2 p-2" @click="activateSaturday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':saturday }">Sa</div>
-                    <div class="border border-1 border-white m-2 p-2" @click="activateSunday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':sunday }">Do</div>
+                <div class="d-flex justify-content-between fs-5 m-1">
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateMonday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':monday  }" >Lu</div>
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateTuesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':tuesday }" >Ma</div>
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateWednesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':wednesday }" >Mi</div>
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateThursday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':thursday }">Ju</div>
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateFriday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':friday }">Vie</div>
+                
+                    <div class="border border-1 border-white m-1 p-1" @click="activateSaturday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':saturday }">Sa</div>
+                    <div class="border border-1 border-white m-1 p-1" @click="activateSunday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':sunday }">Do</div>
                 </div>
 
                 </div>
 
                 <div  class="d-flex justify-content-between mt-2">
-                            <text  class="" >Compartir en Redes Sociales  </text>  
+                            <text  @click="showSocial=!showSocial" class="" >Compartir en Redes Sociales  </text>  
                 </div>
 
               <div v-if="true" class="d-flex justify-content-between p-3 text-white" > 
@@ -178,12 +174,19 @@ import axios from 'axios';
               </div>
 
                               
-                <hr class="text-white">
-                <p v-if="!showEdit" class="text-center fs-4 " > <text  @click="showEdit=true" class="text-white"> Modificar </text>  </p>
-                
+                <hr class="text-white ">
+
+                <div v-if="!showEdit" class="d-flex justify-content-around fs-4 text-white" >
+                     <text  @click="showEdit=true" class="text-white"> Modificar </text>  
+                 
+                </div>
+
                 <div v-if="showEdit" class="d-flex justify-content-between mt-2">
-                            <text @click="saveCalendarChanges();showEdit=false" class="" >GUARDAR  </text>  
-                            <text @click="showEdit=false;resetForm()" class="" >CANCELAR </text>  
+                    <text @click="saveCalendarChanges();showEdit=false" class="" >GUARDAR  </text> 
+                            
+                    <text @click="deleteCalendar();showEdit=false" class="mt-4" >Eliminar <i class="bi bi-trash"></i> </text> 
+                           
+                    <text @click="showEdit=false;resetForm()" class="" >CANCELAR </text>  
                 </div>
 
                                 
@@ -210,10 +213,13 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
+            showSocial : false ,
             showEdit : false, 
+
 
             calendar_active : null ,
             specialty_code : null, 
+            name : null ,
             date_start : null ,
             date_end : null,
             time_start : null ,
@@ -231,12 +237,13 @@ export default {
     },
    	
 	props: [ 'calendar' , 'global_specialties' , 'global_comunas','session_params' ],
-   /* emits: ['updateCenterList'],*/
+    emits: ['updateCalendarList'],
 
 	created () {
-
         this.calendar_active = this.calendar.calendar_active
         this.specialty_code = this.calendar.specialty1 ; 
+        
+        this.name = this.calendar.name ;
 
         this.date_start = this.calendar.date_start.substring(0,10) ;
         this.date_end = this.calendar.date_end.substring(0,10)  ;
@@ -251,10 +258,29 @@ export default {
         this.friday = this.calendar.friday  ;
         this.saturday = this.calendar.saturday  ;
         this.sunday = this.calendar.sunday  ;
-
     },
 
 	methods :{
+
+        async deleteCalendar(){
+          console.log("Professional delete Calendar")
+         
+           var r =confirm("¿ Esta seguro que desea ELIMINAR este Calendario?  Ok para continuar");
+            if (r == true) {
+
+                  const json = { 
+                   // professional_id: this.session_params.professional_id ,
+                    calendar_id :  this.calendar.calendar_id,
+                    };
+
+                  console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_delete_calendar",json);
+                  console.log ("Activate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+                  let aux_resp = response_json.data.rows ; 
+                  this.showModalViewCalendar = false ; 
+                  this.$emit('updateCalendarList'); 
+            }
+      },
 
         switchCalendarActive()
         {   if (this.showEdit)
