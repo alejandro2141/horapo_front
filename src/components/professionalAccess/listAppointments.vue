@@ -33,7 +33,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 
                 <div v-if="hour.app_available != null"  >
                     <div v-if="!hour.app_available">
-                        <AppointmentReserved v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
+                        <AppointmentReserved  v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
                     </div>
                     <!--
                     <div v-else>
@@ -43,7 +43,7 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
                 </div>
 
                 <div v-else >
-                        <AppointmentAvailable @click="displayModalAppAvailable(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
+                        <AppointmentAvailable :days_expired="days_expired" @click="displayModalAppAvailable(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
                   
                     <!--
                     <div class="d-flex justify-content-between mb-3">
@@ -134,10 +134,12 @@ export default {
             openModalReserveAppEvent : null,
             openModalDuplicateDay : null ,
             appointments_day : null ,
+
+            days_expired :false ,
         }   
     },
    	
-   props: ['daterequired','session_params','appointments',  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
+   props: ['day_expired','daterequired','session_params','appointments',  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: ['updateAppointmentList','switchView' ] , 
 	created () {
        // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
@@ -207,7 +209,9 @@ export default {
             });
 
             console.log("HOURS="+JSON.stringify(this.hours) ) 
-            
+            this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
+            console.log("DAY EXPIRED:"+this.days_expired);
+
 
         }
     },
@@ -226,9 +230,14 @@ export default {
         },
         displayModalAppAvailable(hour)
         {
+            if (!this.days_expired )
+            {
             console.log("display Modal App Available Start TIme: "+hour.start_time.substring(0,5));
+
             this.hourToReserve=hour;
             this.openModalReserveAppEvent = Math.random();
+            }
+
         },
 
         duplicateDay(date){
@@ -250,6 +259,7 @@ export default {
         
        displayModalReservedDetails(hour)
        {
+           if (this.display)
             console.log ("Display Modal Reserved APP!")
             this.hourTaken=hour ;
             this.openModalShowAppTakenEvent = Math.random();
