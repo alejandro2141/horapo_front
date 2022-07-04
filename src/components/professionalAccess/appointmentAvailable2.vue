@@ -17,7 +17,7 @@ import axios from 'axios';
                             </text> 
                         </div>
                        
-                                <div  class="w-100 text-white display-6 p-2" :style="[ {'background-color' : appointment.calendar_color} , days_expired==true ? { 'opacity': '0.6' }:{ 'opacity': '1' }  ]"  style="border-radius: 15px;"  >
+                                <div  class="w-100 text-white display-6 p-2" :style="[ {'background-color' : appointment.calendar_color} , days_expired==true ? { 'background-color': '#444' }:{ 'opacity': '1' }  ]"  style="border-radius: 15px;"  >
                                     
                                     <div class=""  >
                                         <text class="" ><small> {{specialtyId2name(appointment.specialty)}} </small> </text>
