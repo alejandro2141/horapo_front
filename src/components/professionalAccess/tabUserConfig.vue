@@ -11,8 +11,9 @@ import axios from 'axios';
         
          <i class="bi bi-person-circle display-1 "></i> 
            <p class="h4 text-center  mt-3 "> Su Información </p> 
-        
-         <i class="display-1 bi bi-x-lg ml-0 text-primary"   aria-label="Close" v-on:click="closeTabUserConfig()" ></i> 
+           <text></text>        
+    <!--     <i class="display-1 bi bi-x-lg ml-0 text-primary"   aria-label="Close" v-on:click="closeTabUserConfig()" ></i> 
+    -->
     </div>
    
     <p class="text-center " > 
