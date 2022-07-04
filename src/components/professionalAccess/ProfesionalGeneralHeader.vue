@@ -13,26 +13,26 @@ import SwitchViewButton from './switchViewButton.vue'
 
 		<text >	
 			<i v-if="showTopMenu" class="fs-4 bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
-			<i v-if="show_close_list" class="fs-3 bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+			<i v-if="show_close_list" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
 		</text>
 
 		<text>
-			<text v-if="showTopMenu" > | </text>
+			<text v-if="showTopMenu" class="text-white-50"> | </text>
 		</text>
 
 		<text>	
 			<i v-if="!show_close_centers && !show_close_list" class="fs-4 bi bi-bullseye" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
-		    <i v-if="show_close_centers" class="fs-3 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
+		    <i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
 	
 		</text>
 
 		<text>
-			<text v-if="showTopMenu">|</text>
+			<text v-if="true" class="text-white-50" >|</text>
 		</text>
 
 		<text>	
 			<i v-if="!show_close_calendars && !show_close_list" class="fs-4 bi bi-calendar-week" @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" ></i>
-			<i v-if="show_close_calendars" class="fs-3 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
+			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
 			
 		</text>
 		
@@ -78,10 +78,14 @@ import SwitchViewButton from './switchViewButton.vue'
 					
 				</a>
 				<hr class="text-white">
+
+				<!--
 				<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="fs-3  text-decoration-none"  >	
 					&nbsp; <i class=" btn-outline-light bi bi-geo-alt fs-5 "></i> <text class="fs-5 btn-outline-light">&nbsp; Direcciones y Consultas </text>	
 				</a>
+				
 				<hr class="text-white">
+				-->
 
 				<!--
 				<div  style="width: 00px; height: 600px;" >		
