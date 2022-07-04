@@ -34,13 +34,13 @@ import axios from 'axios';
 
                     <div class="d-flex justify-content-between mt-0 p-1"> 
                                                   
-                        <div v-if="evaluateCalendarStatus(date_end)==3" class="bg-white"  :class="{ 'bg-dark': showEdit }" style=" border-radius: 15px; "  >
-                              <text class="text-danger  p-1"> Expirado </text> 
+                        <div v-if="evaluateCalendarStatus(date_end)==3" class="bg-secondary" :class="{ 'bg-dark': showEdit }" style=" border-radius: 15px; "  >
+                              <text class="text-white p-1"> Expirado <i class="text-danger display-4 bi bi-slash-circle-fill"></i> </text> 
                         </div>
 
-                        <div v-else   >
+                        <div v-else >
                                 <text v-if="calendar_active"  >  
-                                  <text class="text-white ">Encendido</text>
+                                  <text class="text-white ">Encendido </text>
                                 </text>
                                 <text v-else > 
                                     <text class="text-white">Apagado<i class="text-danger display-4 bi bi-slash-circle-fill"></i></text>
