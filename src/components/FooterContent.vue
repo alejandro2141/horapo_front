@@ -1,34 +1,30 @@
 <script setup>
 import { ref } from 'vue'
 
-defineProps({
-  msg: String
-})
 
-const count = ref(0)
 </script>
 
 <template>
 
 	<div class="fixed-bottom">
 
-    <div  class="d-flex justify-content-between   bg-dark pt-1 pb-1 "> 
+    <div  class="d-flex justify-content-between   fs-5 text-white  pt- pb-2 "> 
 
       <text class="">
 			<a href="/nested/aboutUs.html" class="m-1   text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;&nbsp;&nbsp;	<text class="text-secondary text-decoration-none">123hora?</text>
+				&nbsp;&nbsp;&nbsp;&nbsp;	<text class=" text-decoration-none">123hora?</text>
 			</a>
 	  </text>
 
       <text class="">
 			<a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-					<text class="text-secondary text-decoration-none">Profesionales</text>
+					<text class="text-decoration-none">Profesionales</text>
 			</a>
 	  </text>
 
 	  <text>
 			<a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-					<text class="text-muted text-decoration-none">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
+					<text class="text-decoration-none">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
 			</a>
 	  </text>
 
