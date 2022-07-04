@@ -18,7 +18,7 @@ import CalendarProfessional from './calendar_professional.vue'
                 <div  id="search_result" v-if='calendars!=null &&  calendars.length > 0'  >
                     <div v-for="calendar in calendars"  :key='calendar.id' >
 
-                        <CalendarProfessional :calendar="calendar"  :global_specialties="global_specialties" :global_comunas="global_comunas"> </CalendarProfessional> 
+                        <CalendarProfessional :calendar="calendar" v-on:updateCalendarList="updateCalendarList()" :global_specialties="global_specialties" :global_comunas="global_comunas"> </CalendarProfessional> 
  <!--
                     <div class="m-2">
                         
