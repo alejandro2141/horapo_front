@@ -5,7 +5,7 @@ import axios from 'axios';
 </script>
 
 <template>
-    <div class="p-3 mb-2 text-dark  " style="border-radius: 15px;">
+    <div class="p-3 mb-2 text-white bg-secondary" >
    
     <div class="d-flex justify-content-between mt-3">
         
@@ -35,12 +35,12 @@ import axios from 'axios';
 
         <div class="d-flex justify-content-between"> 
 
-            <a class="mt-4" target="_blank" rel="noopener noreferrer" :href="'/nested/publicSiteProfessional.html?prof_id='+professional_data.id">Ver Su Sitio Profesional</a>
+            <a class="mt-4 text-white" target="_blank" rel="noopener noreferrer" :href="'/nested/publicSiteProfessional.html?prof_id='+professional_data.id">Ver Su Sitio Profesional</a>
             <text class="">
                 <text class="text-center">Compartir </text>
                 <p>
-               &nbsp; <i class="text-primary fs-1 bi bi-whatsapp "> </i> &nbsp; &nbsp;
-               &nbsp; <i class="text-primary fs-1 bi bi-facebook"></i> &nbsp;
+               &nbsp; <i class=" fs-1 bi bi-whatsapp "> </i> &nbsp; &nbsp;
+               &nbsp; <i class=" fs-1 bi bi-facebook"></i> &nbsp;
                 </p>
             </text>
 
