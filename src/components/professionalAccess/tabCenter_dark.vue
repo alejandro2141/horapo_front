@@ -176,7 +176,7 @@ import ConsultancyRemote from './consultancy_remote.vue'
 
 
         <div class="text-center p-3 m-3"> 
-            <text @click="addNewCenter()"  class="m-3 btn btn-dark" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
+            <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
         </div>
 
        
