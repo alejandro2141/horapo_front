@@ -35,13 +35,28 @@ import axios from 'axios';
                     <div class="d-flex justify-content-between mt-2"> 
                           <text class=""> Estado  Actual</text>   
                           
-                          <div v-if="evaluateCalendarStatus(date_end)==3">
-                              <text class="text-danger fw-bold bg-white p-1"> EXPIRADO </text>
+                          <div v-if="evaluateCalendarStatus(date_end)==3"    >
+                             <i class="display-1 text-white bi bi-toggle-off" @click="switchCalendarActive()"  :class="{ 'bg-dark': showEdit }"  ></i><br> 
+                              <text class="text-danger bg-white p-1"> EXPIRADO </text>
                           </div>
+
                           <div v-else>
-                              <text v-if="calendar_active" class="text-success fw-bold bg-white p-1" >  Encendido </text>
-                              <text v-else class="text-danger fw-bold bg-white p-1" > <i class="bi bi-exclamation-octagon bg-white text-danger p-1"></i>
-                                APAGADO </text>
+                              <text v-if="calendar_active" class="p-1" >  
+                                <i class="text-white display-1 bi bi-toggle-on" @click="switchCalendarActive()" :class="{ 'bg-dark': showEdit }"></i> <br>
+                                <text class="text-success bg-white">
+                                    Encendido 
+                                </text>
+                                 
+                              </text>
+                              
+                              <text v-else class="p-1" > 
+                                <i class="text-white display-1 bi bi-toggle-off" @click="switchCalendarActive()" :class="{ 'bg-dark': showEdit }"></i> <br>
+                                <text class="text-danger bg-white"> 
+                                    APAGADO 
+                                </text>
+                                
+                               </text>
+
                           </div>
                     </div>
 <!--
@@ -122,26 +137,18 @@ import axios from 'axios';
                   Dias Recurrencia: <br>
 
                 <div class="d-flex justify-content-start fs-3 m-2">
-                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.monday  }" >Lu</div>
-                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.tuesday }" >Ma</div>
-                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.wednesday }" >Mi</div>
-                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.thursday }">Ju</div>
-                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.friday }">Vie</div>
-
+                    <div class="border border-1 border-white m-2 p-2"  @click="activateMonday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':monday  }" >Lu</div>
+                    <div class="border border-1 border-white m-2 p-2"  @click="activateTuesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':tuesday }" >Ma</div>
+                    <div class="border border-1 border-white m-2 p-2"  @click="activateWednesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':wednesday }" >Mi</div>
+                    <div class="border border-1 border-white m-2 p-2"  @click="activateThursday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':thursday }">Ju</div>
+                    <div class="border border-1 border-white m-2 p-2"  @click="activateFriday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':friday }">Vie</div>
                 </div> 
+
                 <div class="d-flex justify-content-start fs-3 m-2">
-                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.saturday }">Sa</div>
-                    <div class="border border-1 border-white m-2 p-2" :class="{ 'bg-dark p-1': showEdit , 'border-3':calendar.sunday }">Do</div>
+                    <div class="border border-1 border-white m-2 p-2" @click="activateSaturday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':saturday }">Sa</div>
+                    <div class="border border-1 border-white m-2 p-2" @click="activateSunday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':sunday }">Do</div>
                 </div>
 
-
-                                        <text class="d-flex justify-content-end" v-if="calendar.monday"> Lunes <br> </text> 
-                                        <text class="d-flex justify-content-end" v-if="calendar.tuestday"> Martes  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar.wednesday"> Miercoles  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar.thursday"> Jueves  <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar.friday"> Viernes <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar.saturday"> Sabado <br> </text> 
-                                        <text class="d-flex justify-content-end"  v-if="calendar.sunday"> Domingo <br> </text> 
                 </div>
 
                 <div  class="d-flex justify-content-between mt-2">
@@ -175,8 +182,8 @@ import axios from 'axios';
                 <p v-if="!showEdit" class="text-center fs-4 " > <text  @click="showEdit=true" class="text-white"> Modificar </text>  </p>
                 
                 <div v-if="showEdit" class="d-flex justify-content-between mt-2">
-                            <text @click="showEdit=false" class="" >GUARDAR  </text>  
-                            <text @click="showEdit=false" class="" >CANCELAR </text>  
+                            <text @click="saveCalendarChanges();showEdit=false" class="" >GUARDAR  </text>  
+                            <text @click="showEdit=false;resetForm()" class="" >CANCELAR </text>  
                 </div>
 
                                 
@@ -248,6 +255,61 @@ export default {
     },
 
 	methods :{
+
+        switchCalendarActive()
+        {   if (this.showEdit)
+            { this.calendar_active=!this.calendar_active ; }
+        },
+
+        activateMonday()
+        {  if (this.showEdit)
+            { this.monday=!this.monday ; }
+        },
+        activateTuesday()
+        {  if (this.showEdit)
+            { this.tuesday=!this.tuesday ; }
+        },
+        activateWednesday()
+        {  if (this.showEdit)
+            { this.wednesday=!this.wednesday ; }
+        },
+        activateThursday()
+        {  if (this.showEdit)
+            { this.thursday=!this.thursday ; }
+        },
+        activateFriday()
+        {  if (this.showEdit)
+            { this.friday=!this.friday ; }
+        },
+        activateSaturday()
+        {  if (this.showEdit)
+            { this.saturday=!this.saturday ; }
+        },
+        activateSunday()
+        {  if (this.showEdit)
+            { this.sunday=!this.sunday;  }
+        },
+
+        resetForm()
+        {
+        this.calendar_active = this.calendar.calendar_active
+        this.specialty_code = this.calendar.specialty1 ; 
+
+        this.date_start = this.calendar.date_start.substring(0,10) ;
+        this.date_end = this.calendar.date_end.substring(0,10)  ;
+        this.start_time = this.calendar.start_time.substring(0,5)  ;
+        this.end_time = this.calendar.end_time.substring(0,5)  ;
+        this.duration = this.calendar.duration  ;
+        this.time_between = this.calendar.time_between  ;
+        this.monday = this.calendar.monday  ;
+        this.tuesday = this.calendar.tuesday  ;
+        this.wednesday = this.calendar.wednesday ;
+        this.thursday = this.calendar.thursday  ;
+        this.friday = this.calendar.friday  ;
+        this.saturday = this.calendar.saturday  ;
+        this.sunday = this.calendar.sunday  ;
+        },
+
          evaluateCalendarStatus(date_end)
         {
           let aux_date_end=new Date(date_end);
@@ -271,6 +333,66 @@ export default {
             else { return null }
 
         },
+
+
+        async saveCalendarChanges()
+        {
+          console.log("Save Calendar Changes");
+          
+           var r =confirm("¿ Esta seguro que desea Actualizar este Calendario? Ok para continuar");
+            if (r == true) {
+
+                  const json = { 
+                    /*
+                    form_calendar_active : this.calendar_active ,
+                    form_center_id : this.form_center_id,
+                    form_center_name : this.form_center_name,
+                    form_date_start : this.form_date_start ,
+                    form_date_end: this.form_date_end,
+                    form_time_start: this.form_time_start,
+                    form_time_end: this.form_time_end,
+                    form_day_mon: this.form_day_mon ,
+                    form_day_tue: this.form_day_tue ,
+                    form_day_wed: this.form_day_wed ,
+                    form_day_thu: this.form_day_thu ,
+                    form_day_fri: this.form_day_fri ,
+                    form_day_sat: this.form_day_sat ,
+                    form_day_sun: this.form_day_sun , 
+                    form_calendar_color : this.form_calendar_color , 
+
+                    professional_id: this.session_params.professional_id ,
+                    calendar_id :  calendar_details.calendar_id,
+                    */
+                    form_calendar_active : this.calendar_active ,
+                    // form_center_id : 
+                    // cernter_name
+                    form_date_start : this.date_start  ,
+                    form_date_end : this.date_end ,
+                    form_time_start : this.start_time ,
+                    form_time_end : this.end_time , 
+                    form_day_mon: this.monday ,
+                    form_day_tue: this.tuesday ,
+                    form_day_wed: this.wednesday ,
+                    form_day_thu: this.thursday ,
+                    form_day_fri: this.friday ,
+                    form_day_sat: this.saturday ,
+                    form_day_sun: this.sunday , 
+
+                   // professional_id: this.session_params.professional_id ,
+                    calendar_id : this.calendar.calendar_id,
+                    };
+
+                  console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_update_calendar",json);
+                  console.log ("Update Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+                  let aux_resp = response_json.data.rows ; 
+                  this.showModalViewCalendar = false ; 
+                  this.$emit('updateCalendarList'); 
+            }
+
+        },
+
+
 
     }
 }
