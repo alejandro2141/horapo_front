@@ -17,7 +17,9 @@ import loadProgress from '../loadProgress.vue'
 
            <CalendarPickerMinimal2 class="mt-3" v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal2>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> <br>
-         
+         <i class="display-1 bi bi-calendar2-plus"></i><br>
+         <i class="display-1 bi bi-calendar2-x"></i>
+
            <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
          
             <div id='footer' style='height : 300px'>
