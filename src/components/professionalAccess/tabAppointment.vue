@@ -7,6 +7,7 @@ import DateRequiredActions from './dateRequiredActions.vue'
 import ListAppointments from './listAppointments.vue'
 import FirstTimeLogin from './firstTimeLogin.vue'
 import loadProgress from '../loadProgress.vue'
+import LockOptions from './lockOptions.vue'
 
 </script>
 
@@ -15,10 +16,18 @@ import loadProgress from '../loadProgress.vue'
   <loadProgress  :active_spinner="active_spinner" > </loadProgress>
       <div v-if='!session_params.first_time' >
 
-           <CalendarPickerMinimal2 class="mt-3" v-on:set_daterequired="set_daterequired"  > </CalendarPickerMinimal2>
+        <div class="d-flex justify-content-between  ">
+          
+          <LockOptions :daterequired="daterequired" :session_params="session_params" ></LockOptions>
+             
+                
+
+          <div class="w-100"> 
+           <CalendarPickerMinimal2 class="mt-3" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> <br>
-         <i class="display-1 bi bi-calendar2-plus"></i><br>
-         <i class="display-1 bi bi-calendar2-x"></i>
+          </div>
+
+        </div> 
 
            <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
          
@@ -34,6 +43,16 @@ import loadProgress from '../loadProgress.vue'
 </template>
 
 <style scoped>
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
 
 
@@ -48,6 +67,7 @@ data: function () {
             appointments: null, 
             active_spinner : false , 
             calendars_marks : null ,
+          
           
 		 }
 	},
@@ -65,6 +85,8 @@ data: function () {
          },
  
     methods: {
+
+      
 
         switchView(){
             this.$emit('switchView');
