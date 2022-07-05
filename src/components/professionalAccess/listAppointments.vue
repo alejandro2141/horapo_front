@@ -106,15 +106,6 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
     background-color:#ffffff
     }
 
-.patron1 {
-    background:url(
-data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAADdJREFUKFNjZCASMCKrm7635D8yP9O5By4PZ6ArgmmAKQYrxKUIWfFAK8TnThTPwBxNVPAQCncADZ8gC5x6AJ4AAAAASUVORK5CYII=       )
-              }
-
-.patron2 {
-    background:url(
-data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAADBJREFUKFNjZCASMKKrm7635D9ILNO5B0WORgph1uFyLsgZYKuJVohsEp09Q0yYAwDC8CALmx4W/gAAAABJRU5ErkJggg==)
-              }
 </style>
 
 <script>
