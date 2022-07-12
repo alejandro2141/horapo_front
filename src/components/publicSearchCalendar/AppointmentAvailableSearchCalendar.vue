@@ -13,14 +13,14 @@ import { ref } from 'vue'
         
         <div class="">
             <div>
-                <text class="fs-3"> {{day_name[ new Date(appointment.date).getDay()+1] }} &nbsp; </text>
+                <text class="fs-3"> {{day_name[ new Date(appointment.date).getDay()] }} &nbsp; </text>
                 <text class="fs-3"> {{ appointment.date.split("-")[2].substring(0,2) }} de {{ month_name[parseInt(appointment.date.split("-")[1]-1 ) ] }} </text>
                 <text class="fs-3">&nbsp;  {{appointment.date.split("-")[0] }}   </text>   
             </div>    
 
             <div>
                 <text class="display-2">
-                    {{appointment.start_time.split(":")[0].padStart(2,0)  }} : {{appointment.start_time.split(":")[1].padStart(2,0)  }} 
+                    {{appointment.start_time.split(":")[0].padStart(2,0)  }}:{{appointment.start_time.split(":")[1].padStart(2,0)  }} <text class="display-6">Hrs</text>
                 </text>
             </div>
 
@@ -42,7 +42,7 @@ import { ref } from 'vue'
 export default {
   data : function() {
     return {
-        day_name : [ 'Domingo','Lunes','Martes','Miercoles','jueves','Viernes','Sabado'] , 
+        day_name : [ 'Lunes','Martes','Miercoles','jueves','Viernes','Sabado','Domingo' ] , 
         month_name : ['Enero','Ferero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'] , 
 
             }
