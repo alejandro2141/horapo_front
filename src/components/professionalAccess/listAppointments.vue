@@ -7,8 +7,6 @@ import ModalCreateAppointment from './modalCreateAppointment.vue';
 import ModalShowAppointmentDetails from './modalShowAppointmentDetails.vue';
 import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
 import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppointment.vue';
-import ModalDuplicateDay from './modalDuplicateDay.vue';
-
 
 
 </script>
@@ -16,18 +14,17 @@ import ModalDuplicateDay from './modalDuplicateDay.vue';
 <template>
 
  <div id="search_result" class="">
-<ModalDuplicateDay :session_params='session_params' :daterequired='daterequired' :openModalDuplicateDay='openModalDuplicateDay' :appointments_day='appointments_day' :global_comunas='global_comunas' :global_specialties='global_specialties' > </ModalDuplicateDay>
-
+<!--
 <ModalCreateAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourCreate='hourCreate' :session_params='session_params'  v-on:switchView='switchView' :global_comunas="global_comunas" :global_specialties='global_specialties'  :openModalCreateAppEvent='openModalCreateAppEvent' > </ModalCreateAppointment>
+
 <ModalShowAppointmentDetails v-on:showReserveModal="showReserveModal" v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourDetails='hourDetails' :session_params='session_params' :openModalShowDetailsEvent="openModalShowDetailsEvent" :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentDetails>
+-->
 
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'> </ModalProfessionalReserveAppointment>
-
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
 
-
-    <div v-for="(hour) in hours" :key="hour"  >
+    <div v-for="(hour) in appointments" :key="hour"  >
       
             <div>
 
@@ -133,10 +130,16 @@ export default {
    props: ['day_expired','daterequired','session_params','appointments',  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: ['updateAppointmentList','switchView' ] , 
 	created () {
-       // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
+            // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
 	},
     
     watch : {
+          appointments(newValue){
+            this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
+            console.log("DAY EXPIRED:"+this.days_expired);
+          }
+
+        /*
         appointments(newValue){
                 //copy array including only app to be display in Modal duplicate day
                 this.appointments_day = [].concat(newValue);
@@ -205,6 +208,7 @@ export default {
 
 
         }
+        */
     },
 
 	methods :{
@@ -219,6 +223,7 @@ export default {
             if (temp != null) { return temp.name }
             else { return "No Existe Centro" }
         },
+
         displayModalAppAvailable(hour)
         {
             if (!this.days_expired )
@@ -230,13 +235,13 @@ export default {
             }
 
         },
-
+/*
         duplicateDay(date){
             console.log("duplicate day in list appointments "+date) ; 
             console.log("Session Params "+JSON.stringify(this.session_params) ) ;
             this.openModalDuplicateDay= Math.random(); 
         },
-
+*/
         switchView(){
             this.$emit('switchView');
          },
@@ -263,19 +268,21 @@ export default {
             this.hourDetails = hour; 
             this.openModalShowDetailsEvent = Math.random();
         },
-
+/*
         displayModalCreateApp(ahour)
         {
             this.hourCreate = ahour ;
             console.log("Display Modal Create App:"+this.hourCreate.start_time+" Day:"+this.daterequired );
             this.openModalCreateAppEvent = Math.random();
         },
+        */
         updateAppList()
         {
             console.log("Update App List in List Appointments");
             this.$emit('updateAppointmentList');
         },
 
+        /*
         sameCenter(center){
         console.log ("Compare cen Name  center:"+center+" prevCenterName:"+this.prevCenterName+" resultComparison "+center.localeCompare(this.prevCenterName)   );
            if (center.localeCompare(this.prevCenterName) === 0 )
@@ -287,7 +294,10 @@ export default {
                 return false;
             //  this.prevCenterName=center;
             }
-        },  
+
+
+        },
+        */  
 
         specialtyId2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
