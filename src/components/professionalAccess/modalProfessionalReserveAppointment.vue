@@ -28,7 +28,7 @@ import axios from 'axios';
         
       <div id="app" class="m-0 p-0 d-flex" style="border-radius: 15px;" >	
              
-              <div class="m-0 p-2" :style="{ 'background-color' : hourToReserve.calendar_color  }" style="border-radius: 15px;" >
+              <div class="m-0 p-2" :style="{ 'background-color' : calendar_data.color  }" style="border-radius: 15px;" >
                        
               </div>
                             
@@ -39,9 +39,9 @@ import axios from 'axios';
         <div class="display-4  text-success d-flex justify-content-between "  >	
 
                           <text class="p-1 text-dark" >
-                            <i v-if="hourToReserve.center_visit" class=" bi bi-building"></i>      
-                            <i v-if="hourToReserve.home_visit"  class=" bi bi-house-door" > </i>                                  
-                            <i v-if="hourToReserve.remote_care" class=" bi bi-camera-video"></i> 
+                            <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
+                            <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
+                            <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i> 
                           
                           <text class="p-1">   {{ idSpecialty2name(hourToReserve.specialty) }}  </text>
 
@@ -60,36 +60,36 @@ import axios from 'axios';
           <div class="mt-3" >
 
            <!-- TYPE CENTER --> 
-                    <div v-if="hourToReserve.center_visit" class="" >
+                    <div v-if="center_data.center_visit" class="" >
 
                             <p class="h5" style="">
                               <text class="display-5"> En Consulta<br> </text>
-                              <text class="display-5">{{getCenter(hourToReserve.center_id).name}}</text>
+                              <text class="display-5">{{center_data.name}}</text>
                               <br>
-                              Direccion:  {{getCenter(hourToReserve.center_id).address}}
-                              ,{{id2comuna(getCenter(hourToReserve.center_id).comuna)}}
+                              Direccion:  {{center_data.address}}
+                              ,{{ id2comuna(center_data.comuna) }}
                             </p>
                     </div>
 
           <!-- TYPE HOME -->  
-                    <div v-if="hourToReserve.home_visit" >
+                    <div v-if="center_data.home_visit" >
                             <div class="display-5" >
                                <text >  Visita a Domicilio:</text> <br>
                             </div>
 
                             <h5> Zonas de atención:
-                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna1) }} 
-                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna2) }} 
-                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna3) }} 
-                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna4) }} 
-                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna5) }} 
-                                 {{id2comuna(getCenter(hourToReserve.center_id).home_comuna6) }} 
+                                 {{id2comuna(center_data.home_comuna1) }} 
+                                 {{id2comuna(center_data.home_comuna2) }} 
+                                 {{id2comuna(center_data.home_comuna3) }} 
+                                 {{id2comuna(center_data.home_comuna4) }} 
+                                 {{id2comuna(center_data.home_comuna5) }} 
+                                 {{id2comuna(center_data.home_comuna6) }} 
                             
                             </h5>   
                     </div>
 
           <!-- TYPE REMOTE  --> 
-                    <div v-if="hourToReserve.remote_care" >
+                    <div v-if="center_data.remote_care" >
                          <p class="h5"  >
                               
                              <text class="display-5">  Tele Atención. </text> <br> Requiere llamar directamente al telefono registrado del paciente. 
@@ -97,7 +97,7 @@ import axios from 'axios';
                     </div>
 
         </div>
-                        <text v-if="hourToReserve.app_type_home" class="">Direccion: {{hourToReserve.center_address }} </text>
+                        <text v-if="hourToReserve.app_type_home" class="">Direccion: {{center_data.address }} </text>
                         
                         <button type="button" class="btn btn-primary m-3 " @click="show_patient_form=!show_patient_form" >Reservar</button>
                         <div v-if="show_patient_form" class="mt-3"> 
@@ -240,8 +240,8 @@ export default {
           error_msg_phone : false,
           error_msg_insurance_code : false,
 
-
-
+          center_data : null ,
+          calendar_data : null ,
           }   
     },
    	
@@ -296,11 +296,12 @@ export default {
 						appointment_start_time : this.hourToReserve.start_time , 
 						appointment_duration : this.hourToReserve.duration , 
 						appointment_specialty : this.hourToReserve.specialty , 
-						appointment_type_center :  this.hourToReserve.center_visit	 , 
-						appointment_center_name  :  this.hourToReserve.center_name	, 
+
+            appointment_type_center : this.center_data.center_visit	 , 
+						appointment_center_name  :  this.center_data.name	, 
 						appointment_center_id  :  this.hourToReserve.center_id	, 
-						appointment_type_home  :  this.hourToReserve.home_visit	, 
-						appointment_type_remote : this.hourToReserve.remote_care ,
+						appointment_type_home  :  this.center_data.home_visit	, 
+						appointment_type_remote : this.center_data.remote_care ,
 						appointment_professional_id  :  this.session_params.professional_id	, 
 
             /*
@@ -311,7 +312,7 @@ export default {
 						appointment_location5 : this.hourToReserve.home_visit_location1	, 
 						appointment_location6 : this.hourToReserve.home_visit_location1	, 
 						*/
-            appointment_location1 : this.getCenter(this.hourToReserve.center_id).home_comuna1 	, 
+            appointment_location1 : this.center_data.home_comuna1 	, 
 						appointment_location2 : null 	, 
 						appointment_location3 :	null 	, 
 						appointment_location4 : null 	, 
@@ -327,7 +328,7 @@ export default {
 						patient_phone	: this.form_patient_phone,
 						
 							
-						specialty_reserved : this.hourToReserve.specialty1,
+						specialty_reserved : this.hourToReserve.specialty,
 
 						//patient_insurance:	this.form_patient_insurance_code,
 						patient_insurance :	9999 ,
@@ -365,6 +366,10 @@ export default {
         openModalReserveAppEvent(variable) {
           console.log("openModalEvent Reserve App  Event !!!");
           this.showModalReserveAppointment= true ; 
+  
+          this.center_data = this.session_params.centers.find(elem => elem.id == this.hourToReserve.center_id )
+          this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.hourToReserve.calendar_id )
+
         },
 
 
