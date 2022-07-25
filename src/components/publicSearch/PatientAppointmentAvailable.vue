@@ -26,13 +26,13 @@ import { ref } from 'vue'
            
                 <div class="display-5" style=" color:#1f9d94">
                     <div >	
-                    {{ showSpecialtyName(appointment.specialty1) }} 
+                    {{ showSpecialtyName(appointment.specialty) }} 
                     </div>       
                 </div>
  
                 <div class="">
 
-                    <div v-if="appointment.center_visit" class="">
+                    <div v-if="center_data.center_visit" class="">
                  
                         <div class="display-6" style="">  
                             <div style="color: #781ED1" >
@@ -50,7 +50,7 @@ import { ref } from 'vue'
                             
                     </div>
                     
-                    <div v-if="appointment.home_visit" style="color:#3399FF">
+                    <div v-if="center_data.home_visit" style="color:#3399FF">
                             <div class="display-5" >
                                 <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
@@ -64,7 +64,7 @@ import { ref } from 'vue'
                             </div>
                     </div>
 
-                    <div v-if="appointment.remote_care" class="">
+                    <div v-if="center_data.remote_care" class="">
                          <div class="display-5" style="color:#b36b00" >
                                <i class="bi bi-camera-video"></i> Tele Atención  	 
                               <div style="" class="text-dark display-6" >
@@ -164,12 +164,15 @@ import { ref } from 'vue'
 export default {
   data : function() {
     return {
+        center_data : null ,
             }
   },
   
   props: ['appointment','searchParameters' , 'global_comunas' , 'global_specialties' ],
 
  mounted () {  
+      this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
+ 
         },
 
 methods: {
