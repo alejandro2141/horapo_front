@@ -34,7 +34,7 @@ import FooterContent from '../FooterContent.vue'
                 <!--
                 <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                 -->
-                <searchAppointmentResult   :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="filtered_appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+                <searchAppointmentResult    :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="filtered_appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
             </div>
 
             <p v-if="appointments !=null && appointments.length == 0" class="text-center p-2"  > 
@@ -92,7 +92,10 @@ export default {
             filter_remote: false ,
 
             n_appointments_found : 0 ,
-            filtered_appointments : [] 
+            filtered_appointments : [] ,
+
+            global_specialties : null ,
+            global_comunas : null ,
     }
   },
 
@@ -300,26 +303,68 @@ methods: {
               {
                   this.appointments = null;
              
-              }
-                    
-                    
+              }        
+              
+              this.get_specialties();
+              this.get_locations();
+
            },
-
-
-
-
-
-
 
             updateLastSearch()
             {
                 console.log ("update Last Search") ;
                 this.searchAppointments(this.params_bkp);
-            }
+            },
 
+            async get_specialties()
+            {
+                const json_center = { 
+                    token : 123,
+                    };
+               console.log("get_specialties REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_specialty_list",json_center);
+               console.log("get_specialties RESPONSE "+JSON.stringify(response.data.rows) );
+              
+              this.global_specialties =  JSON.parse(JSON.stringify(response.data.rows))
+              this.setSpecialtyName() ;
 
+            },
 
+            async get_locations()
+            {
+                const json_center = { 
+                    token : 123,
+                    };
+               console.log("get_locations REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json_center);
+               console.log("get_locations RESPONSE "+JSON.stringify(response.data.rows) );
+              
+              this.global_comunas=  JSON.parse(JSON.stringify(response.data.rows))
+            },
 
+            //******* AQUI ME QUEDE GET CENTER ***********
+            // IDEALMENTE SOLO TRAER LOS CENTROS DE LOS PROFESIONALES, Y NO TODO EL UNIVERSO
+            async get_centers()
+            {
+            /*    const json_center = { 
+                    token : 123,
+                    };
+               console.log("get_locations REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json_center);
+               console.log("get_locations RESPONSE "+JSON.stringify(response.data.rows) );
+              
+              this.global_comunas=  JSON.parse(JSON.stringify(response.data.rows))
+            */
+            },
+
+             id2comunaName(id)
+            {
+            let temp= this.global_comunas.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+            },
+
+           
         },
 
 }
