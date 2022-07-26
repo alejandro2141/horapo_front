@@ -18,9 +18,9 @@ import LoadProgress from '../loadProgress.vue'
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  -->
       
-            <div class="mt-0 "  v-for="appointment in appointments" :key="appointment.id" >
+            <div  v-for="appointment in appointments" :key="appointment.id" class="mt-0 " >
                 
-                    <patientAppointmentAvailable :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                    <patientAppointmentAvailable :center_data="getCenterData(appointment.center_id)"  :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
              
             </div>
                 <!-- Start make room for Modal data when it display-->
@@ -59,7 +59,7 @@ export default {
     }
   },
 
-   props: ['searchParameters','session_params','appointments','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
+   props: ['centers','searchParameters','session_params','appointments','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
    emits: ["updateLastSearch"],
 
  
@@ -83,7 +83,6 @@ export default {
         {
         this.showLoaderProgress = false  ;
         console.log("showloader progress UPDATE !!!");
-       
         },
 
     watch: {
@@ -95,6 +94,13 @@ export default {
 
     methods: {
 
+            getCenterData(center_id)
+            {
+                console.log("Get Center Data from ID:"+center_id);
+                let temp= this.centers.find(elem => elem.id ==  center_id  )
+                if (temp != null) { return temp }
+                else { return "No Existe Centro" }  
+            },
           
             setModalReserve(appointment)
             {
