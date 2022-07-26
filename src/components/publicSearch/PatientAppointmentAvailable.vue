@@ -31,7 +31,8 @@ import { ref } from 'vue'
                 </div>
  
                 <div class="">
-
+                
+                    
                     <div v-if="center_data.center_visit" class="">
                  
                         <div class="display-6" style="">  
@@ -39,14 +40,16 @@ import { ref } from 'vue'
                             <i class="h1 bi bi-building"></i> En Consulta  </div>
                             </div>
                             <div style="" class="text-dark display-6" >
-                               {{comuna_id2name(appointment.center_visit_location)}}
+                               {{comuna_id2name(center_data.comuna)}}
                             </div>
                             <div class="" style="color:#2e5668" >	
-                                {{appointment.center_name}}
+                                {{center_data.name}}
                             </div> 
+                            <!--
                             <div style="color:#2e5668">
-                               {{appointment.center_address}}
+                               {{center_data.address}}
                             </div>
+                            -->
                             
                     </div>
                     
@@ -55,12 +58,12 @@ import { ref } from 'vue'
                                 <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
                             <div style="" class="text-dark display-6" >
-                              {{  comuna_id2name(appointment.home_visit_location1) }}
-                              {{  comuna_id2name(appointment.home_visit_location2) }}
-                              {{  comuna_id2name(appointment.home_visit_location3) }}
-                              {{  comuna_id2name(appointment.home_visit_location4) }}
-                              {{  comuna_id2name(appointment.home_visit_location5) }}
-                              {{  comuna_id2name(appointment.home_visit_location6) }}
+                              {{  comuna_id2name(center_data.home_comuna1) }}
+                              {{  comuna_id2name(center_data.home_comuna2) }}
+                              {{  comuna_id2name(center_data.home_comuna3) }}
+                              {{  comuna_id2name(center_data.home_comuna4) }}
+                              {{  comuna_id2name(center_data.home_comuna5) }}
+                              {{  comuna_id2name(center_data.home_comuna6) }}
                             </div>
                     </div>
 
@@ -72,6 +75,8 @@ import { ref } from 'vue'
                               </div>                      
                         </div>
                     </div>
+
+                   
 
                 </div>
             
@@ -164,14 +169,14 @@ import { ref } from 'vue'
 export default {
   data : function() {
     return {
-        center_data : null ,
+        
             }
   },
   
-  props: ['appointment','searchParameters' , 'global_comunas' , 'global_specialties' ],
+  props: ['center_data' ,'appointment','searchParameters' , 'global_comunas' , 'global_specialties' ],
 
  mounted () {  
-      this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
+     // this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
  
         },
 
