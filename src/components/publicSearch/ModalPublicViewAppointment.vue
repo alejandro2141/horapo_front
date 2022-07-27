@@ -11,7 +11,7 @@ import loadProgress from '../loadProgress.vue'
 
 <template>
 <div>
-<ModalPublicReserveAppForm   :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve' :global_specialties='global_specialties' ></ModalPublicReserveAppForm>
+<ModalPublicReserveAppForm  :professional_data="professional_data"  :center_data="center_data" :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve' :global_specialties='global_specialties' ></ModalPublicReserveAppForm>
 
 	<teleport to="body" >
 
@@ -28,11 +28,10 @@ import loadProgress from '../loadProgress.vue'
  					
 <!-- -->
 
-
     <div v-if="app != null"     class="bg-white p-0 mb-1 ">
         
 		<div class="d-flex justify-content-between mb-3">
-                      <div  class="display-4 p-2" style=" color:#1f9d94">  {{ showSpecialtyName(app.specialty1) }}  </div>
+                      <div  class="display-4 p-2" style=" color:#1f9d94">  {{ showSpecialtyName(app.specialty) }}  </div>
                       <div  > </div>
                       <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
         </div>
@@ -66,7 +65,7 @@ import loadProgress from '../loadProgress.vue'
  
                 <div class="">
 
-                    <div v-if="app.center_visit" class="">
+                    <div v-if="center_data.center_visit" class="">
                  
                         <div class="display-6" style="">  
                             <div style="color: #781ED1" >
@@ -74,51 +73,51 @@ import loadProgress from '../loadProgress.vue'
                             </div>
 							
                             <div style="" class="text-dark display-6" >
-                               {{comuna_id2name(app.center_visit_location)}}
+                               {{comuna_id2name(center_data.comuna)}}
                             </div>
                             <div class="" style="color:#2e5668" >	
-                             Centro :   {{app.center_name}}
+                             Centro :   {{center_data.name}}
                             </div> 
                             <div style="color:#2e5668">
-                             Direccion:  {{app.center_address}}
+                             Direccion:  {{center_data.address}}
                             </div>
                             
                     </div>
                     
-                    <div v-if="app.home_visit" style="color:#3399FF">
+                    <div v-if="center_data.home_visit" style="color:#3399FF">
                             <div class="display-5" >
                                 <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
                             
 									<div class="m-2">
-									<p  v-if=" app.home_visit_location1 != null " >  
-										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location1) }} 
+									<p  v-if=" center_data.home_comuna1 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna1) }} 
 										<br>
 									</p>
-									<p v-if=" app.home_visit_location2 != null " >  
-										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location2) }} 
+									<p v-if=" center_data.home_comuna2 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna2) }} 
 										<br>
 									</p>
-									<p v-if=" app.home_visit_location3 != null " >  
-									&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location3) }}
+									<p v-if=" center_data.home_comuna3 != null " >  
+									&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna3) }}
 										<br>
 									</p>
-									<p v-if=" app.home_visit_location4 != null " >  
-										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location4) }} 
+									<p v-if=" center_data.home_comuna4 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna4) }} 
 										<br>
 									</p>
-									<p v-if=" app.home_visit_location5 != null " >  
-										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location5) }} 
+									<p v-if=" center_data.home_comuna5 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna5) }} 
 										<br>
 									</p>
-									<p v-if=" app.home_visit_location6 != null " >  
-										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(app.home_visit_location6) }} 
+									<p v-if=" center_data.home_comuna6 != null " >  
+										&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna6) }} 
 										<br>
 									</p>	
 									</div>
                     </div>
 
-                    <div v-if="app.remote_care" class="mb-3">
+                    <div v-if="center_data.remote_care" class="mb-3">
                          <div class="display-5" style="color:#b36b00" >
                                <i class="bi bi-camera-video"></i> Tele Atención  	 
                               <div style="" class="text-dark display-6" >
@@ -127,7 +126,8 @@ import loadProgress from '../loadProgress.vue'
                         </div>
                     </div>
 
-					<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{app.professional_name }}  </p>
+					<p> <i class="bi bi-person-circle display-4 text-primary"></i> 
+					Con :  {{professional_name }}  </p>
 
 					<!-- Include here a map -->
 
@@ -283,11 +283,14 @@ export default {
 		  imgLoaded : null,
 		  imgMapUrl : null,
 
+		  professional_data : null ,
 		  active_spinner : null,
+		  professional_name: null ,
+
         }
   },
 
-	props: [ 'searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen','global_comunas', 'global_specialties' ],
+	props: ['center_data','searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen','global_comunas', 'global_specialties' ],
 	emits: [ "updateLastSearch" ],
 
 computed: {
@@ -300,6 +303,9 @@ computed: {
 		openModalEvent(newApp, oldApp) {
 			console.log("openModalEvent !!!");
 			this.showModalPublicAppDetails = true ; 
+			//get professional data
+			this.getProfessionalData(this.app.professional_id);
+
 			this.imgMapUrl = '/centerMap/center_map_id_'+this.app.center_id+'.JPG' ;	
 	  	},
 		
@@ -312,13 +318,35 @@ computed: {
 
 
 	methods: {
+		
+		async getProfessionalData(prof_id)
+		{
+			console.log("GET PROFESSIONAL ID:"+prof_id)
+			  if ( prof_id != null )
+              { 
+                const json = { 
+                    token : "AC94327FK",
+					professional_id : prof_id ,
+                            };
+
+                  console.log ("patient_get_professional INPUT JSON :"+ JSON.stringify(json)  );
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_professional",json);             
+	              this.professional_data = response_json.data
+				  this.professional_name = this.professional_data.name ;
+				  console.log ("patient_get_professional RESPONSE:"+JSON.stringify(this.professional_data)) ;
+              }
+              else 
+              {
+                    this.appointments = null; 
+              } 
+
+		},
 
 		getShortMonthName(month)
 		{
 			console.log("MONTH:"+parseInt(month));
 			let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
 			return months[parseInt(month)];
-
 		},
 
 		showSpecialtyName(id){
