@@ -24,7 +24,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                 <div class="modal-body w-100" > 
                 
 				 	<div class="d-flex flex-row justify-content-between ">
-                      <div  class="display-4" style="color:#1f9d94 ;" >{{ showSpecialtyName(appToReserve.specialty1) }}  </div>
+                      <div  class="display-4" style="color:#1f9d94 ;" >{{ showSpecialtyName(appToReserve.specialty) }}  </div>
                     
                       <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                     </div>
@@ -281,7 +281,7 @@ export default {
         }
   },
 
- props: [ 'searchParameters', 'appToReserve','eventShowModalPubicReserve' ,'global_comunas', 'global_specialties' ],
+ props: [ 'center_data' , 'professional_data' ,'searchParameters', 'appToReserve','eventShowModalPubicReserve' ,'global_comunas', 'global_specialties' ],
  emits: ['updateAppList','updateLastSearch'] , 
       
 
@@ -385,21 +385,22 @@ computed: {
 						appointment_calendar_id : this.appToReserve.calendar_id , 
 						appointment_date : this.appToReserve.date , 
 						appointment_start_time : this.appToReserve.start_time , 
-						appointment_duration : this.appToReserve.duration , 
-						appointment_specialty : this.appToReserve.specialty1 , 
-						appointment_type_center :  this.appToReserve.center_visit	 , 
-						appointment_center_name  :  this.appToReserve.center_name	, 
-						appointment_center_id  :  this.appToReserve.center_id	, 
-						appointment_type_home  :  this.appToReserve.home_visit	, 
-						appointment_type_remote : this.appToReserve.remote_care ,
-						appointment_professional_id  :  this.appToReserve.professional_id	, 
+						appointment_duration : this.appToReserve.time_between , 
+						appointment_specialty : this.appToReserve.specialty , 
+						appointment_professional_id : this.appToReserve.professional_id	, 
 
-						appointment_location1 : this.appToReserve.home_visit_location1	, 
-						appointment_location2 : this.appToReserve.home_visit_location1	, 
-						appointment_location3 :	this.appToReserve.home_visit_location1	, 
-						appointment_location4 : this.appToReserve.home_visit_location1	, 
-						appointment_location5 : this.appToReserve.home_visit_location1	, 
-						appointment_location6 : this.appToReserve.home_visit_location1	, 
+						appointment_center_id  :  this.center_data.id	, 
+						appointment_type_center :  this.center_data.center_visit	 , 
+						appointment_center_name  :  this.center_data.name	, 
+						appointment_type_home  :  this.center_data.home_visit	, 
+						appointment_type_remote : this.center_data.remote_care ,
+						
+						appointment_location1 : this.center_data.home_comuna1	, 
+						appointment_location2 : this.center_data.home_comuna2	,  
+						appointment_location3 :	this.center_data.home_comuna3	, 
+						appointment_location4 : this.center_data.home_comuna4	, 
+						appointment_location5 : this.center_data.home_comuna5	,  
+						appointment_location6 : this.center_data.home_comuna6	, 
 
 						patient_age : this.form_patient_age,
 						patient_name : this.form_patient_name,
@@ -408,7 +409,7 @@ computed: {
 						patient_phone	: this.form_patient_phone,
 						patient_address : this.form_patient_address , 
 							
-						specialty_reserved : this.appToReserve.specialty1,
+						specialty_reserved : this.appToReserve.specialty,
 
 						//patient_insurance:	this.form_patient_insurance_code,
 						patient_insurance :	9999 ,
