@@ -12,13 +12,13 @@ import axios from 'axios';
         <div class="p-2">
             <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
             <text class="fs-3 fw-light" >
-                <i v-if="appointment.center_visit" class=" bi bi-building"></i>      
-                <i v-if="appointment.home_visit"  class=" bi bi-house-door" > </i>                                  
-                <i v-if="appointment.remote_care" class=" bi bi-camera-video"></i>                         
+                <i v-if="appointment.app_type_center" class=" bi bi-building"></i>      
+                <i v-if="appointment.app_type_home"  class=" bi bi-house-door" > </i>                                  
+                <i v-if="appointment.app_type_remote" class=" bi bi-camera-video"></i>                         
             </text> 
         </div>
                     
-        <div  class="w-100 text-white  p-2" :style="{ 'background-color' : appointment.calendar_color  }"  style="border-radius: 15px;"  >
+        <div  class="w-100 text-white  p-2" :style="{ 'background-color' : calendar_data.color  }"  style="border-radius: 15px;"  >
                             
             <div class=""  >
                 <text class="display-6 m-0 p-0" ><small> {{specialtyId2name(appointment.specialty)}} </small> </text>
@@ -113,13 +113,18 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
+               calendar_data : null,
+               center_data : null , 
         }   
     },
    	
     props: ['daterequired','appointment','index','global_specialties', 'global_comunas', 'session_params' ],
 
 	created () {
-	},
+        this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
+        this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.appointment.calendar_id )
+    },
+
 	methods :{
 
         specialtyId2name(id){
