@@ -113,7 +113,7 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
-               calendar_data : null,
+               calendar_data : null  ,
                center_data : null , 
         }   
     },
@@ -123,6 +123,10 @@ export default {
 	created () {
         this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
         this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.appointment.calendar_id )
+        if ( this.calendar_data == null)
+        {
+            this.calendar_data = { color: '#5A9358' }
+        }
     },
 
 	methods :{
