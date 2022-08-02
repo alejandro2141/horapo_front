@@ -35,29 +35,7 @@ import Datepicker from 'vuejs3-datepicker';
 </template>
 
 <style scoped>
-/* 
-.datepicker-input {
- position: absolute;
-  left: 0;
-  top: 0;
-  
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-.datepicker-input::-webkit-calendar-picker-indicator {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
-}
-*/
+
 bigText 
 {
   font-size: 40px;  
@@ -196,7 +174,9 @@ export default {
             forceUpdateCalendar(newValue)
             {
                 console.log("Date Change So EMIT:"+newValue);
-                this.$emit('set_daterequired', this.calendar_date.getFullYear()+"-"+(this.calendar_date.getMonth()+1)+"-"+ this.calendar_date.getDate() ) ;
+                //this.$emit('set_daterequired', this.calendar_date.getFullYear()+"-"+(this.calendar_date.getMonth()+1)+"-"+ this.calendar_date.getDate() ) ;
+                this.$emit('set_daterequired', this.calendar_date.toISOString().split('T')[0] ) ;
+                //new Date(data.date).toISOString().split('T')[0] )
             }
 
         },
