@@ -95,6 +95,7 @@ export default {
             filtered_appointments : [] ,
 
             centers : [] ,
+            centers_filtered : [] ,
 /*
             global_specialties : null ,
             global_comunas : null ,
@@ -123,7 +124,6 @@ methods: {
            // this.getAppointments(year_month_day);
             this.daterequired = year_month_day ;
             },
-
 
 //SEARCH BY SPECIALTY
             async searchBySpecialty(params)
@@ -156,6 +156,8 @@ methods: {
             searchByTypeCenter(params)
             {
               console.log ("search By Type Center"+JSON.stringify(params))
+
+
               this.filtered_appointments = this.appointments.filter(appointment => appointment.center_visit == true);
               if (params.location != null)
                     {
