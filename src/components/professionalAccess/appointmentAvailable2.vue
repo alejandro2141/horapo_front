@@ -16,7 +16,7 @@ import axios from 'axios';
                             </text> 
                         </div>
                        
-                                <div  class="w-100 text-white display-6 p-2" :style="[ {'background-color' : calendar_data.color} , (days_expired || appointment.lock_day ) ? { 'background-color': '#444' }:{ 'opacity': '1' }  ]"  style="border-radius: 15px;"  >
+                                <div  class="w-100 text-white display-6 p-2" :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-radius: 15px;"  >
                                     
                                     <div class=""  >
                                         <text class="" ><small>  {{specialtyId2name(appointment.specialty)}} </small> </text>
@@ -32,6 +32,12 @@ import axios from 'axios';
 </template>
 
 <style scoped>
+
+/*
+background-color: #e5e5f7;
+opacity: 0.8;
+background: repeating-linear-gradient( -45deg, #444cf7, #444cf7 5px, #e5e5f7 5px, #e5e5f7 25px );
+*/
 </style>
 
 
