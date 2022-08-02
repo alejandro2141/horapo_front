@@ -25,54 +25,17 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
 
     <div v-for="(hour) in appointments" :key="hour"  >
-      
             <div>
-
                 <div v-if="hour.app_available != null"  >
                     <div v-if="!hour.app_available">
                         <AppointmentReserved  v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
                     </div>
-                    <!--
-                    <div v-else>
-                        <AppointmentAvailable  v-on:click="displayModalViewAppDetails(hour)" :appointment='hour' :index="hour.id"  :global_specialties='global_specialties' :global_comunas='global_comunas' > </AppointmentAvailable>
-                    </div>
-                    -->
                 </div>
 
                 <div v-else >
                         <AppointmentAvailable :days_expired="days_expired" @click="displayModalAppAvailable(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
-                  
-                    <!--
-                    <div class="d-flex justify-content-between mb-3">
-                    
-                        <div class="p-2">
-                            <text class="fs-1"> {{ hour.start_time.substring(0,5) }} </text><br>
-                            <text class="fs-5" >
-                                <i v-if="hour.center_visit" class=" bi bi-building"></i>      
-                                <i v-if="hour.home_visit"  class=" bi bi-house-door" > </i>                                  
-                                <i v-if="hour.remote_care" class=" bi bi-camera-video"></i>                         
-                            </text> 
-                        </div>
-                    
-                        <div  class="w-100 text-white display-6 p-2" :style="{ 'background-color' : hour.calendar_color  }"  style="border-radius: 15px;" @click="displayModalAppAvailable(hour)" >
-                            
-                            <div class=""  >
-                                <text class="" ><small> {{specialtyId2name(hour.specialty)}} </small> </text>
-                            </div>  
-                           
-                            <div class="">
-                                <text class="" > 
-                                     <small> <small> {{ getCenterName(hour.center_id) }} </small> </small>
-                                </text>
-                            </div>
-                        </div>
-                    </div>
-                    -->
-                 </div>
-
+                </div>
             </div>
-
-      
     </div>
 
 
@@ -83,7 +46,6 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                   No existen Horarios o  Citas Reservadas para este dia
                 </div>
                 -->
-
     </div>
 
     
