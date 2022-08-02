@@ -18,7 +18,7 @@ import LockOptions from './lockOptions.vue'
 
         <div class="d-flex justify-content-between  ">
           
-          <LockOptions :daterequired="daterequired" :session_params="session_params" ></LockOptions>
+          <LockOptions v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :session_params="session_params" ></LockOptions>
              
                 
 
@@ -67,6 +67,7 @@ data: function () {
             appointments: null, 
             active_spinner : false , 
             calendars_marks : null ,
+            lock_dates : null ,
           
           
 		 }
@@ -85,9 +86,6 @@ data: function () {
          },
  
     methods: {
-
-      
-
         switchView(){
             this.$emit('switchView');
          },
@@ -115,7 +113,8 @@ data: function () {
               let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day3",json);
               console.log ("/professional_get_appointments_day3 RESPONSE:"+JSON.stringify(response_json.data)) ;
               //this.updateCalendarsMarks();
-              this.appointments = response_json.data;	
+              this.appointments = response_json.data.appointments	
+              this.lock_dates = response_json.data.lock_dates
             
           this.active_spinner = false ;  
 		    },
@@ -137,6 +136,8 @@ data: function () {
 
 
   },
+
+  
 
 }
 </script>
