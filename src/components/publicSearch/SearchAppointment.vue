@@ -156,19 +156,38 @@ methods: {
             searchByTypeCenter(params)
             {
               console.log ("search By Type Center"+JSON.stringify(params))
+              console.log ("CENTERS FILTERED "+JSON.stringify( this.centers_filtered))
+              //WE should filter here centers are type "Center"
+              this.centers_filtered = this.centers.filter(cent => cent.center_visit == true );
+              let centers_filtered_ids = this.centers_filtered.map(center => center.id ) ;
 
+              this.filtered_appointments = this.appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
+              
+              console.log ("CENTERS FILTERED :"+JSON.stringify( this.centers_filtered))
+               console.log ("CENTERS FILTERED IDS :"+JSON.stringify( centers_filtered_ids))
 
+              console.log ("APPOINTMENTS :"+JSON.stringify( this.appointments ))
+              console.log ("FILTERED APPOINTMENTS  :"+JSON.stringify( this.filtered_appointments ))
+
+              /*
               this.filtered_appointments = this.appointments.filter(appointment => appointment.center_visit == true);
               if (params.location != null)
                     {
               this.filtered_appointments = this.filtered_appointments.filter(appointment => [appointment.center_visit_location, appointment.home_visit_location1, appointment.home_visit_location2, appointment.home_visit_location3 , appointment.home_visit_location4, appointment.home_visit_location5 , appointment.home_visit_location6 ].includes(params.location)  );
                     }
               this.n_appointments_found=this.filtered_appointments.length
+              */
               //this.searchAppointments(params)
             },
 //SEARCH BY TYPE_HOME
             searchByTypeHome(params)
             {
+              this.centers_filtered = this.centers.filter(cent => cent.home_visit == true );
+              let centers_filtered_ids = this.centers_filtered.map(center => center.id ) ;
+
+              this.filtered_appointments = this.appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
+         
+              /*
               console.log ("search By Type Home"+JSON.stringify(params))
               this.filtered_appointments = this.appointments.filter(appointment => appointment.home_visit == true);
               if (params.location != null)
@@ -176,14 +195,24 @@ methods: {
               this.filtered_appointments = this.filtered_appointments.filter(appointment => [appointment.center_visit_location, appointment.home_visit_location1, appointment.home_visit_location2, appointment.home_visit_location3 , appointment.home_visit_location4, appointment.home_visit_location5 , appointment.home_visit_location6 ].includes(params.location)  );
                     }
               this.n_appointments_found=this.filtered_appointments.length
+            */
             },
 //SEARCH BY TYPE_REMOTE
             searchByTypeRemote(params)
             {
+
+              this.centers_filtered = this.centers.filter(cent => cent.remote_care == true );
+              let centers_filtered_ids = this.centers_filtered.map(center => center.id ) ;
+
+              this.filtered_appointments = this.appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
+  
+              /*
               console.log ("search By Type Remote"+JSON.stringify(params))
               this.filtered_appointments = this.appointments.filter(appointment => appointment.remote_care == true);
              //Does Not require search by Location. 
               this.n_appointments_found=this.filtered_appointments.length
+              */
+
             },
 //SEARCH BY LOCATION
             searchByLocation(params)
