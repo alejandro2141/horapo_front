@@ -30,9 +30,10 @@ import LoadProgress from '../loadProgress.vue'
         </div>	
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
-        <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :center_data="center_data"  :professional_data="professional_data"  :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
+        <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :center_data="center_data"    :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
         <!-- Modal Reserve and Confirm End -->
-</div>     
+        </div>     
+
 </template>
 
 <style scoped>
