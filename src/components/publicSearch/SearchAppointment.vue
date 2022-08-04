@@ -215,8 +215,41 @@ methods: {
 
             },
 //SEARCH BY LOCATION
-            searchByLocation(params)
+            async searchByLocation(params)
             {
+                console.log("Search BY LOCATION: "+JSON.stringify(params));
+              await this.searchAppointments(params);
+              this.filtered_appointments = this.appointments ; 
+
+
+                if (params.type_center == true)
+                { 
+                  this.filtered_appointments = this.filtered_appointments.filter(appointment => appointment.center_visit == true);
+                }
+                if (params.type_home == true)
+                { 
+                 this.filtered_appointments = this.filtered_appointments.filter(appointment => appointment.home_visit == true);
+                }
+                if (params.type_remote == true)
+                { 
+                    this.filtered_appointments = this.appointments ;
+                    return            
+                }
+                if (params.location != null)
+                { 
+                this.filtered_appointments = this.filtered_appointments.filter(appointment => ( [appointment.center_visit_location, appointment.home_visit_location1, appointment.home_visit_location2, appointment.home_visit_location3 , appointment.home_visit_location4, appointment.home_visit_location5 , appointment.home_visit_location6 ].includes(params.location) ) );             
+                }
+                
+                if (this.filtered_appointments != null)
+                {
+                this.n_appointments_found=this.filtered_appointments.length
+                }
+                else
+                {
+                  this.n_appointments_found=0 ;
+                }
+
+            /*
               console.log ("search By Location"+JSON.stringify(params))
               // Now we should filter previos resulset 
                 let temp_appointments = this.appointments ;
@@ -239,6 +272,8 @@ methods: {
                this.filtered_appointments = temp_appointments ;
                //this.searchAppointments(params)
                this.n_appointments_found=this.filtered_appointments.length
+            */
+
             },
 
 //SEARCH BY DATE
@@ -297,11 +332,12 @@ methods: {
                   // agenda_id : this.par_agenda_id ,			 
                           date : params.date ,
                           specialty : specialty_code ,
-                          location : params.comuna ,
+                          location : params.location ,
                           home_visit : params.home_visit,
                           type_home : params.type_home,
                           type_center : params.type_center,
                           type_remote : params.type_remote,
+                          
                                   };
 
                   console.log ("searchAppointments2 input to send JSON :"+ JSON.stringify(json)  );
