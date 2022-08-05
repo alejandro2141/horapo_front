@@ -219,6 +219,8 @@ methods: {
             {
                 console.log("Search BY LOCATION: "+JSON.stringify(params));
               await this.searchAppointments(params);
+                
+                /*
               this.filtered_appointments = this.appointments ; 
 
 
@@ -248,6 +250,7 @@ methods: {
                 {
                   this.n_appointments_found=0 ;
                 }
+                */
 
             /*
               console.log ("search By Location"+JSON.stringify(params))
@@ -319,7 +322,6 @@ methods: {
          
               if (  params.specialty != null )
               { 
-                            
                           let metric = Date.now();
                           this.active_spinner = true ; 
                           console.log("search Appointments input params :"+JSON.stringify(params) )
@@ -336,15 +338,15 @@ methods: {
                           home_visit : params.home_visit,
                           type_home : params.type_home,
                           type_center : params.type_center,
-                          type_remote : params.type_remote,
-                          
+                          type_remote : params.type_remote,           
                                   };
 
                   console.log ("searchAppointments2 input to send JSON :"+ JSON.stringify(json)  );
-                  //let response_json = await axios.post("http://192.168.0.110:8080/patient_get_appointments_day",json);
                   let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
                 
-                  this.appointments = response_json.data;
+                  this.appointments = response_json.data.apps;
+                  this.centers = response_json.data.centers;
+                                  
                   console.log ("getAppointments2 RESPONSE:"+JSON.stringify(this.appointments)) ;
 
                   // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
@@ -359,19 +361,7 @@ methods: {
                     
                                   if (this.appointments != null)
                                   {
-                                  let center_id_array = [] 
-                                  //extraemos los ID de los centros. 
-                                  this.appointments.forEach(element => center_id_array.push(element.center_id) );
-                                  let center_id_array_filtered = center_id_array.filter(function(item, pos) {
-                                        return center_id_array.indexOf(item) == pos;
-                                       })
-                                  console.log("*********** Center To Get:"+center_id_array)
-                                  console.log("*********** Center filtered:"+center_id_array_filtered)
-                                  this.centers = await this.get_centers(center_id_array_filtered) 
-                                  console.log("*********** Centers  :"+ JSON.stringify(this.centers))
-                                  
-                                   // this.filtered_appointments = this.appointments
-                                   //this.n_appointments_found=this.appointments.length
+                                
                                   }
                                   else
                                   {
