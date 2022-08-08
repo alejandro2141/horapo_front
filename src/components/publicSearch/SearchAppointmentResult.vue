@@ -13,10 +13,10 @@ import LoadProgress from '../loadProgress.vue'
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
        <div  v-if="appointments!= null" >
-         
             <!--
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
-                 <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  -->
+                 <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
+            -->
       
             <div  v-for="appointment in appointments" :key="appointment.id" class="mt-0 " >
                 
