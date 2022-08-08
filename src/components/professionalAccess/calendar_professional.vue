@@ -32,7 +32,12 @@ import axios from 'axios';
                 <div class="bg-secondary  text-white w-100 pt-2 pl-2 pr-2">
                     <div class="m-2 ">
 
-                    <div class="d-flex justify-content-between mt-0 p-1"> 
+                    
+                    <div v-if="showEdit" class="d-flex justify-content-between mt-0 p-1"> 
+                        <text  @click="deleteCalendar();showEdit=false" >Eliminar <i class="bi bi-trash"></i> </text> 
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-2 p-1"> 
                                                   
                         <div v-if="evaluateCalendarStatus(date_end)==3" class="bg-secondary" :class="{ 'bg-dark': showEdit }" style=" border-radius: 15px; "  >
                               <text class="text-white p-1"> Expirado <i class="text-danger display-4 bi bi-slash-circle-fill"></i> </text> 
@@ -184,8 +189,7 @@ import axios from 'axios';
                 <div v-if="showEdit" class="d-flex justify-content-between mt-2">
                     <text @click="saveCalendarChanges();showEdit=false" class="" >GUARDAR  </text> 
                             
-                    <text @click="deleteCalendar();showEdit=false" class="mt-4" >Eliminar <i class="bi bi-trash"></i> </text> 
-                           
+                            
                     <text @click="showEdit=false;resetForm()" class="" >CANCELAR </text>  
                 </div>
 
@@ -215,7 +219,6 @@ export default {
         return {
             showSocial : false ,
             showEdit : false, 
-
 
             calendar_active : null ,
             specialty_code : null, 
