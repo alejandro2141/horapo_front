@@ -30,11 +30,11 @@ import FooterContent from '../FooterContent.vue'
             <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
             
             <div v-if="appointments !=null && appointments.length > 0">                
-                En {{metric_search/1000}} Seg encontramos {{n_appointments_found}} resultados
+                En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados
                 <!--
                 <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                 -->
-                <searchAppointmentResult :centers='centers' :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="filtered_appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+                <searchAppointmentResult :key="forceReRender" :centers='centers' :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="filtered_appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
             </div>
 
             <p v-if="appointments !=null && appointments.length == 0" class="text-center p-2"  > 
@@ -100,6 +100,7 @@ export default {
             global_specialties : null ,
             global_comunas : null ,
 */
+            forceReRender : 0 , 
     }
   },
 
@@ -217,9 +218,20 @@ methods: {
 //SEARCH BY LOCATION
             async searchByLocation(params)
             {
-                console.log("Search BY LOCATION: "+JSON.stringify(params));
+              console.log("Search BY LOCATION: "+JSON.stringify(params));
               await this.searchAppointments(params);
+             
+              this.forceReRender = this.forceReRender + 1 ;
+              if (this.filtered_appointments != null)
+                {
+                this.n_appointments_found=this.filtered_appointments.length
+                }
+                else
+                {
+                this.n_appointments_found=0 ;
+                }
                 
+              
                 /*
               this.filtered_appointments = this.appointments ; 
 
@@ -328,7 +340,6 @@ methods: {
                           
                           let specialty_code = null ;
                           specialty_code = params.specialty.id ; 
-                        
 
                           const json = { 
                   // agenda_id : this.par_agenda_id ,			 
@@ -345,6 +356,9 @@ methods: {
                   let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
                 
                   this.appointments = response_json.data.apps;
+                  
+                  this.filtered_appointments = response_json.data.apps 
+                  
                   this.centers = response_json.data.centers;
                                   
                   console.log ("getAppointments2 RESPONSE:"+JSON.stringify(this.appointments)) ;
@@ -367,18 +381,13 @@ methods: {
                                   {
                                     this.n_appointments_found = 0 ;
                                   }
-                   
-
               }
               else 
               {
                   this.appointments = null;
              
               }        
-              
-             // this.get_specialties();
-             // this.get_locations();
-
+           
            },
 
             updateLastSearch()
