@@ -151,12 +151,11 @@ import ConsultancyRemote from './consultancy_remote.vue'
                 
             </div>
 
-            <div v-else class="mt-1  "  style="border-radius: 15px;" >
-                       
-                         Loading...
-                       
+            <div v-else class="mt-1 text-center "  style="border-radius: 15px;" >
+                   <text class="fs-2">
+                    Crea tu primera Consulta!!
+                   </text>                     
             </div>
-
 
 
         </div>
@@ -171,9 +170,6 @@ import ConsultancyRemote from './consultancy_remote.vue'
            </p>
             <p class="">Para crear su primera Consulta, por favor click en el link siguiente </p>
         </div>
-
-
-
 
         <div class="text-center p-3 m-3"> 
             <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
