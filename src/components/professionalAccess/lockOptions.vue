@@ -10,6 +10,7 @@ import axios from 'axios';
         <div class="align-self-end p-2" >
            <!-- <i class=" m-2 fs-2 bi bi-unlock" @click="showLockOptions=!showLockOptions"> </i> -->
             <div class="text-primary"  >    
+              
               <i v-if="isLockDay" class=" m-2 fs-2 bi bi-lock-fill " @click="sendUnLockDay()"> </i> 
               <i v-else class=" m-2 fs-2 bi bi-unlock "  @click="sendLockDay()"> </i> 
             </div>
