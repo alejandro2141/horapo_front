@@ -20,8 +20,6 @@ import LockOptions from './lockOptions.vue'
           
           <LockOptions v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :session_params="session_params" ></LockOptions>
              
-                
-
           <div class="w-100"> 
            <CalendarPickerMinimal2 class="mt-3" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
           <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> <br>
