@@ -15,6 +15,11 @@ import axios from 'axios';
                                         </div>
 
                                         <hr class="m-0">
+
+                                        <div v-if="showEditOptions" class="d-flex justify-content-between mt-0" >
+                                             <text  @click="deleteCenter()" class="mt-2 text-danger bg-white "> Eliminar Este centro </text>
+                                           
+                                        </div>
                                         
                                         <div class="d-flex justify-content-between mt-0">
                                                 <text class="mt-2">Tipo:</text>
@@ -91,6 +96,30 @@ export default {
 	},
 
 	methods :{
+
+        async deleteCenter()
+        {
+            console.log("Delete Center");
+              
+                var r =confirm("Centro ya No estará disponible para seleccionar en los Calendarios");
+                  if (r == true) {
+
+                        const json = { 
+                          professional_id: this.session_params.professional_id ,
+                          center_id :  this.centerDetails.id,
+                          };
+                       
+                        console.log("Delete Center REQUEST :"+JSON.stringify(json));
+                        
+                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_delete_center",json);
+                        console.log ("Delete Center  RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+                        let aux_resp = response_json.data.rows ; 
+                        //this.showModalViewCalendar = false ; 
+                        this.$emit('updateCenterList'); 
+                        //this.showModalCenterDetails = false
+                  }
+        },
+
         async saveChanges()
         {
         console.log("Save Changes");
@@ -119,7 +148,6 @@ export default {
                         //this.showModalViewCalendar = false ; 
                         this.$emit('updateCenterList'); 
                         //this.showModalCenterDetails = false
-  
                   }
 
         },
