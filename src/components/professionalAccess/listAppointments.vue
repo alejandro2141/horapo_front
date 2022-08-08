@@ -39,13 +39,13 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     </div>
 
 
-    <div v-if="hours.length == 0  " class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >
-                <!--
+    <div v-if="appointments_n <= 0 " class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >
+               
                 <div class="p-4 text-center" >    
-                    <i class="display-1 bi bi-emoji-expressionless"></i><br>
+                    <i class="display-2"></i><br>
                   No existen Horarios o  Citas Reservadas para este dia
                 </div>
-                -->
+               
     </div>
 
     
@@ -85,6 +85,7 @@ export default {
             appointments_day : null ,
 
             days_expired :false ,
+            appointments_n : 0 ,
         }   
     },
    	
@@ -95,9 +96,16 @@ export default {
 	},
     
     watch : {
+
           appointments(newValue){
             this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
             console.log("DAY EXPIRED:"+this.days_expired);
+           if (newValue !=null )
+           {
+               this.appointments_n = newValue.length
+           }
+
+
           }
 
         /*
