@@ -29,22 +29,24 @@ import FooterContent from '../FooterContent.vue'
             <div>
             <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
             
-            <div v-if="appointments !=null && appointments.length > 0">                
-                En {{metric_search/1000}} Seg encontramos {{appointments.length}} resultados
+            <div v-if="filtered_appointments !=null && filtered_appointments.length > 0">                
+                En {{metric_search/1000}} Seg encontramos {{filtered_appointments.length}} resultados
                 <!--
                 <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                 -->
                 <searchAppointmentResult :key="forceReRender" :centers='centers' :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="filtered_appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
             </div>
+                      
 
-            <p v-if="appointments !=null && appointments.length == 0" class="text-center p-2"  > 
+            <p v-if="filtered_appointments !=null && filtered_appointments.length == 0" class="text-center p-2"  > 
               <i class="bi bi-emoji-dizzy display-1"> </i> Sin horas disponibles por ahora. <br>
               <!-- {{metric_search/1000}} Seg  -->
             </p>
 
-            <p v-if="appointments == null">
-           <!--     <suggestedSearch></suggestedSearch>
-           -->
+            <p v-if="filtered_appointments == null">
+                busqueda principal 
+            <!--     <suggestedSearch></suggestedSearch>
+            -->
             </p>
          
             </div>
@@ -328,7 +330,6 @@ methods: {
              
             },
 
-
 //SEARCH GENERIC
         async searchAppointments(params) {	
          
@@ -354,14 +355,21 @@ methods: {
 
                   console.log ("searchAppointments2 input to send JSON :"+ JSON.stringify(json)  );
                   let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
-                
+
                   this.appointments = response_json.data.apps;
                   
+                  if (this.filtered_appointments != null )
+                  {
                   this.filtered_appointments = response_json.data.apps 
-                  
                   this.centers = response_json.data.centers;
+                  }
+                  else 
+                  {
+                  this.filtered_appointments = [] 
+                  this.centers =  []
+                  }
                                   
-                  console.log ("getAppointments2 RESPONSE:"+JSON.stringify(this.appointments)) ;
+                  console.log ("getAppointments2 RESPONSE:"+JSON.stringify(this.filtered_appointments)) ;
 
                   // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
                           this.notificationMessage_alert=	false ;
@@ -373,7 +381,7 @@ methods: {
                     this.metric_search = metric ;
                     console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
                     
-                                  if (this.appointments != null)
+                                  if (this.filtered_appointments != null)
                                   {
                                 
                                   }
@@ -384,7 +392,7 @@ methods: {
               }
               else 
               {
-                  this.appointments = null;
+                  this.filtered_appointments = null;
              
               }        
            
