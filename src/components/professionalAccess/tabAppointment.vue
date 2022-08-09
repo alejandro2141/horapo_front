@@ -27,7 +27,7 @@ import LockOptions from './lockOptions.vue'
 
         </div> 
 
-           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments="appointments" :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
+           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
          
             <div id='footer' style='height : 300px'>
             </div>
@@ -62,12 +62,13 @@ data: function () {
 			//prevCenterId : 'NoSet' ,
 			//centers: null ,
             daterequired: null ,
-            appointments: null, 
+            appointments_data: null, 
             active_spinner : false , 
             calendars_marks : null ,
             lock_dates : null ,
-          
-          
+
+            centers : null ,
+            calendars : null ,
 		 }
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
@@ -111,8 +112,22 @@ data: function () {
               let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day3",json);
               console.log ("/professional_get_appointments_day3 RESPONSE:"+JSON.stringify(response_json.data)) ;
               //this.updateCalendarsMarks();
-              this.appointments = response_json.data.appointments	
-              this.lock_dates = response_json.data.lock_dates
+              
+              if (response_json.data != null)
+              {
+                this.appointments_data = response_json.data
+                this.lock_dates = response_json.data.lock_dates
+              }
+              else
+              {
+                 this.appointments_data = []
+              }
+
+              
+              /*	
+              this.centers = response_json.data.centers
+              this.calendars = response_json.data.calendars
+              */
             
           this.active_spinner = false ;  
 		    },
