@@ -18,16 +18,17 @@ import LoadProgress from '../loadProgress.vue'
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
       
-            <div  v-for="appointment in appointments" :key="appointment.id" class="mt-0 " >
-                
+            <div  v-for="appointment in appointments" :key="appointment.id" class="mt-0 " >               
                     <patientAppointmentAvailable :center_data="getCenterData(appointment.center_id)"  :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
-             
-            </div>
-                <!-- Start make room for Modal data when it display-->
-            <div style="height: 400px">
             </div>
 
+                <!-- Start make room for Modal data when it display-->
+           
+
         </div>	
+      
+             <div style="height: 400px">
+            </div>
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
         <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :center_data="center_data"    :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
