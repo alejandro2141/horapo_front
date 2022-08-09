@@ -23,19 +23,20 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'> </ModalProfessionalReserveAppointment>
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
+    <div v-if="appointments_data != null">
+        <div v-for="hour in appointments_data.appointments" :key="hour"  >
+                <div>
+                    <div v-if="hour.app_available != null"  >
+                        <div v-if="!hour.app_available">
+                            <AppointmentReserved  v-on:click="displayModalReservedDetails(hour)" :appointment='hour'  :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
+                        </div>
+                    </div>
 
-    <div v-for="(hour) in appointments" :key="hour"  >
-            <div>
-                <div v-if="hour.app_available != null"  >
-                    <div v-if="!hour.app_available">
-                        <AppointmentReserved  v-on:click="displayModalReservedDetails(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
+                    <div v-else >
+                            <AppointmentAvailable @click="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
                     </div>
                 </div>
-
-                <div v-else >
-                        <AppointmentAvailable :days_expired="days_expired" @click="displayModalAppAvailable(hour)" :appointment='hour' :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
-                </div>
-            </div>
+        </div>
     </div>
 
 
@@ -89,7 +90,7 @@ export default {
         }   
     },
    	
-   props: ['day_expired','daterequired','session_params','appointments',  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
+   props: [ 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: ['updateAppointmentList','switchView' ] , 
 	created () {
             // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
@@ -97,12 +98,12 @@ export default {
     
     watch : {
 
-          appointments(newValue){
+          appointments_data(newValue){
             this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
             console.log("DAY EXPIRED:"+this.days_expired);
            if (newValue !=null )
            {
-               this.appointments_n = newValue.length
+               this.appointments_n = newValue.appointments.length
            }
 
 
@@ -183,12 +184,12 @@ export default {
 	methods :{
 
         getCenter(id){
-            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
+            let temp= this.centers.find(elem => elem.id ==  id  )
             if (temp != null) { return temp }
             else { return null }
         },
         getCenterName(id){
-            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
+            let temp= this.centers.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return "No Existe Centro" }
         },
@@ -229,7 +230,6 @@ export default {
             this.hourTaken=hour ;
             this.openModalShowAppTakenEvent = Math.random();
        },
-
 
         displayModalViewAppDetails(hour)
         {
