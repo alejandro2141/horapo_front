@@ -87,7 +87,7 @@ import axios from 'axios';
                                                         <text>  </text> <text> Tele Atencion </text>
                                         </p>
                                         
-                                          <i class="bi bi-geo-alt text-white"></i> {{name}} 
+                                          <i class="bi bi-geo-alt text-white"></i> {{center_data.name}} 
                                     </div>
                                 </div>
                                 
@@ -219,7 +219,7 @@ export default {
         return {
             showSocial : false ,
             showEdit : false, 
-
+        //form data
             calendar_active : null ,
             specialty_code : null, 
             name : null ,
@@ -239,11 +239,11 @@ export default {
         }   
     },
    	
-	props: [ 'calendar' , 'global_specialties' , 'global_comunas','session_params' ],
+	props: [ 'calendar' ,'center_data' , 'global_specialties' , 'global_comunas','session_params' ],
     emits: ['updateCalendarList'],
 
 	created () {
-        this.calendar_active = this.calendar.calendar_active
+        this.calendar_active = this.calendar.active
         this.specialty_code = this.calendar.specialty1 ; 
         
         this.name = this.calendar.name ;
@@ -372,26 +372,7 @@ export default {
             if (r == true) {
 
                   const json = { 
-                    /*
-                    form_calendar_active : this.calendar_active ,
-                    form_center_id : this.form_center_id,
-                    form_center_name : this.form_center_name,
-                    form_date_start : this.form_date_start ,
-                    form_date_end: this.form_date_end,
-                    form_time_start: this.form_time_start,
-                    form_time_end: this.form_time_end,
-                    form_day_mon: this.form_day_mon ,
-                    form_day_tue: this.form_day_tue ,
-                    form_day_wed: this.form_day_wed ,
-                    form_day_thu: this.form_day_thu ,
-                    form_day_fri: this.form_day_fri ,
-                    form_day_sat: this.form_day_sat ,
-                    form_day_sun: this.form_day_sun , 
-                    form_calendar_color : this.form_calendar_color , 
-
-                    professional_id: this.session_params.professional_id ,
-                    calendar_id :  calendar_details.calendar_id,
-                    */
+                   
                     form_calendar_active : this.calendar_active ,
                     // form_center_id : 
                     // cernter_name
@@ -408,7 +389,7 @@ export default {
                     form_day_sun: this.sunday , 
 
                    // professional_id: this.session_params.professional_id ,
-                    calendar_id : this.calendar.calendar_id,
+                    calendar_id : this.calendar.id,
                     };
 
                   console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
