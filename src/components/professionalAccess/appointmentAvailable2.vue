@@ -46,28 +46,14 @@ background: repeating-linear-gradient( -45deg, #444cf7, #444cf7 5px, #e5e5f7 5px
 export default {
    data : function() {
         return {
-            center_data : null , 
-            calendar_data : null,
+          
         }   
     },
    	
-    props: ['days_expired','daterequired','appointment','index','global_specialties', 'global_comunas', 'session_params' ],
+    props: [ 'appointment', 'calendar_data', 'center_data' , 'days_expired','daterequired','index','global_specialties', 'global_comunas', 'session_params' ],
 
 	created () {
-        this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
-        this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.appointment.calendar_id )
-    },
-    
-    /*
-    watch : {
-
-        appointment(newVal)
-        {
-           this.center_data = this.session_params.centers.find(elem => elem.id == newVal.center_id )
-           console.log("New Appointment, get CENTER:"+JSON.stringify(this.center_data));
-        }
-    },
-    */
+         },
 
 	methods :{
       	
@@ -77,16 +63,6 @@ export default {
             else { return null }
 
         },
-         getCenterName(id){
-            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
-            if (temp != null) { return temp.name }
-            else { return "No Existe Centro" }
-        },
-        getCenterData(id){
-            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
-            if (temp != null) { return temp }
-            else { return "No Existe Centro" }
-        },
        
        
 
@@ -94,4 +70,3 @@ export default {
 }
 
 </script>
-
