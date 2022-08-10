@@ -296,15 +296,13 @@ methods: {
 //SEARCH BY DATE
             async searchByDate(params)
             {
-             
-
               console.log("Search BY DATE: "+JSON.stringify(params));              
               let response_search = await this.searchAppointments(params);
 
-              if ( response_search!= null &&  response_search.apps != null )
+              if ( response_search != null &&  response_search.apps != null )
               {
-              this.appointments = response_search.apps ; 
-              this.centers = response_search.centers ; 
+              this.appointments = response_search.apps  
+              this.centers = response_search.centers    
               this.n_appointments_found = response_search.apps.length
 
               this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
@@ -314,8 +312,6 @@ methods: {
                 this.n_appointments_found = 0  
                 this.appointments = []
               }    
-
-                
                 /*
                 if (params.type_center == true)
                 { 
@@ -331,7 +327,7 @@ methods: {
                     return            
                 }
                 */
-
+                /*
                 if (params.location != null)
                 { 
                 this.appointments_filtered = this.appointments_filtered.filter(appointment => ( [appointment.center_visit_location, appointment.home_visit_location1, appointment.home_visit_location2, appointment.home_visit_location3 , appointment.home_visit_location4, appointment.home_visit_location5 , appointment.home_visit_location6 ].includes(params.location) ) );             
@@ -344,6 +340,7 @@ methods: {
                 {
                 this.n_appointments_found=0 ;
                 }
+                */
                            
             },
 
