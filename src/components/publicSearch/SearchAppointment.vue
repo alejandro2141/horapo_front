@@ -14,45 +14,34 @@ import FooterContent from '../FooterContent.vue'
   <div class="bg-white p-0">
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
   
-
-
-
       <div class=" bg-white  pb-4 text-center"  > 
         <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
       	<i class="bi bi-clipboard-pulse" style="font-size: 2rem; color: cornflowerblue;"></i>
         <text class="display-4"> 123Hora</text>  
         </a> 
-      <small  class="text-muted"> <br> Las mejores consultas en un solo lugar </small>
+        <small  class="text-muted"> <br> Las mejores consultas en un solo lugar </small>
       </div> 
  
       <div>
             <div>
-            <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
-            
+              <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
                
-            <div v-if="appointments_filtered !=null && appointments_filtered.length > 0">                
-                En {{metric_search/1000}} Seg encontramos {{appointments_filtered.length}} resultados
-                <!--
-                <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
-                -->
-                <searchAppointmentResult :key="forceReRender" :appointments="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters' v-if="daterequired != null && appointments_filtered != null"  v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
-            </div>
+              <div v-if="appointments_filtered !=null && appointments_filtered.length > 0">                
+                  En {{metric_search/1000}} Seg encontramos {{appointments_filtered.length}} resultados
+                  <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+                  -->
+                  <searchAppointmentResult :key="forceReRender" :appointments="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters' v-if="daterequired != null && appointments_filtered != null"  v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+              </div>
 
-             <div v-if="n_appointments_found  == 0">  
-                No encontramos resultados 
-            </div>
-
-         
-
-            <p v-if="appointments === null">
-                 suggested search
-            <!--     <suggestedSearch></suggestedSearch>
-            -->
-            </p>
+              <div v-else>
+                
+              </div>
+        
+            
          
             </div>
-     </div>
-  <FooterContent v-if="appointments == null"  ></FooterContent>
+      </div>
+  <FooterContent v-if="showMainScreen"  ></FooterContent>
   </div>
 
   
@@ -77,7 +66,6 @@ export default {
             insurance: null,
             params_bkp: null, 
            
-            appointments : null ,
             appointment : null ,
             show_modal : null ,
             appointment_confirm : null ,
@@ -94,7 +82,7 @@ export default {
             filter_home : false ,
             filter_remote: false ,
 
-            n_appointments_found : 0 ,
+            n_appointments_found : null ,
            // filtered_appointments : null ,
 
             appointments : null ,
@@ -107,6 +95,7 @@ export default {
             global_comunas : null ,
 */
             forceReRender : 0 , 
+            showMainScreen : true ,
     }
   },
 
@@ -120,13 +109,13 @@ export default {
 
 methods: {
 
-        show_modal_appointment_confirm(param)
+            show_modal_appointment_confirm(param)
         {
             console.log("Modal Confirmation: show_modal_appointment_confirm:"+JSON.stringify(param) )
             this.appointment_confirm = param ;
-        },
+            },
 
-        set_daterequired : function (year_month_day) {
+            set_daterequired : function (year_month_day) {
             console.log("TAB HOME GoToDay "+year_month_day);
            // this.getAppointments(year_month_day);
             this.daterequired = year_month_day ;
@@ -305,10 +294,11 @@ methods: {
             },
 
 //SEARCH BY DATE
-          async searchByDate(params)
+            async searchByDate(params)
             {
-              console.log("Search BY DATE: "+JSON.stringify(params));
-              
+             
+
+              console.log("Search BY DATE: "+JSON.stringify(params));              
               let response_search = await this.searchAppointments(params);
 
               if ( response_search!= null &&  response_search.apps != null )
@@ -358,7 +348,10 @@ methods: {
             },
 
 //SEARCH GENERIC
-        async searchAppointments(params) {	
+            async searchAppointments(params) {	
+              
+              this.showMainScreen = false ;
+              
               let response_json = {data:[]}
               let metric = Date.now();
               this.active_spinner = true ; 
@@ -406,8 +399,7 @@ methods: {
                     console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );              
 
               return response_json
-           },
-
+            },
 
             updateLastSearch()
             {
