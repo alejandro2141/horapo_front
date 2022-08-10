@@ -120,7 +120,6 @@ methods: {
            // this.getAppointments(year_month_day);
             this.daterequired = year_month_day ;
             },
-
 //SEARCH BY SPECIALTY
             async searchBySpecialty(params)
             {
@@ -196,18 +195,10 @@ methods: {
 //SEARCH BY TYPE_REMOTE
             searchByTypeRemote(params)
             {
-
               this.centers_filtered = this.centers.filter(cent => cent.remote_care == true );
               let centers_filtered_ids = this.centers_filtered.map(center => center.id ) ;
 
               this.appointments_filtered = this.appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
-  
-              /*
-              console.log ("search By Type Remote"+JSON.stringify(params))
-              this.filtered_appointments = this.appointments.filter(appointment => appointment.remote_care == true);
-             //Does Not require search by Location. 
-              this.n_appointments_found=this.filtered_appointments.length
-              */
 
             },
 //SEARCH BY LOCATION
