@@ -302,6 +302,7 @@ methods: {
               else {
                 this.n_appointments_found = 0  
                 this.appointments = []
+                this.appointments_filtered = []
               }    
                 /*
                 if (params.type_center == true)
@@ -365,15 +366,7 @@ methods: {
                     if (response != null )
                     {
                     response_json = response.data ; 
-                    console.log ("patient_get_appointments_day2 RESPONSE:"+JSON.stringify(response_json.data)) ;
-
-                  // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
-                          /*
-                          this.notificationMessage_alert=	false ;
-                          this.searchParameters = params ;
-                          this.params_bkp = params ; 
-                          this.active_spinner = false ;
-                          */
+                    console.log ("patient_get_appointments_day2 RESPONSE:"+JSON.stringify(response_json)) ;
                     }
               }
               else // specialty == null
