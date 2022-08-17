@@ -18,7 +18,7 @@ import LockOptions from './lockOptions.vue'
 
         <div class="d-flex justify-content-between  ">
           
-          <LockOptions v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :session_params="session_params" ></LockOptions>
+          <LockOptions v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
              
           <div class="w-100"> 
            <CalendarPickerMinimal2 class="mt-3" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
@@ -27,10 +27,12 @@ import LockOptions from './lockOptions.vue'
 
         </div> 
 
-           <ListAppointments  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
+          <ListAppointments  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
          
+       
             <div id='footer' style='height : 300px'>
             </div>
+
 	    </div>
 
       <div v-else >
@@ -69,6 +71,8 @@ data: function () {
 
             centers : null ,
             calendars : null ,
+
+            hours_block_list : null ,
 		 }
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
@@ -85,6 +89,21 @@ data: function () {
          },
  
     methods: {
+
+        addToBlockList(hour)
+        {    
+            console.log("Add to BLock List ")
+            let index = this.hours_block_list.findIndex(hour_list=> (hour_list.start_time == hour.start_time) )
+            console.log ("FOUND : "+index)
+            if ( index > -1) { // only splice array when item is found
+               this.hours_block_list.splice(index, 1); // 2nd parameter means remove one item only
+            }
+            else
+            {
+              this.hours_block_list.push(hour)  
+            }   
+        },
+
         switchView(){
             this.$emit('switchView');
          },
@@ -128,7 +147,7 @@ data: function () {
               this.centers = response_json.data.centers
               this.calendars = response_json.data.calendars
               */
-            
+          this.hours_block_list=[]
           this.active_spinner = false ;  
 		    },
 
