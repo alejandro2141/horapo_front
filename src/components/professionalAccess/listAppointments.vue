@@ -25,19 +25,23 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
     <div v-if="appointments_data != null">
         <div v-for="hour in appointments_data.appointments" :key="hour"  >
-                <div>
+                
+                <div class="m-1">
                     <div v-if="hour.app_available != null"  >
                         <div v-if="!hour.app_available">
-                            <AppointmentReserved  v-on:click="displayModalReservedDetails(hour)" :appointment='hour'  :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
+                            <AppointmentReserved   v-on:click="displayModalReservedDetails(hour)" :appointment='hour'  :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
                         </div>
                     </div>
 
                     <div v-else >
-                            <AppointmentAvailable @click="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
+                            <AppointmentAvailable v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
+                            <!-- @click="displayModalAppAvailable(hour)" -->
                     </div>
                 </div>
         </div>
     </div>
+
+    
 
 
     <div v-if="appointments_n <= 0 " class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >
@@ -87,101 +91,49 @@ export default {
 
             days_expired :false ,
             appointments_n : 0 ,
+
+            hours_block_list : [],
         }   
     },
    	
    props: [ 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
-   emits: ['updateAppointmentList','switchView' ] , 
+   emits: ['updateAppointmentList','switchView' , 'addToBlockList' ] , 
+
 	created () {
             // console.log("Appointments in listAppointments = "+JSON.stringify(appointments) );
 	},
     
     watch : {
-
           appointments_data(newValue){
             this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
             console.log("DAY EXPIRED:"+this.days_expired);
-           if (newValue !=null )
-           {
-               this.appointments_n = newValue.appointments.length
-           }
-
+            if (newValue !=null )
+            {
+                this.appointments_n = newValue.appointments.length
+            }
+         
 
           }
-
-        /*
-        appointments(newValue){
-                //copy array including only app to be display in Modal duplicate day
-                this.appointments_day = [].concat(newValue);
-
-            console.log("appointment_day:"+JSON.stringify(this.appointments_day));  
-            
-            this.hours = [] ;          
- 
-            this.showModalCreateApp= true ;
-            console.log ("appointments change !!!");
-            let poped = newValue.pop() ;
-      
-            while ( poped != null )
-            {  
-            
-             let appointment_taken = {
-                 id :  poped.id ,
-                 calendar_id : poped.calendar_id,
-                 date : poped.date ,
-                 start_time :  poped.start_time , 
-                 duration : poped.duration ,
-                 patient_doc_id : poped.patient_doc_id ,
-                 patient_name : poped.patient_name ,
-                 patient_email : poped.patient_email ,
-                 patient_phone1 : poped.patient_phone1 ,
-                 patient_phone2 : poped.patient_phone2 ,
-                 app_status : poped.app_status , 
-
-                 patient_notification_email_reserved : poped.patient_notification_email_reserved ,
-                 patient_address : poped.patient_address , 
-                 patient_age  : poped.patient_age ,  
-                 specialty : poped.specialty1 , 
-            
-                  home_visit : poped.home_visit ,
-                  center_visit :poped.center_visit ,
-                  remote_care : poped.remote_care ,
-            
-                  center_id :poped.center_id ,
-                  center_color : poped.center_color ,
-                  calendar_color : poped.calendar_color ,
-
-                  app_available : poped.app_available , 
-                  symbol1 : "" ,
-                  message1 : poped.message1 
-                }
-            
-            
-            this.hours.push( appointment_taken )    
-            console.log( "StartTime POP="+JSON.stringify(poped.start_time ) ) 
-            poped = newValue.pop() ;
-            } 
-            //this.hours.sort();
-            //paint based in Calendar Color. 
-
-             this.hours.sort(function(a, b){
-            let x = a.start_time;
-            let y = b.start_time
-            if (x < y) {return -1;}
-            if (x > y) {return 1;}
-            return 0;
-            });
-
-            console.log("HOURS="+JSON.stringify(this.hours) ) 
-            this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
-            console.log("DAY EXPIRED:"+this.days_expired);
-
-
-        }
-        */
     },
 
 	methods :{
+
+        addToBlockList(hour)
+        {
+            this.$emit('addToBlockList',hour)
+            /* 
+            console.log("Add to BLock List ")
+            let index = this.hours_block_list.findIndex(hour_list=> (hour_list.start_time == hour.start_time) )
+            console.log ("FOUND : "+index)
+            if ( index > -1) { // only splice array when item is found
+               this.hours_block_list.splice(index, 1); // 2nd parameter means remove one item only
+            }
+            else
+            {
+              this.hours_block_list.push(hour)  
+            }
+            */
+        },
 
         getCenter(id){
             let temp= this.centers.find(elem => elem.id ==  id  )
@@ -205,13 +157,7 @@ export default {
             }
 
         },
-/*
-        duplicateDay(date){
-            console.log("duplicate day in list appointments "+date) ; 
-            console.log("Session Params "+JSON.stringify(this.session_params) ) ;
-            this.openModalDuplicateDay= Math.random(); 
-        },
-*/
+
         switchView(){
             this.$emit('switchView');
          },
