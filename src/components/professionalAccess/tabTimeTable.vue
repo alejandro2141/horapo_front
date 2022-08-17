@@ -14,6 +14,10 @@ import CalendarProfessional from './calendar_professional.vue'
             <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
       
                 <p class="text-center display-5 pt-1 text-white">Tus Calendarios</p>
+            
+            <div class="text-center p-3 m-3"> 
+                <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
+            </div>
 
                 <div  id="search_result" v-if='calendars!=null'  >
                     <div v-for="calendar in calendars.calendars"  :key='calendar.id' >
@@ -31,9 +35,7 @@ import CalendarProfessional from './calendar_professional.vue'
                         </div>
                 </div>
 
-            <div class="text-center p-3 m-3"> 
-                <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
-            </div>
+          
 
         <div style="height: 200px;">
         </div>  
