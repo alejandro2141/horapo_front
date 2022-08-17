@@ -11,9 +11,10 @@ import axios from 'axios';
            <!-- <i class=" m-2 fs-2 bi bi-unlock" @click="showLockOptions=!showLockOptions"> </i> -->
             <div class="text-primary"  >    
               
-              <i v-if="isLockDay" class=" m-2 fs-2 bi bi-lock-fill " @click="sendUnLockDay()"> </i> 
-              <i v-else class=" m-2 fs-2 bi bi-unlock "  @click="sendLockDay()"> </i> 
+              <i v-if="isLockDay" class=" m-2 fs-2 bi bi-lock-fill " @click="sendUnLock()"> </i> 
+              <i v-else class=" m-2 fs-2 bi bi-unlock "  @click="sendLock()"> </i> 
             </div>
+        
 
 
            <Transition>
@@ -50,22 +51,42 @@ export default {
               isLockDay : false ,
         }   
     },
-  props : [ 'lock_dates', 'session_params','daterequired'] ,
-	emits : ['updateAppList']  ,
+  props : [ 'lock_dates', 'hours_block_list', 'session_params','daterequired'] ,
+	emits : [ 'updateAppointmentList' ]  ,
 
  	mounted () {
          
     },
 
     methods: {
-        lockDay(){
-            console.log("Lock Day");
-            },
     
-            async  sendLockDay(hour)
+            async  sendLock(hour)
             {
-                console.log("professional_lock_day");
-                var r =confirm("Esta seguro que desea bloquear este dia? Pacientes no podran agendar horas en este dia");
+              console.log("professional_send Lock");
+              if (this.hours_block_list !=null && this.hours_block_list.length > 0   )
+              {
+                var r = confirm("Esta seguro que desea bloquear estas Horas? Pacientes no podran agendar horas en este dia");               
+                             if (r == true) {
+                                const json = {  
+                                    token: 'apsfdnwe', 
+                                    appointment_date : this.daterequired ,                         
+                                    lock_apps :   this.hours_block_list , 
+                                    professional_id  : this.session_params.professional_id 	, 
+                                };
+
+                                console.log ("professional_lock_apps  REQUEST :"+ JSON.stringify(json)  );
+                                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_block_appointments",json );
+                                //console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
+                                console.log ("RESPONSE professional_lock_apps :"+JSON.stringify(response_json.data)) ;
+                                this.appointment_confirm = response_json.data ;
+                                //console.log ("We should display a Confirmation Modal now"+JSON.stringify(appointment_confirm) );
+                                this.$emit('updateAppointmentList');
+                                }
+              
+              }
+              else
+              {                
+                var r = confirm("Esta seguro que desea bloquear este dia? Pacientes no podran agendar horas en este dia");
                             if (r == true) {
                                 const json = {  
                                     token: 'apsfdnwe',                         
@@ -81,11 +102,13 @@ export default {
                                 //console.log ("We should display a Confirmation Modal now"+JSON.stringify(appointment_confirm) );
                                 this.$emit('updateAppointmentList');
                                 }
+              }
+
             },
 
-            async  sendUnLockDay(hour)
+            async  sendUnLock(hour)
             {
-                console.log("professional_UN lock_day");
+                console.log("professional_UN lock");
                 var r =confirm("DESBLOQUEAR este dia? Pacientes SI podrán agendar horas en este dia");
                             if (r == true) {
                                 const json = {  
