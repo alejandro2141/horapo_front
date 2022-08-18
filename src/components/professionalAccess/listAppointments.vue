@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+
+import AppointmentBlockedProfessional from './appointmentBlockedByProfessional.vue'
 import AppointmentAvailable from './appointmentAvailable2.vue'
 import AppointmentReserved from  './appointmentReserved.vue'
 import ModalCreateAppointment from './modalCreateAppointment.vue';
@@ -28,15 +30,26 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                 
                 <div class="m-1">
                     <div v-if="hour.app_available != null"  >
-                        <div v-if="!hour.app_available">
-                            <AppointmentReserved   v-on:click="displayModalReservedDetails(hour)" :appointment='hour'  :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
+                        
+                        <div v-if="hour.app_available">
+                            <AppointmentAvailable v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
                         </div>
+
+                         <!-- APP NOT AVAILABLE-->
+                        <div v-else >
+                            
+                            <div v-if="hour.app_blocked==1" >
+                                <AppointmentBlockedProfessional v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentBlockedProfessional>
+                            </div>
+
+                            <div v-else>    
+                                <AppointmentReserved   v-on:click="displayModalReservedDetails(hour)" :appointment='hour'  :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div v-else >
-                            <AppointmentAvailable v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
-                            <!-- @click="displayModalAppAvailable(hour)" -->
-                    </div>
                 </div>
         </div>
     </div>
