@@ -77,9 +77,8 @@ export default {
                                 console.log ("professional_lock_apps  REQUEST :"+ JSON.stringify(json)  );
                                 let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_block_appointments",json );
                                 //console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
-                                console.log ("RESPONSE professional_lock_apps :"+JSON.stringify(response_json.data)) ;
-                                this.appointment_confirm = response_json.data ;
-                                //console.log ("We should display a Confirmation Modal now"+JSON.stringify(appointment_confirm) );
+                                console.log ("RESPONSE professional_lock_apps :"+JSON.stringify(response_json)) ;
+                                //this.appointment_confirm = response_json.data ;
                                 this.$emit('updateAppointmentList');
                                 }
               
