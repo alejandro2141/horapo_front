@@ -6,7 +6,6 @@ import axios from 'axios';
 
 <template>
 
-
                     <div class="d-flex justify-content-start border border-3"  :class="{ 'border-primary': selectApp }"  style="background-color: #E4E4E4;  border-radius: 15px;">
                     
                         <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
@@ -18,8 +17,8 @@ import axios from 'axios';
                             </text> 
                         </div>
 
-                        <div class="d-flex justify-content-between w-100" :style="[ {'background-color' : calendar_data.color} ]"  style="border-radius: 15px;" >       
-                                <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-white display-6 p-2" :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style=""  >
+                        <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-radius: 15px;" >       
+                                <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-white display-6 p-2"  style=""  >
                                     
                                     <div class=""  >
                                         <text class="" ><small>  {{specialtyId2name(appointment.specialty)}} </small> </text>
