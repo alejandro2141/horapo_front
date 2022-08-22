@@ -7,10 +7,31 @@ import axios from 'axios';
 </script>
 
 <template>
-        <div class="align-self-end p-2" >
+        <div class="align-self-center " >
+          
+          <div class=" p-2 border border-1 border-success" style="border-radius: 20px; ">
+            {{dayStatics.total}}
+          </div>
+          
+          <div class="mt-1 p-2 text-white" style="background : repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px ) ;  opacity: 1 ; border-radius: 20px;" >
+            {{dayStatics.blocked}}
+          </div>
+
+          <div class="bg-success p-2">
+            R{{dayStatics.reserved}}
+          </div>
+
+          <div class="bg-warning mt-1 p-2">
+            C{{dayStatics.cancelled}}
+          </div>
+
+          
+
+         
+
            <!-- <i class=" m-2 fs-2 bi bi-unlock" @click="showLockOptions=!showLockOptions"> </i> -->
+          <!--
             <div class="text-primary"  >    
-             
               <div v-if="isLockDay">
                   <i  class=" m-2 fs-2 bi bi-lock-fill " @click="sendUnLock()"></i> <br>
                   <text class="fs-7"><small>Dia Cerrado</small></text>
@@ -18,11 +39,8 @@ import axios from 'axios';
               <div v-else>
                 <i class=" m-2 fs-2 bi bi-unlock "  @click="sendLock()"> </i> 
               </div>
-
-            </div>
+          </div>
         
-
-
            <Transition>
             <div v-if="showLockOptions">
                
@@ -32,6 +50,8 @@ import axios from 'axios';
              <text @click="lockWeek()" >Semana </text>
             </div>
            </Transition>
+        -->
+
         </div>	
 </template>
 
@@ -57,7 +77,7 @@ export default {
               isLockDay : false ,
         }   
     },
-  props : [ 'lock_dates', 'hours_block_list', 'session_params','daterequired'] ,
+  props : [ 'dayStatics', 'lock_dates', 'hours_block_list', 'session_params','daterequired'] ,
 	emits : [ 'updateAppointmentList' ]  ,
 
  	mounted () {
@@ -68,6 +88,7 @@ export default {
     
             async  sendLock(hour)
             {
+              /*
               console.log("professional_send Lock");
               if (this.hours_block_list !=null && this.hours_block_list.length > 0   )
               {
@@ -131,8 +152,10 @@ export default {
                                 this.$emit('updateAppointmentList');
                                 }
             },
+            */
 
         },
+    },
   
   watch :
   {
