@@ -6,28 +6,29 @@ import { ref } from 'vue'
 
 <template>
 
-	<div class="fixed-bottom">
-<hr class="m-0">
-    <div  class="d-flex justify-content-between   fs-6   pt- pb-2 "> 
+	<div class="fixed-bottom bg-dark">
+	
+    <div  class="d-flex justify-content-between fs-6 m-2"> 
 
       <text class="">
 			<a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;&nbsp;&nbsp;	<text class=" text-decoration-none">123hora?</text>
+				&nbsp;&nbsp;&nbsp;&nbsp;	<text class="text-white text-decoration-none">123hora?</text>
 			</a>
 	  </text>
-	  <text class="text-secondary " >|</text>
-
+	  	<!--
+	  	<text class="text-secondary " >|</text>
+		-->
       <text class="">
 			<a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-					<text class="text-secondary text-decoration-none">Profesionales</text>
+					<text class="text-white text-decoration-none">Profesionales</text>
 			</a>
 	  </text>
-
-	  <text class="text-secondary " >|</text>
-
+	 	<!--
+	  	<text class="text-secondary " >|</text>
+		-->
 	  <text>
 			<a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-					<text class="text-secondary text-decoration-none">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
+					<text class="text-white  text-decoration-none">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
 			</a>
 	  </text>
 
