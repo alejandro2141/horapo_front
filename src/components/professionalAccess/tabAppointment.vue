@@ -18,7 +18,7 @@ import LockOptions from './lockOptions.vue'
 
         <div class="d-flex justify-content-between  ">
           
-          <LockOptions v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
+          <LockOptions :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
              
           <div class="w-100"> 
            <CalendarPickerMinimal2 class="mt-3" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
@@ -26,13 +26,9 @@ import LockOptions from './lockOptions.vue'
           </div>
 
         </div> 
-
-          <ListAppointments  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
-         
-       
+            <ListAppointments  :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
             <div id='footer' style='height : 300px'>
             </div>
-
 	    </div>
 
       <div v-else >
@@ -73,6 +69,7 @@ data: function () {
             calendars : null ,
 
             hours_block_list : null ,
+            dayStatics : {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0 , 'blocked' : 0  } ,
 		 }
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
@@ -141,15 +138,28 @@ data: function () {
               {
                  this.appointments_data = []
               }
+              // set statics
+              this.setDayStatics(this.appointments_data)
 
-              
-              /*	
-              this.centers = response_json.data.centers
-              this.calendars = response_json.data.calendars
-              */
           this.hours_block_list=[]
           this.active_spinner = false ;  
 		    },
+
+        setDayStatics(appointments_data)
+        {
+          console.log("SET DAY STATICS.........");
+          this.dayStatics.total = appointments_data.appointments.length ;
+           //how many cancelled ? 
+          let filtered_blocked = appointments_data.appointments.filter(app =>  app.app_blocked === 1 ) 
+          this.dayStatics.blocked = filtered_blocked.length ;
+            //how Reserved ? 
+          let filtered_reserved = appointments_data.appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
+          this.dayStatics.reserved = filtered_reserved.length ;
+
+          console.log("SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
+          // this.dayStatics = {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0  }
+          // this.dayStatics = { 'total' : appointments_data.appointments.length  } 
+        },
 
         async updateCalendarsMarks() {
                         const json = { 
@@ -160,7 +170,6 @@ data: function () {
                         console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
                         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/rofessional_get_calendars",json);
                         this.calendars_marks = response_json.data.rows;
-                        
                         //console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
         },	
 
