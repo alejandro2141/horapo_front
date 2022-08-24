@@ -18,7 +18,7 @@ import LockOptions from './lockOptions.vue'
 
         <div class="d-flex justify-content-between  ">
           
-          <LockOptions :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
+          <LockOptions  v-on:switchFilterOnlyReserved="switchFilterOnlyReserved" :isLockDay="isLockDay" :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
              
           <div class="w-100"> 
            <CalendarPickerMinimal2 class="mt-3" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
@@ -26,7 +26,7 @@ import LockOptions from './lockOptions.vue'
           </div>
 
         </div> 
-            <ListAppointments  :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
+            <ListAppointments :filterOnlyReserved="filterOnlyReserved"  :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
             <div id='footer' style='height : 300px'>
             </div>
 	    </div>
@@ -64,12 +64,15 @@ data: function () {
             active_spinner : false , 
             calendars_marks : null ,
             lock_dates : null ,
+            isLockDay : false ,
+
+            filterOnlyReserved : false ,
 
             centers : null ,
             calendars : null ,
 
             hours_block_list : null ,
-            dayStatics : {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0 , 'blocked' : 0  } ,
+            dayStatics : {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0 , 'blocked' : 0  , 'available' : 0  } ,
 		 }
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
@@ -86,6 +89,17 @@ data: function () {
          },
  
     methods: {
+        switchFilterOnlyReserved()
+        { console.log("FIlter ONly Reserved");
+          this.filterOnlyReserved = !this.filterOnlyReserved;
+          this.addFilterOnlyReserved() 
+        },
+
+        addFilterOnlyReserved()
+        {
+          console.log("ADD Filter only reserved set ")
+          
+        },
 
         addToBlockList(hour)
         {    
@@ -141,6 +155,18 @@ data: function () {
               // set statics
               this.setDayStatics(this.appointments_data)
 
+          //check if current day is a lock day to set the flag isLockDay
+          if (this.lock_dates!=null)
+          {
+            if (this.lock_dates.includes(this.daterequired))
+            {this.isLockDay=true}
+            else{
+              this.isLockDay=false
+            }
+          }  
+          //************ */ 
+
+
           this.hours_block_list=[]
           this.active_spinner = false ;  
 		    },
@@ -155,6 +181,27 @@ data: function () {
             //how Reserved ? 
           let filtered_reserved = appointments_data.appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
           this.dayStatics.reserved = filtered_reserved.length ;
+             //Available ? 
+          this.dayStatics.available =  this.dayStatics.total  - ( this.dayStatics.blocked +  this.dayStatics.reserved ) ;
+
+          if (this.isLockDay)
+          {
+            this.dayStatics.available = "--"
+            this.dayStatics.blocked = "--"
+            this.dayStatics.total = "--"
+            /*
+            this.dayStatics = {
+                  'total' : 0 , 
+                  'reserved' : 0 , 
+                  'cancelled' : 0 , 
+                  'blocked' : 0  , 
+                  'available' : 0  
+                  } 
+                  */
+		
+
+          }
+        
 
           console.log("SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
           // this.dayStatics = {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0  }
