@@ -14,15 +14,15 @@ import axios from 'axios';
             {{dayStatics.total}}
           </div>
           
-          <div @click="$emit('switchFilterOnlyReserved');" class="bg-success mt-1 p-1">
+          <div @click='appFilterShow.reserved  = !appFilterShow.reserved ; trigger_filter=Math.random()' class="bg-success mt-1 p-1">
            {{dayStatics.reserved}}
           </div>
           
-          <div class="mt-1 text-white p-1" style="background : repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px ) ;  opacity: 1 ; " >
+          <div @click="appFilterShow.blocked = !appFilterShow.blocked ; trigger_filter=Math.random()" class="mt-1 text-white p-1" style="background : repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px ) ;  opacity: 1 ; " >
             {{dayStatics.blocked}}
           </div>
 
-          <div class="bg-warning mt-1 p-1">
+          <div @click="appFilterShow.available = !appFilterShow.available ; trigger_filter=Math.random()" class="bg-warning mt-1 p-1">
           {{dayStatics.available}}
           </div>
 
@@ -76,11 +76,13 @@ export default {
    data : function() {
         return {
               showLockOptions : false ,
-            //  isLockDay : false ,
-        }   
+              appFilterShow : { reserved  : false , blocked : false ,  available : false },
+              trigger_filter : 0 ,
+              }   
     },
+
   props : [  'isLockDay' , 'dayStatics', 'lock_dates', 'hours_block_list', 'session_params','daterequired'] ,
-	emits : [ 'updateAppointmentList', 'switchFilterOnlyReserved' ]  ,
+	emits : [ 'updateFilter','updateAppointmentList'  ]  ,
 
  	mounted () {
          
@@ -161,6 +163,12 @@ export default {
   
   watch :
   {
+    trigger_filter(newVal,oldVal)
+    {
+      console.log ("appFilterShow CHANGE!!! to "+JSON.stringify(this.appFilterShow));
+      this.$emit("updateFilter",this.appFilterShow);
+    },
+
     daterequired(newVal,oldVal)
     {
     /*  
