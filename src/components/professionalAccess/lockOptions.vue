@@ -7,24 +7,26 @@ import axios from 'axios';
 </script>
 
 <template>
-        <div class="align-self-center " >
-          
-          <div class=" p-2 border border-1 border-success" style="border-radius: 20px; ">
+        <div class="align-self-center  text-white" >
+          <small>
+
+          <div class=" border border-1 p-1 text-dark" >
             {{dayStatics.total}}
           </div>
           
-          <div class="mt-1 p-2 text-white" style="background : repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px ) ;  opacity: 1 ; border-radius: 20px;" >
+          <div @click="$emit('switchFilterOnlyReserved');" class="bg-success mt-1 p-1">
+           {{dayStatics.reserved}}
+          </div>
+          
+          <div class="mt-1 text-white p-1" style="background : repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px ) ;  opacity: 1 ; " >
             {{dayStatics.blocked}}
           </div>
 
-          <div class="bg-success p-2">
-            R{{dayStatics.reserved}}
+          <div class="bg-warning mt-1 p-1">
+          {{dayStatics.available}}
           </div>
 
-          <div class="bg-warning mt-1 p-2">
-            C{{dayStatics.cancelled}}
-          </div>
-
+        </small>
           
 
          
@@ -74,11 +76,11 @@ export default {
    data : function() {
         return {
               showLockOptions : false ,
-              isLockDay : false ,
+            //  isLockDay : false ,
         }   
     },
-  props : [ 'dayStatics', 'lock_dates', 'hours_block_list', 'session_params','daterequired'] ,
-	emits : [ 'updateAppointmentList' ]  ,
+  props : [  'isLockDay' , 'dayStatics', 'lock_dates', 'hours_block_list', 'session_params','daterequired'] ,
+	emits : [ 'updateAppointmentList', 'switchFilterOnlyReserved' ]  ,
 
  	mounted () {
          
@@ -161,7 +163,7 @@ export default {
   {
     daterequired(newVal,oldVal)
     {
-    
+    /*  
        console.log("Check if DATE:"+newVal+" is in LockDates"+JSON.stringify(this.lock_dates))
 
           if (this.lock_dates!=null)
@@ -172,8 +174,7 @@ export default {
               this.isLockDay=false
             }
           }     
-
-
+      */
     }
 
   },
