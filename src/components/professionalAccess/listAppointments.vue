@@ -24,26 +24,28 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'> </ModalProfessionalReserveAppointment>
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
-    <div class="d-flex text-primary justify-content-start fs-4" > 
+    <div class="d-flex  justify-content-start fs-4" > 
        
-        <div v-if="isLockDay" @click="sendUnLock()"  >
-            &nbsp;&nbsp;&nbsp;   <i  class=" m-2  bi bi-lock-fill " ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <text class=""><small>Dia Cerrado</small></text>
+        <div v-if="isLockDay"   >
+            &nbsp;&nbsp;&nbsp;&nbsp;   <i @click="sendUnLock()" class=" m-2 fs-1 bi bi-lock-fill text-primary" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <text class=""><small><i> Dia Cerrado </i> </small></text>
         </div>
         <div v-else>
-            &nbsp;&nbsp;&nbsp;  <i class=" m-2 fs-2 bi bi-unlock "  @click="sendLock()"> </i> 
+            &nbsp;&nbsp;&nbsp;&nbsp;  <i class=" m-2 fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
         </div>    
-       
+        filter only reserved {{filterOnlyReserved}}
+
+
     </div>
     
     <div v-if="appointments_data != null">
-        <div v-for="hour in appointments_data.appointments" :key="hour"  >
+        <div v-for="hour in filteredAppList" :key="hour"  >
                 
                 <div class="m-1">
 
                     <div v-if="hour.app_available != null"  >
                         
-                        <div v-if="hour.app_available">
+                        <div v-if="hour.app_available ">
                             <AppointmentAvailable v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
                         </div>
 
@@ -108,10 +110,12 @@ export default {
             hours_block_list : [],
 
             isLockDay : null ,
+
+            filteredAppList : [] , 
         }   
     },
    	
-   props: [ 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
+   props: [ 'filterOnlyReserved' , 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: [ 'updateAppointmentList' , 'switchView' , 'addToBlockList' ] , 
 
 	created () {
@@ -123,9 +127,14 @@ export default {
             //check if Day is expired
             this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
             console.log("DAY EXPIRED:"+this.days_expired);
+            console.log("this.filterOnlyReserved:"+this.filterOnlyReserved);
+
             if (newValue !=null )
             {
                 this.appointments_n = newValue.appointments.length
+                this.filteredAppList = this.appointments_data.appointments ;
+
+
             }
             //check if date is a blocked date
             if (this.lock_dates!=null)
@@ -137,7 +146,20 @@ export default {
                 this.isLockDay=false
                 }
             } 
-         }
+         },
+
+        filterOnlyReserved()
+         {
+             console.log("lIST APPOINTMENTS FILTER ONLY RESERVED "+this.filterOnlyReserved)
+             //now check if there is a filter active
+                if (this.filterOnlyReserved)
+                {
+                    console.log("IF filterOnlyReserved:"+this.filterOnlyReserved);
+                    this.filteredAppList  = this.filteredAppList.filter(app  => (app.app_available == false  && app.app_blocked != 1 ) )
+                }
+         },
+
+
         },
 
 	methods :{
