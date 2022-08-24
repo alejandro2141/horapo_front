@@ -18,7 +18,7 @@ import LockOptions from './lockOptions.vue'
 
         <div class="d-flex justify-content-between  ">
           
-          <LockOptions  v-on:switchFilterOnlyReserved="switchFilterOnlyReserved" :isLockDay="isLockDay" :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
+          <LockOptions v-on:updateFilter="updateFilter"  :isLockDay="isLockDay" :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
              
           <div class="w-100"> 
            <CalendarPickerMinimal2 class="mt-3" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
@@ -26,7 +26,7 @@ import LockOptions from './lockOptions.vue'
           </div>
 
         </div> 
-            <ListAppointments :filterOnlyReserved="filterOnlyReserved"  :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
+            <ListAppointments  :filterApps="filterApps" :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
             <div id='footer' style='height : 300px'>
             </div>
 	    </div>
@@ -66,7 +66,7 @@ data: function () {
             lock_dates : null ,
             isLockDay : false ,
 
-            filterOnlyReserved : false ,
+            filterApps : null ,
 
             centers : null ,
             calendars : null ,
@@ -89,17 +89,14 @@ data: function () {
          },
  
     methods: {
-        switchFilterOnlyReserved()
-        { console.log("FIlter ONly Reserved");
-          this.filterOnlyReserved = !this.filterOnlyReserved;
-          this.addFilterOnlyReserved() 
+
+        updateFilter(filter)
+        {
+          console.log("TAB APPOINTMENT updateFilter:"+JSON.stringify(filter));
+          this.filterApps = filter ;
         },
 
-        addFilterOnlyReserved()
-        {
-          console.log("ADD Filter only reserved set ")
-          
-        },
+      
 
         addToBlockList(hour)
         {    
