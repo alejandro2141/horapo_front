@@ -33,7 +33,9 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
         <div v-else>
             &nbsp;&nbsp;&nbsp;&nbsp;  <i class=" m-2 fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
         </div>    
-        filter only reserved {{filterOnlyReserved}}
+
+        
+       
 
 
     </div>
@@ -115,7 +117,7 @@ export default {
         }   
     },
    	
-   props: [ 'filterOnlyReserved' , 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
+   props: [ 'filterApps' , 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: [ 'updateAppointmentList' , 'switchView' , 'addToBlockList' ] , 
 
 	created () {
@@ -123,18 +125,33 @@ export default {
 	},
     
     watch : {
+        // NO SE ACTUALIZAAAA
+          filterApps(filter)
+          {
+              console.log("filterAPpps changed here too :"+JSON.stringify(filter) )
+              if (filter.reserved)
+              {
+              this.filteredAppList =  this.appointments_data.appointments.filter(app => app.app_blocked != 1 && app.app_available == false )
+              }
+              else 
+              {
+                this.filteredAppList = this.appointments_data.appointments ; 
+              }
+              
+          },
+
           appointments_data(newValue){        
             //check if Day is expired
             this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
             console.log("DAY EXPIRED:"+this.days_expired);
-            console.log("this.filterOnlyReserved:"+this.filterOnlyReserved);
-
+          
             if (newValue !=null )
             {
                 this.appointments_n = newValue.appointments.length
                 this.filteredAppList = this.appointments_data.appointments ;
-
-
+                //IF Filter Only Reserved
+               
+                
             }
             //check if date is a blocked date
             if (this.lock_dates!=null)
@@ -146,23 +163,18 @@ export default {
                 this.isLockDay=false
                 }
             } 
-         },
 
-        filterOnlyReserved()
-         {
-             console.log("lIST APPOINTMENTS FILTER ONLY RESERVED "+this.filterOnlyReserved)
-             //now check if there is a filter active
-                if (this.filterOnlyReserved)
-                {
-                    console.log("IF filterOnlyReserved:"+this.filterOnlyReserved);
-                    this.filteredAppList  = this.filteredAppList.filter(app  => (app.app_available == false  && app.app_blocked != 1 ) )
-                }
          },
 
 
         },
 
 	methods :{
+
+        filterReserved(apps)
+        {   
+         this.filteredAppList =  apps.filter(app => app.app_blocked !=1 && app.app_available == false   )
+        },
 
         async  sendLock(hour)
             {
