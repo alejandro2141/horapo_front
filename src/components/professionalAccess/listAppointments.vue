@@ -27,16 +27,16 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
         <div>
             <div v-if="isLockDay"   >
-                &nbsp; &nbsp;<i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small></small> 
+                &nbsp; <i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small></small> 
             </div>
             <div v-else>
-                &nbsp; &nbsp;<i class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
+                &nbsp; <i class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
             </div>   
         </div>
         <div>
             <small>
-                <text class="link-success" v-if="filterApps!=null && filterApps.reserved"> <i class="m-0 p-0 display-2 bi bi-eyeglasses"></i> <text class="">Reservadas</text> </text>  
-                <text class="link-warning" v-if="filterApps!=null && filterApps.available"> <i class="display-2 bi bi-eyeglasses"></i> Disponibles</text>  
+                <text class="link-success" v-if="filterApps!=null && filterApps.reserved"> <i class="m-0 p-0 display-2 bi bi-person"></i> <text class="">Reservadas</text> </text>  
+                <text class="link-warning" v-if="filterApps!=null && filterApps.available"> <i class="display-2 bi bi-clock-history"></i> Disponibles</text>  
                 <text  v-if="filterApps!=null && !filterApps.available && !filterApps.reserved ">  </text>  
     
             </small>     
