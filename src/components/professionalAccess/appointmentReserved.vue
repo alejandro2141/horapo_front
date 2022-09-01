@@ -9,12 +9,14 @@ import axios from 'axios';
                     <div class="d-flex justify-content-start border border-3"  :class="{ 'border-primary': selectApp }"  style="background-color: #E4E4E4;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
                     
                         <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
-                            <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
-                            <text class="fs-3 fw-light text-muted" >
+                            <text class="fs-3 fw-light " > {{ appointment.start_time.substring(0,5) }} </text><br>
+                            <text class="fs-3 text-muted fw-light"  >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
-                                <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>                         
-                            </text> 
+                                <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>   
+                                                   
+                            </text><br>
+                            <text> <i class="text-success display-3 bi bi-person"></i>    </text> 
                         </div>
 
                         <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
