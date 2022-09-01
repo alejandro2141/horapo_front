@@ -6,8 +6,51 @@ import axios from 'axios';
 </script>
 
 <template>
+                    <div class="d-flex justify-content-start border border-3"  :class="{ 'border-primary': selectApp }"  style="background-color: #E4E4E4;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
+                    
+                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
+                            <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
+                            <text class="fs-3 fw-light text-muted" >
+                                <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
+                                <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
+                                <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>                         
+                            </text> 
+                        </div>
 
-    <div class="d-flex justify-content-between m-1" style="background-color: #D4D4D4;  border-radius: 15px;" >
+                        <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
+                                <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-white display-6 p-2"  style=""  >
+                                    
+                                    <div class=""  >
+                                        <text class="" ><small>  {{specialtyId2name(appointment.specialty)}} </small> </text>
+                                    </div>  
+                                
+                                    <div class="">
+                                        <text class="" > 
+                                            <small> <small> {{center_data.name}} </small> </small>
+                                        </text>
+                                    </div>
+                                    
+                                    <div class="fs-5">
+                                         <small> <small>
+                                                <text > {{appointment.patient_name }}</text><br>
+                                                <text ><i class="bi bi-dot"></i> id:{{appointment.patient_doc_id }} </text><br>
+                                                <text ><i class="bi bi-dot"></i> Edad:{{appointment.patient_age }} </text><br>
+                                                <text v-if="appointment.home_visit"  ><i class="bi bi-dot"></i> A Domicilio <br> 
+                                                - {{appointment.patient_address }} 
+                                                </text>
+                                        </small> </small>
+                                    </div>
+                                </div>    
+                                
+                                <div @click="$emit('displayModalReservedDetails', appointment )" style="background-color: #000 ; opacity: 0.6;  border-top-right-radius:25px" >
+                                    <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-white"  ></i> 
+                                </div>   
+                        </div>           
+
+                    </div>
+
+<!--
+    <div class="d-flex justify-content-between m-1" style="background-color: #D4D4D4; border-bottom-left-radius: 25px; border-top-right-radius: 25px; " >
                     
         <div class="p-2">
             <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
@@ -18,7 +61,7 @@ import axios from 'axios';
             </text> 
         </div>
                     
-        <div  class="w-100 text-white  p-2" :style="{ 'background-color' : calendar_data.color  }"  style="border-radius: 15px;"  >
+        <div  class="w-100 text-white  p-2" :style="{ 'background-color' : calendar_data.color  }"  style="border-top-right-radius : 25px;"  >
                             
             <div class=""  >
                 <text class="display-6 m-0 p-0" ><small> {{specialtyId2name(appointment.specialty)}} </small> </text>
@@ -30,7 +73,8 @@ import axios from 'axios';
                 </text>
             </div>
 
-            <div class=" mt-2">
+            <div class="d-flex justify-content-between w-100" >
+                    <div>
                         <text > {{appointment.patient_name }}</text><br>
                         <text ><i class="bi bi-dot"></i> id:{{appointment.patient_doc_id }} </text><br>
                         <text ><i class="bi bi-dot"></i> Edad:{{appointment.patient_age }} </text><br>
@@ -43,8 +87,13 @@ import axios from 'axios';
                         
                         <text v-if="appointment.remote_care" ><i class="bi bi-dot"></i> Atención Remota  </text>
                     
-                   {{appointment.message1 }} 
-                   <p></p>
+                        {{appointment.message1 }} 
+                        <p></p>
+                   </div>
+
+                   <div @click="$emit('displayModalAppAvailable', center_data )" style="background-color: #000 ; opacity: 0.6;  border-top-right-radius:25px" >
+                        <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-white"  ></i> 
+                   </div>
 
             </div>
 
@@ -55,52 +104,7 @@ import axios from 'axios';
 
 
     </div>
-
-
-
-
-     <!--
-    <div  :style="{ 'background-color' : appointment.calendar_color   }"  style="border-radius: 25px;"  class="mb-2 border border-secondary text-muted" data-bs-toggle="modal" :data-bs-target="'#modal_appdetails_'+index"  >
-    
-        <div class=" ml-4" >
-
-             <div class="d-flex justify-content-start display-6 mb-0"  >
-                             <text class="p-1" >
-                                        <i v-if="appointment.center_visit" class=" bi bi-building"></i>      
-                                        <i v-if="appointment.home_visit"  class=" bi bi-house-door" > </i>                                  
-                                        <i v-if="appointment.remote_care" class=" bi bi-camera-video"></i> 
-                             </text> 
-                             <text class="p-1 text-success "> {{ appointment.start_time.substring(0,5) }} </text>
-                             
-                             <text class="p-1 text-success "><small> {{ id2name(appointment.specialty)}} </small> </text>
-             </div>    
-
-            <p class="display-6 mb-2 mt-0 "> <small><small>&nbsp;&nbsp;&nbsp; {{getCenter(appointment.center_id).name }} </small> </small>   </p>
-
-          
-        </div>
-
-
-            <div class="">
-                        <text >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> {{appointment.patient_name }}</text><br>
-                        <text >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> id:{{appointment.patient_doc_id }} </text><br>
-                        <text >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> Edad:{{appointment.patient_age }} </text><br>
-                        <text v-if="appointment.home_visit"  >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> A Domicilio <br> 
-                        &nbsp;&nbsp;&nbsp;- {{appointment.patient_address }} </text>
-                        
-                        <text v-if="appointment.center_visit">&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i>  En Consulta <br>
-                        </text>
-                        
-                        
-                        <text v-if="appointment.remote_care" >&nbsp;&nbsp;&nbsp;<i class="bi bi-dot"></i> Atención Remota  </text>
-                    
-                   {{appointment.message1 }} 
-                   <p></p>
-
-            </div>
-           
-    </div>
-    -->
+-->
 
 </template>
 
@@ -119,6 +123,7 @@ export default {
     },
    	
     props: ['daterequired','appointment','index','global_specialties', 'global_comunas', 'session_params' ],
+    emits:  ['displayModalReservedDetails'],
 
 	created () {
         this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
