@@ -7,30 +7,27 @@ import axios from 'axios';
 </script>
 
 <template>
-        <div class="align-self-center  text-white" >
-          <small>
+        <div class="align-self-center  text-white w-25" >
+        <small>
 
-          <div class=" border border-1 p-1 text-dark" >
+          <div @click='appFilterShow.reserved  = false ; appFilterShow.blocked = false ; appFilterShow.available=false ; trigger_filter=Math.random()' class=" border border-1 p-1 text-dark w-25" :class="{ 'w-75' : appFilterShow.available }" >
             {{dayStatics.total}}
           </div>
           
-          <div @click='appFilterShow.reserved  = !appFilterShow.reserved ; trigger_filter=Math.random()' class="bg-success mt-1 p-1">
-           {{dayStatics.reserved}}
+          <div @click='appFilterShow.reserved  = !appFilterShow.reserved ; appFilterShow.blocked=false; appFilterShow.available=false ; trigger_filter=Math.random()' class="bg-success mt-1 p-1 w-25" :class="{ 'w-75' : appFilterShow.reserved }" >
+           {{dayStatics.reserved}} <i v-if="appFilterShow.reserved" class="m-0 p-0 h1 bi bi-eyeglasses"></i>
           </div>
-          
-          <div @click="appFilterShow.blocked = !appFilterShow.blocked ; trigger_filter=Math.random()" class="mt-1 text-white p-1" style="background : repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px ) ;  opacity: 1 ; " >
-            {{dayStatics.blocked}}
+          <!--
+          <div @click="appFilterShow.blocked = !appFilterShow.blocked ; appFilterShow.reserved=false; appFilterShow.available=false ; trigger_filter=Math.random()" class="mt-1 text-white p-1  w-25" :class="{ 'w-75' : appFilterShow.blocked }"  style="background : repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px ) ;  opacity: 1 ; " >
+            {{dayStatics.blocked}} <i v-if="appFilterShow.blocked" class="m-0 p-0 h1 bi bi-eyeglasses"></i>
           </div>
-
-          <div @click="appFilterShow.available = !appFilterShow.available ; trigger_filter=Math.random()" class="bg-warning mt-1 p-1">
-          {{dayStatics.available}}
+          -->
+          <div @click="appFilterShow.available = !appFilterShow.available ; appFilterShow.reserved=false; appFilterShow.blocked=false ; trigger_filter=Math.random()" class=" bg-warning text-dark mt-1 p-1  w-25" :class="{ 'w-75' : appFilterShow.available }" >
+          {{dayStatics.available}} <i v-if="appFilterShow.available" class="m-0 p-0 h1 bi bi-eyeglasses"></i>
           </div>
 
         </small>
           
-
-         
-
            <!-- <i class=" m-2 fs-2 bi bi-unlock" @click="showLockOptions=!showLockOptions"> </i> -->
           <!--
             <div class="text-primary"  >    
