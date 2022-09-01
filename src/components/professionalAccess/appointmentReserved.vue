@@ -16,7 +16,7 @@ import axios from 'axios';
                                 <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>   
                                                    
                             </text><br>
-                            <text> <i class="text-success display-3 bi bi-person"></i>    </text> 
+                            <text> <i class="text-success display-3 bi bi-person-fill"></i>    </text> 
                         </div>
 
                         <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
