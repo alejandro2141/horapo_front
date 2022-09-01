@@ -27,7 +27,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
         <div>
             <div v-if="isLockDay"   >
-                &nbsp; &nbsp;<i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small>Dia Cerrado</small> 
+                &nbsp; &nbsp;<i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small></small> 
             </div>
             <div v-else>
                 &nbsp; &nbsp;<i class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
@@ -35,8 +35,9 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
         </div>
         <div>
             <small>
-                <text v-if="filterApps!=null && filterApps.reserved">Solo Reservadas</text>  
-                <text v-if="filterApps!=null && filterApps.available">Solo Disponibles</text>  
+                <text class="link-success" v-if="filterApps!=null && filterApps.reserved"> <i class="m-0 p-0 display-2 bi bi-eyeglasses"></i> <text class="">Reservadas</text> </text>  
+                <text class="link-warning" v-if="filterApps!=null && filterApps.available"> <i class="display-2 bi bi-eyeglasses"></i> Disponibles</text>  
+                <text  v-if="filterApps!=null && !filterApps.available && !filterApps.reserved ">  </text>  
     
             </small>     
         </div> 
@@ -64,7 +65,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                                 <AppointmentBlockedProfessional v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentBlockedProfessional>
                             </div>
                             <div v-else>    
-                                <AppointmentReserved   v-on:click="displayModalReservedDetails(hour)" :appointment='hour'  :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
+                                <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='hour'  :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
                             </div>
 
                         </div>
@@ -179,7 +180,7 @@ export default {
 
               if (this.filterApps!=null && this.filterApps.available !=null && this.filterApps.available)
               {
-              this.filteredAppList =  this.appointments_data.appointments.filter(app.app_available == true )
+              this.filteredAppList =  this.appointments_data.appointments.filter(app => app.app_available == true && app.lock_day == false)
               }
 
               if (this.filterApps!=null && this.filterApps.blocked !=null && this.filterApps.blocked)
