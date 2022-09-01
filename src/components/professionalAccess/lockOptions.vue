@@ -10,11 +10,11 @@ import axios from 'axios';
         <div class="align-self-center  text-white " style="width:13%"  >
           <small>
             
-            <div @click='active_show_all=!active_show_all; active_reserved=false ; active_available=false; trigger_send_filter=Math.random()' class="p-1 mt-1 bg-secondary text-white" :class="{ 'w-100' : (active_show_all || (active_reserved==false && active_available==false ) ) , 'w-50' : (!active_show_all)  }"  >
+            <div @click='active_show_all=!active_show_all; active_reserved=false ; active_available=false; trigger_send_filter=Math.random()' style=" border-top-right-radius:10px ; border-bottom-right-radius:10px" class="p-1 mt-1 bg-secondary text-white" :class="{ 'w-100' : (active_show_all || (active_reserved==false && active_available==false ) ) , 'w-50' : (!active_show_all)  }"  >
               {{dayStatics.total}}
             </div>
 
-            <div @click='active_reserved=!active_reserved; active_show_all=false ; active_available=false ; trigger_send_filter=Math.random()' class="justify-content-start  bg-success p-1 mt-1 " :class="{'w-100' : active_reserved, 'w-50' : !active_reserved }"   >
+            <div @click='active_reserved=!active_reserved; active_show_all=false ; active_available=false ; trigger_send_filter=Math.random()' style=" border-top-right-radius:10px ; border-bottom-right-radius:10px" class="justify-content-start  bg-success p-1 mt-1 " :class="{'w-100' : active_reserved, 'w-50' : !active_reserved }"   >
               {{dayStatics.reserved}} 
             </div>
             <!--
@@ -22,7 +22,7 @@ import axios from 'axios';
               {{dayStatics.blocked}} <i v-if="appFilterShow.blocked" class="m-0 p-0 h1 bi bi-eyeglasses"></i>
             </div>
             -->
-            <div @click='active_available=!active_available; active_show_all=false ; active_reserved=false; trigger_send_filter=Math.random()' class="bg-warning text-dark p-1 mt-1" :class="{'w-100' : active_available, 'w-50' : !active_available }"   >
+            <div @click='active_available=!active_available; active_show_all=false ; active_reserved=false; trigger_send_filter=Math.random()' style=" border-top-right-radius:10px ; border-bottom-right-radius:10px" class="bg-warning text-dark p-1 mt-1" :class="{'w-100' : active_available, 'w-50' : !active_available }"   >
               {{dayStatics.available}} 
             </div>   
 
