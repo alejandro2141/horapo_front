@@ -6,7 +6,7 @@ import axios from 'axios';
 
 <template>
 
-                    <div class="d-flex justify-content-start border border-3"  :class="{ 'border-primary': selectApp }"  style="background-color: #E4E4E4;  border-radius: 15px;">
+                    <div class="d-flex justify-content-start border border-3"  :class="{ 'border-primary': selectApp }"  style="background-color: #E4E4E4;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
                     
                         <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
                             <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
@@ -17,7 +17,7 @@ import axios from 'axios';
                             </text> 
                         </div>
 
-                        <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-radius: 15px;" >       
+                        <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
                                 <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-white display-6 p-2"  style=""  >
                                     
                                     <div class=""  >
@@ -31,8 +31,8 @@ import axios from 'axios';
                                     </div>
                                 </div>    
                                 
-                                <div @click="$emit('displayModalAppAvailable', center_data )" >
-                                    <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-white" ></i> 
+                                <div @click="$emit('displayModalAppAvailable', center_data )" style="background-color: #000 ; opacity: 0.6;  border-top-right-radius:25px" >
+                                    <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-white"  ></i> 
                                 </div>   
                         </div>           
 
