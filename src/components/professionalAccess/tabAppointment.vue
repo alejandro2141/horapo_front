@@ -26,7 +26,7 @@ import LockOptions from './lockOptions.vue'
           </div>
 
         </div> 
-            <ListAppointments  :key="render_id" :filterApps="filterApps" :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
+            <ListAppointments  :force_filter="force_filter" :filterApps="filterApps" :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
             <div id='footer' style='height : 300px'>
             </div>
 	    </div>
@@ -74,7 +74,8 @@ data: function () {
             hours_block_list : null ,
             dayStatics : {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0 , 'blocked' : 0  , 'available' : 0  } ,
 
-            render_id : 0 ,
+            force_filter : 0 ,
+            filters : null , 
 		 }
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
@@ -92,13 +93,13 @@ data: function () {
  
     methods: {
 
-
-
         updateFilter(filter)
         {
           console.log("TAB APPOINTMENT updateFilter:"+JSON.stringify(filter));
-          this.filterApps = filter ;
-         // this.forceRenderListApp() ; 
+          this.force_filter = this.force_filter+1 
+          this.filterApps = filter
+          // this.render_id = this.render_id + 1 
+          // this.forceRenderListApp() ; 
         },
 
         forceRenderListApp()
