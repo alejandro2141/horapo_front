@@ -24,19 +24,25 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'> </ModalProfessionalReserveAppointment>
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
-    <div class="d-flex  justify-content-start fs-4" > 
-       
-        <div v-if="isLockDay"   >
-            &nbsp;&nbsp;&nbsp;&nbsp;   <i @click="sendUnLock()" class=" m-2 fs-1 bi bi-lock-fill text-primary" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <text class=""><small><i> Dia Cerrado </i> </small></text>
+    <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
+        <div>
+            <div v-if="isLockDay"   >
+                &nbsp; &nbsp;<i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small>Dia Cerrado</small> 
+            </div>
+            <div v-else>
+                &nbsp; &nbsp;<i class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
+            </div>   
         </div>
-        <div v-else>
-            &nbsp;&nbsp;&nbsp;&nbsp;  <i class=" m-2 fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
-        </div>    
-
-        
-       
-
+        <div>
+            <small>
+                <text v-if="filterApps!=null && filterApps.reserved">Solo Reservadas</text>  
+                <text v-if="filterApps!=null && filterApps.available">Solo Disponibles</text>  
+    
+            </small>     
+        </div> 
+        <div>
+          
+        </div> 
 
     </div>
     
@@ -47,7 +53,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
                     <div v-if="hour.app_available != null"  >
                         
-                        <div v-if="hour.app_available ">
+                        <div v-if="hour.app_available">
                             <AppointmentAvailable v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentAvailable>
                         </div>
 
@@ -117,7 +123,7 @@ export default {
         }   
     },
    	
-   props: [ 'filterApps' , 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
+   props: [ 'force_filter' , 'filterApps' , 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: [ 'updateAppointmentList' , 'switchView' , 'addToBlockList' ] , 
 
 	created () {
@@ -126,20 +132,11 @@ export default {
     
     watch : {
         // NO SE ACTUALIZAAAA
-          filterApps(filter)
+          force_filter(force_filter)
           {
-              console.log("filterAPpps changed here too :"+JSON.stringify(filter) )
-              if (filter.reserved)
-              {
-              this.filteredAppList =  this.appointments_data.appointments.filter(app => app.app_blocked != 1 && app.app_available == false )
-              }
-              else 
-              {
-                this.filteredAppList = this.appointments_data.appointments ; 
-              }
-              
+              this.run_filter();
           },
-
+        
           appointments_data(newValue){        
             //check if Day is expired
             this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
@@ -149,9 +146,7 @@ export default {
             {
                 this.appointments_n = newValue.appointments.length
                 this.filteredAppList = this.appointments_data.appointments ;
-                //IF Filter Only Reserved
-               
-                
+                //IF Filter Only Reserved    
             }
             //check if date is a blocked date
             if (this.lock_dates!=null)
@@ -162,7 +157,9 @@ export default {
                 else{
                 this.isLockDay=false
                 }
-            } 
+            }
+           this.run_filter();
+
 
          },
 
@@ -170,6 +167,32 @@ export default {
         },
 
 	methods :{
+
+            run_filter()
+            {
+              console.log("List Appointments Filter :"+JSON.stringify(this.filterApps) )
+              
+              if ( this.filterApps!=null && this.filterApps.reserved !=null && this.filterApps.reserved)
+              {
+              this.filteredAppList =  this.appointments_data.appointments.filter(app => app.app_blocked != 1 && app.app_available == false )
+              }
+
+              if (this.filterApps!=null && this.filterApps.available !=null && this.filterApps.available)
+              {
+              this.filteredAppList =  this.appointments_data.appointments.filter(app.app_available == true )
+              }
+
+              if (this.filterApps!=null && this.filterApps.blocked !=null && this.filterApps.blocked)
+              {
+              this.filteredAppList =  this.appointments_data.appointments.filter(app => app.app_blocked == 1 )
+              }
+              
+              if (this.filterApps!=null && !this.filterApps.blocked && !this.filterApps.available && !this.filterApps.reserved )
+              {
+                  this.filteredAppList =this.appointments_data.appointments
+              }
+
+          },
 
         filterReserved(apps)
         {   
