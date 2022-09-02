@@ -34,12 +34,21 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
             </div>   
         </div>
         <div>
+            <!--
             <small>
                 <text class="link-success" v-if="filterApps!=null && filterApps.reserved"> <i class="m-0 p-0 display-2 bi bi-person"></i> <text class="">Reservadas</text> </text>  
                 <text class="link-warning" v-if="filterApps!=null && filterApps.available"> <i class="display-2 bi bi-clock-history"></i> Disponibles</text>  
                 <text  v-if="filterApps!=null && !filterApps.available && !filterApps.reserved ">  </text>  
     
-            </small>     
+            </small>  
+            -->  
+            <small>
+                <small>
+                    <text class="" > Res  </text>  &nbsp;&nbsp;
+                    <text class="" >  Dis </text>  &nbsp;&nbsp;
+                    <text class="" >  Total </text>  &nbsp;&nbsp;
+                </small>    
+            </small>   
         </div> 
         <div>
           
