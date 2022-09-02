@@ -33,7 +33,7 @@ import axios from 'axios';
                     <div class="m-2 ">
 
                     
-                    <div v-if="showEdit" class="d-flex justify-content-between mt-0 p-1"> 
+                    <div v-if="showEdit" class="d-flex justify-content-between mt-0 p-1 bg-white text-danger"> 
                         <text  @click="deleteCalendar();showEdit=false" >Eliminar <i class="bi bi-trash"></i> </text> 
                     </div>
 
@@ -273,7 +273,7 @@ export default {
 
                   const json = { 
                    // professional_id: this.session_params.professional_id ,
-                    calendar_id :  this.calendar.calendar_id,
+                    calendar_id :  this.calendar.id,
                     };
 
                   console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
