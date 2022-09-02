@@ -136,15 +136,20 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                   Color
                                 </div>
                                 <div  class="col-9 border border-primary" :style="{ 'background-color' : form_calendar_color  }" >
-                                  <p @click="showColorSelection=!showColorSelection" class="text-end pt-2 h5"> &nbsp;Editar </p>
+                                  <p @click="showColorSelection=!showColorSelection" class="text-end pt-2 h5"> <i><small>Seleccione</small></i> </p>
                                 </div>
                             
                             </div>
                             <!--Select Color -->
-                            <div v-if="showColorSelection">
-                                <div v-for="color in calendarColorArray" :key="color" :value="color">
-                                         <p @click="form_calendar_color=color ; showColorSelection=false" class="text-end"  > <text class="p-4 " :style="{ 'background-color' : color  }"> {{ color }} </text> </p> 
-                                </div>
+                            <div v-if="showColorSelection" >
+                                                           
+                              <div class="d-flex justify-content-end border border-1">
+                                  <div v-for="color in calendarColorArray" :key="color" :value="color" >
+                                          <div @click="form_calendar_color=color ; showColorSelection=true" class="text-end border border-1 border-primary m-2 p-2"  :style="{ 'background-color' : color  }"> 
+                                              <text class="" >&nbsp;&nbsp;&nbsp;</text> 
+                                          </div> 
+                                  </div>
+                              </div>
                             </div>
 
                           
@@ -334,9 +339,9 @@ data: function () {
 
             centers_found_flag : true ,
             
-            calendarColorArray : ["#1E3E72","#D88DBC","#F37336", "#5ABA4A", "#484848", "#921D1D"],
+            calendarColorArray : ["#FCFFE9","#FFF2CC","#CAEFD1", "#FDE0D9", "#CAF4F4", "#cbc9e1"],
             
-            showColorSelection : false ,
+            showColorSelection : true ,
 
 		 }
 	},
