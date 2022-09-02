@@ -48,7 +48,9 @@ import ConsultancyRemote from './consultancy_remote.vue'
                 vii - Para crear una nueva consulta, debe hacer click en <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text> <br> 
             </div>
             
-
+        <div class="text-center p-1 m-1"> 
+            <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
+        </div>
 
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
@@ -171,9 +173,7 @@ import ConsultancyRemote from './consultancy_remote.vue'
             <p class="">Para crear su primera Consulta, por favor click en el link siguiente </p>
         </div>
 
-        <div class="text-center p-3 m-3"> 
-            <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
-        </div>
+        
 
        
         <p>
