@@ -7,7 +7,7 @@ import axios from 'axios';
 <template>
 
 
-                    <div class="d-flex justify-content-between border border-3"  :class="{ ' border-primary': selectApp }"  style="background-color: #D4D4D4;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
+                    <div class="d-flex justify-content-between border border-3"  :class="{ ' border-primary': selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
                     
                         <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
                             <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
@@ -17,9 +17,14 @@ import axios from 'axios';
                                 <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>                         
                             </text> 
                         </div>
-
-                         <div class="d-flex justify-content-between w-100" style="background: repeating-linear-gradient(-45deg, rgb(0, 0, 0), rgb(136, 136, 136) 1px, rgb(51, 51, 51) 5px, rgb(51, 51, 51) 10px); border-top-right-radius: 25px;" >       
-                                <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-white display-6 p-2"  >
+<!--
+                         <div class="d-flex justify-content-between w-100" style="background: repeating-linear-gradient(-45deg, rgb(100, 100, 100), rgb(136, 136, 136) 1px, rgb(151, 151, 151) 5px, rgb(151, 151, 151) 10px); border-top-right-radius: 25px;" >       
+                     
+                            <div class="d-flex justify-content-between w-100" style="background: #eee ; border-top-right-radius: 25px;" >       
+-->
+                             <div class="d-flex justify-content-between w-100" style="background: repeating-linear-gradient(-45deg, rgb(230, 230, 230), rgb(230, 230, 230) 5px, rgb(230, 230, 230) 5px, rgb(255, 255, 255) 10px); border-top-right-radius: 25px;" >       
+                        
+                                <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-secondary display-6 p-2"  >
                                     
                                     <div class=""  >
                                         <text class="" ><small>  {{specialtyId2name(appointment.specialty)}} </small> </text>
@@ -32,8 +37,8 @@ import axios from 'axios';
                                     </div>
                                 </div>    
                                 
-                                <div @click="$emit('displayModalAppAvailable', center_data )" style="background-color: #000 ; opacity: 0.6;  border-top-right-radius:25px" >
-                                    <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-white" ></i> 
+                                <div @click="$emit('displayModalAppAvailable', center_data )" style="background-color: #fff; opacity: 0.5;  border-top-right-radius:25px" >
+                                    <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-primary" ></i> 
                                 </div>   
                         </div> 
 
