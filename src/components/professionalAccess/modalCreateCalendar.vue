@@ -41,20 +41,25 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                         </select>
                           </div>
 
-                          <div class="form-group mt-3 h3">
+                          <div class="form-group mt-3 h3 ">
                                     <label for="exampleInputEmail1">Lugar de atencion ( X Y Z) </label>
                                     <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
                           </div>
 
                           <div class="mt-2"> 
-                                <div class="form-group">
+
+                          <label class="h3">Horas </label>
+
+                                <div class="form-group d-flex justify-content-between">
                                         <label for="exampleInputEmail1">Hora Inicio </label>
-                                        <input type="text" class="form-control" autocomplete="off" id="form_start_time" name="form_start_time" v-model="form_start_time"  placeholder="ejemplo 14:30">
+                                      <!--  <input type="text" class="form-control" autocomplete="off" id="form_start_time" name="form_start_time" v-model="form_start_time"  placeholder="ejemplo 14:30">  -->
+                                        <input type="time" id="form_start_time" name="form_start_time" v-model="form_start_time" min="00:00" max="23:59" required>
                                 </div>
                                 
-                                <div class="form-group">
+                                <div class="form-group d-flex justify-content-between mt-3">
                                         <label for="exampleInputEmail1">Hora Fin </label>
-                                        <input type="text" class="form-control" autocomplete="off" id="form_end_time" name="form_end_time" v-model="form_end_time"  placeholder="ejemplo 19:30">
+                                        <input type="time" id="form_end_time" name="form_end_time" v-model="form_end_time" min="00:00" max="23:59" required>
+                                      <!--  <input type="text" class="form-control" autocomplete="off" id="form_end_time" name="form_end_time" v-model="form_end_time"  placeholder="ejemplo 19:30"> -->
                                 </div>
                           </div>  
                           
