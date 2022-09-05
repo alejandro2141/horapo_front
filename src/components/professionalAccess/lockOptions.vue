@@ -9,7 +9,7 @@ import axios from 'axios';
 <template>
         <div class="align-self-center  text-white " style="width:13%"  >
           <small>
-            
+            <!--
             <div @click='active_show_all=!active_show_all; active_reserved=false ; active_available=false; trigger_send_filter=Math.random()' style=" border-top-right-radius:10px ; border-bottom-right-radius:10px" class="p-2 mt-1 bg-secondary text-white" :class="{ 'w-100' : (active_show_all || (active_reserved==false && active_available==false ) ) , 'w-50' : (!active_show_all)  }"  >
               {{dayStatics.total}}<i v-if="active_show_all">Total</i>
             </div>
@@ -17,14 +17,12 @@ import axios from 'axios';
             <div @click='active_reserved=!active_reserved; active_show_all=false ; active_available=false ; trigger_send_filter=Math.random()' style=" border-top-right-radius:10px ; border-bottom-right-radius:10px" class="justify-content-start  bg-success p-2 mt-1 " :class="{'w-100' : active_reserved, 'w-50' : !active_reserved }"   >
               {{dayStatics.reserved}} <i v-if="active_reserved" class="bi bi-person"></i>
             </div>
-            <!--
-            <div @click="appFilterShow.blocked = !appFilterShow.blocked ; appFilterShow.reserved=false; appFilterShow.available=false ; trigger_filter=Math.random()" class="mt-1 text-white p-1  w-25" :class="{ 'w-75' : appFilterShow.blocked }"  style="background : repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px ) ;  opacity: 1 ; " >
-              {{dayStatics.blocked}} <i v-if="appFilterShow.blocked" class="m-0 p-0 h1 bi bi-eyeglasses"></i>
-            </div>
-            -->
+
             <div @click='active_available=!active_available; active_show_all=false ; active_reserved=false; trigger_send_filter=Math.random()' style=" border-top-right-radius:10px ; border-bottom-right-radius:10px" class="bg-warning text-dark p-2 mt-1" :class="{'w-100' : active_available, 'w-50' : !active_available }"   >
               {{dayStatics.available}}  <i v-if="active_available" class="bi bi-clock-history"></i>
-            </div>   
+            </div> 
+            -->
+
 
           </small>
           
