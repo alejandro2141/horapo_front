@@ -33,22 +33,14 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                 &nbsp; <i class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
             </div>   
         </div>
-        <div>
-            <!--
-            <small>
-                <text class="link-success" v-if="filterApps!=null && filterApps.reserved"> <i class="m-0 p-0 display-2 bi bi-person"></i> <text class="">Reservadas</text> </text>  
-                <text class="link-warning" v-if="filterApps!=null && filterApps.available"> <i class="display-2 bi bi-clock-history"></i> Disponibles</text>  
-                <text  v-if="filterApps!=null && !filterApps.available && !filterApps.reserved ">  </text>  
-    
-            </small>  
-            -->  
-            <small>
+        <div class="d-flex justify-content-around" >
                 <small>
-                    <text class="" > Res  </text>  &nbsp;&nbsp;
-                    <text class="" >  Dis </text>  &nbsp;&nbsp;
-                    <text class="" >  Total </text>  &nbsp;&nbsp;
+                <small>
+                    <text @click="apply_filter_reserved  =! apply_filter_reserved " class=""  :class="{ 'activeFilter' : apply_filter_reserved }" >  Res  {{dayStatics.reserved}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <text @click="apply_filter_available =! apply_filter_available" class=""  :class="{ 'activeFilter' : apply_filter_available }" >  Dis {{dayStatics.available}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <text @click="apply_filter_total =! apply_filter_total" class=""  :class="{ 'activeFilter' : apply_filter_total }"  >  Total {{dayStatics.total}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
                 </small>    
-            </small>   
+                </small>   
         </div> 
         <div>
           
@@ -103,6 +95,10 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     background-color:#ffffff
     }
 
+    .activeFilter {
+    text-decoration: underline;
+    }
+
 </style>
 
 <script>
@@ -130,10 +126,18 @@ export default {
             isLockDay : null ,
 
             filteredAppList : [] , 
+            //**** to filter
+            apply_filter_reserved: false ,
+            apply_filter_available : false ,
+            apply_filter_total : false ,
+            filterApps : { reserved  : false , blocked : false ,  available : false },
+            //********** */
+            dayStatics : {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0 , 'blocked' : 0  , 'available' : 0  } ,
+
         }   
     },
    	
-   props: [ 'force_filter' , 'filterApps' , 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
+   props: [  'filterApps' , 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: [ 'updateAppointmentList' , 'switchView' , 'addToBlockList' ] , 
 
 	created () {
@@ -141,16 +145,68 @@ export default {
 	},
     
     watch : {
-        // NO SE ACTUALIZAAAA
-          force_filter(force_filter)
-          {
+         // NO SE ACTUALIZAAAA
+          apply_filter_reserved(oldval,newval)
+          { console.log("FILTER RESERVED");
+              if (oldval)
+              {
+              this.filterApps.available = false ;
+              this.filterApps.reserved = true ;
+              this.filterApps.total = false ;
               this.run_filter();
+              }
+              else
+               {
+              this.filterApps.available = false ;
+              this.filterApps.reserved = false ; 
+              this.filterApps.total = false ;
+              this.run_filter();
+               }
           },
+          apply_filter_available(oldval,newval)
+          {   console.log("FILTER AVAILABLE");
+              if (oldval)
+              {
+              this.filterApps.available = true ;
+              this.filterApps.reserved = false ;
+              this.filterApps.total = false ;
+              this.run_filter();
+              }
+              else
+               {
+              this.filterApps.available = false ;
+              this.filterApps.reserved = false ; 
+              this.filterApps.total = false ;
+              this.run_filter();
+               }
+          },
+          apply_filter_total(oldval,newval)
+          {   console.log("FILTER AVAILABLE");
+              if (oldval)
+              {
+              this.filterApps.available = false ;
+              this.filterApps.total = true ;
+              this.filterApps.reserved = false ;
+              this.run_filter();
+              }
+              else
+               {
+              this.filterApps.available = false ;
+              this.filterApps.reserved = false ; 
+              this.filterApps.total = false ;
+              this.run_filter();
+               }
+          },
+
         
           appointments_data(newValue){        
+            
+             this.filterApps.available = false ;
+             this.filterApps.reserved = false  ;
             //check if Day is expired
             this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
             console.log("DAY EXPIRED:"+this.days_expired);
+            this.setDayStatics(newValue)
           
             if (newValue !=null )
             {
@@ -169,14 +225,35 @@ export default {
                 }
             }
            this.run_filter();
-
-
-         },
+          },
 
 
         },
 
 	methods :{
+
+            setDayStatics(appointments_data)
+            {
+            console.log("SET DAY STATICS.........");
+            this.dayStatics.total = appointments_data.appointments.length ;
+            //how many cancelled ? 
+            let filtered_blocked = appointments_data.appointments.filter(app =>  app.app_blocked === 1 ) 
+            this.dayStatics.blocked = filtered_blocked.length ;
+                //how Reserved ? 
+            let filtered_reserved = appointments_data.appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
+            this.dayStatics.reserved = filtered_reserved.length ;
+                //Available ? 
+            this.dayStatics.available =  this.dayStatics.total  - ( this.dayStatics.blocked +  this.dayStatics.reserved ) ;
+
+                if (this.isLockDay)
+                {   this.dayStatics.available = "0"
+                    this.dayStatics.blocked = ""
+                    this.dayStatics.reserved = "0"
+                    this.dayStatics.total = appointments_data.appointments.length
+                }
+            console.log("SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
+            },
+
 
             run_filter()
             {
