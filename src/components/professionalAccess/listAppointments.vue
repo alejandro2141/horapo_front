@@ -36,8 +36,8 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
         <div class="d-flex justify-content-around" >
                 <small>
                 <small>
-                    <text @click="apply_filter_reserved  =! apply_filter_reserved " class=""  :class="{ 'activeFilter' : apply_filter_reserved }" >  Res  {{dayStatics.reserved}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <text @click="apply_filter_available =! apply_filter_available" class=""  :class="{ 'activeFilter' : apply_filter_available }" >  Dis {{dayStatics.available}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <text @click="apply_filter_reserved  =! apply_filter_reserved " class=""  :class="{ 'activeFilter' : apply_filter_reserved }" >   Reserv {{dayStatics.reserved}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <text @click="apply_filter_available =! apply_filter_available" class=""  :class="{ 'activeFilter' : apply_filter_available }" >  Disp {{dayStatics.available}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
                     <text @click="apply_filter_total =! apply_filter_total" class=""  :class="{ 'activeFilter' : apply_filter_total }"  >  Total {{dayStatics.total}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
                 </small>    
                 </small>   
