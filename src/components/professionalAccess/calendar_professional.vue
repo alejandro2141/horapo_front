@@ -133,7 +133,22 @@ import axios from 'axios';
                           <input :disabled="!showEdit"  type="number" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="time_between" style=" border-radius: 25px; width:40%;  text-align: right; ">
                 
                 </div>
+                
+                <div  class="d-flex justify-content-between mt-2">
+                            <text>Color </text>  
+                            <div  class="col-9 w-25 border border-primary text-dark" :style="{ 'background-color' : color   }" >
+                                  <p @click="showColorSelection=!showColorSelection" class="p-2 pt-2 h5"> <i><small>Selec</small></i> </p>
+                            </div>
 
+                </div>
+
+                <div v-if="showColorSelection && showEdit" class="d-flex justify-content-end" >
+                     
+                    <div v-for="calcol in calendarColorArray"  :key="calcol.id"  >
+                       <div class="m-1 p-3" @click="color=calcol" :style="{ 'background-color' : calcol   }" > &nbsp;&nbsp;&nbsp;&nbsp; </div>
+                    </div>
+
+                </div>
                
 
                 <div class="mt-1">
@@ -236,6 +251,11 @@ export default {
             friday : null ,
             saturday : null ,
             sunday : null, 
+
+            color : null ,
+            showColorSelection : false , 
+
+            calendarColorArray : ["#FCFFE9","#FFF2CC","#CAEFD1", "#FDE0D9", "#CAF4F4", "#cbc9e1"],
         }   
     },
    	
@@ -261,6 +281,8 @@ export default {
         this.friday = this.calendar.friday  ;
         this.saturday = this.calendar.saturday  ;
         this.sunday = this.calendar.sunday  ;
+
+        this.color = this.calendar.color  ;
     },
 
 	methods :{
@@ -337,6 +359,8 @@ export default {
         this.friday = this.calendar.friday  ;
         this.saturday = this.calendar.saturday  ;
         this.sunday = this.calendar.sunday  ;
+        this.sunday = this.calendar.color  ;
+
         },
 
          evaluateCalendarStatus(date_end)
@@ -352,8 +376,6 @@ export default {
               //Expired
               return 3 ;
             }
-        
-
         },
 
         idSpecialty2name(id){
@@ -390,6 +412,7 @@ export default {
 
                    // professional_id: this.session_params.professional_id ,
                     calendar_id : this.calendar.id,
+                    form_color : this.color 
                     };
 
                   console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
