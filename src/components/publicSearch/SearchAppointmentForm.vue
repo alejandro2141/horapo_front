@@ -97,7 +97,7 @@ export default {
  
    created () {    
         this.form_minimum_date = new Date().toISOString().split('T')[0] ;
-        this.form_current_date = new Date().toISOString().split('T')[0] ; 
+        this.form_current_date = new Date().toISOString() 
         },
 
     methods: {
