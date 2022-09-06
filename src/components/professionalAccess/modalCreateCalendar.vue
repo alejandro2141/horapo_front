@@ -14,12 +14,10 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
      	<teleport to="body"   >
 		<div  v-if="showModalCreateCalendar" class="modal bg-secondary scroll" >
 		    <transition name="modal">
-			<div class="modal-mask "   >
+			<div class="modal-mask ">
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-1 modal-background">
  
-
-
                 <div class="modal-header">
                         <div class="text-secondary  display-5">
                         Crear Calendario
