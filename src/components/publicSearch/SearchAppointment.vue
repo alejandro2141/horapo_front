@@ -137,8 +137,7 @@ methods: {
               */
              this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
              this.centers_filtered = JSON.parse(JSON.stringify(this.centers));
-              
-
+             
               this.n_appointments_found = response_search.apps.length
               }
               else{
@@ -283,7 +282,6 @@ methods: {
             */
 
             },
-
 //SEARCH BY DATE
             async searchByDate(params)
             {
@@ -345,10 +343,8 @@ methods: {
               let metric = Date.now();
               this.active_spinner = true ; 
               if (  params.specialty != null )
-              { 
-                          
-                          console.log("search Appointments input params :"+JSON.stringify(params) )
-                         
+              {            
+                          console.log("search Appointments input params :"+JSON.stringify(params) )        
                           const json = { 
                   // agenda_id : this.par_agenda_id ,			 
                           date : params.date ,
