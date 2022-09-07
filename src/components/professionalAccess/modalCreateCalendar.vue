@@ -413,7 +413,7 @@ data: function () {
 
               const json = { 
                
-                form_start_time : this.form_start_time ,
+                form_start_time : this.form_start_time,
                 form_end_time : this.form_end_time ,
                 form_specialty_id : this.form_specialty_id, 
                 form_app_duration : this.form_app_duration ,
