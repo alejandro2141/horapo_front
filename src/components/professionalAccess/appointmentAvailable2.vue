@@ -9,7 +9,7 @@ import axios from 'axios';
                     <div class="d-flex justify-content-start border border-2"  :class="{ 'border-primary': selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 35px; border-top-right-radius: 25px;">
                     
                         <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
-                            <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
+                            <text class="fs-3 fw-light"> {{getLocalTime()}} </text><br>
                             <text class="fs-3 fw-light text-muted" >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
@@ -55,6 +55,8 @@ export default {
    data : function() {
         return {
             selectApp : false ,
+            hours : null ,
+            minutes : null ,
           
         }   
     },
@@ -63,17 +65,25 @@ export default {
     emits:  ['displayModalAppAvailable', 'addToBlockList' ] ,
 
 	created () {
+        //transform UTC to Local get Hour and Minute
+       
          },
 
 	methods :{
       	
-       specialtyId2name(id){
+        specialtyId2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
-
         },
-       
+
+        getLocalTime()
+        {
+        let date = new Date(this.appointment.start_time)
+        this.hours   = new String(date.getHours())
+        this.minutes =  new String(date.getMinutes())
+        return  (this.hours.padStart(2,0)+":"+this.minutes.padStart(2,0))
+        }
        
 
     }
