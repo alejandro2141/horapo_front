@@ -79,19 +79,16 @@ export default {
    	components: { Datepicker },
 
     props: ['required_day'],
-    
     emits: ['set_daterequired'] ,
 
 	created () {
         console.log("CALENDAR PICKER MINIMAL 2 CREATED !!");
-        this.calendar_date = new Date()
-		
+        this.calendar_date = new Date()	
         /*
         this.req_day = this.calendar_date.getDate() ,
         this.req_month = this.calendar_date.getMonth(),
         this.req_year = this.calendar_date.getFullYear(),
 	     */
-
         console.log("CALENDAR PICKER MINIMAL 2 CREATED END !!");
     },
 
