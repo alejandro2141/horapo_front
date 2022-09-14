@@ -20,7 +20,7 @@ import { ref } from 'vue'
                     <div class="display-5" style=" color:#2e5668">	 
                    <b>  {{ transform_date( appointment.date.substring(0, 10) ) }} </b>
                     
-                 {{appointment.start_time}} <text style=" font-size: 0.6em;">hrs</text>  
+                 {{ transform_time(appointment.start_time)}}<text style=" font-size: 0.6em;">hrs</text>  
                     </div>       
                 </div>
            
@@ -210,6 +210,13 @@ methods: {
         let temp = date.split("-") ;
         return (""+temp[2]+" "+this.getShortMonthName(temp[1])+" "+temp[0])
     },
+
+    transform_time(time)
+    {
+        let tim = new Date(time) ;
+        return (""+new String(tim.getHours()).padStart(2,0)+":"+new String(tim.getMinutes()).padStart(2,0) )
+    },
+
     getShortMonthName(month)
     {
               console.log("MONTH:"+parseInt(month));
