@@ -82,13 +82,10 @@ data: function () {
   emits: ['switchView','switchToCenters' ] ,
     created () {
          this.active_spinner = true ;  	
-            //this.daterequired="12-12-2021";
-            //this.getCenters();
+          
             console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );
             let today=new Date();
-
-            //this.daterequired = new Date().toISOString().split('T')[0] ;
-            this.daterequired = String(today.getFullYear()).padStart(2,0)+"-"+String(today.getMonth()).padStart(2,0)+"-"+String(today.getDate()).padStart(2,0)  ;
+            this.daterequired = String(today.getFullYear()).padStart(2,0)+"-"+String(today.getMonth()+1).padStart(2,0)+"-"+String(today.getDate()).padStart(2,0)  ;
          
             this.updateAppointmentList();
          
