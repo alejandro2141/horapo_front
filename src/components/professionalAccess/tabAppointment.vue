@@ -84,8 +84,12 @@ data: function () {
          this.active_spinner = true ;  	
             //this.daterequired="12-12-2021";
             //this.getCenters();
-            console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );   
-            this.daterequired = new Date().toISOString().split('T')[0] ;
+            console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );
+            let today=new Date();
+
+            //this.daterequired = new Date().toISOString().split('T')[0] ;
+            this.daterequired = String(today.getFullYear()).padStart(2,0)+"-"+String(today.getMonth()).padStart(2,0)+"-"+String(today.getDate()).padStart(2,0)  ;
+         
             this.updateAppointmentList();
          
          this.active_spinner = false ;  	
@@ -130,7 +134,7 @@ data: function () {
         },
 
         set_daterequired : function (year_month_day) {
-            console.log("TAB HOME GoToDay "+year_month_day);
+            console.log("SET_DATEREQUIRED TAB APPOINTMENT : "+year_month_day);
            // this.getAppointments(year_month_day);
             this.daterequired = year_month_day ;
             //this.showSpinner(1000);
@@ -171,7 +175,6 @@ data: function () {
             }
           }  
           //************ */ 
-
 
           this.hours_block_list=[]
           this.active_spinner = false ;  
