@@ -293,7 +293,7 @@ export default {
 						const json = { 
 						appointment_calendar_id : this.hourToReserve.calendar_id , 
 						appointment_date : this.hourToReserve.date , 
-						appointment_start_time : this.hourToReserve.start_time , 
+						appointment_start_time : new Date(this.hourToReserve.start_time).toString() , 
 						appointment_duration : this.hourToReserve.duration , 
 						appointment_specialty : this.hourToReserve.specialty , 
 
