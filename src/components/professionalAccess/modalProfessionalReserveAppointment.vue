@@ -53,8 +53,8 @@ import axios from 'axios';
                            <i class="display-1 text-primary bi bi-x-lg p-1 "  v-on:click="showModalReserveAppointment = false" aria-label="Close"></i>
         </div>
         <div class="display-6 mt-3"> 
-            <text class="p-1 "> {{ transform_date(hourToReserve.date.substring(0, 10) ) }} </text> <br>
-            <text class="" ><b>{{hourToReserve.start_time}}</b> </text > hrs
+            <text class="p-1 "> {{ transform_date(hourToReserve.date ) }} </text> <br>
+            <text class="" ><b>{{ transform_time(hourToReserve.start_time)}}</b> </text > hrs
         </div>
        
           <div class="mt-3" >
@@ -267,9 +267,17 @@ export default {
 
       transform_date(date)
     	{
-        let temp = date.split("-") ;
-        return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
-    	},
+        let temp = new Date(date);
+        return (""+temp.getDate() +" de "+this.getShortMonthName(temp.getMonth()+1 )+" "+temp.getFullYear())
+     
+      },
+
+      transform_time(date_time)
+    	{
+        let temp = new Date(date_time);
+        return (""+String(temp.getHours()).padStart(2,0) +" :  "+String(temp.getMinutes()).padStart(2,0)+" ")
+      },
+
 
     getShortMonthName(month)
 		{
@@ -289,11 +297,13 @@ export default {
     {
       console.log("Send Reserve Appointment");
       	var r =confirm("Desea continuar con la Reservar esta cita?");
+            let auxDate= new Date(this.hourToReserve.start_time)
+
 					  if (r == true) {
 						const json = { 
 						appointment_calendar_id : this.hourToReserve.calendar_id , 
 						appointment_date : this.hourToReserve.date , 
-						appointment_start_time : new Date(this.hourToReserve.start_time).toString() , 
+						appointment_start_time : auxDate.getHours()+":"+auxDate.getMinutes()+":00"  , 
 						appointment_duration : this.hourToReserve.duration , 
 						appointment_specialty : this.hourToReserve.specialty , 
 
