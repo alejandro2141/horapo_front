@@ -141,6 +141,7 @@ data: function () {
         async updateAppointmentList() {
           this.active_spinner = true ;  
           
+         
               
               const json = { 
               // agenda_id : this.par_agenda_id ,			 
