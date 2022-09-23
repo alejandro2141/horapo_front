@@ -139,10 +139,12 @@ data: function () {
             },
 
         async updateAppointmentList() {
-          this.active_spinner = true ;  	
+          this.active_spinner = true ;  
+          
+              
               const json = { 
               // agenda_id : this.par_agenda_id ,			 
-              date : this.daterequired ,
+              date : new Date(this.daterequired).toISOString() ,
               professional_id : this.session_params.professional_id , 
                     };
               console.log ("professional_get_appointments_day3 REQUEST :"+ JSON.stringify(json)  );
