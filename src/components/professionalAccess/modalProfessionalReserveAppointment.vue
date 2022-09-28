@@ -297,13 +297,14 @@ export default {
     {
       console.log("Send Reserve Appointment");
       	var r =confirm("Desea continuar con la Reservar esta cita?");
-            let auxDate= new Date(this.hourToReserve.start_time)
+            //let auxDate= new Date(this.hourToReserve.start_time)
 
 					  if (r == true) {
 						const json = { 
 						appointment_calendar_id : this.hourToReserve.calendar_id , 
 						appointment_date : this.hourToReserve.date , 
-						appointment_start_time : auxDate.getHours()+":"+auxDate.getMinutes()+":00"  , 
+						//appointment_start_time : auxDate.getHours()+":"+auxDate.getMinutes()+":00"  , 
+            appointment_start_time : this.hourToReserve.start_time  , 
 						appointment_duration : this.hourToReserve.duration , 
 						appointment_specialty : this.hourToReserve.specialty , 
 
