@@ -263,13 +263,18 @@ export default {
     emits: ['updateCalendarList'],
 
 	created () {
+       let date_start_local = new Date(this.calendar.date_start)
+       let date_end_local = new Date(this.calendar.date_end)
+                
         this.calendar_active = this.calendar.active
         this.specialty_code = this.calendar.specialty1 ; 
         
         this.name = this.calendar.name ;
 
-        this.date_start = this.calendar.date_start.substring(0,10) ;
-        this.date_end = this.calendar.date_end.substring(0,10)  ;
+        //this.date_end = this.calendar.date_end.substring(0,10)  ;
+        //this.date_start = this.calendar.date_start.substring(0,10) ;2022-09-29T03:00:00.000Z
+        this.date_start =  date_start_local.getFullYear()+"-"+String(date_start_local.getMonth()+1).padStart(2,0)+"-"+String(date_start_local.getDate()).padStart(2,0)  ;
+        this.date_end   =  date_end_local.getFullYear()+"-"+String(date_end_local.getMonth()+1).padStart(2,0)+"-"+String(date_end_local.getDate()).padStart(2,0)  ;
         this.start_time = this.calendar.start_time.substring(0,5)  ;
         this.end_time = this.calendar.end_time.substring(0,5)  ;
         this.duration = this.calendar.duration  ;
@@ -343,11 +348,14 @@ export default {
 
         resetForm()
         {
+       let date_start_local = new Date(this.calendar.date_start)
+       let date_end_local = new Date(this.calendar.date_end)
+
         this.calendar_active = this.calendar.calendar_active
         this.specialty_code = this.calendar.specialty1 ; 
 
-        this.date_start = this.calendar.date_start.substring(0,10) ;
-        this.date_end = this.calendar.date_end.substring(0,10)  ;
+        this.date_start = date_start_local.getFullYear()+"-"+String(date_start_local.getMonth()+1).padStart(2,0)+"-"+String(date_start_local.getDate()).padStart(2,0)  ;
+        this.date_end = date_end_local.getFullYear()+"-"+String(date_end_local.getMonth()+1).padStart(2,0)+"-"+String(date_end_local.getDate()).padStart(2,0)  ;  ;
         this.start_time = this.calendar.start_time.substring(0,5)  ;
         this.end_time = this.calendar.end_time.substring(0,5)  ;
         this.duration = this.calendar.duration  ;
@@ -393,13 +401,22 @@ export default {
            var r =confirm("¿ Esta seguro que desea Actualizar este Calendario? Ok para continuar");
             if (r == true) {
 
+                let end_date_corrected = new Date(this.date_end)
+                end_date_corrected.setHours(0,0,0,0)
+                //one milisecond to dont reach next day
+                var day = (60 * 60 * 24 * 1000 )-1000;
+                end_date_corrected = new Date(end_date_corrected.getTime() + (day*2) )  
+                
+                let start_date_corrected = new Date(this.date_start)
+                start_date_corrected.setHours(24,0,0,0)
+
                   const json = { 
                    
                     form_calendar_active : this.calendar_active ,
                     // form_center_id : 
                     // cernter_name
-                    form_date_start : this.date_start  ,
-                    form_date_end : this.date_end ,
+                    form_date_start : start_date_corrected  ,
+                    form_date_end : end_date_corrected ,
                     form_time_start : this.start_time ,
                     form_time_end : this.end_time , 
                     form_day_mon: this.monday ,
