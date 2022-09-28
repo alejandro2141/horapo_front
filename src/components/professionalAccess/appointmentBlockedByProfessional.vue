@@ -10,7 +10,7 @@ import axios from 'axios';
                     <div class="d-flex justify-content-between border border-3"  :class="{ ' border-primary': selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
                     
                         <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
-                            <text class="fs-3 fw-light"> {{ appointment.start_time.substring(0,5) }} </text><br>
+                            <text class="fs-3 fw-light"> {{ format_start_time(appointment.start_time) }} </text><br>
                             <text class="fs-3 fw-light text-muted" >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
@@ -88,6 +88,12 @@ export default {
          },
 
 	methods :{
+        
+        format_start_time(date_time)
+        {
+            let aux= new Date(date_time)
+            return ( String(aux.getHours()).padStart(2,0) +":"+String(aux.getMinutes()).padStart(2,0) )
+        },
       	
        specialtyId2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
