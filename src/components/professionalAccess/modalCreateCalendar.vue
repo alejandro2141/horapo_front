@@ -411,8 +411,30 @@ data: function () {
                 console.log("createNewCalendar Request JSON");
                 console.log ("createNewCalendar :" );
 
+                let end_date_corrected = new Date(this.form_calendar_end)
+                end_date_corrected.setHours(0,0,0,0)
+                //one milisecond to dont reach next day
+                var day = (60 * 60 * 24 * 1000 )-1000;
+                end_date_corrected = new Date(end_date_corrected.getTime() + (day*2) )  
+                
+                let start_date_corrected = new Date(this.form_calendar_start)
+                start_date_corrected.setHours(24,0,0,0)
+                //start_date_corrected = new Date(start_date_corrected.getTime() + (day) )  
+
+                
+                
+/*
+                let end_date_correct = 
+                
+                var day = 60 * 60 * 24 * 1000;
+                var endDate = new Date(startDate.getTime() + day);
+*/
+
               const json = { 
-               
+            
+                form_calendar_start: start_date_corrected ,
+                form_calendar_end: end_date_corrected , 
+                 
                 form_start_time : this.form_start_time,
                 form_end_time : this.form_end_time ,
                 form_specialty_id : this.form_specialty_id, 
@@ -427,8 +449,6 @@ data: function () {
                 form_recurrency_sat : this.form_recurrency_sat , 
                 form_recurrency_sun : this.form_recurrency_sun , 
 
-                form_calendar_start: this.form_calendar_start ,
-                form_calendar_end: this.form_calendar_end ,
                 form_appointment_center: this. form_appointment_center ,
                 form_appointment_home: this.form_appointment_home ,
                 form_appointment_remote: this.form_appointment_remote ,
@@ -448,7 +468,8 @@ data: function () {
               let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_calendar",json);
               console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
               this.$emit('updateCalendarList');  
-              this.showModalCreateCalendar = false ;       
+              this.showModalCreateCalendar = false ;
+                    
               
         },
 
