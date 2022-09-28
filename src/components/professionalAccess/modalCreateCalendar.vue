@@ -419,17 +419,12 @@ data: function () {
                 
                 let start_date_corrected = new Date(this.form_calendar_start)
                 start_date_corrected.setHours(24,0,0,0)
-                //start_date_corrected = new Date(start_date_corrected.getTime() + (day) )  
-
-                
-                
+                //start_date_corrected = new Date(start_date_corrected.getTime() + (day) )    
 /*
-                let end_date_correct = 
-                
+                let end_date_correct =             
                 var day = 60 * 60 * 24 * 1000;
                 var endDate = new Date(startDate.getTime() + day);
 */
-
               const json = { 
             
                 form_calendar_start: start_date_corrected ,
