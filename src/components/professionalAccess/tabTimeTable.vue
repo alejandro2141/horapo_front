@@ -23,7 +23,6 @@ import CalendarProfessional from './calendar_professional.vue'
                     <div v-for="calendar in calendars.calendars"  :key='calendar.id' >
                         <CalendarProfessional :calendar="calendar" :center_data="getCenterData(calendar.center_id)"  v-on:updateCalendarList="updateCalendarList()" :global_specialties="global_specialties" :global_comunas="global_comunas"> </CalendarProfessional> 
                     </div>
-
                 </div>
 
                 <div v-else class="mt-1   "  style="border-radius: 15px;" >
