@@ -16,7 +16,7 @@ import axios from 'axios';
                                 <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>   
                                                    
                             </text><br>
-                            <text> <i class="text-success display-3 bi bi-person-fill"></i>    </text> 
+                            <text> <i style="color:#5BA199" class="display-3 bi bi-person-fill"></i>    </text> 
                         </div>
 
                         <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#444'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
@@ -44,7 +44,7 @@ import axios from 'axios';
                                     </div>
                                 </div>    
                                 
-                                <div @click="$emit('displayModalReservedDetails', appointment )" style="background-color: #000 ; opacity: 0.6;  border-top-right-radius:25px" >
+                                <div @click="$emit('displayModalReservedDetails', appointment )" style="background-color: #5BA199 ; opacity: 0.6;  border-top-right-radius:25px" >
                                     <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-white"  ></i> 
                                 </div>   
                         </div>           
