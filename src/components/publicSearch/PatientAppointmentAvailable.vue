@@ -18,7 +18,7 @@ import { ref } from 'vue'
             <div>
                 <div class="">
                     <div class="display-5" style=" color:#2e5668">	 
-                   <b>  {{ transform_date( appointment.date.substring(0, 10) ) }} </b>
+                   <b>  {{ transform_date( appointment.date ) }} </b>
                     
                  {{ transform_time(appointment.start_time)}}<text style=" font-size: 0.6em;">hrs</text>  
                     </div>       
@@ -207,8 +207,9 @@ methods: {
 
     transform_date(date)
     {
-        let temp = date.split("-") ;
-        return (""+temp[2]+" "+this.getShortMonthName(temp[1])+" "+temp[0])
+        //let temp = date.split("-") ;
+        let temp = new Date(date);
+        return ( temp.getDate()+" "+this.getShortMonthName(temp.getMonth()+1)+" "+temp.getFullYear() )
     },
 
     transform_time(time)
