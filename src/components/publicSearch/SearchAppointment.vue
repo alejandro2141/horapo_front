@@ -347,7 +347,7 @@ methods: {
                           console.log("search Appointments input params :"+JSON.stringify(params) )        
                           const json = { 
                   // agenda_id : this.par_agenda_id ,			 
-                          date : params.date ,
+                          date : new Date(params.date) ,
                           specialty : params.specialty.id ,
                           location : params.location ,
                           home_visit : params.home_visit,
