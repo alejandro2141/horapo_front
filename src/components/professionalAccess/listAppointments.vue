@@ -26,7 +26,8 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
     <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
         <div>
-            <div v-if="isLockDay"   >
+            <!-- <div v-if="isLockDay"   > -->
+             <div v-if="isLockDay"   >    
                 &nbsp; <i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small></small> 
             </div>
             <div v-else>
@@ -215,6 +216,23 @@ export default {
                 //IF Filter Only Reserved    
             }
             //check if date is a blocked date
+            console.log("APPS LOCK DATES:"+newValue.lock_dates );
+             let aux_date_required = new Date(this.daterequired)
+            aux_date_required.setHours(0,0,0,0)
+            console.log("APPS DATE REQUIRED :"+aux_date_required.toISOString() );
+
+            const lock_date_found = newValue.lock_dates.find(element => new Date(element).getTime() === aux_date_required.getTime()  );
+            
+            if (lock_date_found != null )
+            {
+             this.isLockDay=true ; 
+            }
+            else
+            {
+            this.isLockDay=false ; 
+            }
+
+/*
             if (this.lock_dates!=null)
             {
                 if (this.lock_dates.includes(this.daterequired)){
@@ -224,15 +242,17 @@ export default {
                 this.isLockDay=false
                 }
             }
+*/
            this.run_filter();
-          },
+
+        },
 
 
         },
 
 	methods :{
 
-            setDayStatics(appointments_data)
+        setDayStatics(appointments_data)
             {
             console.log("SET DAY STATICS.........");
             this.dayStatics.total = appointments_data.appointments.length ;
@@ -252,10 +272,9 @@ export default {
                     this.dayStatics.total = appointments_data.appointments.length
                 }
             console.log("SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
-            },
+        },
 
-
-            run_filter()
+        run_filter()
             {
               console.log("List Appointments Filter :"+JSON.stringify(this.filterApps) )
               
@@ -279,7 +298,7 @@ export default {
                   this.filteredAppList =this.appointments_data.appointments
               }
 
-          },
+        },
 
         filterReserved(apps)
         {   
@@ -313,9 +332,13 @@ export default {
               {                
                 var r = confirm("Esta seguro que desea bloquear este dia? Pacientes no podran agendar horas en este dia");
                             if (r == true) {
+
+                                let aux_date_required = new Date(this.daterequired)
+                                aux_date_required.setHours(0,0,0,0)
+                                
                                 const json = {  
                                     token: 'apsfdnwe',                         
-                                    appointment_date : this.daterequired , 
+                                    appointment_date : aux_date_required , 
                                     appointment_professional_id  : this.session_params.professional_id 	, 
                                 };
 
@@ -331,16 +354,20 @@ export default {
 
               this.hours_block_list = []
 
-            },
+        },
 
-            async  sendUnLock(hour)
+        async  sendUnLock(hour)
             {
                 console.log("professional_UN lock");
                 var r =confirm("DESBLOQUEAR este dia? Pacientes SI podrán agendar horas en este dia");
                             if (r == true) {
+
+                                let aux_date_required = new Date(this.daterequired)
+                                aux_date_required.setHours(0,0,0,0)
+
                                 const json = {  
                                     token: 'apsfdnwe',                         
-                                    appointment_date : this.daterequired , 
+                                    appointment_date :  aux_date_required , 
                                     appointment_professional_id  : this.session_params.professional_id 	, 
                                 };
 
@@ -352,7 +379,7 @@ export default {
                                 //console.log ("We should display a Confirmation Modal now"+JSON.stringify(appointment_confirm) );
                                 this.$emit('updateAppointmentList');
                                 }
-            },
+        },
 
         addToBlockList(hour)
         {
@@ -389,6 +416,7 @@ export default {
             if (temp != null) { return temp }
             else { return null }
         },
+
         getCenterName(id){
             let temp= this.centers.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
