@@ -172,7 +172,8 @@ export default {
             {
                 console.log("Date Change So EMIT:"+newValue);
                 //this.$emit('set_daterequired', this.calendar_date.getFullYear()+"-"+(this.calendar_date.getMonth()+1)+"-"+ this.calendar_date.getDate() ) ;
-                let new_dateRequired= String(this.calendar_date.getFullYear()).padStart(2,0)+"-"+String(this.calendar_date.getMonth()+1).padStart(2,0)+"-"+String(this.calendar_date.getDate()).padStart(2,0)  ;
+                //let new_dateRequired= String(this.calendar_date.getFullYear()).padStart(2,0)+"-"+String(this.calendar_date.getMonth()+1).padStart(2,0)+"-"+String(this.calendar_date.getDate()).padStart(2,0)  ;
+                let new_dateRequired= this.calendar_date  ;
          
                 this.$emit('set_daterequired', new_dateRequired ) ;
 
