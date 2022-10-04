@@ -138,7 +138,7 @@ export default {
         }   
     },
    	
-   props: [  'filterApps' , 'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
+   props: [   'lock_dates' , 'appointments_data' , 'day_expired' , 'daterequired', 'session_params' ,  'calendars_marks' , 'global_specialties', 'global_comunas'  ],
    emits: [ 'updateAppointmentList' , 'switchView' , 'addToBlockList' ] , 
 
 	created () {
@@ -220,7 +220,7 @@ export default {
              let aux_date_required = new Date(this.daterequired)
             aux_date_required.setHours(0,0,0,0)
             console.log("APPS DATE REQUIRED :"+aux_date_required.toISOString() );
-
+            
             const lock_date_found = newValue.lock_dates.find(element => new Date(element).getTime() === aux_date_required.getTime()  );
             
             if (lock_date_found != null )
@@ -231,6 +231,7 @@ export default {
             {
             this.isLockDay=false ; 
             }
+            console.log("Is a Lock Date ?  :"+ this.isLockDay );
 
 /*
             if (this.lock_dates!=null)
