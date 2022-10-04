@@ -80,18 +80,22 @@ data: function () {
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
   emits: ['switchView','switchToCenters' ] ,
+    
     created () {
          this.active_spinner = true ;  	
-          
+            console.log("TAB APPOINTMENT CREATED");
             console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );
             let today=new Date();
             this.daterequired = String(today.getFullYear()).padStart(2,0)+"-"+String(today.getMonth()+1).padStart(2,0)+"-"+String(today.getDate()).padStart(2,0)  ;
          
-            this.updateAppointmentList();
-         
          this.active_spinner = false ;  	
          },
- 
+    
+    mounted () {
+          console.log("TAB APPOINTMENT MOUNTED");
+          this.updateAppointmentList();
+         },
+    
     methods: {
 
         updateFilter(filter)
@@ -142,14 +146,14 @@ data: function () {
             this.active_spinner = true ;  
             //let aux_date = new Date(); //to get User Offset Timezone
             let aux_dateRequired = new Date(this.daterequired)
-            var aux_dateToSearch = new Date(aux_dateRequired.getTime() + new Date().getTimezoneOffset()*60000);
-  
+            //var aux_dateToSearch = new Date(aux_dateRequired.getTime() + new Date().getTimezoneOffset()*60000);
+
               const json = { 
-              // agenda_id : this.par_agenda_id ,			 
-            //  date :  new Date(this.daterequired).toISOString() ,
-              date :  new Date(aux_dateToSearch).toISOString() ,
+             // date :  new Date(aux_dateToSearch).toISOString() ,
+              date :  aux_dateRequired ,
               professional_id : this.session_params.professional_id , 
                     };
+            
               console.log ("professional_get_appointments_day3 REQUEST :"+ JSON.stringify(json)  );
               let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day3",json);
               console.log ("/professional_get_appointments_day3 RESPONSE:"+JSON.stringify(response_json.data)) ;
