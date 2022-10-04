@@ -10,7 +10,7 @@ import axios from 'axios';
                     
                         <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
                             <text class="fs-3 fw-light"> {{getLocalTime()}} </text><br>
-                              <text class="fs-3 fw-light"><small><small><small> <small><small> {{getLocalDate()}} </small></small></small></small></small></text><br>
+                              <text class="fs-3 fw-light"><small><small><small><small><small><small> <small><small> {{getLocalDate()}} </small></small></small></small></small></small></small></small> </text><br>
                             <text class="fs-3 fw-light text-muted" >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
