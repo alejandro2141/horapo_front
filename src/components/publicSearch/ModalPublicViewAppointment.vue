@@ -45,7 +45,7 @@ import loadProgress from '../loadProgress.vue'
                 <div class="">
 					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" " ></i> Fecha : 
 						<text class="" style="">	 
-						  {{ transform_date( app.date.substring(0, 10) ) }} 
+						  {{ transform_date( app.date ) }} 
 						</text>       
 					
 					</p>
@@ -55,7 +55,7 @@ import loadProgress from '../loadProgress.vue'
 				<div class="">
 					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" " ></i> Hora : 
 						<text class="" style="">	 
-						{{app.start_time}} <text >hrs</text>  
+						{{transform_time(app.start_time)}} <text >hrs</text>  
 						</text>       
 					
 					</p>
@@ -384,16 +384,22 @@ computed: {
 
 		transform_date(date)
     	{
-        let temp = date.split("-") ;
-        return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+        let temp = new Date(date)
+        return (""+temp.getDate()+" de "+this.getShortMonthName(temp.getMonth()+1)+" "+temp.getFullYear())
     	},
-		
+
+		transform_time(date)
+    	{
+        let temp = new Date(date)
+        return (  String(temp.getHours()).padStart(2,0)+":"+String(temp.getMinutes()).padStart(2,0) )
+    	},
+		/*
 		transform_date2(date)
 		{
 			let temp = date.split("-") ;
 			return (""+temp[2]+" "+this.getShortMonthName(temp[1])+" "+temp[0])
 		},
-        
+        */
 
 
 
