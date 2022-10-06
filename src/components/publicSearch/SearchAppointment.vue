@@ -102,8 +102,8 @@ export default {
     props: ['global_specialties','global_comunas'], 
 
  mounted () {
-             this.daterequired = new Date().toISOString().split('T')[0] ;
-             this.currentDate =  new Date().toISOString().split('T')[0] ;
+             this.daterequired = new Date() ;
+             this.currentDate =  new Date() ;
              console.log('Search Appointment global_specialties'+this.global_specialties);
         },
 
