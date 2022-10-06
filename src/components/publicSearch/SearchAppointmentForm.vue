@@ -208,6 +208,9 @@ export default {
         //SELECTED DATE 
         selectedDate(date)
         {
+            let aux_date = new Date(date)
+            aux_date.setHours(24,0,0,0) 
+
                 const search_params = { 
 				        specialty : this.form_specialty ,
                         type_center : this.form_app_type_center,
@@ -215,7 +218,7 @@ export default {
                         type_remote : this.form_app_type_remote,
                     //   app type no set
                         location : this.form_location_code ,
-                        date :  date ,  
+                        date :  aux_date ,  
                   		  };
             if (this.form_specialty != null)
             {
@@ -229,7 +232,7 @@ export default {
         
         form_current_date(newValue, oldValue)
         {
-            console.log("DATE  CHANGE :"+ oldValue+ " To New Value : "+newValue );
+            
             if (newValue !=null)
             {  
                 this.selectedDate(newValue)
