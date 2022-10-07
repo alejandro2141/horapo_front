@@ -50,7 +50,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     </div>
     
     <div v-if="appointments_data != null">
-        <div v-for="hour in filteredAppList" :key="hour"  >
+        <div v-for="hour in filteredAppList.appointments" :key="hour"  >
                 
                 <div class="m-1">
 
