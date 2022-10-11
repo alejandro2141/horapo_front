@@ -188,13 +188,14 @@ data: function () {
 
         setDayStatics(appointments_data)
         {
-          console.log("SET DAY STATICS.........");
-          this.dayStatics.total = appointments_data.appointments.length ;
+          /*
+          console.log("SET DAY STATICS........." );
+          this.dayStatics.total = appointments_data.appointments_list.length ;
            //how many cancelled ? 
-          let filtered_blocked = appointments_data.appointments.filter(app =>  app.app_blocked === 1 ) 
+          let filtered_blocked = appointments_data.appointments_list[0].appointments.filter(app =>  app.app_blocked === 1 ) 
           this.dayStatics.blocked = filtered_blocked.length ;
             //how Reserved ? 
-          let filtered_reserved = appointments_data.appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
+          let filtered_reserved = appointments_data.appointments_list[0].appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
           this.dayStatics.reserved = filtered_reserved.length ;
              //Available ? 
           this.dayStatics.available =  this.dayStatics.total  - ( this.dayStatics.blocked +  this.dayStatics.reserved ) ;
@@ -204,23 +205,12 @@ data: function () {
             this.dayStatics.available = "--"
             this.dayStatics.blocked = "--"
             this.dayStatics.total = "--"
-            /*
-            this.dayStatics = {
-                  'total' : 0 , 
-                  'reserved' : 0 , 
-                  'cancelled' : 0 , 
-                  'blocked' : 0  , 
-                  'available' : 0  
-                  } 
-                  */
-		
-
           }
         
-
           console.log("SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
           // this.dayStatics = {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0  }
           // this.dayStatics = { 'total' : appointments_data.appointments.length  } 
+          */
         },
 
         async updateCalendarsMarks() {
