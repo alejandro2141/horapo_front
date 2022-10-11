@@ -49,8 +49,8 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
     </div>
     
-    <div v-if="appointments_data != null">
-        <div v-for="hour in filteredAppList.appointments" :key="hour"  >
+    <div v-if="filteredAppList != null && filteredAppList.length >0 && appointments_data.calendars != null && appointments_data.calendars.length > 0 ">
+        <div v-for="hour in filteredAppList" :key="hour"  >
                 
                 <div class="m-1">
 
@@ -200,8 +200,8 @@ export default {
           },
 
         
-          appointments_data(newValue){        
-            
+          appointments_data(newValue){
+        
              this.filterApps.available = false ;
              this.filterApps.reserved = false  ;
             //check if Day is expired
@@ -209,10 +209,10 @@ export default {
             console.log("DAY EXPIRED:"+this.days_expired);
             this.setDayStatics(newValue)
           
-            if (newValue !=null )
+            if (newValue !=null && newValue.appointments_list[0] !=null && newValue.appointments_list[0].appointments != null  )
             {
-                this.appointments_n = newValue.appointments.length
-                this.filteredAppList = this.appointments_data.appointments ;
+                this.appointments_n = newValue.appointments_list.length
+                this.filteredAppList = newValue.appointments_list[0].appointments ;
                 //IF Filter Only Reserved    
             }
             //check if date is a blocked date
@@ -233,19 +233,7 @@ export default {
             }
             console.log("Is a Lock Date ?  :"+ this.isLockDay );
 
-/*
-            if (this.lock_dates!=null)
-            {
-                if (this.lock_dates.includes(this.daterequired)){
-                this.isLockDay=true
-                }
-                else{
-                this.isLockDay=false
-                }
-            }
-*/
            this.run_filter();
-
         },
 
 
@@ -255,13 +243,13 @@ export default {
 
         setDayStatics(appointments_data)
             {
-            console.log("SET DAY STATICS.........");
-            this.dayStatics.total = appointments_data.appointments.length ;
+            /*
+            this.dayStatics.total = appointments_data.appointments_list.length ;
             //how many cancelled ? 
-            let filtered_blocked = appointments_data.appointments.filter(app =>  app.app_blocked === 1 ) 
+            let filtered_blocked = appointments_data.appointments_list[0].appointments.filter(app =>  app.app_blocked === 1 ) 
             this.dayStatics.blocked = filtered_blocked.length ;
                 //how Reserved ? 
-            let filtered_reserved = appointments_data.appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
+            let filtered_reserved = appointments_data.appointments_list[0].appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
             this.dayStatics.reserved = filtered_reserved.length ;
                 //Available ? 
             this.dayStatics.available =  this.dayStatics.total  - ( this.dayStatics.blocked +  this.dayStatics.reserved ) ;
@@ -270,34 +258,38 @@ export default {
                 {   this.dayStatics.available = "0"
                     this.dayStatics.blocked = ""
                     this.dayStatics.reserved = "0"
-                    this.dayStatics.total = appointments_data.appointments.length
+                    this.dayStatics.total = appointments_data.appointments_list.appointments.length
                 }
-            console.log("SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
+            console.log("LIST APPOITNMENTS SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
+            */
         },
 
         run_filter()
             {
-              console.log("List Appointments Filter :"+JSON.stringify(this.filterApps) )
-              
-              if ( this.filterApps!=null && this.filterApps.reserved !=null && this.filterApps.reserved)
-              {
-              this.filteredAppList =  this.appointments_data.appointments.filter(app => app.app_blocked != 1 && app.app_available == false )
-              }
+                if (this.appointments_data !=null && this.appointments_data.appointments_list[0] !=null && this.appointments_data.appointments_list[0].appointments != null  )
+                { 
+                    console.log("List Appointments Filter :"+JSON.stringify(this.filterApps) )
+                    
+                    if ( this.filterApps!=null && this.filterApps.reserved !=null && this.filterApps.reserved)
+                    {
+                    this.filteredAppList =  this.appointments_data.appointments_list[0].appointments.filter(app => app.app_blocked != 1 && app.app_available == false )
+                    }
 
-              if (this.filterApps!=null && this.filterApps.available !=null && this.filterApps.available)
-              {
-              this.filteredAppList =  this.appointments_data.appointments.filter(app => app.app_available == true && app.lock_day == false)
-              }
+                    if (this.filterApps!=null && this.filterApps.available !=null && this.filterApps.available)
+                    {
+                    this.filteredAppList =  this.appointments_data.appointments_list[0].appointments.filter(app => app.app_available == true && app.lock_day == false)
+                    }
 
-              if (this.filterApps!=null && this.filterApps.blocked !=null && this.filterApps.blocked)
-              {
-              this.filteredAppList =  this.appointments_data.appointments.filter(app => app.app_blocked == 1 )
-              }
-              
-              if (this.filterApps!=null && !this.filterApps.blocked && !this.filterApps.available && !this.filterApps.reserved )
-              {
-                  this.filteredAppList =this.appointments_data.appointments
-              }
+                    if (this.filterApps!=null && this.filterApps.blocked !=null && this.filterApps.blocked)
+                    {
+                    this.filteredAppList =  this.appointments_data.appointments_list[0].appointments.filter(app => app.app_blocked == 1 )
+                    }
+                    
+                    if (this.filterApps!=null && !this.filterApps.blocked && !this.filterApps.available && !this.filterApps.reserved )
+                    {
+                        this.filteredAppList =this.appointments_data.appointments_list[0].appointments
+                    }
+                }
 
         },
 
