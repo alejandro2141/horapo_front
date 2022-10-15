@@ -121,6 +121,9 @@ export default {
         return {
                calendar_data : null  ,
                center_data : null , 
+               selectApp : false ,
+               days_expired : false ,
+             
         }   
     },
    	
