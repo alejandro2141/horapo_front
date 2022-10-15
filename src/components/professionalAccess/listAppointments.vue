@@ -78,7 +78,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
         </div>
     </div>
 
-    <div v-if="isLockDay"   >    
+    <div v-if="isLockDay "   >    
     
     Is a lock day
     
