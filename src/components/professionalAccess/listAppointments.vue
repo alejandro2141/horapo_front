@@ -78,6 +78,12 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
         </div>
     </div>
 
+    <div v-if="isLockDay"   >    
+    
+    Is a lock day
+    
+    </div>
+
     <div v-if="appointments_n <= 0 " class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >
                
                 <div class="p-4 text-center" >    
@@ -201,6 +207,8 @@ export default {
 
         
           appointments_data(newValue){
+             
+             console.log("------------------appointments_data:"+JSON.stringify(newValue));
         
              this.filterApps.available = false ;
              this.filterApps.reserved = false  ;
@@ -209,10 +217,10 @@ export default {
             console.log("DAY EXPIRED:"+this.days_expired);
             this.setDayStatics(newValue)
           
-            if (newValue !=null && newValue.appointments_list[0] !=null && newValue.appointments_list[0].appointments != null  )
+            if (newValue !=null && newValue.appointments_list !=null && newValue.appointments_list.appointments != null  )
             {
                 this.appointments_n = newValue.appointments_list.length
-                this.filteredAppList = newValue.appointments_list[0].appointments ;
+                this.filteredAppList = newValue.appointments_list.appointments ;
                 //IF Filter Only Reserved    
             }
             //check if date is a blocked date
@@ -220,7 +228,7 @@ export default {
              let aux_date_required = new Date(this.daterequired)
             aux_date_required.setHours(0,0,0,0)
             console.log("APPS DATE REQUIRED :"+aux_date_required.toISOString() );
-            
+            /*
             const lock_date_found = newValue.lock_dates.find(element => new Date(element).getTime() === aux_date_required.getTime()  );
             
             if (lock_date_found != null )
@@ -231,6 +239,8 @@ export default {
             {
             this.isLockDay=false ; 
             }
+            */
+            this.isLockDay = newValue.lock_date
             console.log("Is a Lock Date ?  :"+ this.isLockDay );
 
            this.run_filter();
