@@ -22,7 +22,7 @@ import axios from 'axios';
                                 <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-dark display-6 p-2" :class="{ 'text-white' : appointment.lock_day}"  style=""  >
                                     
                                     <div class=""  >
-                                        <text class="" ><small>  {{specialtyId2name(appointment.specialty)}} </small> </text>
+                                        <text class="" ><small>  {{specialty_data.name}} </small> </text>
                                     </div>  
                                 
                                     <div class="">
@@ -58,11 +58,10 @@ export default {
             selectApp : false ,
             hours : null ,
             minutes : null ,
-          
         }   
     },
    	
-    props: [ 'appointment', 'calendar_data', 'center_data' , 'days_expired','daterequired','index','global_specialties', 'global_comunas', 'session_params' ],
+    props: [ 'appointment' , 'specialty_data',  'calendar_data', 'center_data' ,'session_params' , 'days_expired' ],
     emits:  ['displayModalAppAvailable', 'addToBlockList' ] ,
 
 	created () {
@@ -71,12 +70,6 @@ export default {
          },
 
 	methods :{
-      	
-        specialtyId2name(id){
-            let temp= this.global_specialties.find(elem => elem.id ==  id  )
-            if (temp != null) { return temp.name }
-            else { return null }
-        },
 
         getLocalTime()
         {
