@@ -28,7 +28,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
         <div>
             <!-- <div v-if="isLockDay"   > -->
              <div v-if="isLockDay"   >    
-                &nbsp; <i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small></small> 
+            <!--    &nbsp; <i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small></small>  -->
             </div>
             <div v-else>
                 &nbsp; <i class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
@@ -78,11 +78,14 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
         </div>
     </div>
 
-    <div v-if="isLockDay "   >    
-    
-    Is a lock day
-    
+    <div v-if="isLockDay">
+        <p  class="text-center text-secondary">
+            
+            <text style="font-size:50vw;"><i  class="bi bi-lock-fill"></i></text><br>
+            <i @click="sendUnLock()" class="text-primary" >Desbloquear Dia </i>
+        </p>
     </div>
+   
 
     <div v-if="appointments_n <= 0 " class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >
                
@@ -213,8 +216,10 @@ export default {
              this.filterApps.available = false ;
              this.filterApps.reserved = false  ;
             //check if Day is expired
+            
             this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
             console.log("DAY EXPIRED:"+this.days_expired);
+            
             this.setDayStatics(newValue)
           
             if (newValue !=null && newValue.appointments_list !=null && newValue.appointments_list.appointments != null  )
@@ -224,10 +229,12 @@ export default {
                 //IF Filter Only Reserved    
             }
             //check if date is a blocked date
+            /*
             console.log("APPS LOCK DATES:"+newValue.lock_dates );
              let aux_date_required = new Date(this.daterequired)
             aux_date_required.setHours(0,0,0,0)
             console.log("APPS DATE REQUIRED :"+aux_date_required.toISOString() );
+            */
             /*
             const lock_date_found = newValue.lock_dates.find(element => new Date(element).getTime() === aux_date_required.getTime()  );
             
