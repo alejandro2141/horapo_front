@@ -86,9 +86,11 @@ data: function () {
             console.log("TAB APPOINTMENT CREATED");
             console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );
             let today=new Date();
-            this.daterequired = String(today.getFullYear()).padStart(2,0)+"-"+String(today.getMonth()+1).padStart(2,0)+"-"+String(today.getDate()).padStart(2,0)  ;
-         
-         this.active_spinner = false ;  	
+            this.daterequired = today
+            //this.daterequired = String(today.getFullYear()).padStart(2,0)+"-"+String(today.getMonth()+1).padStart(2,0)+"-"+String(today.getDate()).padStart(2,0)  ;
+            
+            console.log("TAB APPOINTMENT Date Required:"+this.daterequired);
+            this.active_spinner = false ;  	
          },
     
     mounted () {
