@@ -26,13 +26,15 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
     <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
         <div>
+
             <!-- <div v-if="isLockDay"   > -->
              <div v-if="isLockDay"   >    
             <!--    &nbsp; <i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small></small>  -->
             </div>
             <div v-else>
-                &nbsp; <i class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
-            </div>   
+                &nbsp; <i v-if="!days_expired" class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
+            </div>
+
         </div>
         <div class="d-flex justify-content-around" >
                 <small>
@@ -67,7 +69,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                                 <AppointmentBlockedProfessional v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour'  :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )" :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentBlockedProfessional>
                             </div>
                             <div v-else>    
-                                <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='hour'  :index="hour.id" :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
+                                <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='hour'  :index="hour.id" :days_expired="days_expired"  :global_specialties='global_specialties' :global_comunas='global_comunas' :session_params='session_params' > </AppointmentReserved>
                             </div>
 
                         </div>
@@ -78,11 +80,20 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
         </div>
     </div>
 
+  
+
+    <div v-if="!isLockDay && filteredAppList.length == 0">
+        <p  class="text-center text-secondary">       
+            <text style="font-size:50vw;">  <i class="bi bi-wind"></i> </text><br>
+            <i>Sin Citas</i>
+        </p>
+    </div>
+    
     <div v-if="isLockDay">
         <p  class="text-center text-secondary">
             
             <text style="font-size:50vw;"><i  class="bi bi-lock-fill"></i></text><br>
-            <i @click="sendUnLock()" class="text-primary" >Desbloquear Dia </i>
+            <i v-if="!days_expired"  @click="sendUnLock()" class="text-primary" >Desbloquear Dia </i>
         </p>
     </div>
    
@@ -217,7 +228,7 @@ export default {
              this.filterApps.reserved = false  ;
             //check if Day is expired
             
-            this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -120000000  ;
+            this.days_expired = (new Date(this.daterequired).getTime() - new Date().getTime() ) < -60000000  ;
             console.log("DAY EXPIRED:"+this.days_expired);
             
             this.setDayStatics(newValue)
@@ -260,13 +271,13 @@ export default {
 
         setDayStatics(appointments_data)
             {
-            /*
-            this.dayStatics.total = appointments_data.appointments_list.length ;
+            
+            this.dayStatics.total = appointments_data.appointments_list.appointments.length ;
             //how many cancelled ? 
-            let filtered_blocked = appointments_data.appointments_list[0].appointments.filter(app =>  app.app_blocked === 1 ) 
+            let filtered_blocked = appointments_data.appointments_list.appointments.filter(app =>  app.app_blocked === 1 ) 
             this.dayStatics.blocked = filtered_blocked.length ;
                 //how Reserved ? 
-            let filtered_reserved = appointments_data.appointments_list[0].appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
+            let filtered_reserved = appointments_data.appointments_list.appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
             this.dayStatics.reserved = filtered_reserved.length ;
                 //Available ? 
             this.dayStatics.available =  this.dayStatics.total  - ( this.dayStatics.blocked +  this.dayStatics.reserved ) ;
@@ -278,33 +289,33 @@ export default {
                     this.dayStatics.total = appointments_data.appointments_list.appointments.length
                 }
             console.log("LIST APPOITNMENTS SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
-            */
+            
         },
 
         run_filter()
             {
-                if (this.appointments_data !=null && this.appointments_data.appointments_list[0] !=null && this.appointments_data.appointments_list[0].appointments != null  )
+                if (this.appointments_data !=null && this.appointments_data.appointments_list !=null && this.appointments_data.appointments_list.appointments != null  )
                 { 
                     console.log("List Appointments Filter :"+JSON.stringify(this.filterApps) )
                     
                     if ( this.filterApps!=null && this.filterApps.reserved !=null && this.filterApps.reserved)
                     {
-                    this.filteredAppList =  this.appointments_data.appointments_list[0].appointments.filter(app => app.app_blocked != 1 && app.app_available == false )
+                    this.filteredAppList =  this.appointments_data.appointments_list.appointments.filter(app => app.app_blocked != 1 && app.app_available == false )
                     }
 
                     if (this.filterApps!=null && this.filterApps.available !=null && this.filterApps.available)
                     {
-                    this.filteredAppList =  this.appointments_data.appointments_list[0].appointments.filter(app => app.app_available == true && app.lock_day == false)
+                    this.filteredAppList =  this.appointments_data.appointments_list.appointments.filter(app => app.app_available == true && app.lock_day == false)
                     }
 
                     if (this.filterApps!=null && this.filterApps.blocked !=null && this.filterApps.blocked)
                     {
-                    this.filteredAppList =  this.appointments_data.appointments_list[0].appointments.filter(app => app.app_blocked == 1 )
+                    this.filteredAppList =  this.appointments_data.appointments_list.appointments.filter(app => app.app_blocked == 1 )
                     }
                     
                     if (this.filterApps!=null && !this.filterApps.blocked && !this.filterApps.available && !this.filterApps.reserved )
                     {
-                        this.filteredAppList =this.appointments_data.appointments_list[0].appointments
+                        this.filteredAppList =this.appointments_data.appointments_list.appointments
                     }
                 }
 
