@@ -93,12 +93,12 @@ import SwitchViewButton from './switchViewButton.vue'
 			<div class="bg-secondary" >
 				<hr class="text-white">
 			
-				<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light "> 
+				<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light text-white "> 
 					&nbsp; <i class="pl-5 bi bi-arrow-left-circle fs-5 "></i> &nbsp; Salir 
 				</a>
 			
 			<hr class="text-white">
-				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light"> 
+				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
 					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información 
 					
 				</a>
