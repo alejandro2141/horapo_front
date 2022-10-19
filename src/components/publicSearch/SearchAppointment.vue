@@ -26,7 +26,7 @@ import FooterContent from '../FooterContent.vue'
             <div>
               <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
                
-              <div v-if="appointments_filtered !=null && appointments_filtered.length > 0">                
+              <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list.appointments.length > 0">                
                   En {{metric_search/1000}} Seg encontramos {{appointments_filtered.length}} resultados
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                   -->
@@ -34,7 +34,7 @@ import FooterContent from '../FooterContent.vue'
               </div>
 
               <div v-else>
-                
+           
               </div>
         
             
@@ -128,9 +128,9 @@ methods: {
               
               console.log ("search By Specialty RESULTS : "+JSON.stringify(response_search))
 
-              if ( response_search!= null &&  response_search.apps != null )
+              if ( response_search!= null &&  response_search.appointments_list != null )
               {
-              this.appointments = response_search.apps ; 
+              this.appointments = response_search ; 
               this.centers = response_search.centers ; 
               /*
              COPY TO filtered clone to dont lost the original search, required for filter Center TYpe
