@@ -9,7 +9,7 @@ import LoadProgress from '../loadProgress.vue'
 <template>
 
 <div>
-  
+
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
        <div  v-if="appointments!= null" >
@@ -17,7 +17,7 @@ import LoadProgress from '../loadProgress.vue'
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
-            <div  v-for="appointment in appointments" :key="appointment.id" class="mt-0 " >               
+            <div  v-for="appointment in appointments.appointments_list.appointments " :key="appointment.id" class="mt-0 " >               
                     <patientAppointmentAvailable :center_data="getCenterData(appointment.center_id)"  :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
             </div>
                 <!-- Start make room for Modal data when it display-->
@@ -67,11 +67,14 @@ export default {
     beforeCreate(){
        console.log("showloader progress BEFORE CREATE !!!");
     },
+
+
     activated(){
   console.log("showloader progress ACTIVATED !!!");
     },
    mounted () {    
        console.log("showloader progress MOUNTED !!!");
+         console.log("Mounted- SEARCH APPOINTMENTS RESULT :"+JSON.stringify(this.appointment_list) )  
         },
 
         beforeUpdate(){
@@ -87,7 +90,8 @@ export default {
 
     watch: {
             appointments(newAppointments, oldAppointments ) {
-                this.appointment_list =  newAppointments ;   
+                this.appointment_list =  newAppointments ; 
+                console.log("+++++++++++++++++++SEARCH APPOINTMENTS RESULT :"+JSON.stringify(this.appointment_list) )  
              //   this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	                 
             },
         },
