@@ -80,7 +80,7 @@ export default {
             form_insurance_code : null,
 
             form_minimum_date : null,
-            form_current_date : null,
+            form_current_date : null,  // DATE INPUT Return:  2022-10-26 
             
             insurance_list : [],
             comuna_list : [],
@@ -97,8 +97,9 @@ export default {
  
    created () {    
        //TODO DEBERIA SER YEAR MONT DAY LOCAL TIME
-        this.form_minimum_date = new Date().toISOString().split('T')[0] ;
-        this.form_current_date = new Date()
+       let aux_date = new Date() 
+        this.form_minimum_date = aux_date 
+        this.form_current_date = aux_date.getFullYear()+"-"+(aux_date.getMonth()+1)+"-"+aux_date.getDate()
         },
 
     methods: {
@@ -133,8 +134,12 @@ export default {
         //SELECTED SPECIALTY comes from V-ON event component
         selectedSpecialtyCode(code)
         {
-        console.log("Specialty Code:"+JSON.stringify(code));
+        console.log("searchBySpecialty - Specialty Code:"+JSON.stringify(code));
+        console.log("searchBySpecialty - Form_current_date:"+this.form_current_date);
         this.form_specialty = code;
+        let aux_date = new Date(this.form_current_date)
+        console.log("searchBySpecialty - Aux Date :"+aux_date);
+        aux_date.setHours(24,0,0,0)
         
             this.form_app_type_center=false ;
             this.form_app_type_home=false; 
@@ -142,8 +147,11 @@ export default {
 
         const search_params = { 
 				 specialty : this.form_specialty ,
-                 date :  this.form_current_date ,  
+                 date :  aux_date ,  
                   		  };
+        
+        console.log("searchBySpecialty - Search Params :"+JSON.stringify(search_params));
+
         this.$emit("searchBySpecialty",search_params );
         },
 
@@ -208,8 +216,8 @@ export default {
         //SELECTED DATE 
         selectedDate(date)
         {
-            let aux_date = new Date(date)
-            aux_date.setHours(24,0,0,0) 
+
+            console.log("SelectedDate :"+date);
 
                 const search_params = { 
 				        specialty : this.form_specialty ,
@@ -218,12 +226,13 @@ export default {
                         type_remote : this.form_app_type_remote,
                     //   app type no set
                         location : this.form_location_code ,
-                        date :  aux_date ,  
+                        date :  date ,  
                   		  };
             if (this.form_specialty != null)
             {
             this.$emit("searchByDate",search_params );
             }
+
         },          
 
         },
@@ -232,10 +241,13 @@ export default {
         
         form_current_date(newValue, oldValue)
         {
-            
-            if (newValue !=null)
+            if (newValue != null)
             {  
-                this.selectedDate(newValue)
+                console.log("New FORM_CURRENT_DATE :"+newValue);
+                let date = new Date(newValue)
+                date.setHours(24,0,0,0)
+                console.log("New FORM_CURRENT_DATE after:"+date);
+                this.selectedDate(date)
             }
         },  
 
