@@ -12,14 +12,20 @@ import LoadProgress from '../loadProgress.vue'
 
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
-       <div  v-if="appointments!= null" >
+       <div  v-if="appointments!= null  && appointments.appointments_list !=null && appointments.appointments_list.appointments !=null && appointments.appointments_list.appointments.length > 0"   >
             <!--
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
-            <div  v-for="appointment in appointments.appointments_list.appointments " :key="appointment.id" class="mt-0 " >               
+            <div v-for="day in appointments.appointments_list" :key="day.id" >
+               aaa {{day}} aaaa
+            </div>
+
+<!--
+            <div  v-for="appointment in appointments.appointments_list.appointments" :key="appointment.id" class="mt-0 " >               
                     <patientAppointmentAvailable :center_data="getCenterData(appointment.center_id)"  :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
             </div>
+-->
                 <!-- Start make room for Modal data when it display-->
         </div>	
              <div style="height: 400px">
@@ -62,17 +68,19 @@ export default {
    props: ['centers','searchParameters','session_params','appointments','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
    emits: ["updateLastSearch"],
 
- 
-
     beforeCreate(){
        console.log("showloader progress BEFORE CREATE !!!");
     },
-
+    
+    created(){
+       console.log("CREATED CREATE !!!");
+    },
 
     activated(){
-  console.log("showloader progress ACTIVATED !!!");
+    console.log("showloader progress ACTIVATED !!!");
     },
-   mounted () {    
+    
+    mounted () {    
        console.log("showloader progress MOUNTED !!!");
          console.log("Mounted- SEARCH APPOINTMENTS RESULT :"+JSON.stringify(this.appointment_list) )  
         },
