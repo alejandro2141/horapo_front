@@ -26,11 +26,11 @@ import FooterContent from '../FooterContent.vue'
             <div>
               <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
                
-              <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.appointments !=null && appointments_filtered.appointments_list.appointments.length > 0">                
-                  En {{metric_search/1000}} Seg encontramos {{appointments_filtered.length}} resultados
+              <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
+                  En {{metric_search/1000}} Seg encontramos {{appointments_filtered.appointments_list.length}} resultados
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                   -->
-                  <searchAppointmentResult :key="forceReRender" :appointments="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters' v-if="daterequired != null && appointments_filtered != null"  v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+                  <searchAppointmentResult :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters' v-if="daterequired != null && appointments_filtered != null"  v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
               </div>
 
               <div v-else>
@@ -127,18 +127,15 @@ methods: {
               let response_search = await this.searchAppointments(params)
               
               console.log ("search By Specialty RESULTS : "+JSON.stringify(response_search))
-
-              if ( response_search!= null &&  response_search.appointments_list != null &&  response_search.appointments_list.appointments != null )
+              
+              if ( response_search!= null &&  response_search.appointments_list != null &&  response_search.appointments_list.length > 0  )
               {
               this.appointments = response_search ; 
               this.centers = response_search.centers ; 
-              /*
-             COPY TO filtered clone to dont lost the original search, required for filter Center TYpe
-              */
-             this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
-             this.centers_filtered = JSON.parse(JSON.stringify(this.centers));
-             
-              this.n_appointments_found = response_search.appointments_list.appointments.length
+              this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
+              console.log ("search Specialty RESULTS : "+JSON.stringify(this.appointments_filtered))
+
+              this.n_appointments_found = this.appointments_filtered.appointments_list.length
               }
               else{
                 this.n_appointments_found = 0  
