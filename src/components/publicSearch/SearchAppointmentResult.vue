@@ -17,18 +17,20 @@ import LoadProgress from '../loadProgress.vue'
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
-            <div v-for="app in array_appointments" :key="app.id" >
-            
-            <p>    {{format_date(app.date)}} </p>
-            
-            
+            <div v-for="day in array_appointments" :key="day.id" >
+                    <p class="text-center mt-4"> <text class="h6">Disponibles {{format_date(day.date)}}</text> </p>
+                    
+                    <div v-if="day.appointments != null">
+                        <div  v-for="app in day.appointments" :key="app.id" class="mt-0 " > 
+                                <patientAppointmentAvailable   :center_data="getCenterData(day,app.center_id)"    :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                        </div>
+                    </div>
+                    <div v-else class="m-0 p-0">
+                      <i style="font-size: 50vw;" class="m-0 p-0 bi bi-wind"></i>
+                    </div>
             </div>
 
-<!--
-            <div  v-for="appointment in appointments.appointments_list.appointments" :key="appointment.id" class="mt-0 " >               
-                    <patientAppointmentAvailable :center_data="getCenterData(appointment.center_id)"  :searchParameters="searchParameters" class=" m-2 "  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
-            </div>
--->
+
                 <!-- Start make room for Modal data when it display-->
         </div>	
              <div style="height: 400px">
@@ -71,32 +73,24 @@ export default {
    props: ['centers','searchParameters','session_params','appointments_filtered','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
    emits: ["updateLastSearch"],
 
-    beforeCreate(){
-       console.log("showloader progress BEFORE CREATE !!!");
-    },
     
     created(){
-       console.log("Search Appointment Result CREATED CREATED ++++++ SEARCH APPOINTMENTS RESULT :"+JSON.stringify(this.appointment_list) )
-    },
-
-    activated(){
-    console.log("showloader progress ACTIVATED !!!");
-    },
+             },
     
     mounted () {    
-       console.log("showloader progress MOUNTED !!!");
-         console.log("showloader progress SEARCH APPOINTMENTS RESULT :"+JSON.stringify(this.appointment_list) )  
+        console.log("SearchAppointmentResult Mounted :"+JSON.stringify(this.appointments_filtered) ) 
+        this.array_appointments = this.appointments_filtered.appointments_list
         },
 
         beforeUpdate(){
-        this.showLoaderProgress = true  ;
-        console.log("showloader progress BEFORE UPDATE !!!");
+        //  this.showLoaderProgress = true  ;
+        //  console.log("showloader progress BEFORE UPDATE !!!");
         },
 
         updated()
         {
-        this.showLoaderProgress = false  ;
-        console.log("showloader progress UPDATE !!!");
+        // this.showLoaderProgress = false  ;
+        // console.log("SearchAPpointmentResult Updated");
         },
 
     watch: {
@@ -104,7 +98,7 @@ export default {
             appointments_filtered(newAppointments, oldAppointments ) {
                // this.appointment_list_result =  newAppointments ; 
                 this.array_appointments = newAppointments.appointments_list
-                console.log("+++++++++++++++++++ SEARCH APPOINTMENTS RESULT :"+JSON.stringify(this.array_appointments) )  
+                console.log("Watch SearchAppointmentResult :"+JSON.stringify(this.array_appointments) )  
              //   this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	                 
             },
             
@@ -114,16 +108,18 @@ export default {
             format_date(date)
             {
                 let aux_date = new Date(date)
-                return (aux_date.getDate()+"-"+(aux_date.getMonth()+1)+"-"+aux_date.getFullYear() )
+                let days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ]
+                let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
+
+
+                return (days[aux_date.getDay()]+" "+aux_date.getDate()+" de "+months[aux_date.getMonth()]+" "+aux_date.getFullYear() )
             },
 
-            getCenterData(center_id)
+            getCenterData(day,center_id)
             {
-                console.log("Get Center Data from ID:"+center_id);
-                let temp= this.centers.find(elem => elem.id ==  center_id  )
-                if (temp != null) { return temp }
-                else { return "No Existe Centro" }  
+                return day.centers.find(elem => elem.id ==  center_id)  
             },
+           
           
             setModalReserve(appointment)
             {
