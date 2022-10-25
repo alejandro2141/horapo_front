@@ -57,7 +57,7 @@ import inputFormComuna  from './InputFormComuna.vue'
                 </form> 
                
             </div>	
-            <hr>
+            
         </div>			
 
 </template>
@@ -134,11 +134,8 @@ export default {
         //SELECTED SPECIALTY comes from V-ON event component
         selectedSpecialtyCode(code)
         {
-        console.log("searchBySpecialty - Specialty Code:"+JSON.stringify(code));
-        console.log("searchBySpecialty - Form_current_date:"+this.form_current_date);
         this.form_specialty = code;
         let aux_date = new Date(this.form_current_date)
-        console.log("searchBySpecialty - Aux Date :"+aux_date);
         aux_date.setHours(24,0,0,0)
         
             this.form_app_type_center=false ;
@@ -150,7 +147,7 @@ export default {
                  date :  aux_date ,  
                   		  };
         
-        console.log("searchBySpecialty - Search Params :"+JSON.stringify(search_params));
+        console.log("SearchAppointmentForm By Specialty Id:"+JSON.stringify(search_params));
 
         this.$emit("searchBySpecialty",search_params );
         },
