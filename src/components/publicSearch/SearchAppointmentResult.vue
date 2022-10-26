@@ -18,18 +18,19 @@ import LoadProgress from '../loadProgress.vue'
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
             <div v-for="day in array_appointments" :key="day.id" >
-                    <p class="text-center mt-4"> <text class="h6">Disponibles {{format_date(day.date)}}</text> </p>
+                    <p class=" mt-4"> <text class="h6"> {{format_date(day.date)}}</text> </p>
                     
-                    <div v-if="day.appointments != null">
+                    <div v-if="day.appointments != null && day.appointments.length >0 ">
                         <div  v-for="app in day.appointments" :key="app.id" class="mt-0 " > 
-                                <patientAppointmentAvailable   :center_data="getCenterData(day,app.center_id)"    :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                                <patientAppointmentAvailable   :center_data="getCenterData(day.centers,app.center_id)"    :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app,day.centers)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
                         </div>
                     </div>
-                    <div v-else class="m-0 p-0">
-                      <i style="font-size: 50vw;" class="m-0 p-0 bi bi-wind"></i>
-                    </div>
-            </div>
 
+                    <div v-else class="m-0 p-0">
+                      <p class="text-center" > <i style="font-size: 10vw;" class="m-0 p-0 bi bi-wind"></i>Sin Horas Disponibles </p>
+                    </div>
+
+            </div>
 
                 <!-- Start make room for Modal data when it display-->
         </div>	
@@ -115,28 +116,22 @@ export default {
                 return (days[aux_date.getDay()]+" "+aux_date.getDate()+" de "+months[aux_date.getMonth()]+" "+aux_date.getFullYear() )
             },
 
-            getCenterData(day,center_id)
+            getCenterData(centers,center_id)
             {
-                return day.centers.find(elem => elem.id ==  center_id)  
+                let aux_centers = Array.from(centers)
+                return aux_centers.find(elem => elem.id ==  center_id)  
             },
-           
           
-            setModalReserve(appointment)
+            setModalReserve(appointment,centers)
             {
                 console.log("Set Modal Reserve method in SearchApp Resutl"+JSON.stringify(appointment));
                 this.app = appointment;
-                this.center_data = this.getCenterData(appointment.center_id);
+                this.center_data = this.getCenterData(centers,appointment.center_id)  //this.getCenterData(appointment.center_id);
                 //this.professional_data = this.getProfessionalData(appointment.professional_id)
                 //this.modalOpen = true; 
                 this.openModalEvent = Math.random();
             },
-            /*
-            showConfirmationModal(appconfirm)
-            {
-                console.log ("showConfirmationModal method. Display Confirmation Modal: "+ JSON.stringify(appconfirm)) ;
-                this.appConfirmed=appconfirm;
-            },
-            */
+            
             updateLastSearch()
             {
                 console.log (" update search Result. ");
