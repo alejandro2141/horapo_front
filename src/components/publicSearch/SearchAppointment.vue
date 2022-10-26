@@ -86,7 +86,7 @@ export default {
             n_appointments_found : null ,
            // filtered_appointments : null ,
 
-            appointments : null ,
+            appointments : [] ,
             appointments_filtered : null ,
 
             centers : [] ,
@@ -148,13 +148,15 @@ methods: {
               console.log("Search by type Center SEARCH APPOINTMENT ");
               //cicle for each day
               for (let i = 0; i < this.appointments.appointments_list.length; i++) {
-              console.log("Filter day "+JSON.stringify(this.appointments.appointments_list[i]))
-              //filter centers Remote Care == true
-              this.appointments_filtered.appointments_list[i].centers = this.appointments.appointments_list[i].centers.filter(center => center.center_visit == true );
-              //extract only id froms Centers filtered
-              let centers_filtered_ids = this.appointments_filtered.appointments_list[i].centers.map(center => center.id ) ;
-
-              this.appointments_filtered.appointments_list[i].appointments = this.appointments.appointments_list[i].appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
+                  console.log("Filter day "+JSON.stringify(this.appointments.appointments_list[i]))
+                  //filter centers Remote Care == true
+                  let aux_centers =  this.appointments.appointments_list[i].centers || [] 
+                  this.appointments_filtered.appointments_list[i].centers = aux_centers.filter(center => center.center_visit == true );
+                  //extract only id froms Centers filtered
+                  let centers_filtered_ids = this.appointments_filtered.appointments_list[i].centers.map(center => center.id ) ;
+                  //finally filter appointments exist in centers filtered ids
+                  let aux_appointments =  this.appointments.appointments_list[i].appointments || [] 
+                  this.appointments_filtered.appointments_list[i].appointments = aux_appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
                }
             },
 //SEARCH BY TYPE_HOME
@@ -165,11 +167,13 @@ methods: {
               for (let i = 0; i < this.appointments.appointments_list.length; i++) {
               console.log("Filter day "+JSON.stringify(this.appointments.appointments_list[i]))
               //filter centers Remote Care == true
-              this.appointments_filtered.appointments_list[i].centers = this.appointments.appointments_list[i].centers.filter(center => center.home_visit == true );
+              let aux_centers =  this.appointments.appointments_list[i].centers || [] 
+              this.appointments_filtered.appointments_list[i].centers = aux_centers.filter(center => center.home_visit == true );
               //extract only id froms Centers filtered
               let centers_filtered_ids = this.appointments_filtered.appointments_list[i].centers.map(center => center.id ) ;
-
-              this.appointments_filtered.appointments_list[i].appointments = this.appointments.appointments_list[i].appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
+               //finally filter appointments exist in centers filtered ids
+              let aux_appointments =  this.appointments.appointments_list[i].appointments || [] 
+              this.appointments_filtered.appointments_list[i].appointments = aux_appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
                }
               
             },
@@ -181,11 +185,13 @@ methods: {
               for (let i = 0; i < this.appointments.appointments_list.length; i++) {
               console.log("Filter day "+JSON.stringify(this.appointments.appointments_list[i]))
               //filter centers Remote Care == true
-              this.appointments_filtered.appointments_list[i].centers = this.appointments.appointments_list[i].centers.filter(center => center.remote_care == true );
+              let aux_centers =  this.appointments.appointments_list[i].centers || [] 
+              this.appointments_filtered.appointments_list[i].centers = aux_centers.filter(center => center.remote_care == true );
               //extract only id froms Centers filtered
               let centers_filtered_ids = this.appointments_filtered.appointments_list[i].centers.map(center => center.id ) ;
-
-              this.appointments_filtered.appointments_list[i].appointments = this.appointments.appointments_list[i].appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
+              //finally filter appointments exist in centers filtered ids
+              let aux_appointments =  this.appointments.appointments_list[i].appointments || [] 
+              this.appointments_filtered.appointments_list[i].appointments = aux_appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
                }
 
             },
