@@ -293,16 +293,23 @@ export default {
 	props: ['center_data','searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen','global_comunas', 'global_specialties' ],
 	emits: [ "updateLastSearch" ],
 
-computed: {
+	created() {
+	
+			},
+
+
+	computed: {
 		showModalAux2() {
 		  return   this.showModal ;
 		}
 	  },
 
-	  watch: {
+	watch: {
 		openModalEvent(newApp, oldApp) {
 			console.log("openModalEvent !!!");
 			this.showModalPublicAppDetails = true ; 
+			console.log("modal created APP:"+this.app)
+			console.log("modal created center_data:"+this.center_data)
 			//get professional data
 			this.getProfessionalData(this.app.professional_id);
 
