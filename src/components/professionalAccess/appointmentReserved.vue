@@ -65,7 +65,7 @@ export default {
                calendar_data : null  ,
                center_data : null , 
                selectApp : false ,
-               days_expired : false ,
+              // days_expired : false ,
              
         }   
     },
