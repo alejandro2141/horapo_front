@@ -25,17 +25,16 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
     <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
-        <div>
 
-            <!-- <div v-if="isLockDay"   > -->
-             <div v-if="isLockDay"   >    
-            <!--    &nbsp; <i @click="sendUnLock()" class=" fs-1 bi bi-lock-fill text-primary" > </i><small></small>  -->
+        <div>
+            <div v-if="isLockDay"   >    
             </div>
+
             <div v-else>
                 &nbsp; <i v-if="!days_expired" class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
             </div>
-
         </div>
+
         <div class="d-flex justify-content-around" >
                 <small>
                 <small>
@@ -44,9 +43,9 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                     <text @click="apply_filter_total =! apply_filter_total" class=""  :class="{ 'activeFilter' : apply_filter_total }"  >  Total {{dayStatics.total}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
                 </small>    
                 </small>   
-        </div> 
+        </div>
+
         <div>
-          
         </div> 
 
     </div>
@@ -240,24 +239,6 @@ export default {
                 //IF Filter Only Reserved    
             }
             //check if date is a blocked date
-            /*
-            console.log("APPS LOCK DATES:"+newValue.lock_dates );
-             let aux_date_required = new Date(this.daterequired)
-            aux_date_required.setHours(0,0,0,0)
-            console.log("APPS DATE REQUIRED :"+aux_date_required.toISOString() );
-            */
-            /*
-            const lock_date_found = newValue.lock_dates.find(element => new Date(element).getTime() === aux_date_required.getTime()  );
-            
-            if (lock_date_found != null )
-            {
-             this.isLockDay=true ; 
-            }
-            else
-            {
-            this.isLockDay=false ; 
-            }
-            */
             this.isLockDay = newValue.lock_date
             console.log("Is a Lock Date ?  :"+ this.isLockDay );
 
