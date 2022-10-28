@@ -34,8 +34,8 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                       </div>
 
                       <div class="mt-3 h3">Tipo de consulta</div>
+                      
                       <div >
-                          
                           <button type="button" class="btn btn-outline-primary m-0"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
                               <i class="h3 bi bi-building m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">En Consulta</text> 
