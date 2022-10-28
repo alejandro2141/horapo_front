@@ -6,7 +6,7 @@ import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 import ConsultancyCenter from './consultancy_center.vue'
 import ConsultancyHome from './consultancy_home.vue'
 import ConsultancyRemote from './consultancy_remote.vue'
-
+import Consultancy from './consultancy.vue'
 
 </script>
 
@@ -62,13 +62,13 @@ import ConsultancyRemote from './consultancy_remote.vue'
                                 <div >
                                     <!-- CENTER VISIT -->
                                     <div v-if="center.center_visit" >
-                                        <ConsultancyCenter :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </ConsultancyCenter> 
+                                        <Consultancy :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </Consultancy> 
 
                                     </div>
 
                                     <!-- A DOMICILIO -->
                                     <div v-if="center.home_visit" >
-                                        <ConsultancyHome :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </ConsultancyHome> 
+                                        <Consultancy :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </Consultancy> 
 
                                         <!--
 
@@ -113,7 +113,7 @@ import ConsultancyRemote from './consultancy_remote.vue'
 
                                     <!-- REMOTE CARE  -->
                                     <div v-if="center.remote_care" >
-                                        <ConsultancyRemote :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </ConsultancyRemote> 
+                                        <Consultancy :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </Consultancy> 
 
                                         <!--
                                         <div class="d-flex justify-content-between ">
