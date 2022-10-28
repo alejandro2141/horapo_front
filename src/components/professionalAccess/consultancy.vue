@@ -1,47 +1,87 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
 
 </script>
 
 <template>
 
     <div>
+     <form autocomplete="off">	
                                         <div class="d-flex justify-content-start ">
-                                           
-                                         <i class=" bi bi-geo-alt fs-1 m-1"></i> 
+
+                                         <div v-if="showEditOptions" class="d-flex justify-content-between " >
+                                             <text  @click="deleteCenter()" class="text-danger"> <i class="fs-1 m-1 bi bi-trash"></i>  </text>
+                                        </div>
+
+                                         <i v-else class=" bi bi-geo-alt fs-1 m-1"></i> 
                                          <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control form-control-lg" id="form_phone2" name="form_phone2" v-model="name" style="z-index: 9;  border-radius: 25px; width:80%;  text-align: left; ">
                                          
+                                        
+
                                         </div>
 
                                         <hr class="m-0">
-
+                                        <!--
                                         <div v-if="showEditOptions" class="d-flex justify-content-between mt-0" >
                                              <text  @click="deleteCenter()" class="mt-2 text-danger bg-white "> Eliminar Este centro </text>
                                            
                                         </div>
-                                        
+                                        -->
+                                        <!--
                                         <div class="d-flex justify-content-between mt-0">
                                                 <text class="mt-2">Tipo:</text>
                                                 <text v-if="centerDetails.home_visit"  class="text-end"> A Domicilio <i class="text-white h1 bi bi-house-door"></i> </text>
                                                 <text v-if="centerDetails.center_visit"  class="text-end"> En Consulta <i class="text-white h1 bi bi-building"></i> </text>
                                                 <text v-if="centerDetails.remote_care"  class="text-end">Atencion Remota <i class="text-white h1 bi bi-camera-video"></i> </text>
                                         </div>
+                                        -->
 
-                                        
-                                        <p class="mt-3">
-                                            <text >Direccion: </text><br>
-                                          <!--  <text class="text-end">{{center.address}}, {{ comunaId2Name(center.comuna)  }} </text> -->
-                                                <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="address" style="z-index: 9;  border-radius: 25px; width:100%;  text-align: right; ">
-                                       </p>
+                <text class="mt-2">Tipo:</text>
+                      <div class="d-flex justify-content-between " >
+                          <button  v-if="app_type_center || showEditOptions"  type="button" class="btn  m-1" :class="[ app_type_center ? 'btn-outline-light': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
+                              <i class="h3 bi bi-building m-0 p-0"></i><br>
+                              <text class="fs-6 m-0 p-0">En Consulta</text> 
+                          </button>
+                          
+                          <button v-if="app_type_home || showEditOptions"  type="button" class="btn  m-1" :class="[ app_type_home  ? 'btn-outline-light': 'btn-outline-dark' ]"   @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ;" >
+                              <i class="h3 bi bi-house-door m-0 p-0"></i><br>
+                               <text class="fs-6 m-0 p-0">A Domicilio</text> 
+                          </button>
+                          
+                          <button v-if="app_type_remote || showEditOptions" type="button" class="btn  m-1" :class="[ app_type_tele ? 'btn-outline-light': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
+                              <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
+                              <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
+                          </button>
+                      </div>
+   
+                    <p v-if="app_type_center" class="mt-3">
+                        <text >Direccion: </text><br>
+                        <!--  <text class="text-end">{{center.address}}, {{ comunaId2Name(center.comuna)  }} </text> -->
+                        <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="address" style="z-index: 9;  border-radius: 25px; width:100%;  text-align: right; ">
+                        
+                        <text >Comuna: </text><br>
+                        <text class="text-end"> {{ comunaId2Name(centerDetails.comuna)  }} </text>
+                    </p>
+                        
+                    <div v-if="app_type_home" class="mt-2 " >               
+                        <p >Comuna(s): </p>
+                        <div  class="mt-2" >
+                                <div v-if="app_type_home || app_type_center" >
+                                    <p class="text-end" v-if="home_comuna1!=null"><i @click="home_comuna1=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna1) }}  </p>
+                                    <p class="text-end" v-if="home_comuna2!=null"><i @click="home_comuna2=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna2)  }} </p>
+                                    <p class="text-end" v-if="home_comuna3!=null"><i @click="home_comuna3=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna3)  }} </p>
+                                    <p class="text-end" v-if="home_comuna4!=null"><i @click="home_comuna4=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna4)  }} </p>
+                                    <p class="text-end" v-if="home_comuna5!=null"><i @click="home_comuna5=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna5)  }} </p>
+                                </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-3">
+                            <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna> 
+                            <text class="display-1">+</text>
+                        </div>
 
-                                        <div class="mt-2 d-flex justify-content-between" >
-                                            <text >Comuna(s): </text><br>
-                                            <text class="text-end"> {{ comunaId2Name(centerDetails.comuna)  }} </text>
-                                            <text v-if="centerDetails.home_visit"  class="text-end"> {{ comunaId2Name(centerDetails.home_comuna1)  }} </text>
-                                            <text v-if="centerDetails.home_visit"  class="text-end"> {{ comunaId2Name(centerDetails.home_comuna2)  }} </text>
-                                            <text v-if="centerDetails.remote_care" class="text-end"> Todas <i class="bi text-light bi-slash-circle"></i> </text>
-                                        </div>
+                    </div>
 
                                         <div v-if="centerDetails.phone1 != 'null' " class="d-flex justify-content-between mt-3">
                                             <text class="">Telefono 1:</text>
@@ -59,6 +99,7 @@ import axios from 'axios';
                                             <text @click="saveChanges();showEditOptions=false;showEditButton=true;" >GUARDAR </text>
                                         </div>
 
+    </form>
     </div>
 
 </template>
@@ -76,10 +117,20 @@ export default {
             showEditOptions : false ,
             showEditButton : true, 
 
+            app_type_home :  false ,
+            app_type_center : false ,
+            app_type_remote : false , 
+
             name : null ,
             address: null ,
             phone1: null,
             phone2: null,
+
+            home_comuna1 : null ,
+            home_comuna2 : null ,
+            home_comuna3 : null ,
+            home_comuna4 : null ,
+            home_comuna5 : null ,
         }   
     },
    	
@@ -92,7 +143,18 @@ export default {
         this.address = this.centerDetails.address ; 
         this.phone1 = this.centerDetails.phone1 ;
         this.phone2 = this.centerDetails.phone2 ;
-	},
+       
+        this.app_type_home = this.centerDetails.home_visit 
+        this.app_type_center = this.centerDetails.center_visit 
+        this.app_type_remote = this.centerDetails.remote_care 
+	
+        this.home_comuna1 = this.centerDetails.home_comuna1 
+        this.home_comuna2 = this.centerDetails.home_comuna2 
+        this.home_comuna3 = this.centerDetails.home_comuna3 
+        this.home_comuna4 = this.centerDetails.home_comuna4 
+        this.home_comuna5 = this.centerDetails.home_comuna5 
+
+    },
 
 	methods :{
 
@@ -137,6 +199,12 @@ export default {
                           phone1 : this.phone1,
                           phone2 : this.phone2,
                           //home_locations : [] ,
+                          home_comuna1 : this.home_comuna1, 
+                          home_comuna2 : this.home_comuna2, 
+                          home_comuna3 : this.home_comuna3, 
+                          home_comuna4 : this.home_comuna4, 
+                          home_comuna5 : this.home_comuna5, 
+                          
                           };
                        
                         console.log("Save Center  REQUEST :"+JSON.stringify(json));
@@ -154,7 +222,19 @@ export default {
         resetData()
         {
         this.name = this.centerDetails.name ; 
+        this.address = this.centerDetails.address ; 
         this.phone1 = this.centerDetails.phone1 ;
+        this.phone2 = this.centerDetails.phone2 ;
+       
+        this.app_type_home = this.centerDetails.home_visit 
+        this.app_type_center = this.centerDetails.center_visit 
+        this.app_type_remote = this.centerDetails.remote_care 
+	
+        this.home_comuna1 = this.centerDetails.home_comuna1 
+        this.home_comuna2 = this.centerDetails.home_comuna2 
+        this.home_comuna3 = this.centerDetails.home_comuna3 
+        this.home_comuna4 = this.centerDetails.home_comuna4 
+        this.home_comuna5 = this.centerDetails.home_comuna5 
         },
 
         comunaId2Name(comuna_id)
