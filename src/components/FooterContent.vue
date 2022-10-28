@@ -6,13 +6,13 @@ import { ref } from 'vue'
 
 <template>
 
-	<div class="fixed-bottom bg-dark">
+	<div class="fixed-bottom mb-5 ">
 	
     <div  class="d-flex justify-content-between fs-6 m-2"> 
 
       <text class="">
 			<a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;&nbsp;&nbsp;	<text class="text-white text-decoration-none">123hora?</text>
+				&nbsp;&nbsp;&nbsp;&nbsp;	<text class="text-decoration-none" style="color: #568281">123hora?</text>
 			</a>
 	  </text>
 	  	<!--
@@ -20,7 +20,7 @@ import { ref } from 'vue'
 		-->
       <text class="">
 			<a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-					<text class="text-white text-decoration-none">Profesionales</text>
+					<text class=" text-decoration-none" style="color: #568281">Profesionales</text>
 			</a>
 	  </text>
 	 	<!--
@@ -28,7 +28,7 @@ import { ref } from 'vue'
 		-->
 	  <text>
 			<a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-					<text class="text-white  text-decoration-none">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
+					<text class="text-decoration-none" style="color: #568281">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
 			</a>
 	  </text>
 
