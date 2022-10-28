@@ -14,7 +14,7 @@ import FooterContent from '../FooterContent.vue'
   <div class="bg-white p-0">
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
   
-      <div class=" bg-white  pb-4 text-center"  > 
+      <div class="bg-white  pb-4 text-center"  > 
         <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
       	<i class="bi bi-clipboard-pulse" style="font-size: 2rem; color: cornflowerblue;"></i>
         <text class="display-4"> 123Hora</text>  
