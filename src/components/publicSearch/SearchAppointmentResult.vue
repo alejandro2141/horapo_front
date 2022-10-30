@@ -18,7 +18,7 @@ import LoadProgress from '../loadProgress.vue'
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
             <div v-for="day in array_appointments" :key="day.id" >
-                    <p class=" mt-4"> <text class="h6"> {{format_date(day.date)}}</text> </p>
+                    <p class=" mt-4"> <text class="h3"> {{format_date(day.date)}}</text> </p>
                     
                     <div v-if="day.appointments != null && day.appointments.length >0 ">
                         <div  v-for="app in day.appointments" :key="app.id" class="mt-0 " > 
