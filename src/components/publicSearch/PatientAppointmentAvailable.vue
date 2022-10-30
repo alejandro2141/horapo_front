@@ -9,20 +9,20 @@ import { ref } from 'vue'
     
     <div v-if="appointment != null"   style="border: 2px solid rgb(168, 168, 168); border-radius: 15px;"  class="bg-white p-0 mb-1 ">
         
-        <div id="app" class="m-0 d-flex  "  >	
+        <div id="app" class="m-0 d-flex" style="font-size: 1.2em;"  >	
             <div class="">
                      &nbsp;
             </div>
             <div>
                 <div class="">
-                    <div class="display-5" style=" color:#2e5668">	 
+                    <div class="" style=" color:#2e5668">	 
                    <b>  {{ transform_date( appointment.date ) }} </b>
                     
-                 {{ transform_time(appointment.start_time)}}<text style=" font-size: 0.6em;">hrs</text>  
+                 {{ transform_time(appointment.start_time)}}<text style="">hrs</text>  
                     </div>       
                 </div>
            
-                <div class="display-5" style=" color:#1f9d94">
+                <div class="" style=" color:#1f9d94">
                     <div >	
                     {{ showSpecialtyName(appointment.specialty) }} 
                     </div>       
@@ -33,11 +33,11 @@ import { ref } from 'vue'
                     
                     <div v-if="center_data.center_visit" class="">
                  
-                        <div class="display-6" style="">  
+                        <div class="" style="">  
                             <div style="color: #781ED1" >
                             <i class="h1 bi bi-building"></i> En Consulta  </div>
                             </div>
-                            <div style="" class="text-dark display-6" >
+                            <div style="" class="text-dark" >
                                {{comuna_id2name(center_data.comuna)}}
                             </div>
                             <div class="" style="color:#2e5668" >	
@@ -47,10 +47,10 @@ import { ref } from 'vue'
                     </div>
                     
                     <div v-if="center_data.home_visit" style="color:#3399FF">
-                            <div class="display-5" >
+                            <div class="" >
                                 <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
-                            <div style="" class="text-dark display-6" >
+                            <div style="" class="text-dark " >
                               {{  comuna_id2name(center_data.home_comuna1) }}
                               {{  comuna_id2name(center_data.home_comuna2) }}
                               {{  comuna_id2name(center_data.home_comuna3) }}
@@ -61,9 +61,9 @@ import { ref } from 'vue'
                     </div>
 
                     <div v-if="center_data.remote_care" class="">
-                         <div class="display-5" style="color:#b36b00" >
+                         <div class="" style="color:#b36b00" >
                                <i class="bi bi-camera-video"></i> Tele Atención  	 
-                              <div style="" class="text-dark display-6" >
+                              <div style="" class="text-dark" >
                                Todas las comunas 
                               </div>                      
                         </div>
@@ -77,9 +77,6 @@ import { ref } from 'vue'
 
             </div>
 
-
-               
-     <text style="color: #ffffff;" >#{{appointment.calendar_id}}</text> 
        </div>
 
 </template>
