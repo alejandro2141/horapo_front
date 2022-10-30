@@ -62,7 +62,11 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                         <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="address" style="z-index: 9;  border-radius: 25px; width:100%;  text-align: right; ">
                         
                         <text >Comuna: </text><br>
-                        <text class="text-end"> {{ comunaId2Name(centerDetails.comuna)  }} </text>
+                        <text class="text-end"> {{ comunaId2Name(center_comuna)  }} </text>
+                        <div v-if="showEditOptions" class="d-flex justify-content-between mt-3">
+                            <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode_center" :global_comunas='global_comunas' > </inputFormComuna> 
+                            <text class="display-1">+</text>
+                        </div>
                     </p>
                         
                     <div v-if="app_type_home" class="mt-2 " >               
@@ -131,6 +135,8 @@ export default {
             home_comuna3 : null ,
             home_comuna4 : null ,
             home_comuna5 : null ,
+
+            center_comuna : null,
         }   
     },
    	
@@ -153,6 +159,8 @@ export default {
         this.home_comuna3 = this.centerDetails.home_comuna3 
         this.home_comuna4 = this.centerDetails.home_comuna4 
         this.home_comuna5 = this.centerDetails.home_comuna5 
+
+        this.center_comuna = this.centerDetails.comuna
 
     },
 
@@ -182,6 +190,13 @@ export default {
             return
             }
             
+        },
+
+        selectedComunaCode_center(comuna_code)
+        {
+            console.log("Comuna code Center selected"+comuna_code)
+             this.center_comuna = comuna_code
+                        
         },
 
         async deleteCenter()
@@ -231,6 +246,8 @@ export default {
                           home_comuna4 : this.home_comuna4, 
                           home_comuna5 : this.home_comuna5, 
                           
+                          center_comuna: this.center_comuna,
+
                           };
                        
                         console.log("Save Center  REQUEST :"+JSON.stringify(json));
@@ -247,6 +264,7 @@ export default {
 
         resetData()
         {
+     
         this.name = this.centerDetails.name ; 
         this.address = this.centerDetails.address ; 
         this.phone1 = this.centerDetails.phone1 ;
@@ -261,6 +279,9 @@ export default {
         this.home_comuna3 = this.centerDetails.home_comuna3 
         this.home_comuna4 = this.centerDetails.home_comuna4 
         this.home_comuna5 = this.centerDetails.home_comuna5 
+
+        this.center_comuna = this.centerDetails.comuna
+
         },
 
         comunaId2Name(comuna_id)
