@@ -69,14 +69,14 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                         <p >Comuna(s): </p>
                         <div  class="mt-2" >
                                 <div v-if="app_type_home || app_type_center" >
-                                    <p class="text-end" v-if="home_comuna1!=null"><i @click="home_comuna1=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna1) }}  </p>
-                                    <p class="text-end" v-if="home_comuna2!=null"><i @click="home_comuna2=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna2)  }} </p>
-                                    <p class="text-end" v-if="home_comuna3!=null"><i @click="home_comuna3=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna3)  }} </p>
-                                    <p class="text-end" v-if="home_comuna4!=null"><i @click="home_comuna4=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna4)  }} </p>
-                                    <p class="text-end" v-if="home_comuna5!=null"><i @click="home_comuna5=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i>  {{ comunaId2Name(home_comuna5)  }} </p>
+                                    <p class="text-end" v-if="home_comuna1!=null">  {{ comunaId2Name(home_comuna1) }}  <i @click="home_comuna1=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+                                    <p class="text-end" v-if="home_comuna2!=null">  {{ comunaId2Name(home_comuna2)  }} <i @click="home_comuna2=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+                                    <p class="text-end" v-if="home_comuna3!=null">  {{ comunaId2Name(home_comuna3)  }} <i @click="home_comuna3=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+                                    <p class="text-end" v-if="home_comuna4!=null">  {{ comunaId2Name(home_comuna4)  }} <i @click="home_comuna4=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+                                    <p class="text-end" v-if="home_comuna5!=null">  {{ comunaId2Name(home_comuna5)  }} <i @click="home_comuna5=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
                                 </div>
                         </div>
-                        <div class="d-flex justify-content-between mt-3">
+                        <div v-if="showEditOptions" class="d-flex justify-content-between mt-3">
                             <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna> 
                             <text class="display-1">+</text>
                         </div>
@@ -157,6 +157,32 @@ export default {
     },
 
 	methods :{
+
+        selectedComunaCode(comuna_code)
+        {
+            console.log("Comuna code selected"+comuna_code)
+            if (this.home_comuna1 ==null )
+            { this.home_comuna1 = comuna_code
+            return
+            }
+            if (this.home_comuna2 ==null )
+            { this.home_comuna2 = comuna_code
+            return
+            }
+            if (this.home_comuna3 ==null )
+            { this.home_comuna3 = comuna_code
+            return
+            }
+            if (this.home_comuna4 ==null )
+            { this.home_comuna4 = comuna_code
+            return
+            }
+            if (this.home_comuna5 ==null )
+            { this.home_comuna5 = comuna_code
+            return
+            }
+            
+        },
 
         async deleteCenter()
         {
