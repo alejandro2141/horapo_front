@@ -283,7 +283,7 @@ methods: {
               let response_json = {data:[]}
               let metric = Date.now();
               this.active_spinner = true ; 
-              if (  params.specialty != null )
+              if (  params !=null && params.specialty != null )
               {            
                           console.log("search Appointments input params :"+JSON.stringify(params) )        
                           const json = { 
