@@ -63,7 +63,7 @@ export default {
         }
     },  
  
-   props: ['global_comunas','location_id'], 
+   props: ['global_comunas' , 'location_id' , 'setLocationCode'], 
    emits: ["selectedComunaCode"],
 
 mounted() {   
@@ -74,6 +74,14 @@ mounted() {
 
     watch: {
         //WATCHER PREDICTOR COMUNA
+            setLocationCode(newVal,oldVal)
+            {
+                if (newVal != null)
+                {
+                    this.form_comuna = null
+                }
+            },
+
             form_comuna(value, oldValue) {
 
                     if (value !=null && value.length >= 0 &&  !this.clearfiltered)
