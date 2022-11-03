@@ -275,7 +275,7 @@ computed: {
             },
             updateSearchResult()
             {
-                console.log (" update search Result. In Modal Public Reserve Confirmation ");
+                console.log ("emit updateLastSearch: Public Reserve Confirmation ");
                 //this.appointment_list=null ;
                 this.$emit('updateLastSearch');
                 this.showModalConfirmation = false ;
