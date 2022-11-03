@@ -178,9 +178,10 @@ methods: {
               
             },
 //SEARCH BY TYPE_REMOTE
-            searchByTypeRemote(params)
+            async searchByTypeRemote(params)
             {
               console.log("Search by type Remote SEARCH APPOINTMENT ");
+              /*
               //cicle for each day
               for (let i = 0; i < this.appointments.appointments_list.length; i++) {
               console.log("Filter day "+JSON.stringify(this.appointments.appointments_list[i]))
@@ -193,8 +194,42 @@ methods: {
               let aux_appointments =  this.appointments.appointments_list[i].appointments || [] 
               this.appointments_filtered.appointments_list[i].appointments = aux_appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
                }
-
+              */
+              let response_search = await this.searchAppointments(params)
+               
+              if ( response_search!= null &&  response_search.appointments_list != null &&  response_search.appointments_list.length > 0  )
+              {
+              this.appointments = response_search ; 
+              // this.centers = response_search.centers ; 
+              //this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
+              //console.log ("SearchAppointment searchBySpecialty RESULTS : "+JSON.stringify(this.appointments_filtered))
+              //this.n_appointments_found = this.appointments_filtered.appointments_list.length 
+              
+            //FILTER ONLY REMOTE CARE
+              //cicle for each day
+              for (let i = 0; i < this.appointments.appointments_list.length; i++) {
+              console.log("Filter day "+JSON.stringify(this.appointments.appointments_list[i]))
+              //filter centers Remote Care == true
+              let aux_centers =  this.appointments.appointments_list[i].centers || [] 
+              this.appointments_filtered.appointments_list[i].centers = aux_centers.filter(center => center.remote_care == true );
+              //extract only id froms Centers filtered
+              let centers_filtered_ids = this.appointments_filtered.appointments_list[i].centers.map(center => center.id ) ;
+              //finally filter appointments exist in centers filtered ids
+              let aux_appointments =  this.appointments.appointments_list[i].appointments || [] 
+              this.appointments_filtered.appointments_list[i].appointments = aux_appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
+               }
+            
+            
+            //END FILTER ONLY REMOTE CARE
+              }
+              else{
+                this.n_appointments_found = 0  
+                this.appointments_filtered = []
+                this.centers_filtered = []
+              }          
+              
             },
+
 //SEARCH BY LOCATION
             async searchByLocation(params)
             {
