@@ -277,7 +277,8 @@ methods: {
 
 //SEARCH GENERIC
             async searchAppointments(params) {	
-              
+              console.log("search Appointments input params :"+JSON.stringify(params) ) 
+              this.params_bkp = params
               this.showMainScreen = false ;
               
               let response_json = {data:[]}
@@ -285,7 +286,7 @@ methods: {
               this.active_spinner = true ; 
               if (  params !=null && params.specialty != null )
               {            
-                          console.log("search Appointments input params :"+JSON.stringify(params) )        
+                                 
                           const json = { 
                   // agenda_id : this.par_agenda_id ,			 
                           date : new Date(params.date) ,
@@ -319,10 +320,11 @@ methods: {
               return response_json
             },
 
-            updateLastSearch()
+            async updateLastSearch()
             {
-                console.log ("update Last Search") ;
-                this.searchAppointments(this.params_bkp);
+                console.log ("END emit : Search Appointment"+JSON.stringify(this.params_bkp)) ;
+                this.appointments = await this.searchAppointments(this.params_bkp); 
+                this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
             },
 
             // IDEALMENTE SOLO TRAER LOS CENTROS DE LOS PROFESIONALES, Y NO TODO EL UNIVERSO
