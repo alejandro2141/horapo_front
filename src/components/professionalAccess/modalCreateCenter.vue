@@ -61,7 +61,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                         <p>  <text class="h3">Atencion a domicilio.</text><br>   Comunas atiende a Domicilio (Máximo 6). </p>
                         <div  class="b p-2" >
                             <!-- <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional> -->
-                            <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
+                            <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode_home" :global_comunas='global_comunas' > </inputFormComuna>   
                             <br>  
                         </div>
                       </div>
@@ -79,6 +79,12 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                             <div class="form-group">
                             <label for="exampleInputPassword1">Comuna</label>
                             
+                              <p class="text-end" v-if="home_comuna1!=null">  {{ comunaId2Name(home_comuna1) }}  <i @click="home_comuna1=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+                              <p class="text-end" v-if="home_comuna2!=null">  {{ comunaId2Name(home_comuna2)  }} <i @click="home_comuna2=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+                              <p class="text-end" v-if="home_comuna3!=null">  {{ comunaId2Name(home_comuna3)  }} <i @click="home_comuna3=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+                              <p class="text-end" v-if="home_comuna4!=null">  {{ comunaId2Name(home_comuna4)  }} <i @click="home_comuna4=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+                              <p class="text-end" v-if="home_comuna5!=null">  {{ comunaId2Name(home_comuna5)  }} <i @click="home_comuna5=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
+
                             <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
                             
                             </div>
@@ -263,7 +269,15 @@ data: function () {
             app_type_tele : false , 
             
             form_comunas_id : [] ,
-            form_app_type : null
+            form_app_type : null, 
+
+            home_comuna1 : null ,
+            home_comuna2 : null ,
+            home_comuna3 : null ,
+            home_comuna4 : null ,
+            home_comuna5 : null ,
+
+            center_comuna : null,
 		      }
 
 	},
@@ -286,12 +300,15 @@ data: function () {
           }
           console.log("Comuna id array:"+this.form_comunas_id );
       },
-                 
       selectedComunaCode(comunaCode){
               console.log("Seected comuna Code "+comunaCode); 
               this.form_center_comuna_code = comunaCode ;
       },
-
+      selectedComunaCode_home(comunaCode){
+              console.log("Seected comuna Code "+comunaCode); 
+              this.form_home_comuna_code = comunaCode ;
+      },
+      
         //CREATE New Center
  	    async createNewCenter() {
 
