@@ -190,7 +190,8 @@ export default {
                 const search_params = { 
 				        specialty : this.form_specialty ,
                         type_remote : this.form_app_type_remote,
-                        location : this.form_location_code ,
+                        //location : this.form_location_code ,
+                        location : null ,
                         date :  this.form_current_date ,  
                   		  };
             this.$emit("searchByTypeRemote",search_params );
