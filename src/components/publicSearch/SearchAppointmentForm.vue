@@ -23,7 +23,7 @@ import inputFormComuna  from './InputFormComuna.vue'
 <!-- FORM INPUT LOCATION-->
                 <div  v-if="show_input_date()"  class="row  mb-1   "  >
                     <div class="col">
-                        <inputFormComuna position="true"  v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
+                        <inputFormComuna position="true" :setLocationCode="setLocationCode" v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
                 </div>
 
@@ -89,6 +89,8 @@ export default {
             form_app_type_home : false ,
             form_app_type_center : false ,
             form_app_type_remote : false ,
+
+            setLocationCode : 1 ,
     }
   },
 
@@ -184,14 +186,15 @@ export default {
         },
          // SELECTED TYPE_REMOTE
         selectedTypeRemote(){
+            this.setLocationCode = Math.random()  ;
+            this.form_location_code = null ; 
             this.form_app_type_center=false ;
             this.form_app_type_home=false ; 
             this.form_app_type_remote=!this.form_app_type_remote ;
                 const search_params = { 
 				        specialty : this.form_specialty ,
                         type_remote : this.form_app_type_remote,
-                        //location : this.form_location_code ,
-                        location : null ,
+                        location : this.form_location_code ,
                         date :  this.form_current_date ,  
                   		  };
             this.$emit("searchByTypeRemote",search_params );
