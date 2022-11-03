@@ -325,6 +325,12 @@ export default {
 
 
 	methods: {
+		updateLastSearch()
+		{
+                console.log (" update Last Search");
+                //this.appointment_list=null ;
+                this.$emit('updateLastSearch');
+        },
 		
 		async getProfessionalData(prof_id)
 		{
@@ -373,7 +379,7 @@ export default {
 		},
 		updateLastSearch()
         {
-                console.log (" update search Result. ");
+                console.log ("emit updateLastSearch: ModalPublicViewAPpointment");
                 //this.appointment_list=null ;
                 this.$emit('updateLastSearch');
         },
