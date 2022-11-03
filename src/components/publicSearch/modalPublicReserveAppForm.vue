@@ -328,7 +328,7 @@ computed: {
 
 		updateLastSearch()
             {
-                console.log (" update search Result. in Public Reserve Form ");
+                console.log (" emit updateLastSearch: SearchAppointment");
                 //this.appointment_list=null ;
                 this.$emit('updateLastSearch');
             },
