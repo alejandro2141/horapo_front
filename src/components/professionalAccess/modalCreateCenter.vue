@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-import inputFormComuna from  './InputFormComuna.vue'
+import inputFormComuna from  './InputFormComuna2.vue'
 import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
 </script>
@@ -52,16 +52,18 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                           </button>
                       </div>
 
-
-                       
-
-
-
                       <div v-if="app_type_home"  class="form-group mt-3" >
-                        <p>  <text class="h3">Atencion a domicilio.</text><br>   Comunas atiende a Domicilio (Máximo 6). </p>
-                        <div  class="b p-2" >
+                        <div>  <text class="h3">Atencion a domicilio.</text><br>   Comunas atiende a Domicilio (Máximo 5). </div>
+                        <div  class="mt-0 pt-0" >
                             <!-- <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional> -->
-                            <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode_home" :global_comunas='global_comunas' > </inputFormComuna>   
+                            <div v-for="comuna in form_comuna_codes" :key="comuna" class="d-flex justify-content-between m-0 p-0 " >
+                                <div>
+                                    <i class="h2 text-success bi bi-check"></i> 
+                                    <text>{{comunaId2Name(comuna)}} </text>
+                                </div>
+                                <i @click="removeFromList(comuna)" class="h3 text-danger bi bi-x mr-2"></i>
+                            </div>
+                            <inputFormComuna class="mt-2" v-on:selectedComunaCode="selectedComunaCode_home" :global_comunas='global_comunas' > </inputFormComuna>   
                             <br>  
                         </div>
                       </div>
@@ -79,11 +81,6 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                             <div class="form-group">
                             <label for="exampleInputPassword1">Comuna</label>
                             
-                              <p class="text-end" v-if="home_comuna1!=null">  {{ comunaId2Name(home_comuna1) }}  <i @click="home_comuna1=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
-                              <p class="text-end" v-if="home_comuna2!=null">  {{ comunaId2Name(home_comuna2)  }} <i @click="home_comuna2=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
-                              <p class="text-end" v-if="home_comuna3!=null">  {{ comunaId2Name(home_comuna3)  }} <i @click="home_comuna3=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
-                              <p class="text-end" v-if="home_comuna4!=null">  {{ comunaId2Name(home_comuna4)  }} <i @click="home_comuna4=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
-                              <p class="text-end" v-if="home_comuna5!=null">  {{ comunaId2Name(home_comuna5)  }} <i @click="home_comuna5=null" v-if="showEditOptions" class="fs-1 m-1 bi bi-trash"></i></p>
 
                             <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
                             
@@ -258,7 +255,7 @@ data: function () {
             form_center_name : null,
             form_center_address : null,
             form_center_region : null,
-            form_center_comuna_code : null,
+            //form_center_comuna_code : null,
             
             form_center_phone1 : null,
             form_center_phone2 : null,
@@ -278,6 +275,8 @@ data: function () {
             home_comuna5 : null ,
 
             center_comuna : null,
+
+            form_comuna_codes : []
 		      }
 
 	},
@@ -289,7 +288,33 @@ data: function () {
          },
  
     methods: {
+      removeFromList(comuna)
+      {
+        let index=this.form_home_comuna_codes.indexOf(5);
+        this.form_home_comuna_codes.splice(index, 1);
+      },
 
+      comunaId2Name(comuna_id)
+          {
+            if (comuna_id != null)
+            {
+            let aux = this.global_comunas.find(o => o.id === comuna_id)
+                if (aux != null)
+                {
+                    return  aux.name
+                }
+                else
+                {
+                    return "not found" ;  
+                }
+            }
+            else
+            {
+            return null ; 
+            }
+
+          },
+      /*
       selectedComunas(value)
       {
       console.log("capture emit comuna List "+JSON.stringify(value));
@@ -300,19 +325,24 @@ data: function () {
           }
           console.log("Comuna id array:"+this.form_comunas_id );
       },
+      */
       selectedComunaCode(comunaCode){
-              console.log("Seected comuna Code "+comunaCode); 
-              this.form_center_comuna_code = comunaCode ;
+              console.log("Seected comuna Code:"+comunaCode); 
+              if (comunaCode !=null )
+              {
+              this.form_comuna_codes.push(comunaCode) ;
+              }
       },
       selectedComunaCode_home(comunaCode){
-              console.log("Seected comuna Code "+comunaCode); 
-              this.form_home_comuna_code = comunaCode ;
+              console.log("Seected comuna Code Home:"+comunaCode); 
+              if (comunaCode !=null )
+              {
+              this.form_comuna_codes.push(comunaCode) ;
+              }
       },
       
         //CREATE New Center
  	    async createNewCenter() {
-
-
         //define color for this center
         var colorArray = [
               "#FFE6E6",
@@ -324,20 +354,18 @@ data: function () {
             ];
         var randomColor = colorArray[Math.floor(Math.random()*colorArray.length)];
 
-
-        console.log ("createNewCenter :" );
+        console.log ("createNewCenter :");
         const json = { 
-           center_name    : this.form_center_name ,
-           center_address : this.form_center_address ,
-           center_comuna  : this.form_center_comuna_code ,
-           center_region  :  this.form_center_region, 
-           center_phone1  : this.form_center_phone1 ,
-           center_phone2  : this.form_center_phone2 ,
+           name    : this.form_center_name ,
+           address : this.form_center_address ,
+           locations      : this.form_comuna_codes ,
+           //home_comuna  : this.form_comuna_codes ,
+           //center_region  :  this.form_center_region, 
+           phone1  : this.form_center_phone1 ,
+           phone2  : this.form_center_phone2 ,
            professional_id: this.session_params.professional_id ,
            app_type       : this.form_app_type , 
            center_color   : randomColor ,
-           comunas_ids    : this.form_comunas_id        
-           
            };
 
         console.log("REQUEST :"+JSON.stringify(json));
