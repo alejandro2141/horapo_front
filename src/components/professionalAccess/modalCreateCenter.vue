@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
+import inputFormComuna from  './InputFormComuna.vue'
 import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
 </script>
