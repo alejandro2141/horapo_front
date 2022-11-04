@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
+import inputFormComuna from  './InputFormComuna2.vue'
 import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
