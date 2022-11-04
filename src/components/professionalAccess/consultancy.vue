@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
+import inputFormComuna from  './InputFormComuna2.vue'
 
 </script>
 
@@ -18,8 +18,6 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                                          <i v-else class=" bi bi-geo-alt fs-1 m-1"></i> 
                                          <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control form-control-lg" id="form_phone2" name="form_phone2" v-model="name" style="z-index: 9;  border-radius: 25px; width:80%;  text-align: left; ">
                                          
-                                        
-
                                         </div>
 
                                         <hr class="m-0">
@@ -50,13 +48,13 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                                <text class="fs-6 m-0 p-0">A Domicilio</text> 
                           </button>
                           
-                          <button v-if="app_type_remote || showEditOptions" type="button" class="btn  m-1" :class="[ app_type_tele ? 'btn-outline-light': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
+                          <button v-if="app_type_remote || showEditOptions" type="button" class="btn  m-1" :class="[ app_type_remote  ? 'btn-outline-light': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
                               <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
                           </button>
                       </div>
    
-                    <p v-if="app_type_center" class="mt-3">
+                    <div v-if="app_type_center" class="mt-3">
                         <text >Direccion: </text><br>
                         <!--  <text class="text-end">{{center.address}}, {{ comunaId2Name(center.comuna)  }} </text> -->
                         <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="address" style="z-index: 9;  border-radius: 25px; width:100%;  text-align: right; ">
@@ -67,7 +65,7 @@ import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
                             <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode_center" :global_comunas='global_comunas' > </inputFormComuna> 
                             <text class="display-1">+</text>
                         </div>
-                    </p>
+                    </div>
                         
                     <div v-if="app_type_home" class="mt-2 " >               
                         <p >Comuna(s): </p>
