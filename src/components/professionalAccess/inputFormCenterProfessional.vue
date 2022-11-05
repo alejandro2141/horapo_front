@@ -13,7 +13,6 @@ import SwitchViewButton from './switchViewButton.vue'
    	  <select class="form-select form-control-lg" aria-label="Default" id="form_center"  v-model="form_center"  name="form_center">
             <option selected v-for="(center) in center_list" :value="center.id" :key="center.id" >{{center.name}}-[{{getCenterType(center)}}]</option>	
       </select>
-     auch
     </div>
     <div v-else >
           <SwitchViewButton v-if="session_params['professional_name']"  v-on:switchView="switchView" ></SwitchViewButton>
