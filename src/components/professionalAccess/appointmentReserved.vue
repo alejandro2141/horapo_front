@@ -70,16 +70,18 @@ export default {
         }   
     },
    	
-    props: ['daterequired', 'days_expired' , 'appointment','index','global_specialties', 'global_comunas', 'session_params' ],
-    emits:  ['displayModalReservedDetails'],
+    props: ['daterequired', 'days_expired' , 'appointment','index','global_specialties','global_comunas','specialty_data','center_data','calendar_data','session_params' ],
+    emits: ['displayModalReservedDetails'],
 
 	created () {
-        this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
-        this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.appointment.calendar_id )
+        //this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
+        //this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.appointment.calendar_id )
+        /*
         if ( this.calendar_data == null)
         {
             this.calendar_data = { color: '#5A9358' }
         }
+        */
     },
 
 	methods :{
