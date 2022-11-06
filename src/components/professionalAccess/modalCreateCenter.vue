@@ -36,17 +36,17 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                       <div class="mt-3 h3">Tipo de consulta</div>
                       
                       <div >
-                          <button type="button" class="btn  m-0" :class="[app_type_center ? 'btn-outline-primary' : 'btn-outline-secondary']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
+                          <button type="button" class="btn  m-0" :class="[app_type_center ? 'btn-outline-primary' : 'btn-outline-secondary']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[]" >
                               <i class="h3 bi bi-building m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">En Consulta</text> 
                           </button>
                           
-                          <button type="button" class="btn m-1" :class="[app_type_home ? 'btn-outline-primary' : 'btn-outline-secondary']"  @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ;" >
+                          <button type="button" class="btn m-1" :class="[app_type_home ? 'btn-outline-primary' : 'btn-outline-secondary']"  @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ; form_comuna_codes=[]" >
                               <i class="h3 bi bi-house-door m-0 p-0"></i><br>
                                <text class="fs-6 m-0 p-0">A Domicilio</text> 
                           </button>
                           
-                          <button type="button" class="btn m-0" :class="[app_type_tele ? 'btn-outline-primary' : 'btn-outline-secondary']" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
+                          <button type="button" class="btn m-0" :class="[app_type_tele ? 'btn-outline-primary' : 'btn-outline-secondary']" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ; form_comuna_codes=[]" >
                               <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
                           </button>
