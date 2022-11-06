@@ -6,6 +6,7 @@ import searchAppointmentResult  from './SearchAppointmentResult.vue'
 import loadProgress from '../loadProgress.vue'
 import suggestedSearch from './SuggestedSearch.vue'
 import FooterContent from '../FooterContent.vue'
+import WordSphere from 'wordsphere';
 
 
 </script>
@@ -24,8 +25,9 @@ import FooterContent from '../FooterContent.vue'
  
       <div>
             <div>
+              <text @click="WordSphere.$emit('start_autonomous_move');  " >START MOVE</text>
               <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
-               
+          
               <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
                   En {{metric_search/1000}} Seg encontramos {{appointments_filtered.appointments_list.length}} resultados
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
@@ -34,8 +36,17 @@ import FooterContent from '../FooterContent.vue'
                   <searchAppointmentResult :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
               </div>
 
-              <div v-else>
-           
+              <div v-else style="position:relative; bottom:0 ; width:100%">
+                <WordSphere  
+                id="id_sphere_object" ref="ref_sphere_object"
+                :items_list="['Kinesiologia', 'Nutrición', 'Psicologia', 'Fisiología', 'Nutrición', 'Rehabilitación', 'Enfermeria', 'Kinesiologia', 'Nutrición', 'Psicologia' ]"
+                :radius=6
+                :text_color="'#000000'"
+              	:font_size_max="1"
+	              :blur_max="0.05"
+	              :update_interval="1"
+	              :extra_padding="1"
+                />
               </div>
         
             
@@ -100,9 +111,12 @@ export default {
     }
   },
 
-    props: ['global_specialties','global_comunas'], 
+    props: ['global_specialties','global_comunas','start_autonomous_move'], 
+    
 
  mounted () {
+             //this.$root.$emit('start_autonomous_move')
+             
              this.daterequired = new Date() 
              this.currentDate =  new Date() 
              this.appointments_filtered = [] 
@@ -347,7 +361,6 @@ methods: {
             if (temp != null) { return temp.name }
             else { return null }
             },
-
            
         },
 
