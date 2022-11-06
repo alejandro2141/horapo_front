@@ -57,7 +57,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 				<div style="margin-top: 1em; " class="h4">
 							<div class="" >
-								<p> {{ transform_date( appToReserve.date.substring(0, 10) ) }}, a las {{appToReserve.start_time.substring(0, 5) }} hrs </p>
+								<p> {{ transform_date(appToReserve.date) }}, a las {{transform_time(appToReserve.start_time)}} hrs  </p>
 							</div>
 				</div>
 
@@ -315,13 +315,27 @@ computed: {
 
 		transform_date(date)
     	{
-      	  let temp = date.split("-") ;
-      	  return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+        let temp = new Date(date)
+        return ( this.getDayName(temp.getDay())+" "+temp.getDate()+" de "+this.getShortMonthName(temp.getMonth()+1)+" "+temp.getFullYear())
     	},
+		
+		transform_time(date)
+    	{
+        let temp = new Date(date)
+        return (  String(temp.getHours()).padStart(2,0)+":"+String(temp.getMinutes()).padStart(2,0) )
+    	},
+		
+		getDayName(day)
+		{
+			console.log("day:"+parseInt(day));
+			let days = ['domingo','Lunes','Martes','Miercoles' ,'Jueves','Viernes','Sabado' ]
+			return days[parseInt(day)];
+		},
+
         getShortMonthName(month)
 			{
 				console.log("Modal Public Reserve App form MONTH:"+parseInt(month));
-				let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+				let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Noviembre','Dic.' ]
 				return months[parseInt(month)];
 
 			},	
