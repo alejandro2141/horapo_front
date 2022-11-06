@@ -29,59 +29,46 @@ import loadProgress from '../loadProgress.vue'
 <!-- -->
 
     <div v-if="app != null"     class="bg-white p-0 mb-1 ">
-        
+
+
+		<!-- HEADER -->
 		<div class="d-flex justify-content-between mb-3">
                       <div  class="display-4 p-2" style=" color:#1f9d94">  {{ showSpecialtyName(app.specialty) }}  </div>
-                      <div  > </div>
-                      <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
-        </div>
-        
-		<div id="app" class="m-0 d-flex  "  >	
-            <div class="">
-                     &nbsp;
-            </div>
-            <div>
+                      <div> </div>
+                      <div><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicAppDetails = false" aria-label="Close"></i> </div>
+        </div> 
 
-                <div class="">
-					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" " ></i> Fecha : 
-						<text class="" style="">	 
-						  {{ transform_date( app.date ) }} 
-						</text>       
-					
-					</p>
-				</div>
+		<!-- DATE/TIME APPOINTMENT -->
+		<div class="d-flex justify-content-start mb-3" >
+			<text  style=""> <i class="text-muted h1  m-2 bi bi-calendar"></i> </text>
 
 
-				<div class="">
-					<p> <i class="bi bi-circle-fill display-5 text-primary"   style=" " ></i> Hora : 
-						<text class="" style="">	 
+			<div class="">
+				<text class="">	{{ transform_date( app.date ) }} </text><br>
+				<text class="" style="">	 
 						{{transform_time(app.start_time)}} <text >hrs</text>  
-						</text>       
-					
-					</p>
-				</div>
+				</text>       		
+			</div>
+		</div>
+		<!-- LOCATION -->		
 
-
- 
-                <div class="">
+        <div class="m-2 " style="">
 
                     <div v-if="center_data.center_visit" class="">
-                 
                         <div class="display-6" style="">  
                             <div style="color: #781ED1" >
-                            <i class="h1 bi bi-building"></i> En Consulta  </div>
-                            </div>
+                            <i class="h1 bi bi-building "></i> En Consulta  </div>
+                        </div>
 							
-                            <div style="" class="text-dark display-6" >
-                               {{comuna_id2name(center_data.comuna)}}
-                            </div>
-                            <div class="" style="color:#2e5668" >	
-                             Centro :   {{center_data.name}}
+                            <div>	
+                            "{{center_data.name}}"
                             </div> 
-                            <div style="color:#2e5668">
+                            <div>
                              Direccion:  {{center_data.address}}
-                            </div>
-                            
+                            </div> 
+							<div style="" class="" >
+                               {{comuna_id2name(center_data.comuna)}}
+                            </div>           
                     </div>
                     
                     <div v-if="center_data.home_visit" style="color:#3399FF">
@@ -125,15 +112,21 @@ import loadProgress from '../loadProgress.vue'
                               </div>                      
                         </div>
                     </div>
-
-					<p> <i class="bi bi-person-circle display-4 text-primary"></i> 
-					Con :  {{professional_name }}  </p>
-
 					<!-- Include here a map -->
+        </div>
 
-                </div>
+		<div>
+          	<p> <i class="text-muted bi bi-person display-1 m-0 p-0"></i> 
+				 {{professional_name }}  
+			</p>
+        </div>
+
+
+		
+        
+		<div id="app" class="m-0 d-flex  "  >	
             
-            </div>
+            
 
             </div>              
      <text style="color: #ffffff;" >#{{app.calendar_id}}</text> 
@@ -358,8 +351,14 @@ export default {
 		getShortMonthName(month)
 		{
 			console.log("MONTH:"+parseInt(month));
-			let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Nov.','Dic.' ]
+			let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Noviembre','Dic.' ]
 			return months[parseInt(month)];
+		},
+		getDayName(day)
+		{
+			console.log("day:"+parseInt(day));
+			let days = ['domingo','Lunes','Martes','Miercoles' ,'Jueves','Viernes','Sabado' ]
+			return days[parseInt(day)];
 		},
 
 		showSpecialtyName(id){
@@ -398,7 +397,7 @@ export default {
 		transform_date(date)
     	{
         let temp = new Date(date)
-        return (""+temp.getDate()+" de "+this.getShortMonthName(temp.getMonth()+1)+" "+temp.getFullYear())
+        return ( this.getDayName(temp.getDay())+" "+temp.getDate()+" de "+this.getShortMonthName(temp.getMonth()+1)+" "+temp.getFullYear())
     	},
 
 		transform_time(date)
