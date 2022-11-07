@@ -6,7 +6,7 @@ import { ref } from 'vue'
 
 <template>
 
-	<div class="fixed-bottom mb-5 ">
+	<div class="fixed-bottom pb-1 border border-1 bg-light ">
 	
     <div  class="d-flex justify-content-between fs-6 m-2"> 
 
