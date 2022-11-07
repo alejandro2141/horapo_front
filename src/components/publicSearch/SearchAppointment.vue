@@ -7,6 +7,7 @@ import loadProgress from '../loadProgress.vue'
 import suggestedSearch from './SuggestedSearch.vue'
 import FooterContent from '../FooterContent.vue'
 import WordSphere from 'wordsphere';
+import SuggestedSearch from './SuggestedSearch.vue'
 
 
 </script>
@@ -17,15 +18,15 @@ import WordSphere from 'wordsphere';
   
       <div class="bg-white  pb-4 text-center"  > 
         <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
-      	<i class="bi bi-clipboard-pulse" style="font-size: 2rem; color: cornflowerblue;"></i>
-        <text class="display-4"> 123Hora</text>  
+     
+        <text class="display-4">123H<small><small><i class="bi bi-flower1 h1"></i></small></small>RA</text>  
         </a> 
         <small  class="text-muted"> <br> Las mejores consultas en un solo lugar </small>
       </div> 
  
       <div>
             <div>
-              <text @click="WordSphere.$emit('start_autonomous_move');  " >START MOVE</text>
+            <!--  <text @click="WordSphere.$emit('start_autonomous_move');  " >START MOVE</text> -->
               <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
           
               <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
@@ -37,9 +38,14 @@ import WordSphere from 'wordsphere';
               </div>
 
               <div v-else style="position:relative; bottom:0 ; width:100%">
+               
+                <suggested-search >  </suggested-search > 
+                
+                
+                <!--
                 <WordSphere  
                 id="id_sphere_object" ref="ref_sphere_object"
-                :items_list="['Kinesiología', 'Psicología','Fonoaudiología', 'Nutrición', 'Terapia Ocupacional', 'Psicopedagogía', 'Enfermería'  ]"
+                :items_list="['<text>Kinesiología</text>', 'Psicología','Fonoaudiología', 'Nutrición', 'Terapia Ocupacional', 'Psicopedagogía', 'Enfermería'  ]"
                 :radius=6
                 :text_color="'#000000'"
               	:font_size_max="1"
@@ -47,6 +53,8 @@ import WordSphere from 'wordsphere';
 	              :update_interval="1"
 	              :extra_padding="1"
                 />
+                -->
+               
               </div>
         
         
@@ -68,6 +76,7 @@ import WordSphere from 'wordsphere';
 
 
 export default {
+  components: { SuggestedSearch },
   data : function() {
     return {
             daterequired : null,
