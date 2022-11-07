@@ -5,7 +5,7 @@ import axios from 'axios';
 import CalendarPickerMinimal2 from './calendarPickerMinimal2.vue'
 import DateRequiredActions from './dateRequiredActions.vue'
 import ListAppointments from './listAppointments.vue'
-import FirstTimeLogin from './firstTimeLogin.vue'
+import Tutorial from './tutorial.vue'
 import loadProgress from '../loadProgress.vue'
 import LockOptions from './lockOptions.vue'
 
@@ -14,8 +14,9 @@ import LockOptions from './lockOptions.vue'
 <template>
 <div>
   <loadProgress  :active_spinner="active_spinner" > </loadProgress>
+      
       <div v-if='!session_params.first_time' >
-
+      
         <div class="d-flex justify-content-between  ">
           
           <LockOptions v-on:updateFilter="updateFilter"  :isLockDay="isLockDay" :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
@@ -32,7 +33,7 @@ import LockOptions from './lockOptions.vue'
 	    </div>
 
       <div v-else >
-        <FirstTimeLogin v-on:switchToCenters='switchToCenters' > </FirstTimeLogin>
+        <Tutorial v-on:switchToCenters='switchToCenters' :session_params="session_params" > </Tutorial>
       </div>
 
 </div>
