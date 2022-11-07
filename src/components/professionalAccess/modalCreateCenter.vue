@@ -374,8 +374,10 @@ data: function () {
         this.$emit('updateCenterList');  
         this.showModalCreate = false ;    
         
+        /*
         let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
         this.session_params.first_time = false ;   
+        */
         },
 
 	    },
