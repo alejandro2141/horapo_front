@@ -14,10 +14,10 @@ import { ref } from 'vue'
             <p class="display-1">Bienvenido </p>
             <p> <i class="display-1 bi bi-emoji-wink"></i> </p>
             <p>
-            Lo primero que debes hacer es crear un Centro. 
+            Para iniciar debes crear tu primera consulta. 
             </p>
             <p>
-            Un Centro es un lugar donde provees tus servicios, y donde tus pacientes debe asistir a tus citas.
+            Una Consulta es un lugar fisico o remoto/Virtual donde atiendes a tus pacientes, y es donde tus pacientes debe asistir a tus citas.
             </p>
 
         <div class="display-4 text-center text-primary" @click='switchToCenter()' >
