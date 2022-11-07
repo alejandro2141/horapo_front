@@ -39,7 +39,7 @@ import WordSphere from 'wordsphere';
               <div v-else style="position:relative; bottom:0 ; width:100%">
                 <WordSphere  
                 id="id_sphere_object" ref="ref_sphere_object"
-                :items_list="['Kinesiologia', 'Nutrición', 'Psicologia', 'Fisiología', 'Nutrición', 'Rehabilitación', 'Enfermeria', 'Kinesiologia', 'Nutrición', 'Psicologia' ]"
+                :items_list="['Kinesiología', 'Psicología','Fonoaudiología', 'Nutrición', 'Terapia Ocupacional', 'Psicopedagogía', 'Enfermería'  ]"
                 :radius=6
                 :text_color="'#000000'"
               	:font_size_max="1"
@@ -49,8 +49,7 @@ import WordSphere from 'wordsphere';
                 />
               </div>
         
-            
-         
+        
             </div>
       </div>
   <FooterContent v-if="showMainScreen"  ></FooterContent>
