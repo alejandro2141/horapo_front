@@ -27,7 +27,7 @@ import SuggestedSearch from './SuggestedSearch.vue'
       <div>
             <div>
             <!--  <text @click="WordSphere.$emit('start_autonomous_move');  " >START MOVE</text> -->
-              <searchAppointmentForm  v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
+              <searchAppointmentForm  :suggestedSearchParams='suggestedSearchParams' v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
           
               <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
                   En {{metric_search/1000}} Seg encontramos {{appointments_filtered.appointments_list.length}} resultados
@@ -39,7 +39,7 @@ import SuggestedSearch from './SuggestedSearch.vue'
 
               <div v-else style="position:relative; bottom:0 ; width:100%">
                
-                <suggested-search >  </suggested-search > 
+                <suggested-search v-on:suggestedSearchCall='suggestedSearchCall' :global_specialties="global_specialties" >  </suggested-search > 
                 
                 
                 <!--
@@ -116,6 +116,8 @@ export default {
 */
             forceReRender : 0 , 
             showMainScreen : true ,
+
+            suggestedSearchParams : null ,
     }
   },
 
@@ -295,6 +297,36 @@ methods: {
                 this.appointments_filtered = []
               }    
                            
+            },
+
+//SUGESTED SEARCH
+            async suggestedSearchCall(params)
+            {
+              this.suggestedSearchParams = { 
+				            specialty   : { name : 'lalal' , id : params.specialty } ,
+                    type_center : params.type ,
+                    location    : this.form_location_code ,
+                    date        : this.daterequired ,  
+                    };           
+
+              console.log ("Search Appointment Suggested Search "+JSON.stringify(this.suggestedSearchParams))
+              let response_search = await this.searchAppointments(this.suggestedSearchParams)
+               
+              if ( response_search!= null &&  response_search.appointments_list != null &&  response_search.appointments_list.length > 0  )
+              {
+              this.appointments = response_search ; 
+              // this.centers = response_search.centers ; 
+              this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
+              console.log ("Suggested Search, SearchAppointment searchBySpecialty RESULTS : "+JSON.stringify(this.appointments_filtered))
+              this.n_appointments_found = this.appointments_filtered.appointments_list.length 
+              }
+              else{
+                this.n_appointments_found = 0  
+                this.appointments_filtered = []
+                this.centers_filtered = []
+              }          
+              //this.forceReRender = Math.random() 
+
             },
 
 //SEARCH GENERIC
