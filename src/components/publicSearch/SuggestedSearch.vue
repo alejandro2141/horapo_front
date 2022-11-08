@@ -40,18 +40,18 @@ import specialtyCircle from './SpecialtyCircle.vue'
             </div>
             -->
             <div class="w-100 mb-0 mt-3 pb-0 d-flex justify-content-center">
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties.pop())" :specialty='global_specialties[0]' :index='0' > </specialtyCircle>
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties.pop())" :specialty='global_specialties[0]' :index='0' > </specialtyCircle>
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties.pop())" :specialty='global_specialties[0]' :index='0' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[0])" :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[1])" :specialty='global_specialties[1]' :color='circleColors[1]' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[2])" :specialty='global_specialties[2]' :color='circleColors[2]' > </specialtyCircle>
             </div>
             <div class="w-100 mt-0 pt-0 d-flex justify-content-center">
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties.pop())" :specialty='global_specialties[0]' :index='0' > </specialtyCircle>
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties.pop())" :specialty='global_specialties[0]' :index='0' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[3])" :specialty='global_specialties[3]' :color='circleColors[3]' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[4])" :specialty='global_specialties[4]' :color='circleColors[4]' > </specialtyCircle>
             </div>
             <div class="w-100 mt-0 pt-0  d-flex justify-content-center">
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties.pop())" :specialty='global_specialties[0]' :index='0' > </specialtyCircle>
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties.pop())" :specialty='global_specialties[0]' :index='0' > </specialtyCircle>
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties.pop())" :specialty='global_specialties[0]' :index='0' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[5])" :specialty='global_specialties[5]' :color='circleColors[5]' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[6])" :specialty='global_specialties[6]' :color='circleColors[6]' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[7])" :specialty='global_specialties[7]' :color='circleColors[7]' > </specialtyCircle>
             </div>
 
 
@@ -76,7 +76,7 @@ import specialtyCircle from './SpecialtyCircle.vue'
 export default {
    data : function() {
         return {
-        circleColors: ['#ff0000','#ffaaff','#ffffaa','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#511F73'],
+        circleColors: ['#b7d8d6','#DDC696','#CEF3DD','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#89dee2'],
         search_center :false ,
         search_home :false ,
         search_remote :false ,
