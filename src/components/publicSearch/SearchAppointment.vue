@@ -302,15 +302,11 @@ methods: {
 //SUGESTED SEARCH
             async suggestedSearchCall(params)
             {
-              this.suggestedSearchParams = { 
-				            specialty   : { name : 'lalal' , id : params.specialty } ,
-                    type_center : params.type ,
-                    location    : this.form_location_code ,
-                    date        : this.daterequired ,  
-                    };           
-
-              console.log ("Search Appointment Suggested Search "+JSON.stringify(this.suggestedSearchParams))
-              let response_search = await this.searchAppointments(this.suggestedSearchParams)
+              params.date = this.daterequired
+              this.suggestedSearchParams = params 
+              console.log ("Search Appointment Suggested Search "+JSON.stringify(params))
+              
+              let response_search = await this.searchAppointments(params)
                
               if ( response_search!= null &&  response_search.appointments_list != null &&  response_search.appointments_list.length > 0  )
               {
@@ -324,7 +320,8 @@ methods: {
                 this.n_appointments_found = 0  
                 this.appointments_filtered = []
                 this.centers_filtered = []
-              }          
+              } 
+                       
               //this.forceReRender = Math.random() 
 
             },
