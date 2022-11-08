@@ -94,7 +94,7 @@ export default {
     }
   },
 
- props: [ 'global_specialties','global_comunas', 'currentDate','n_app_filtered' ], 
+ props: [ 'global_specialties','global_comunas', 'currentDate','n_app_filtered','suggestedSearchParams' ], 
  emits: [ 'searchBySpecialty','searchByTypeCenter','searchByTypeHome' ,'searchByTypeRemote' ,'searchByLocation' ,'searchByDate' ],
  
    created () {    
@@ -239,6 +239,11 @@ export default {
         },
     
     watch : {
+        suggestedSearchParams(val)
+        {
+           console.log("SearchAppointmentForm.  suggestedSearchParams:"+JSON.stringify(val))
+           this.form_specialty = val.specialty.id ; 
+        },
         
         form_current_date(newValue, oldValue)
         {
