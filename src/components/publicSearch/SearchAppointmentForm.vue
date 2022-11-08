@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import inputFormSpecialty  from './InputFormSpecialty.vue'
 import inputFormComuna  from './InputFormComuna.vue'
 
+
 </script>
 
 <template>
@@ -242,7 +243,8 @@ export default {
         suggestedSearchParams(val)
         {
            console.log("SearchAppointmentForm.  suggestedSearchParams:"+JSON.stringify(val))
-           this.form_specialty = val.specialty.id ; 
+           
+           this.form_specialty = val.specialty ; 
         },
         
         form_current_date(newValue, oldValue)
