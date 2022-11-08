@@ -15,10 +15,10 @@ import { ref } from 'vue'
                 </div> 
                 -->
                 
-                <div id="hexagono3" @click="active=!active" :style="{ 'background-color': circleColors[index] }" class=" border  border-2  d-flex justify-content-center align-items-center" :class="{'border-success': true}" > 
-                    <div id="hexagono3-1"  class="text-center " :style="{ 'background-color': circleColors[index] }" >
-                        <div id="hexagono3-2" :style="{ 'background-color': circleColors[index] }" >
-                            <text class="m-4 text-dark"> <br><br>asdfaaasdf
+                <div  id="hexagono3" @click="active=!active" :style="{ 'background-color': color }" class=" border  border-2  d-flex justify-content-center align-items-center" :class="{'border-success': true}" > 
+                    <div id="hexagono3-1"  class="text-center " :style="{ 'background-color': color }" >
+                        <div id="hexagono3-2" class="align-items-end" :style="{ 'background-color': color }" >
+                            <text class="text-dark"> <br><br><br><br>{{getSpecialtyName()}} 
                             </text>
                             <br> 
                         </div>
@@ -60,12 +60,12 @@ import { ref } from 'vue'
 export default {
    data : function() {
         return {
-        circleColors: ['#ffda9e','#fdf9c4','#ffffaa','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#511F73'],
+       // circleColors: ['#ffda9e','#fdf9c4','#ffffaa','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#511F73'],
         active : false
         }
     },  
  
-   props: ['specialty','index' ], 
+   props: ['specialty','index', 'color' ], 
    
 mounted() {   
        },
@@ -74,6 +74,20 @@ mounted() {
         },
 
     methods: {
+        changeColor()
+        {
+            console.log("changeColor!!")
+        },
+        getSpecialtyName()
+        {
+            if (this.specialty !=null)
+            {return this.specialty.name }
+            else
+            {
+                return "nosetname"
+            }
+
+        }
         /*
         suggestedSearch(specialty,type)
         {
