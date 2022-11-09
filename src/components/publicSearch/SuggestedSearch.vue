@@ -12,7 +12,7 @@ import specialtyCircle from './SpecialtyCircle.vue'
         
         <div class="d-flex justify-content-center mb-0">
             
-            <div @click="search_center = !search_center" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_center }" > 
+            <div @click="search_center = !search_center" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_center  }" > 
                 <div class="m-2">
                     <i  class="bi bi-building m-0  display-3 d-flex justify-content-center" style="color: #781ED1;"></i>
                     <text style="font-size: 0.7em;">En Consulta</text>
@@ -40,7 +40,7 @@ import specialtyCircle from './SpecialtyCircle.vue'
             </div>
             -->
             <div class="w-100 mb-0 mt-3 pb-0 d-flex justify-content-center">
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties[0])" :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[0]); circleColors[0]='#eeeeee'" :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[1])" :specialty='global_specialties[1]' :color='circleColors[1]' > </specialtyCircle>
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[2])" :specialty='global_specialties[2]' :color='circleColors[2]' > </specialtyCircle>
             </div>
