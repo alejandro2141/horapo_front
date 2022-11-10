@@ -27,8 +27,8 @@ import SuggestedSearch from './SuggestedSearch.vue'
       <div>
             <div>
             <!--  <text @click="WordSphere.$emit('start_autonomous_move');  " >START MOVE</text> -->
-              <suggested-search v-on:suggestedSearchCall='suggestedSearchCall' :global_specialties="global_specialties" >  </suggested-search > 
-    
+             <!--<suggested-search v-on:suggestedSearchCall='suggestedSearchCall' :global_specialties="global_specialties" >  </suggested-search > 
+              --> 
               <searchAppointmentForm  :suggestedSearchParams='suggestedSearchParams' v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
                 
 
@@ -36,14 +36,11 @@ import SuggestedSearch from './SuggestedSearch.vue'
                   En {{metric_search/1000}} Seg encontramos {{appointments_filtered.appointments_list.length}} resultados
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                   -->
-                  <hr>
+                  <hr ref="scrollToMe">
                   <searchAppointmentResult :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
               </div>
 
               <div v-else style="position:relative; bottom:0 ; width:100%">
-               
-                
-                
                 <!--
                 <WordSphere  
                 id="id_sphere_object" ref="ref_sphere_object"
@@ -56,8 +53,8 @@ import SuggestedSearch from './SuggestedSearch.vue'
 	              :extra_padding="1"
                 />
                 -->
+               </div>
                
-              </div>
         
         
             </div>
@@ -135,6 +132,14 @@ export default {
             },
 
 methods: {
+            scrollDown()
+            {
+            console.log("scroll Down");
+            var element = this.$refs['scrollToMe'];
+            var top = element.offsetTop;
+            window.scrollTo(0, top);
+            },
+
             show_modal_appointment_confirm(param)
             {
             console.log("Modal Confirmation: show_modal_appointment_confirm:"+JSON.stringify(param) )
@@ -166,7 +171,8 @@ methods: {
                 this.centers_filtered = []
               }          
               //this.forceReRender = Math.random() 
-
+              this.scrollDown()
+        
             },
 //SEARCH BY TYPE_CENTER
             searchByTypeCenter(params)
