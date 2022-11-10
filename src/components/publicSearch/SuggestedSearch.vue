@@ -40,7 +40,7 @@ import specialtyCircle from './SpecialtyCircle.vue'
             </div>
             -->
             <div class="w-100 mb-0 mt-3 pb-0 d-flex justify-content-center">
-                <specialtyCircle @click="sendSuggestedSearch(global_specialties[0]); circleColors[0]='#eeeeee'" :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
+                <specialtyCircle @click="sendSuggestedSearch(global_specialties[0]); circleColors[0]='#eeeeee' ; scrollDown()  " :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[1]); circleColors[1]='#eeeeee'" :specialty='global_specialties[1]' :color='circleColors[1]' > </specialtyCircle>
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[2]); circleColors[2]='#eeeeee'" :specialty='global_specialties[2]' :color='circleColors[2]' > </specialtyCircle>
             </div>
@@ -83,7 +83,7 @@ export default {
         }
     },  
  
-   props: ['global_comunas', 'global_specialties' ], 
+   props: ['global_comunas', 'global_specialties', 'scrollToResults' ], 
    emits: ["suggestedSearchCall"],
 
 mounted() {   
@@ -93,6 +93,10 @@ mounted() {
         },
 
     methods: {
+        scrollDown()
+        {
+        //this.$emit("scrollToResults")
+        },
 
         sendSuggestedSearch(specialty)
         {
