@@ -14,13 +14,14 @@ import inputFormComuna  from './InputFormComuna.vue'
                 <form autocomplete="off" >
 
                 <input  v-model="form_token" id="form_token" name="form_token" type="hidden"  > 
-<!--FORM INPUT SPECIALTY -->                   
+<!--FORM INPUT SPECIALTY -->            
+<!--       
                 <div v-if="show_input_specialty()"  class="w-100 mb-1"  >
                     <div class="">
                         <inputFormSpecialty  v-on:selectedSpecialtyCode="selectedSpecialtyCode" :global_specialties="global_specialties" > </inputFormSpecialty> 
                     </div>
                 </div>           
-
+-->
 <!-- FORM INPUT LOCATION-->
                 <div  v-if="show_input_date()"  class="row  mb-1   "  >
                     <div class="col">
@@ -36,6 +37,7 @@ import inputFormComuna  from './InputFormComuna.vue'
                 </div>
                  
 <!--FORM INPUT  APP TYPE -->
+                <!--
                 <div v-if="show_app_type()" class="d-flex justify-content-around   mb-1" style=" border-radius: 15px;"  >
                     
                      <text  @click="selectedTypeCenter()" class="m-1 p-1" :class="{ 'text-decoration-underline' : form_app_type_center }" style=" " > 
@@ -54,6 +56,7 @@ import inputFormComuna  from './InputFormComuna.vue'
                     </text>
                    
                 </div>
+                -->
 
                 </form> 
                
@@ -127,10 +130,15 @@ export default {
         },
 
         show_input_date()
-        {   if ( this.form_specialty != null  )
+        {   
+            return true
+            /*
+            if ( this.form_specialty != null  )
             {   return true } 
             else
             { return false }
+
+            */
         },
 
 //SELECTED IN FORM TO EMIT  FOR SEARCH 
