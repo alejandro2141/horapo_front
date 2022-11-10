@@ -48,15 +48,14 @@ import specialtyCircle from './SpecialtyCircle.vue'
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[3]); circleColors[3]='#eeeeee'" :specialty='global_specialties[3]' :color='circleColors[3]' > </specialtyCircle>
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[4]); circleColors[4]='#eeeeee'" :specialty='global_specialties[4]' :color='circleColors[4]' > </specialtyCircle>
             </div>
-            <div class="w-100 mt-0 pt-0  d-flex justify-content-center">
+            <div class="w-100 mt-0 pt-0  mb-3 pb-2 d-flex justify-content-center">
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[5]); circleColors[5]='#eeeeee'" :specialty='global_specialties[5]' :color='circleColors[5]' > </specialtyCircle>
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[6]); circleColors[6]='#eeeeee'" :specialty='global_specialties[6]' :color='circleColors[6]' > </specialtyCircle>
                 <specialtyCircle @click="sendSuggestedSearch(global_specialties[7]); circleColors[7]='#eeeeee'" :specialty='global_specialties[7]' :color='circleColors[7]' > </specialtyCircle>
             </div>
 
 
-            <div class="m-5 p-5">
-            </div>
+            
            
             </div>
             
