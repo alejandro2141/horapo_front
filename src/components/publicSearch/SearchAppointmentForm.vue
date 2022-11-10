@@ -3,18 +3,58 @@ import { ref } from 'vue'
 //const showForm = ref(false)
 import inputFormSpecialty  from './InputFormSpecialty.vue'
 import inputFormComuna  from './InputFormComuna.vue'
+import specialtyCircle from './SpecialtyCircle.vue'
 
 
 </script>
 
 <template>
-      <div class="container" style="padding-right: 0 ;padding-left: 0 ; " >
+      <div class="container" style="padding-right: 0 ;padding-left: 0  " >
 
             <div id="formSearch" class="mx-auto "  >
                 <form autocomplete="off" >
 
-                <input  v-model="form_token" id="form_token" name="form_token" type="hidden"  > 
-<!--FORM INPUT SPECIALTY -->            
+<!--FORM TYPE CENTER HOME REMOTE -->                    
+                <div>
+                    <div class="d-flex justify-content-center mb-0">
+                        <div @click="search_params.type_center = !search_params.type_center" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_center  }" > 
+                            <div class="m-2">
+                                <i  class="bi bi-building m-0  display-3 d-flex justify-content-center" style="color: #781ED1;"></i>
+                                <text style="font-size: 0.7em;">En Consulta</text>
+                            </div>
+                        </div>
+                        <div @click="search_params.type_home = !search_params.type_home" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-2 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_home }" > 
+                            <div class="m-2">
+                                <i  class="bi bi-house-door m-0  display-3 d-flex justify-content-center" style="color:#3399FF;"></i>
+                                <text style="font-size: 0.7em;">A Domicilio</text>
+                            </div>
+                        </div>
+                        <div @click="search_params.type_remote = !search_params.type_remote" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_remote }" > 
+                        <div class="m-2">
+                                <i  class="bi bi-camera-video m-0 display-3 d-flex justify-content-center" style="color:#b36b00;"></i>
+                                <text style="font-size: 0.7em;">Remoto</text>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+
+<!--FORM INPUT SPECIALTY -->     
+            <div class="w-100 mb-0 mt-3 pb-0 d-flex justify-content-center">
+                <specialtyCircle @click="specialtySelected(global_specialties[0]); circleColors[0]='#eeeeee' ; scrollDown()  " :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[1]); circleColors[1]='#eeeeee'" :specialty='global_specialties[1]' :color='circleColors[1]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[2]); circleColors[2]='#eeeeee'" :specialty='global_specialties[2]' :color='circleColors[2]' > </specialtyCircle>
+            </div>
+            <div class="w-100 mt-0 pt-0 d-flex justify-content-center">
+                <specialtyCircle @click="specialtySelected(global_specialties[3]); circleColors[3]='#eeeeee'" :specialty='global_specialties[3]' :color='circleColors[3]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[4]); circleColors[4]='#eeeeee'" :specialty='global_specialties[4]' :color='circleColors[4]' > </specialtyCircle>
+            </div>
+            <div class="w-100 mt-0 pt-0  mb-3 pb-2 d-flex justify-content-center">
+                <specialtyCircle @click="specialtySelected(global_specialties[5]); circleColors[5]='#eeeeee'" :specialty='global_specialties[5]' :color='circleColors[5]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[6]); circleColors[6]='#eeeeee'" :specialty='global_specialties[6]' :color='circleColors[6]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[7]); circleColors[7]='#eeeeee'" :specialty='global_specialties[7]' :color='circleColors[7]' > </specialtyCircle>
+            </div>
+<!--FORM INPUT SPECIALTY -->     
+
 <!--       
                 <div v-if="show_input_specialty()"  class="w-100 mb-1"  >
                     <div class="">
@@ -59,8 +99,13 @@ import inputFormComuna  from './InputFormComuna.vue'
                 -->
 
                 </form> 
+
                
             </div>	
+            
+            <div id="scrollToMe" ref="scrollToMe" class="m-4 p-4"></div>
+            
+
             
         </div>			
 
@@ -95,6 +140,19 @@ export default {
             form_app_type_remote : false ,
 
             setLocationCode : 1 ,
+            circleColors: ['#b7d8d6','#DDC696','#CEF3DD','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#89dee2'],
+       
+            search_params : { 
+				        specialty : null ,
+                        type_home : null ,
+                        type_center : null ,
+                        type_home : null ,
+                        type_remote : null ,
+                        location : null ,
+                        date : null ,  
+                  		  },
+
+            el: '#app',
     }
   },
 
@@ -106,9 +164,23 @@ export default {
        let aux_date = new Date() 
         this.form_minimum_date = aux_date 
         this.form_current_date = aux_date.getFullYear()+"-"+(aux_date.getMonth()+1)+"-"+aux_date.getDate()
+        this.search_params.date =   this.form_current_date 
         },
 
     methods: {
+        scrollDown()
+        {
+            console.log("scroll Down");
+            var element = this.$refs['scrollToMe'];
+            var top = element.offsetTop;
+            window.scrollTo(0, top);
+        },
+        specialtySelected(specialty)
+        {
+           this.search_params.specialty = specialty
+           console.log("Specialty Selected"+JSON.stringify(this.search_params))
+           this.$emit("searchBySpecialty",this.search_params );
+        },
 
         show_input_specialty()
         {   
