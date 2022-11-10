@@ -27,8 +27,11 @@ import SuggestedSearch from './SuggestedSearch.vue'
       <div>
             <div>
             <!--  <text @click="WordSphere.$emit('start_autonomous_move');  " >START MOVE</text> -->
+              <suggested-search v-on:suggestedSearchCall='suggestedSearchCall' :global_specialties="global_specialties" >  </suggested-search > 
+    
               <searchAppointmentForm  :suggestedSearchParams='suggestedSearchParams' v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
-          
+                
+
               <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
                   En {{metric_search/1000}} Seg encontramos {{appointments_filtered.appointments_list.length}} resultados
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
@@ -39,7 +42,6 @@ import SuggestedSearch from './SuggestedSearch.vue'
 
               <div v-else style="position:relative; bottom:0 ; width:100%">
                
-                <suggested-search v-on:suggestedSearchCall='suggestedSearchCall' :global_specialties="global_specialties" >  </suggested-search > 
                 
                 
                 <!--
