@@ -40,18 +40,18 @@ import specialtyCircle from './SpecialtyCircle.vue'
 
 <!--FORM INPUT SPECIALTY -->     
             <div class="w-100 mb-0 mt-3 pb-0 d-flex justify-content-center">
-                <specialtyCircle @click="specialtySelected(global_specialties[0]); circleColors[0]='#eeeeee' ; scrollDown()  " :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[1]); circleColors[1]='#eeeeee'" :specialty='global_specialties[1]' :color='circleColors[1]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[2]); circleColors[2]='#eeeeee'" :specialty='global_specialties[2]' :color='circleColors[2]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[0]); circleColors[0]='#eeeeee' ;  " :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[1]); circleColors[1]='#eeeeee' ;  " :specialty='global_specialties[1]' :color='circleColors[1]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[2]); circleColors[2]='#eeeeee' ;  " :specialty='global_specialties[2]' :color='circleColors[2]' > </specialtyCircle>
             </div>
             <div class="w-100 mt-0 pt-0 d-flex justify-content-center">
-                <specialtyCircle @click="specialtySelected(global_specialties[3]); circleColors[3]='#eeeeee'" :specialty='global_specialties[3]' :color='circleColors[3]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[4]); circleColors[4]='#eeeeee'" :specialty='global_specialties[4]' :color='circleColors[4]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[3]); circleColors[3]='#eeeeee' ; " :specialty='global_specialties[3]' :color='circleColors[3]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[4]); circleColors[4]='#eeeeee' ; " :specialty='global_specialties[4]' :color='circleColors[4]' > </specialtyCircle>
             </div>
             <div class="w-100 mt-0 pt-0  mb-3 pb-2 d-flex justify-content-center">
-                <specialtyCircle @click="specialtySelected(global_specialties[5]); circleColors[5]='#eeeeee'" :specialty='global_specialties[5]' :color='circleColors[5]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[6]); circleColors[6]='#eeeeee'" :specialty='global_specialties[6]' :color='circleColors[6]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[7]); circleColors[7]='#eeeeee'" :specialty='global_specialties[7]' :color='circleColors[7]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[5]); circleColors[5]='#eeeeee' ;  " :specialty='global_specialties[5]' :color='circleColors[5]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[6]); circleColors[6]='#eeeeee' ;  " :specialty='global_specialties[6]' :color='circleColors[6]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[7]); circleColors[7]='#eeeeee' ;  " :specialty='global_specialties[7]' :color='circleColors[7]' > </specialtyCircle>
             </div>
 <!--FORM INPUT SPECIALTY -->     
 
@@ -103,7 +103,7 @@ import specialtyCircle from './SpecialtyCircle.vue'
                
             </div>	
             
-            <div id="scrollToMe" ref="scrollToMe" class="m-4 p-4"></div>
+            <div id="scrollToMe" ref="scrollToMe" class="mt-4"></div>
             
 
             
@@ -157,7 +157,7 @@ export default {
   },
 
  props: [ 'global_specialties','global_comunas', 'currentDate','n_app_filtered','suggestedSearchParams' ], 
- emits: [ 'searchBySpecialty','searchByTypeCenter','searchByTypeHome' ,'searchByTypeRemote' ,'searchByLocation' ,'searchByDate' ],
+ emits: [ 'searchGeneric' ,'searchBySpecialty','searchByTypeCenter','searchByTypeHome' ,'searchByTypeRemote' ,'searchByLocation' ,'searchByDate' ],
  
    created () {    
        //TODO DEBERIA SER YEAR MONT DAY LOCAL TIME
@@ -168,6 +168,7 @@ export default {
         },
 
     methods: {
+    /*
         scrollDown()
         {
             console.log("scroll Down");
@@ -175,11 +176,11 @@ export default {
             var top = element.offsetTop;
             window.scrollTo(0, top);
         },
+    */
         specialtySelected(specialty)
         {
            this.search_params.specialty = specialty
-           console.log("Specialty Selected"+JSON.stringify(this.search_params))
-           this.$emit("searchBySpecialty",this.search_params );
+           this.$emit("searchGeneric",this.search_params);
         },
 
         show_input_specialty()
@@ -215,8 +216,10 @@ export default {
 
 //SELECTED IN FORM TO EMIT  FOR SEARCH 
         //SELECTED SPECIALTY comes from V-ON event component
+        /*
         selectedSpecialtyCode(code)
         {
+        
         this.form_specialty = code;
         let aux_date = new Date(this.form_current_date)
         aux_date.setHours(24,0,0,0)
@@ -232,9 +235,12 @@ export default {
         
         console.log("SearchAppointmentForm By Specialty Id:"+JSON.stringify(search_params));
 
-        this.$emit("searchBySpecialty",search_params );
+        
+        this.search_params.specialty = code ;
+        this.$emit("searchGeneric",this.search_params);
         },
-
+        */
+        /*
         // SELECTED TYPE_CENTER
         selectedTypeCenter(){
             this.form_app_type_center=!this.form_app_type_center ;
@@ -280,9 +286,13 @@ export default {
                   		  };
             this.$emit("searchByTypeRemote",search_params );
         },
+        */
         //SELECTED COMUNA 
         selectedComunaCode(code)
         {
+            this.search_params.location = code 
+            this.$emit("searchGeneric",this.search_params);
+            /*
             this.form_location_code = code ; 
                 const search_params = { 
 				        specialty : this.form_specialty ,
@@ -294,11 +304,11 @@ export default {
                         date :  this.form_current_date ,  
                   		  };
             this.$emit("searchByLocation",search_params );
+            */
         },
         //SELECTED DATE 
         selectedDate(date)
         {
-
             console.log("SelectedDate :"+date);
 
                 const search_params = { 
@@ -314,10 +324,9 @@ export default {
             {
             this.$emit("searchByDate",search_params );
             }
-
         },          
 
-        },
+    },
     
     watch : {
         suggestedSearchParams(val)
