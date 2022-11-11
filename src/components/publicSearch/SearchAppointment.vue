@@ -29,15 +29,15 @@ import SuggestedSearch from './SuggestedSearch.vue'
             <!--  <text @click="WordSphere.$emit('start_autonomous_move');  " >START MOVE</text> -->
              <!--<suggested-search v-on:suggestedSearchCall='suggestedSearchCall' :global_specialties="global_specialties" >  </suggested-search > 
               --> 
-              <searchAppointmentForm  :suggestedSearchParams='suggestedSearchParams' v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
+              <searchAppointmentForm  v-on:searchGeneric="searchGeneric" :suggestedSearchParams='suggestedSearchParams' v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
                 
-
+<div ref="scrollToMe"></div>
               <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
                   En {{metric_search/1000}} Seg encontramos {{appointments_filtered.appointments_list.length}} resultados
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                   -->
-                  <hr ref="scrollToMe">
-                  <searchAppointmentResult :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+                  <hr >
+                  <searchAppointmentResult   :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
               </div>
 
               <div v-else style="position:relative; bottom:0 ; width:100%">
@@ -132,6 +132,30 @@ export default {
             },
 
 methods: {
+
+            async searchGeneric(params)
+            {
+               console.log("Search Generic Params :"+JSON.stringify(params))
+               let response_search = await this.searchAppointmentsGeneric(params)
+               
+               if ( response_search!= null &&  response_search.appointments_list != null &&  response_search.appointments_list.length > 0  )
+               {
+               this.appointments = response_search ; 
+               // this.centers = response_search.centers ; 
+               this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
+               console.log ("SearchGeneric RESULTS : "+JSON.stringify(this.appointments_filtered))
+               this.n_appointments_found = this.appointments_filtered.appointments_list.length 
+               }
+               else{
+                 this.n_appointments_found = 0  
+                 this.appointments_filtered = []
+                 this.centers_filtered = []
+               }          
+               //this.forceReRender = Math.random() 
+               this.scrollDown()
+
+            },
+
             scrollDown()
             {
             console.log("scroll Down");
@@ -152,6 +176,7 @@ methods: {
             this.daterequired = year_month_day ;
             },
 //SEARCH BY SPECIALTY
+/*
             async searchBySpecialty(params)
             {
               console.log ("SearchAppointment searchBySpecialty ")
@@ -174,6 +199,9 @@ methods: {
               this.scrollDown()
         
             },
+            */
+
+            /*
 //SEARCH BY TYPE_CENTER
             searchByTypeCenter(params)
             {
@@ -213,20 +241,7 @@ methods: {
             async searchByTypeRemote(params)
             {
               console.log("Search by type Remote SEARCH APPOINTMENT ");
-              /*
-              //cicle for each day
-              for (let i = 0; i < this.appointments.appointments_list.length; i++) {
-              console.log("Filter day "+JSON.stringify(this.appointments.appointments_list[i]))
-              //filter centers Remote Care == true
-              let aux_centers =  this.appointments.appointments_list[i].centers || [] 
-              this.appointments_filtered.appointments_list[i].centers = aux_centers.filter(center => center.remote_care == true );
-              //extract only id froms Centers filtered
-              let centers_filtered_ids = this.appointments_filtered.appointments_list[i].centers.map(center => center.id ) ;
-              //finally filter appointments exist in centers filtered ids
-              let aux_appointments =  this.appointments.appointments_list[i].appointments || [] 
-              this.appointments_filtered.appointments_list[i].appointments = aux_appointments.filter(appointment => centers_filtered_ids.includes(appointment.center_id) );
-               }
-              */
+              
               let response_search = await this.searchAppointments(params)
                
               if ( response_search!= null &&  response_search.appointments_list != null &&  response_search.appointments_list.length > 0  )
@@ -306,9 +321,11 @@ methods: {
               }    
                            
             },
+            */  
 
 //SUGESTED SEARCH
-            async suggestedSearchCall(params)
+/*  
+async suggestedSearchCall(params)
             {
               params.date = this.daterequired
               this.suggestedSearchParams = params 
@@ -333,8 +350,53 @@ methods: {
               //this.forceReRender = Math.random() 
 
             },
+*/
 
 //SEARCH GENERIC
+async searchAppointmentsGeneric(params) {	
+              console.log("search Appointments Generic Input Params :"+JSON.stringify(params) ) 
+              this.params_bkp = params
+              this.showMainScreen = false ;
+              
+              let response_json = {data:[]}
+              let metric = Date.now();
+              this.active_spinner = true ; 
+              if (  params !=null && params.specialty != null )
+              {            
+                                 
+                          const json = { 
+                  // agenda_id : this.par_agenda_id ,			 
+                          date : new Date(params.date) ,
+                          specialty : params.specialty.id ,
+                          location : params.location ,
+                          home_visit : params.home_visit,
+                          type_home : params.type_home,
+                          type_center : params.type_center,
+                          type_remote : params.type_remote,           
+                                  };
+
+                  console.log ("patient_get_appointments_generic REQUEST:"+ JSON.stringify(json)  );
+                 
+                  let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_generic",json);
+                    if (response != null )
+                    {
+                    response_json = response.data ; 
+                    console.log ("patient_get_appointments_day2 RESPONSE:"+JSON.stringify(response_json)) ;
+                    }
+              }
+              else // specialty == null
+              {
+                 response_json = null;
+              } 
+              this.active_spinner = false  
+
+                    metric = (Date.now() - metric ) ;     
+                    this.metric_search = metric ;
+                    console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );              
+
+              return response_json
+            },
+//SEARCH APPOINTMENTS
             async searchAppointments(params) {	
               console.log("search Appointments input params :"+JSON.stringify(params) ) 
               this.params_bkp = params
