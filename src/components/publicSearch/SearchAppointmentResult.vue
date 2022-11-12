@@ -12,7 +12,7 @@ import LoadProgress from '../loadProgress.vue'
 
 <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
-       <div  v-if="array_appointments !=null && array_appointments.length > 0"   >
+       <div  v-if="n_appointments_found>0 && array_appointments !=null && array_appointments.length > 0"   >
             <!--
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
@@ -33,6 +33,10 @@ import LoadProgress from '../loadProgress.vue'
             </div>
 
                 <!-- Start make room for Modal data when it display-->
+        </div>
+        <div v-else  class="w-100 text-center" >
+            <i style="font-size: 50vw;" class=" m-0 p-0 bi bi-wind"></i><br>
+            Sin Horas disponible
         </div>	
              <div style="height: 400px">
             </div>
@@ -71,7 +75,7 @@ export default {
     }
   },
 
-   props: ['centers','searchParameters','session_params','appointments_filtered','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
+   props: [ 'n_appointments_found' ,'centers','searchParameters','session_params','appointments_filtered','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
    emits: ["updateLastSearch"],
 
     
