@@ -29,15 +29,19 @@ import SuggestedSearch from './SuggestedSearch.vue'
             <!--  <text @click="WordSphere.$emit('start_autonomous_move');  " >START MOVE</text> -->
              <!--<suggested-search v-on:suggestedSearchCall='suggestedSearchCall' :global_specialties="global_specialties" >  </suggested-search > 
               --> 
+              <!--
               <searchAppointmentForm  v-on:searchGeneric="searchGeneric" :suggestedSearchParams='suggestedSearchParams' v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
-                
+                -->
+              <searchAppointmentForm  v-on:searchGeneric="searchGeneric"  :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
+              
+
 <div ref="scrollToMe"></div>
               <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
-                  En {{metric_search/1000}} Seg encontramos {{appointments_filtered.appointments_list.length}} resultados
+                  En {{metric_search/1000}} Seg encontramos {{n_appointments_found }} resultados para ti. 
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                   -->
                   <hr >
-                  <searchAppointmentResult   :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+                  <searchAppointmentResult  :n_appointments_found="n_appointments_found" :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
               </div>
 
               <div v-else style="position:relative; bottom:0 ; width:100%">
@@ -59,7 +63,7 @@ import SuggestedSearch from './SuggestedSearch.vue'
         
             </div>
       </div>
-  <FooterContent v-if="showMainScreen"  ></FooterContent>
+  <FooterContent v-if="true"  ></FooterContent>
   </div>
 
   
@@ -133,6 +137,17 @@ export default {
 
 methods: {
 
+            numberAppointmentFound()
+            {
+              let n_app = 0
+              for (var i = 0; i <this.appointments_filtered.appointments_list.length ; i++) {
+                if (this.appointments_filtered.appointments_list != null && this.appointments_filtered.appointments_list[i].appointments != null ) {
+                  n_app = n_app + this.appointments_filtered.appointments_list[i].appointments.length
+                }
+              }
+              return n_app
+            },
+
             async searchGeneric(params)
             {
                console.log("Search Generic Params :"+JSON.stringify(params))
@@ -144,15 +159,17 @@ methods: {
                // this.centers = response_search.centers ; 
                this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
                console.log ("SearchGeneric RESULTS : "+JSON.stringify(this.appointments_filtered))
-               this.n_appointments_found = this.appointments_filtered.appointments_list.length 
-               }
+               //this.n_appointments_found = this.appointments_filtered.appointments_list.length 
+              this.n_appointments_found = this.numberAppointmentFound()  
+              this.scrollDown()
+              }
                else{
                  this.n_appointments_found = 0  
                  this.appointments_filtered = []
                  this.centers_filtered = []
                }          
                //this.forceReRender = Math.random() 
-               this.scrollDown()
+              
 
             },
 
@@ -353,6 +370,7 @@ async suggestedSearchCall(params)
 */
 
 //SEARCH GENERIC
+
 async searchAppointmentsGeneric(params) {	
               console.log("search Appointments Generic Input Params :"+JSON.stringify(params) ) 
               this.params_bkp = params
@@ -381,7 +399,7 @@ async searchAppointmentsGeneric(params) {
                     if (response != null )
                     {
                     response_json = response.data ; 
-                    console.log ("patient_get_appointments_day2 RESPONSE:"+JSON.stringify(response_json)) ;
+                    console.log ("patient_get_appointments_generic RESPONSE:"+JSON.stringify(response_json)) ;
                     }
               }
               else // specialty == null
@@ -396,8 +414,10 @@ async searchAppointmentsGeneric(params) {
 
               return response_json
             },
+            
 //SEARCH APPOINTMENTS
-            async searchAppointments(params) {	
+/*
+async searchAppointments(params) {	
               console.log("search Appointments input params :"+JSON.stringify(params) ) 
               this.params_bkp = params
               this.showMainScreen = false ;
@@ -440,11 +460,12 @@ async searchAppointmentsGeneric(params) {
 
               return response_json
             },
+*/
 
             async updateLastSearch()
             {
-                console.log ("END emit : Search Appointment"+JSON.stringify(this.params_bkp)) ;
-                this.appointments = await this.searchAppointments(this.params_bkp); 
+                console.log ("update Last Search"+JSON.stringify(this.params_bkp)) ;
+                this.appointments = await  this.searchGeneric(this.params_bkp); 
                 this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
             },
 
