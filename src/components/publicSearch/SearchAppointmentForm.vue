@@ -11,34 +11,38 @@ import specialtyCircle from './SpecialtyCircle.vue'
 <template>
       <div class="container" style="padding-right: 0 ;padding-left: 0  " >
 
-            <div id="formSearch" class="mx-auto "  >
+           <div id="formSearch" class="mx-auto "  >
                 <form autocomplete="off" >
 
 <!--FORM TYPE CENTER HOME REMOTE -->                    
-                <div>
+                <div class="position-relative">
                     <div class="d-flex justify-content-center mb-0">
-                        <div @click="search_params.type_center = !search_params.type_center" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_center  }" > 
+                        <div @click="search_params.type_center = !search_params.type_center; search_params.type_home = false ; search_params.type_remote=false " :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_center  }" > 
                             <div class="m-2">
                                 <i  class="bi bi-building m-0  display-3 d-flex justify-content-center" style="color: #781ED1;"></i>
                                 <text style="font-size: 0.7em;">En Consulta</text>
                             </div>
                         </div>
-                        <div @click="search_params.type_home = !search_params.type_home" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-2 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_home }" > 
+                        <div @click="search_params.type_home = !search_params.type_home; search_params.type_remote=false ;search_params.type_center=false" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-2 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_home }" > 
                             <div class="m-2">
                                 <i  class="bi bi-house-door m-0  display-3 d-flex justify-content-center" style="color:#3399FF;"></i>
                                 <text style="font-size: 0.7em;">A Domicilio</text>
                             </div>
                         </div>
-                        <div @click="search_params.type_remote = !search_params.type_remote" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_remote }" > 
+                        <div @click="search_params.type_remote = !search_params.type_remote;search_params.type_home = false ;search_params.type_center=false " :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_remote }" > 
                         <div class="m-2">
                                 <i  class="bi bi-camera-video m-0 display-3 d-flex justify-content-center" style="color:#b36b00;"></i>
                                 <text style="font-size: 0.7em;">Remoto</text>
                             </div>
                         </div>
                     </div>
+                    
+                 <img v-if="!search_params.type_remote && !search_params.type_home  && !search_params.type_center" src="/public/finger.png" class="position-absolute  top-0 end-0" width="80" > 
+
                 </div>   
 
-<!--FORM INPUT SPECIALTY -->     
+<!--FORM INPUT SPECIALTY -->
+<div class="position-relative">    
             <div class="w-100 mb-0 mt-3 pb-0 d-flex justify-content-center">
                 <specialtyCircle @click="specialtySelected(global_specialties[0]); circleColors[0]='#eeeeee' ;  " :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
                 <specialtyCircle @click="specialtySelected(global_specialties[1]); circleColors[1]='#eeeeee' ;  " :specialty='global_specialties[1]' :color='circleColors[1]' > </specialtyCircle>
@@ -48,11 +52,14 @@ import specialtyCircle from './SpecialtyCircle.vue'
                 <specialtyCircle @click="specialtySelected(global_specialties[3]); circleColors[3]='#eeeeee' ; " :specialty='global_specialties[3]' :color='circleColors[3]' > </specialtyCircle>
                 <specialtyCircle @click="specialtySelected(global_specialties[4]); circleColors[4]='#eeeeee' ; " :specialty='global_specialties[4]' :color='circleColors[4]' > </specialtyCircle>
             </div>
+            <img v-if=" this.search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
+
             <div class="w-100 mt-0 pt-0  mb-3 pb-2 d-flex justify-content-center">
                 <specialtyCircle @click="specialtySelected(global_specialties[5]); circleColors[5]='#eeeeee' ;  " :specialty='global_specialties[5]' :color='circleColors[5]' > </specialtyCircle>
                 <specialtyCircle @click="specialtySelected(global_specialties[6]); circleColors[6]='#eeeeee' ;  " :specialty='global_specialties[6]' :color='circleColors[6]' > </specialtyCircle>
                 <specialtyCircle @click="specialtySelected(global_specialties[7]); circleColors[7]='#eeeeee' ;  " :specialty='global_specialties[7]' :color='circleColors[7]' > </specialtyCircle>
             </div>
+</div>
 <!--FORM INPUT SPECIALTY -->     
 
 <!--       
@@ -157,7 +164,7 @@ export default {
   },
 
  props: [ 'global_specialties','global_comunas', 'currentDate','n_app_filtered','suggestedSearchParams' ], 
- emits: [ 'searchGeneric' ,'searchBySpecialty','searchByTypeCenter','searchByTypeHome' ,'searchByTypeRemote' ,'searchByLocation' ,'searchByDate' ],
+ emits: [ 'searchGeneric'  ],
  
    created () {    
        //TODO DEBERIA SER YEAR MONT DAY LOCAL TIME
@@ -196,7 +203,7 @@ export default {
         },
 
         show_input_location()
-        {   if ( this.form_specialty != null )
+        {   if ( this.search_params.specialt != null )
             { return true } 
             else
             { return false }
@@ -204,14 +211,13 @@ export default {
 
         show_input_date()
         {   
-            return true
-            /*
-            if ( this.form_specialty != null  )
+            //return true
+            
+            if ( this.search_params.specialty != null  )
             {   return true } 
             else
             { return false }
-
-            */
+            
         },
 
 //SELECTED IN FORM TO EMIT  FOR SEARCH 
@@ -310,7 +316,10 @@ export default {
         selectedDate(date)
         {
             console.log("SelectedDate :"+date);
+            this.search_params.date = date 
+            this.$emit("searchGeneric",this.search_params);
 
+            /*
                 const search_params = { 
 				        specialty : this.form_specialty ,
                         type_center : this.form_app_type_center,
@@ -324,18 +333,23 @@ export default {
             {
             this.$emit("searchByDate",search_params );
             }
+            */
+           
         },          
 
     },
     
     watch : {
+        /*
         suggestedSearchParams(val)
         {
            console.log("SearchAppointmentForm.  suggestedSearchParams:"+JSON.stringify(val))
            
            this.form_specialty = val.specialty ; 
         },
+        */
         
+
         form_current_date(newValue, oldValue)
         {
             if (newValue != null)
