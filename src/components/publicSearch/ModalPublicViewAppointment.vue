@@ -50,6 +50,18 @@ import loadProgress from '../loadProgress.vue'
 				</text>       		
 			</div>
 		</div>
+
+		<div class="d-flex justify-content-start mb-3" >
+			<text  style=""> <i class="text-muted bi bi-person display-1 m-0 p-0"></i> </text>
+
+			<div class="">
+				<text class="">	Profesional: </text><br>
+				<text class="" style="">	 
+					{{professional_name }}   
+				</text>       		
+			</div>
+		</div>
+		
 		<!-- LOCATION -->		
 
         <div class="m-2 " style="">
@@ -115,11 +127,7 @@ import loadProgress from '../loadProgress.vue'
 					<!-- Include here a map -->
         </div>
 
-		<div>
-          	<p> <i class="text-muted bi bi-person display-1 m-0 p-0"></i> 
-				 {{professional_name }}  
-			</p>
-        </div>
+		
 
 
 		
