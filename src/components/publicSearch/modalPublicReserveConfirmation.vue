@@ -37,19 +37,19 @@ import axios from 'axios'
             <p> <i class="bi bi-check2-circle display-1"></i></p>
           </div>
           <div class="text-dark d-flex justify-content-center"> 
-            <p> <i class=""></i> Recuerde confirmar su asistencia respondiendo al mensaje que enviamos a su correo  lalaqq12@nada.com  </p>
+            <p> <i class=""></i> Recuerde confirmar su asistencia respondiendo el correo que enviamos a {{appConfirmed.patient_email}}  </p>
           </div>
 <hr>
 					<div  class="h4">
               <div  class=" display-4 mb-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appConfirmed.specialty_reserved) }} </div> 
 							<div class="" >
-								<p> <i class="bi bi-circle-fill"  ></i>  Fecha :  {{ transform_date( appConfirmed.date.substring(0, 10) ) }}  </p>
-								<p> <i class="bi bi-circle-fill  "></i> Hora  :  {{appConfirmed.start_time.substring(0, 5) }} hrs     </p>
-								<p> <i class="bi bi-person-circle "></i> Con :  {{app.professional_name }}  </p>
+								<p> <i class="bi bi-circle-fill"  ></i>  Fecha :  {{ transform_date( appConfirmed.date ) }}  </p>
+								<p> <i class="bi bi-circle-fill  "></i> Hora  :  {{ transform_time(appConfirmed.start_time) }} hrs     </p>
+								<p> <i class="bi bi-person-circle "></i> Con :  {{professional_data.name }}  </p>
               
                 <p>  
                      <text v-if="appConfirmed.app_type_remote" >  <i class=" h1 bi bi-camera-video "></i> Atencion Remota:<br>Profesional le llamara directamente a su Telefono: <b>{{appConfirmed.patient_phone1 }}</b></text>  
-                     <text v-if="appConfirmed.app_type_center" > <i class="  h1 bi bi-building "> </i> En {{app.center_name }} <br>{{app.center_address }} </text>  
+                     <text v-if="appConfirmed.app_type_center" > <i class="  h1 bi bi-building "> </i> En {{center_data.name }} <br>{{center_data.address }} </text>  
                      <text v-if="appConfirmed.app_type_home" > <i class="    h1 bi bi-house-door "></i> a Domicilio en dirección paciente: <br> {{appConfirmed.patient_address }}</text> 
                 </p>
                 
@@ -239,7 +239,7 @@ export default {
         }
   },
 
- props: [ 'searchParameters', 'appConfirmed','eventShowModalConfirmation','app' , 'global_specialties' ],
+ props: [ 'professional_data' , 'center_data', 'searchParameters', 'appConfirmed','eventShowModalConfirmation','app' , 'global_specialties' ],
  emits: ['updateLastSearch'] , 
           
 
@@ -260,12 +260,25 @@ computed: {
             if (temp != null) { return temp.name }
             else { return null }
             },
-
-           	transform_date(date)
+            
+            transform_time(date)
             {
-              let temp = date.split("-") ;
-              return (""+temp[2]+" "+this.getShortMonthName(temp[1])+" "+temp[0])
+              let temp = new Date(date)
+              return (  String(temp.getHours()).padStart(2,0)+":"+String(temp.getMinutes()).padStart(2,0) )
             },
+            transform_date(date)
+            {
+              let temp = new Date(date)
+              return ( this.getDayName(temp.getDay())+" "+temp.getDate()+" de "+this.getShortMonthName(temp.getMonth()+1)+" "+temp.getFullYear())
+            },
+
+            getDayName(day)
+            {
+              console.log("day:"+parseInt(day));
+              let days = ['domingo','Lunes','Martes','Miercoles' ,'Jueves','Viernes','Sabado' ]
+              return days[parseInt(day)];
+            },
+
              getShortMonthName(month)
             {
               console.log("MONTH:"+parseInt(month));
