@@ -4,7 +4,7 @@ import { ref } from 'vue'
 import inputFormSpecialty  from './InputFormSpecialty.vue'
 import inputFormComuna  from './InputFormComuna.vue'
 import specialtyCircle from './SpecialtyCircle.vue'
-
+import appTypeCircle from './AppTypeCircle.vue'
 
 </script>
 
@@ -13,32 +13,14 @@ import specialtyCircle from './SpecialtyCircle.vue'
 
            <div id="formSearch" class="mx-auto "  >
                 <form autocomplete="off" >
-
 <!--FORM TYPE CENTER HOME REMOTE -->                    
                 <div class="position-relative">
-                    <div class="d-flex justify-content-center mb-0 mt-0">
-                        <div @click="search_params.type_center = !search_params.type_center; search_params.type_home = false ; search_params.type_remote=false " :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'bg-primary' : search_params.type_center  }" > 
-                            <div class="m-2">
-                                <i  class="bi bi-building m-0  display-3 d-flex justify-content-center" style="color: #781ED1;" ></i>
-                                <text style="font-size: 0.7em;">En Consulta</text>
-                            </div>
-                        </div>
-                        <div @click="search_params.type_home = !search_params.type_home; search_params.type_remote=false ;search_params.type_center=false" :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-2 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_home }" > 
-                            <div class="m-2">
-                                <i  class="bi bi-house-door m-0  display-3 d-flex justify-content-center" style="color:#3399FF;"></i>
-                                <text style="font-size: 0.7em;">A Domicilio</text>
-                            </div>
-                        </div>
-                        <div @click="search_params.type_remote = !search_params.type_remote;search_params.type_home = false ;search_params.type_center=false " :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_remote }" > 
-                            <div class="m-2">
-                                <i  class="bi bi-camera-video m-0 display-3 d-flex justify-content-center" style="color:#b36b00;"></i>
-                                <text style="font-size: 0.7em;">Remoto</text>
-                            </div>
-                        </div>
-                    </div>
-                    
-                 <img v-if="!search_params.type_remote && !search_params.type_home  && !search_params.type_center" src="/public/finger.png" class="position-absolute  top-0 end-0" width="80" > 
-
+                    <div class="d-flex justify-content-center mb-0 mt-0">                    
+                        <appTypeCircle :appType='0' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>
+                        <appTypeCircle :appType='1' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>
+                        <appTypeCircle :appType='2' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>    
+                    </div>                    
+                    <img v-if="!search_params.type_remote && !search_params.type_home  && !search_params.type_center" src="/public/finger.png" class="position-absolute  top-0 end-0" width="80" > 
                 </div>   
 
 <!--FORM INPUT SPECIALTY -->
@@ -131,9 +113,7 @@ import specialtyCircle from './SpecialtyCircle.vue'
             </div>	
             
             <div id="scrollToMe" ref="scrollToMe" class="mt-4"></div>
-            
-
-            
+           
         </div>			
 
 </template>
@@ -150,6 +130,10 @@ export default {
     return {
             search_button_message: "Buscar " ,
 
+            center_color :  '#781ED1',
+            home_color: '#3399FF',
+            remote_color: '#b36b00',
+
             form_token : null,
             form_specialty : null,
             form_location_code  : null,
@@ -161,10 +145,11 @@ export default {
             insurance_list : [],
             comuna_list : [],
             specialty_list : [ ] ,
-
+/*
             form_app_type_home : false ,
             form_app_type_center : false ,
             form_app_type_remote : false ,
+*/
 
             setLocationCode : 1 ,
             circleColors: ['#b7d8d6','#DDC696','#CEF3DD','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#89dee2'],
@@ -180,34 +165,59 @@ export default {
                         date : null ,  
                   		  },
 
+            appTypeCode : null ,
+
             el: '#app',
     }
   },
 
- props: [ 'global_specialties','global_comunas', 'currentDate','n_app_filtered','suggestedSearchParams' ], 
+ props: [ 'global_specialties','global_comunas', 'currentDate','n_appointments_found','suggestedSearchParams' ], 
  emits: [ 'searchGeneric'  ],
  
    created () {    
        //TODO DEBERIA SER YEAR MONT DAY LOCAL TIME
-       let aux_date = new Date() 
+        let aux_date = new Date() 
         this.form_minimum_date = aux_date 
         this.form_current_date = aux_date.getFullYear()+"-"+(aux_date.getMonth()+1)+"-"+aux_date.getDate()
         this.search_params.date =   this.form_current_date 
         },
 
     methods: {
-    /*
-        scrollDown()
+        appTypeSelected(appType)
         {
-            console.log("scroll Down");
-            var element = this.$refs['scrollToMe'];
-            var top = element.offsetTop;
-            window.scrollTo(0, top);
+           console.log("appTypeSelected:"+appType);
+           this.appTypeCode = appType;
+
+           switch (appType) {
+                case 0:
+                    this.search_params.type_center = true 
+                    this.search_params.type_home = false 
+                    this.search_params.type_remote = false  
+                break;
+              
+                case 1:
+                    this.search_params.type_center = false 
+                    this.search_params.type_home = true
+                    this.search_params.type_remote = false                  
+                break;
+              
+                case 2:
+                    this.search_params.type_center = false 
+                    this.search_params.type_home = false 
+                    this.search_params.type_remote = true 
+                break;
+             }
+
+             if (this.search_params.specialty != null)
+             {
+                this.$emit("searchGeneric",this.search_params);
+             }
+
         },
-    */
+
         specialtySelected(specialty)
         {
-            console.log("SearchAppointmentFOrm specialtySelected "+JSON.stringify(specialty))
+           console.log("SearchAppointmentFOrm specialtySelected "+JSON.stringify(specialty))
            this.search_params.specialty = specialty
            this.$emit("searchGeneric",this.search_params);
         },
@@ -226,18 +236,34 @@ export default {
 
         show_input_location()
         {   
-            return true
+            //return true
             /*
             if ( this.search_params.specialt != null )
             { return true } 
             else
             { return false }
             */
+           if (this.n_appointments_found>0)
+           {
+            return true
+           }
+           else 
+           {
+            return false
+           }
         },
 
         show_input_date()
         {   
+            if (this.n_appointments_found>0)
+           {
             return true
+           }
+           else 
+           {
+            return false
+           }
+            //return true
             /*
             if ( this.search_params.specialty != null  )
             {   return true } 
@@ -324,7 +350,10 @@ export default {
         selectedComunaCode(code)
         {
             this.search_params.location = code 
+            if (this.search_params.location !=null )
+            {
             this.$emit("searchGeneric",this.search_params);
+            }
             /*
             this.form_location_code = code ; 
                 const search_params = { 
