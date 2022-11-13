@@ -62,8 +62,8 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
-               calendar_data : null  ,
-               center_data : null , 
+               //calendar_data : null  ,
+               //center_data : null , 
                selectApp : false ,
               // days_expired : false ,
              
