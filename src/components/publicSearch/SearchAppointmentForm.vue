@@ -69,7 +69,7 @@ import specialtyCircle from './SpecialtyCircle.vue'
                 <specialtyCircle @click="specialtySelected(global_specialties[3]); circleColors[3]='#eeeeee' ; " :specialty='global_specialties[3]' :color='circleColors[3]' :textColor='textColors[3]'  > </specialtyCircle>
                 <specialtyCircle @click="specialtySelected(global_specialties[4]); circleColors[4]='#eeeeee' ; " :specialty='global_specialties[4]' :color='circleColors[4]' :textColor='textColors[4]'  > </specialtyCircle>
             </div>
-            <img v-if=" this.search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
+            <img v-if="search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
 
             <div class="w-100 mt-0 pt-0  mb-0 pb-0 d-flex justify-content-center">
                 <specialtyCircle @click="specialtySelected(global_specialties[5]); circleColors[5]='#eeeeee' ;  " :specialty='global_specialties[5]' :color='circleColors[5]' :textColor='textColors[5]'  > </specialtyCircle>

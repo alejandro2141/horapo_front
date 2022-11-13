@@ -93,7 +93,7 @@ data: function () {
           // center_color   : randomColor ,
            };
 
-            let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
+            let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
             this.session_params.first_time = false ;   
         },
  
