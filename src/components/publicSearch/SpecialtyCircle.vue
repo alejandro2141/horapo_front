@@ -14,17 +14,17 @@ import { ref } from 'vue'
                     </div> 
                 </div> 
                 -->
-                
-                <div  id="hexagono3" @click="active=!active" :style="{ 'background-color': color }" class=" border  border-2  d-flex justify-content-center align-items-center" :class="{'border-success': true}" > 
-                    <div id="hexagono3-1"  class="text-center " :style="{ 'background-color': color }" >
-                        <div id="hexagono3-2" class="align-items-end" :style="{ 'background-color': color }" >
-                            <text class="text-dark"> <br><br><br><br>{{getSpecialtyName()}} 
+            <div @click='selectSpecialty(specialty)' >
+                <div  id="hexagono3"  :style="{ 'background-color': '#FF0000'        } " class=" border  border-2  d-flex justify-content-center align-items-center"  > 
+                    <div id="hexagono3-1"  class="text-center" :style="{ 'background-color': '#00FF00'      } " >
+                        <div id="hexagono3-2" class="d-flex justify-content-center align-items-center" :style="{ 'background-color': getBgcolor() , 'color' : getTextColor() } " >
+                            <text > {{getSpecialtyName()}} 
                             </text>
                             <br> 
                         </div>
                     </div> 
                 </div> 
-
+            </div>
 
 
 
@@ -32,12 +32,12 @@ import { ref } from 'vue'
 
 <style scoped>
 #hexagono3 {
-  height: 15em;
-  margin: -4.2em 0; 
+  height: 10em;
+  margin: -2.2em 0; 
   overflow: hidden;
   transform: rotate(120deg);
   visibility: hidden;
-  width: 7.5em;
+  width: 6.5em;
 }
 #hexagono3-1 {
   height: 100%;
@@ -61,19 +61,69 @@ export default {
    data : function() {
         return {
        // circleColors: ['#ffda9e','#fdf9c4','#ffffaa','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#511F73'],
-        active : false
+        active : false ,
         }
     },  
  
-   props: ['specialty','index', 'color' ], 
+   props: ['specialty','bgcolor', 'code' ], 
+   emits: [ 'specialtySelected' ],
+ 
    
 mounted() {   
        },
 
     watch: {
+            code(val)
+            {
+                if (val.id != this.specialty.id )        
+                {
+                this.active = false 
+                }
+
+            }
+
         },
 
     methods: {
+
+        getTextColor()
+        {
+            if (this.active)
+            {
+                return ("#fff")
+            }
+            else
+            {
+                return ("#000")
+            }
+        },
+
+        getBgcolor()
+        {
+            if (this.active)
+            {
+                return ("#004BE1")
+            }
+            else
+            {
+                return this.bgcolor
+            }
+        },
+
+        selectSpecialty(specialty)
+        {
+        console.log("SelectSpecialty :"+JSON.stringify(specialty))    
+        this.active = true 
+        /*
+        console.log("Active :"+this.active)
+            if (this.active)
+            {
+                this.$emit('specialtySelected',specialty)
+            }   
+        */
+        this.$emit('specialtySelected',specialty)
+        },
+
         changeColor()
         {
             console.log("changeColor!!")
