@@ -10,9 +10,9 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 <template>
  <div>
-<ModalPublicReserveConfirmation :searchParameters='searchParameters' v-on:updateLastSearch='updateLastSearch'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app' :global_specialties='global_specialties' ></ModalPublicReserveConfirmation>
+<ModalPublicReserveConfirmation :professional_data='professional_data'  :center_data="center_data" :searchParameters='searchParameters' v-on:updateLastSearch='updateLastSearch'  :appConfirmed='appConfirmed' :eventShowModalConfirmation='eventShowModalConfirmation' :app='app' :global_specialties='global_specialties' ></ModalPublicReserveConfirmation>
  
-  	<teleport to="body"   >
+  	<teleport to="body" >
 
 		<div v-if="showModalPublicReserveForm" class="modal  bg-secondary scroll"    >
 		    
@@ -55,11 +55,100 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 
 				-->
 
+				<!--
 				<div style="margin-top: 1em; " class="h4">
 							<div class="" >
-								<p> {{ transform_date(appToReserve.date) }}, a las {{transform_time(appToReserve.start_time)}} hrs  </p>
+								<p> {{ transform_date(appToReserve.date) }}.<br>A las {{transform_time(appToReserve.start_time)}} hrs  </p>
 							</div>
 				</div>
+				-->
+
+				<div class="d-flex justify-content-start mb-3" >
+					<text  style=""> <i class="text-muted h1  m-2 bi bi-calendar"></i> </text>
+					<div class="">
+						<text class="">	{{ transform_date(appToReserve.date) }} </text><br>
+						<text class="" style="">	 
+								{{transform_time(appToReserve.start_time)}} <text >hrs</text>  
+						</text>       		
+					</div>
+				</div>
+				
+				<div class="d-flex justify-content-start mb-3" >
+					<text  style=""> <i class="text-muted bi bi-person display-1 m-0 p-0"></i> </text>
+					<div class="">
+						<text class="">	Profesional: </text><br>
+						<text class="" style="">	 
+							{{professional_data.name }}   
+						</text>       		
+					</div>
+				</div>
+
+
+		<!-- LOCATION -->		
+
+        <div class="m-2 " style="">
+
+			<div v-if="center_data.center_visit" class="">
+				<div class="display-6" style="">  
+					<div style="color: #781ED1" >
+					<i class="h1 bi bi-building "></i> En Consulta  </div>
+				</div>
+					
+					<div>	
+					"{{center_data.name}}"
+					</div> 
+					<div>
+					Direccion:  {{center_data.address}}
+					</div> 
+					<div style="" class="" >
+					{{comuna_id2name(center_data.comuna)}}
+					</div>           
+			</div>
+
+			<div v-if="center_data.home_visit" style="color:#3399FF">
+					<div class="display-5" >
+						<i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
+					</div>
+					
+							<div class="m-2">
+							<p  v-if=" center_data.home_comuna1 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna1) }} 
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna2 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna2) }} 
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna3 != null " >  
+							&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna3) }}
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna4 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna4) }} 
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna5 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna5) }} 
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna6 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ comuna_id2name(center_data.home_comuna6) }} 
+								<br>
+							</p>	
+							</div>
+			</div>
+
+			<div v-if="center_data.remote_care" class="mb-3">
+				<div class="display-5" style="color:#b36b00" >
+					<i class="bi bi-camera-video"></i> Tele Atención  	 
+					<div style="" class="text-dark display-6" >
+					Todas las comunas 
+					</div>                      
+				</div>
+			</div>
+			<!-- Include here a map -->
+		</div>
+
 
 <hr>				 
                 <div class="text-dark"> 
@@ -208,7 +297,7 @@ div.scroll {
 }
 
 .modal-wrapper {
-  display: table-cell;
+  /*display: table-cell;*/
   vertical-align: middle;
 }
 
@@ -284,7 +373,6 @@ export default {
  props: [ 'center_data' , 'professional_data' ,'searchParameters', 'appToReserve','eventShowModalPubicReserve' ,'global_comunas', 'global_specialties' ],
  emits: ['updateAppList','updateLastSearch'] , 
       
-
 computed: {
 	},
 
@@ -305,6 +393,12 @@ computed: {
       	},
 
 	methods: {
+		comuna_id2name(id)
+    	{
+            let temp= this.global_comunas.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp.name }
+            else { return null }
+   		},
 	
 		showSpecialtyName(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
