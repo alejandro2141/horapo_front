@@ -16,12 +16,13 @@ import SuggestedSearch from './SuggestedSearch.vue'
   <div class="bg-white p-0">
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
   
-      <div class="bg-white  pb-4 text-center"  > 
+      <div class="bg-white  pb-1 text-center"  > 
         <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
-     
-        <text class="display-4">123H<small><small><i class="bi bi-flower1 h1"></i></small></small>RA</text>  
+            <text class="display-4">123H<small><small><i class="bi bi-flower1 h1"></i></small></small>RA</text>  
         </a> 
+     <!--
         <small  class="text-muted"> <br> Las mejores consultas en un solo lugar </small>
+     -->
       </div> 
  
       <div>
@@ -34,30 +35,19 @@ import SuggestedSearch from './SuggestedSearch.vue'
                 -->
               <searchAppointmentForm  v-on:searchGeneric="searchGeneric"  :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
               
+            <div ref="scrollToMe"></div>
 
-<div ref="scrollToMe"></div>
-              <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
+          <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
                   En {{metric_search/1000}} Seg encontramos {{n_appointments_found }} resultados para ti. 
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                   -->
                   <hr >
                   <searchAppointmentResult  :n_appointments_found="n_appointments_found" :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
-              </div>
-
-              <div v-else style="position:relative; bottom:0 ; width:100%">
-                <!--
-                <WordSphere  
-                id="id_sphere_object" ref="ref_sphere_object"
-                :items_list="['<text>Kinesiología</text>', 'Psicología','Fonoaudiología', 'Nutrición', 'Terapia Ocupacional', 'Psicopedagogía', 'Enfermería'  ]"
-                :radius=6
-                :text_color="'#000000'"
-              	:font_size_max="1"
-	              :blur_max="0.05"
-	              :update_interval="1"
-	              :extra_padding="1"
-                />
-                -->
-               </div>
+          </div>
+          <div v-else style="height:500px">
+                
+               
+          </div>
                
         
         
