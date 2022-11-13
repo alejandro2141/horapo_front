@@ -4,14 +4,13 @@ import axios from 'axios'
 import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 import loadProgress from '../loadProgress.vue'
 
-
-
 //const count = ref(0)
 </script>
 
 <template>
 <div>
-<ModalPublicReserveAppForm   :center_data="center_data" :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve' :global_specialties='global_specialties' ></ModalPublicReserveAppForm>
+
+<ModalPublicReserveAppForm :global_comunas="global_comunas" :professional_data="professional_data" :center_data="center_data" :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve' :global_specialties='global_specialties' ></ModalPublicReserveAppForm>
 
 	<teleport to="body" >
 
@@ -29,7 +28,6 @@ import loadProgress from '../loadProgress.vue'
 <!-- -->
 
     <div v-if="app != null"     class="bg-white p-0 mb-1 ">
-
 
 		<!-- HEADER -->
 		<div class="d-flex justify-content-between mb-3">
@@ -199,7 +197,7 @@ div.scroll {
 }
 
 .modal-wrapper {
-  display: table-cell;
+  /*display: table-cell;*/
   vertical-align: middle;
 }
 
@@ -291,7 +289,7 @@ export default {
         }
   },
 
-	props: ['center_data','searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen','global_comunas', 'global_specialties' ],
+	props: ['center_data' ,'searchParameters', 'app' , 'global_comunas' , 'openModalEvent' , 'modalOpen','global_comunas', 'global_specialties' ],
 	emits: [ "updateLastSearch" ],
 
 	created() {
