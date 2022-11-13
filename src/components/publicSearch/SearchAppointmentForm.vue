@@ -16,10 +16,10 @@ import specialtyCircle from './SpecialtyCircle.vue'
 
 <!--FORM TYPE CENTER HOME REMOTE -->                    
                 <div class="position-relative">
-                    <div class="d-flex justify-content-center mb-0">
-                        <div @click="search_params.type_center = !search_params.type_center; search_params.type_home = false ; search_params.type_remote=false " :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_center  }" > 
+                    <div class="d-flex justify-content-center mb-0 mt-0">
+                        <div @click="search_params.type_center = !search_params.type_center; search_params.type_home = false ; search_params.type_remote=false " :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'bg-primary' : search_params.type_center  }" > 
                             <div class="m-2">
-                                <i  class="bi bi-building m-0  display-3 d-flex justify-content-center" style="color: #781ED1;"></i>
+                                <i  class="bi bi-building m-0  display-3 d-flex justify-content-center" style="color: #781ED1;" ></i>
                                 <text style="font-size: 0.7em;">En Consulta</text>
                             </div>
                         </div>
@@ -30,7 +30,7 @@ import specialtyCircle from './SpecialtyCircle.vue'
                             </div>
                         </div>
                         <div @click="search_params.type_remote = !search_params.type_remote;search_params.type_home = false ;search_params.type_center=false " :style="{  'border-radius': '50%' ,'width': '5.5em', 'height': '5.5em' }" class="border  border-3  p-0 m-1 d-flex justify-content-center align-items-center" :class="{'border-primary' : search_params.type_remote }" > 
-                        <div class="m-2">
+                            <div class="m-2">
                                 <i  class="bi bi-camera-video m-0 display-3 d-flex justify-content-center" style="color:#b36b00;"></i>
                                 <text style="font-size: 0.7em;">Remoto</text>
                             </div>
@@ -42,23 +42,41 @@ import specialtyCircle from './SpecialtyCircle.vue'
                 </div>   
 
 <!--FORM INPUT SPECIALTY -->
-<div class="position-relative">    
-            <div class="w-100 mb-0 mt-3 pb-0 d-flex justify-content-center">
-                <specialtyCircle @click="specialtySelected(global_specialties[0]); circleColors[0]='#eeeeee' ;  " :specialty='global_specialties[0]' :color='circleColors[0]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[1]); circleColors[1]='#eeeeee' ;  " :specialty='global_specialties[1]' :color='circleColors[1]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[2]); circleColors[2]='#eeeeee' ;  " :specialty='global_specialties[2]' :color='circleColors[2]' > </specialtyCircle>
+<div class="position-relative mt-3 pb-4 mb-3" >
+            <div class="w-100 mb-0  pb-0 d-flex justify-content-center">
+                <specialtyCircle :specialty='global_specialties[0]'  :bgcolor='circleColors[0]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[1]'  :bgcolor='circleColors[1]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[2]'  :bgcolor='circleColors[2]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
             </div>
             <div class="w-100 mt-0 pt-0 d-flex justify-content-center">
-                <specialtyCircle @click="specialtySelected(global_specialties[3]); circleColors[3]='#eeeeee' ; " :specialty='global_specialties[3]' :color='circleColors[3]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[4]); circleColors[4]='#eeeeee' ; " :specialty='global_specialties[4]' :color='circleColors[4]' > </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[3]'  :bgcolor='circleColors[3]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[4]'  :bgcolor='circleColors[4]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+            </div>
+            <img v-if=" this.search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
+            <div class="w-100 mt-0 pt-0  mb-0 pb-0 d-flex justify-content-center">
+                <specialtyCircle :specialty='global_specialties[5]'  :bgcolor='circleColors[5]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[6]'  :bgcolor='circleColors[6]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[7]'  :bgcolor='circleColors[7]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+            </div>
+
+            <!--
+            <div class="w-100 mb-0  pb-0 d-flex justify-content-center">
+                <specialtyCircle :specialty='global_specialties[0]'  > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[1]); circleColors[1]='blue' ;  " :specialty='global_specialties[1]' :color='circleColors[1]'    :textColor='textColors[1]' > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[2]); circleColors[2]='#eeeeee' ;  " :specialty='global_specialties[2]' :color='circleColors[2]' :textColor='textColors[2]' > </specialtyCircle>
+            </div>
+            <div class="w-100 mt-0 pt-0 d-flex justify-content-center">
+                <specialtyCircle @click="specialtySelected(global_specialties[3]); circleColors[3]='#eeeeee' ; " :specialty='global_specialties[3]' :color='circleColors[3]' :textColor='textColors[3]'  > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[4]); circleColors[4]='#eeeeee' ; " :specialty='global_specialties[4]' :color='circleColors[4]' :textColor='textColors[4]'  > </specialtyCircle>
             </div>
             <img v-if=" this.search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
 
-            <div class="w-100 mt-0 pt-0  mb-3 pb-2 d-flex justify-content-center">
-                <specialtyCircle @click="specialtySelected(global_specialties[5]); circleColors[5]='#eeeeee' ;  " :specialty='global_specialties[5]' :color='circleColors[5]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[6]); circleColors[6]='#eeeeee' ;  " :specialty='global_specialties[6]' :color='circleColors[6]' > </specialtyCircle>
-                <specialtyCircle @click="specialtySelected(global_specialties[7]); circleColors[7]='#eeeeee' ;  " :specialty='global_specialties[7]' :color='circleColors[7]' > </specialtyCircle>
+            <div class="w-100 mt-0 pt-0  mb-0 pb-0 d-flex justify-content-center">
+                <specialtyCircle @click="specialtySelected(global_specialties[5]); circleColors[5]='#eeeeee' ;  " :specialty='global_specialties[5]' :color='circleColors[5]' :textColor='textColors[5]'  > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[6]); circleColors[6]='#eeeeee' ;  " :specialty='global_specialties[6]' :color='circleColors[6]' :textColor='textColors[6]'  > </specialtyCircle>
+                <specialtyCircle @click="specialtySelected(global_specialties[7]); circleColors[7]='#eeeeee' ;  " :specialty='global_specialties[7]' :color='circleColors[7]' :textColor='textColors[7]'  > </specialtyCircle>
             </div>
+            -->
 </div>
 <!--FORM INPUT SPECIALTY -->     
 
@@ -70,18 +88,20 @@ import specialtyCircle from './SpecialtyCircle.vue'
                 </div>           
 -->
 <!-- FORM INPUT LOCATION-->
-                <div  v-if="show_input_date()"  class="row  mb-1   "  >
+                <div  v-show="show_input_date()"  class="row  mb-1   "  >
                     <div class="col">
                         <inputFormComuna position="true" :setLocationCode="setLocationCode" v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
                 </div>
 
 <!-- FORM INPUT DATE -->
-                <div v-if="show_input_date()"  class="row  mb-1  ">
+                <div v-show="show_input_date()"  class="row  mb-1  ">
                     <div class="col">
                         <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
                     </div>
                 </div>
+
+                
                  
 <!--FORM INPUT  APP TYPE -->
                 <!--
@@ -148,6 +168,7 @@ export default {
 
             setLocationCode : 1 ,
             circleColors: ['#b7d8d6','#DDC696','#CEF3DD','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#89dee2'],
+            textColors:   ['#ff0000','#ff0000','#ff0000','#000000','#000000','#000000','#000000','#000000','#000000' ],
        
             search_params : { 
 				        specialty : null ,
@@ -186,6 +207,7 @@ export default {
     */
         specialtySelected(specialty)
         {
+            console.log("SearchAppointmentFOrm specialtySelected "+JSON.stringify(specialty))
            this.search_params.specialty = specialty
            this.$emit("searchGeneric",this.search_params);
         },
@@ -203,20 +225,25 @@ export default {
         },
 
         show_input_location()
-        {   if ( this.search_params.specialt != null )
+        {   
+            return true
+            /*
+            if ( this.search_params.specialt != null )
             { return true } 
             else
             { return false }
+            */
         },
 
         show_input_date()
         {   
-            //return true
-            
+            return true
+            /*
             if ( this.search_params.specialty != null  )
             {   return true } 
             else
             { return false }
+            */
             
         },
 
