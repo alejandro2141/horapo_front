@@ -33,7 +33,7 @@ import SuggestedSearch from './SuggestedSearch.vue'
               <!--
               <searchAppointmentForm  v-on:searchGeneric="searchGeneric" :suggestedSearchParams='suggestedSearchParams' v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
                 -->
-              <searchAppointmentForm  v-on:searchGeneric="searchGeneric"  :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
+              <searchAppointmentForm  v-on:searchGeneric="searchGeneric"  :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_appointments_found="n_appointments_found" ></searchAppointmentForm>
               
             <div ref="scrollToMe"></div>
 
@@ -44,7 +44,7 @@ import SuggestedSearch from './SuggestedSearch.vue'
                   <hr >
                   <searchAppointmentResult  :n_appointments_found="n_appointments_found" :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
           </div>
-          <div v-else style="height:500px">
+          <div v-else style="height:900px">
                 
                
           </div>
@@ -456,8 +456,9 @@ async searchAppointments(params) {
             {
                 console.log ("update Last Search"+JSON.stringify(this.params_bkp)) ;
                 this.appointments = await  this.searchGeneric(this.params_bkp); 
-                this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
-            },
+                //this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
+                this.appointments_filtered = this.appointments;
+              },
 
             // IDEALMENTE SOLO TRAER LOS CENTROS DE LOS PROFESIONALES, Y NO TODO EL UNIVERSO
             async get_centers(centers_id_list)
