@@ -29,28 +29,59 @@ import Consultancy from './consultancy.vue'
          <i class="mt-4 display-1 bi bi-x-lg  text-primary" aria-label="Close" v-on:click="closeTabCenter()" ></i> 
         -->
     </div>
-            <!--
-            <p class="lead mb-0 pb-0 text-center">
-            <small class="text-white">  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info text-primary"></i> </small>Direcciónes de sus consultas 
-           </p>
-           -->
+
+
+    <div v-if="session_params.tutorial_center || showInfoCreate" class="bg-white text-dark m-2 p-2 border border-rounded" style="border-radius: 15px;" >
+        Tutorial <br>
+             Aqui puedes crear tus consultas   
+        <div >
+        Una consulta es un lugar fisico o virtual donde usted entrega sus servicios profesionales, <br>
+        Existen tres tipos de consultas: <br> 
+        Consulta En consulta
+
+                          <button type="button" class="btn  m-0 btn-outline-primary"  >
+                              <i class="h3 bi bi-building m-0 p-0"></i><br>
+                              <text class="fs-6 m-0 p-0">En Consulta</text> 
+                          </button>
+        <br>
+        La direccion de Consulta es donde el paciente debe asistir
+        <br>
+        Consulta a Domicilio
+                          <button type="button" class="btn m-1 btn-outline-primary"  >
+                              <i class="h3 bi bi-house-door m-0 p-0"></i><br>
+                               <text class="fs-6 m-0 p-0">A Domicilio</text> 
+                          </button>
+        <br>
+        Se indican las comunas donde usted atiende.
+        <br>
+        Consulta Remota                          
+                          <button type="button" class="btn m-0 btn-outline-primary"  >
+                              <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
+                              <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
+                          </button>
+        Se entrega el servicio de forma remota telefonica en el telefono indicado. 
+        </div>
+
+        Puede crear tantas consultas como usted quiera,estas consultas estarán disponibles para sus calendarios.  
+            <br>
+        <div class="text-center p-1 m-1"> 
+            <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
+        </div>
             
-            <div  v-if='showInfoCreate' class="alert alert-info p-0 m-0 p-3" style=" border-radius: 15px;" >
-                i - Una Consulta es  el lugar "Virtual" o "Fisico" donde usted entrega sus servicios profesionales.<br>
-                ii - Una Consulta debe ser seleccionada para cada Calendario.<br>
-                iii - Puede crear cuantas Consultas usted desee. <br>
-                iv - La direccion de la Consulta es donde el paciente debe asisitir para citas en un lugar "Fisico" de tipo "<i class="bi bi-building"></i> En Consulta".<br>
-                v - Existe tres tipos de consultas: <br>
-                    &nbsp;&nbsp;<i class="bi bi-building"></i>  "En Consulta"  <br>
-                    &nbsp;&nbsp;<i class="bi bi-house-door"></i> "A domicilio" <br>
-                    &nbsp;&nbsp;<i class="bi bi-camera-video"></i> "Atencion Remota"<br> 
-                vi  - El telefono que registra para la consulta es public para el paciente, por lo que usted podria recibir llamadas del paciente al telefono registrado <br> 
-                vii - Para crear una nueva consulta, debe hacer click en <text @click="addNewCenter()"  class="text-primary m-3"> <i class="bi bi-plus-square h5"></i> Agregar nueva Consulta </text> <br> 
+            <div class="text-primary mt-4 pt-4" @click='finishTutorial()' >
+                Finalizar este Tutorial
             </div>
+
+
+    </div>
+
             
         <div class="text-center p-1 m-1"> 
             <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
         </div>
+  
+  <div>
+
 
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
@@ -162,8 +193,9 @@ import Consultancy from './consultancy.vue'
 
         </div>
 
+</div>
 
-
+        <!--
         <div  v-else class=" m-2 p-2">
            <p> Algo de informacion antes de continuar: <br>
             -Puede crear mas de una Consulta<br>
@@ -172,6 +204,7 @@ import Consultancy from './consultancy.vue'
            </p>
             <p class="">Para crear su primera Consulta, por favor click en el link siguiente </p>
         </div>
+        -->
 
         
 
@@ -233,6 +266,15 @@ data: function () {
          },
  
     methods: {
+         async finishTutorial()
+        {
+           const json = { 
+                     professional_id: this.session_params.professional_id ,
+                     tutorial: 2,
+           };
+            let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
+            this.session_params.tutorial_center = false ;   
+        },
 
         closeTabCenter()
         {
