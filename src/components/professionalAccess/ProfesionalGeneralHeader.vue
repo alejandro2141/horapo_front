@@ -28,9 +28,11 @@ import SwitchViewButton from './switchViewButton.vue'
 			<text v-if="showTopMenu" class="text-white-50"> </text>
 		</text>
 		
-		<text>	
-			<i v-if="showTopMenu" class="fs-4 bi bi-geo-alt" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
-		    <i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
+		<text>
+			<div v-if="showTopMenu" class="rounded-circle p-1" :class="{'border border-4 border-danger':session_params.tutorial_start}" >	
+			<i  class="fs-4 bi bi-geo-alt" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
+		    </div>
+			<i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
 	
 		</text>
 
@@ -173,6 +175,7 @@ import SwitchViewButton from './switchViewButton.vue'
 export default {
    data : function() {
         return {
+			//active_tutorial : false,
 			header_menu_exit : false ,
 			header_menu_appointments : true ,
 
@@ -190,7 +193,7 @@ export default {
 			transitionHigth : 0 ,
         }   
     },
-    props : ['session_params'] ,
+    props : ['session_params', 'active_tutorial'] ,
 	emits : ['switchView', 'switchViewTo' ]  ,
 
  	mounted () {
