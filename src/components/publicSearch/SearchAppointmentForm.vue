@@ -79,20 +79,58 @@ import Datepicker from 'vuejs3-datepicker';
                 </div>
 
 <!-- FORM INPUT DATE -->
-                <div v-show="show_input_date()"  class="row  mb-1  ">
-                    <div class="col">
-                        <!--
-                        <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
-                        -->
-                        <div @click="show_date_picker = !show_date_picker" class="border border-1 border-primary">
-                            <i class="bi display-1 bi-calendar-event"></i><text class="h5">Lunes 31 Diciembre 2023</text>
-                        </div>    
+                <div v-show="show_input_date() " @click="show_date_picker = !show_date_picker"  >
+                    <div class="text-muted d-flex justify-content-between border border-1 border-primary" style=" z-index: 9;   border-radius: 25px;"  >
+                        <div class="m-0 p-1"> 
+                            &nbsp;<i class="m-0 p-0 bi display-6  bi-calendar-event"></i> 
+                        </div>
+                        <div class="m-0 p-2"> 
+                            <text class="h6">&nbsp;&nbsp;&nbsp; {{format_date(search_params.date)}}</text>
+                        </div>
+                        <div class="m-0 p-1"  > 
+                            <i class="bi bi-x-lg m-0 p-0 text-muted border-start display-6"  ></i>  
+                        </div>
+
                     </div>
+
+                     <!--
+                    <div class="col " style="position: relative;" >
+
+                        <div  style="position: absolute; z-index: 9; top : 6px ; left : 3px " class="mb-2  rounded" > 
+                            <i class="m-0 p-0 bi h3 bi-calendar-event"></i>                      
+                        </div>
+                        <div>
+                             <text class="m-0 p-0  h5 ">&nbsp;&nbsp;&nbsp; {{getDateFormat()}}</text>
+                        </div>
+                        <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
+                            <i class="display-2 m-0 p-0  bi bi-x  text-muted border-start"  ></i>
+                        </div>
+                    </div> 
+                    -->
+                      <!--  
+                    <div class="d-flex justify-content-between border border-1 p-0 m- 0text-muted " style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;">
+                       
+                        <div>
+                         <i class="m-0 p-0 bi h3 bi-calendar-event"></i>
+                        </div>
+
+                        <div @click="show_date_picker = !show_date_picker"  >
+                           <text class="m-0 p-0  h5 ">&nbsp;&nbsp;&nbsp; {{getDateFormat()}}</text>
+                        </div> 
+
+                        <div  style="" class="rounded" > 
+                            <i class="display-2 m-0 p-0  display-3  bi bi-x   border-start" ></i>
+                        </div>
+
+                    </div>
+                    -->
+                 
                 </div>
-    
+    <!--DATE PICKER COMPONENT -->
     <div v-if="show_date_picker" class="text-center "> 
-            <datepicker :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="form_current_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+            <datepicker   ref="inputRef"  :monday-first="true" :inline="true" v-model="form_current_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
     </div>
+     <!--DATE PICKER COMPONENT -->
                 
                  
 <!--FORM INPUT  APP TYPE -->
@@ -194,6 +232,19 @@ export default {
         },
 
     methods: {
+
+
+          format_date(date)
+            {
+                let aux_date = new Date(date)
+                let days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ]
+                let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
+
+
+                return (days[aux_date.getDay()]+" "+aux_date.getDate()+" de "+months[aux_date.getMonth()]+" "+aux_date.getFullYear() )
+            },
+
+
         appTypeSelected(appType)
         {
            console.log("appTypeSelected:"+appType);
@@ -266,6 +317,8 @@ export default {
 
         show_input_date()
         {   
+            return true
+            /*
             if (this.n_appointments_found>0)
            {
             return true
@@ -274,12 +327,6 @@ export default {
            {
             return false
            }
-            //return true
-            /*
-            if ( this.search_params.specialty != null  )
-            {   return true } 
-            else
-            { return false }
             */
             
         },
@@ -383,7 +430,7 @@ export default {
         selectedDate(date)
         {
             console.log("SelectedDate :"+date);
-            this.search_params.date = date 
+            this.search_params.date = date.setHours(-24,0,0,0) 
             this.$emit("searchGeneric",this.search_params);
 
             /*
