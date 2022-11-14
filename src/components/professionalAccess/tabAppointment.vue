@@ -5,7 +5,7 @@ import axios from 'axios';
 import CalendarPickerMinimal2 from './calendarPickerMinimal2.vue'
 import DateRequiredActions from './dateRequiredActions.vue'
 import ListAppointments from './listAppointments.vue'
-import Tutorial from './tutorial.vue'
+import Tutorial from './tutorial_start.vue'
 import loadProgress from '../loadProgress.vue'
 import LockOptions from './lockOptions.vue'
 
@@ -15,7 +15,7 @@ import LockOptions from './lockOptions.vue'
 <div>
   <loadProgress  :active_spinner="active_spinner" > </loadProgress>
       
-      <div v-if='!session_params.first_time' >
+      <div v-if='!session_params.tutorial_start' >
       
         <div class="d-flex justify-content-between  ">
           
