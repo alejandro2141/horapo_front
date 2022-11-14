@@ -36,7 +36,7 @@ import Datepicker from 'vuejs3-datepicker';
                 <specialtyCircle :specialty='global_specialties[3]'  :bgcolor='circleColors[3]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
                 <specialtyCircle :specialty='global_specialties[4]'  :bgcolor='circleColors[4]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
             </div>
-            <img style="z-index: 3" v-if=" this.search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
+            <img style="z-index: 3" v-if=" search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
             <div class="w-100 mt-0 pt-0  mb-0 pb-0 d-flex justify-content-center">
                 <specialtyCircle :specialty='global_specialties[5]'  :bgcolor='circleColors[5]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
                 <specialtyCircle :specialty='global_specialties[6]'  :bgcolor='circleColors[6]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
