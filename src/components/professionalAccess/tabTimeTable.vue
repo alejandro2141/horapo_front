@@ -8,17 +8,35 @@ import CalendarProfessional from './calendar_professional.vue'
 
 </script>
 <template>
-        <div class="bg-secondary">  
+    <div class="bg-secondary">  
+
+      
             <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas"  :global_specialties="global_specialties"  ></ModalCreateCalendar>
             <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
             <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
       
-                <p class="text-center display-5 pt-1 text-white">Tus Calendarios</p>
+                <p class="text-center display-5 pt-1 text-white">Tus Calendarios  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2 border-white " style=" border-radius: 15px;" ></i> 
+
+
+                </p>
             
             <div class="text-center p-3 m-3"> 
                 <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
             </div>
+        
 
+        <div v-if="session_params.tutorial_calendar || showInfoCreate" class="bg-light m-2">
+            Felicitaciones, ya creaste tu primera Consulta. Ahora ya puedes crear tu primer Calendario.<br> 
+            Un Calendario es un periodo de tiempo, identificado con fechas, dias  y horas en que vas a entregar tus servicios<br>
+            El calendario que vas a crear quedara disponible para la busqueda de pacientes, de acuerdo a criterios de Tipo, especialidad, fecha, Comuna. <br> 
+
+            <div class="text-primary mt-4 pt-4" @click='finishTutorial()' >
+                Finalizar Tutorial
+            </div>
+
+        </div>        
+        
+        <div>
                 <div  id="search_result" v-if='calendars!=null'  >
                     <div v-for="calendar in calendars.calendars"  :key='calendar.id' >
                         <CalendarProfessional :calendar="calendar" :center_data="getCenterData(calendar.center_id)"  v-on:updateCalendarList="updateCalendarList()" :global_specialties="global_specialties" :global_comunas="global_comunas"> </CalendarProfessional> 
@@ -33,14 +51,12 @@ import CalendarProfessional from './calendar_professional.vue'
                             </p>
                         </div>
                 </div>
-
-          
-
-        <div style="height: 200px;">
-        </div>  
-
-        </div>       
-
+        </div>
+        
+            
+            <div style="height: 200px;">
+            </div> 
+    </div>     
 </template>
 
 <style scoped>
@@ -54,6 +70,7 @@ export default {
  
 data: function () {
 		return {
+            showInfoCreate : false ,
             calendars : [] ,
             activatorCreateNewCalendar : null ,
             activatorViewCalendar : null ,
@@ -87,18 +104,7 @@ data: function () {
               this.getCalendars();
           this.active_spinner = false ;  	
          },
-    
-    beforeMount () {
-        console.log("TAB Time Table Before MOunt");
-        },
-
-    mounted () {
-        console.log("TAB Time Table Mounted");
-        },
-
-    beforeUpdate () {
-        console.log("TAB Time Table Before Update");
-        },
+   
 
     updated () {
         console.log("TAB Time Table Updated");
@@ -111,6 +117,18 @@ data: function () {
 
  
     methods: {
+
+        async finishTutorial()
+        {
+           const json = { 
+              professional_id: this.session_params.professional_id ,
+              tutorial : 3
+           };
+
+            let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
+            this.session_params.tutorial_calendar = false ;   
+        },
+
         getCenterData(center_id)
         {
            let center_data=this.calendars.centers.find(elem => elem.id ==  center_id)
