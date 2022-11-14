@@ -5,6 +5,8 @@ import inputFormSpecialty  from './InputFormSpecialty.vue'
 import inputFormComuna  from './InputFormComuna.vue'
 import specialtyCircle from './SpecialtyCircle.vue'
 import appTypeCircle from './AppTypeCircle.vue'
+import Datepicker from 'vuejs3-datepicker';
+
 
 </script>
 
@@ -79,10 +81,18 @@ import appTypeCircle from './AppTypeCircle.vue'
 <!-- FORM INPUT DATE -->
                 <div v-show="show_input_date()"  class="row  mb-1  ">
                     <div class="col">
+                        <!--
                         <input style="border-radius: 25px;" v-model="form_current_date" :min="form_minimum_date" type="date" id="app_date" name="app_date" class="form-control form-control-lg border border-primary" >
+                        -->
+                        <div @click="show_date_picker = !show_date_picker" class="border border-1 border-primary">
+                            <i class="bi display-1 bi-calendar-event"></i><text class="h5">Lunes 31 Diciembre 2023</text>
+                        </div>    
                     </div>
                 </div>
-
+    
+    <div v-if="show_date_picker" class="text-center "> 
+            <datepicker :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="form_current_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+    </div>
                 
                  
 <!--FORM INPUT  APP TYPE -->
@@ -128,6 +138,7 @@ import appTypeCircle from './AppTypeCircle.vue'
 export default {
  data : function() {
     return {
+            show_date_picker : false ,
             search_button_message: "Buscar " ,
 
             center_color :  '#781ED1',
@@ -404,8 +415,12 @@ export default {
            this.form_specialty = val.specialty ; 
         },
         */
+       /*
+        form_current_date(val)
+        {
+            this.show_date_picker = false 
+        },*/
         
-
         form_current_date(newValue, oldValue)
         {
             if (newValue != null)
@@ -415,6 +430,9 @@ export default {
                 date.setHours(24,0,0,0)
                 console.log("New FORM_CURRENT_DATE after:"+date);
                 this.selectedDate(date)
+
+                //this.search_params.date = new Date (newValue)
+                this.show_date_picker = false 
             }
         },  
 
