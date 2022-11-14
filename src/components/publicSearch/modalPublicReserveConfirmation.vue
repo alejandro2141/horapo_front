@@ -82,7 +82,7 @@ import axios from 'axios'
 
           <div class="d-flex justify-content-center m-5" >
 							<input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
-             	<button type="button" @click="showModalConfirmation = false ; this.updateSearchResult() " class="btn btn-primary p-4 btn-lg" data-bs-dismiss="modal"> Finalizar</button>
+             	<button type="button" @click="showModalConfirmation = false ; updateSearchResult() " class="btn btn-primary p-4 btn-lg" data-bs-dismiss="modal"> Finalizar</button>
           </div> 				
                             
       </div>
