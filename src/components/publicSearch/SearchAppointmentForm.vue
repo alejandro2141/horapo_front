@@ -85,7 +85,7 @@ import Datepicker from 'vuejs3-datepicker';
                             &nbsp;<i class="m-0 p-0 bi display-6  bi-calendar-event"></i> 
                         </div>
                         <div class="m-0 p-2"> 
-                            <text class="h6">&nbsp;&nbsp;&nbsp; {{format_date(search_params.date)}}</text>
+                            <text style="font-size: 1.1em;" class="">&nbsp;&nbsp;&nbsp; {{format_date(search_params.date)}}</text>
                         </div>
                         <div class="m-0 p-1"  > 
                             <i class="bi bi-x-lg m-0 p-0 text-muted border-start display-6"  ></i>  
