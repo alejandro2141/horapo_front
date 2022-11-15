@@ -58,6 +58,9 @@ import { ref } from 'vue'
                               {{  comuna_id2name(center_data.home_comuna5) }}
                               {{  comuna_id2name(center_data.home_comuna6) }}
                             </div>
+                            <div class="" style="color:#2e5668" >	
+                                {{center_data.name}}
+                            </div>
                     </div>
 
                     <div v-if="center_data.remote_care" class="">
@@ -66,6 +69,9 @@ import { ref } from 'vue'
                               <div style="" class="text-dark" >
                                Todas las comunas 
                               </div>                      
+                        </div>
+                        <div class="" style="color:#2e5668" >	
+                                {{center_data.name}}
                         </div>
                     </div>
 
