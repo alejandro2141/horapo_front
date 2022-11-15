@@ -5,7 +5,7 @@ import LandingContent from './LandingContent.vue'
 import FooterContent from './FooterContent.vue'
 
 
-  window.location.href = "/nested/publicSearch.html";
+ // window.location.href = "/nested/publicSearch.html";
 
 </script>
 
@@ -18,8 +18,14 @@ import FooterContent from './FooterContent.vue'
     <FooterContent></FooterContent>
     -->
     <div>
-Being redirected based in Browser options<br>
-DDOS filter protection
+        <div v-if="isMobile()">
+            Being redirected based in Browser options<br>
+            DDOS filter protection
+        </div>
+        
+        <div v-else>
+            Lo sentimos. Por el momento solo disponible en Navegadores Mobiles. 
+        </div>
     </div>
 </template>
 
@@ -48,6 +54,22 @@ beforeCreate(){
 mounted() {
    console.log("Landing P , performance end,"+Date.now());
 },
+
+methods: {
+
+    isMobile(){
+        // credit to Timothy Huang for this regex test: 
+        // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){          
+            window.location.href = "/nested/publicSearch.html";
+            return true
+       }
+       else{
+            return false
+       }
+    }
+    
+    } 
 
 
 }
