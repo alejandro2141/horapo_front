@@ -26,12 +26,9 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
     <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
 
-        <div>
-            <div v-if="isLockDay"   >    
-            </div>
-
-            <div v-else>
-                &nbsp; <i v-if="!days_expired" class=" fs-1 bi bi-unlock "  @click="sendLock()"> </i> 
+        <div >
+            <div v-if="!isLockDay" >
+                &nbsp; <i v-if="!days_expired" class=" fs-1 bi bi-unlock " :class="{'text-primary': hours_block_list.length >0 }"  @click="sendLock()"> </i> 
             </div>
         </div>
 
