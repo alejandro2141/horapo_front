@@ -5,6 +5,7 @@ import inputFormComuna from  './InputFormComuna2.vue'
 import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
+import Datepicker from 'vuejs3-datepicker';
 
 
 </script>
@@ -52,7 +53,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                         <label for="exampleInputEmail1">Hora Inicio </label>
                                         <!--<input type="time" id="form_start_time" name="form_start_time" v-model="form_start_time" min="00:00" max="23:59" required>
                                         -->
-                                        <div @click="show_start_hour=!show_start_hour" class="border border-1 p-3 border-primary">
+                                        <div @click="show_start_hour=!show_start_hour ; show_start_minutes=false" class="border border-1 p-3 border-primary">
                                          <text >{{start_hour}}</text> 
                                         </div>
                                         <div class="p-3">:</div>
@@ -133,7 +134,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                         <label for="exampleInputEmail1">Hora Fin </label>
                                         <!--<input type="time" id="form_start_time" name="form_start_time" v-model="form_start_time" min="00:00" max="23:59" required>
                                         -->
-                                        <div @click="show_end_hour=!show_end_hour" class="border border-1 p-3 border-primary">
+                                        <div @click="show_end_hour=!show_end_hour; show_end_minutes = false" class="border border-1 p-3 border-primary">
                                          <text >{{end_hour}}</text> 
                                         </div>
                                         <div class="p-3">:</div>
@@ -269,27 +270,40 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                                 <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sun" >Domingo</label>
                             </div>
 
-                          <div class="mt-3">
                           <h2>Fechas Calendario</h2>
-                            <div class="row  mb-1  border-secondary ">
-                              <div class="col-3 h5">
-                              Inicio
+                          <!-- FECHA INICIO CALENDARIO-->
+                            
+                            <div class="row  mb-1  border-secondary d-flex justify-content-between border-primary">
+                              <div class="h5">
+                              Fecha Inicio
                               </div>
+
+                              <div @click="show_date_start=!show_date_start"  >
+                                {{formatDate(form_calendar_start)}} 
+                              </div>
+                              <!--
                               <div class="col">
                                   <input  v-model="form_calendar_start" :min="form_minimum_date" type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
                               </div>
+                              -->
                             </div>
+                        
+                           <!-- DATE PICKER FECHA INICIO CALENDARIO -->
+                          <div v-if="show_date_start">
+                              <datepicker :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                           </div>
+
 
                       
                             <div class="row  mb-1  border-secondary ">
                                <div class="col-3 h5">
-                              Fin
+                              Fecha Termino
                               </div>
                               <div class="col">
                                   <input  v-model="form_calendar_end" :min="form_minimum_date" type="date" id="form_calendar_end" name="form_calendar_end" class="form-control form-control-lg border border-primary" >
                               </div>
                             </div>
+
 
                             <div class="row  mb-1  border-secondary ">
                                 <div class="col-3 h5">
@@ -483,8 +497,13 @@ data: function () {
             form_specialty_id : null ,
             form_app_duration : null ,
             form_app_time_between : null ,
+
             form_calendar_start: null ,
+            show_date_start : false ,
+
             form_minimum_date : null ,
+
+            show_date_end : false ,
             form_calendar_end: null ,
             form_appointment_center: false ,
             form_appointment_home : false ,
@@ -523,6 +542,9 @@ data: function () {
     created () {
       console.log("created modalCreateCalendar");
       this.getSpecialties(); 
+      let current_date = new Date()
+      this.form_calendar_start=current_date.getDate()+"/"+current_date.getMonth()+1+"/"+ current_date.getFullYear()
+       
     },
 
     mounted () {
@@ -530,6 +552,25 @@ data: function () {
          },
  
     methods: {
+      
+      setCalendarStart(date)
+      {
+        console.log("date Selected en emit :"+date);
+        let aux_date=new Date(date);
+        this.form_calendar_start=aux_date.getDate()+"/"+aux_date.getMonth()+1+"/"+ aux_date.getFullYear()
+       // this.show_date_picker =false ;
+       // this.forceUpdateCalendar += 1 ; 
+      },
+
+
+      formatDate(val)
+      {
+        
+        let aux_date=new Date(date);
+        let response= aux_date.getDate()+"/"+aux_date.getMonth()+1+"/"+ aux_date.getFullYear()
+        return response
+      },
+
       centers_found_flag_emit(val)
       {
       console.log("MODAL CREATE CALENDAR centers_found_flag_emit : "+val);
