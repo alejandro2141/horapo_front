@@ -20,17 +20,40 @@ import axios from 'axios';
        
    
     </p>
+        <div class="d-flex justify-content-between">
+            <text>Nombre</text> 
+            <text>{{ professional_data.name }} </text> 
+        </div>
+         <div class="d-flex justify-content-between">
+            <text>Numero Doc</text> 
+            <text>{{ professional_data.document_number }} </text> 
+        </div>
+         <div class="d-flex justify-content-between">
+            <text>License_number </text> 
+            <text> {{ professional_data.license_number }}</text> 
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <text>Dirección Personal </text> 
+            <text> {{ professional_data.address }}</text> 
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <text>Información Certificada Professional </text> 
+            <text>  -- </text> 
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <text>Teléfono  </text> 
+            <text>  {{ professional_data.phone }}  </text> 
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <text>Status </text> 
+            <text> {{ professional_data.active }} </text> 
+        </div>
         
-        <p class=""> Nombre : <br> {{ professional_data.name }} </p>
-        <p class=""> Numero Doc :  {{ professional_data.document_number }} </p>
-        <p class=""> license_number :  {{ professional_data.license_number }} </p>
-        <p class=""> Dirección Personal : <br> {{ professional_data.address }} </p>
 
-        <p class=""> Información Certificada Professional : <br> To be completed </p>
-
-        <p class=""> Teléfono :  {{ professional_data.phone }} </p>
-        <p class=""> Activo :  {{ professional_data.active }} </p>
-        <p class=""> Primer Login  :  {{ professional_data.first_time }} </p>
         
 
         <div class="d-flex justify-content-between"> 
