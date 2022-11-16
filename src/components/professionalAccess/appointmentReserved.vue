@@ -6,17 +6,19 @@ import axios from 'axios';
 </script>
 
 <template>
-                    <div class="d-flex justify-content-start border border-2"  :class="{ 'border-primary': selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
+                    <div class="d-flex justify-content-start border border-2 "  :class="{ 'border-primary': selectApp, 'border-success': !selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
                     
-                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
+                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2" :class="{'bg-primary text-white':selectApp }" style=" border-bottom-left-radius: 25px;" >
                             <text class="fs-3 fw-light " > {{  format_start_time(appointment.start_time) }} </text><br>
-                            <text class="fs-3 text-muted fw-light"  >
+                            <text class="fs-3 fw-light " >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
-                                <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
-                                <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>   
-                                                   
-                            </text><br>
-                            <text> <i style="color:#5BA199" class="display-3 bi bi-person-fill"></i>    </text> 
+                                <i v-if="center_data.home_visit"   class=" bi bi-house-door" > </i>                                  
+                                <i v-if="center_data.remote_care"  class=" bi bi-camera-video"></i>                   
+                            </text>
+                            <text> 
+                               <!-- <i style="color:#5BA199" class="display-3 bi bi-person-fill"></i>    -->
+                                <i class="display-5 bi bi-person-fill"></i>
+                            </text> 
                         </div>
 
                         <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#eee'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
@@ -27,7 +29,7 @@ import axios from 'axios';
                                     </div>  
                                 
                                     <div class="">
-                                        <text class="" > 
+                                        <text class="mt-0 pt-0" > 
                                             <small> <small> {{center_data.name}} </small> </small>
                                         </text>
                                     </div>
@@ -35,8 +37,9 @@ import axios from 'axios';
                                     <div class="fs-5">
                                          <small> <small>
                                                 <text > {{appointment.patient_name }}</text><br>
-                                                <text ><i class="bi bi-dot"></i> id:{{appointment.patient_doc_id }} </text><br>
-                                                <text ><i class="bi bi-dot"></i> Edad:{{appointment.patient_age }} </text><br>
+                                                <text >id:{{appointment.patient_doc_id }}, {{appointment.patient_age }} Años.  </text><br>
+                                                <!-- <text ><i class="bi bi-dot"></i> Edad:{{appointment.patient_age }} </text><br> -->
+                                                
                                                 <text v-if="appointment.home_visit"  ><i class="bi bi-dot"></i> A Domicilio <br> 
                                                 - {{appointment.patient_address }} 
                                                 </text>
