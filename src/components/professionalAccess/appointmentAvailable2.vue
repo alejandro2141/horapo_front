@@ -8,13 +8,13 @@ import axios from 'axios';
             
                 <div class="d-flex justify-content-start border border-2"  :class="{ 'border-primary': selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 35px; border-top-right-radius: 25px;">
                                                
-                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment)"  class="p-2 "  >
+                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment)"  class="p-2 " :class="{'bg-primary':selectApp ,'text-white':selectApp   }" style="border-bottom-left-radius: 35px;"  >
                             
                             <text class="fs-3 fw-light"> {{getLocalTime()}} </text><br>
                             <!--
                             <text class="fs-3 fw-light"><small><small><small><small><small><small> <small><small> {{getLocalDate()}} </small></small></small></small></small></small></small></small> </text><br>
                             -->
-                            <text class="fs-3 fw-light text-muted" >
+                            <text class="fs-3 fw-light " >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
                                 <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>                         
