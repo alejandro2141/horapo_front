@@ -22,9 +22,14 @@ defineProps({
 
             <div class="d-flex justify-content-center mt-5">
                     <div class=""  > 
+                        <!--
                         <a HREF="/index.html" class="display-4 text-decoration-none" style="color :#2e5668"> 
                         <i class="bi bi-clipboard-pulse" style="font-size: 2rem; color: cornflowerblue;"></i>
                             123Hora  
+                        </a>
+                        --> 
+                        <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
+                            <text class="display-4">123H<small><small><i class="bi bi-flower1 h1"></i></small></small>RA</text>  
                         </a> 
                     
                         <div class="text-muted">Mejores consultas en un solo lugar
