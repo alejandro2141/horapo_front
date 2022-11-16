@@ -47,18 +47,175 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                           <div class="mt-2"> 
 
                           <label class="h3">Horas </label>
-
+                                <!-- hora inicio -->
                                 <div class="form-group d-flex justify-content-between">
                                         <label for="exampleInputEmail1">Hora Inicio </label>
-                                      <!--  <input type="text" class="form-control" autocomplete="off" id="form_start_time" name="form_start_time" v-model="form_start_time"  placeholder="ejemplo 14:30">  -->
-                                        <input type="time" id="form_start_time" name="form_start_time" v-model="form_start_time" min="00:00" max="23:59" required>
+                                        <!--<input type="time" id="form_start_time" name="form_start_time" v-model="form_start_time" min="00:00" max="23:59" required>
+                                        -->
+                                        <div @click="show_start_hour=!show_start_hour" class="border border-1 p-3 border-primary">
+                                         <text >{{start_hour}}</text> 
+                                        </div>
+                                        <div class="p-3">:</div>
+                                        <div @click="show_start_minutes=!show_start_minutes" class="border border-1 p-3 border-primary">
+                                          <text >{{start_minutes}}</text>
+                                        </div>
+                                        <div class="p-3">hrs</div>
+                                </div>
+
+                                
+ <div v-if="show_start_hour">
+  <table class="table caption-top">
+  <caption>Seleccione Hora Inicio</caption>
+  <tbody class="border border-primary">
+    <tr>
+      <td @click="start_hour='00'; show_start_hour=false" class="border border-primary p-2 text-center">00</td>
+      <td @click="start_hour='01'; show_start_hour=false" class="border border-primary p-2 text-center">01</td>
+      <td @click="start_hour='02'; show_start_hour=false"  class="border border-primary p-2 text-center">02</td>
+      <td @click="start_hour='03'; show_start_hour=false"  class="border border-primary p-2 text-center">03</td>
+      <td @click="start_hour='04'; show_start_hour=false"  class="border border-primary p-2 text-center">04</td>
+      <td @click="start_hour='05'; show_start_hour=false"  class="border border-primary p-2 text-center">05</td>
+    </tr>
+    <tr>
+      <td @click="start_hour='06'; show_start_hour=false" class="border border-primary text-center">06</td>
+      <td @click="start_hour='07'; show_start_hour=false" class="border border-primary text-center">07</td>
+      <td @click="start_hour='08'; show_start_hour=false" class="border border-primary text-center">08</td>
+      <td @click="start_hour='09'; show_start_hour=false" class="border border-primary text-center">09</td>
+      <td @click="start_hour='10'; show_start_hour=false" class="border border-primary text-center">10</td>
+      <td @click="start_hour='11'; show_start_hour=false" class="border border-primary text-center">11</td>
+    </tr>
+    <tr>
+      <td @click="start_hour='12'; show_start_hour=false" class="border border-primary text-center">12</td>
+      <td @click="start_hour='13'; show_start_hour=false" class="border border-primary text-center">13</td>
+      <td @click="start_hour='14'; show_start_hour=false" class="border border-primary text-center">14</td>
+      <td @click="start_hour='15'; show_start_hour=false" class="border border-primary text-center">15</td>
+      <td @click="start_hour='16'; show_start_hour=false" class="border border-primary text-center">16</td>
+      <td @click="start_hour='17'; show_start_hour=false" class="border border-primary text-center">17</td>
+    </tr>
+    <tr>
+      <td @click="start_hour='18'; show_start_hour=false" class="border border-primary text-center">18</td>
+      <td @click="start_hour='19'; show_start_hour=false" class="border border-primary text-center">19</td>
+      <td @click="start_hour='20'; show_start_hour=false" class="border border-primary text-center">20</td>
+      <td @click="start_hour='21'; show_start_hour=false" class="border border-primary text-center">21</td>
+      <td @click="start_hour='22'; show_start_hour=false" class="border border-primary text-center">22</td>
+      <td @click="start_hour='23'; show_start_hour=false" class="border border-primary text-center">23</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+                                
+<div v-if="show_start_minutes">
+  <table class="table caption-top">
+  <caption>Seleccione Minutos</caption>
+  <tbody class="border border-primary">
+    <tr>
+      <td @click="start_minutes='05'; show_start_minutes=false" class="border border-primary p-2 text-center">05</td>
+      <td @click="start_minutes='10'; show_start_minutes=false" class="border border-primary p-2 text-center">10</td>
+      <td @click="start_minutes='15'; show_start_minutes=false" class="border border-primary p-2 text-center">15</td>
+      <td @click="start_minutes='20'; show_start_minutes=false" class="border border-primary p-2 text-center">20</td>
+      <td @click="start_minutes='25'; show_start_minutes=false" class="border border-primary p-2 text-center">25</td>
+      <td @click="start_minutes='30'; show_start_minutes=false" class="border border-primary p-2 text-center">30</td>
+    </tr>
+    <tr>
+      <td @click="start_minutes='35'; show_start_minutes=false" class="border border-primary text-center">35</td>
+      <td @click="start_minutes='40'; show_start_minutes=false" class="border border-primary text-center">40</td>
+      <td @click="start_minutes='45'; show_start_minutes=false" class="border border-primary text-center">45</td>
+      <td @click="start_minutes='50'; show_start_minutes=false" class="border border-primary text-center">50</td>
+      <td @click="start_minutes='55'; show_start_minutes=false" class="border border-primary text-center">55</td>
+      <td class="border border-primary text-center">--</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+<!-- END START HOUR--> 
+
+<!-- END HOUR -->
+                                  <div class="mt-4 form-group d-flex justify-content-between">
+                                        <label for="exampleInputEmail1">Hora Fin </label>
+                                        <!--<input type="time" id="form_start_time" name="form_start_time" v-model="form_start_time" min="00:00" max="23:59" required>
+                                        -->
+                                        <div @click="show_end_hour=!show_end_hour" class="border border-1 p-3 border-primary">
+                                         <text >{{end_hour}}</text> 
+                                        </div>
+                                        <div class="p-3">:</div>
+                                        <div @click="show_end_minutes=!show_end_minutes" class="border border-1 p-3 border-primary">
+                                          <text >{{end_minutes}}</text>
+                                        </div>
+                                        <div class="p-3">hrs</div>
                                 </div>
                                 
+<div v-if="show_end_hour">
+  <table class="table caption-top">
+  <caption>Seleccione Hora Termino</caption>
+  <tbody class="border border-primary">
+    <tr>
+      <td @click="end_hour='00'; show_end_hour=false" class="border border-primary p-2 text-center">00</td>
+      <td @click="end_hour='01'; show_end_hour=false" class="border border-primary p-2 text-center">01</td>
+      <td @click="end_hour='02'; show_end_hour=false"  class="border border-primary p-2 text-center">02</td>
+      <td @click="end_hour='03'; show_end_hour=false"  class="border border-primary p-2 text-center">03</td>
+      <td @click="end_hour='04'; show_end_hour=false"  class="border border-primary p-2 text-center">04</td>
+      <td @click="end_hour='05'; show_end_hour=false"  class="border border-primary p-2 text-center">05</td>
+    </tr>
+    <tr>
+      <td @click="end_hour='06'; show_end_hour=false" class="border border-primary text-center">06</td>
+      <td @click="end_hour='07'; show_end_hour=false" class="border border-primary text-center">07</td>
+      <td @click="end_hour='08'; show_end_hour=false" class="border border-primary text-center">08</td>
+      <td @click="end_hour='09'; show_end_hour=false" class="border border-primary text-center">09</td>
+      <td @click="end_hour='10'; show_end_hour=false" class="border border-primary text-center">10</td>
+      <td @click="end_hour='11'; show_end_hour=false" class="border border-primary text-center">11</td>
+    </tr>
+    <tr>
+      <td @click="end_hour='12'; show_end_hour=false" class="border border-primary text-center">12</td>
+      <td @click="end_hour='13'; show_end_hour=false" class="border border-primary text-center">13</td>
+      <td @click="end_hour='14'; show_end_hour=false" class="border border-primary text-center">14</td>
+      <td @click="end_hour='15'; show_end_hour=false" class="border border-primary text-center">15</td>
+      <td @click="end_hour='16'; show_end_hour=false" class="border border-primary text-center">16</td>
+      <td @click="end_hour='17'; show_end_hour=false" class="border border-primary text-center">17</td>
+    </tr>
+    <tr>
+      <td @click="end_hour='18'; show_end_hour=false" class="border border-primary text-center">18</td>
+      <td @click="end_hour='19'; show_end_hour=false" class="border border-primary text-center">19</td>
+      <td @click="end_hour='20'; show_end_hour=false" class="border border-primary text-center">20</td>
+      <td @click="end_hour='21'; show_end_hour=false" class="border border-primary text-center">21</td>
+      <td @click="end_hour='22'; show_end_hour=false" class="border border-primary text-center">22</td>
+      <td @click="end_hour='23'; show_end_hour=false" class="border border-primary text-center">23</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+                                
+<div v-if="show_end_minutes">
+  <table class="table caption-top">
+  <caption>Seleccione Minutos</caption>
+  <tbody class="border border-primary">
+    <tr>
+      <td @click="end_minutes='05'; show_end_minutes=false" class="border border-primary p-2 text-center">05</td>
+      <td @click="end_minutes='10'; show_end_minutes=false" class="border border-primary p-2 text-center">10</td>
+      <td @click="end_minutes='15'; show_end_minutes=false" class="border border-primary p-2 text-center">15</td>
+      <td @click="end_minutes='20'; show_end_minutes=false" class="border border-primary p-2 text-center">20</td>
+      <td @click="end_minutes='25'; show_end_minutes=false" class="border border-primary p-2 text-center">25</td>
+      <td @click="end_minutes='30'; show_end_minutes=false" class="border border-primary p-2 text-center">30</td>
+    </tr>
+    <tr>
+      <td @click="end_minutes='35'; show_end_minutes=false" class="border border-primary text-center">35</td>
+      <td @click="end_minutes='40'; show_end_minutes=false" class="border border-primary text-center">40</td>
+      <td @click="end_minutes='45'; show_end_minutes=false" class="border border-primary text-center">45</td>
+      <td @click="end_minutes='50'; show_end_minutes=false" class="border border-primary text-center">50</td>
+      <td @click="end_minutes='55'; show_end_minutes=false" class="border border-primary text-center">55</td>
+      <td class="border border-primary text-center">--</td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+
+
+                                <!--                                
                                 <div class="form-group d-flex justify-content-between mt-3">
                                         <label for="exampleInputEmail1">Hora Fin </label>
                                         <input type="time" id="form_end_time" name="form_end_time" v-model="form_end_time" min="00:00" max="23:59" required>
-                                      <!--  <input type="text" class="form-control" autocomplete="off" id="form_end_time" name="form_end_time" v-model="form_end_time"  placeholder="ejemplo 19:30"> -->
                                 </div>
+                                -->
+
                           </div>  
                           
 
@@ -307,6 +464,17 @@ export default {
 
 data: function () {
 		return {
+            show_start_hour : false ,
+            start_hour : '00' ,
+            show_start_minutes : false ,
+            start_minutes : '05' ,
+            
+            
+            show_end_hour : false ,
+            end_hour : '23' ,
+            show_end_minutes : false ,
+            end_minutes : '55' ,
+            
 			      showModalCreateCalendar  : false ,
 
             form_start_time : '00:00', 
@@ -430,8 +598,10 @@ data: function () {
                 form_calendar_start: start_date_corrected ,
                 form_calendar_end: end_date_corrected , 
                  
-                form_start_time : this.form_start_time,
-                form_end_time : this.form_end_time ,
+                //form_start_time : this.form_start_time,
+                //form_end_time : this.form_end_time ,
+                form_start_time : this.start_hour+":"+this.start_minutes  ,
+                form_end_time : this.end_hour+":"+this.end_minutes ,
                 form_specialty_id : this.form_specialty_id, 
                 form_app_duration : this.form_app_duration ,
                 form_app_time_between : this.form_app_time_between ,
