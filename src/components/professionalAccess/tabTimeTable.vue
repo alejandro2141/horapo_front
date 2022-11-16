@@ -208,7 +208,6 @@ data: function () {
         addNewCalendar(){
                 console.log("Add new Calendar action "+JSON.stringify(this.session_params) ) ;
                 this.activatorCreateNewCalendar = Math.random(); 
-
                 },
 
 
