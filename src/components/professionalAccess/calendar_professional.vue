@@ -89,32 +89,21 @@ import axios from 'axios';
                                         
                                           <i class="bi bi-geo-alt text-white"></i> {{center_data.name}} 
                                     </div>
-                                </div>
-                                
-                                
-                                
-
-                                    
-                               
-                               
+                                </div>     
             
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Inicio  </text>  
-                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_start" style=" border-radius: 25px; width:60%;  text-align: right;  ">
-                                       
+                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_start" style=" border-radius: 25px; width:60%;  text-align: right;  ">              
                   </div>
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Fin </text>  
-                         
-                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_end" style=" border-radius: 25px; width:60%;  text-align: right; color: #fff; ">
-                         
+                           <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_end" style=" border-radius: 25px; width:60%;  text-align: right; color: #fff; ">
                   </div>
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Hora  Inicio </text>  
                           <input :disabled="!showEdit"  type="time" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="start_time" style=" border-radius: 25px; width:40%;  text-align: right; ">
-                         
                   </div>
 
                   <div  class="d-flex justify-content-between mt-2">
