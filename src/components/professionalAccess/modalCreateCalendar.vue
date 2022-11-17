@@ -17,18 +17,174 @@ import Datepicker from 'vuejs3-datepicker';
 		    <transition name="modal">
 			<div class="modal-mask ">
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-1 modal-background">
+			<div class="modal-container  m-0 p-0 bg-secondary">
  
                 <div class="modal-header">
-                        <div class="text-secondary  display-5">
+                        <div class="text-white display-5">
                         Crear Calendario
                         </div>
-                        <div class="p-1 "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalCreateCalendar = false"  aria-label="Close"></i>
+                        <div class="p-0 "><i class="display-1 text-white bi bi-x-lg ml-0"  v-on:click="showModalCreateCalendar = false"  aria-label="Close"></i>
                         </div>
                 </div>
 
                 <div class="modal-body mt-0"  > 
+
+<!-- NUEVO FORMULARIO CREACION -->
+
+<div class="">
+              <text class="text-white">Aqui puedes crear un nuevo calendario llenado la siguiente información </text>
+                   
+                    <div class="card mb-0 p-3 w-100 border border-1 border-white bg-secondary" style="width: 18rem; border-radius: 15px; "   >
+                    
+                    <div class="card-body p-0 m-0" >
+                    
+                    <div class="d-flex justify-content-between p-2 w-100 " style="width: 18rem; border-radius: 15px; " >
+                                
+                               
+                    </div>
+
+                <div class=" text-white w-100">
+                    <div class="m-0 ">
+                    
+                    
+                  <!-- SPECIALTY -->
+                    <div class="">
+                          <div>
+                            <text> Especialidad </text>
+                          </div>
+                        
+                          <div class="">
+                                    <select   v-model="form_specialty_id" class="bg-secondary border-0 text-white form-control  " :class="{ 'bg-dark border border-white': true }" id="form_specialty_id" >
+                                    <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
+                                      {{ specialty.name }} 
+                                    </option>
+                                  </select>        
+                          </div>
+                    </div>
+                    
+                    <!-- CONSULTANCY -->
+                    <div class="mt-2">
+                                   <text>Consulta
+                                   </text>
+                                    <div class="form-group h3 ">
+                                         <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+                                    </div>
+                    </div>    
+
+                  <!-- DATE START CALENDAR -->
+                  <div  class="d-flex justify-content-between mt-3">
+                          <div class="p-2">
+                          Fecha Inicio
+                          </div>
+
+                          <div class="p-2  bg-dark  " @click="show_date_start=!show_date_start"  >
+                                {{formatDate(form_calendar_start)}} <i class="bi bi-calendar-week"></i>
+                          </div>
+                  </div>
+                  <div v-if="show_date_start">
+                              <datepicker :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                  </div>
+                  <!-- DATE START CALENDAR -->
+
+
+                  <div  class="d-flex justify-content-between mt-3">
+                          <text> Fecha Fin </text>  
+                           <input type="date" :class="{ 'bg-dark border border-white': true }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="form_calendar_end" style=" border-radius: 25px; width:60%;  text-align: right; color: #fff; ">
+                  </div>
+
+                  <div  class="d-flex justify-content-between mt-3">
+                          <text> Hora  Inicio </text>  
+                          <input   type="time" :class="{ 'bg-dark border border-white': true }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="form_start_time" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                  </div>
+
+                  <div  class="d-flex justify-content-between mt-3">
+                          <text> Hora  Fin </text>  
+                          <input   type="time" :class="{ 'bg-dark border border-white': true }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="form_end_time" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                  </div>
+
+                <div  class="d-flex justify-content-between mt-3">
+                          <text> Minutos de Atención </text>  
+                          <input   type="number" :class="{ 'bg-dark border border-white': true }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="form_app_duration" style=" border-radius: 25px; width:40%;  text-align: right; ">
                 
+                </div>
+                
+                <div  class="d-flex justify-content-between mt-3">
+                          <text>Minutos entre citas </text>  
+                          <input   type="number" :class="{ 'bg-dark border border-white': true }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="form_app_time_between" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                
+                </div>
+                
+                <div  class="d-flex justify-content-between mt-3">
+                            <text>Color </text>  
+                            <div  class="col-9 w-25 border border-primary text-dark" :style="{ 'background-color' : '#ffeeee'   }" >
+                                  <p @click="showColorSelection=!showColorSelection" class="p-2 pt-2 h5"> <i><small>Selec</small></i> </p>
+                            </div>
+
+                </div>
+
+                <div v-if="showColorSelection && showEdit" class="d-flex justify-content-end" >
+                     
+                    <div v-for="calcol in calendarColorArray"  :key="calcol.id"  >
+                       <div class="m-1 p-3"  :style="{ 'background-color' : '#ffeeee'   }" > &nbsp;&nbsp;&nbsp;&nbsp; </div>
+                    </div>
+
+                </div>
+               
+
+                <div class="mt-1">
+                  Dias Recurrencia: <br>
+
+                <div class="d-flex justify-content-between fs-5 m-1">
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateMonday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':monday  }" >Lu</div>
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateTuesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':tuesday }" >Ma</div>
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateWednesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':wednesday }" >Mi</div>
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateThursday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':thursday }">Ju</div>
+                    <div class="border border-1 border-white m-1 p-1"  @click="activateFriday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':friday }">Vie</div>
+                
+                    <div class="border border-1 border-white m-1 p-1" @click="activateSaturday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':saturday }">Sa</div>
+                    <div class="border border-1 border-white m-1 p-1" @click="activateSunday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':sunday }">Do</div>
+                </div>
+
+                </div>
+
+
+
+                              
+                <hr class="text-white ">
+
+              
+                <div v-if="showEdit" class="d-flex justify-content-between mt-2">
+                    <text @click="saveCalendarChanges();showEdit=false" class="" >GUARDAR  </text> 
+                            
+                            
+                    <text @click="showEdit=false;resetForm()" class="" >CANCELAR </text>  
+                </div>
+
+                                
+                                 <!--    <p class="text-white">C#{{calendar.calendar_id}} </p> -->
+               
+                </div>
+                </div>
+                </div>
+                    <!-- end card -->
+                </div>   
+                    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- FIN NUEVO FORMULARIO CREACION -->
+
+
+                <!--
                     <div v-if="centers_found_flag" >
                 
                           <div class="form-group mt-3 h3">
@@ -48,11 +204,8 @@ import Datepicker from 'vuejs3-datepicker';
                           <div class="mt-2"> 
 
                           <label class="h3">Horas </label>
-                                <!-- hora inicio -->
                                 <div class="form-group d-flex justify-content-between">
                                         <label for="exampleInputEmail1">Hora Inicio </label>
-                                        <!--<input type="time" id="form_start_time" name="form_start_time" v-model="form_start_time" min="00:00" max="23:59" required>
-                                        -->
                                         <div @click="show_start_hour=!show_start_hour ; show_start_minutes=false" class="border border-1 p-3 border-primary">
                                          <text >{{start_hour}}</text> 
                                         </div>
@@ -127,14 +280,10 @@ import Datepicker from 'vuejs3-datepicker';
   </tbody>
   </table>
 </div>
-<!-- END START HOUR--> 
 
-<!-- END HOUR -->
                                   <div class="mt-4 form-group d-flex justify-content-between">
                                         <label for="exampleInputEmail1">Hora Fin </label>
-                                        <!--<input type="time" id="form_start_time" name="form_start_time" v-model="form_start_time" min="00:00" max="23:59" required>
-                                        -->
-                                        <div @click="show_end_hour=!show_end_hour; show_end_minutes = false" class="border border-1 p-3 border-primary">
+                                         <div @click="show_end_hour=!show_end_hour; show_end_minutes = false" class="border border-1 p-3 border-primary">
                                          <text >{{end_hour}}</text> 
                                         </div>
                                         <div class="p-3">:</div>
@@ -207,19 +356,10 @@ import Datepicker from 'vuejs3-datepicker';
   </tbody>
   </table>
 </div>
-
-
-
-                                <!--                                
-                                <div class="form-group d-flex justify-content-between mt-3">
-                                        <label for="exampleInputEmail1">Hora Fin </label>
-                                        <input type="time" id="form_end_time" name="form_end_time" v-model="form_end_time" min="00:00" max="23:59" required>
-                                </div>
-                                -->
+                                
 
                           </div>  
                           
-
                           <div class="mt-3"> 
                                     <h3> Tiempo de atencion: </h3>
                                     <select class="form-select form-control-lg" aria-label="Default" id="time" name="form_app_duration" v-model="form_app_duration">
@@ -270,42 +410,45 @@ import Datepicker from 'vuejs3-datepicker';
                                 <label class="checkbox-inline"><input type="checkbox" value="true" v-model="form_recurrency_sun" >Domingo</label>
                             </div>
 
-                          <h2>Fechas Calendario</h2>
-                          <!-- FECHA INICIO CALENDARIO-->
-                            
-                            <div class="row  mb-1  border-secondary d-flex justify-content-between border-primary">
-                              <div class="h5">
-                              Fecha Inicio
+                  <div class="mt-3">
+                      <h2>Fechas Calendario</h2>
+                          
+                            <div class="d-flex justify-content-around  ">
+                              <div class="h5 p-2">
+                              Inicio
                               </div>
 
-                              <div @click="show_date_start=!show_date_start"  >
-                                {{formatDate(form_calendar_start)}} 
+                              <div class="h5 p-2 border border-1 border-primary " @click="show_date_start=!show_date_start"  >
+                                {{formatDate(form_calendar_start)}} <i class="bi bi-calendar-week"></i>
                               </div>
-                              <!--
-                              <div class="col">
-                                  <input  v-model="form_calendar_start" :min="form_minimum_date" type="date" id="form_calendar_start" name="form_calendar_start" class="form-control form-control-lg border border-primary" >
-                              </div>
-                              -->
+                              
                             </div>
-                        
-                           <!-- DATE PICKER FECHA INICIO CALENDARIO -->
-                          <div v-if="show_date_start">
+                           <div v-if="show_date_start">
                               <datepicker :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                           </div>
 
+                           <div class="d-flex justify-content-around">
+                              <div class="h5 p-2">
+                              Fin
+                              </div>
+
+                              <div class="h5 p-2 border border-1 border-primary" @click="show_date_end=!show_date_end"  >
+                                {{formatDate(form_calendar_end)}} <i class="bi bi-calendar-week"></i>
+                              </div>
+                              
+                            </div>
+                          <div v-if="show_date_end">
+                              <datepicker :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="form_calendar_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                          </div>
+
+                </div>
+
+
 
                       
-                            <div class="row  mb-1  border-secondary ">
-                               <div class="col-3 h5">
-                              Fecha Termino
-                              </div>
-                              <div class="col">
-                                  <input  v-model="form_calendar_end" :min="form_minimum_date" type="date" id="form_calendar_end" name="form_calendar_end" class="form-control form-control-lg border border-primary" >
-                              </div>
-                            </div>
+                           
 
-
-                            <div class="row  mb-1  border-secondary ">
+                            <div class="row  mt-2 mb-1  border-secondary ">
                                 <div class="col-3 h5">
                                   Color
                                 </div>
@@ -314,7 +457,6 @@ import Datepicker from 'vuejs3-datepicker';
                                 </div>
                             
                             </div>
-                            <!--Select Color -->
                             <div v-if="showColorSelection" >
                                                            
                               <div class="d-flex justify-content-end border border-1">
@@ -325,33 +467,7 @@ import Datepicker from 'vuejs3-datepicker';
                                   </div>
                               </div>
                             </div>
-
-                          
-
-
-        <!--
-                          <h2>Tipo de Cita:</h2>
-                                <div class="radio">
-                                  <label><input v-model="form_appointment_center" type="checkbox"  @click="form_appointment_home = false;  form_appointment_center = true "   >En Consulta</label>
-                                </div>
-                                <div class="radio">
-                                  <label><input v-model="form_appointment_home" type="checkbox" @click="form_appointment_center = false; form_appointment_home = true "  >A Domicilio</label>
-                                </div>
-                              
-                          
-                        <div v-if="form_appointment_center" class="border border-2 p-2" >
-                                Seleccione Centro de Atencion 
-                                <InputFormCenterProfessional class="m-3" v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
-                                <br>
-                        </div>
-
-                        <div v-if="form_appointment_home" class="border border-2 p-2" >
-                                Comunas en las que atiende a Domicilio (Máximo 6). 
-                                <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional>    
-                                <br>  
-                        </div>
-
-        -->
+        
                         <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
                         
                     </div>
@@ -360,7 +476,8 @@ import Datepicker from 'vuejs3-datepicker';
                       <br>
                         Para crear un Horario debe existir al menos una Consulta. <i class="bi bi-geo-alt"></i>
                     </div>
-
+                -->
+                
                 </div>
 
             </div> 
@@ -478,6 +595,9 @@ export default {
 
 data: function () {
 		return {
+
+            showColorSelection : false  ,
+
             show_start_hour : false ,
             start_hour : '00' ,
             show_start_minutes : false ,
@@ -497,14 +617,15 @@ data: function () {
             form_specialty_id : null ,
             form_app_duration : null ,
             form_app_time_between : null ,
-
-            form_calendar_start: null ,
+ 
             show_date_start : false ,
-
+            form_calendar_start: null ,
+           
             form_minimum_date : null ,
 
             show_date_end : false ,
             form_calendar_end: null ,
+
             form_appointment_center: false ,
             form_appointment_home : false ,
             form_appointment_remote : false , 
@@ -532,6 +653,16 @@ data: function () {
             calendarColorArray : ["#FCFFE9","#FFF2CC","#CAEFD1", "#FDE0D9", "#CAF4F4", "#cbc9e1"],
             
             showColorSelection : true ,
+            month_name : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+
+            monday : null,
+            tuesday : null ,
+            wednesday : null ,
+            thursday : null,
+            friday : null ,
+            saturday : null ,
+            sunday : null, 
+
 
 		 }
 	},
@@ -542,8 +673,10 @@ data: function () {
     created () {
       console.log("created modalCreateCalendar");
       this.getSpecialties(); 
-      let current_date = new Date()
-      this.form_calendar_start=current_date.getDate()+"/"+current_date.getMonth()+1+"/"+ current_date.getFullYear()
+      this.form_calendar_start = new Date()
+      this.form_calendar_end = new Date()
+      
+      //this.form_calendar_start=current_date.getDate()+"/"+current_date.getMonth()+1+"/"+ current_date.getFullYear()
        
     },
 
@@ -552,22 +685,58 @@ data: function () {
          },
  
     methods: {
+       activateMonday()
+        {  if (this.showEdit)
+            { this.monday=!this.monday ; }
+        },
+        activateTuesday()
+        {  if (this.showEdit)
+            { this.tuesday=!this.tuesday ; }
+        },
+        activateWednesday()
+        {  if (this.showEdit)
+            { this.wednesday=!this.wednesday ; }
+        },
+        activateThursday()
+        {  if (this.showEdit)
+            { this.thursday=!this.thursday ; }
+        },
+        activateFriday()
+        {  if (this.showEdit)
+            { this.friday=!this.friday ; }
+        },
+        activateSaturday()
+        {  if (this.showEdit)
+            { this.saturday=!this.saturday ; }
+        },
+        activateSunday()
+        {  if (this.showEdit)
+            { this.sunday=!this.sunday;  }
+        },
+
       
       setCalendarStart(date)
       {
         console.log("date Selected en emit :"+date);
-        let aux_date=new Date(date);
-        this.form_calendar_start=aux_date.getDate()+"/"+aux_date.getMonth()+1+"/"+ aux_date.getFullYear()
-       // this.show_date_picker =false ;
-       // this.forceUpdateCalendar += 1 ; 
+        //let aux_date=new Date(date);
+        this.form_calendar_start= new Date(date);
+     //   this.form_calendar_start=aux_date.getDate()+"/"+month_name[aux_date.getMonth()]+"/"+ aux_date.getFullYear()
+        this.show_date_start = false
       },
 
+      setCalendarEnd(date)
+      {
+        console.log("date Selected en emit :"+date);
+        //let aux_date=new Date(date);
+        this.form_calendar_end= new Date(date);
+       // this.form_calendar_end=aux_date.getDate()+"/"+(aux_date.getMonth()+1)+"/"+ aux_date.getFullYear()
+        this.show_date_end = false
+      },
 
       formatDate(val)
       {
-        
-        let aux_date=new Date(date);
-        let response= aux_date.getDate()+"/"+aux_date.getMonth()+1+"/"+ aux_date.getFullYear()
+        let aux_date=new Date(val);
+        let response= aux_date.getDate()+" de "+this.month_name[parseInt(aux_date.getMonth())]+" "+ aux_date.getFullYear()
         return response
       },
 
