@@ -22,13 +22,14 @@ import axios from 'axios';
                       <div class="pr-1  "><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalReserveAppointment = false" aria-label="Close"></i>
                       </div>
                 </div>
+                calendar_data.color
                 -->
 
       <div class="modal-body mt-0 p-0"  >                   
         
       <div id="app" class="m-0 p-0 d-flex" style="border-radius: 15px;" >	
              
-              <div class="m-0 p-2" :style="{ 'background-color' : calendar_data.color  }" style="border-radius: 15px;" >
+              <div class="m-0 p-2" :style="{ 'background-color' :  '#EEE' }" style="border-radius: 15px;" >
                        
               </div>
                             
@@ -241,11 +242,11 @@ export default {
           error_msg_insurance_code : false,
 
           center_data : null ,
-          calendar_data : null ,
+          //calendar_data : null ,
           }   
     },
    	
-   props: ['daterequired','hourToReserve', 'session_params', 'openModalReserveAppEvent','global_specialties', 'global_comunas' ],
+   props: ['calendar_data' ,'daterequired','hourToReserve', 'session_params', 'openModalReserveAppEvent','global_specialties', 'global_comunas' ],
    emits: ['updateAppList','reserveUpdateAppList'] , 
       
    	mounted () {
@@ -379,7 +380,7 @@ export default {
           this.showModalReserveAppointment= true ; 
   
           this.center_data = this.session_params.centers.find(elem => elem.id == this.hourToReserve.center_id )
-          this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.hourToReserve.calendar_id )
+         //this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.hourToReserve.calendar_id )
 
         },
 
