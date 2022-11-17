@@ -416,6 +416,8 @@ export default {
             else { return null }
         },
 
+     
+
         getCenterName(id){
             let temp= this.centers.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
