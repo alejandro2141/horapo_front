@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import Datepicker from 'vuejs3-datepicker';
+
 
 </script>
 
@@ -37,8 +39,12 @@ import axios from 'axios';
                         <text  @click="deleteCalendar();showEdit=false" >Eliminar <i class="bi bi-trash"></i> </text> 
                     </div>
 
+                <!-- ESTADO -->
                     <div class="d-flex justify-content-between mt-2 p-1"> 
-                                                  
+                        <div>
+                            Estado 
+                        </div>
+
                         <div v-if="evaluateCalendarStatus(date_end)==3" class="bg-secondary" :class="{ 'bg-dark': showEdit }" style=" border-radius: 15px; "  >
                               <text class="text-white p-1"> Expirado <i class="text-danger display-4 bi bi-slash-circle-fill"></i> </text> 
                         </div>
@@ -46,18 +52,14 @@ import axios from 'axios';
                         <div v-else >
                                 <text v-if="calendar_active"  >  
                                   <text class="text-white ">Encendido </text>
+                                  <text @click="switchCalendarActive()"> Apagar </text>
                                 </text>
                                 <text v-else > 
-                                    <text class="text-white">Apagado<i class="text-danger display-4 bi bi-slash-circle-fill"></i></text>
+                                    <text class="text-white">Apagado</text>
+                                    <text @click="switchCalendarActive()"> Encender </text>
                                 </text>
                         </div>
-
-                        <text class=""> </text>  
-
-                        <div :class="{ 'bg-dark': showEdit }" class="text-center" style="width: 4rem; border-radius: 15px; "  >
-                            <i class="display-1 text-white pl-3 pr-3" @click="switchCalendarActive()"  :class="{ 'bi bi-toggle-off':!calendar_active , 'bi bi-toggle-on':calendar_active   }"  ></i>
-                        </div>                        
-                    </div>
+                </div>
 <!--
                                 <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between">
                                     <text>Estado Actual </text>
@@ -71,26 +73,58 @@ import axios from 'axios';
                                     
                                 </div>
 -->
-                                <div class="mt-2 mb-2 d-flex justify-content-between">
-                                    <text>Lugar de Atencion  <br>
-                                   
-                                    </text>
-                                    
-                                    <div>
-                                        <p v-if="calendar.center_visit" class="text-white text-end" >
-                                            <text>  </text> <text> En Consulta  </text>  
-                                        </p>
-                                        <p v-if="calendar.home_visit" class="text-white text-end">
-                                                        <text>  </text> <text> A Domicilio  </text>
-                                        </p>
-                                        <p v-if="calendar.remote_care" class="text-white text-end">
-                                                        <text>  </text> <text> Tele Atencion </text>
-                                        </p>
-                                        
-                                          <i class="bi bi-geo-alt text-white"></i> {{center_data.name}} 
-                                    </div>
-                                </div>     
-            
+                <!-- LUGAR -->
+            <div class="mt-2 mb-2 d-flex justify-content-between">
+                <text>Lugar de Atencion  <br>
+                </text>
+                <div>
+                    <p v-if="calendar.center_visit" class="text-white text-end" >
+                        <text>  </text> <text> En Consulta  </text>  
+                    </p>
+                    <p v-if="calendar.home_visit" class="text-white text-end">
+                        <text>  </text> <text> A Domicilio  </text>
+                    </p>
+                    <p v-if="calendar.remote_care" class="text-white text-end">
+                        <text>  </text> <text> Tele Atencion </text>
+                    </p>
+                    <i class="bi bi-geo-alt text-white"></i> {{center_data.name}} 
+                </div>
+            </div>     
+
+            <!-- CALENDAR DATE START-->
+                  <div  class="d-flex justify-content-between mt-3">
+                          <div class="p-2">
+                          Fecha Inicio
+                          </div>
+
+                          <div class="p-2  bg-dark  " @click="show_date_start=!show_date_start"  >
+                                {{formatDate(date_start)}} <i class="bi bi-calendar-week"></i>
+                          </div>
+                  </div>
+                  <div v-if="show_date_start">
+                          <datepicker  class="text-dark" :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="date_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                  </div>
+                  <!--  -->
+
+            <!-- CALENDAR DATE END -->
+                  <div class="d-flex justify-content-between mt-3">
+                      <div class="p-2">
+                          Fecha Fin
+                      </div>
+                      <div class="p-2 bg-dark" @click="show_date_end=!show_date_end"  >
+                             {{formatDate(date_end)}} <i class="bi bi-calendar-week"></i>
+                      </div>
+                  </div>
+                  <div v-if="show_date_end">
+                        <datepicker class="text-dark"  :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="date_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                  </div>
+            <!--  -->
+
+
+
+
+
+
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Fecha Inicio  </text>  
                           <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_start" style=" border-radius: 25px; width:60%;  text-align: right;  ">              
@@ -221,6 +255,12 @@ import axios from 'axios';
 export default {
    data : function() {
         return {
+            month_name : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+
+            show_date_start : false ,
+            show_date_end : false, 
+
+
             showSocial : false ,
             showEdit : false, 
         //form data
@@ -280,6 +320,13 @@ export default {
     },
 
 	methods :{
+        
+        formatDate(val)
+        {
+            let aux_date=new Date(val);
+            let response= aux_date.getDate()+" de "+this.month_name[parseInt(aux_date.getMonth())]+" "+ aux_date.getFullYear()
+            return response
+        },
 
         async deleteCalendar(){
           console.log("Professional delete Calendar")
