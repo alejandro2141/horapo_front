@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import ModalCreateCalendar from './modalCreateCalendar.vue';
-import ModalViewCalendar from './modalViewCalendar.vue';
+//import ModalViewCalendar from './modalViewCalendar.vue';
 import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatient.vue'
 import CalendarProfessional from './calendar_professional.vue'
 
