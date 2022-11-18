@@ -198,34 +198,36 @@ import Datepicker from 'vuejs3-datepicker';
                           </div>
                   </div>
 
-                    <div v-if="show_end_hour" class="text-white">
-                      <text>Seleccione Hora Inicio</text>
+                    <div v-if="show_end_hour" class="">
+                      <div class="bg-success text-white border border-1 border-dark">
+                        <text class="p-2 h5 ">Seleccione Hora Inicio</text>
+                      </div>
                       <table class="table caption-top">
                       
-                      <tbody class="border border-white text-white">
-                        <tr class="border border-white">
-                          <td @click="end_hour='00'; show_end_hour=false" class="p-2 border border-white text-center">00</td>
-                          <td @click="end_hour='01'; show_end_hour=false" class="p-2 border border-white text-center">01</td>
-                          <td @click="end_hour='02'; show_end_hour=false" class="p-2 border border-white text-center">02</td>
-                          <td @click="end_hour='03'; show_end_hour=false" class="p-2 border border-white text-center">03</td>
-                          <td @click="end_hour='04'; show_end_hour=false" class="p-2 border border-white text-center">04</td>
-                          <td @click="end_hour='05'; show_end_hour=false" class="p-2 border border-white text-center">05</td>
+                      <tbody class="border border-dark text-dark bg-white">
+                        <tr class="border border-dark">
+                          <td @click="end_hour='00'; show_end_hour=false" class="p-2 border border-dark text-center">00</td>
+                          <td @click="end_hour='01'; show_end_hour=false" class="p-2 border border-dark text-center">01</td>
+                          <td @click="end_hour='02'; show_end_hour=false" class="p-2 border border-dark text-center">02</td>
+                          <td @click="end_hour='03'; show_end_hour=false" class="p-2 border border-dark text-center">03</td>
+                          <td @click="end_hour='04'; show_end_hour=false" class="p-2 border border-dark text-center">04</td>
+                          <td @click="end_hour='05'; show_end_hour=false" class="p-2 border border-dark text-center">05</td>
                         </tr>
                         <tr>
-                          <td @click="end_hour='06'; show_end_hour=false" class=" border border-white  text-center">06</td>
-                          <td @click="end_hour='07'; show_end_hour=false" class=" border border-white  text-center">07</td>
-                          <td @click="end_hour='08'; show_end_hour=false" class=" border border-white  text-center">08</td>
-                          <td @click="end_hour='09'; show_end_hour=false" class=" border border-white  text-center">09</td>
-                          <td @click="end_hour='10'; show_end_hour=false" class=" border border-white  text-center">10</td>
-                          <td @click="end_hour='11'; show_end_hour=false" class=" border border-white  text-center">11</td>
+                          <td @click="end_hour='06'; show_end_hour=false" class=" border border-dark  text-center">06</td>
+                          <td @click="end_hour='07'; show_end_hour=false" class=" border border-dark  text-center">07</td>
+                          <td @click="end_hour='08'; show_end_hour=false" class=" border border-dark  text-center">08</td>
+                          <td @click="end_hour='09'; show_end_hour=false" class=" border border-dark  text-center">09</td>
+                          <td @click="end_hour='10'; show_end_hour=false" class=" border border-dark  text-center">10</td>
+                          <td @click="end_hour='11'; show_end_hour=false" class=" border border-dark  text-center">11</td>
                         </tr>
                         <tr>
-                          <td @click="end_hour='12'; show_end_hour=false" class=" border border-white  text-center">12</td>
-                          <td @click="end_hour='13'; show_end_hour=false" class=" border border-white  text-center">13</td>
-                          <td @click="end_hour='14'; show_end_hour=false" class=" border border-white  text-center">14</td>
-                          <td @click="end_hour='15'; show_end_hour=false" class=" border border-white  text-center">15</td>
-                          <td @click="end_hour='16'; show_end_hour=false" class=" border border-white  text-center">16</td>
-                          <td @click="end_hour='17'; show_end_hour=false" class=" border border-white  text-center">17</td>
+                          <td @click="end_hour='12'; show_end_hour=false" class=" border border-dark  text-center">12</td>
+                          <td @click="end_hour='13'; show_end_hour=false" class=" border border-dark  text-center">13</td>
+                          <td @click="end_hour='14'; show_end_hour=false" class=" border border-dark  text-center">14</td>
+                          <td @click="end_hour='15'; show_end_hour=false" class=" border border-dark  text-center">15</td>
+                          <td @click="end_hour='16'; show_end_hour=false" class=" border border-dark  text-center">16</td>
+                          <td @click="end_hour='17'; show_end_hour=false" class=" border border-dark  text-center">17</td>
                         </tr>
                         <tr>
                           <td @click="end_hour='18'; show_end_hour=false" class=" border border-white  text-center">18</td>
@@ -336,15 +338,18 @@ import Datepicker from 'vuejs3-datepicker';
 
                 <!-- SELECT COLOR   -->
                 <div  class="d-flex justify-content-between mt-3">
-                            <text>Color de Referencia </text>  
+                            <text>Seleccione Color de Referencia </text>  
+                            <!--  
                             <div  class="col-9 w-25 text-dark" :style="{ 'background-color' : form_calendar_color   }" >
-                                  <p @click="showColorSelection=!showColorSelection" class="p-2 pt-2 h5"> <i class="bi bi-moisture"></i> </p>
+                                <p @click="showColorSelection=!showColorSelection" class="p-2 pt-2 h5"> <i class="bi bi-moisture"></i> </p>
+                            
                             </div>
+                            -->
                 </div>
 
                 <div v-if="true" class="d-flex justify-content-end" >
                     <div v-for="calcol in calendarColorArray"  :key="calcol.id"  >
-                       <div class="m-1 p-3" @click="form_calendar_color=calcol ; showColorSelection=true"  :style="{ 'background-color' : calcol   }" > &nbsp;&nbsp;</div>
+                       <div class="m-1 p-3 border border-3" @click="form_calendar_color=calcol "  :class="{'border-primary' : (form_calendar_color==calcol )}" :style="{ 'background-color' : calcol   }" > </div>
                     </div>
                 </div>
                
@@ -352,16 +357,19 @@ import Datepicker from 'vuejs3-datepicker';
                 <div class="mt-3">
                   Dias Recurrencia: <br>
 
-                <div class="d-flex justify-content-between fs-5 m-1">
-                    <div class="border border-1 border-white m-1 p-1"  @click="form_recurrency_mon=!form_recurrency_mon" :class="{ 'bg-dark p-1': true , 'border-3':form_recurrency_mon  }" >Lu</div>
-                    <div class="border border-1 border-white m-1 p-1"  @click="form_recurrency_tue=!form_recurrency_tue" :class="{ 'bg-dark p-1': true , 'border-3':form_recurrency_tue }" >Ma</div>
-                    <div class="border border-1 border-white m-1 p-1"  @click="form_recurrency_wed=!form_recurrency_wed" :class="{ 'bg-dark p-1': true , 'border-3':form_recurrency_wed }" >Mi</div>
-                    <div class="border border-1 border-white m-1 p-1"  @click="form_recurrency_thu=!form_recurrency_thu" :class="{ 'bg-dark p-1': true , 'border-3':form_recurrency_thu }">Ju</div>
-                    <div class="border border-1 border-white m-1 p-1"  @click="form_recurrency_fri=!form_recurrency_fri" :class="{ 'bg-dark p-1': true , 'border-3':form_recurrency_fri }">Vie</div>
-                
-                    <div class="border border-1 border-white m-1 p-1" @click="form_recurrency_sat=!form_recurrency_sat" :class="{ 'bg-dark p-1': true , 'border-3':form_recurrency_sat }">Sa</div>
-                    <div class="border border-1 border-white m-1 p-1" @click="form_recurrency_sun=!form_recurrency_sun" :class="{ 'bg-dark p-1': true , 'border-3':form_recurrency_sun }">Do</div>
-                </div>
+                <div class="d-flex justify-content-between  m-0 p-0">
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_mon=!form_recurrency_mon" :class="{ 'bg-dark p-1': true , 'border-primary' :form_recurrency_mon  }" >Lu</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_tue=!form_recurrency_tue" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_tue }" >Ma</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_wed=!form_recurrency_wed" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_wed }" >Mi</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_thu=!form_recurrency_thu" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_thu }">Ju</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_fri=!form_recurrency_fri" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_fri }">Vie</div>
+                    
+                  </div>
+                  <div class="d-flex justify-content-start m-0 p-0">
+                    <div class="border border-3 m-1 p-2" @click="form_recurrency_sat=!form_recurrency_sat" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_sat }">Sa</div>
+                    <div class="border border-3 m-1 p-2" @click="form_recurrency_sun=!form_recurrency_sun" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_sun }">Do</div>
+                  </div>
+               
 
                 </div>
                               
