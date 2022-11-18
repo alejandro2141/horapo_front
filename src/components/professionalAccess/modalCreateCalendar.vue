@@ -117,65 +117,72 @@ import Datepicker from 'vuejs3-datepicker';
                   </div>
 
                     <div v-if="show_start_hour" class="text-white">
-                      <text>Seleccione Hora Inicio</text>
+                      <div class="bg-success text-white border border-1 border-dark">
+                        <text class="p-2 h5 ">Seleccione Hora Inicio</text>
+                      </div>
+                     
                       <table class="table caption-top">
                       
-                      <tbody class="border border-white text-white">
+                      <tbody class="border border-dark text-dark  bg-white">
                         <tr class="border border-white">
-                          <td @click="start_hour='00'; show_start_hour=false" class="p-2 border border-white text-center">00</td>
-                          <td @click="start_hour='01'; show_start_hour=false" class="p-2 border border-white text-center">01</td>
-                          <td @click="start_hour='02'; show_start_hour=false" class="p-2 border border-white text-center">02</td>
-                          <td @click="start_hour='03'; show_start_hour=false" class="p-2 border border-white text-center">03</td>
-                          <td @click="start_hour='04'; show_start_hour=false" class="p-2 border border-white text-center">04</td>
-                          <td @click="start_hour='05'; show_start_hour=false" class="p-2 border border-white text-center">05</td>
+                          <td @click="start_hour='00'; show_start_hour=false" class="p-2 border border-dark text-center">00</td>
+                          <td @click="start_hour='01'; show_start_hour=false" class="p-2 border border-dark text-center">01</td>
+                          <td @click="start_hour='02'; show_start_hour=false" class="p-2 border border-dark text-center">02</td>
+                          <td @click="start_hour='03'; show_start_hour=false" class="p-2 border border-dark text-center">03</td>
+                          <td @click="start_hour='04'; show_start_hour=false" class="p-2 border border-dark text-center">04</td>
+                          <td @click="start_hour='05'; show_start_hour=false" class="p-2 border border-dark text-center">05</td>
                         </tr>
                         <tr>
-                          <td @click="start_hour='06'; show_start_hour=false" class=" border border-white  text-center">06</td>
-                          <td @click="start_hour='07'; show_start_hour=false" class=" border border-white  text-center">07</td>
-                          <td @click="start_hour='08'; show_start_hour=false" class=" border border-white  text-center">08</td>
-                          <td @click="start_hour='09'; show_start_hour=false" class=" border border-white  text-center">09</td>
-                          <td @click="start_hour='10'; show_start_hour=false" class=" border border-white  text-center">10</td>
-                          <td @click="start_hour='11'; show_start_hour=false" class=" border border-white  text-center">11</td>
+                          <td @click="start_hour='06'; show_start_hour=false" class=" border border-dark  text-center">06</td>
+                          <td @click="start_hour='07'; show_start_hour=false" class=" border border-dark  text-center">07</td>
+                          <td @click="start_hour='08'; show_start_hour=false" class=" border border-dark  text-center">08</td>
+                          <td @click="start_hour='09'; show_start_hour=false" class=" border border-dark  text-center">09</td>
+                          <td @click="start_hour='10'; show_start_hour=false" class=" border border-dark  text-center">10</td>
+                          <td @click="start_hour='11'; show_start_hour=false" class=" border border-dark  text-center">11</td>
                         </tr>
                         <tr>
-                          <td @click="start_hour='12'; show_start_hour=false" class=" border border-white  text-center">12</td>
-                          <td @click="start_hour='13'; show_start_hour=false" class=" border border-white  text-center">13</td>
-                          <td @click="start_hour='14'; show_start_hour=false" class=" border border-white  text-center">14</td>
-                          <td @click="start_hour='15'; show_start_hour=false" class=" border border-white  text-center">15</td>
-                          <td @click="start_hour='16'; show_start_hour=false" class=" border border-white  text-center">16</td>
-                          <td @click="start_hour='17'; show_start_hour=false" class=" border border-white  text-center">17</td>
+                          <td @click="start_hour='12'; show_start_hour=false" class=" border border-dark  text-center">12</td>
+                          <td @click="start_hour='13'; show_start_hour=false" class=" border border-dark  text-center">13</td>
+                          <td @click="start_hour='14'; show_start_hour=false" class=" border border-dark  text-center">14</td>
+                          <td @click="start_hour='15'; show_start_hour=false" class=" border border-dark  text-center">15</td>
+                          <td @click="start_hour='16'; show_start_hour=false" class=" border border-dark  text-center">16</td>
+                          <td @click="start_hour='17'; show_start_hour=false" class=" border border-dark  text-center">17</td>
                         </tr>
                         <tr>
-                          <td @click="start_hour='18'; show_start_hour=false" class=" border border-white  text-center">18</td>
-                          <td @click="start_hour='19'; show_start_hour=false" class=" border border-white  text-center">19</td>
-                          <td @click="start_hour='20'; show_start_hour=false" class=" border border-white  text-center">20</td>
-                          <td @click="start_hour='21'; show_start_hour=false" class=" border border-white  text-center">21</td>
-                          <td @click="start_hour='22'; show_start_hour=false" class=" border border-white  text-center">22</td>
-                          <td @click="start_hour='23'; show_start_hour=false" class=" border border-white  text-center">23</td>
+                          <td @click="start_hour='18'; show_start_hour=false" class=" border border-dark  text-center">18</td>
+                          <td @click="start_hour='19'; show_start_hour=false" class=" border border-dark  text-center">19</td>
+                          <td @click="start_hour='20'; show_start_hour=false" class=" border border-dark  text-center">20</td>
+                          <td @click="start_hour='21'; show_start_hour=false" class=" border border-dark  text-center">21</td>
+                          <td @click="start_hour='22'; show_start_hour=false" class=" border border-dark  text-center">22</td>
+                          <td @click="start_hour='23'; show_start_hour=false" class=" border border-dark  text-center">23</td>
                         </tr>
                       </tbody>
                       </table>
                     </div>
 
                     <div v-if="show_start_minutes" class="text-white">
+                      <div class="bg-success text-white border border-1 border-dark">
+                        <text class="p-2 h5 ">Seleccione Minutos</text>
+                      </div>
+                     
                       <table class="table caption-top">
-                      <caption>Seleccione Minutos</caption>
-                      <tbody class="border border-white text-white">
+                     
+                      <tbody class="border border-dark text-dark bg-white">
                         <tr>
-                          <td @click="start_minutes='00'; show_start_minutes=false" class="border border-white  p-2 text-center">00</td>
-                          <td @click="start_minutes='05'; show_start_minutes=false" class="border border-white  p-2 text-center">05</td>
-                          <td @click="start_minutes='10'; show_start_minutes=false" class="border border-white  p-2 text-center">10</td>
-                          <td @click="start_minutes='15'; show_start_minutes=false" class="border border-white  p-2 text-center">15</td>
-                          <td @click="start_minutes='20'; show_start_minutes=false" class="border border-white  p-2 text-center">20</td>
-                          <td @click="start_minutes='25'; show_start_minutes=false" class="border border-white  p-2 text-center">25</td>
+                          <td @click="start_minutes='00'; show_start_minutes=false" class="border border-dark  p-2 text-center">00</td>
+                          <td @click="start_minutes='05'; show_start_minutes=false" class="border border-dark  p-2 text-center">05</td>
+                          <td @click="start_minutes='10'; show_start_minutes=false" class="border border-dark  p-2 text-center">10</td>
+                          <td @click="start_minutes='15'; show_start_minutes=false" class="border border-dark  p-2 text-center">15</td>
+                          <td @click="start_minutes='20'; show_start_minutes=false" class="border border-dark  p-2 text-center">20</td>
+                          <td @click="start_minutes='25'; show_start_minutes=false" class="border border-dark  p-2 text-center">25</td>
                         </tr>
                         <tr>
-                          <td @click="start_minutes='30'; show_start_minutes=false" class="border border-white  text-center">30</td>
-                          <td @click="start_minutes='35'; show_start_minutes=false" class="border border-white  text-center">35</td>
-                          <td @click="start_minutes='40'; show_start_minutes=false" class="border border-white  text-center">40</td>
-                          <td @click="start_minutes='45'; show_start_minutes=false" class="border border-white  text-center">45</td>
-                          <td @click="start_minutes='50'; show_start_minutes=false" class="border border-white  text-center">50</td>
-                          <td @click="start_minutes='55'; show_start_minutes=false" class="border border-white  text-center">55</td>
+                          <td @click="start_minutes='30'; show_start_minutes=false" class="border border-dark  text-center">30</td>
+                          <td @click="start_minutes='35'; show_start_minutes=false" class="border border-dark  text-center">35</td>
+                          <td @click="start_minutes='40'; show_start_minutes=false" class="border border-dark  text-center">40</td>
+                          <td @click="start_minutes='45'; show_start_minutes=false" class="border border-dark  text-center">45</td>
+                          <td @click="start_minutes='50'; show_start_minutes=false" class="border border-dark  text-center">50</td>
+                          <td @click="start_minutes='55'; show_start_minutes=false" class="border border-dark  text-center">55</td>
                         </tr>
                       </tbody>
                       </table>
@@ -230,36 +237,39 @@ import Datepicker from 'vuejs3-datepicker';
                           <td @click="end_hour='17'; show_end_hour=false" class=" border border-dark  text-center">17</td>
                         </tr>
                         <tr>
-                          <td @click="end_hour='18'; show_end_hour=false" class=" border border-white  text-center">18</td>
-                          <td @click="end_hour='19'; show_end_hour=false" class=" border border-white  text-center">19</td>
-                          <td @click="end_hour='20'; show_end_hour=false" class=" border border-white  text-center">20</td>
-                          <td @click="end_hour='21'; show_end_hour=false" class=" border border-white  text-center">21</td>
-                          <td @click="end_hour='22'; show_end_hour=false" class=" border border-white  text-center">22</td>
-                          <td @click="end_hour='23'; show_end_hour=false" class=" border border-white  text-center">23</td>
+                          <td @click="end_hour='18'; show_end_hour=false" class=" border border-dark  text-center">18</td>
+                          <td @click="end_hour='19'; show_end_hour=false" class=" border border-dark  text-center">19</td>
+                          <td @click="end_hour='20'; show_end_hour=false" class=" border border-dark  text-center">20</td>
+                          <td @click="end_hour='21'; show_end_hour=false" class=" border border-dark  text-center">21</td>
+                          <td @click="end_hour='22'; show_end_hour=false" class=" border border-dark  text-center">22</td>
+                          <td @click="end_hour='23'; show_end_hour=false" class=" border border-dark  text-center">23</td>
                         </tr>
                       </tbody>
                       </table>
                     </div>
 
                     <div v-if="show_end_minutes" class="text-white">
-                      <table class="table caption-top">
-                      <caption>Seleccione Minutos</caption>
-                      <tbody class="border border-white text-white">
+                      <div class="bg-success text-white border border-1 border-dark">
+                          <text>Seleccione Minutos</text>
+                      </div>
+                      
+                      <table class="table caption-top bg-white text-dark">
+                      <tbody class="border border-dark text-dark">
                         <tr>
-                          <td @click="end_minutes='00'; show_end_minutes=false" class="border border-white  p-2 text-center">00</td>
-                          <td @click="end_minutes='05'; show_end_minutes=false" class="border border-white  p-2 text-center">05</td>
-                          <td @click="end_minutes='10'; show_end_minutes=false" class="border border-white  p-2 text-center">10</td>
-                          <td @click="end_minutes='15'; show_end_minutes=false" class="border border-white  p-2 text-center">15</td>
-                          <td @click="end_minutes='20'; show_end_minutes=false" class="border border-white  p-2 text-center">20</td>
-                          <td @click="end_minutes='25'; show_end_minutes=false" class="border border-white  p-2 text-center">25</td>
+                          <td @click="end_minutes='00'; show_end_minutes=false" class="border border-dark  p-2 text-center">00</td>
+                          <td @click="end_minutes='05'; show_end_minutes=false" class="border border-dark  p-2 text-center">05</td>
+                          <td @click="end_minutes='10'; show_end_minutes=false" class="border border-dark  p-2 text-center">10</td>
+                          <td @click="end_minutes='15'; show_end_minutes=false" class="border border-dark  p-2 text-center">15</td>
+                          <td @click="end_minutes='20'; show_end_minutes=false" class="border border-dark  p-2 text-center">20</td>
+                          <td @click="end_minutes='25'; show_end_minutes=false" class="border border-dark  p-2 text-center">25</td>
                         </tr>
                         <tr>
-                          <td @click="end_minutes='30'; show_end_minutes=false" class="border border-white  text-center">30</td>
-                          <td @click="end_minutes='35'; show_end_minutes=false" class="border border-white  text-center">35</td>
-                          <td @click="end_minutes='40'; show_end_minutes=false" class="border border-white  text-center">40</td>
-                          <td @click="end_minutes='45'; show_end_minutes=false" class="border border-white  text-center">45</td>
-                          <td @click="end_minutes='50'; show_end_minutes=false" class="border border-white  text-center">50</td>
-                          <td @click="end_minutes='55'; show_end_minutes=false" class="border border-white  text-center">55</td>
+                          <td @click="end_minutes='30'; show_end_minutes=false" class="border border-dark  text-center">30</td>
+                          <td @click="end_minutes='35'; show_end_minutes=false" class="border border-dark  text-center">35</td>
+                          <td @click="end_minutes='40'; show_end_minutes=false" class="border border-dark  text-center">40</td>
+                          <td @click="end_minutes='45'; show_end_minutes=false" class="border border-dark  text-center">45</td>
+                          <td @click="end_minutes='50'; show_end_minutes=false" class="border border-dark  text-center">50</td>
+                          <td @click="end_minutes='55'; show_end_minutes=false" class="border border-dark  text-center">55</td>
                         </tr>
                       </tbody>
                       </table>
