@@ -285,26 +285,28 @@ import Datepicker from 'vuejs3-datepicker';
                             </div>
                 </div>
 
-                <div v-if="show_duration_minutes" class="text-white">
-                     <text>Seleccione tiempo de duracion de su cita</text>
-                      <table class="table caption-top">
+                <div v-if="show_duration_minutes" class="">
+                    <div class="bg-success text-white border border-1 border-dark">
+                      <text>Seleccione tiempo de duracion de su cita</text>
+                    </div> 
+                     <table class="table caption-top bg-white text-dark">
                      
-                      <tbody class="border border-white text-white">
+                      <tbody class="border border-1 border-dark ">
                         <tr>
-                          <td @click="form_app_duration='00'; show_duration_minutes=false" class="border border-white  p-2 text-center">00 Min</td>
-                          <td @click="form_app_duration='05'; show_duration_minutes=false" class="border border-white  p-2 text-center">05</td>
-                          <td @click="form_app_duration='10'; show_duration_minutes=false" class="border border-white  p-2 text-center">10</td>
-                          <td @click="form_app_duration='15'; show_duration_minutes=false" class="border border-white  p-2 text-center">15</td>
-                          <td @click="form_app_duration='20'; show_duration_minutes=false" class="border border-white  p-2 text-center">20</td>
-                          <td @click="form_app_duration='25'; show_duration_minutes=false" class="border border-white  p-2 text-center">25</td>
+                          <td @click="form_app_duration='00'; show_duration_minutes=false" class="border border-dark  p-2 text-center">00 Min</td>
+                          <td @click="form_app_duration='05'; show_duration_minutes=false" class="border border-dark  p-2 text-center">05</td>
+                          <td @click="form_app_duration='10'; show_duration_minutes=false" class="border border-dark  p-2 text-center">10</td>
+                          <td @click="form_app_duration='15'; show_duration_minutes=false" class="border border-dark  p-2 text-center">15</td>
+                          <td @click="form_app_duration='20'; show_duration_minutes=false" class="border border-dark  p-2 text-center">20</td>
+                          <td @click="form_app_duration='25'; show_duration_minutes=false" class="border border-dark  p-2 text-center">25</td>
                         </tr>
                         <tr>
-                          <td @click="form_app_duration='30'; show_duration_minutes=false" class="border border-white  text-center">30</td>
-                          <td @click="form_app_duration='35'; show_duration_minutes=false" class="border border-white  text-center">35</td>
-                          <td @click="form_app_duration='40'; show_duration_minutes=false" class="border border-white  text-center">40</td>
-                          <td @click="form_app_duration='45'; show_duration_minutes=false" class="border border-white  text-center">45</td>
-                          <td @click="form_app_duration='50'; show_duration_minutes=false" class="border border-white  text-center">50</td>
-                          <td @click="form_app_duration='55'; show_duration_minutes=false" class="border border-white  text-center">55</td>
+                          <td @click="form_app_duration='30'; show_duration_minutes=false" class="border border-dark  text-center">30</td>
+                          <td @click="form_app_duration='35'; show_duration_minutes=false" class="border border-dark  text-center">35</td>
+                          <td @click="form_app_duration='40'; show_duration_minutes=false" class="border border-dark  text-center">40</td>
+                          <td @click="form_app_duration='45'; show_duration_minutes=false" class="border border-dark  text-center">45</td>
+                          <td @click="form_app_duration='50'; show_duration_minutes=false" class="border border-dark  text-center">50</td>
+                          <td @click="form_app_duration='55'; show_duration_minutes=false" class="border border-dark  text-center">55</td>
                         </tr>
                       </tbody>
                       </table>
@@ -314,36 +316,41 @@ import Datepicker from 'vuejs3-datepicker';
 
                 <!-- TIEMPO ATENCION ENTRE CITAS  -->
                 <div  class="d-flex justify-content-between mt-3">
-                            <text> Tiempo entre Citas: </text>
+                           
+                  <text> Tiempo entre Citas: </text>
                             <div @click="show_timebtw_minutes=!show_timebtw_minutes" class="bg-dark p-2 ">
                                   <text >{{form_app_time_between}}</text> Minutos
                             </div>
                 </div>
 
-                <div v-if="show_timebtw_minutes" class="text-white">
-                     <text>Seleccione tiempo de duracion de su cita</text>
-                      <table class="table caption-top">
+                <div v-if="show_timebtw_minutes" class="test-dark bg-white  border-dark">
+                    <div class="text-white bg-success">  
+                        <text class="p-2">Entre Citas Tiempo duracion Minutos</text>
+                    </div>
+                    
+                    <table class="table caption-top">
                      
-                      <tbody class="border border-white text-white">
+                      <tbody class="border border-white text-dark">
                         <tr>
-                          <td @click="form_app_time_between='00'; show_timebtw_minutes=false" class="border border-white  p-2 text-center">00 Min</td>
-                          <td @click="form_app_time_between='05'; show_timebtw_minutes=false" class="border border-white  p-2 text-center">05</td>
-                          <td @click="form_app_time_between='10'; show_timebtw_minutes=false" class="border border-white  p-2 text-center">10</td>
-                          <td @click="form_app_time_between='15'; show_timebtw_minutes=false" class="border border-white  p-2 text-center">15</td>
-                          <td @click="form_app_time_between='20'; show_timebtw_minutes=false" class="border border-white  p-2 text-center">20</td>
-                          <td @click="form_app_time_between='25'; show_timebtw_minutes=false" class="border border-white  p-2 text-center">25</td>
+                          <td @click="form_app_time_between='00'; show_timebtw_minutes=false" class="border border-dark  p-2 text-center">00</td>
+                          <td @click="form_app_time_between='05'; show_timebtw_minutes=false" class="border border-dark  p-2 text-center">05</td>
+                          <td @click="form_app_time_between='10'; show_timebtw_minutes=false" class="border border-dark  p-2 text-center">10</td>
+                          <td @click="form_app_time_between='15'; show_timebtw_minutes=false" class="border border-dark  p-2 text-center">15</td>
+                          <td @click="form_app_time_between='20'; show_timebtw_minutes=false" class="border border-dark  p-2 text-center">20</td>
+                          <td @click="form_app_time_between='25'; show_timebtw_minutes=false" class="border border-dark  p-2 text-center">25</td>
                         </tr>
                         <tr>
-                          <td @click="form_app_time_between='30'; show_timebtw_minutes=false" class="border border-white  text-center">30</td>
-                          <td @click="form_app_time_between='35'; show_timebtw_minutes=false" class="border border-white  text-center">35</td>
-                          <td @click="form_app_time_between='40'; show_timebtw_minutes=false" class="border border-white  text-center">40</td>
-                          <td @click="form_app_time_between='45'; show_timebtw_minutes=false" class="border border-white  text-center">45</td>
-                          <td @click="form_app_time_between='50'; show_timebtw_minutes=false" class="border border-white  text-center">50</td>
-                          <td @click="form_app_time_between='55'; show_timebtw_minutes=false" class="border border-white  text-center">55</td>
+                          <td @click="form_app_time_between='30'; show_timebtw_minutes=false" class="border border-dark  text-center">30</td>
+                          <td @click="form_app_time_between='35'; show_timebtw_minutes=false" class="border border-dark  text-center">35</td>
+                          <td @click="form_app_time_between='40'; show_timebtw_minutes=false" class="border border-dark  text-center">40</td>
+                          <td @click="form_app_time_between='45'; show_timebtw_minutes=false" class="border border-dark  text-center">45</td>
+                          <td @click="form_app_time_between='50'; show_timebtw_minutes=false" class="border border-dark  text-center">50</td>
+                          <td @click="form_app_time_between='55'; show_timebtw_minutes=false" class="border border-dark  text-center">55</td>
                         </tr>
                       </tbody>
                       </table>
                 </div>
+
                 <!-- END  TIEMPO ATENCION ENTRE CITAS  -->
 
                 <!-- SELECT COLOR   -->
