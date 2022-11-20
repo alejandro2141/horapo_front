@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import Datepicker from 'vuejs3-datepicker';
+import timeSelector from './time_selector.vue'
 
 
 </script>
@@ -119,21 +120,12 @@ import Datepicker from 'vuejs3-datepicker';
                         <datepicker class="text-dark"  :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="date_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
             <!--  -->
+                <text>Start Time</text>
+                <timeSelector :start_hour='start_hour' :start_minutes='start_minutes' v-on:selected_hour="set_start_hour" ></timeSelector>
+
+                
 
 
-
-
-
-
-                  <div  class="d-flex justify-content-between mt-2">
-                          <text> Fecha Inicio  </text>  
-                          <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_start" style=" border-radius: 25px; width:60%;  text-align: right;  ">              
-                  </div>
-
-                  <div  class="d-flex justify-content-between mt-2">
-                          <text> Fecha Fin </text>  
-                           <input :disabled="!showEdit"  type="date" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="date_end" style=" border-radius: 25px; width:60%;  text-align: right; color: #fff; ">
-                  </div>
 
                   <div  class="d-flex justify-content-between mt-2">
                           <text> Hora  Inicio </text>  
@@ -285,6 +277,10 @@ export default {
             showColorSelection : false , 
 
             calendarColorArray : ["#FCFFE9","#FFF2CC","#CAEFD1", "#FDE0D9", "#CAF4F4", "#cbc9e1"],
+        
+            start_hour : '00' ,
+            start_minutes : null ,
+        
         }   
     },
    	
@@ -320,6 +316,11 @@ export default {
     },
 
 	methods :{
+        //from emit
+        set_start_hour(val)
+        {
+        this.start_hour = val
+        },
         
         formatDate(val)
         {
