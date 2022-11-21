@@ -3,6 +3,11 @@ import { ref } from 'vue'
 import axios from 'axios';
 import Datepicker from 'vuejs3-datepicker';
 import timeSelector from './time_selector.vue'
+import HourSelector from './hour_selector.vue';
+import MinutesSelector from './minutes_selector.vue'
+import DurationMinutes from './duration_minutes.vue'
+import MinutesBtwMinutes from './timebtw_minutes.vue'
+
 
 
 </script>
@@ -32,35 +37,37 @@ import timeSelector from './time_selector.vue'
                                 -->
                     </div>
 
+                     <div v-if="showEdit" class="d-flex justify-content-between mt-0 p-1 bg-white text-danger"> 
+                        <text  @click="deleteCalendar();showEdit=false" >Eliminar <i class="bi bi-trash"></i> </text> 
+                    </div>
+
+
                 <div class="bg-secondary  text-white w-100 pt-2 pl-2 pr-2">
                     <div class="m-2 ">
 
                     
-                    <div v-if="showEdit" class="d-flex justify-content-between mt-0 p-1 bg-white text-danger"> 
-                        <text  @click="deleteCalendar();showEdit=false" >Eliminar <i class="bi bi-trash"></i> </text> 
-                    </div>
-
+                   
                 <!-- ESTADO -->
                     <div class="d-flex justify-content-between mt-2 p-1"> 
                         <div>
                             Estado 
                         </div>
 
-                        <div v-if="evaluateCalendarStatus(date_end)==3" class="bg-secondary" :class="{ 'bg-dark': showEdit }" style=" border-radius: 15px; "  >
+                        <div v-if="evaluateCalendarStatus(form_date_end)==3" class="bg-secondary" :class="{ 'bg-dark': showEdit }" style=" border-radius: 15px; "  >
                               <text class="text-white p-1"> Expirado <i class="text-danger display-4 bi bi-slash-circle-fill"></i> </text> 
                         </div>
 
                         <div v-else >
-                                <text v-if="calendar_active"  >  
-                                  <text class="text-white ">Encendido </text>
-                                  <text @click="switchCalendarActive()"> Apagar </text>
+                                <text v-if="form_calendar_active "  >  
+                                  <text class="text-white "><i class="bi bi-check-lg text-success bg-white"></i> Encendido </text>
+                                  <text v-if="showEdit" @click="switchCalendarActive()" class="btn btn-danger"> Apagar </text>
                                 </text>
                                 <text v-else > 
-                                    <text class="text-white">Apagado</text>
-                                    <text @click="switchCalendarActive()"> Encender </text>
+                                    <text   class="text-white"> <i class="bi bi-exclamation-octagon-fill text-danger display-5 "></i> Apagado</text>
+                                    <text v-if="showEdit" @click="switchCalendarActive()" class="btn btn-success"> Encender </text>
                                 </text>
                         </div>
-                </div>
+                    </div>
 <!--
                                 <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between">
                                     <text>Estado Actual </text>
@@ -98,12 +105,12 @@ import timeSelector from './time_selector.vue'
                           Fecha Inicio
                           </div>
 
-                          <div class="p-2  bg-dark  " @click="show_date_start=!show_date_start"  >
-                                {{formatDate(date_start)}} <i class="bi bi-calendar-week"></i>
+                          <div class="p-2 " :class="{'bg-dark':showEdit }" @click="show_date_start=!show_date_start"  >
+                                {{formatDate(form_date_start)}} <i class="bi bi-calendar-week"></i>
                           </div>
                   </div>
-                  <div v-if="show_date_start">
-                          <datepicker  class="text-dark" :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="date_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                  <div v-if="show_date_start && showEdit">
+                          <datepicker  class="text-dark"    ref="inputRef"  @selected="setCalendarStart"  :monday-first="true" :inline="true" v-model="form_date_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
                   <!--  -->
 
@@ -112,75 +119,126 @@ import timeSelector from './time_selector.vue'
                       <div class="p-2">
                           Fecha Fin
                       </div>
-                      <div class="p-2 bg-dark" @click="show_date_end=!show_date_end"  >
-                             {{formatDate(date_end)}} <i class="bi bi-calendar-week"></i>
+                      <div class="p-2" :class="{'bg-dark':showEdit }"  @click="show_date_end=!show_date_end"  >
+                             {{formatDate(form_date_end)}} <i class="bi bi-calendar-week"></i>
                       </div>
                   </div>
-                  <div v-if="show_date_end">
-                        <datepicker class="text-dark"  :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="date_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
-                  </div>
-            <!--  -->
-                <text>Start Time</text>
-                <timeSelector :start_hour='start_hour' :start_minutes='start_minutes' v-on:selected_hour="set_start_hour" ></timeSelector>
-
-                
-
-
-
-                  <div  class="d-flex justify-content-between mt-2">
-                          <text> Hora  Inicio </text>  
-                          <input :disabled="!showEdit"  type="time" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="start_time" style=" border-radius: 25px; width:40%;  text-align: right; ">
+                  <div v-if="show_date_end && showEdit">
+                        <datepicker class="text-dark"    ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="form_date_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
 
-                  <div  class="d-flex justify-content-between mt-2">
-                          <text> Hora  Fin </text>  
-                          <input :disabled="!showEdit"  type="time" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="end_time" style=" border-radius: 25px; width:40%;  text-align: right; ">
-                  </div>
 
+            <!--TIME START  -->
                 <div  class="d-flex justify-content-between mt-2">
-                          <text> Minutos de Atención </text>  
-                          <input :disabled="!showEdit"  type="number" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="duration" style=" border-radius: 25px; width:40%;  text-align: right; ">
-                
-                </div>
-                
-                <div  class="d-flex justify-content-between mt-2">
-                          <text>Minutos entre citas </text>  
-                          <input :disabled="!showEdit"  type="number" :class="{ 'bg-dark border border-white': showEdit }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="time_between" style=" border-radius: 25px; width:40%;  text-align: right; ">
-                
-                </div>
-                
-                <div  class="d-flex justify-content-between mt-2">
-                            <text>Color </text>  
-                            <div  class="col-9 w-25 border border-primary text-dark" :style="{ 'background-color' : color   }" >
-                                  <p @click="showColorSelection=!showColorSelection" class="p-2 pt-2 h5"> <i><small>Selec</small></i> </p>
-                            </div>
-
-                </div>
-
-                <div v-if="showColorSelection && showEdit" class="d-flex justify-content-end" >
-                     
-                    <div v-for="calcol in calendarColorArray"  :key="calcol.id"  >
-                       <div class="m-1 p-3" @click="color=calcol" :style="{ 'background-color' : calcol   }" > &nbsp;&nbsp;&nbsp;&nbsp; </div>
+                    <text> Hora Inicio </text>
+                    
+                    <div  class="d-flex flex-row-reverse">
+                          <div class="d-flex justify-content-end">
+                              <div @click="show_start_hour_picker=!show_start_hour_picker ;show_start_minutes_picker=false" class="p-2" :class="{'bg-dark':showEdit }">
+                                  <text >{{form_start_hour}}</text> 
+                              </div>
+                              <div class="p-2">:</div>
+                              <div @click="show_start_minutes_picker=!show_start_minutes_picker; show_start_hour_picker=false" class="p-2" :class="{'bg-dark':showEdit }" >
+                                    <text >{{form_start_minutes}}</text>
+                                    </div>
+                              <div class="p-2">hrs</div>
+                          </div>
                     </div>
-
+                
                 </div>
-               
+                
+            <HourSelector v-if="show_start_hour_picker && showEdit" :hour='form_start_hour' v-on:selected_hour="set_start_hour"></HourSelector>
+            <MinutesSelector v-if="show_start_minutes_picker && showEdit" :minutes='form_start_minutes' v-on:selected_minutes="set_start_minutes" ></MinutesSelector> 
+           
+           <!--TIME END   -->
+                <div  class="d-flex justify-content-between mt-2">
+                    <text> Hora FIN </text>
+                    
+                    <div  class="d-flex flex-row-reverse">
+                          <div class="d-flex justify-content-end">
+                              <div @click="show_end_hour_picker=!show_end_hour_picker ;show_end_minutes_picker=false" class="p-2" :class="{'bg-dark':showEdit }" >
+                                  <text >{{form_end_hour}}</text> 
+                              </div>
+                              <div class="p-2">:</div>
+                              <div @click="show_end_minutes_picker=!show_end_minutes_picker; show_end_hour_picker=false" class="p-2" :class="{'bg-dark':showEdit }" >
+                                    <text >{{form_end_minutes}}</text>
+                                    </div>
+                              <div class="p-2">hrs</div>
+                          </div>
+                    </div>
+                
+                </div>
+                
+            <HourSelector v-if="show_end_hour_picker && showEdit" :hour='form_end_hour' v-on:selected_hour="set_end_hour"></HourSelector>
+            <MinutesSelector v-if="show_end_minutes_picker && showEdit" :minutes='form_end_minutes' v-on:selected_minutes="set_end_minutes" ></MinutesSelector> 
+           
 
-                <div class="mt-1">
+        <!-- APP DURATION  -->
+                <div  class="d-flex justify-content-between mt-3">
+                            <text> Tiempo de atencion: </text>
+                            <div @click="show_duration_minutes=!show_duration_minutes" class="p-2 " :class="{'bg-dark':showEdit }" >
+                                  <text >{{form_app_duration}}</text> Minutos
+                            </div>
+                </div>
+
+            <DurationMinutes v-if='show_duration_minutes && showEdit ' v-on:selected_app_duration='selected_app_duration'  ></DurationMinutes>
+
+  
+        <!-- END  APP DURATION  -->
+
+
+        <!-- TIEMPO ATENCION ENTRE CITAS  -->
+                <div  class="d-flex justify-content-between mt-3">
+                           
+                        <text> Tiempo entre Citas: </text>
+                            <div @click="show_timebtw_minutes=!show_timebtw_minutes" class="p-2 " :class="{'bg-dark':showEdit }" >
+                                  <text >{{form_app_time_between}}</text> Minutos
+                            </div>
+                </div>
+
+                <MinutesBtwMinutes v-if="show_timebtw_minutes && showEdit "  v-on:selected_app_duration_btw='selected_app_duration_btw' ></MinutesBtwMinutes>
+
+                <!-- END  TIEMPO ATENCION ENTRE CITAS  -->
+
+
+             <!-- SELECT COLOR   -->
+                <div  class="d-flex justify-content-between mt-3">
+                            <text>Seleccione Color de Referencia </text>  
+                            <!--  
+                            <div  class="col-9 w-25 text-dark" :style="{ 'background-color' : form_calendar_color   }" >
+                                <p @click="showColorSelection=!showColorSelection" class="p-2 pt-2 h5"> <i class="bi bi-moisture"></i> </p>
+                            
+                            </div>
+                            -->
+                </div>
+
+                <div  class="d-flex justify-content-end" :class="{ 'bg-dark p-1': showEdit}" >
+                    <div v-for="calcol in calendarColorArray"  :key="calcol.id"  >
+                       <div class="m-1 p-3 border border-3" @click="form_calendar_color=calcol"  :class="{'border-primary' : (form_calendar_color==calcol ) }" :style="{ 'background-color' : calcol   }" > </div>
+                    </div>
+                </div>
+             <!-- SELECT COLOR   -->
+            
+             <!-- SELECT DAYS RECURRENCY   -->
+                <div class="mt-3">
                   Dias Recurrencia: <br>
 
-                <div class="d-flex justify-content-between fs-5 m-1">
-                    <div class="border border-1 border-white m-1 p-1"  @click="activateMonday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':monday  }" >Lu</div>
-                    <div class="border border-1 border-white m-1 p-1"  @click="activateTuesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':tuesday }" >Ma</div>
-                    <div class="border border-1 border-white m-1 p-1"  @click="activateWednesday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':wednesday }" >Mi</div>
-                    <div class="border border-1 border-white m-1 p-1"  @click="activateThursday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':thursday }">Ju</div>
-                    <div class="border border-1 border-white m-1 p-1"  @click="activateFriday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':friday }">Vie</div>
-                
-                    <div class="border border-1 border-white m-1 p-1" @click="activateSaturday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':saturday }">Sa</div>
-                    <div class="border border-1 border-white m-1 p-1" @click="activateSunday()" :class="{ 'bg-dark p-1': showEdit , 'border-3':sunday }">Do</div>
-                </div>
+                <div class="d-flex justify-content-between  m-0 p-0" :class="{ 'bg-dark p-1': showEdit}" >
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_mon=!form_recurrency_mon" :class="{ 'bg-dark p-1': showEdit , 'border-white' :form_recurrency_mon, 'border-secondary':!form_recurrency_mon}" >Lu</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_tue=!form_recurrency_tue" :class="{ 'bg-dark p-1': showEdit , 'border-white' :form_recurrency_tue, 'border-secondary':!form_recurrency_tue}" >Ma</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_wed=!form_recurrency_wed" :class="{ 'bg-dark p-1': showEdit , 'border-white' :form_recurrency_wed, 'border-secondary':!form_recurrency_wed}" >Mi</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_thu=!form_recurrency_thu" :class="{ 'bg-dark p-1': showEdit , 'border-white' :form_recurrency_thu, 'border-secondary':!form_recurrency_thu}">Ju</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_fri=!form_recurrency_fri" :class="{ 'bg-dark p-1': showEdit , 'border-white' :form_recurrency_fri, 'border-secondary':!form_recurrency_fri}">Vie</div>
+                    
+                  </div>
+                  <div class="d-flex justify-content-start m-0 p-0" :class="{ 'bg-dark p-1': showEdit}"  >
+                    <div class="border border-3  m-1 p-2" @click="form_recurrency_sat=!form_recurrency_sat" :class="{ 'bg-dark p-1': showEdit , 'border-white':form_recurrency_sat, 'border-secondary':!form_recurrency_sat}">Sa</div>
+                    <div class="border border-3  m-1 p-2" @click="form_recurrency_sun=!form_recurrency_sun" :class="{ 'bg-dark p-1': showEdit , 'border-white':form_recurrency_sun, 'border-secondary':!form_recurrency_sun}">Do</div>
+                  </div>
+               
 
                 </div>
+
 
                 <div  class="d-flex justify-content-between mt-2">
                             <text  @click="showSocial=!showSocial" class="" >Compartir en Redes Sociales  </text>  
@@ -245,26 +303,67 @@ import timeSelector from './time_selector.vue'
 <script>
 
 export default {
+ 
    data : function() {
         return {
-            month_name : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
 
-            show_date_start : false ,
-            show_date_end : false, 
+            //FORM DATA
+            form_calendar_active : null ,
 
-
-            showSocial : false ,
-            showEdit : false, 
-        //form data
-            calendar_active : null ,
             specialty_code : null, 
+            form_date_start : null ,
+            show_date_start : false ,
+            
+            form_date_end : null,
+            show_date_end : false, 
+            
+            //start time
+            form_start_hour : '00' ,
+            show_start_hour_picker : false ,
+
+            form_start_minutes : '00' ,
+            show_start_minutes_picker : false ,
+
+            //end time
+            form_end_hour : '00' ,
+            show_end_hour_picker : false ,
+            
+            form_end_minutes : '00' ,
+            show_end_minutes_picker : false ,
+            //duration            
+            show_duration_minutes : false ,
+            form_app_duration : '00' ,
+            //time btw
+            show_timebtw_minutes : false ,
+            form_app_time_between : '00' ,
+
+            calendarColorArray : ["#FCFFE9","#FFF2CC","#CAEFD1", "#FDE0D9", "#CAF4F4", "#cbc9e1"],
+
+            form_calendar_color : null ,
+
+            form_recurrency_mon: false ,
+            form_recurrency_tue: false ,
+            form_recurrency_wed: false ,
+            form_recurrency_thu: false ,
+            form_recurrency_fri: false ,
+            form_recurrency_sat: false ,
+            form_recurrency_sun: false ,
+
+            showEdit : false, 
+
+            //utilities 
+           
+            month_name : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
+            showSocial : false ,
+            calendar_active : null ,
             name : null ,
-            date_start : null ,
-            date_end : null,
-            time_start : null ,
+           /*
+           time_start : null ,
             time_end : null ,
             duration : null ,
             time_between : null ,
+            */
+/*
             monday : null,
             tuesday : null ,
             wednesday : null ,
@@ -272,15 +371,11 @@ export default {
             friday : null ,
             saturday : null ,
             sunday : null, 
-
+*/
+/*
             color : null ,
             showColorSelection : false , 
-
-            calendarColorArray : ["#FCFFE9","#FFF2CC","#CAEFD1", "#FDE0D9", "#CAF4F4", "#cbc9e1"],
-        
-            start_hour : '00' ,
-            start_minutes : null ,
-        
+            */
         }   
     },
    	
@@ -288,22 +383,56 @@ export default {
     emits: ['updateCalendarList'],
 
 	created () {
-       let date_start_local = new Date(this.calendar.date_start)
-       let date_end_local = new Date(this.calendar.date_end)
-                
-        this.calendar_active = this.calendar.active
-        this.specialty_code = this.calendar.specialty1 ; 
-        
-        this.name = this.calendar.name ;
+        this.resetForm()
+        /*
+        this.form_calendar_active =  this.calendar.active
 
+        this.specialty_code = this.calendar.specialty1 ; 
+
+        let aux_date_start = new Date(this.calendar.date_start) 
+        this.form_date_start =  aux_date_start.getFullYear()+"-"+String(aux_date_start.getMonth()+1).padStart(2,0)+"-"+String(aux_date_start.getDate()).padStart(2,0)  ;
+        let aux_date_end = new Date(this.calendar.date_end)
+        this.form_date_end   =  aux_date_end.getFullYear()+"-"+String(aux_date_end.getMonth()+1).padStart(2,0)+"-"+String(aux_date_end.getDate()).padStart(2,0)  ;
+       //SET TIME START & END 
+        let aux = this.calendar.start_time.split(':')
+        this.form_start_hour = aux[0]  
+        this.form_start_minutes = aux[1] 
+
+        let aux2 = this.calendar.end_time.split(':')
+        this.form_end_hour = aux2[0]  
+        this.form_end_minutes = aux2[1] 
+       
+
+        this.form_app_duration = this.calendar.duration  
+        this.form_app_time_between = this.calendar.time_between  
+
+        //color
+        this.form_calendar_color = this.calendar.color  ;
+        //Day Recurrency
+        this.form_recurrency_mon = this.calendar.monday  
+        this.form_recurrency_tue = this.calendar.tuesday 
+        this.form_recurrency_wed = this.calendar.wednesday 
+        this.form_recurrency_thu = this.calendar.thursday
+        this.form_recurrency_fri = this.calendar.friday 
+        this.form_recurrency_sat = this.calendar.saturday 
+        this.form_recurrency_sun = this.calendar.sunday 
+
+
+
+       
+       
+
+                
+        this.calendar_active = this.calendar.active      
+        this.name = this.calendar.name ;
+*/
         //this.date_end = this.calendar.date_end.substring(0,10)  ;
         //this.date_start = this.calendar.date_start.substring(0,10) ;2022-09-29T03:00:00.000Z
-        this.date_start =  date_start_local.getFullYear()+"-"+String(date_start_local.getMonth()+1).padStart(2,0)+"-"+String(date_start_local.getDate()).padStart(2,0)  ;
-        this.date_end   =  date_end_local.getFullYear()+"-"+String(date_end_local.getMonth()+1).padStart(2,0)+"-"+String(date_end_local.getDate()).padStart(2,0)  ;
+        /*
         this.start_time = this.calendar.start_time.substring(0,5)  ;
         this.end_time = this.calendar.end_time.substring(0,5)  ;
-        this.duration = this.calendar.duration  ;
-        this.time_between = this.calendar.time_between  ;
+        */
+  /*      
         this.monday = this.calendar.monday  ;
         this.tuesday = this.calendar.tuesday  ;
         this.wednesday = this.calendar.wednesday ;
@@ -313,14 +442,61 @@ export default {
         this.sunday = this.calendar.sunday  ;
 
         this.color = this.calendar.color  ;
+*/
+        
     },
 
 	methods :{
-        //from emit
+        
         set_start_hour(val)
         {
-        this.start_hour = val
+        this.form_start_hour = val
+        this.show_start_hour_picker = false
         },
+        set_start_minutes(val)
+        {
+        this.form_start_minutes = val
+        this.show_start_minutes_picker = false
+        },
+        set_end_hour(val)
+        {
+        this.show_end_hour_picker = false
+        this.form_end_hour = val
+        },
+        set_end_minutes(val)
+        {
+        this.show_end_minutes_picker = false
+        this.form_end_minutes = val
+        },
+        selected_app_duration(val)
+        {
+        this.show_duration_minutes = false 
+        this.form_app_duration = val
+        },
+        selected_app_duration_btw(val)
+        {
+        this.form_app_time_between = val
+        this.show_timebtw_minutes = false 
+        },
+        
+        setCalendarStart(date)
+        {
+            console.log("date Selected en emit :"+date);
+            //let aux_date=new Date(date);
+            this.form_calendar_start= new Date(date);
+        //   this.form_calendar_start=aux_date.getDate()+"/"+month_name[aux_date.getMonth()]+"/"+ aux_date.getFullYear()
+            this.show_date_start = false
+        },
+
+        setCalendarEnd(date)
+        {
+            console.log("date Selected en emit :"+date);
+            //let aux_date=new Date(date);
+            this.form_calendar_end= new Date(date);
+        // this.form_calendar_end=aux_date.getDate()+"/"+(aux_date.getMonth()+1)+"/"+ aux_date.getFullYear()
+            this.show_date_end = false
+        },
+
         
         formatDate(val)
         {
@@ -348,11 +524,12 @@ export default {
                   this.$emit('updateCalendarList'); 
             }
       },
-
-        switchCalendarActive()
+       switchCalendarActive()
         {   if (this.showEdit)
-            { this.calendar_active=!this.calendar_active ; }
+            { this.form_calendar_active=!this.form_calendar_active ; }
         },
+/*
+       
 
         activateMonday()
         {  if (this.showEdit)
@@ -382,29 +559,50 @@ export default {
         {  if (this.showEdit)
             { this.sunday=!this.sunday;  }
         },
-
+*/
         resetForm()
         {
-       let date_start_local = new Date(this.calendar.date_start)
-       let date_end_local = new Date(this.calendar.date_end)
+         this.form_calendar_active =  this.calendar.active
 
-        this.calendar_active = this.calendar.calendar_active
         this.specialty_code = this.calendar.specialty1 ; 
 
-        this.date_start = date_start_local.getFullYear()+"-"+String(date_start_local.getMonth()+1).padStart(2,0)+"-"+String(date_start_local.getDate()).padStart(2,0)  ;
-        this.date_end = date_end_local.getFullYear()+"-"+String(date_end_local.getMonth()+1).padStart(2,0)+"-"+String(date_end_local.getDate()).padStart(2,0)  ;  ;
-        this.start_time = this.calendar.start_time.substring(0,5)  ;
-        this.end_time = this.calendar.end_time.substring(0,5)  ;
-        this.duration = this.calendar.duration  ;
-        this.time_between = this.calendar.time_between  ;
-        this.monday = this.calendar.monday  ;
-        this.tuesday = this.calendar.tuesday  ;
-        this.wednesday = this.calendar.wednesday ;
-        this.thursday = this.calendar.thursday  ;
-        this.friday = this.calendar.friday  ;
-        this.saturday = this.calendar.saturday  ;
-        this.sunday = this.calendar.sunday  ;
-        this.sunday = this.calendar.color  ;
+        let aux_date_start = new Date(this.calendar.date_start) 
+        this.form_date_start =  aux_date_start.getFullYear()+"-"+String(aux_date_start.getMonth()+1).padStart(2,0)+"-"+String(aux_date_start.getDate()).padStart(2,0)  ;
+        let aux_date_end = new Date(this.calendar.date_end)
+        this.form_date_end   =  aux_date_end.getFullYear()+"-"+String(aux_date_end.getMonth()+1).padStart(2,0)+"-"+String(aux_date_end.getDate()).padStart(2,0)  ;
+       //SET TIME START & END 
+        let aux = this.calendar.start_time.split(':')
+        this.form_start_hour = aux[0]  
+        this.form_start_minutes = aux[1] 
+
+        let aux2 = this.calendar.end_time.split(':')
+        this.form_end_hour = aux2[0]  
+        this.form_end_minutes = aux2[1] 
+        //****************** */
+
+        this.form_app_duration = this.calendar.duration  
+        this.form_app_time_between = this.calendar.time_between  
+
+        //color
+        this.form_calendar_color = this.calendar.color  ;
+        //Day Recurrency
+        this.form_recurrency_mon = this.calendar.monday  
+        this.form_recurrency_tue = this.calendar.tuesday 
+        this.form_recurrency_wed = this.calendar.wednesday 
+        this.form_recurrency_thu = this.calendar.thursday
+        this.form_recurrency_fri = this.calendar.friday 
+        this.form_recurrency_sat = this.calendar.saturday 
+        this.form_recurrency_sun = this.calendar.sunday 
+
+
+
+
+       
+       
+
+                
+        this.calendar_active = this.calendar.active      
+        this.name = this.calendar.name ;
 
         },
 
@@ -438,35 +636,36 @@ export default {
            var r =confirm("¿ Esta seguro que desea Actualizar este Calendario? Ok para continuar");
             if (r == true) {
 
-                let end_date_corrected = new Date(this.date_end)
+                let end_date_corrected = new Date(this.form_date_end)
                 end_date_corrected.setHours(0,0,0,0)
                 //one milisecond to dont reach next day
                 var day = (60 * 60 * 24 * 1000 )-1000;
                 end_date_corrected = new Date(end_date_corrected.getTime() + (day*2) )  
                 
-                let start_date_corrected = new Date(this.date_start)
+                let start_date_corrected = new Date(this.form_date_start)
                 start_date_corrected.setHours(24,0,0,0)
 
                   const json = { 
                    
-                    form_calendar_active : this.calendar_active ,
+                    form_calendar_active : this.form_calendar_active  ,
                     // form_center_id : 
                     // cernter_name
                     form_date_start : start_date_corrected  ,
                     form_date_end : end_date_corrected ,
-                    form_time_start : this.start_time ,
-                    form_time_end : this.end_time , 
-                    form_day_mon: this.monday ,
-                    form_day_tue: this.tuesday ,
-                    form_day_wed: this.wednesday ,
-                    form_day_thu: this.thursday ,
-                    form_day_fri: this.friday ,
-                    form_day_sat: this.saturday ,
-                    form_day_sun: this.sunday , 
-
+                    form_time_start : this.form_start_hour +":"+this.form_start_minutes ,
+                    form_time_end : this.form_end_hour +":"+this.form_end_minutes, 
+                    
+                    form_day_mon: this.form_recurrency_mon ,
+                    form_day_tue: this.form_recurrency_tue ,
+                    form_day_wed: this.form_recurrency_wed ,
+                    form_day_thu: this.form_recurrency_thu ,
+                    form_day_fri: this.form_recurrency_fri ,
+                    form_day_sat: this.form_recurrency_sat ,
+                    form_day_sun: this.form_recurrency_sun , 
+                     
                    // professional_id: this.session_params.professional_id ,
                     calendar_id : this.calendar.id,
-                    form_color : this.color 
+                    form_color : this.form_calendar_color
                     };
 
                   console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
