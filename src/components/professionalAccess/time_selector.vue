@@ -10,7 +10,7 @@ import { ref } from 'vue'
         <div  class="d-flex justify-content-between mt-3">
                           
                           <div class="d-flex justify-content-end">
-                              <div @click="show_start_hour=!show_start_hour ; show_start_minutes=false" class="bg-dark p-2">
+                              <div @click="show_hour=!show_hour ; show_start_minutes=false" class="bg-dark p-2">
                                   <text >{{hour}}</text> 
                               </div>
                               <div class="p-2">:</div>
@@ -21,7 +21,7 @@ import { ref } from 'vue'
                           </div>
                   </div>
 
-                    <div v-if="show_start_hour" class="text-white">
+                    <div v-if="show_hour" class="text-white">
                       <div class="bg-success text-white border border-1 border-dark">
                         <text class="p-2 h5 ">Seleccione Hora Inicio</text>
                       </div>
