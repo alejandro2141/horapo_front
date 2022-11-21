@@ -29,8 +29,8 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 		
 		<text>
-			<div v-if="showTopMenu" class="rounded-circle p-1" :class="{'border border-4 border-danger':session_params.tutorial_start}" >	
-			<i  class="fs-4 bi bi-geo-alt" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
+			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
+			<i  class="fs-6 bi " @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >Consultas</i>
 		    </div>
 			<i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
 	
@@ -41,7 +41,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 
 		<text>	
-			<i v-if="showTopMenu" class="fs-4 bi bi-calendar-week" @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" ></i>
+			<i v-if="showTopMenu" class="fs-6 bi " @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" >Calendarios</i>
 			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
 			
 		</text>
