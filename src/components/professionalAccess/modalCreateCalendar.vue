@@ -82,7 +82,7 @@ import Datepicker from 'vuejs3-datepicker';
                           </div>
                   </div>
                   <div v-if="show_date_start">
-                          <datepicker  class="text-dark" :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                          <datepicker  class="text-dark"   ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
                   <!--  -->
 
@@ -96,7 +96,7 @@ import Datepicker from 'vuejs3-datepicker';
                       </div>
                   </div>
                   <div v-if="show_date_end">
-                        <datepicker class="text-dark"  :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="form_calendar_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                        <datepicker class="text-dark"   ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="form_calendar_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
                   <!--  -->
 
