@@ -27,7 +27,7 @@ import Datepicker from 'vuejs3-datepicker';
         </div>
      
       <div v-if="show_date_picker" class="text-center "> 
-            <datepicker :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+            <datepicker  :day-cell-content="dayContent(calendar_date)" :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
       </div>
 
   </div>
@@ -74,6 +74,9 @@ export default {
 
         componentKey : 0 ,
         forceUpdateCalendar : 0 ,
+
+        //experimental
+        dcount : parseInt(0)
         }   
     },
    	components: { Datepicker },
@@ -99,6 +102,11 @@ export default {
         },
 
 	methods :{
+
+        dayContent(date)
+        {   
+            return (function() {  return (this.dcount) }) 
+        },
 /*
         openCalendarPicker()
         {
