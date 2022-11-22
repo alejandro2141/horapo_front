@@ -33,7 +33,6 @@ import SwitchViewButton from './switchViewButton.vue'
 			<i  class="fs-6 bi " @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >Consultas</i>
 		    </div>
 			<i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
-	
 		</text>
 
 		<text>
