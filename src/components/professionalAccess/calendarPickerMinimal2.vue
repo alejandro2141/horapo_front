@@ -26,8 +26,8 @@ import Datepicker from 'vuejs3-datepicker';
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>   </div>
         </div>
      
-      <div v-if="show_date_picker" class="text-center "> 
-            <datepicker  :day-cell-content="dayContent(calendar_date)" :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+      <div v-if="show_date_picker" class="text-center text-dark"> 
+            <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
       </div>
 
   </div>
