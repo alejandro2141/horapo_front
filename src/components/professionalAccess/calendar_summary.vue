@@ -9,17 +9,17 @@ import axios from 'axios';
     <div class="d-flex justify-content-between bg-primary text-white">
                   
                 <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[0].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[0].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[0].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[0].reserved }}</div>
+                    <div style="font-size: 0.9em" class="m-0 p-0" >{{getdDayData(0).day_name }}</div>
+                     <div style="font-size: 1.5em" class="m-0 p-0" >{{getdDayData[0].day_number }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" >{{getdDayData[0].month }}</div>
+                     <div style="font-size: 0.9em" class="m-0 p-0" >{{getdDayData[0].reserved }}</div>
                 </div>
 
                 <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[1].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[1].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[1].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[1].reserved }}</div>
+                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ getdDayData[1].day_name }}</div>
+                     <div style="font-size: 1.5em" class="m-0 p-0" >{{getdDayData[1].day_number }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" >{{getdDayData[1].month }}</div>
+                     <div style="font-size: 0.9em" class="m-0 p-0" >{{getdDayData[1].reserved }}</div>
                 </div>
                 <div class="text-center">
                     <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[2].day_name }}</div>
