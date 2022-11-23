@@ -18,7 +18,7 @@ import CalendarSummary from './calendar_summary.vue'
       
       <div v-if='!session_params.tutorial_start' >
 
-        <CalendarSummary :session_params="session_params" />
+        <CalendarSummary :session_params="session_params" :forceUpdateCalendarSummary="forceUpdateCalendarSummary" :daterequired="daterequired" />
       
         <div class="d-flex justify-content-between  ">
           
@@ -80,6 +80,9 @@ data: function () {
 
             force_filter : 0 ,
             filters : null , 
+
+            calendar_summary_date : null,
+            forceUpdateCalendarSummary : 0,
 		 }
 	},
 	props: ['session_params','global_specialties', 'global_comunas' ],
@@ -90,7 +93,9 @@ data: function () {
             console.log("TAB APPOINTMENT CREATED");
             console.log("TAB APPOINTMENT session_params "+ this.session_params.professional_id );
             let today=new Date();
+
             this.daterequired = today
+             
             //this.daterequired = String(today.getFullYear()).padStart(2,0)+"-"+String(today.getMonth()+1).padStart(2,0)+"-"+String(today.getDate()).padStart(2,0)  ;
             
             console.log("TAB APPOINTMENT Date Required:"+this.daterequired);
@@ -140,10 +145,11 @@ data: function () {
             this.$emit('switchToCenters');
         },
 
-        set_daterequired : function (year_month_day) {
+        set_daterequired(year_month_day) {
             console.log("SET_DATEREQUIRED TAB APPOINTMENT : "+year_month_day);
            // this.getAppointments(year_month_day);
             this.daterequired = year_month_day ;
+            this.forceUpdateCalendarSummary = Math.random()
             //this.showSpinner(1000);
             this.updateAppointmentList();
             },
