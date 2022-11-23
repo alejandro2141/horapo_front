@@ -73,12 +73,8 @@ export default {
    data : function() {
         return {
         cdate : null ,
-        month_summary : ["a","a","a","a","a","a","a","a"],
-        dayData :   {   day_number  :  null ,
-                        day_name    : null  ,
-                        month       :  null ,
-                        reserved    : 0 
-                    },
+        month_summary : [],
+       
             }   
     },
    	
@@ -86,10 +82,11 @@ export default {
     emits: [],
 
 	created () {
-            
+            /*
             for (let i = 0; i < 8 ; i++) {
-                this.month_summary.push(this.dayData)
+                //this.month_summary.push(this.dayData)
             }
+            */
         
         },
 
@@ -131,47 +128,57 @@ export default {
               let response_json =  await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_month_summary",json) 
               console.log ("/professional_get_month_summary RESPONSE: "+JSON.stringify(response_json.data)) 
               //this.updateCalendarsMarks();
-              this.build_calendar_summary (response_json,aux_start_date,aux_end_date)
+              this.build_calendar_summary(response_json.data,aux_start_date,aux_end_date)
               //this.month_summary = response_json 
         },
 
-        build_calendar_summary(app_reserv,date_start,date_end)
+        async build_calendar_summary(app_reserv,date_start,date_end)
         {
             //make slots  
             let day_names =['D','L','M','Mi','J','V','S']
             let month_names =['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
-            let i=0 
-            for (var d = new Date(date_start); (d <= date_end && d <= new Date(date_end)  )  ; d.setDate(new Date(d).getDate() + 1)) 
-            {
-                //CHECK IF APP TAKEN in app_reserv
+            let app_dates_filtered = app_reserv.map(app => new Date(app.date) )
 
+            console.log("app_dates_filtered:"+JSON.stringify(app_dates_filtered))
+           
+           let i=0;  
+           for (var d = new Date(date_start); (d <= date_end && d <= new Date(date_end)  )  ; d.setDate(new Date(d).getDate() + 1)) 
+            {
+                //Cycle to check date is in app array list
+                let counter = 2
+                /*
+                for (let i = 0; i < app_dates_filtered.length ; i++) { 
+                    if (new Date(app_dates_filtered).getDate() == d.getDate() && new Date(app_dates_filtered).getMonth() == d.getMonth()  &&  new Date(app_dates_filtered).getFullYear() == d.getFullYear()  )
+                    {
+                    counter++
+                    }                
+                }
+                */
+         
                 const structure_day = {
-                    day_number :  d.getDate(),
-                    day_name : day_names[d.getDay()] ,
-                    month : month_names[d.getMonth()] ,
-                    reserved : 0 , 
-                } 
-                this.month_summary[i] = structure_day
-                i++
-            }
+                        day_number :  d.getDate(),
+                        day_name : day_names[d.getDay()] ,
+                        month : month_names[d.getMonth()] ,
+                        reserved : counter, 
+                    }
+
+                this.month_summary.push(structure_day)
+                i++ 
             //ADD FILTER HERE TO COUNT APPOINTMENTS EXIST IN DATE
             //calendars =  calendars.filter(cal =>  centers_ids_filtered.includes(cal.center_id) ) 
-  
+            }
 
-           console.log("month_summary lenght :"+this.month_summary.length  )
-        }
+        },
+
     },
 
     watch: {
-        
-       
-
+              
         forceUpdateCalendarSummary(new_date) 
         { console.log("forceUpdateCalendarSummary calendar_summary" +this.daterequired);
-           
+           this.daterequired.setHours(0,0,0,0)
            this.updateMonthSummary(this.daterequired) 
         }
-
 
     }
 }
