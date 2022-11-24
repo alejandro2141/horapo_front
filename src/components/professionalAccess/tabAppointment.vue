@@ -18,15 +18,14 @@ import CalendarSummary from './calendar_summary.vue'
       
       <div v-if='!session_params.tutorial_start' >
 
-        <CalendarSummary :session_params="session_params" :forceUpdateCalendarSummary="forceUpdateCalendarSummary" :daterequired="daterequired" />
-      
+       
         <div class="d-flex justify-content-between  ">
-          
+         <!-- 
           <LockOptions v-on:updateFilter="updateFilter"  :isLockDay="isLockDay" :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
-             
+             -->
           <div class="w-100"> 
-           <CalendarPickerMinimal2 class="mt-3" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
-          <!-- <DateRequiredActions :daterequired="daterequired" ></DateRequiredActions> --> <br>
+              <CalendarPickerMinimal2 class="mt-3" :session_params="session_params" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
+            <br> 
           </div>
 
         </div> 
@@ -149,7 +148,7 @@ data: function () {
             console.log("SET_DATEREQUIRED TAB APPOINTMENT : "+year_month_day);
            // this.getAppointments(year_month_day);
             this.daterequired = year_month_day ;
-            this.forceUpdateCalendarSummary = Math.random()
+           
             //this.showSpinner(1000);
             this.updateAppointmentList();
             },
