@@ -1,17 +1,17 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-/*
-  import Datepicker from 'vue3-date-time-picker';
-  import 'vue3-date-time-picker/dist/main.css'
-  */ 
 import Datepicker from 'vuejs3-datepicker';
+import DatePickerJAM from './datepicker_jam.vue'
+import CalendarSummary from './calendar_summary.vue'
 
 </script>
 
 <template>
     <div>
-
+      
+        <CalendarSummary :month_summary="month_summary" :forceUpdateCalendarSummary="forceUpdateCalendarSummary"  />
+      
         <div class="d-flex justify-content-around text-primary"> 
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
                 <div class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
@@ -27,7 +27,8 @@ import Datepicker from 'vuejs3-datepicker';
         </div>
      
       <div v-if="show_date_picker" class="text-center text-dark"> 
-            <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+           <!-- <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>-->
+            <DatePickerJAM :month_summary="month_summary" ></DatePickerJAM>
       </div>
 
   </div>
@@ -57,10 +58,6 @@ export default {
         today_month : null,
         today_year : null,
 
-        req_day : null,
-        req_month : null,
-        req_year : null,
-
         form_minimum_date : null,
         form_required_date : null,
         show_date_picker : false ,
@@ -74,56 +71,86 @@ export default {
 
         componentKey : 0 ,
         forceUpdateCalendar : 0 ,
+        forceUpdateCalendarSummary : 0 ,
 
         //experimental
-        dcount : parseInt(0)
+        dcount : parseInt(0) , 
+        month_summary : [] ,
+
         }   
     },
    	components: { Datepicker },
 
-    props: ['required_day'],
+    props: ['required_day', 'session_params' ],
     emits: ['set_daterequired'] ,
 
 	created () {
         console.log("CALENDAR PICKER MINIMAL 2 CREATED !!");
         this.calendar_date = new Date()	
-        /*
-        this.req_day = this.calendar_date.getDate() ,
-        this.req_month = this.calendar_date.getMonth(),
-        this.req_year = this.calendar_date.getFullYear(),
-	     */
+       
         console.log("CALENDAR PICKER MINIMAL 2 CREATED END !!");
+        this.getMonthSummary(new Date())
     },
 
     mounted() {   
          // this.setCalendar();
          console.log("CALENDAR PICKER MINIMAL MOUNTED !!");
-        // this.setCalendar() ;
         },
 
 	methods :{
+
+        async getMonthSummary(date)
+        {
+            let aux_start_date =   new Date(date.getFullYear(),date.getMonth(), 1);
+            let aux_end_date = new Date( aux_start_date.getTime() + (86400000*7) )
+            const json = { 
+                    professional_id : this.session_params.professional_id , 
+                    start_date : aux_start_date,
+                    end_date : aux_end_date,
+                    };
+            //first Get Appointments between two dates
+            console.log ("professional_get_month_summary REQUEST :"+ JSON.stringify(json)  ) 
+            let response_json =  await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_month_summary",json) 
+            console.log ("/professional_get_month_summary RESPONSE: "+JSON.stringify(response_json.data))
+            //clean Month Summary
+             this.month_summary = []
+            
+            let day_names =['D','L','M','Mi','J','V','S']
+            let month_names =['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
+            // create a filtered list includin only dates of appointments
+            let app_dates_filtered = response_json.data.map(app => new Date(app.date) )
+
+            console.log("app_dates_filtered:"+JSON.stringify(app_dates_filtered))
+           
+           for (var d = new Date(aux_start_date); (d <= aux_end_date && d <= new Date(aux_end_date)  )  ; d.setDate(new Date(d).getDate() + 1)) 
+            {
+                
+               console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
+                let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
+           
+         
+                const structure_day = {
+                        day_number :  d.getDate(),
+                        day_name : day_names[d.getDay()] ,
+                        month : month_names[d.getMonth()] ,
+                        reserved : nfound.length , 
+                    }
+
+                this.month_summary.push(structure_day)
+            }
+
+        },
 
         dayContent(date)
         {   
             return (function() {  return (this.dcount) }) 
         },
-/*
-        openCalendarPicker()
-        {
-        console.log("openCalendar ");
-        //this.show_date_picker = true ; 
-        let element = document.getElementById("calendar-picker");
-        element.datepicker();
-        },
-*/
-
         handleSelectDate(date)
         {
         console.log("date Selected en emit :"+date);
         this.show_date_picker =false ;
         this.forceUpdateCalendar += 1 ; 
         },
-
         getMonthName(n)
         {
             return this.month_name[n];
@@ -138,8 +165,6 @@ export default {
             //this.calendar_date.getDay()
             return this.calendar_date.getDay();
         },
-
-
         nextDay()
         {
            console.log("Next Day");
@@ -151,8 +176,7 @@ export default {
            console.log("Prev Day");
            this.calendar_date.setDate( this.calendar_date.getDate() - 1 ) 
           this.forceUpdateCalendar += 1 ; 
-        },
-            
+        },  
         nextMonth()
         {   
            console.log("Next Month");
@@ -160,35 +184,24 @@ export default {
            this.forceUpdateCalendar += 1 ; 
            
         },
-
         prevMonth()
         {
            console.log("Prev Month");
            this.calendar_date.setDate( this.calendar_date.getDate() - 31 ) 
            this.forceUpdateCalendar += 1 ; 
         },
-    //********* GO TO DAY
-	
-
-   
+  
 
     },
 
    watch: {
- 
             forceUpdateCalendar(newValue)
             {
+                this.forceUpdateCalendarSummary = Math.random()
                 console.log("Date Change So EMIT:"+newValue);
-                //this.$emit('set_daterequired', this.calendar_date.getFullYear()+"-"+(this.calendar_date.getMonth()+1)+"-"+ this.calendar_date.getDate() ) ;
-                //let new_dateRequired= String(this.calendar_date.getFullYear()).padStart(2,0)+"-"+String(this.calendar_date.getMonth()+1).padStart(2,0)+"-"+String(this.calendar_date.getDate()).padStart(2,0)  ;
                 let new_dateRequired= this.calendar_date  ;
-         
                 this.$emit('set_daterequired', new_dateRequired ) ;
-
-                
-                //new Date(data.date).toISOString().split('T')[0] )
             }
-
         },
 
 }
