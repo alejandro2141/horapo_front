@@ -35,18 +35,31 @@ import axios from 'axios';
                         reserved : nfound.length , 
                     -->
 
-                <tr>
+                <tr v-if="week1!=null" >
                     <td  v-for="day in week1" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
-                    
                 </tr>
-                
+                <tr v-if="week2!=null" >
+                    <td  v-for="day in week2" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                </tr>
+                 <tr v-if="week3!=null" >
+                    <td  v-for="day in week3" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                </tr>
+                 <tr v-if="week4!=null" >
+                    <td  v-for="day in week4" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                </tr>
+                 <tr v-if="week5!=null" >
+                    <td  v-for="day in week5" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                </tr>
+                 <tr v-if="week6!=null" >
+                    <td  v-for="day in week6" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                </tr>
                            
 
             </tbody>
         </table>      
           
     </div>   
-   week1:{{week1}}
+  
 
 </div>
 </template>
@@ -61,13 +74,14 @@ export default {
    data : function() {
         return {
         cdate : null ,
-        month_summary : [],
+       
         week1 : [] ,
         week2 : [] ,
         week3 : [] ,
         week4 : [] ,
         week5 : [] ,
-        week5 : [] ,      
+        week5 : [] ,     
+        week6 : [] ,   
             }   
     },
    	
@@ -85,8 +99,12 @@ export default {
             {
                 if(this.month_summary !=null )
                 {
-                   this.week1 = this.month_summary.slice(0,6)
-                   this.week2 = this.month_summary.slice(7,13)
+                   this.week1 = this.month_summary.slice(0,7)
+                   this.week2 = this.month_summary.slice(7,14)
+                   this.week3 = this.month_summary.slice(14,21)
+                   this.week4 = this.month_summary.slice(21,28)
+                   this.week5 = this.month_summary.slice(28,35)
+                   this.week6 = this.month_summary.slice(35,42)
                 }
 
             }
