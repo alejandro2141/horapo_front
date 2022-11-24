@@ -28,7 +28,7 @@ import CalendarSummary from './calendar_summary.vue'
      
       <div v-if="show_date_picker" class="text-center text-dark"> 
            <!-- <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>-->
-            <DatePickerJAM :month_summary="month_summary" ></DatePickerJAM>
+            <DatePickerJAM :month_summary="month_summary"  :forceUpdateCalendar="forceUpdateCalendar" ></DatePickerJAM>
       </div>
 
   </div>
@@ -101,8 +101,11 @@ export default {
 
         async getMonthSummary(date)
         {
-            let aux_start_date =   new Date(date.getFullYear(),date.getMonth(), 1);
-            let aux_end_date = new Date( aux_start_date.getTime() + (86400000*7) )
+            let aux_start_date = new Date(date.getFullYear(),date.getMonth(), 1)
+            aux_start_date.setDate( aux_start_date.getDate() - aux_start_date.getDay() + 1 ) 
+            let aux_end_date =   new Date(date.getFullYear(),date.getMonth()+1, 0);
+            aux_end_date.setDate( aux_end_date.getDate() + (7 - aux_end_date.getDay() ) ) 
+            //let aux_end_date = new Date( aux_start_date.getTime() + (86400000*7) )
             const json = { 
                     professional_id : this.session_params.professional_id , 
                     start_date : aux_start_date,
@@ -198,6 +201,7 @@ export default {
             forceUpdateCalendar(newValue)
             {
                 this.forceUpdateCalendarSummary = Math.random()
+                this.forceUpdateCalendar= Math.random()
                 console.log("Date Change So EMIT:"+newValue);
                 let new_dateRequired= this.calendar_date  ;
                 this.$emit('set_daterequired', new_dateRequired ) ;
