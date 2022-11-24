@@ -6,15 +6,15 @@ import axios from 'axios';
 
 <template>
    
-    <div class="d-flex justify-content-between bg-primary bg-opacity-75 text-white">
-            <!--  
-                <div class="text-center" v-if="month_summary[0] !=null ">
+    <div class="d-flex justify-content-between bg-success bg-opacity-75 text-white">
+                       
+                
+                <div class="text-center" v-if="month_summary[1] !=null ">
                     <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[0].day_name }}</div>
                      <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[0].day_number }}</div>
                      <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[0].month }}</div>
                      <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[0].reserved }}</div>
                 </div>
-            -->
                 <div class="text-center" v-if="month_summary[1] !=null ">
                     <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[1].day_name }}</div>
                      <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[1].day_number }}</div>
@@ -57,60 +57,7 @@ import axios from 'axios';
                      <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[7].month }}</div>
                      <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[7].reserved }}</div>
                 </div>
-                <!--   
-
-                <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{getdDayData(0).day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{getdDayData(0).day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{getdDayData(0).month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{getdDayData(0).reserved }}</div>
-                </div>
-                
-                <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ getdDayData[1].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{getdDayData[1].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{getdDayData[1].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{getdDayData[1].reserved }}</div>
-                </div>
-                <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[2].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[2].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[2].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[2].reserved }}</div>
-                </div>
-                <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[3].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[3].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[3].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[3].reserved }}</div>
-                </div>
-                <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[4].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{ month_summary[4].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[4].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[4].reserved }}</div>
-                </div>
-
-                <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[5].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[5].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[5].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[5].reserved }}</div>
-                </div>
-
-                <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[6].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[6].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[6].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[6].reserved }}</div>
-                </div>
-                <div class="text-center">
-                    <div style="font-size: 0.9em" class="m-0 p-0" >{{ month_summary[7].day_name }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" >{{month_summary[7].day_number }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" >{{month_summary[7].month }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" >{{month_summary[7].reserved }}</div>
-                </div>
-            -->
+                 
     </div>        
     
 </template>
@@ -125,19 +72,18 @@ export default {
    data : function() {
         return {
         cdate : null ,
-        month_summary : [],
-       
             }   
     },
    	
-	props: ['session_params', 'daterequired','forceUpdateCalendarSummary'],
+	props: ['month_summary','forceUpdateCalendarSummary'],
     emits: [],
 
 	created () {
-        this.updateMonthSummary(new Date()) 
+        //this.updateMonthSummary(new Date()) 
         },
 
 	methods :{
+        /*
         getdDayData(pos)
         {
             const dayData = {
@@ -191,16 +137,7 @@ export default {
            
            for (var d = new Date(date_start); (d <= date_end && d <= new Date(date_end)  )  ; d.setDate(new Date(d).getDate() + 1)) 
             {
-                //Cycle to check date is in app array list
-                //let counter = 2
-                /*
-                for (let i = 0; i < app_dates_filtered.length ; i++) { 
-                    if (new Date(app_dates_filtered).getDate() == d.getDate() && new Date(app_dates_filtered).getMonth() == d.getMonth()  &&  new Date(app_dates_filtered).getFullYear() == d.getFullYear()  )
-                    {
-                    counter++
-                    }                
-                }
-                */
+                
                console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
                 let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
            
@@ -213,22 +150,21 @@ export default {
                     }
 
                 this.month_summary.push(structure_day)
-               
-            //ADD FILTER HERE TO COUNT APPOINTMENTS EXIST IN DATE
-            //calendars =  calendars.filter(cal =>  centers_ids_filtered.includes(cal.center_id) ) 
             }
 
         },
+        */
 
     },
 
     watch: {
-              
+        /*    
         forceUpdateCalendarSummary(new_date) 
         { console.log("forceUpdateCalendarSummary calendar_summary" +this.daterequired);
            this.daterequired.setHours(0,0,0,0)
            this.updateMonthSummary(this.daterequired) 
         }
+        */
 
     }
 }
