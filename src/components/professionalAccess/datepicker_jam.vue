@@ -28,57 +28,25 @@ import axios from 'axios';
                     <td colspan="2" class="table-active text-white">S</td>
                     <td colspan="2" class="table-active text-white">D</td>
                 </tr>
+                    <!--
+                        day_number :  d.getDate(),
+                        day_name : day_names[d.getDay()] ,
+                        month : month_names[d.getMonth()] ,
+                        reserved : nfound.length , 
+                    -->
+
                 <tr>
-                    <td colspan="2" class="table-active text-white"><text class="h5">22</text><br><small>9</small></td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                </tr>
-                 <tr>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                </tr>
-                 <tr>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                </tr>
-                                 <tr>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                </tr>
-                 <tr>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
-                    <td colspan="2" class="table-active text-white">22<br>9</td>
+                    <td  v-for="day in week1" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                    
                 </tr>
                 
+                           
 
             </tbody>
         </table>      
           
     </div>   
+   week1:{{week1}}
 
 </div>
 </template>
@@ -94,31 +62,42 @@ export default {
         return {
         cdate : null ,
         month_summary : [],
-        week1 : new Array(6),
-        week2 : new Array(6),
-        week3 : new Array(6),
-        week4 : new Array(6),
-        week5 : new Array(6),
-       
+        week1 : [] ,
+        week2 : [] ,
+        week3 : [] ,
+        week4 : [] ,
+        week5 : [] ,
+        week5 : [] ,      
             }   
     },
    	
 //	props: ['session_params', 'daterequired','forceUpdateCalendarSummary'],
-    props: ['month_summary'],
+    props: ['month_summary','forceUpdateCalendar'],
     emits: [],
 
 	created () {
-       
+        this.updateCalendar()
+        
         },
 
 	methods :{
+            updateCalendar()
+            {
+                if(this.month_summary !=null )
+                {
+                   this.week1 = this.month_summary.slice(0,6)
+                   this.week2 = this.month_summary.slice(7,13)
+                }
+
+            }
+
            },
 
     watch: {
               
-        forceUpdateCalendarSummary(new_date) 
+        forceUpdateCalendar(new_date) 
         { 
-
+            this.updateCalendar()
         }
 
     }
