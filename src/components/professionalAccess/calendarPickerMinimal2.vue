@@ -28,8 +28,9 @@ import CalendarSummary from './calendar_summary.vue'
      
       <div v-if="show_date_picker" class="text-center text-dark"> 
            <!-- <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>-->
-            <DatePickerJAM :month_summary="month_summary"  :forceUpdateCalendar="forceUpdateCalendar" ></DatePickerJAM>
-      </div>
+            <DatePickerJAM v-on:selectedDate="selectedDate" :month_summary="month_summary"  :forceUpdateCalendar="forceUpdateCalendar" ></DatePickerJAM>
+      
+        </div>
 
   </div>
 
@@ -65,10 +66,9 @@ export default {
 
      //   state : { date: new Date()} ,
         dateSelected :  ref(new Date()),
-
         month_name: ["Enero", "Febrero","Marzo","Abril", "Mayo", "Junio","Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ] ,
         day_name: ["Domingo","Lunes", "Martes","Miercoles","Jueves", "Viernes", "Sabado"],
-
+       
         componentKey : 0 ,
         forceUpdateCalendar : 0 ,
         forceUpdateCalendarSummary : 0 ,
@@ -118,8 +118,8 @@ export default {
             //clean Month Summary
              this.month_summary = []
             
-            let day_names =['D','L','M','Mi','J','V','S']
-            let month_names =['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
+           // let day_names =['D','L','M','Mi','J','V','S']
+           // let month_names =['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
             // create a filtered list includin only dates of appointments
             let app_dates_filtered = response_json.data.map(app => new Date(app.date) )
 
@@ -127,18 +127,13 @@ export default {
            
            for (var d = new Date(aux_start_date); (d <= aux_end_date && d <= new Date(aux_end_date)  )  ; d.setDate(new Date(d).getDate() + 1)) 
             {
-                
-               console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
+                console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
                 let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
-           
          
                 const structure_day = {
-                        day_number :  d.getDate(),
-                        day_name : day_names[d.getDay()] ,
-                        month : month_names[d.getMonth()] ,
+                        date : new Date(d),  
                         reserved : nfound.length , 
                     }
-
                 this.month_summary.push(structure_day)
             }
 
@@ -147,6 +142,14 @@ export default {
         dayContent(date)
         {   
             return (function() {  return (this.dcount) }) 
+        },
+        selectedDate(date)
+        { 
+            console.log("selected Date:"+date)   
+            this.calendar_date = new Date( date ) 
+            this.forceUpdateCalendar += 1      
+            this.show_date_picker = false 
+        //this.$emit('set_daterequired', new Date(date) ) ;
         },
         handleSelectDate(date)
         {
@@ -178,7 +181,7 @@ export default {
         {
            console.log("Prev Day");
            this.calendar_date.setDate( this.calendar_date.getDate() - 1 ) 
-          this.forceUpdateCalendar += 1 ; 
+           this.forceUpdateCalendar += 1 ; 
         },  
         nextMonth()
         {   
@@ -201,8 +204,6 @@ export default {
             forceUpdateCalendar(newValue)
             {
                 this.forceUpdateCalendarSummary = Math.random()
-                this.forceUpdateCalendar= Math.random()
-                console.log("Date Change So EMIT:"+newValue);
                 let new_dateRequired= this.calendar_date  ;
                 this.$emit('set_daterequired', new_dateRequired ) ;
             }
