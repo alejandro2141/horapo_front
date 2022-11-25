@@ -6,27 +6,22 @@ import axios from 'axios';
 
 <template>
 <div>
-
-    <div>
-        <CalendarSummary :session_params="session_params" :forceUpdateCalendarSummary="forceUpdateCalendarSummary" :daterequired="daterequired" />
-    </div>
-
    
-    <div class="bg-primary bg-opacity-75 m-3 " style="border-radius: 15px;" >
+    <div class=" m-1  border border-1 border-dark" style="border-radius: 15px;" >
           <div>
                 <p class="mt-2"> NOVIEMBRE 2022  </p> 
             </div>
-        <table class="table table-bordered">
+        <table class="bg-white table " style="border-radius: 15px;" >
            
             <tbody>
                  <tr>
-                    <td colspan="2" class="table-active text-white">L</td>
-                    <td colspan="2" class="table-active text-white">M</td>
-                    <td colspan="2" class="table-active text-white">Mi</td>
-                    <td colspan="2" class="table-active text-white">J</td>
-                    <td colspan="2" class="table-active text-white">V</td>
-                    <td colspan="2" class="table-active text-white">S</td>
-                    <td colspan="2" class="table-active text-white">D</td>
+                    <td colspan="2" class="">L</td>
+                    <td colspan="2" class="">M</td>
+                    <td colspan="2" class="">Mi</td>
+                    <td colspan="2" class="">J</td>
+                    <td colspan="2" class="">V</td>
+                    <td colspan="2" class="">S</td>
+                    <td colspan="2" class="">D</td>
                 </tr>
                     <!--
                         day_number :  d.getDate(),
@@ -36,24 +31,25 @@ import axios from 'axios';
                     -->
 
                 <tr v-if="week1!=null" >
-                    <td  v-for="day in week1" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                    <td  v-for="day in week1" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h3">{{day.date.getDate()}}</text><br><small class="text-muted">{{day.reserved}}</small></text></td>                      
                 </tr>
                 <tr v-if="week2!=null" >
-                    <td  v-for="day in week2" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                    <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h3">{{day.date.getDate()}}</text><br><small class="text-muted">{{day.reserved}}</small></text></td>                      
                 </tr>
-                 <tr v-if="week3!=null" >
-                    <td  v-for="day in week3" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                <tr v-if="week3!=null" >
+                    <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h3">{{day.date.getDate()}}</text><br><small class="text-muted">{{day.reserved}}</small></text></td>                      
                 </tr>
-                 <tr v-if="week4!=null" >
-                    <td  v-for="day in week4" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                <tr v-if="week4!=null" >
+                    <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h5">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
                 </tr>
-                 <tr v-if="week5!=null" >
-                    <td  v-for="day in week5" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                <tr v-if="week5!=null" >
+                    <td  v-for="day in week5" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h5">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
                 </tr>
-                 <tr v-if="week6!=null" >
-                    <td  v-for="day in week6" :key="day" colspan="2" class="table-active text-white"><text class="h5">{{day.day_number}}</text><br><small>9</small></td>                      
+                <tr v-if="week6!=null" >
+                    <td  v-for="day in week6" :key="day" colspan="2" class=""  @click="dayPicked(day.date)"><text> <text class="h5">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
                 </tr>
-                           
+                
+                
 
             </tbody>
         </table>      
@@ -82,12 +78,16 @@ export default {
         week5 : [] ,
         week5 : [] ,     
         week6 : [] ,   
+
+            
+        day_names : ['D','L','M','Mi','J','V','S'] ,
+        month_names : ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
+           
             }   
     },
    	
-//	props: ['session_params', 'daterequired','forceUpdateCalendarSummary'],
     props: ['month_summary','forceUpdateCalendar'],
-    emits: [],
+    emits: ['selectedDate'],
 
 	created () {
         this.updateCalendar()
@@ -95,6 +95,11 @@ export default {
         },
 
 	methods :{
+            dayPicked(day)
+            {
+                console.log("dayPicker:"+day)
+                this.$emit('selectedDate', day ) ;
+            },
             updateCalendar()
             {
                 if(this.month_summary !=null )
@@ -106,7 +111,6 @@ export default {
                    this.week5 = this.month_summary.slice(28,35)
                    this.week6 = this.month_summary.slice(35,42)
                 }
-
             }
 
            },
