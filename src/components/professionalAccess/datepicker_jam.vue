@@ -7,14 +7,22 @@ import axios from 'axios';
 <template>
 <div>
    
-    <div class=" m-1  border border-1 border-dark" style="border-radius: 15px;" >
-          <div>
-                <p class="mt-2"> NOVIEMBRE 2022  </p> 
+    <div class=" m-1  border border-3 bg-white bg-opacity-75 text-secondary" style="border-radius: 15px; background-color:#eee " >
+            <div class="display-5">
+                <small><small>
+                    
+                    <div class="d-flex justify-content-around">
+                        <text class="p-3" @click="prevMonth(month_summary[15].date)" > <i class="display-1 bi bi-caret-left "></i>       </text>  
+                        <text class="p-4" >  {{ month_full_names[week3[3].date.getMonth()] }}  {{month_summary[15].date.getFullYear()}}  </text> 
+                        <text class="p-3" @click="nextMonth(month_summary[15].date)" > <i class="display-1 bi bi-caret-right "></i>      </text>
+                    </div>
+                    
+                </small></small>
             </div>
-        <table class="bg-white table " style="border-radius: 15px;" >
-           
+        
+        <table class=" table " style="border-radius: 15px;" >
             <tbody>
-                 <tr>
+                 <tr class="h5 text-dark">
                     <td colspan="2" class="">L</td>
                     <td colspan="2" class="">M</td>
                     <td colspan="2" class="">Mi</td>
@@ -23,34 +31,25 @@ import axios from 'axios';
                     <td colspan="2" class="">S</td>
                     <td colspan="2" class="">D</td>
                 </tr>
-                    <!--
-                        day_number :  d.getDate(),
-                        day_name : day_names[d.getDay()] ,
-                        month : month_names[d.getMonth()] ,
-                        reserved : nfound.length , 
-                    -->
-
-                <tr v-if="week1!=null" >
-                    <td  v-for="day in week1" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h3">{{day.date.getDate()}}</text><br><small class="text-muted">{{day.reserved}}</small></text></td>                      
+                <tr v-if="week1!=null" class="text-secondary" >
+                    <td  v-for="day in week1" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger bg-secondary' : tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()  }]" >{{day.date.getDate()}}</text><br><small >{{day.reserved}}</small></text></td>                      
                 </tr>
-                <tr v-if="week2!=null" >
-                    <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h3">{{day.date.getDate()}}</text><br><small class="text-muted">{{day.reserved}}</small></text></td>                      
+                <tr v-if="week2!=null" class="text-secondary" >
+                    <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate()  && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()  }]">{{day.date.getDate()}}</text><br><small >{{day.reserved}}</small></text></td>                      
                 </tr>
-                <tr v-if="week3!=null" >
-                    <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h3">{{day.date.getDate()}}</text><br><small class="text-muted">{{day.reserved}}</small></text></td>                      
+                <tr v-if="week3!=null" class="text-secondary"  >
+                    <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()   }]">{{day.date.getDate()}}</text><br><small >{{day.reserved}}</small></text></td>                      
                 </tr>
-                <tr v-if="week4!=null" >
-                    <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h5">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
+                <tr v-if="week4!=null" class="text-secondary" >
+                    <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()   }]">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
                 </tr>
-                <tr v-if="week5!=null" >
-                    <td  v-for="day in week5" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h5">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
+                <tr v-if="week5!=null" class="text-secondary" >
+                    <td  v-for="day in week5" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()   }]">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
                 </tr>
-                <tr v-if="week6!=null" >
-                    <td  v-for="day in week6" :key="day" colspan="2" class=""  @click="dayPicked(day.date)"><text> <text class="h5">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
+                <tr v-if="week6!=null" class="text-secondary" >
+                    <td  v-for="day in week6" :key="day" colspan="2" class=""  @click="dayPicked(day.date)"><text> <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()   }]">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
                 </tr>
-                
-                
-
+          
             </tbody>
         </table>      
           
@@ -69,7 +68,7 @@ export default {
  
    data : function() {
         return {
-        cdate : null ,
+        tday : null ,
        
         week1 : [] ,
         week2 : [] ,
@@ -81,20 +80,29 @@ export default {
 
             
         day_names : ['D','L','M','Mi','J','V','S'] ,
-        month_names : ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
-           
+        month_names : ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
+        month_full_names : ['ENERO','FEBRERO','MARZO','ABRRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
+            
             }   
     },
    	
-    props: ['month_summary','forceUpdateCalendar'],
-    emits: ['selectedDate'],
+    props: ['month_summary','forceUpdateDatePickerJAM','dateRequired'],
+    emits: ['selectedDate','nextMonth','prevMonth'],
 
 	created () {
-        this.updateCalendar()
-        
+            this.updateCalendar()
+            this.tday = new Date() 
         },
 
 	methods :{
+            prevMonth(date)
+            {
+                this.$emit('prevMonth',date)
+            },
+            nextMonth(date)
+            {
+                this.$emit('nextMonth',date )
+            },
             dayPicked(day)
             {
                 console.log("dayPicker:"+day)
@@ -117,8 +125,9 @@ export default {
 
     watch: {
               
-        forceUpdateCalendar(new_date) 
+        forceUpdateDatePickerJAM(new_date) 
         { 
+            console.log("forceUpdateDatePickerJAM")
             this.updateCalendar()
         }
 
