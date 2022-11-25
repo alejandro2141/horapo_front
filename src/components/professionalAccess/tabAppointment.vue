@@ -24,7 +24,7 @@ import CalendarSummary from './calendar_summary.vue'
           <LockOptions v-on:updateFilter="updateFilter"  :isLockDay="isLockDay" :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
              -->
           <div class="w-100"> 
-              <CalendarPickerMinimal2 class="mt-3" :session_params="session_params" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
+              <CalendarPickerMinimal2 class="mt-1" :session_params="session_params" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
             <br> 
           </div>
 
