@@ -7,18 +7,19 @@ import axios from 'axios';
 <template>
 <div>
    
-    <div class=" m-1  border border-3 bg-white bg-opacity-75 text-secondary" style="border-radius: 15px; background-color:#eee " >
-            <div class="display-5">
+    <div class=" m-3  border border-3 bg-white bg-opacity-75 text-secondary" style="border-radius: 15px; background-color:#eee " >
+           <div class="display-5">
                 <small><small>
                     
                     <div class="d-flex justify-content-around">
-                        <text class="p-3" @click="prevMonth(month_summary[15].date)" > <i class="display-1 bi bi-caret-left "></i>       </text>  
-                        <text class="p-4" >  {{ month_full_names[week3[3].date.getMonth()] }}  {{month_summary[15].date.getFullYear()}}  </text> 
-                        <text class="p-3" @click="nextMonth(month_summary[15].date)" > <i class="display-1 bi bi-caret-right "></i>      </text>
+                        <text class="pt-2 mb-0" @click="prevMonth(month_summary[15].date)" > <i class="display-1 bi bi-caret-left "></i>       </text>  
+                        <text class="pt-3 mb-0" >  {{ month_full_names[week3[3].date.getMonth()] }}  {{month_summary[15].date.getFullYear()}}  </text> 
+                        <text class="pt-2 mb-0" @click="nextMonth(month_summary[15].date)" > <i class="display-1 bi bi-caret-right "></i>      </text>
                     </div>
                     
                 </small></small>
             </div>
+        <hr class="b-0 m-0">
         
         <table class=" table " style="border-radius: 15px;" >
             <tbody>
