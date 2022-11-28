@@ -11,10 +11,10 @@ import CalendarSummary from './calendar_summary.vue'
     <div>
       
         <CalendarSummary v-on:selectedDate="selectedDateInCalendarSummary" v-if="!show_date_picker" :week_summary="week_summary" :forceUpdateCalendarSummary="forceUpdateCalendarSummary"  />
-      
+      <hr v-if="!show_date_picker" class="m-0 p-0">
         <div class="d-flex justify-content-around text-primary"> 
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
-                <div class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
+                <div v-if="true"  class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
                        <text class="text-dark"> {{ getSelectedDayName() }} </text> <br> {{ calendar_date.getDate() }}           
 
                         <div class="display-5 text-dark" v-if="!show_date_picker" >
@@ -25,6 +25,7 @@ import CalendarSummary from './calendar_summary.vue'
                 </div>
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>   </div>
         </div>
+       
      
         <div v-if="show_date_picker" class="text-center text-dark"> 
            <!-- <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>-->
