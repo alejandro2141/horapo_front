@@ -72,7 +72,7 @@ export default {
             }   
     },
    	
-	props: ['week_summary','forceUpdateCalendarSummary'],
+	props: ['week_summary','forceUpdateCalendarSummary','calendar_date'],
     emits: ['selectedDate'],
 
 	created () {
