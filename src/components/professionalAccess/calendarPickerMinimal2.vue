@@ -12,7 +12,7 @@ import CalendarSummary from './calendar_summary.vue'
       
         <CalendarSummary  :calendar_date="calendar_date"  v-on:selectedDate="selectedDateInCalendarSummary" v-if="!show_date_picker" :week_summary="week_summary" :forceUpdateCalendarSummary="forceUpdateCalendarSummary"  />
       <hr v-if="!show_date_picker" class="m-0 p-0">
-        <div class="d-flex justify-content-around text-primary"> 
+        <div class="d-flex justify-content-around text-primary mt-2"> 
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
                 <div v-if="true"  class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
                        <text class="text-dark"> {{ getSelectedDayName() }} </text> <br> {{ calendar_date.getDate() }}           
