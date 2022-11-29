@@ -33,22 +33,22 @@ import axios from 'axios';
                     <td colspan="2" class="">D</td>
                 </tr>
                 <tr v-if="week1!=null" class="text-secondary" >
-                    <td  v-for="day in week1" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger bg-secondary' : tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()  }]" >{{day.date.getDate()}}</text><br><small >{{day.reserved}}</small></text></td>                      
+                    <td  v-for="day in week1" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-50' :  day.date.getDate() > 10    }]" > <text> {{day.date.getDate()}}</text><br><small >{{day.reserved}}</small></text></td>                      
                 </tr>
                 <tr v-if="week2!=null" class="text-secondary" >
-                    <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate()  && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()  }]">{{day.date.getDate()}}</text><br><small >{{day.reserved}}</small></text></td>                      
+                    <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth(), 'text-primary' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()  }]"><text> {{day.date.getDate()}}</text><br><small >  {{day.reserved}}</small></text></td>                      
                 </tr>
                 <tr v-if="week3!=null" class="text-secondary"  >
-                    <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()   }]">{{day.date.getDate()}}</text><br><small >{{day.reserved}}</small></text></td>                      
+                    <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth(), 'text-primary' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()   }]">  <text> {{day.date.getDate()}}</text><br><small > {{day.reserved}}</small></text></td>                      
                 </tr>
                 <tr v-if="week4!=null" class="text-secondary" >
-                    <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()   }]">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
+                    <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth(), 'text-primary' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()   }]"> <text> {{day.date.getDate()}}</text><br><small>  {{day.reserved}}</small></text></td>                      
                 </tr>
                 <tr v-if="week5!=null" class="text-secondary" >
-                    <td  v-for="day in week5" :key="day" colspan="2" class="" @click="dayPicked(day.date)"><text > <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()   }]">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
+                    <td  v-for="day in week5" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth(), 'text-primary ' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-50' :  day.date.getDate() < 10 }] ">  <text>  {{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
                 </tr>
                 <tr v-if="week6!=null" class="text-secondary" >
-                    <td  v-for="day in week6" :key="day" colspan="2" class=""  @click="dayPicked(day.date)"><text> <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate() && tday.getYear() == day.date.getYear() && tday.getMonth() == day.date.getMonth()   }]">{{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
+                    <td  v-for="day in week6" :key="day" colspan="2" class=""  @click="dayPicked(day.date)"> <text class="h4" :class="[{ 'text-danger': tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth(), 'text-primary' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-50 ' :  day.date.getDate() < 10 }] ">  <text>  {{day.date.getDate()}}</text><br><small>{{day.reserved}}</small></text></td>                      
                 </tr>
           
             </tbody>
@@ -87,7 +87,7 @@ export default {
             }   
     },
    	
-    props: ['month_summary','forceUpdateDatePickerJAM','dateRequired'],
+    props: ['month_summary','forceUpdateDatePickerJAM','dateRequired','calendar_date'],
     emits: ['selectedDate','nextMonth','prevMonth'],
 
 	created () {
