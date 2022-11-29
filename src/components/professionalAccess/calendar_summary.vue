@@ -6,50 +6,50 @@ import axios from 'axios';
 
 <template>
    
-    <div class="d-flex justify-content-between bg-white bg-opacity-75 text-secondary p-2">
+    <div class="d-flex justify-content-between bg-white bg-opacity-75 text-secondary pt-0">
                 
                 <div class="text-center" @click="selectedDate(week_summary[0].date)" v-if="week_summary[0] !=null">
                    <!-- <div style="font-size: 0.9em" class="m-0 p-0" > {{ day_names[week_summary[0].date.getDay()] }}</div> -->
-                     <div style="font-size: 0.9em" class="m-0 p-0" > HOY </div> 
-                     <div style="font-size: 1.7em" class="m-0 p-0  text-danger" > {{ week_summary[0].date.getDate() }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" > {{ month_names[week_summary[0].date.getMonth()] }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" > -> </div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > HOY </div> 
+                     <div style="font-size: 1.3em" class="m-0 p-0  text-danger" > {{ week_summary[0].date.getDate() }}</div>
+                     <div style="font-size: 0.6em" class="m-0 p-0" > {{ month_names[week_summary[0].date.getMonth()] }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > -> </div>
                 </div>
                 <div class="text-center" @click="selectedDate(week_summary[1].date)"   v-if="week_summary[1] !=null ">
-                    <div style="font-size: 0.9em" class="m-0 p-0" > {{ day_names[week_summary[1].date.getDay()] }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" :class="[{'text-primary': week_summary[1].date.getDate() == calendar_date.getDate()  }]"  >{{ week_summary[1].date.getDate() }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" > {{month_names[week_summary[1].date.getMonth()] }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" > {{week_summary[1].reserved}}</div>
+                    <div  style="font-size: 0.7em" class="m-0 p-0" > {{ day_names[week_summary[1].date.getDay()] }}</div>
+                     <div style="font-size: 1.3em" class="m-0 p-0" :class="[{'text-primary': week_summary[1].date.getDate() == calendar_date.getDate()  }]"  >{{ week_summary[1].date.getDate() }}</div>
+                     <div style="font-size: 0.6em" class="m-0 p-0" > {{month_names[week_summary[1].date.getMonth()] }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > {{week_summary[1].reserved}}</div>
                 </div>
                 <div class="text-center" @click="selectedDate(week_summary[2].date)"  v-if="week_summary[2] !=null ">
-                    <div style="font-size: 0.9em" class="m-0 p-0" > {{ day_names[week_summary[2].date.getDay()] }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" :class="[{'text-primary ': week_summary[2].date.getDate() == calendar_date.getDate()  }]"   >{{ week_summary[2].date.getDate() }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" > {{month_names[week_summary[2].date.getMonth()] }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" > {{week_summary[2].reserved}}</div>
+                    <div  style="font-size: 0.7em" class="m-0 p-0" > {{ day_names[week_summary[2].date.getDay()] }}</div>
+                     <div style="font-size: 1.3em" class="m-0 p-0" :class="[{'text-primary ': week_summary[2].date.getDate() == calendar_date.getDate()  }]"   >{{ week_summary[2].date.getDate() }} </div>
+                     <div style="font-size: 0.6em" class="m-0 p-0" > {{month_names[week_summary[2].date.getMonth()] }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > {{week_summary[2].reserved}}</div>
                 </div>
                 <div class="text-center" @click="selectedDate(week_summary[3].date)"  v-if="week_summary[3] !=null ">
-                    <div style="font-size: 0.9em" class="m-0 p-0" > {{ day_names[week_summary[3].date.getDay()] }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" :class="[{'text-primary ': week_summary[3].date.getDate() == calendar_date.getDate()  }]"  >{{ week_summary[3].date.getDate() }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" > {{month_names[week_summary[3].date.getMonth()] }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" > {{week_summary[3].reserved}}</div>
+                    <div  style="font-size: 0.7em" class="m-0 p-0" > {{ day_names[week_summary[3].date.getDay()] }}</div>
+                     <div style="font-size: 1.3em" class="m-0 p-0" :class="[{'text-primary ': week_summary[3].date.getDate() == calendar_date.getDate()  }]"  >{{ week_summary[3].date.getDate() }}</div>
+                     <div style="font-size: 0.6em" class="m-0 p-0" > {{month_names[week_summary[3].date.getMonth()] }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > {{week_summary[3].reserved}}</div>
                 </div>
                 <div class="text-center" @click="selectedDate(week_summary[4].date)"  v-if="week_summary[4] !=null ">
-                    <div style="font-size: 0.9em" class="m-0 p-0" > {{ day_names[week_summary[4].date.getDay()] }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" :class="[{'text-primary ':week_summary[4].date.getDate() == calendar_date.getDate() }]"   >{{ week_summary[4].date.getDate() }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" > {{month_names[week_summary[4].date.getMonth()] }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" > {{week_summary[4].reserved}}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > {{ day_names[week_summary[4].date.getDay()] }}</div>
+                     <div style="font-size: 1.3em" class="m-0 p-0" :class="[{'text-primary ':week_summary[4].date.getDate() == calendar_date.getDate() }]"   >{{ week_summary[4].date.getDate() }}</div>
+                     <div style="font-size: 0.6em" class="m-0 p-0" > {{month_names[week_summary[4].date.getMonth()] }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > {{week_summary[4].reserved}}</div>
                 </div>
                 <div class="text-center" @click="selectedDate(week_summary[5].date)"  v-if="week_summary[5] !=null ">
-                    <div style="font-size: 0.9em" class="m-0 p-0" > {{ day_names[week_summary[5].date.getDay()] }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" :class="[{'text-primary': week_summary[5].date.getDate() == calendar_date.getDate() }]"   >{{ week_summary[5].date.getDate() }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" > {{month_names[week_summary[5].date.getMonth()] }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" > {{week_summary[5].reserved}}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > {{ day_names[week_summary[5].date.getDay()] }}</div>
+                     <div style="font-size: 1.3em" class="m-0 p-0" :class="[{'text-primary': week_summary[5].date.getDate() == calendar_date.getDate() }]"   >{{ week_summary[5].date.getDate() }}</div>
+                     <div style="font-size: 0.6em" class="m-0 p-0" > {{month_names[week_summary[5].date.getMonth()] }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > {{week_summary[5].reserved}}</div>
                 </div>
                 <div class="text-center" @click="selectedDate(week_summary[6].date)"  v-if="week_summary[6] !=null ">
-                    <div style="font-size: 0.9em" class="m-0 p-0" > {{ day_names[week_summary[6].date.getDay()] }}</div>
-                     <div style="font-size: 1.5em" class="m-0 p-0" :class="[{'text-primary ': week_summary[6].date.getDate() == calendar_date.getDate() }]"   >{{ week_summary[6].date.getDate() }}</div>
-                     <div style="font-size: 0.7em" class="m-0 p-0" > {{month_names[week_summary[6].date.getMonth()] }}</div>
-                     <div style="font-size: 0.9em" class="m-0 p-0" > {{week_summary[6].reserved}}</div>
+                    <div style="font-size: 0.7em" class="m-0 p-0" > {{ day_names[week_summary[6].date.getDay()] }}</div>
+                     <div style="font-size: 1.3em" class="m-0 p-0" :class="[{'text-primary ': week_summary[6].date.getDate() == calendar_date.getDate() }]"   >{{ week_summary[6].date.getDate() }}</div>
+                     <div style="font-size: 0.6em" class="m-0 p-0" > {{month_names[week_summary[6].date.getMonth()] }}</div>
+                     <div style="font-size: 0.7em" class="m-0 p-0" > {{week_summary[6].reserved}}</div>
                 </div>
                  
     </div>        
