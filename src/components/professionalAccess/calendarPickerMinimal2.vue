@@ -29,7 +29,7 @@ import CalendarSummary from './calendar_summary.vue'
      
         <div v-if="show_date_picker" class="text-center text-dark"> 
            <!-- <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>-->
-            <DatePickerJAM v-on:prevMonth="prevMonth" v-on:nextMonth="nextMonth" v-on:selectedDate="selectedDateInDatePicker" :month_summary="month_summary"  :forceUpdateDatePickerJAM="forceUpdateDatePickerJAM" ></DatePickerJAM>
+            <DatePickerJAM  :calendar_date="calendar_date" v-on:prevMonth="prevMonth" v-on:nextMonth="nextMonth" v-on:selectedDate="selectedDateInDatePicker" :month_summary="month_summary"  :forceUpdateDatePickerJAM="forceUpdateDatePickerJAM" ></DatePickerJAM>
         </div>
 
   </div>
@@ -106,8 +106,17 @@ export default {
 
         async getMonthSummary(date)
         {
+            console.log("calendar Picker - GetMonthSummary:"+date)
             let aux_start_date = new Date(date.getFullYear(),date.getMonth(), 1)
+            if (aux_start_date.getDay()!=0) //because  getDay when sunday return 0
+            {
             aux_start_date.setDate( aux_start_date.getDate() - aux_start_date.getDay() + 1 ) 
+            }
+            else
+            {
+            aux_start_date.setDate( aux_start_date.getDate() - 6 )  
+            }
+
             let aux_end_date =   new Date(date.getFullYear(),date.getMonth()+1, 0);
             aux_end_date.setDate( aux_end_date.getDate() + (7 - aux_end_date.getDay() ) ) 
             //let aux_end_date = new Date( aux_start_date.getTime() + (86400000*7) )
@@ -130,7 +139,7 @@ export default {
 
             console.log("app_dates_filtered:"+JSON.stringify(app_dates_filtered))
            
-           for (var d = new Date(aux_start_date); (d <= aux_end_date && d <= new Date(aux_end_date)  )  ; d.setDate(new Date(d).getDate() + 1)) 
+           for (var d = new Date(aux_start_date); d.getTime() <= aux_end_date.getTime()   ; d.setDate(new Date(d).getDate() + 1)) 
             {
                 console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
                 let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
@@ -143,6 +152,7 @@ export default {
                     }
                 this.month_summary.push(structure_day)
             }
+            this.forceUpdateDatePickerJAM = Math.random() 
 
         },
 
@@ -176,7 +186,7 @@ export default {
 
             console.log("app_dates_filtered:"+JSON.stringify(app_dates_filtered))
            
-           for (var d = new Date(aux_start_date); (d <= aux_end_date && d <= new Date(aux_end_date)  )  ; d.setDate(new Date(d).getDate() + 1)) 
+           for (var d = new Date(aux_start_date); d.getTime() <= aux_end_date.getTime()   ; d.setDate(new Date(d).getDate() + 1)) 
             {
                 console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
                 let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
@@ -210,7 +220,7 @@ export default {
             console.log("selected Date:"+date)   
             this.calendar_date = new Date( date ) 
             this.forceUpdateCalendar += 1      
-            this.show_date_picker = false 
+            //this.show_date_picker = false 
         //this.$emit('set_daterequired', new Date(date) ) ;
         },
         handleSelectDate(date)
@@ -251,9 +261,10 @@ export default {
            //let aux_nextMonth = new Date(date)
            let aux_nextMonth = new Date(date.getFullYear(),date.getMonth()+1 ,15  )
            //aux_nextMonth.setDate(aux_nextMonth.getDate() +31 ) 
-           //this.calendar_date.setDate( this.calendar_date.getDate() + 31 ) 
-           this.forceUpdateDatePickerJAM = Math.random() 
+           //this.calendar_date.setDate( this.calendar_date.getDate() + 31 )  
+           console.log("calendar Picker - aux_Next Month:"+aux_nextMonth);
            this.getMonthSummary(aux_nextMonth)  
+           this.forceUpdateDatePickerJAM = Math.random() 
         },
         prevMonth(date)
         {
