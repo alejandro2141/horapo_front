@@ -12,9 +12,9 @@ import axios from 'axios';
                 <small><small>
                     
                     <div class="d-flex justify-content-around">
-                        <text class="pt-2 mb-0" @click="prevMonth(month_summary[15].date)" > <i class="display-1 bi bi-caret-left "></i>       </text>  
+                        <text class="pt-2 mb-0" @click="prevMonth(month_summary[15].date)" > <i class="display-1 text-primary bi bi-caret-left "></i>       </text>  
                         <text class="pt-3 mb-0" >  {{ month_full_names[week3[3].date.getMonth()] }}  {{month_summary[15].date.getFullYear()}}  </text> 
-                        <text class="pt-2 mb-0" @click="nextMonth(month_summary[15].date)" > <i class="display-1 bi bi-caret-right "></i>      </text>
+                        <text class="pt-2 mb-0" @click="nextMonth(month_summary[15].date)" > <i class="display-1 text-primary bi bi-caret-right "></i>      </text>
                     </div>
                     
                 </small></small>
