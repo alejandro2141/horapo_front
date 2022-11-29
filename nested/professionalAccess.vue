@@ -65,6 +65,9 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
 </template>
 
 <style scoped>
+body {
+    overscroll-behavior: none 
+}
 
 .v-enter-active,
 .v-leave-active {
