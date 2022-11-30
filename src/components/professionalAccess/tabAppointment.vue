@@ -16,27 +16,27 @@ import CalendarSummary from './calendar_summary.vue'
 <div>
   <loadProgress  :active_spinner="active_spinner" > </loadProgress>
       
-      <div v-if='!session_params.tutorial_start' >
+    <div v-if='!session_params.tutorial_start' >
 
-       
-        <div class="d-flex justify-content-between  ">
-         <!-- 
+      <div class="d-flex justify-content-between  ">
+          <!-- 
           <LockOptions v-on:updateFilter="updateFilter"  :isLockDay="isLockDay" :dayStatics="dayStatics" v-on:updateAppointmentList="updateAppointmentList" :daterequired="daterequired" :lock_dates="lock_dates" :hours_block_list="hours_block_list" :session_params="session_params" ></LockOptions>
-             -->
+          -->
           <div class="w-100"> 
-              <CalendarPickerMinimal2 class="mt-1" :session_params="session_params" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
-            <br> 
+              <CalendarPickerMinimal2 class="mt-1" :lock_dates="lock_dates" :session_params="session_params" :daterequired="daterequired" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
+              <br> 
           </div>
-
-        </div> 
-            <ListAppointments  :force_filter="force_filter" :filterApps="filterApps" :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
-            <div id='footer' style='height : 300px'>
-            </div>
-	    </div>
-
-      <div v-else >
-        <Tutorial v-on:switchToCenters='switchToCenters' :session_params="session_params" > </Tutorial>
+      </div> 
+        <ListAppointments  :force_filter="force_filter" :filterApps="filterApps" :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
+    
+      <div id='footer' style='height : 300px'>
       </div>
+	  
+    </div>
+
+    <div v-else >
+        <Tutorial v-on:switchToCenters='switchToCenters' :session_params="session_params" > </Tutorial>
+    </div>
 
 </div>
 </template>
@@ -148,7 +148,6 @@ data: function () {
             console.log("SET_DATEREQUIRED TAB APPOINTMENT : "+year_month_day);
            // this.getAppointments(year_month_day);
             this.daterequired = year_month_day ;
-           
             //this.showSpinner(1000);
             this.updateAppointmentList();
             },
@@ -191,37 +190,45 @@ data: function () {
               this.isLockDay=false
             }
           }  
-          //************ */ 
+          
+          //****UPDATE BLOCK DAYS ******** */ 
+          //this.updateBlockDays()
 
           this.hours_block_list=[]
           this.active_spinner = false ;  
 		    },
 
+/*
+        async updateBlockDays() {
+           
+              const json = { 
+               // date :  aux_dateRequired ,
+                professional_id : this.session_params.professional_id , 
+                    };
+            
+              console.log ("professional_get_lock_days REQUEST :"+ JSON.stringify(json)  );
+              let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_lock_days",json);
+              console.log ("/professional_get_lock_days RESPONSE:"+JSON.stringify(response_json.data)) ;
+              //this.updateCalendarsMarks();
+              
+              if (response_json.data != null)
+              {
+                this.lock_dates = response_json.data
+              }
+              else
+              {
+                 this.lock_dates = []
+              }
+         
+              this.lock_dates = this.lock_dates.map(x => x.date );
+              console.log("this.lock_dates:"+JSON.stringify(this.lock_dates));
+        
+        },
+        */
+
         setDayStatics(appointments_data)
         {
-          /*
-          console.log("SET DAY STATICS........." );
-          this.dayStatics.total = appointments_data.appointments_list.length ;
-           //how many cancelled ? 
-          let filtered_blocked = appointments_data.appointments_list[0].appointments.filter(app =>  app.app_blocked === 1 ) 
-          this.dayStatics.blocked = filtered_blocked.length ;
-            //how Reserved ? 
-          let filtered_reserved = appointments_data.appointments_list[0].appointments.filter(app =>  app.app_available === false && app.app_blocked != 1  ) 
-          this.dayStatics.reserved = filtered_reserved.length ;
-             //Available ? 
-          this.dayStatics.available =  this.dayStatics.total  - ( this.dayStatics.blocked +  this.dayStatics.reserved ) ;
-
-          if (this.isLockDay)
-          {
-            this.dayStatics.available = "--"
-            this.dayStatics.blocked = "--"
-            this.dayStatics.total = "--"
-          }
-        
-          console.log("SET DAY STATICS.........:"+JSON.stringify(this.dayStatics) );
-          // this.dayStatics = {'total' : 0 , 'reserved' : 0 , 'cancelled' : 0  }
-          // this.dayStatics = { 'total' : appointments_data.appointments.length  } 
-          */
+      
         },
 
         async updateCalendarsMarks() {
