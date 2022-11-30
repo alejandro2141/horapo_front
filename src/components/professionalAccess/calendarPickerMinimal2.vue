@@ -9,9 +9,10 @@ import CalendarSummary from './calendar_summary.vue'
 
 <template>
     <div>
-      
+      <!--
         <CalendarSummary  :calendar_date="calendar_date"  v-on:selectedDate="selectedDateInCalendarSummary" v-if="!show_date_picker" :week_summary="week_summary" :forceUpdateCalendarSummary="forceUpdateCalendarSummary"  />
       <hr v-if="!show_date_picker" class="m-0 p-0">
+      -->
         <div class="d-flex justify-content-around text-primary mt-2"> 
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
                 <div v-if="true"  class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
@@ -29,7 +30,7 @@ import CalendarSummary from './calendar_summary.vue'
      
         <div v-if="show_date_picker" class="text-center text-dark"> 
            <!-- <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>-->
-            <DatePickerJAM  :calendar_date="calendar_date" v-on:prevMonth="prevMonth" v-on:nextMonth="nextMonth" v-on:selectedDate="selectedDateInDatePicker" :month_summary="month_summary"  :forceUpdateDatePickerJAM="forceUpdateDatePickerJAM" ></DatePickerJAM>
+            <DatePickerJAM  :lock_dates="lock_dates" :calendar_date="calendar_date" v-on:prevMonth="prevMonth" v-on:nextMonth="nextMonth" v-on:selectedDate="selectedDateInDatePicker" :month_summary="month_summary"  :forceUpdateDatePickerJAM="forceUpdateDatePickerJAM" ></DatePickerJAM>
         </div>
 
   </div>
@@ -85,7 +86,7 @@ export default {
     },
    	components: { Datepicker },
 
-    props: ['required_day', 'session_params' ],
+    props: ['required_day', 'session_params', 'lock_dates' ],
     emits: ['set_daterequired'] ,
 
 	created () {
@@ -94,7 +95,7 @@ export default {
        
         console.log("CALENDAR PICKER MINIMAL 2 CREATED END !!");
         this.getMonthSummary(new Date())
-        this.updateWeekSummary(new Date())
+        //this.updateWeekSummary(new Date())
     },
 
     mounted() {   
@@ -107,6 +108,7 @@ export default {
         async getMonthSummary(date)
         {
             console.log("calendar Picker - GetMonthSummary:"+date)
+            console.log("calendar Picker - this.lock_dates :"+this.lock_dates)
             let aux_start_date = new Date(date.getFullYear(),date.getMonth(), 1)
             if (aux_start_date.getDay()!=0) //because  getDay when sunday return 0
             {
@@ -132,30 +134,39 @@ export default {
             //clean Month Summary
             this.month_summary = [] 
             
-           // let day_names =['D','L','M','Mi','J','V','S']
-           // let month_names =['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
-            // create a filtered list includin only dates of appointments
-            let app_dates_filtered = response_json.data.map(app => new Date(app.date) )
-
-            console.log("app_dates_filtered:"+JSON.stringify(app_dates_filtered))
+           // MAKE A LIST ONLY INCLUDE DATES OF APPOINTMENTS
+            let app_dates_filtered = response_json.data.appointments.map(app => new Date(app.date) )
+           // MAKE A LIST ONLY INCLUDE DATES OF Lock Dates
+            let lock_dates = response_json.data.lock_days.map(app => new Date(app.date) )
+        
+            console.log("getMonthSummary lock_dates:"+JSON.stringify(lock_dates))
+            console.log("getMonthSummary app_dates_filtered:"+JSON.stringify(app_dates_filtered))
            
            for (var d = new Date(aux_start_date); d.getTime() <= aux_end_date.getTime()   ; d.setDate(new Date(d).getDate() + 1)) 
             {
                 console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
                 let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
-         
+                
+                let isblock = lock_dates.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() && app.getFullYear() == d.getFullYear()   ) )
+                //let isblock = lock_dates.includes( d )
+                let val_bool = isblock.length > 0
+
+                //check if is locked list
+               
                 const structure_day = {
                         date : new Date(d),  
                         reserved : nfound.length , 
                         today : false ,
                         selected : false, 
+                        locked : val_bool,
                     }
                 this.month_summary.push(structure_day)
             }
+          
             this.forceUpdateDatePickerJAM = Math.random() 
 
         },
-
+/*
         async updateWeekSummary(date)
         {
             let aux_start_date = new Date(date)
@@ -182,7 +193,8 @@ export default {
            // let day_names =['D','L','M','Mi','J','V','S']
            // let month_names =['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
             // create a filtered list includin only dates of appointments
-            let app_dates_filtered = response_json.data.map(app => new Date(app.date) )
+            let app_dates_filtered = response_json.data.appointments.map(app => new Date(app.date) )
+
 
             console.log("app_dates_filtered:"+JSON.stringify(app_dates_filtered))
            
@@ -201,7 +213,7 @@ export default {
             }
 
         },
-
+*/
 
         dayContent(date)
         {   
