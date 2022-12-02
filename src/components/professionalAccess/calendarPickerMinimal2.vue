@@ -150,19 +150,37 @@ export default {
                 //let isblock = lock_dates.includes( d )
                 let val_bool = isblock.length > 0
 
-                //check if is locked list
-               
+                //CHECK if Day is active in calendar list
+                let calendars_active_day = response_json.data.calendars.filter(cal => (new Date(cal.date_start).getTime() < d.getTime()  && new Date(cal.date_end).getTime() > d.getTime()  )    );
+                
+                //Cicle for each Calendar  to check id day is active : Mon tue wed thu fri sat sun
+                let calendars_active = []
+                for (let i = 0; i < calendars_active_day.length; i++) 
+                {
+                    if (  (d.getDay() == 0 && calendars_active_day[i].sunday ) ||  (d.getDay() == 1 && calendars_active_day[i].monday ) ||  (d.getDay() == 2 && calendars_active_day[i].tuesday  )  ||  (d.getDay() == 3 && calendars_active_day[i].wednesday) || (d.getDay() == 4 && calendars_active_day[i].thursday ) || (d.getDay() == 5 && calendars_active_day[i].friday) || (d.getDay() == 6 && calendars_active_day[i].saturday)   )
+                    {   //clean calendars
+                       calendars_active.push(calendars_active_day[i])
+                    }    
+                }
+
+                calendars_active = calendars_active.map(cal => cal.color)              
+                
+                //check if day is available
+
                 const structure_day = {
                         date : new Date(d),  
                         reserved : nfound.length , 
                         today : false ,
                         selected : false, 
-                        locked : val_bool,
+                        locked : val_bool, 
+                        calendar_colors : calendars_active
                     }
                 this.month_summary.push(structure_day)
             }
           
             this.forceUpdateDatePickerJAM = Math.random() 
+   
+        console.log("calendar Picker - month_summary this.month_summary :"+JSON.stringify(this.month_summary))
 
         },
 /*
