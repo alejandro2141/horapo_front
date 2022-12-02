@@ -13,24 +13,23 @@ import CalendarSummary from './calendar_summary.vue'
         <CalendarSummary  :calendar_date="calendar_date"  v-on:selectedDate="selectedDateInCalendarSummary" v-if="!show_date_picker" :week_summary="week_summary" :forceUpdateCalendarSummary="forceUpdateCalendarSummary"  />
       <hr v-if="!show_date_picker" class="m-0 p-0">
       -->
+      <!--
         <div class="d-flex justify-content-around text-primary mt-2"> 
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="prevDay()" class=" bi bi-caret-left "></i>   </div>
                 <div v-if="true"  class="display-5 text-center " @click="show_date_picker =!show_date_picker">   
                        <text class="text-dark"> {{ getSelectedDayName() }} </text> <br> {{ calendar_date.getDate() }}           
 
                         <div class="display-5 text-dark" v-if="!show_date_picker" >
-                            <!--  <i v-on:click="prevMonth()" class="text-primary bi bi-caret-left display-5"></i>   -->
                             <text :forceUpdate="forceUpdateCalendar" >  {{ getMonthName( calendar_date.getMonth() ) }}  {{calendar_date.getFullYear()}} </text>
-                            <!--   <i v-on:click="nextMonth()" class="text-primary bi bi-caret-right display-5"></i>  -->
                         </div>
+
                 </div>
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>   </div>
-        </div>
-       
-     
+        </div>     
+     -->
         <div v-if="show_date_picker" class="text-center text-dark"> 
            <!-- <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>-->
-            <DatePickerJAM  :lock_dates="lock_dates" :calendar_date="calendar_date" v-on:prevMonth="prevMonth" v-on:nextMonth="nextMonth" v-on:selectedDate="selectedDateInDatePicker" :month_summary="month_summary"  :forceUpdateDatePickerJAM="forceUpdateDatePickerJAM" ></DatePickerJAM>
+            <DatePickerJAM  :session_params="session_params" :required_day="required_day" :lock_dates="lock_dates" :calendar_date="calendar_date" v-on:prevMonth="prevMonth" v-on:nextMonth="nextMonth" v-on:selectedDate="selectedDateInDatePicker" :month_summary="month_summary"  :forceUpdateDatePickerJAM="forceUpdateDatePickerJAM" ></DatePickerJAM>
         </div>
 
   </div>
@@ -62,7 +61,7 @@ export default {
 
         form_minimum_date : null,
         form_required_date : null,
-        show_date_picker : false ,
+        show_date_picker : true ,
         calendar_date: null,
 
      //   state : { date: new Date()} ,
@@ -86,7 +85,7 @@ export default {
     },
    	components: { Datepicker },
 
-    props: ['required_day', 'session_params', 'lock_dates' ],
+    props: ['required_day', 'session_params',  ],
     emits: ['set_daterequired'] ,
 
 	created () {
@@ -108,7 +107,7 @@ export default {
         async getMonthSummary(date)
         {
             console.log("calendar Picker - GetMonthSummary:"+date)
-            console.log("calendar Picker - this.lock_dates :"+this.lock_dates)
+          
             let aux_start_date = new Date(date.getFullYear(),date.getMonth(), 1)
             if (aux_start_date.getDay()!=0) //because  getDay when sunday return 0
             {
@@ -137,9 +136,9 @@ export default {
            // MAKE A LIST ONLY INCLUDE DATES OF APPOINTMENTS
             let app_dates_filtered = response_json.data.appointments.map(app => new Date(app.date) )
            // MAKE A LIST ONLY INCLUDE DATES OF Lock Dates
-            let lock_dates = response_json.data.lock_days.map(app => new Date(app.date) )
-        
-            console.log("getMonthSummary lock_dates:"+JSON.stringify(lock_dates))
+            this.lock_dates = response_json.data.lock_days.map(app => new Date(app.date) )
+           
+            console.log("getMonthSummary lock_dates:"+JSON.stringify(this.lock_dates))
             console.log("getMonthSummary app_dates_filtered:"+JSON.stringify(app_dates_filtered))
            
            for (var d = new Date(aux_start_date); d.getTime() <= aux_end_date.getTime()   ; d.setDate(new Date(d).getDate() + 1)) 
@@ -147,7 +146,7 @@ export default {
                 console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
                 let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
                 
-                let isblock = lock_dates.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() && app.getFullYear() == d.getFullYear()   ) )
+                let isblock = this.lock_dates.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() && app.getFullYear() == d.getFullYear()   ) )
                 //let isblock = lock_dates.includes( d )
                 let val_bool = isblock.length > 0
 
@@ -232,6 +231,10 @@ export default {
             console.log("selected Date:"+date)   
             this.calendar_date = new Date( date ) 
             this.forceUpdateCalendar += 1      
+
+            this.getMonthSummary(this.calendar_date)  
+            this.forceUpdateDatePickerJAM = Math.random() 
+
             //this.show_date_picker = false 
         //this.$emit('set_daterequired', new Date(date) ) ;
         },
@@ -271,7 +274,7 @@ export default {
         {   
            console.log("calendar Picker - Next Month:"+date);
            //let aux_nextMonth = new Date(date)
-           let aux_nextMonth = new Date(date.getFullYear(),date.getMonth()+1 ,15  )
+           let aux_nextMonth = new Date(date.getFullYear(),date.getMonth()+1 ,date.getDate()  )
            //aux_nextMonth.setDate(aux_nextMonth.getDate() +31 ) 
            //this.calendar_date.setDate( this.calendar_date.getDate() + 31 )  
            console.log("calendar Picker - aux_Next Month:"+aux_nextMonth);
