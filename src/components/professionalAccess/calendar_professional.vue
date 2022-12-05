@@ -357,25 +357,7 @@ export default {
             showSocial : false ,
             calendar_active : null ,
             name : null ,
-           /*
-           time_start : null ,
-            time_end : null ,
-            duration : null ,
-            time_between : null ,
-            */
-/*
-            monday : null,
-            tuesday : null ,
-            wednesday : null ,
-            thursday : null,
-            friday : null ,
-            saturday : null ,
-            sunday : null, 
-*/
-/*
-            color : null ,
-            showColorSelection : false , 
-            */
+
         }   
     },
    	
@@ -383,67 +365,7 @@ export default {
     emits: ['updateCalendarList'],
 
 	created () {
-        this.resetForm()
-        /*
-        this.form_calendar_active =  this.calendar.active
-
-        this.specialty_code = this.calendar.specialty1 ; 
-
-        let aux_date_start = new Date(this.calendar.date_start) 
-        this.form_date_start =  aux_date_start.getFullYear()+"-"+String(aux_date_start.getMonth()+1).padStart(2,0)+"-"+String(aux_date_start.getDate()).padStart(2,0)  ;
-        let aux_date_end = new Date(this.calendar.date_end)
-        this.form_date_end   =  aux_date_end.getFullYear()+"-"+String(aux_date_end.getMonth()+1).padStart(2,0)+"-"+String(aux_date_end.getDate()).padStart(2,0)  ;
-       //SET TIME START & END 
-        let aux = this.calendar.start_time.split(':')
-        this.form_start_hour = aux[0]  
-        this.form_start_minutes = aux[1] 
-
-        let aux2 = this.calendar.end_time.split(':')
-        this.form_end_hour = aux2[0]  
-        this.form_end_minutes = aux2[1] 
-       
-
-        this.form_app_duration = this.calendar.duration  
-        this.form_app_time_between = this.calendar.time_between  
-
-        //color
-        this.form_calendar_color = this.calendar.color  ;
-        //Day Recurrency
-        this.form_recurrency_mon = this.calendar.monday  
-        this.form_recurrency_tue = this.calendar.tuesday 
-        this.form_recurrency_wed = this.calendar.wednesday 
-        this.form_recurrency_thu = this.calendar.thursday
-        this.form_recurrency_fri = this.calendar.friday 
-        this.form_recurrency_sat = this.calendar.saturday 
-        this.form_recurrency_sun = this.calendar.sunday 
-
-
-
-       
-       
-
-                
-        this.calendar_active = this.calendar.active      
-        this.name = this.calendar.name ;
-*/
-        //this.date_end = this.calendar.date_end.substring(0,10)  ;
-        //this.date_start = this.calendar.date_start.substring(0,10) ;2022-09-29T03:00:00.000Z
-        /*
-        this.start_time = this.calendar.start_time.substring(0,5)  ;
-        this.end_time = this.calendar.end_time.substring(0,5)  ;
-        */
-  /*      
-        this.monday = this.calendar.monday  ;
-        this.tuesday = this.calendar.tuesday  ;
-        this.wednesday = this.calendar.wednesday ;
-        this.thursday = this.calendar.thursday  ;
-        this.friday = this.calendar.friday  ;
-        this.saturday = this.calendar.saturday  ;
-        this.sunday = this.calendar.sunday  ;
-
-        this.color = this.calendar.color  ;
-*/
-        
+        this.resetForm()       
     },
 
 	methods :{
@@ -500,9 +422,12 @@ export default {
         
         formatDate(val)
         {
-            let aux_date=new Date(val);
-            let response= aux_date.getDate()+" de "+this.month_name[parseInt(aux_date.getMonth())]+" "+ aux_date.getFullYear()
-            return response
+            console.log("formatDate:"+val)
+          //  let aux_date= val.split("-") ;
+          //  let response= aux_date[0]+" de "+this.month_name[parseInt(aux_date[1])]+" "+ aux_date[2]
+          //  console.log("formatDate:"+response)
+          //  return response
+            return val
         },
 
         async deleteCalendar(){
@@ -528,41 +453,11 @@ export default {
         {   if (this.showEdit)
             { this.form_calendar_active=!this.form_calendar_active ; }
         },
-/*
-       
 
-        activateMonday()
-        {  if (this.showEdit)
-            { this.monday=!this.monday ; }
-        },
-        activateTuesday()
-        {  if (this.showEdit)
-            { this.tuesday=!this.tuesday ; }
-        },
-        activateWednesday()
-        {  if (this.showEdit)
-            { this.wednesday=!this.wednesday ; }
-        },
-        activateThursday()
-        {  if (this.showEdit)
-            { this.thursday=!this.thursday ; }
-        },
-        activateFriday()
-        {  if (this.showEdit)
-            { this.friday=!this.friday ; }
-        },
-        activateSaturday()
-        {  if (this.showEdit)
-            { this.saturday=!this.saturday ; }
-        },
-        activateSunday()
-        {  if (this.showEdit)
-            { this.sunday=!this.sunday;  }
-        },
-*/
         resetForm()
         {
-         this.form_calendar_active =  this.calendar.active
+       
+        this.form_calendar_active =  this.calendar.active
 
         this.specialty_code = this.calendar.specialty1 ; 
 
@@ -593,20 +488,18 @@ export default {
         this.form_recurrency_fri = this.calendar.friday 
         this.form_recurrency_sat = this.calendar.saturday 
         this.form_recurrency_sun = this.calendar.sunday 
-
-
-
-
-       
-       
-
                 
         this.calendar_active = this.calendar.active      
         this.name = this.calendar.name ;
 
+        console.log("calendar_professional :  this.calendar.date_start : "+ this.calendar.date_start )
+        console.log("calendar_professional :  this.calendar.date_end   : "+ this.calendar.date_end   )
+        
+        console.log("calendar_professional :  this.form_date_start : "+  this.form_date_start )
+        console.log("calendar_professional :  this.form_date_end   : "+  this.form_date_end   )
         },
 
-         evaluateCalendarStatus(date_end)
+        evaluateCalendarStatus(date_end)
         {
           let aux_date_end=new Date(date_end);
           let aux_date_current = new Date ();
@@ -637,13 +530,14 @@ export default {
             if (r == true) {
 
                 let end_date_corrected = new Date(this.form_date_end)
-                end_date_corrected.setHours(0,0,0,0)
+                end_date_corrected.setHours(24,0,0,0)
+                end_date_corrected = new Date(end_date_corrected.getTime()-3)
                 //one milisecond to dont reach next day
-                var day = (60 * 60 * 24 * 1000 )-1000;
-                end_date_corrected = new Date(end_date_corrected.getTime() + (day*2) )  
+               // var day = (60 * 60 * 24 * 1000 )-1000;
+               // end_date_corrected = new Date(end_date_corrected.getTime() + (day*2) )  
                 
                 let start_date_corrected = new Date(this.form_date_start)
-                start_date_corrected.setHours(24,0,0,0)
+                start_date_corrected.setHours(0,0,0,0)
 
                   const json = { 
                    
