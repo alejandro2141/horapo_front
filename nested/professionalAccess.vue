@@ -17,7 +17,7 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
 <template>
 <div>
     
-    <ProfesionalGeneralHeader :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
+    <ProfesionalGeneralHeader v-on:setTodayDateFromHeader='setTodayDateFromHeader' :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
     
     
     <div class='m-0'>
@@ -41,7 +41,7 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
         
         <transition>
         <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style=""  class=" bg-white">
-            <TabAppointment  :key="forceRender" :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
+            <TabAppointment :forceUpdateTabAppointment="forceUpdateTabAppointment" :setTodayDate="setTodayDate" :key="forceRender" :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
         </div>
         </transition>
 
@@ -122,6 +122,9 @@ export default {
         forceRender:0 ,
 
          showme: false ,
+
+         setTodayDate : null  ,
+         forceUpdateTabAppointment : 0 ,
        
     }
   },
@@ -138,8 +141,12 @@ created() {
 },
 
 methods: {
+    setTodayDateFromHeader(dateObj)
+    {   console.log("setTodayDateFromHeader in professionalAccess")
+        this.setTodayDate = dateObj
+        this.forceUpdateTabAppointment=Math.random() 
+    },
     
-
     switchViewTo(val)
     {
         console.log("switchViewTo:"+val);
