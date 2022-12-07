@@ -337,7 +337,7 @@ export default {
             show_timebtw_minutes : false ,
             form_app_time_between : '00' ,
 
-            calendarColorArray : ["#FCFFE9","#FFF2CC","#CAEFD1", "#FDE0D9", "#CAF4F4", "#cbc9e1"],
+            calendarColorArray : ["#FF0000","#00FF00","#0000FF", "#FFE800", "#00ECFF", "#273030"],
 
             form_calendar_color : null ,
 
@@ -418,16 +418,15 @@ export default {
         // this.form_calendar_end=aux_date.getDate()+"/"+(aux_date.getMonth()+1)+"/"+ aux_date.getFullYear()
             this.show_date_end = false
         },
-
         
         formatDate(val)
         {
             console.log("formatDate:"+val)
-          //  let aux_date= val.split("-") ;
-          //  let response= aux_date[0]+" de "+this.month_name[parseInt(aux_date[1])]+" "+ aux_date[2]
+            let aux_date= new Date(val) ;
+            let response= aux_date.getDate()+" de "+this.month_name[aux_date.getMonth()]+" "+ aux_date.getFullYear()
           //  console.log("formatDate:"+response)
           //  return response
-            return val
+            return response
         },
 
         async deleteCalendar(){
@@ -459,12 +458,16 @@ export default {
        
         this.form_calendar_active =  this.calendar.active
 
-        this.specialty_code = this.calendar.specialty1 ; 
+        this.specialty_code = this.calendar.specialty1  
 
         let aux_date_start = new Date(this.calendar.date_start) 
-        this.form_date_start =  aux_date_start.getFullYear()+"-"+String(aux_date_start.getMonth()+1).padStart(2,0)+"-"+String(aux_date_start.getDate()).padStart(2,0)  ;
+        //this.form_date_start =  aux_date_start.getFullYear()+"-"+String(aux_date_start.getMonth()+1).padStart(2,0)+"-"+String(aux_date_start.getDate()).padStart(2,0)  ;
+        this.form_date_start = this.calendar.date_start 
+
         let aux_date_end = new Date(this.calendar.date_end)
-        this.form_date_end   =  aux_date_end.getFullYear()+"-"+String(aux_date_end.getMonth()+1).padStart(2,0)+"-"+String(aux_date_end.getDate()).padStart(2,0)  ;
+        //this.form_date_end   =  aux_date_end.getFullYear()+"-"+String(aux_date_end.getMonth()+1).padStart(2,0)+"-"+String(aux_date_end.getDate()).padStart(2,0)  ;
+       this.form_date_end = this.calendar.date_end
+       
        //SET TIME START & END 
         let aux = this.calendar.start_time.split(':')
         this.form_start_hour = aux[0]  
