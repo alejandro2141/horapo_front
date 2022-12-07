@@ -143,6 +143,7 @@ export default {
            
            for (var d = new Date(aux_start_date); d.getTime() <= aux_end_date.getTime()   ; d.setDate(new Date(d).getDate() + 1)) 
             {
+
                 console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
                 let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
                 
@@ -151,7 +152,7 @@ export default {
                 let val_bool = isblock.length > 0
 
                 //CHECK if Day is active in calendar list
-                let calendars_active_day = response_json.data.calendars.filter(cal => (new Date(cal.date_start).getTime() < d.getTime()  && new Date(cal.date_end).getTime() > d.getTime()  )    );
+                let calendars_active_day = response_json.data.calendars.filter(cal => (new Date(cal.date_start).getTime() <= d.getTime()  && new Date(cal.date_end).getTime() > d.getTime()  )    );
                 
                 //Cicle for each Calendar  to check id day is active : Mon tue wed thu fri sat sun
                 let calendars_active = []
@@ -176,6 +177,8 @@ export default {
                         calendar_colors : calendars_active
                     }
                 this.month_summary.push(structure_day)
+
+
             }
           
             this.forceUpdateDatePickerJAM = Math.random() 
