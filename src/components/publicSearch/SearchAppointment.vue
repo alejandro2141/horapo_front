@@ -38,7 +38,8 @@ import SuggestedSearch from './SuggestedSearch.vue'
             <div ref="scrollToMe"></div>
 
           <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
-                  En {{metric_search/1000}} Seg encontramos {{n_appointments_found }} resultados para ti. 
+                 <!-- {{metric_search/1000}} Seg,  {{n_appointments_found }} resultados en los proximos 40 dias.  -->
+                 {{n_appointments_found }} resultados en los proximos 40 dias
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                   -->
                   <hr >
