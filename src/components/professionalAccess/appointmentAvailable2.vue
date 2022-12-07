@@ -6,9 +6,12 @@ import axios from 'axios';
 <template>
             
             
-                <div class="d-flex justify-content-start border border-2"  :class="{ 'border-primary': selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 35px; border-top-right-radius: 25px;">
-                                               
-                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment)"  class="p-2 " :class="{'bg-primary':selectApp ,'text-white':selectApp   }" style="border-bottom-left-radius: 35px;"  >
+                <div class="d-flex justify-content-start border border-1"  :class="{ 'border-primary': selectApp }"  style="background-color: #fff;  border-bottom-right-radius: 25px; border-top-right-radius: 25px;">
+                            <div  class="p-1" :style="[ {'background-color' : calendar_data.color}]" >
+                                
+                            </div>
+
+                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment)"  class="p-2 " :class="{'bg-primary':selectApp ,'text-white':selectApp   }"   >
                             
                             <text class="fs-3 fw-light"> {{getLocalTime()}} </text><br>
                             <!--
@@ -22,25 +25,31 @@ import axios from 'axios';
                             
                         </div>
                           
-                            
-                        <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : calendar_data.color} , (days_expired ) ? { 'background-color': '#eee'  }:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
-                               
-                                <div  @click="selectApp=!selectApp; $emit('addToBlockList',appointment)" class="w-100 text-dark display-6 p-2" :class="{ 'text-white' : appointment.lock_day}"  style=""  >
-                                    <div class=""  >
-                                        <text class="" ><small>  {{specialty_data.name}} </small> </text>
-                                    </div>  
+                        <div class="d-flex justify-content-start" > 
+                          <!--
+                            <div  class="p-1" :style="[ {'background-color' : calendar_data.color}]" >
                                 
-                                    <div class="">
-                                        <text class="" > 
-                                            <small> <small> {{center_data.name}} </small> </small>
-                                        </text>
-                                    </div>
-                                </div>    
+                            </div>
+                          -->
+                            <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : '#FFF'} , (days_expired ) ? { 'background-color': '#eee'  }:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;border-bottom-right-radius: 25px; " >       
                                 
-                                <div @click="$emit('displayModalAppAvailable', center_data )"  style="background-color: #ffff ; opacity: 0.5;  border-top-right-radius:25px" >
-                                    <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-primary"  ></i> 
-                                </div>   
-                        </div>    
+                                    <div  @click="selectApp=!selectApp; $emit('addToBlockList',appointment)" class="w-100 text-dark display-6 p-2" :class="{ 'text-white' : appointment.lock_day}"  style=""  >
+                                        <div class=""  >
+                                            <text class="" ><small>  {{specialty_data.name}} </small> </text>
+                                        </div>  
+                                    
+                                        <div class="">
+                                            <text class="" > 
+                                                <small> <small> {{center_data.name}} </small> </small>
+                                            </text>
+                                        </div>
+                                    </div>    
+                                    
+                                    <div @click="$emit('displayModalAppAvailable', center_data )"  style="background-color: #ffff ; opacity: 0.5;  border-top-right-radius:25px" >
+                                        <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-primary"  ></i> 
+                                    </div>   
+                            </div> 
+                        </div>     
                              
                 </div>
               
