@@ -17,17 +17,22 @@ import LoadProgress from '../loadProgress.vue'
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
+            <text>Horas disponibles mas proximas:</text>
             <div v-for="day in array_appointments" :key="day.id" >
-                    <p class=" mt-4"> <text class="h5"> {{format_date(day.date)}}  </text> </p>
                     
-                    <div v-if="day.appointments != null && day.appointments.length >0 ">
-                        <div  v-for="app in day.appointments" :key="app.id" class="mt-0 " > 
-                                <patientAppointmentAvailable   :center_data="getCenterData(day.centers,app.center_id)"    :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app,day.centers)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
-                        </div>
-                    </div>
+                    <div v-if="day.appointments != null && day.appointments.length >0" >
 
-                    <div v-else class="m-0 p-0">
-                      <p class="text-center" > <i style="font-size: 10vw;" class="m-0 p-0 bi bi-wind"></i>Sin Horas Disponibles </p>
+                            <p class=" mt-4"> <text class="h5"> {{format_date(day.date)}}  </text> </p>
+                            
+                            <div v-if="day.appointments != null && day.appointments.length >0 ">
+                                <div  v-for="app in day.appointments" :key="app.id" class="mt-0 " > 
+                                        <patientAppointmentAvailable   :center_data="getCenterData(day.centers,app.center_id)"    :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app,day.centers)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                                </div>
+                            </div>
+
+                            <div v-else class="m-0 p-0">
+                            <p class="text-center" > <i style="font-size: 10vw;" class="m-0 p-0 bi bi-wind"></i>Sin Horas Disponibles </p>
+                            </div>
                     </div>
 
             </div>
