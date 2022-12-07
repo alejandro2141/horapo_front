@@ -9,7 +9,7 @@ import SwitchViewButton from './switchViewButton.vue'
 	<div>
 
 
-	<div v-if="session_params['professional_name'] != null"  class="text-white d-flex pt-2 pb-2 justify-content-around bg-secondary" :class="{ 'bg-dark': !showTopMenu }" > 
+	<div v-if="session_params['professional_name'] != null"  class="text-white d-flex pt-0 pb-2 justify-content-around bg-secondary" :class="{ 'bg-dark': !showTopMenu }" > 
 
 		<text >	
 			<i v-if="showTopMenu" class="fs-4 bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
@@ -21,9 +21,34 @@ import SwitchViewButton from './switchViewButton.vue'
 		<text>
 			<text v-if="showTopMenu" class="text-white-50">  </text>
 		</text>
-		<text>
-			<text v-if="showTopMenu" class="text-white-50"> </text>
-		</text>
+
+		<!-- DAY CALENDAR -->
+		<div @click="setToday(dateObj)" >
+			<div class="w-100 d-flex justify-content-around">
+				<div class="bg-danger " style=" width:3px;  height:3px"  >
+						
+				</div>
+			
+				<div class="bg-danger " style=" width:3px;  height:3px" >
+					
+				</div>
+				
+			</div>
+			<div  v-if="showTopMenu" class="bg-danger border border-2 border-danger" style="border-radius:5px; ">
+
+				<div class="bg-danger" style="border-radius:5px; ">
+					<text class=""   >   </text>
+					<!-- /{{month_name[month]}} -->
+				</div>
+
+				<div class="bg-secondary  mt-1 " style="border-bottom-left-radius:5px;  border-bottom-right-radius:5px" >
+					<text class=""  > &nbsp; {{this.day}} &nbsp;  </text>
+					<!-- /{{month_name[month]}} -->
+				</div>
+			</div>
+		</div>
+		
+
 		<text>
 			<text v-if="showTopMenu" class="text-white-50"> </text>
 		</text>
@@ -190,23 +215,33 @@ export default {
 			year : null ,
 
 			transitionHigth : 0 ,
+			month_name : ["Ene","Feb","Marz","Abr","May","Jun","Jul","Ago","Sept","Oct","Nov","Dic"] ,
+
+			dateObj : null 
+
         }   
     },
-    props : ['session_params', 'active_tutorial'] ,
-	emits : ['switchView', 'switchViewTo' ]  ,
+    props : ['session_params', 'active_tutorial' ] ,
+	emits : ['switchView', 'switchViewTo' , 'setTodayDateFromHeader'  ]  ,
 
  	mounted () {
-            var dateObj = new Date();
-			this.month = dateObj.getUTCMonth() + 1; //months from 1-12
-			this.day = dateObj.getUTCDate();
-			this.year = dateObj.getUTCFullYear();
+            this.dateObj = new Date();
+			this.month = this.dateObj.getMonth() ; //months from 1-12
+			this.day = this.dateObj.getDate();
+			this.year = this.dateObj.getFullYear();
     },
 
     methods: {
+		setToday(dateObj)
+		{   
+			console.log("setToday in ProfessionalGeneralHeader")
+			this.$emit('setTodayDateFromHeader',dateObj );
+		},
+
 		getMonthName(month)
 		{	
 			let month_name = ["Ene","Feb","Marz","Abr","May","Jun","Jul","Ago","Sept","Oct","Nov","Dic"]
-			return month_name[month-1] ; 
+			return month_name[month] ; 
 
 		},
 
