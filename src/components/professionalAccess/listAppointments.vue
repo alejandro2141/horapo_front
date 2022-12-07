@@ -53,7 +53,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                 <div class="m-1">
 
                     <div v-if="hour.app_available != null"  >
-                        
+                      
                         <div v-if="hour.app_available">
                             <AppointmentAvailable v-on:addToBlockList="addToBlockList"  v-on:displayModalAppAvailable="displayModalAppAvailable(hour)" :days_expired="days_expired" :appointment='hour' :specialty_data="appointments_data.specialties.find(elem => elem.id ==  hour.specialty  )" :center_data="appointments_data.centers.find(elem => elem.id ==  hour.center_id  )" :calendar_data="appointments_data.calendars.find(elem => elem.id ==  hour.calendar_id  )"  :session_params='session_params' > </AppointmentAvailable>
                         </div>
@@ -305,7 +305,7 @@ export default {
         },
 
         async  sendLock(hour)
-            {
+        {
               console.log("professional_send Lock");
               if (this.hours_block_list !=null && this.hours_block_list.length > 0   )
               {
@@ -350,7 +350,6 @@ export default {
                                 this.$emit('updateAppointmentList');
                                 }
               }
-
               this.hours_block_list = []
 
         },
