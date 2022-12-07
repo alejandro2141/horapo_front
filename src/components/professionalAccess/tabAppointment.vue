@@ -82,9 +82,11 @@ data: function () {
 
             calendar_summary_date : null,
             forceUpdateCalendarSummary : 0,
+
+            dateRequiredFromHeader : null ,
 		 }
 	},
-	props: ['session_params','global_specialties', 'global_comunas' ],
+	props: ['session_params','global_specialties', 'global_comunas' , 'forceUpdateTabAppointment', 'setTodayDate'  ],
   emits: ['switchView','switchToCenters' ] ,
     
     created () {
@@ -198,34 +200,6 @@ data: function () {
           this.active_spinner = false ;  
 		    },
 
-/*
-        async updateBlockDays() {
-           
-              const json = { 
-               // date :  aux_dateRequired ,
-                professional_id : this.session_params.professional_id , 
-                    };
-            
-              console.log ("professional_get_lock_days REQUEST :"+ JSON.stringify(json)  );
-              let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_lock_days",json);
-              console.log ("/professional_get_lock_days RESPONSE:"+JSON.stringify(response_json.data)) ;
-              //this.updateCalendarsMarks();
-              
-              if (response_json.data != null)
-              {
-                this.lock_dates = response_json.data
-              }
-              else
-              {
-                 this.lock_dates = []
-              }
-         
-              this.lock_dates = this.lock_dates.map(x => x.date );
-              console.log("this.lock_dates:"+JSON.stringify(this.lock_dates));
-        
-        },
-        */
-
         setDayStatics(appointments_data)
         {
       
@@ -241,13 +215,23 @@ data: function () {
                         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/rofessional_get_calendars",json);
                         this.calendars_marks = response_json.data.rows;
                         //console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
-        },	
-
-
-
-
+        },
+        
   },
 
+ watch : {
+        setTodayDate(dayObj)
+        {
+          console.log("setTodayDate in tab appointment:"+dayObj)
+         
+        },
+        forceUpdateTabAppointment(number)
+        {
+          console.log("Force Update Appointment:"+number)
+          this.set_daterequired(new Date())
+        }
+      
+      },
   
 
 }
