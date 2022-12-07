@@ -604,7 +604,7 @@ data: function () {
             form_app_time_between : 0 ,
 
             form_calendar_color : "#FCFFE9" ,
-            calendarColorArray : ["#FCFFE9","#FFF2CC","#CAEFD1", "#FDE0D9", "#CAF4F4", "#cbc9e1"],
+            calendarColorArray : ["#FF0000","#00FF00","#0000FF", "#FFE800", "#00ECFF", "#273030"],
            
             form_recurrency_mon : false  , 
             form_recurrency_tue : false , 
