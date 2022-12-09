@@ -7,21 +7,35 @@ import axios from 'axios';
 <template>
 <div>
    
-    <div class=" m-3  border border-3  border-secondary  bg-white bg-opacity-75 text-secondary" style="border-radius: 15px; background-color:#eee " >
+    <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-secondary':show_days  }" style="border-radius: 15px; background-color:#eee " >
            <div class="display-5">
                 <small><small>
                     
                     <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
-                        <text style="font-size:1.7em" class="pt-2 mb-0" @click="prevMonth(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
+                        <text v-if="show_days" style="font-size:1.7em" class="pt-2 mb-0" @click="prevMonth(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
                         <text class="pt-3 mb-0" > {{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}}  </text> 
-                        <text style="font-size:1.7em" class="pt-2 mb-0" @click="nextMonth(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
+                        <text v-if="show_days" style="font-size:1.7em" class="pt-2 mb-0" @click="nextMonth(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
                     </div>
                   
                 </small></small>
             </div>
+
+            <div v-if="!show_days" class="display-5">
+                <small><small>
+                    
+                    <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
+                        <text style="font-size:1.7em" class="pt-2 mb-0" @click="prevDay(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
+                        <text class="pt-3 mb-0" > {{ calendar_date.getDate() }}  </text> 
+                        <text style="font-size:1.7em" class="pt-2 mb-0" @click="nextDay(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
+                    </div>
+                  
+                </small></small>
+            </div>
+
+
         <hr class="b-0 m-0">
         
-        <table class=" table " style="border-radius: 15px;" >
+        <table v-if="show_days" class=" table " style="border-radius: 15px;" >
             <tbody>
                  <tr class="h6 text-dark">
                     <td colspan="2" class="">L</td>
@@ -129,8 +143,14 @@ import axios from 'axios';
             </tbody>
         </table> 
         
-        <text class="h2 text-primary">
-            <i @click="swLock(calendar_date)" class="bi bi-unlock-fill"></i>    
+        <text class="h2 text-primary d-flex justify-content-between m-2" >
+            <text></text>   
+            <i @click="swLock(calendar_date)" class="bi bi-unlock-fill"></i>     
+         
+         
+            <text >
+             <i @click="show_days = !show_days" class="bi bi-calendar3 " style="font-size: 1.1em;" ></i>
+            </text>
         </text>
 
     </div>   
@@ -157,12 +177,13 @@ export default {
         week5 : [] ,
         week5 : [] ,     
         week6 : [] ,   
-
-            
+    
         day_names : ['D','L','M','Mi','J','V','S'] ,
         month_names : ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
-        month_full_names : ['ENERO','FEBRERO','MARZO','ABRRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE']
-            
+        month_full_names : ['ENERO','FEBRERO','MARZO','ABRRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'] ,
+        
+        show_days : false ,
+
             }   
     },
    	
@@ -251,6 +272,16 @@ export default {
             {
                 let next_month_date = new Date(date.getFullYear(),date.getMonth()+1, date.getDate()  )
                 this.$emit('selectedDate', next_month_date ) ;
+            },
+            nextDay(date)
+            {
+                let next_day = new Date(date.getFullYear(),date.getMonth(), date.getDate()+1  )
+                this.$emit('selectedDate', next_day ) ;
+            },
+            prevDay(date)
+            {
+                let prev_day = new Date(date.getFullYear(),date.getMonth(), date.getDate()-1  )
+                this.$emit('selectedDate', prev_day ) ;
             },
             dayPicked(day)
             {
