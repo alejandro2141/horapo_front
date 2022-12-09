@@ -42,7 +42,7 @@ import SwitchViewButton from './switchViewButton.vue'
 				</div>
 
 				<div class="bg-white  mt-1 " style="border-bottom-left-radius:5px;  border-bottom-right-radius:5px" >
-					<text class="text-danger"  > &nbsp; {{this.day}} &nbsp;  </text>
+					<text class="text-danger"  > &nbsp; {{day}} &nbsp;  </text>
 					<!-- /{{month_name[month]}} -->
 				</div>
 			</div>
