@@ -7,7 +7,7 @@ import axios from 'axios';
 <template>
 <div>
    
-    <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-secondary':show_days  }" style="border-radius: 15px; background-color:#eee " >
+    <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-primary':show_days  }" style="border-radius: 15px; background-color:#eee " >
            <div class="display-5">
                 <small><small>
                     
