@@ -85,7 +85,7 @@ export default {
     },
    	components: { Datepicker },
 
-    props: ['required_day', 'session_params',  ],
+    props: ['required_day', 'session_params', 'forceUpdateCalendarPickerMin' ,'daterequired' ],
     emits: ['set_daterequired'] ,
 
 	created () {
@@ -186,54 +186,7 @@ export default {
         console.log("calendar Picker - month_summary this.month_summary :"+JSON.stringify(this.month_summary))
 
         },
-/*
-        async updateWeekSummary(date)
-        {
-            let aux_start_date = new Date(date)
-            aux_start_date.setDate( aux_start_date.getDate()   )
-            
-            let aux_end_date =   new Date(aux_start_date);
-            aux_end_date.setDate( aux_end_date.getDate() + 7  )
 
-
-            //aux_end_date.setDate( aux_end_date.getDate() + (7 - aux_end_date.getDay() ) ) 
-            //let aux_end_date = new Date( aux_start_date.getTime() + (86400000*7) )
-            const json = { 
-                    professional_id : this.session_params.professional_id , 
-                    start_date : aux_start_date,
-                    end_date : aux_end_date,
-                    };
-            //first Get Appointments between two dates
-            console.log ("calendar Picker Week - professional_get_month_summary REQUEST :"+ JSON.stringify(json)  ) 
-            let response_json =  await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_month_summary",json) 
-            console.log ("calendar Picker Week - professional_get_month_summary RESPONSE: "+JSON.stringify(response_json.data))
-            //clean Month Summary
-            this.week_summary = [] 
-            
-           // let day_names =['D','L','M','Mi','J','V','S']
-           // let month_names =['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC']
-            // create a filtered list includin only dates of appointments
-            let app_dates_filtered = response_json.data.appointments.map(app => new Date(app.date) )
-
-
-            console.log("app_dates_filtered:"+JSON.stringify(app_dates_filtered))
-           
-           for (var d = new Date(aux_start_date); d.getTime() <= aux_end_date.getTime()   ; d.setDate(new Date(d).getDate() + 1)) 
-            {
-                console.log("Searching  d:"+d.toISOString()+" d.Time:"+d.getTime()+" in array:"+JSON.stringify(app_dates_filtered))
-                let nfound =  app_dates_filtered.filter(app => ( app.getDate() == d.getDate()  && app.getMonth() == d.getMonth() ) ) 
-         
-                const structure_day = {
-                        date : new Date(d),  
-                        reserved : nfound.length , 
-                        today : false ,
-                        selected : false, 
-                    }
-                this.week_summary.push(structure_day)
-            }
-
-        },
-*/
 
         dayContent(date)
         {   
@@ -251,10 +204,12 @@ export default {
         { 
             console.log("selected Date:"+date)   
             this.calendar_date = new Date( date ) 
-            this.forceUpdateCalendar += 1      
+            this.forceUpdateCalendar += 1     
 
             this.getMonthSummary(this.calendar_date)  
             this.forceUpdateDatePickerJAM = Math.random() 
+
+            this.$emit('set_daterequired', this.calendar_date ) ;
 
             //this.show_date_picker = false 
         //this.$emit('set_daterequired', new Date(date) ) ;
@@ -316,12 +271,21 @@ export default {
     },
 
    watch: {
+            
             forceUpdateCalendar(newValue)
             {
                 this.forceUpdateCalendarSummary = Math.random()
                 //let new_dateRequired= this.calendar_date  ;
                 this.$emit('set_daterequired', this.calendar_date ) ;
+            },
+
+            forceUpdateCalendarPickerMin(newValue) 
+            {
+                console.log("setDayFromHeader calendarPickerMInimal2: "+this.daterequired)
+                this.calendar_date=this.daterequired
+                this.getMonthSummary(this.daterequired)
             }
+
         },
 
 }
