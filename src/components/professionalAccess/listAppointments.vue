@@ -26,11 +26,15 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
     <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
 
+        
         <div >
             <div v-if="!isLockDay" >
-                &nbsp; <i v-if="!days_expired" class=" fs-1 bi bi-unlock " :class="{'text-primary': hours_block_list.length >0 }"  @click="sendLock()"> </i> 
+                &nbsp; <i v-if="hours_block_list.length>0" class=" fs-1 bi bi-unlock " :class="{'text-primary': hours_block_list.length >0 }"  @click="sendLockHours()"> </i> 
             </div>
         </div>
+        
+
+        <div></div>
 
         <div class="d-flex justify-content-around" >
                 <small>
@@ -74,6 +78,8 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
                 </div>
         </div>
+
+         
     </div>
 
   
@@ -239,7 +245,8 @@ export default {
             this.isLockDay = newValue.lock_date
             console.log("Is a Lock Date ?  :"+ this.isLockDay );
 
-           this.run_filter();
+           this.run_filter()
+           this.hours_block_list = [] 
         },
 
 
@@ -302,6 +309,31 @@ export default {
         filterReserved(apps)
         {   
          this.filteredAppList =  apps.filter(app => app.app_blocked !=1 && app.app_available == false   )
+        },
+
+        async  sendLockHours(hour)
+        {    
+              console.log("sendLockHours ");
+              if (this.hours_block_list !=null && this.hours_block_list.length > 0   )
+              {
+                var r = confirm("Esta seguro que desea bloquear estas Horas? Pacientes no podran agendar horas en este dia");               
+                             if (r == true) {
+                                const json = {  
+                                    token: 'apsfdnwe', 
+                                    appointment_date : this.daterequired ,                         
+                                    lock_apps :   this.hours_block_list , 
+                                    professional_id  : this.session_params.professional_id 	, 
+                                };
+
+                                console.log ("professional_lock_apps  REQUEST :"+ JSON.stringify(json)  );
+                                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_block_appointments",json );
+                                //console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
+                                console.log ("RESPONSE professional_lock_apps :"+JSON.stringify(response_json)) ;
+                                //this.appointment_confirm = response_json.data ;
+                                this.$emit('updateAppointmentList');
+                                }  
+                this.hours_block_list = []   
+              }
         },
 
         async  sendLock(hour)
