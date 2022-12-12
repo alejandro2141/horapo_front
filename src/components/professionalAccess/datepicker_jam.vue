@@ -8,24 +8,30 @@ import axios from 'axios';
 <div>
    
     <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-primary':show_days  }" style="border-radius: 15px; background-color:#eee " >
-           <div class="display-5">
+            <div class="display-5">
                 <small><small>
                     
                     <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
                         <text v-if="show_days" style="font-size:1.7em" class="pt-2 mb-0" @click="prevMonth(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
-                        <text class="pt-3 mb-0" > {{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}}  </text> 
+                        <text @click="show_days = !show_days"  class="pt-3 mb-0 text-primary" >   <i  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i> {{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}}  </text> 
                         <text v-if="show_days" style="font-size:1.7em" class="pt-2 mb-0" @click="nextMonth(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
                     </div>
                   
                 </small></small>
             </div>
 
-            <div v-if="!show_days" class="display-5">
+            <div v-if="!show_days" class="display-5 text-primary">
                 <small><small>
                     
                     <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
                         <text style="font-size:1.7em" class="pt-2 mb-0" @click="prevDay(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
-                        <text class="pt-3 mb-0" > {{ calendar_date.getDate() }}  </text> 
+                            <text @click="show_days = !show_days" class="pt-3 mb-0" >
+                                {{day_long_names[calendar_date.getDay()] }} 
+                                {{ calendar_date.getDate() }}  
+                               
+                             
+                            
+                            </text> 
                         <text style="font-size:1.7em" class="pt-2 mb-0" @click="nextDay(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
                     </div>
                   
@@ -143,14 +149,18 @@ import axios from 'axios';
             </tbody>
         </table> 
         
-        <text class="h2 text-primary d-flex justify-content-between m-2" >
-            <text></text>   
-            <i @click="swLock(calendar_date)" class="bi bi-unlock-fill"></i>     
-         
-         
+        <text class="h2 text-primary d-flex justify-content-end m-2" >
+          
+
+            <i @click="swLock(calendar_date)" class="bi bi-unlock-fill opacity-50"></i>     
+
+           <text class="m-2" ></text>
+        <!--
             <text >
-             <i @click="show_days = !show_days" class="bi bi-calendar3 " style="font-size: 1.1em;" ></i>
+                 <i v-if="show_days" @click="show_days = !show_days" class="bi bi-calendar-x  " style="font-size: 1.1em;" ></i>
             </text>
+            -->
+        
         </text>
 
     </div>   
@@ -181,7 +191,8 @@ export default {
         day_names : ['D','L','M','Mi','J','V','S'] ,
         month_names : ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
         month_full_names : ['ENERO','FEBRERO','MARZO','ABRRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'] ,
-        
+        day_long_names : [ 'Domingo', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado' ],
+
         show_days : false ,
 
             }   
