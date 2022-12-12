@@ -9,8 +9,8 @@ import axios from 'axios';
    
     <div class="d-flex justify-content-between mt-3">
         
-         <i class="bi bi-person-circle display-1 "></i> 
-           <p class="h4 text-center  mt-3 "> Su Información </p> 
+         <i class="bi bi-person-bounding-box display-1 "></i>
+           <p class="h4 text-center  mt-3  "> Su Información </p> 
            <text></text>        
     <!--     <i class="display-1 bi bi-x-lg ml-0 text-primary"   aria-label="Close" v-on:click="closeTabUserConfig()" ></i> 
     -->
@@ -20,35 +20,35 @@ import axios from 'axios';
        
    
     </p>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between m-1">
             <text>Nombre</text> 
             <text>{{ professional_data.name }} </text> 
         </div>
-         <div class="d-flex justify-content-between">
+         <div class="d-flex justify-content-between m-1">
             <text>Numero Doc</text> 
             <text>{{ professional_data.document_number }} </text> 
         </div>
-         <div class="d-flex justify-content-between">
+         <div class="d-flex justify-content-between m-1">
             <text>License_number </text> 
             <text> {{ professional_data.license_number }}</text> 
         </div>
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between m-1">
             <text>Dirección Personal </text> 
             <text> {{ professional_data.address }}</text> 
         </div>
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between m-1">
             <text>Información Certificada Professional </text> 
             <text>  -- </text> 
         </div>
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between  m-1">
             <text>Teléfono  </text> 
             <text>  {{ professional_data.phone }}  </text> 
         </div>
 
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between m-1">
             <text>Status </text> 
             <text> {{ professional_data.active }} </text> 
         </div>
@@ -56,7 +56,7 @@ import axios from 'axios';
 
         
 
-        <div class="d-flex justify-content-between"> 
+        <div class="d-flex justify-content-between  m-1"> 
 
             <a class="mt-4 text-white" target="_blank" rel="noopener noreferrer" :href="'/nested/publicSiteProfessional.html?prof_id='+professional_data.id">Ver Su Sitio Profesional</a>
             <text class="">
