@@ -79,6 +79,8 @@ export default {
         month_summary : [] ,
         week_summary : [] ,
 
+        lock_dates : [],
+
       //  week_summary : true, 
 
         }   
