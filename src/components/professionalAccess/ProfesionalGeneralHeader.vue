@@ -18,12 +18,18 @@ import SwitchViewButton from './switchViewButton.vue'
 		<text>
 			<text v-if="showTopMenu" class="text-white-50">  </text>
 		</text>
-		<text>
+		
+
+		<div v-if="showTopMenu" >
+			<i @click="switchViewTo(5)" class="bi bi-clock-history display-5"></i>
+		</div>
+		
+		<text  >
 			<text v-if="showTopMenu" class="text-white-50">  </text>
 		</text>
 
 		<!-- DAY CALENDAR -->
-		<div @click="setToday(dateObj)" >
+		<div v-if="showTopMenu" @click="setToday(dateObj)" >
 			<div class="w-100 d-flex justify-content-around">
 				<div class="bg-white " style=" width:3px;  height:3px"  >
 						
@@ -222,7 +228,7 @@ export default {
         }   
     },
     props : ['session_params', 'active_tutorial' ] ,
-	emits : ['switchView', 'switchViewTo' , 'setTodayDateFromHeader'  ]  ,
+	emits : ['switchView', 'switchViewTo' , 'setTodayDateFromHeader' ,'showAppointmentsTakenList' ]  ,
 
  	mounted () {
             this.dateObj = new Date();
@@ -232,6 +238,12 @@ export default {
     },
 
     methods: {
+		showAppointmentsTakenList()
+		{
+			console.log("showAppointmentsTakenList")
+			this.$emit('showAppointmentsTakenList' );
+		},
+
 		setToday(dateObj)
 		{   
 			console.log("setToday in ProfessionalGeneralHeader")
