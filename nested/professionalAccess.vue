@@ -8,8 +8,10 @@ import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
 import TabCenter from '../src/components/professionalAccess/tabCenter_dark.vue'
 import TabAppointment from '../src/components/professionalAccess/tabAppointment.vue'
 import TabTimeTable from '../src/components/professionalAccess/tabTimeTable.vue'
-import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vue'
+import TabUserConfig from   '../src/components/professionalAccess/tabUserConfig.vue'
 
+import TabListAppTaken from   '../src/components/professionalAccess/tabAppointmentsListReserved.vue'
+//import TabListAppTaken from '../src/components/professionalAccess/tabAppointmetsListReserved.vue'
 
 
 </script>
@@ -17,7 +19,7 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
 <template>
 <div>
     
-    <ProfesionalGeneralHeader v-on:setTodayDateFromHeader='setTodayDateFromHeader' :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
+    <ProfesionalGeneralHeader v-on:setTodayDateFromHeader='setTodayDateFromHeader'   :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
     
     
     <div class='m-0'>
@@ -54,6 +56,12 @@ import TabUserConfig from '../src/components/professionalAccess/tabUserConfig.vu
         <transition>
         <div v-if="visible_tab_userconfig == 'block'" :style="{display:  visible_tab_userconfig }"  style=""  class=" bg-white">
             <TabUserConfig :session_params="session_params" v-on:switchViewTo="switchViewTo" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabUserConfig> 	
+        </div>
+        </transition>
+
+         <transition>  
+        <div v-if="visible_tab_appListTaken == 'block'" :style="{display:  visible_tab_appListTaken }"  style=""  class="bg-white ">
+           <TabListAppTaken :session_params="session_params"> </TabListAppTaken>
         </div>
         </transition>
         
@@ -111,6 +119,7 @@ export default {
         visible_tab_login: 'block' ,
         visible_tab_timetable: 'none' ,
         visible_tab_userconfig : 'none' , 
+        visible_tab_appListTaken : 'none' ,
 
         product : 'Socks',
         some : './assets/images/socks_blue.jpg',
@@ -141,6 +150,8 @@ created() {
 },
 
 methods: {
+   
+     
     setTodayDateFromHeader(dateObj)
     {   console.log("setTodayDateFromHeader in professionalAccess")
         this.setTodayDate = dateObj
@@ -156,11 +167,15 @@ methods: {
             this.visible_tab_login = 'none' ;
             this.visible_tab_timetable = 'none' ;
             this.visible_tab_userconfig = 'none' ;
+            this.visible_tab_appListTaken = 'none' ;
 
         if (val == 1) { this.visible_tab_timetable = 'block' }
         if (val == 2) { this.visible_tab_appointments = 'block'; this.forceRender +=1 }
         if (val == 3) { this.visible_tab_centers = 'block' }
         if (val == 4) { this.visible_tab_userconfig = 'block' }
+        if (val == 5) {  this.visible_tab_appListTaken = 'block' }
+
+
     },
 
     async loadGlobalSpecialties() {
