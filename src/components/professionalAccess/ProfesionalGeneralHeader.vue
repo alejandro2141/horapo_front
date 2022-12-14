@@ -29,7 +29,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 
 		<!-- DAY CALENDAR -->
-		<div v-if="showTopMenu" @click="setToday(dateObj)" >
+		<div v-if="showTopMenu" @click="setToday(dateObj);switchViewTo(2)" >
 			<div class="w-100 d-flex justify-content-around">
 				<div class="bg-white " style=" width:3px;  height:3px"  >
 						
