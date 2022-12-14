@@ -12,7 +12,7 @@ import axios from 'axios';
     </div>
     <!-- Search form -->
         <div class="m-2 d-flex justify-content-center">
-            <input class="form-control form-control-sm ml-3 w-75"  v-model="pattern" type="text" placeholder="Search" aria-label="Search">
+            <input class="text-uppercase form-control form-control-sm ml-3 w-75"  v-model="pattern"    type="text" placeholder="Search" aria-label="Search">
             <i @click="searchPattern(pattern)" class="bi bi-search display-3"></i>
         </div>
       
@@ -46,7 +46,7 @@ data: function () {
 		return {
             appsTaken : [],
             specialties: [],
-            pattern : "Patron de Busqueda",
+            pattern : null ,
             appTakenFiltered : [] 
            		 }
 	},
@@ -80,22 +80,19 @@ data: function () {
  
     methods: {
             searchPattern(pattern)
-            {
+            {  this.pattern = this.pattern.toUpperCase()
                this.appTakenFiltered = [] 
                console.log("searchPatter:"+pattern)
-               this.pattern.toUpperCase()
+             
                
                for (let i = 0; i < this.appsTaken.length; i++) 
                {
-                    if ( this.appsTaken[i].patient_name.includes(pattern) )
+                    if ( this.appsTaken[i].patient_name.includes(pattern) || this.appsTaken[i].patient_email.includes(pattern) || this.appsTaken[i].patient_doc_id.includes(pattern) || this.appsTaken[i].patient_phone1.includes(pattern)  )
                     {
                     this.appTakenFiltered.push(this.appsTaken[i]) 
                     }
                 
                 }
-
-               
-
 
             },
 
