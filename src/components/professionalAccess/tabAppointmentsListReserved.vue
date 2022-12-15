@@ -84,15 +84,35 @@ data: function () {
                this.appTakenFiltered = [] 
                console.log("searchPatter:"+pattern)
              
-               
-               for (let i = 0; i < this.appsTaken.length; i++) 
+               if (pattern.includes("/"))
                {
-                    if ( this.appsTaken[i].patient_name.includes(pattern) || this.appsTaken[i].patient_email.includes(pattern) || this.appsTaken[i].patient_doc_id.includes(pattern) || this.appsTaken[i].patient_phone1.includes(pattern)  )
+                   
+                    for (let i = 0; i < this.appsTaken.length; i++) 
                     {
-                    this.appTakenFiltered.push(this.appsTaken[i]) 
+                        let auxDate = new Date (this.appsTaken[i].date)
+                        let dateFormatter =  auxDate.getDate()+"/"+(auxDate.getMonth()+1)+"/"+auxDate.getFullYear()   
+                        console.log("dateFormatter:"+dateFormatter)
+                         
+                         if (dateFormatter.includes(pattern))
+                         {
+                         this.appTakenFiltered.push(this.appsTaken[i]) 
+                         }
+
+                        
                     }
-                
-                }
+
+               }
+               else
+               {
+                    for (let i = 0; i < this.appsTaken.length; i++) 
+                    {
+                        if ( this.appsTaken[i].patient_name.includes(pattern) || this.appsTaken[i].patient_email.includes(pattern) || this.appsTaken[i].patient_doc_id.includes(pattern) || this.appsTaken[i].patient_phone1.includes(pattern)  )
+                        {
+                        this.appTakenFiltered.push(this.appsTaken[i]) 
+                        }
+                        
+                    }
+               }
 
             },
 
