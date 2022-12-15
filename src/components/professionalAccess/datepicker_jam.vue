@@ -7,19 +7,20 @@ import axios from 'axios';
 <template>
 <div>
    
-    <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-primary':show_days  }" style="border-radius: 15px; background-color:#eee " >
+    <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-primary':false  }" style="border-radius: 15px; background-color:#eee " >
             <div class="display-5">
                 <small><small>
                     
                     <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
-                        <text v-if="show_days" style="font-size:1.7em" class="pt-2 mb-0" @click="prevMonth(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
-                        <text @click="show_days = !show_days"  class="pt-3 mb-0 text-primary" >   <i  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i> {{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}}  </text> 
-                        <text v-if="show_days" style="font-size:1.7em" class="pt-2 mb-0" @click="nextMonth(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
+                        <text v-if="true" style="font-size:1.7em" class="pt-2 mb-0" @click="prevMonth(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
+                        <text  class="pt-3 mb-0 text-primary" >   {{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}}  </text> 
+                        <text v-if="true" style="font-size:1.7em" class="pt-2 mb-0" @click="nextMonth(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
                     </div>
                   
                 </small></small>
             </div>
 
+            <!--
             <div v-if="!show_days" class="display-5 text-primary">
                 <small><small>
                     
@@ -37,131 +38,146 @@ import axios from 'axios';
                   
                 </small></small>
             </div>
-
-
-        <hr class="b-0 m-0">
-        
-        <table v-if="show_days" class=" table " style="border-radius: 15px;" >
-            <tbody>
-                 <tr class="h6 text-dark">
-                    <td colspan="2" class="">L</td>
-                    <td colspan="2" class="">M</td>
-                    <td colspan="2" class="">Mi</td>
-                    <td colspan="2" class="">J</td>
-                    <td colspan="2" class="">V</td>
-                    <td colspan="2" class="text-danger opacity-75">S</td>
-                    <td colspan="2" class="text-danger opacity-75">D</td>
-                </tr>
-                
-                <tr v-if="week1!=null" class="text-secondary" >
-                    <td  v-for="day in week1" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                        <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() > 20     }]" > 
-                            <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
-                            <br> 
-                            <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
-                                
-                            </div>
-
-                            <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
-                            <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
-                        </text>  
-                    </td>                      
-                </tr>
-
-                <tr v-if="week2!=null" class="text-secondary" >
-                    <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                        <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()     }]" > 
-                            <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
-                            <br> 
-                            <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
-                                
-                            </div>
-
-                            <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
-                            <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
-                        </text>  
-                    </td>                      
-                </tr>
-
-                <tr v-if="week3!=null" class="text-secondary" >
-                    <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                        <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()     }]" > 
-                            <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
-                            <br> 
-                            <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
-                                
-                            </div>
-
-                            <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
-                            <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
-                        </text>  
-                    </td>                      
-                </tr>
-
-                <tr v-if="week4!=null" class="text-secondary" >
-                    <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                        <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
-                            <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
-                            <br> 
-                            <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
-                                
-                            </div>
-
-                            <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i> 
-                            <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
-                        </text>  
-                    </td>                      
-                </tr>
-
-                <tr v-if="week5!=null" class="text-secondary" >
-                    <td  v-for="day in week5" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                        <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
-                            <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
-                            <br> 
-                            <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
-                                
-                            </div>
-
-                           <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>   
-                            <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>   
-                        </text>  
-                    </td>                      
-                </tr>
-
-                <tr v-if="week6!=null" class="text-secondary" >
-                    <td  v-for="day in week6" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                        <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
-                            <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
-                            <br> 
-                            <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
-                                
-                            </div>
-
-                           <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
-                            <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
-                        </text>  
-                    </td>                      
-                </tr>
-
-                
-                
-                          
-            </tbody>
-        </table> 
-        
-        <text class="h2 text-primary d-flex justify-content-end m-2" >
-          
-
-            <i @click="swLock(calendar_date)" class="bi bi-unlock-fill opacity-50"></i>     
-
-           <text class="m-2" ></text>
-        <!--
-            <text >
-                 <i v-if="show_days" @click="show_days = !show_days" class="bi bi-calendar-x  " style="font-size: 1.1em;" ></i>
-            </text>
             -->
+
+
+       
+
+
+        <div v-if="show_days" class="border border-primary" style="border-radius: 15px;">
+            <table  class=" table " >
+                <tbody>
+                    <tr class="h6 text-dark">
+                        <td colspan="2" class="">L</td>
+                        <td colspan="2" class="">M</td>
+                        <td colspan="2" class="">Mi</td>
+                        <td colspan="2" class="">J</td>
+                        <td colspan="2" class="">V</td>
+                        <td colspan="2" class="text-danger opacity-75">S</td>
+                        <td colspan="2" class="text-danger opacity-75">D</td>
+                    </tr>
+                    
+                    <tr v-if="week1!=null" class="text-secondary" >
+                        <td  v-for="day in week1" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
+                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() > 20     }]" > 
+                                <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
+                                <br> 
+                                <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
+                                    
+                                </div>
+
+                                <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                            </text>  
+                        </td>                      
+                    </tr>
+
+                    <tr v-if="week2!=null" class="text-secondary" >
+                        <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
+                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()     }]" > 
+                                <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
+                                <br> 
+                                <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
+                                    
+                                </div>
+
+                                <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                            </text>  
+                        </td>                      
+                    </tr>
+
+                    <tr v-if="week3!=null" class="text-secondary" >
+                        <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
+                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()     }]" > 
+                                <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
+                                <br> 
+                                <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
+                                    
+                                </div>
+
+                                <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                            </text>  
+                        </td>                      
+                    </tr>
+
+                    <tr v-if="week4!=null" class="text-secondary" >
+                        <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
+                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
+                                <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
+                                <br> 
+                                <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
+                                    
+                                </div>
+
+                                <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i> 
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                            </text>  
+                        </td>                      
+                    </tr>
+
+                    <tr v-if="week5!=null" class="text-secondary" >
+                        <td  v-for="day in week5" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
+                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
+                                <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
+                                <br> 
+                                <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
+                                    
+                                </div>
+
+                            <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>   
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>   
+                            </text>  
+                        </td>                      
+                    </tr>
+
+                    <tr v-if="week6!=null" class="text-secondary" >
+                        <td  v-for="day in week6" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
+                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
+                                <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
+                                <br> 
+                                <div class="m-1" v-for="color in day.calendar_colors" :key="color"  style="height:5px" :style="{'background-color': color }" > 
+                                    
+                                </div>
+
+                            <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                            </text>  
+                        </td>                      
+                    </tr>
+
+                    
+                    
+                            
+                </tbody>
+            </table> 
+        </div>
         
-        </text>
+        <div v-if="true" class="display-5 text-primary">
+            <small>
+             
+                    <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
+                         
+                        <text style="font-size:1.7em" class="pt-2 mb-0" @click="prevDay(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
+                           
+                        <text @click="show_days = !show_days" class="pt-3 mb-0" >
+                                 <i  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i>   {{day_long_names[calendar_date.getDay()] }} 
+                                {{ calendar_date.getDate() }}  
+                        </text> 
+                        
+                        <text style="font-size:1.7em" class="pt-2 mb-0" @click="nextDay(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
+                     
+                    </div>
+            </small>
+        </div>
+
+    <div class="d-flex justify-content-around fs-3 text-primary opacity-50" >
+        <i @click="swLock(calendar_date)" class="bi bi-unlock-fill "></i>   
+      <!--  <i @click="show_days = !show_days"  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i> -->
+       
+    </div>
+                       
 
     </div>   
   
