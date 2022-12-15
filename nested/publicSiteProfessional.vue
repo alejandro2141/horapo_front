@@ -44,9 +44,9 @@ export default {
 created() {
     this.session_data=JSON.parse(JSON.stringify(BKND_CONFIG)) ;
 },
+
 mounted() {
     this.session_data=JSON.parse(JSON.stringify(BKND_CONFIG)) ;
-
 },
 
 watch: {
