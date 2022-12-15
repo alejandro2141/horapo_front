@@ -24,27 +24,35 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 <ModalProfessionalReserveAppointment  v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourToReserve='hourToReserve' :session_params='session_params' :openModalReserveAppEvent='openModalReserveAppEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'> </ModalProfessionalReserveAppointment>
 <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
-    <div class="m-1 d-flex  justify-content-start fs-4 d-flex justify-content-between" > 
+    <div class="m-1 fs-4  " > 
 
-        
-        <div >
+        <!--
+        <div class="d-flex  justify-content-start" >
             <div v-if="!isLockDay" >
                 &nbsp; <i v-if="hours_block_list.length>0" class=" fs-1 bi bi-unlock " :class="{'text-primary': hours_block_list.length >0 }"  @click="sendLockHours()"> </i> 
             </div>
+            <small>
+            <small>
+                    <text @click="apply_filter_reserved  =! apply_filter_reserved " class=""  :class="{ 'activeFilter' : apply_filter_reserved }" >R:{{dayStatics.reserved}} </text>  
+                    <text @click="apply_filter_available =! apply_filter_available" class=""  :class="{ 'activeFilter' : apply_filter_available }" >D:{{dayStatics.available}} </text>
+            </small>    
+            </small>   
         </div>
+        -->
         
 
         <div></div>
-
-        <div class="d-flex justify-content-around" >
+        <!--
+        <div class="d-flex justify-content-start" >
                 <small>
                 <small>
-                    <text @click="apply_filter_reserved  =! apply_filter_reserved " class=""  :class="{ 'activeFilter' : apply_filter_reserved }" >   Reserv {{dayStatics.reserved}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <text @click="apply_filter_available =! apply_filter_available" class=""  :class="{ 'activeFilter' : apply_filter_available }" >  Disp {{dayStatics.available}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
-                    <text @click="apply_filter_total =! apply_filter_total" class=""  :class="{ 'activeFilter' : apply_filter_total }"  >  Total {{dayStatics.total}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <text @click="apply_filter_reserved  =! apply_filter_reserved " class=""  :class="{ 'activeFilter' : apply_filter_reserved }" >R:{{dayStatics.reserved}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <text @click="apply_filter_available =! apply_filter_available" class=""  :class="{ 'activeFilter' : apply_filter_available }" >D:{{dayStatics.available}} </text>  &nbsp;&nbsp;&nbsp;&nbsp;
+                    <text @click="apply_filter_total =! apply_filter_total" class=""  :class="{ 'activeFilter' : apply_filter_total }"  >  Total {{dayStatics.total}} </text>  &nbsp;&nbsp;&nbsp;&nbsp; 
                 </small>    
                 </small>   
         </div>
+        -->
 
         <div>
         </div> 
@@ -78,7 +86,10 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
                 </div>
         </div>
-
+            
+            <div v-if="!isLockDay && hours_block_list.length>0" class="text-primary" >
+                Bloquear horas seleccionadas &nbsp; <i  class=" fs-1 bi bi-unlock " :class="{'text-primary': hours_block_list.length >0 }"  @click="sendLockHours()"> </i> 
+            </div>
          
     </div>
 
