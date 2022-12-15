@@ -14,26 +14,30 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
 <template>
 <div>
+    <!--
      <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>    
-    
+    -->
+
     <div >
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
         <GeneralHeader></GeneralHeader>
     
             <p class="fs-3 text-center">
-            Sitio del profesional
+              Agenda del profesional 
             </p>
 
             <div class="d-flex justify-content-start">
                 <i class="display-1 m-4 bi bi-person-bounding-box"></i>
                 <text class="mt-4">
-                    {{ professional.name }} <br>
-                    Activo:{{ professional.active }}
+                   
+                    <text v-if="professional_data!=null" > {{ professional_data.name}} </text>
+
+                  <!--  Activo:{{ professional.active }} -->
                 </text>
             </div>
 
             <p class="fs-3 mt-4 pt-4">
-            Calendarios por Especialidad
+            Calendarios Disponibles
             </p>
 
 
@@ -43,28 +47,32 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
              </div>
              <hr>
 
-            <div v-for="calendar in calendars" :key="calendar.calendar_id" >
+             {{calendars}}
 
-                <div class="d-flex justify-content-between mt-3">
-                    <div>
-                        <text class="fs-3 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
-                        <text v-if="calendar.home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> </text>
-                        <text v-if="calendar.center_visit" > Cita en Consulta <i class="h1 bi bi-building"></i> </text>
-                        <text v-if="calendar.remote_care" > Atención Remota <i class="h1 bi bi-camera-video"></i> </text>
-                        
-                       <br> {{ calendar.address}}
-                    </div>
-
-                    <div>
-                       <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendar.calendar_id"> <i  class="fs-2 text-primary p-2 bi bi-arrow-right-square"></i> </a>
-                    </div>
+            <div v-if="calendars!=null && calendars.length>0">
+                <div  v-for="calendar in calendars" :key="calendar.id" >
                     
-                  
+                    <div class="d-flex justify-content-between mt-3">
+                        <div>
+                            <text class="fs-3 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
+                            <text v-if="calendar.home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> </text>
+                            <text v-if="calendar.center_visit" > Cita en Consulta <i class="h1 bi bi-building"></i> </text>
+                            <text v-if="calendar.remote_care" > Atención Remota <i class="h1 bi bi-camera-video"></i> </text>
+                            
+                        <br> {{ calendar.address}}
+                        </div>
 
+                        <div>
+                        <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendar.calendar_id"> <i  class="fs-2 text-primary p-2 bi bi-arrow-right-square"></i> </a>
+                        </div>
+                    
+                    </div>
+                   
+                    <hr>
                 </div>
-<hr>
-
             </div>
+
+
 
             <div class="mt-5 pt-5">
                
@@ -82,35 +90,15 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 export default {
  data : function() {
     return {
-            professional : {name : 'Not Set'} ,
-            calendars : null ,
 
+        calendars : [],
+        cdate : null,
+        active_spinner : null ,
 
-            prof_id : null ,
-            token : null ,
-            appointments : null ,
-            center_id : null , 
-            professional_id : null ,
-            date :null ,
-            center : null, 
-           
-            specialty : "No Set",
-            global_specialties : [] ,
-            global_comunas : [] ,
-            //APP set for modal View Appointment
-            app : null ,
-            openModalEvent : null , 
+        professional_data : null ,
+        calendars : null ,
+        centers   : null ,
 
-            searchParameters : null ,
-
-            form_search_date: null ,
-            form_minimum_date : null ,
-
-            active_spinner : false ,
-
-            showSearch : false,
-
-            metric_search : null ,
         }
   },
 
@@ -124,198 +112,68 @@ export default {
       
     },
    mounted () {    
+        this.active_spinner = true 
         let uri = window.location.search.substring(1); 
         let params = new URLSearchParams(uri);
         this.token=params.get("token")
         this.prof_id=params.get("prof_id")
-        console.log("URL PARAMETROS : cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
+        this.cal_id=params.get("cal_id")
+        console.log("URL PARAMETROS :  prof_id:"+this.prof_id+" cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
     
-        let aux_date = new Date();
-
-        this.date = new Date().setDate(aux_date.getDate()+1) 
-        this.form_search_date = null 
-        //new Date(this.date.getDate() +1 ).toISOString().split("T")[0];
-        
-        this.cal_specialty = null 
-        this.cal_professional = null 
-
-        this.form_minimum_date = new Date().setDate(aux_date.getDate()+1) 
-        this.get_professional_data(this.prof_id);        
-        this.get_professional_calendars(this.prof_id);        
-        this.get_specialties() ;
-
+        this.cdate = new Date();
+       
+        this.get_professional_data(this.prof_id,this.cal_id);        
+        this.active_spinner = false 
        },
 
     beforeUpdate(){
-        /*
-        this.showLoaderProgress = true  ;
-        console.log("showloader progress BEFORE UPDATE !!!");
-        */
         },
 
     updated()
         {
-            /*
-        this.showLoaderProgress = false  ;
-        console.log("showloader progress UPDATE !!!");
-        */
         },
 
     watch: {
-            /*
-            appointments(newAppointments, oldAppointments ) {
-                this.appointment_list =  newAppointments ;   
-             //   this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	                 
-            },
-            */
         },
 
     methods: {
 
-        viewCalendar(id)
-        {
-            console.log("viewCalendar id:"+id)
-        },
-
-        updateLastSearch()
-        {
-
-        },
- /*      
-        async searchAppointmentsCalendar() {	
-            this.active_spinner = true ; 
-              if (  this.cal_id != null )
-              {    
-                          let metric = Date.now();
-                                                   
-                          const json = { 
-                            date : this.date ,
-                            token : this.token , 
-                            cal_id :  this.cal_id,
-                                };
-
-                  console.log ("searchAppointmentsCalendar INPUT send JSON :"+ JSON.stringify(json)  );
-                  let response_json = await axios.post(this.session_data.BKND_HOST+"/patient_get_appointments_calendar",json);
-                  
-                  this.appointments = response_json.data;
-                  console.log ("searchAppointmentsCalendar RESPONSE:"+JSON.stringify(this.appointments)) ;
-                  if (this.appointments.length > 0)
-                    {
-
-                  // this.notificationMessage="Econtramos "+this.appointments.length+" resultados, desde dia "+this.daterequired +" ";	
-                    this.center_id = this.appointments[0].center_id;
-                  
-                    metric = (Date.now() - metric ) ;     
-                    this.metric_search = metric ;
-                    console.log("performance, searchAppointments , searchAppointments ,"+  this.metric_search  );
-                                
-                    this.get_center();  
-                   
-                    this.get_professional_data();
-                    this.get_specialties() ;
-                    this.get_locations() ; 
-
-                    }
-              }
-              else 
-              {
-                  this.appointments = null;
-              }
-            
-            this.active_spinner = false ;         
-           
-           },
-*/
-/*
-          async get_center()
-           {
-                const json_center = { 
-                    center_id : this.appointments[0].center_id,
-                    };
-               console.log("get Center REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.session_data.BKND_HOST+"/patient_get_center",json_center);
-               this.center = response.data
-               console.log("get Center RESPONSE "+JSON.stringify(this.center) );
-           },
-*/
-            async get_professional_data(id)
-           {
-                const json_center = { 
-                    professional_id : id,
-                    };
-               console.log("get_professional_data REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.session_data.BKND_HOST+"/patient_get_professional",json_center);
-               this.professional= response.data
-               console.log("get_professional_data RESPONSE "+JSON.stringify(this.professional) );
-           },
-
-            async get_professional_calendars(id)
-           {
-                const json_center = { 
-                    professional_id : id,
-                    };
-               console.log("get_professional_data REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.session_data.BKND_HOST+"/patient_get_professional_calendars",json_center);
-               this.calendars= response.data.rows
-               console.log("get_professional_data RESPONSE "+JSON.stringify(this.calendars) );
-           },
-
-
-
-
-
-            async get_specialties()
-           {
-                const json_center = { 
-                    token : 123,
-                    };
-               console.log("get_specialties REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.session_data.BKND_HOST+"/common_get_specialty_list",json_center);
-               console.log("get_specialties RESPONSE "+JSON.stringify(response.data.rows) );
-              
-              this.global_specialties =  JSON.parse(JSON.stringify(response.data.rows))
-             
-
-           },
-
-          
-           async get_locations()
-           {
-                const json_center = { 
-                    token : 123,
-                    };
-               console.log("get_locations REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.session_data.BKND_HOST+"/common_get_comuna_list",json_center);
-               console.log("get_locations RESPONSE "+JSON.stringify(response.data.rows) );
-              
-              this.global_comunas=  JSON.parse(JSON.stringify(response.data.rows))
-             
-           },
-
-            getSpecialtyName()
+            async get_professional_data(pid,cid)
             {
-                if (this.appointments != null && this.appointments.length > 0 )
-                {
-                    let temp= this.global_specialties.find(elem => elem.id ==  this.appointments[0].specialty  )
-                    if (temp != null) { return temp.name }
-                    else { return null }
+                let aux_date = new Date();
 
-                }
-                else { return null }
+                const json_center = { 
+                    professional_id : pid,
+                    calendar_id : cid,
+                    date  :  aux_date
+                        };
+
+               console.log("professional_pwsite_get_calendar REQUEST "+JSON.stringify(json_center));
+               let response = await axios.post(this.session_data.BKND_HOST+"/professional_pwsite_get_calendar",json_center);
+               
+               this.professional_data= response.data.professional_data 
+               this.calendars = response.data.calendars 
+               this.centers= response.data.centers 
+               
+               console.log("professional_pwsite_get_calendar RESPONSE "+JSON.stringify(response) );
             },
 
             id2comunaName(id)
             {
+             /*
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
+            */
             },
 
             id2specialtyName(id)
             {
+            /*
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
+            */
             },
          
          
@@ -355,20 +213,7 @@ export default {
                this.openModalEvent = Math.random() ;
             },
           
-          /* 
-            updateLastSearch()
-            {
-                console.log (" update search Result. ");
-                //this.appointment_list=null ;
-                this.$emit('updateLastSearch');
-            },
-
-            selectedInsuranceCode(code)
-            {
-            console.log("Insurance Code:"+code);
-            this.form_patient_insurance_code = code;
-            },
-            */
+        
 
         },
   
