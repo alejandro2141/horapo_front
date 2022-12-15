@@ -10,26 +10,21 @@ import axios from 'axios';
     <div class="d-flex justify-content-between mt-3">
         
          <i class="bi bi-person-bounding-box display-1 "></i>
-           <p class="h4 text-center  mt-3  "> Su Información </p> 
+           <p class="h4 text-center  mt-3  "> {{ professional_data.name }} </p> 
            <text></text>        
     <!--     <i class="display-1 bi bi-x-lg ml-0 text-primary"   aria-label="Close" v-on:click="closeTabUserConfig()" ></i> 
     -->
     </div>
    
     <p class="text-center " > 
-       
-   
     </p>
-        <div class="d-flex justify-content-between m-1">
-            <text>Nombre</text> 
-            <text>{{ professional_data.name }} </text> 
-        </div>
+
          <div class="d-flex justify-content-between m-1">
-            <text>Numero Doc</text> 
+            <text>Nº Documento</text> 
             <text>{{ professional_data.document_number }} </text> 
         </div>
          <div class="d-flex justify-content-between m-1">
-            <text>License_number </text> 
+            <text>Nº Licencia  </text> 
             <text> {{ professional_data.license_number }}</text> 
         </div>
 
@@ -40,27 +35,31 @@ import axios from 'axios';
 
         <div class="d-flex justify-content-between m-1">
             <text>Información Certificada Professional </text> 
-            <text>  -- </text> 
+            <text> -- </text> 
         </div>
 
         <div class="d-flex justify-content-between  m-1">
             <text>Teléfono  </text> 
-            <text>  {{ professional_data.phone }}  </text> 
+            <text> {{professional_data.phone }} </text> 
         </div>
 
         <div class="d-flex justify-content-between m-1">
-            <text>Status </text> 
+            <text>Estado Activo  </text> 
             <text> {{ professional_data.active }} </text> 
         </div>
+
+        <div class="m-1 d-flex justify-content-between  m-1">
+            <a class="text-white" target="_blank" rel="noopener noreferrer" :href="'/nested/publicSiteProfessional.html?prof_id='+professional_data.id">Ver Su Sitio Profesional</a>
+            <i class="bi bi-arrow-right-square" ></i>
+        </div>          
         
 
         
 
         <div class="d-flex justify-content-between  m-1"> 
 
-            <a class="mt-4 text-white" target="_blank" rel="noopener noreferrer" :href="'/nested/publicSiteProfessional.html?prof_id='+professional_data.id">Ver Su Sitio Profesional</a>
-            <text class="">
-                <text class="text-center">Compartir </text>
+             <text class="">
+                <text class="text-center">Compartir su sitio en redes sociales </text>
                 <p>
                &nbsp; <i class=" fs-1 bi bi-whatsapp "> </i> &nbsp; &nbsp;
                &nbsp; <i class=" fs-1 bi bi-facebook"></i> &nbsp;
