@@ -3,13 +3,15 @@ import { ref } from 'vue'
 import LoadProgress from '../loadProgress.vue'
 import axios from 'axios'
 import GeneralHeader from '../GeneralHeader.vue'
-
+import appointmentAvailableSearchCalendar from './AppointmentAvailableSearchCalendar.vue'
+//import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue';
+
 /*
 import patientAppointmentAvailable  from '../publicSearch/PatientAppointmentAvailable.vue'
 import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue'
-
 */
+
 </script>
 
 <template>
@@ -19,6 +21,10 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
     -->
 
     <div >
+        <!--
+        <ModalPublicReserveAppForm :global_comunas="global_comunas" :professional_data="professional_data" :center_data="center_data" :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve' :global_specialties='global_specialties' ></ModalPublicReserveAppForm>
+        -->
+
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
         <GeneralHeader></GeneralHeader>
     
@@ -28,7 +34,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
             <div class="d-flex justify-content-start">
                 <i class="display-1 m-4 bi bi-person-bounding-box"></i>
-                <text class="mt-4">
+                <text class="mt-4 fs-3">
                    
                     <text v-if="professional_data!=null" > {{ professional_data.name}} </text>
 
@@ -36,18 +42,11 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                 </text>
             </div>
 
-            <p class="fs-3 mt-4 pt-4">
+            <p class="fs-3 mt-1 pt-1">
             Calendarios Disponibles
             </p>
 
-
-             <div class="d-flex justify-content-between mt-3">
-                 <text></text>
-                 <text class=""><small> Ver horas </small> </text>
-             </div>
-             <hr>
-
-             {{calendars}}
+            <hr>
 
             <div v-if="calendars!=null && calendars.length>0">
                 <div  v-for="calendar in calendars" :key="calendar.id" >
@@ -55,23 +54,32 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                     <div class="d-flex justify-content-between mt-3">
                         <div>
                             <text class="fs-3 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
-                            <text v-if="calendar.home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> </text>
-                            <text v-if="calendar.center_visit" > Cita en Consulta <i class="h1 bi bi-building"></i> </text>
-                            <text v-if="calendar.remote_care" > Atención Remota <i class="h1 bi bi-camera-video"></i> </text>
+                            <text v-if="getCenterData(calendar.center_id).home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> </text>
+                            <text v-if="getCenterData(calendar.center_id).center_visit" > Cita en Consulta <i class="h1 bi bi-building"></i> </text>
+                            <text v-if="getCenterData(calendar.center_id).remote_care" > Atención Remota <i class="h1 bi bi-camera-video"></i> </text>
                             
-                        <br> {{ calendar.address}}
+                        <br> {{getCenterData(calendar.center_id).address}}
                         </div>
-
+                        <!--
                         <div>
-                        <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendar.calendar_id"> <i  class="fs-2 text-primary p-2 bi bi-arrow-right-square"></i> </a>
+                             <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendar.calendar_id"> <i  class="display-1 fw-light text-primary p-2 bi bi-arrow-right-square"></i> </a>
                         </div>
-                    
+                        -->
                     </div>
-                   
                     <hr>
+                    
+                    <div class="d-flex justify-content-center">
+                        <button   @click="showAppAvailable(calendar.id)"  type="button" class="btn btn-primary">Ver Horas Disponibles <i class="bi bi-arrow-down-short"></i> </button>
+                    </div>
                 </div>
             </div>
 
+
+            <div>
+                <div  v-for="appointment in appointments"  :key="appointment.id"  class="mt-3" >
+                    <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>       
+                </div>
+            </div>    
 
 
             <div class="mt-5 pt-5">
@@ -98,7 +106,10 @@ export default {
         professional_data : null ,
         calendars : null ,
         centers   : null ,
+        specialties : null ,
 
+        appointments : [] ,
+ 
         }
   },
 
@@ -138,6 +149,19 @@ export default {
 
     methods: {
 
+            async showAppAvailable(calid)
+            {
+                const json_request = { 
+                    calendar_id : calid,
+                    date  :  new Date()
+                        };
+
+                console.log("professional_pwsite_get_appointments_calendar REQUEST:"+JSON.stringify(json_request))
+                let response = await axios.post(this.session_data.BKND_HOST+"/professional_pwsite_get_appointments_calendar",json_request);
+                console.log("professional_pwsite_get_appointments_calendar RESPONSE :"+JSON.stringify(response.data) )   
+                this.appointments = response.data.appointments     
+            },
+
             async get_professional_data(pid,cid)
             {
                 let aux_date = new Date();
@@ -154,6 +178,7 @@ export default {
                this.professional_data= response.data.professional_data 
                this.calendars = response.data.calendars 
                this.centers= response.data.centers 
+               this.specialties = response.data.specialties 
                
                console.log("professional_pwsite_get_calendar RESPONSE "+JSON.stringify(response) );
             },
@@ -169,20 +194,22 @@ export default {
 
             id2specialtyName(id)
             {
-            /*
-            let temp= this.global_specialties.find(elem => elem.id ==  id  )
+            let temp= this.specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
-            */
             },
          
+            getCenterData(id)
+            {
+            let temp= this.centers.find(elem => elem.id ==  id  )
+            if (temp != null) { return temp }
+            else { return null }
+            },
          
             setModalReserve(appointment)
             {
                 console.log("Set Modal Reserve method in SearchApp Resutl"+JSON.stringify(appointment));
                 
-              //  {"calendar_id":"136","date":"2022-06-14","professional_name":"Juanito Cura Los Dolores Pies","specialty1":144,"duration":60,"professional_id":"1","home_visit":true,"home_visit_location1":1662,"home_visit_location2":1511,"home_visit_location3":null,"home_visit_location4":null,"home_visit_location5":null,"home_visit_location6":null,"center_visit_location":null,"center_visit":false,"center_id":149,"center_name":"Kines a domicilio","center_address":null,"remote_care":false,"status":1,"start_time":"02:00"}
-              //  {"calendar_id":"136","date":"2022-06-15                                                    ","specialty" :144,"duration":60,                                                                                                                                                                                                                                                                  "center_id":149,                                                                                       "start_time":"1:0","time_between":0,"professional_id":"1"}
                 this.app = appointment;
                 this.app['professional_name']=this.professional.name ; 
                 this.app['specialty1']=new String(this.app.specialty) ; 
