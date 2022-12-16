@@ -258,8 +258,8 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                     </a></div>
                 </div>
                 
-                <div> 
-                  <a class="text-white" :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSearchCalendar.html?cal_id='+calendar.calendar_id">
+                <div v-if="session_params != null"> 
+                  <a class="text-white" :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id">
                    WhatsApp <br>
                    <i class="text-white display-1 bi bi-whatsapp"></i> </a>  
                 </div>
