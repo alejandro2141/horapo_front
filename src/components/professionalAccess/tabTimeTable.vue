@@ -40,7 +40,7 @@ import CalendarProfessional from './calendar_professional.vue'
         <div>
                 <div  id="search_result" v-if='calendars!=null'  >
                     <div v-for="calendar in calendars.calendars"  :key='calendar.id' >
-                        <CalendarProfessional :calendar="calendar" :center_data="getCenterData(calendar.center_id)"  v-on:updateCalendarList="updateCalendarList()" :global_specialties="global_specialties" :global_comunas="global_comunas"> </CalendarProfessional> 
+                        <CalendarProfessional :calendar="calendar" :center_data="getCenterData(calendar.center_id)"  v-on:updateCalendarList="updateCalendarList()" :global_specialties="global_specialties" :global_comunas="global_comunas" :session_params="session_params" > </CalendarProfessional> 
                     </div>
                 </div>
 
