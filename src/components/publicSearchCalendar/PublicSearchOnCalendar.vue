@@ -91,19 +91,14 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         <p class="text-center" v-if="!showSearch">
         <button @click="showSearch=!showSearch;searchAppointmentsCalendar();" type="button" class="mt-3 btn btn-primary"> 123Hora <br> Ver Horas Disponibles </button>
         </p>
-         
 
         <p v-if="appointments != null " class="mt-3">   
           horas disponibles en Fecha seleccionada
         </p>
        
-       <div  v-for="appointment in appointments" :key="appointment.id" class="mt-3">
+        <div  v-for="appointment in appointments" :key="appointment.id" class="mt-3">
                 <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>                  
         </div>
-
-       
-
-
 
 
         <!--
