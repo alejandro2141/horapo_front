@@ -48,6 +48,7 @@ import axios from 'axios';
             <text> {{ professional_data.active }} </text> 
         </div>
 
+        <!--
         <div class="m-1 d-flex justify-content-between  m-1">
             <a class="text-white" target="_blank" rel="noopener noreferrer" :href="'/nested/publicSiteProfessional.html?prof_id='+professional_data.id">Ver Su Sitio Profesional</a>
             <i class="bi bi-arrow-right-square" ></i>
@@ -55,7 +56,6 @@ import axios from 'axios';
         
 
         
-
         <div class="d-flex justify-content-between  m-1"> 
 
              <text class="">
@@ -67,6 +67,7 @@ import axios from 'axios';
             </text>
 
         </div>
+        -->
 
         <p>
             
