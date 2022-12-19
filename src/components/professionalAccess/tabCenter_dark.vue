@@ -3,9 +3,9 @@ import { ref } from 'vue'
 import axios from 'axios';
 import ModalCreateCenter from './modalCreateCenter.vue'
 import ModalViewCenterDetails from './modalViewCenterDetails.vue'
-import ConsultancyCenter from './consultancy_center.vue'
-import ConsultancyHome from './consultancy_home.vue'
-import ConsultancyRemote from './consultancy_remote.vue'
+//import ConsultancyCenter from './consultancy_center.vue'
+//import ConsultancyHome from './consultancy_home.vue'
+//import ConsultancyRemote from './consultancy_remote.vue'
 import Consultancy from './consultancy.vue'
 
 </script>
