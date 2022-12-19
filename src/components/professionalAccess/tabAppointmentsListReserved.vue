@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-
+import AppointmentReserved from  './appointmentReserved.vue'
 
 </script>
 <template>
@@ -18,17 +18,22 @@ import axios from 'axios';
       
         <hr>        
         <div v-for="app in appTakenFiltered" :key='app.id' >
-            
+           <!-- 
           <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
             <br> 
             <small>
             {{ app.patient_name  }} {{ app.patient_doc_id  }} ({{ app.patient_age  }})  {{ app.patient_email  }} <i class="bi bi-telephone"></i>{{app.patient_phone1}}
             </small>
             <br>
-        <hr>
+            -->
+            <div class="m-1">
+            <AppointmentReserved  includeExtraData='true' v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
+            </div>                           
         </div>
       
 
+    <div class="m-3 p-3">       
+    </div>
 
     </div>     
 </template>
@@ -47,7 +52,10 @@ data: function () {
             appsTaken : [],
             specialties: [],
             pattern : null ,
-            appTakenFiltered : [] 
+            appTakenFiltered : [] ,
+            centers : [] , 
+            calendars : [] ,
+
            		 }
 	},
 	
@@ -127,7 +135,6 @@ data: function () {
 
                 if (spe != null) { return spe.name }
                 else { return "" }
-            
             },
 
             formatDate(obj)
@@ -154,6 +161,8 @@ data: function () {
                     this.appsTaken = response_json.data.appointments
                     this.appTakenFiltered = response_json.data.appointments
                     this.specialties = response_json.data.specialties
+                    this.centers = response_json.data.centers
+                    this.calendars = response_json.data.calendars
             },	
 
 		},
