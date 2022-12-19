@@ -246,7 +246,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
               <div v-if="true" class="d-flex justify-content-between p-3 text-white" > 
                 <div> 
-                  <a  class="text-white" href="mailto:user@example.com?subject=Hola Te comparto mi calendario para agendar horas&body=Hola Te comparto mi calendario para agendar horas, en el siguiente link puedes acceder directamente a mi agenda para encontrar la hora que mejor se ajuste a tu disponibilidad de tiempo">Email<br> 
+                  <a  class="text-white" :href="'mailto:user@example.com?subject=Agenda Online de:'+session_params['professional_name']+' para especialidad de: '+idSpecialty2name(specialty_code)+'&body=Hola. Agenda Online de:'+session_params['professional_name']+' para especialidad de: '+idSpecialty2name(specialty_code)+'. Puedes buscar una hora disponible en:  http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+' '">Email<br> 
                   <i class="display-1  bi bi-envelope"></i> </a> 
                 </div>
                 
@@ -259,7 +259,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                 </div>
                 
                 <div v-if="session_params != null"> 
-                  <a class="text-white" :href="'whatsapp://send?text=http://ec2-3-143-168-51.us-east-2.compute.amazonaws.com/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id">
+                  <a class="text-white" :href="'whatsapp://send?text=Agenda Online de:'+session_params['professional_name']+' para especialidad de: '+idSpecialty2name(specialty_code)+' http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id">
                    WhatsApp <br>
                    <i class="text-white display-1 bi bi-whatsapp"></i> </a>  
                 </div>
@@ -276,7 +276,6 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
                 <div v-if="showEdit" class="d-flex justify-content-between mt-2">
                     <text @click="saveCalendarChanges();showEdit=false" class="" >GUARDAR  </text> 
-                            
                             
                     <text @click="showEdit=false;resetForm()" class="" >CANCELAR </text>  
                 </div>
@@ -358,6 +357,8 @@ export default {
             calendar_active : null ,
             name : null ,
 
+            host: null ,
+
         }   
     },
    	
@@ -366,6 +367,8 @@ export default {
 
 	created () {
         this.resetForm()       
+
+        this.host = window.location.host;
     },
 
 	methods :{
