@@ -32,7 +32,7 @@ import axios from 'axios';
 
                         <div class="d-flex justify-content-between w-100"  :style="[ (days_expired ) ? { 'background-color': '#eee'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
                                 <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-dark display-6 p-2"  style=""  >
-                                   - {{specialty_data}} -
+                                   - {{specialty_data.name}} -
                                     <div class=""  >
                                         <text class="" ><small>  {{specialtyId2name(appointment.specialty)}} </small> </text>
                                     </div>  
