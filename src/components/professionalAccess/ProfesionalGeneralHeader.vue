@@ -21,7 +21,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		
 
 		<div v-if="showTopMenu" >
-			<i @click="switchViewTo(5)" class="bi bi-clock-history display-5"></i>
+			<i @click="switchViewTo(5)" class="bi bi-person-square display-5"></i>  
 		</div>
 		
 		<text  >
@@ -61,8 +61,9 @@ import SwitchViewButton from './switchViewButton.vue'
 		
 		<text>
 			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
-			<i  class="fs-6 bi " @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >Consultas</i>
-		    </div>
+				<i  class="fs-6" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >Consultas</i>
+	        	<br><i class="bi bi-buildings"></i>
+			</div>
 			<i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
 		</text>
 
