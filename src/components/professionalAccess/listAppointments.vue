@@ -5,7 +5,7 @@ import axios from 'axios'
 import AppointmentBlockedProfessional from './appointmentBlockedByProfessional.vue'
 import AppointmentAvailable from './appointmentAvailable2.vue'
 import AppointmentReserved from  './appointmentReserved.vue'
-import ModalCreateAppointment from './modalCreateAppointment_eliminar.vue';
+//import ModalCreateAppointment from './modalCreateAppointment_eliminar.vue';
 import ModalShowAppointmentDetails from './modalShowAppointmentDetails.vue';
 import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
 import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppointment.vue';
