@@ -5,7 +5,10 @@ import axios from 'axios'
 import GeneralHeader from '../GeneralHeader.vue'
 import appointmentAvailableSearchCalendar from './AppointmentAvailableSearchCalendar.vue'
 //import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
-import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue';
+//import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue';
+
+import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue' 
+
 
 /*
 import patientAppointmentAvailable  from '../publicSearch/PatientAppointmentAvailable.vue'
@@ -16,18 +19,18 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
 <template>
 <div>
-    <!--
-     <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>    
-    -->
-
+    
+    <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :center_data="center_data"    :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='comunas' :global_specialties="specialties"  > </modalPublicViewAppointment>
+   
     <div >
         <!--
         <ModalPublicReserveAppForm :global_comunas="global_comunas" :professional_data="professional_data" :center_data="center_data" :searchParameters='searchParameters'   v-on:updateLastSearch='updateLastSearch' :appToReserve='appToReserve'  :eventShowModalPubicReserve='eventShowModalPubicReserve' :global_specialties='global_specialties' ></ModalPublicReserveAppForm>
         -->
 
         <loadProgress  :active_spinner="active_spinner" > </loadProgress>
+    <!--
         <GeneralHeader></GeneralHeader>
-    
+    -->
             <p class="fs-3 text-center">
               Agenda del profesional 
             </p>
@@ -41,11 +44,11 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                   <!--  Activo:{{ professional.active }} -->
                 </text>
             </div>
-
+<!--
             <p class="fs-3 mt-1 pt-1">
             Calendarios Disponibles
             </p>
-
+-->
             <hr>
 
             <div v-if="calendars!=null && calendars.length>0">
@@ -109,6 +112,13 @@ export default {
         specialties : null ,
 
         appointments : [] ,
+
+        //form modal data
+        searchParameters : [] ,
+        app : [] ,
+        center_data : [] ,
+        openModalEvent : 0 ,
+        comunas: [],
  
         }
   },
@@ -148,6 +158,11 @@ export default {
         },
 
     methods: {
+            updateLastSearch()
+            {
+                console.log("update Last Search")
+                this.showAppAvailable(this.cal_id) 
+            },
 
             async showAppAvailable(calid)
             {
@@ -209,8 +224,12 @@ export default {
             setModalReserve(appointment)
             {
                 console.log("Set Modal Reserve method in SearchApp Resutl"+JSON.stringify(appointment));
-                
                 this.app = appointment;
+                this.center_data = this.getCenterData(appointment.center_id)
+            
+                this.openModalEvent = Math.random() ;
+    
+                /*
                 this.app['professional_name']=this.professional.name ; 
                 this.app['specialty1']=new String(this.app.specialty) ; 
                 this.app['home_visit']=this.center.home_visit ; 
@@ -238,6 +257,8 @@ export default {
                //this.searchParameters = { 'specialty' : this.appointments[0].specialty } 
                //this.modalOpen = true; 
                this.openModalEvent = Math.random() ;
+               */
+
             },
           
         
