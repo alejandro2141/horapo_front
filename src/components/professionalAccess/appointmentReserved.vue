@@ -9,21 +9,30 @@ import axios from 'axios';
                     <div class="d-flex justify-content-start border border-2 "  :class="{ 'border-primary': selectApp, 'border-success': !selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
                     
                         <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2" :class="{'bg-primary text-white':selectApp }" style=" border-bottom-left-radius: 25px;" >
-                            <text class="fs-3 fw-light " > {{  format_start_time(appointment.start_time) }} </text><br>
+                            
+                            <text v-if="includeExtraData">
+                              {{ format_start_date(appointment.date) }}<br>
+                            </text> 
+
+                            <text class="fs-3 fw-light " > {{format_start_time(appointment.start_time) }} </text>
+                            <br>
+                            
                             <text class="fs-3 fw-light " >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="center_data.home_visit"   class=" bi bi-house-door" > </i>                                  
                                 <i v-if="center_data.remote_care"  class=" bi bi-camera-video"></i>                   
                             </text>
+                            
                             <text> 
                                <!-- <i style="color:#5BA199" class="display-3 bi bi-person-fill"></i>    -->
                                 <i class="display-5 bi bi-person-fill"></i>
-                            </text> 
+                            </text>
+
                         </div>
 
                         <div class="d-flex justify-content-between w-100"  :style="[ (days_expired ) ? { 'background-color': '#eee'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
                                 <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-dark display-6 p-2"  style=""  >
-                                    
+                                   - {{specialty_data}} -
                                     <div class=""  >
                                         <text class="" ><small>  {{specialtyId2name(appointment.specialty)}} </small> </text>
                                     </div>  
@@ -73,7 +82,7 @@ export default {
         }   
     },
    	
-    props: ['daterequired', 'days_expired' , 'appointment','index','global_specialties','global_comunas','specialty_data','center_data','calendar_data','session_params' ],
+    props: [ 'includeExtraData' ,'daterequired', 'days_expired' , 'appointment','index','global_specialties','global_comunas','specialty_data','center_data','calendar_data','session_params' ],
     emits: ['displayModalReservedDetails'],
 
 	created () {
@@ -88,6 +97,12 @@ export default {
     },
 
 	methods :{
+
+        format_start_date(app_date)
+        {
+            let adate = new Date (app_date)
+            return (adate.getDate()+"/"+(adate.getMonth()+1)+"/"+adate.getFullYear() )
+        },
 
         format_start_time(date_time)
         {
