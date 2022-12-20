@@ -77,7 +77,6 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                 </div>
             </div>
 
-
             <div>
                 <div  v-for="appointment in appointments"  :key="appointment.id"  class="mt-3" >
                     <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>       
@@ -169,6 +168,7 @@ export default {
                 const json_request = { 
                     calendar_id : calid,
                     date  :  new Date()
+                    
                         };
 
                 console.log("professional_pwsite_get_appointments_calendar REQUEST:"+JSON.stringify(json_request))
