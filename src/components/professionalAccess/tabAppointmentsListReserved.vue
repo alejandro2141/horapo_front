@@ -2,11 +2,14 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import AppointmentReserved from  './appointmentReserved.vue'
+import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
 
 </script>
 <template>
     
     <div class="m-3">
+    <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
+
             <p class="text-center">Se listan todas las Reservadas</p>
             <div class="md-form mt-0">
     </div>
@@ -19,7 +22,7 @@ import AppointmentReserved from  './appointmentReserved.vue'
         <hr>        
         <div v-for="app in appTakenFiltered" :key='app.id' >
            <!-- 
-          <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
+            <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
             <br> 
             <small>
             {{ app.patient_name  }} {{ app.patient_doc_id  }} ({{ app.patient_age  }})  {{ app.patient_email  }} <i class="bi bi-telephone"></i>{{app.patient_phone1}}
@@ -56,6 +59,12 @@ data: function () {
             centers : [] , 
             calendars : [] ,
 
+            //for VIew Detail Modal
+            hourTaken : null ,
+            daterequired : null ,
+            openModalShowAppTakenEvent : null,
+            global_comunas   :  null ,
+            global_specialties :  null ,
            		 }
 	},
 	
@@ -87,6 +96,19 @@ data: function () {
 
  
     methods: {
+            
+            displayModalReservedDetails(app)
+            {
+                this.hourTaken = app
+                this.openModalShowAppTakenEvent = Math.random();
+
+            },
+
+            updateAppList()
+            {
+                console.log("updateAppList")
+            },
+
             searchPattern(pattern)
             {  this.pattern = this.pattern.toUpperCase()
                this.appTakenFiltered = [] 
