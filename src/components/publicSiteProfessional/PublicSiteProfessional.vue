@@ -54,6 +54,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
             <div v-if="calendars!=null && calendars.length>0">
                 <div  v-for="calendar in calendars" :key="calendar.id" >
                     
+
                     <div class="d-flex justify-content-between mt-3">
                         <div>
                             <text class="fs-3 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
@@ -101,14 +102,30 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                         <button   @click="showAppAvailable(calendar.id)"  type="button" class="m-2 btn btn-primary">Ver Horas Disponibles <i class="bi bi-arrow-down-short"></i> </button>
                     
                     </div>
+                
+                
+                
+                
+                
                 </div>
             </div>
 
+
+            <!-- LIST APPOINTMENTS --->
+
             <div v-if="appointments !=null && appointments.length">
+               
                 <div  v-for="appointment in appointments"  :key="appointment.id"  class="mt-3" >
-                    <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>       
+                   <!-- <text> {{appointment.date}} </text> -->
+               
+                    <!-- List app of a day -->
+                    <div  v-for="app in appointment.appointments"  :key="app.id"  class="mt-3" >
+                        <appointmentAvailableSearchCalendar class=""  v-if="app != null"  v-on:click="setModalReserve(app)" :appointment='app'  > </appointmentAvailableSearchCalendar>       
+                    </div>
                 </div>
-            </div>   
+            
+            </div>
+
             <div class="m-2 p-2 display-5">
             Sin citas disponibles 
             </div> 
