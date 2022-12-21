@@ -101,7 +101,6 @@ data: function () {
             {
                 this.hourTaken = app
                 this.openModalShowAppTakenEvent = Math.random();
-
             },
 
             updateAppList()
