@@ -26,7 +26,7 @@ import CalendarSummary from './calendar_summary.vue'
                 </div>
                 <div v-if="!show_date_picker" class="display-1 d-flex align-items-center">   <i v-on:click="nextDay()" class="text-primary bi bi-caret-right"></i>   </div>
         </div>     
-     -->
+     show_date_picker -->
         <div v-if="show_date_picker" class="text-center text-dark"> 
            <!-- <datepicker   :forceUpdate="forceUpdateCalendar" :key="componentKey" ref="inputRef"  @selected="handleSelectDate" :monday-first="true" :inline="true" v-model="calendar_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>-->
             <DatePickerJAM  :session_params="session_params" :required_day="required_day" :lock_dates="lock_dates" :calendar_date="calendar_date" v-on:prevMonth="prevMonth" v-on:nextMonth="nextMonth" v-on:selectedDate="selectedDateInDatePicker" :month_summary="month_summary"  :forceUpdateDatePickerJAM="forceUpdateDatePickerJAM" ></DatePickerJAM>
