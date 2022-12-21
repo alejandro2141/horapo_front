@@ -57,11 +57,30 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                     <div class="d-flex justify-content-between mt-3">
                         <div>
                             <text class="fs-3 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
-                            <text v-if="getCenterData(calendar.center_id).home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> </text>
-                            <text v-if="getCenterData(calendar.center_id).center_visit" > Cita en Consulta <i class="h1 bi bi-building"></i> </text>
-                            <text v-if="getCenterData(calendar.center_id).remote_care" > Atención Remota <i class="h1 bi bi-camera-video"></i> </text>
                             
-                        <br> {{getCenterData(calendar.center_id).address}}
+                            <text v-if="getCenterData(calendar.center_id).home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> 
+                              <br>
+                                <text class="text-primary fs-5">
+                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna1) }}  
+                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna2) }} 
+                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna3) }} 
+                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna4) }} 
+                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna5) }} 
+                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna6) }}
+                                </text>
+                            </text>
+                            
+                            <text v-if="getCenterData(calendar.center_id).center_visit" > Cita en Consulta <i class="h1 bi bi-building"></i> 
+                                <text class="text-primary fs-5">
+                                    <br> {{ id2comunaName(getCenterData(calendar.center_id).comuna) }}
+                                </text>
+                            </text>
+
+                            <text v-if="getCenterData(calendar.center_id).remote_care" > Atención Remota <i class="h1 bi bi-camera-video"></i> 
+                                Todas las comunas
+                            </text>
+                            
+                            <br> {{getCenterData(calendar.center_id).address}}
                         </div>
                         <!--
                         <div>
@@ -72,16 +91,27 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                     <hr>
                     
                     <div class="d-flex justify-content-center">
-                        <button   @click="showAppAvailable(calendar.id)"  type="button" class="btn btn-primary">Ver Horas Disponibles <i class="bi bi-arrow-down-short"></i> </button>
+                        
+                        <div class="m-2">
+                            <input class="p-3" type="date" id="start" name="trip-start"
+                             v-model="selected_search_date" 
+                            :min="search_date.toISOString().split('T')[0]" max="2023-12-31">
+                        </div>
+
+                        <button   @click="showAppAvailable(calendar.id)"  type="button" class="m-2 btn btn-primary">Ver Horas Disponibles <i class="bi bi-arrow-down-short"></i> </button>
+                    
                     </div>
                 </div>
             </div>
 
-            <div>
+            <div v-if="appointments !=null && appointments.length">
                 <div  v-for="appointment in appointments"  :key="appointment.id"  class="mt-3" >
                     <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>       
                 </div>
-            </div>    
+            </div>   
+            <div class="m-2 p-2 display-5">
+            Sin citas disponibles 
+            </div> 
 
 
             <div class="mt-5 pt-5">
@@ -109,8 +139,10 @@ export default {
         calendars : null ,
         centers   : null ,
         specialties : null ,
+        locations: null ,
 
         appointments : [] ,
+        search_date : null ,
 
         //form modal data
         searchParameters : [] ,
@@ -118,6 +150,8 @@ export default {
         center_data : [] ,
         openModalEvent : 0 ,
         comunas: [],
+
+        selected_search_date : null ,
  
         }
   },
@@ -140,7 +174,8 @@ export default {
         this.cal_id=params.get("cal_id")
         console.log("URL PARAMETROS :  prof_id:"+this.prof_id+" cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
     
-        this.cdate = new Date();
+        this.cdate = new Date()
+        this.search_date = new Date()
        
         this.get_professional_data(this.prof_id,this.cal_id);        
         this.active_spinner = false 
@@ -167,7 +202,7 @@ export default {
             {
                 const json_request = { 
                     calendar_id : calid,
-                    date  :  new Date()
+                    date  :  this.selected_search_date
                     
                         };
 
@@ -194,17 +229,17 @@ export default {
                this.calendars = response.data.calendars 
                this.centers= response.data.centers 
                this.specialties = response.data.specialties 
+               this.locations = response.data.locations
+            
                
                console.log("professional_pwsite_get_calendar RESPONSE "+JSON.stringify(response) );
             },
 
             id2comunaName(id)
-            {
-             /*
-            let temp= this.global_comunas.find(elem => elem.id ==  id  )
+            {    
+            let temp= this.locations.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
-            */
             },
 
             id2specialtyName(id)
