@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import LoadProgress from '../loadProgress.vue'
 import axios from 'axios'
 import GeneralHeader from '../GeneralHeader.vue'
-import appointmentAvailableSearchCalendar from './AppointmentAvailableSearchCalendar.vue'
+//import appointmentAvailableSearchCalendar from './AppointmentAvailableSearchCalendar.vue'
 import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue';
 /*
 import patientAppointmentAvailable  from '../publicSearch/PatientAppointmentAvailable.vue'
@@ -97,7 +97,8 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         </p>
        
         <div  v-for="appointment in appointments" :key="appointment.id" class="mt-3">
-                <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>                  
+          <!--      <appointmentAvailableSearchCalendar class=""  v-if="appointment != null"  v-on:click="setModalReserve(appointment)" :appointment='appointment'  > </appointmentAvailableSearchCalendar>                  
+       -->
         </div>
 
 
