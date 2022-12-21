@@ -43,8 +43,8 @@ import axios from 'axios';
 
        
 
-
-        <div v-if="show_days" class="border border-primary" style="border-radius: 15px;">
+<!-- show_days -->
+        <div v-if="true" class="border border-primary" style="border-radius: 15px;">
             <table  class=" table " >
                 <tbody>
                     <tr class="h6 text-dark">
@@ -166,29 +166,37 @@ import axios from 'axios';
             </table> 
         </div>
         
-        <div v-if="true" class="display-5 text-primary">
-            <small>
-             
+        <div v-if="true" class="display-3 text-primary">
+              
+                  
                     <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
-                         
+
+                        <i @click="swLock(calendar_date)" class="pt-4 mb-0 fs-1 bi bi-unlock-fill opacity-50"></i>  
+             
+                         <!--
                         <text style="font-size:1.7em" class="pt-2 mb-0" @click="prevDay(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
-                           
+                           -->
                         <text @click="show_days = !show_days" class="pt-3 mb-0" >
-                                 <i  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i>   {{day_long_names[calendar_date.getDay()] }} 
+                                <!-- <i  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i> -->  {{day_long_names[calendar_date.getDay()] }} 
                                 {{ calendar_date.getDate() }}  
                         </text> 
-                        
+
+                        <text></text>
+                       
+                        <!--
                         <text style="font-size:1.7em" class="pt-2 mb-0" @click="nextDay(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
-                     
+                     -->
                     </div>
-            </small>
+           
         </div>
 
-    <div class="d-flex justify-content-around fs-3 text-primary opacity-50" >
+<!--
+    <div class="d-flex justify-content-around fs-3 text-primary opacity-50 mt-4" >
         <i @click="swLock(calendar_date)" class="bi bi-unlock-fill "></i>   
-      <!--  <i @click="show_days = !show_days"  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i> -->
+        <i @click="show_days = !show_days"  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i> 
        
     </div>
+-->
                        
 
     </div>   
