@@ -15,7 +15,7 @@ import { ref } from 'vue'
             
             <div class="">
                 <div>
-                    <text class="fs-4"> 
+                    <text class="fs-5"> 
                         {{ getDateFormat(appointment.date) }}
                             
                     </text>   
@@ -66,7 +66,7 @@ methods: {
     getTimeFormat(time)
     {   
         let aux_time=new Date(time) 
-        return (String(aux_time.getHours()).padStart(2,0)+" : "+String(aux_time.getMinutes()).padStart(2,0) )
+        return (String(aux_time.getHours()).padStart(2,0)+":"+String(aux_time.getMinutes()).padStart(2,0) )
     },
     getDateFormat(date)
     { 
