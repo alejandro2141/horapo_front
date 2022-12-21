@@ -20,15 +20,20 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 		
 
+		<!-- LIST APPOINTMENT -->
+		<!--
 		<div v-if="showTopMenu" >
 			<i @click="switchViewTo(5)" class="bi bi-person-square display-5"></i>  
 		</div>
-		
+		-->
+
+
 		<text  >
 			<text v-if="showTopMenu" class="text-white-50">  </text>
 		</text>
 
 		<!-- DAY CALENDAR -->
+
 		<div v-if="showTopMenu" @click="setToday(dateObj);switchViewTo(2)" >
 			<div class="w-100 d-flex justify-content-around">
 				<div class="bg-white " style=" width:3px;  height:3px"  >
@@ -59,6 +64,9 @@ import SwitchViewButton from './switchViewButton.vue'
 			<text v-if="showTopMenu" class="text-white-50"> </text>
 		</text>
 		
+
+
+		<!-- CONSULTAS -->
 		<text>
 			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
 				<i  class="fs-6" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >Consultas</i>
@@ -71,6 +79,7 @@ import SwitchViewButton from './switchViewButton.vue'
 			<text v-if="true" class="text-white-50" >|</text>
 		</text>
 
+		<!--CALENDARS -->
 		<text>	
 			<i v-if="showTopMenu" class="fs-6 bi " @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" >Calendarios</i>
 			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
@@ -126,16 +135,25 @@ import SwitchViewButton from './switchViewButton.vue'
 			<div class="bg-secondary" >
 				<hr class="text-white">
 			
+				<!-- SALIR -->
 				<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light text-white "> 
 					&nbsp; <i class="pl-5 bi bi-arrow-left-circle fs-5 "></i> &nbsp; Salir 
 				</a>
 			
 			<hr class="text-white">
+
+
+				<!-- PROFESSIONAL DATA -->
 				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
-					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información 
-					
+					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información 		
 				</a>
+
 				<hr class="text-white">
+				
+				<!-- APPOINTMENT LIST  -->
+				<a @click="switchViewTo(5);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+					&nbsp; <i class="bi bi-person-square fs-5"> </i> &nbsp; Lista de Citas  
+				</a>
 
 				<!--
 				<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="fs-3  text-decoration-none"  >	
