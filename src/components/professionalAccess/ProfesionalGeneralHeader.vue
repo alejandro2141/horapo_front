@@ -152,7 +152,7 @@ import SwitchViewButton from './switchViewButton.vue'
 				
 				<!-- APPOINTMENT LIST  -->
 				<a @click="switchViewTo(5);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
-					&nbsp; <i class="bi bi-person-square fs-5"> </i> &nbsp; Lista de Citas  
+					&nbsp; <i class="bi bi-person-lines-fill fs-5"></i> &nbsp; Lista de Citas  
 				</a>
 
 				<!--
