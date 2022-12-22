@@ -103,10 +103,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                     
                     </div>
                 
-                
-                
-                
-                
+                                
                 </div>
             </div>
 
@@ -116,7 +113,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
             <div v-if="appointments !=null && appointments.length">
                
                 <div  v-for="appointment in appointments"  :key="appointment.id"  class="mt-3" >
-                   <!-- <text> {{appointment.date}} </text> -->
+                    <!-- <text> {{appointment.date}} </text> -->
                
                     <!-- List app of a day -->
                     <div  v-for="app in appointment.appointments"  :key="app.id"  class="mt-3" >
