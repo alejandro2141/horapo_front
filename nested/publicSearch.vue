@@ -15,7 +15,7 @@ import SearchAppointment from '../src/components/publicSearch/SearchAppointment.
 <!--
     <GeneralHeader></GeneralHeader>
     -->
-    <div id="app" class="p-3 bg-white" >       
+    <div id="app" class=" bg-white" >       
         <SearchAppointment :global_specialties="global_specialties" :global_comunas="global_comunas" ></SearchAppointment>
     </div>
 
