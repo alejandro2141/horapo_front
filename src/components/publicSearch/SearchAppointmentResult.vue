@@ -18,17 +18,25 @@ import LoadProgress from '../loadProgress.vue'
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
-            <text>Horas disponibles mas proximas:</text>
+          
             <div v-for="day in array_appointments" :key="day.id" >
                     
                     <div v-if="day.appointments != null && day.appointments.length >0" >
 
+         <!--    <hr class="style-eight" :style="{'color' : '#FF0000' , ':after.content':'asdf' }" >  -->
+         <hr  :class="classObject" > 
+         
+          <!-- <hr style="  overflow: visible; padding: 0;  border: none; border-top: medium double #333;  color: #333; text-align: center; "  >
+-->
                             <p class=" mt-4"> <text class="h5"> {{format_date(day.date)}}  </text> </p>
                             
                             <div v-if="day.appointments != null && day.appointments.length >0 ">
+                                
+                                <!-- Cicle for apps -->
                                 <div  v-for="app in day.appointments" :key="app.id" class="mt-0 " > 
                                         <patientAppointmentAvailable   :center_data="getCenterData(day.centers,app.center_id)"    :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app,day.centers)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
                                 </div>
+                            
                             </div>
 
                             <div v-else class="m-0 p-0">
@@ -55,6 +63,24 @@ import LoadProgress from '../loadProgress.vue'
 </template>
 
 <style scoped>
+
+hr.style-eight {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+hr.style-eight:after {
+    content: "§"; 
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
 
 </style>
 
@@ -116,6 +142,30 @@ export default {
         },
 
     methods: {
+
+            getClassObject()
+            {
+                let classObject = {
+                overflow: 'visible' , /* For IE */
+                padding: '0' ,
+                border: 'none',
+                'border-top' : 'medium double #333' ,
+                color: '#333',
+                'text-align' : 'center',
+            /*
+                after = {   content: "§", 
+                            display : 'inline-block',
+                            position: 'relative',
+                            top: '-0.7em',
+                            'font-size': '1.5em',
+                            padding: '0 0.25em',
+                            background: 'white',
+                        }
+                        */
+                }
+                return  classObject
+            },            
+
             format_date(date)
             {
                 let aux_date = new Date(date)
