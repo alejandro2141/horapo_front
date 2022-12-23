@@ -57,7 +57,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
                     <div class="d-flex justify-content-between mt-3">
                         <div>
-                            <text class="fs-3 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
+                            <text class="fs-1 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
                             
                             <text v-if="getCenterData(calendar.center_id).home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> 
                               <br>
@@ -109,12 +109,11 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
 
             <!-- LIST APPOINTMENTS --->
-
-            <div v-if="appointments !=null && appointments.length">
+            Resultados en los proximos {{appointments.length}} dias.
+            <div v-if="appointments !=null && appointments.length>0">
                
                 <div  v-for="appointment in appointments"  :key="appointment.id"  class="mt-3" >
-                    <!-- <text> {{appointment.date}} </text> -->
-               
+                    <!-- <text> {{appointment.date}} </text> -->    
                     <!-- List app of a day -->
                     <div  v-for="app in appointment.appointments"  :key="app.id"  class="mt-3" >
                         <appointmentAvailableSearchCalendar class=""  v-if="app != null"  v-on:click="setModalReserve(app)" :appointment='app'  > </appointmentAvailableSearchCalendar>       
@@ -123,8 +122,13 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
             
             </div>
 
-            <div class="m-2 p-2 display-5">
-            Sin citas disponibles 
+            <div v-else class="m-2 p-2 display-5">
+             
+                <div class="w-100 text-center">
+                    <i class="m-0 p-0 bi bi-wind display-1" ></i>
+                    <br> Sin Horas disponible 
+                </div>
+
             </div> 
 
 
@@ -190,6 +194,7 @@ export default {
     
         this.cdate = new Date()
         this.search_date = new Date()
+        this.selected_search_date = new Date()
        
         this.get_professional_data(this.prof_id,this.cal_id);        
         this.active_spinner = false 
