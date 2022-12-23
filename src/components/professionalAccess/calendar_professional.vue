@@ -246,7 +246,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
               <div v-if="true" class="d-flex justify-content-between p-3 text-white" > 
                 <div> 
-                  <a  class="text-white" :href="'mailto:user@example.com?subject=Agenda Online de:'+session_params['professional_name']+' para especialidad de: '+idSpecialty2name(specialty_code)+'&body=Hola. Agenda Online de:'+session_params['professional_name']+' para especialidad de: '+idSpecialty2name(specialty_code)+'. Puedes buscar una hora disponible en:  http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+' '">Email<br> 
+                  <a  class="text-white" :href="'mailto:user@example.com?subject=Agenda Online de:'+session_params['professional_name']+' para especialidad de: '+idSpecialty2name(specialty_code)+'&body=Hola.  Agenda Online de:'+session_params['professional_name']+' para especialidad de: '+idSpecialty2name(specialty_code)+'. Puedes buscar una hora disponible en http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+' '">Email<br> 
                   <i class="display-1  bi bi-envelope"></i> </a> 
                 </div>
                 
@@ -259,7 +259,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                 </div>
                 
                 <div v-if="session_params != null"> 
-                  <a class="text-white" :href="'whatsapp://send?text=Agenda Online de:'+session_params['professional_name']+' para especialidad de: '+idSpecialty2name(specialty_code)+' http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id">
+                  <a class="text-white" :href="'whatsapp://send?text=Agenda de '+session_params['professional_name']+' para especialidad '+idSpecialty2name(specialty_code)+'. Puedes buscar una hora disponible en HTTP://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id">
                    WhatsApp <br>
                    <i class="text-white display-1 bi bi-whatsapp"></i> </a>  
                 </div>
