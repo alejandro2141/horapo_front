@@ -8,18 +8,24 @@ import suggestedSearch from './SuggestedSearch.vue'
 import FooterContent from '../FooterContent.vue'
 import WordSphere from 'wordsphere';
 import SuggestedSearch from './SuggestedSearch.vue'
+import headerPublicSearch from '../HeaderPublicSearch.vue'
 
 
 </script>
 
 <template>
   <div class="bg-white p-0">
+   
+    <headerPublicSearch></headerPublicSearch>
+
   <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
   
       <div class="bg-white  pb-1 text-center"  > 
+        <!--
         <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
             <text class="display-4">123H<small><small><i class="bi bi-flower1 h1"></i></small></small>RA</text>  
-        </a> 
+        </a>
+        --> 
      <!--
         <small  class="text-muted"> <br> Las mejores consultas en un solo lugar </small>
      -->
@@ -39,7 +45,8 @@ import SuggestedSearch from './SuggestedSearch.vue'
 
           <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
                  <!-- {{metric_search/1000}} Seg,  {{n_appointments_found }} resultados en los proximos 40 dias.  -->
-                 {{n_appointments_found }} resultados en los proximos 40 dias
+                <p class="text-center">{{n_appointments_found }} resultados para los proximos 40 dias</p>
+                 
                   <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
                   -->
                   <hr >
@@ -54,7 +61,11 @@ import SuggestedSearch from './SuggestedSearch.vue'
         
             </div>
       </div>
-  <FooterContent v-if="true"  ></FooterContent>
+
+<!--
+  <FooterContent v-if="show_footer"  ></FooterContent>
+ --> 
+  
   </div>
 
   
@@ -112,6 +123,8 @@ export default {
             showMainScreen : true ,
 
             suggestedSearchParams : null ,
+
+            show_footer : true,
     }
   },
 
@@ -119,11 +132,10 @@ export default {
     
 
  mounted () {
-             //this.$root.$emit('start_autonomous_move')
-             
              this.daterequired = new Date() 
              this.currentDate =  new Date() 
              this.appointments_filtered = [] 
+             this.show_footer = true 
             },
 
 methods: {
@@ -141,6 +153,10 @@ methods: {
 
             async searchGeneric(params)
             {
+              this.show_footer=false 
+                            
+              //this.searchGeneric = false
+
                console.log("Search Generic Params :"+JSON.stringify(params))
                let response_search = await this.searchAppointmentsGeneric(params)
                
