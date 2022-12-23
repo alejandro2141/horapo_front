@@ -8,6 +8,7 @@ import axios from 'axios';
 <div>
    
     <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-primary':false  }" style="border-radius: 15px; background-color:#eee " >
+            <!--
             <div class="display-5">
                 <small><small>
                     
@@ -19,6 +20,7 @@ import axios from 'axios';
                   
                 </small></small>
             </div>
+            -->
 
             <!--
             <div v-if="!show_days" class="display-5 text-primary">
@@ -44,7 +46,7 @@ import axios from 'axios';
        
 
 <!-- show_days -->
-        <div v-if="true" class="border border-primary" style="border-radius: 15px;">
+        <div v-if="show_days" class="border border-primary" style="border-radius: 15px;">
             <table  class=" table " >
                 <tbody>
                     <tr class="h6 text-dark">
@@ -164,30 +166,43 @@ import axios from 'axios';
                             
                 </tbody>
             </table> 
+            
         </div>
         
+        <div class="display-5">
+                <small><small>
+                    
+                    <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
+                        <text v-if="true" style="font-size:1.7em" class="pt-2 mb-0" @click="prevMonth(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
+                        <text  @click="show_days = !show_days"  class="pt-3 mb-0 text-primary" >   {{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}}  </text> 
+                        <text v-if="true" style="font-size:1.7em" class="pt-2 mb-0" @click="nextMonth(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
+                    </div>
+                  
+                </small></small>
+        </div>
+
+
         <div v-if="true" class="display-3 text-primary">
-              
+             <small><small>
                   
                     <div  v-if="calendar_date!=null" class="d-flex justify-content-around">
 
                         <i @click="swLock(calendar_date)" class="pt-4 mb-0 fs-1 bi bi-unlock-fill opacity-50"></i>  
              
-                         <!--
+                         
                         <text style="font-size:1.7em" class="pt-2 mb-0" @click="prevDay(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
-                           -->
+                         
                         <text @click="show_days = !show_days" class="pt-3 mb-0" >
                                 <!-- <i  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i> -->  {{day_long_names[calendar_date.getDay()] }} 
                                 {{ calendar_date.getDate() }}  
                         </text> 
-
-                        <text></text>
-                       
-                        <!--
+                        
                         <text style="font-size:1.7em" class="pt-2 mb-0" @click="nextDay(calendar_date)" > <i class="text-primary bi bi-caret-right "></i>      </text>
-                     -->
+                     
+                        <text></text>
+
                     </div>
-           
+            </small></small>
         </div>
 
 <!--
