@@ -24,11 +24,11 @@ import LoadProgress from '../loadProgress.vue'
                     <div v-if="day.appointments != null && day.appointments.length >0" >
 
          <!--    <hr class="style-eight" :style="{'color' : '#FF0000' , ':after.content':'asdf' }" >  -->
-         <hr  :class="classObject" > 
+         <hr  style="overflow: visible; padding: 0; border: none;  border-top: medium double #333;  color: #333;  text-align: center;  :after : {content : aaaa} " > 
          
           <!-- <hr style="  overflow: visible; padding: 0;  border: none; border-top: medium double #333;  color: #333; text-align: center; "  >
 -->
-                            <p class=" mt-4"> <text class="h5"> {{format_date(day.date)}}  </text> </p>
+                           <!-- <p class=" mt-4"> <text class="h5"> {{format_date(day.date)}}  </text> </p> -->
                             
                             <div v-if="day.appointments != null && day.appointments.length >0 ">
                                 
@@ -65,15 +65,20 @@ import LoadProgress from '../loadProgress.vue'
 <style scoped>
 
 hr.style-eight {
+   
     overflow: visible; /* For IE */
     padding: 0;
     border: none;
     border-top: medium double #333;
     color: #333;
     text-align: center;
+      
+   
+
+
 }
 hr.style-eight:after {
-    content: "§"; 
+     content: "§";
     display: inline-block;
     position: relative;
     top: -0.7em;
