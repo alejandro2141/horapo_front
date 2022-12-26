@@ -6,9 +6,9 @@ import axios from 'axios';
 </script>
 
 <template>
-                    <div class="d-flex justify-content-start border border-2 "  :class="{ 'border-primary': selectApp, 'border-success': !selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
+                    <div class="d-flex justify-content-start "  :class="{ 'border-primary': selectApp, 'border-success': !selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 0px; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
                     
-                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2" :class="{'bg-primary text-white':selectApp }" style=" border-bottom-left-radius: 25px;" >
+                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2" :class="{'bg-primary text-white':selectApp }" style=" border-bottom-left-radius: 0px; " >
                             
                             <text v-if="includeExtraData">
                               {{ format_start_date(appointment.date) }}<br>
@@ -30,7 +30,7 @@ import axios from 'axios';
 
                         </div>
 
-                        <div class="d-flex justify-content-between w-100"  :style="[ (days_expired ) ? { 'background-color': '#eee'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;" >       
+                        <div class="d-flex justify-content-between w-100"  :style="[ (days_expired ) ? { 'background-color': '#FFF'}:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;border-bottom-right-radius: 25px;" >       
                                 <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-dark display-6 p-2"  style=""  >
                                   
                                     <div class=""  >
@@ -56,7 +56,7 @@ import axios from 'axios';
                                     </div>
                                 </div>    
                                 
-                                <div @click="$emit('displayModalReservedDetails', appointment )" style="background-color: #5BA199 ; opacity: 0.6;  border-top-right-radius:25px" >
+                                <div @click="$emit('displayModalReservedDetails', appointment )" style="background-color: #5BA199 ; opacity: 0.6;  border-top-right-radius:25px;  border-bottom-right-radius:25px" >
                                     <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-white"  ></i> 
                                 </div>   
                         </div>           
