@@ -29,7 +29,7 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
             </small>
             <br>
             -->
-            <div class="m-1">
+            <div class="mt-4">
             <AppointmentReserved  includeExtraData='true' v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
             </div>                           
         </div>
