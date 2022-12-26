@@ -68,11 +68,19 @@ import SwitchViewButton from './switchViewButton.vue'
 
 		<!-- CONSULTAS -->
 		<text>
+			<!--
 			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
 				<i  class="fs-6" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >Consultas</i>
 	        	<br><i class="bi bi-buildings"></i>
 			</div>
+			-->
+			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
+				<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn btn-light h6 small">Consultas</button>
+			</div>
+
 			<i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
+		
+		
 		</text>
 
 		<text>
@@ -81,9 +89,12 @@ import SwitchViewButton from './switchViewButton.vue'
 
 		<!--CALENDARS -->
 		<text>	
+			<!--
 			<i v-if="showTopMenu" class="fs-6 bi " @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" >Calendarios</i>
 			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
-			
+			-->
+			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
+			<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn btn-light small">Agendas</button>
 		</text>
 		<!--
 		<text>	
