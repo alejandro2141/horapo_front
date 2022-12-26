@@ -6,7 +6,7 @@ import axios from 'axios';
 <template>
             
             
-                <div class="d-flex justify-content-start border border-1"  :class="{ 'border-primary': selectApp }"  style="background-color: #fff;  border-bottom-right-radius: 25px; border-top-right-radius: 25px;">
+                <div class="d-flex justify-content-start "  :class="{ 'border-primary': selectApp }"  style="background-color: #fff;  border-bottom-right-radius: 25px; border-top-right-radius: 25px;">
                             <div  class="p-1" :style="[ {'background-color' : calendar_data.color}]" >
                                 
                             </div>
@@ -31,7 +31,7 @@ import axios from 'axios';
                                 
                             </div>
                           -->
-                            <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : '#FFF'} , (days_expired ) ? { 'background-color': '#eee'  }:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;border-bottom-right-radius: 25px; " >       
+                            <div class="d-flex justify-content-between w-100"  :style="[ {'background-color' : '#FFF'} , (days_expired ) ? { 'background-color': '#FFF'  }:{ } , (appointment.lock_day ) ? { 'background-color': '#444', 'background' : 'repeating-linear-gradient( -45deg, #000, #888 1px, #333 5px, #333 10px )' }:{ 'opacity': '1' }  ]"  style="border-top-right-radius: 25px;border-bottom-right-radius: 25px; " >       
                                 
                                     <div  @click="selectApp=!selectApp; $emit('addToBlockList',appointment)" class="w-100 text-dark display-6 p-2" :class="{ 'text-white' : appointment.lock_day}"  style=""  >
                                         <div class=""  >
