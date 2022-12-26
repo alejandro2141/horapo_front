@@ -33,7 +33,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 
 		<!-- DAY CALENDAR -->
-
+		<!--
 		<div v-if="showTopMenu" @click="setToday(dateObj);switchViewTo(2)" >
 			<div class="w-100 d-flex justify-content-around">
 				<div class="bg-white " style=" width:3px;  height:3px"  >
@@ -49,14 +49,20 @@ import SwitchViewButton from './switchViewButton.vue'
 
 				<div class="bg-danger" style="border-radius:5px; ">
 					<text class=""   >   </text>
-					<!-- /{{month_name[month]}} -->
+					
 				</div>
 
 				<div class="bg-white  mt-1 " style="border-bottom-left-radius:5px;  border-bottom-right-radius:5px" >
 					<text class="text-danger"  > &nbsp; {{day}} &nbsp;  </text>
-					<!-- /{{month_name[month]}} -->
+					
 				</div>
 			</div>
+		</div>
+		{{month_name[month]}}
+		{{month_name[month]}}
+		-->
+		<div v-if="showTopMenu" class="m-1" @click="setToday(dateObj);switchViewTo(2)" >
+			HOY <text class="text-white"  > {{day}}/{{month+1}} </text>
 		</div>
 		
 
@@ -75,11 +81,10 @@ import SwitchViewButton from './switchViewButton.vue'
 			</div>
 			-->
 			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
-				<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn btn-light h6 small">Consultas</button>
+				<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn btn-light small p-1"><small>Consultas <i class="bi bi-building"></i></small></button>
 			</div>
 
-			<i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
-		
+			<i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>	
 		
 		</text>
 
@@ -94,7 +99,7 @@ import SwitchViewButton from './switchViewButton.vue'
 			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
 			-->
 			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
-			<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn btn-light small">Agendas</button>
+			<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn btn-light small p-1"><small>Calendar <i class="bi bi-calendar"></i> </small></button>
 		</text>
 		<!--
 		<text>	
