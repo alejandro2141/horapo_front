@@ -7,7 +7,7 @@ import axios from 'axios';
 <template>
 <div>
    
-    <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-primary':false  }" style="border-radius: 15px; background-color:#eee " >
+    <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-secondary':false  }" style="border-radius: 15px; background-color:#eee " >
             <!--
             <div class="display-5">
                 <small><small>
@@ -46,7 +46,7 @@ import axios from 'axios';
        
 
 <!-- show_days -->
-        <div v-if="show_days" class="border border-primary" style="border-radius: 15px;">
+        <div v-if="show_days" class="" style="border-radius: 15px;">
             <table  class=" table " >
                 <tbody>
                     <tr class="h6 text-dark">
