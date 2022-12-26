@@ -55,7 +55,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                 <div  v-for="calendar in calendars" :key="calendar.id" >
                     
 
-                    <div class="d-flex justify-content-between mt-3">
+                    <div class="d-flex justify-content-between mt-5">
                         <div>
                             <text class="fs-1 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
                             
