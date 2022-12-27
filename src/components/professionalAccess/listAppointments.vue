@@ -62,7 +62,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     <div v-if="filteredAppList != null && filteredAppList.length >0  ">
         <div v-for="hour in filteredAppList" :key="hour"  >
                 
-                <div class="m-2 mt-3">
+                <div class="m-2 mt-4">
 
                     <div v-if="hour.app_available != null"  >
                       
