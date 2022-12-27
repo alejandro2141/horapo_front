@@ -53,7 +53,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
                             <div>
                                 <div class="bg-secondary p-1 w-75" style="border-radius: 15px;" >
-                                    <input type="text" :value="get_link_calendar()" id="linkcal">
+                                    <input  type="text" :value="get_link_calendar()" id="linkcal">
                                    
                                 </div>
                                 <div @click="copyToClipBoard(get_link_calendar())" class="d-flex justify-content-end">
@@ -68,7 +68,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
                                 <div v-if="showInputEmail"> 
                                     Ingrese Email
-                                    <input type="text" v-model="customer_email" id="fname" name="fname"><br>
+                                    <input class="text-dark bg-white" type="text" v-model="customer_email" id="fname" name="fname"><br>
                                     <!--
                                     <a  class="text-white" :href="'mailto:'+customer_email+'?subject='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'&body='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+' '">
                                     -->
@@ -87,7 +87,8 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
                                 <div v-if="showInputPhone"> 
                                     Ingrese Telefono
-                                    <input type="text" id="fname" v-model="customer_phone" name="fname"><br>
+                                    <input class="text-dark bg-white" type="text" id="fname" v-model="customer_phone" name="fname">
+                                    <br>
                                     <!--
                                     <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text='+idSpecialty2name(specialty_code)+'\n'+session_params['professional_name']+'\nHTTP://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+''" >
                                     Enviar </a>
@@ -327,7 +328,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
                 </div>
 
-
+<!--
                 <div  class="d-flex justify-content-between mt-2">
                             <text  @click="showSocial=!showSocial" class="" >Compartir en Redes Sociales  </text>  
                 </div>
@@ -358,7 +359,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                 </div>
 
               </div>
-
+-->
                               
                 <hr class="text-white ">
 
@@ -494,7 +495,6 @@ export default {
            // Copy the text inside the text field
             navigator.clipboard.writeText(copyText.value);
             alert("URL de su Agenda Copiado "+copyText.value)
-
 
            //navigator.clipboard.writeText(text);
         },
