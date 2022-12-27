@@ -20,6 +20,8 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                     <div class="card mb-5  w-100 border border-1 border-white bg-secondary" style="width: 18rem; border-radius: 15px; "   >
                     
                     <div class="card-body p-0 m-0" >
+
+                    
                     
                     <div class="d-flex justify-content-between p-2 w-100 bg-secondary" style="width: 18rem; border-radius: 15px; " >
                                 <text class="card-title display-6 text-white mt-0 pt-0"   >
@@ -48,6 +50,16 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                         <div class="d-flex justify-content-end"> <i @click="showSocials=false" class="bi bi-x-lg"></i> </div>
                         
                         <div>
+
+                            <div>
+                                <div class="bg-secondary p-1" style="border-radius: 15px;" >
+                                    {{get_link_calendar()}}
+                                </div>
+                                <div @click="copyToClipBoard(get_link_calendar())" class="d-flex justify-content-end">
+                                    copy
+                                </div>
+                            </div>
+
                             <div > 
                                 <div @click="showInputEmail=!showInputEmail">
                                     <i class="display-2  bi bi-envelope"></i>  Enviar calendario por correo
@@ -463,15 +475,32 @@ export default {
 
 	methods :{
 
+        copyToClipBoard(text)
+        {
+            /*
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+            */
+           navigator.clipboard.writeText(text);
+        },
+        get_link_calendar()
+        {
+          let link="http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" "
+          return (link)
+        },
+
         get_link_email(email)
         {
-            let link="mailto:"+email+"?subject="+this.idSpecialty2name(this.specialty_code)+"%20"+this.idSpecialty2name(this.specialty_code)+"&body="+this.idSpecialty2name(this.specialty_code)+"-"+this.idSpecialty2name(this.specialty_code)+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" "
+            let link="mailto:"+email+"?subject="+this.idSpecialty2name(this.specialty_code)+"%20"+this.session_params.professional_name+"&body="+this.idSpecialty2name(this.specialty_code)+"\n"+this.session_params.professional_name+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" "
             return (link)
 
         },
         get_link_whatsApp(phone)
         {
-            let link="https://wa.me/"+phone+"?text="+this.idSpecialty2name(this.specialty_code)+"\n%20"+this.idSpecialty2name(this.specialty_code)+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" " 
+            let link="https://wa.me/"+phone+"?text="+this.idSpecialty2name(this.specialty_code)+"\n%20"+this.session_params.professional_name+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" " 
             return (link)
         },
 
