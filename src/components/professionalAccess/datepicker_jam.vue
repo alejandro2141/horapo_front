@@ -46,7 +46,24 @@ import axios from 'axios';
        
 
 <!-- show_days -->
-        <div v-if="show_days" class="" style="border-radius: 15px;">
+        <div v-if="show_days" class="border border-1" style="border-radius: 15px; ">
+            
+            <div class="d-flex justify-content-around">
+
+                <text>
+                    <i @click="swLock(calendar_date)" class="fs-1 bi bi-unlock-fill opacity-50"></i> 
+                </text>
+
+                <text @click="show_days = !show_days" class="text-primary m-2">
+                     {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  {{  month_full_names[calendar_date.getMonth()] }}  {{ calendar_date.getFullYear() }}  
+                </text>    
+
+                <text @click="show_days = !show_days">
+                    <i class=" text-primary bi bi-x display-3"></i>
+                </text>
+
+            </div>
+
             <table  class=" table " >
                 <tbody>
                     <tr class="h6 text-dark">
@@ -168,6 +185,7 @@ import axios from 'axios';
             </table> 
             
         </div>
+        <!--
         
         <div class="display-5">
                 <small><small>
@@ -193,7 +211,7 @@ import axios from 'axios';
                         <text style="font-size:1.7em" class="pt-2 mb-0" @click="prevDay(calendar_date)" > <i class="text-primary bi bi-caret-left "></i>       </text>  
                          
                         <text @click="show_days = !show_days" class="pt-3 mb-0" >
-                                <!-- <i  class="bi bi-calendar3 " style="font-size: 1.1em;" ></i> -->  {{day_long_names[calendar_date.getDay()] }} 
+                                {{day_long_names[calendar_date.getDay()] }} 
                                 {{ calendar_date.getDate() }}  
                         </text> 
                         
@@ -204,6 +222,7 @@ import axios from 'axios';
                     </div>
             </small></small>
         </div>
+        -->
 
 <!--
     <div class="d-flex justify-content-around fs-3 text-primary opacity-50 mt-4" >
@@ -216,6 +235,63 @@ import axios from 'axios';
 
     </div>   
   
+
+       <div class="d-flex justify-content-center   m-3">
+            <table class=" display-5 w-100">
+                    
+                    <tr>
+                        <td @click="prevMonth(calendar_date)"> 
+                            <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
+                        </td>
+                        
+                        <td  @click="show_days = !show_days" class="fs-2 "> 
+                            {{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} 
+                        </td>
+                        
+                        <td @click="nextMonth(calendar_date)">
+                            <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i> 
+                        </td>
+                    </tr>
+
+                   
+                    <tr style="font-size: 15px;" >
+                        <td>
+                        </td>
+
+                        <td>
+                            <i   @click="show_days = !show_days" class="bi bi-calendar4-week text-primary" ></i>
+                        </td>
+
+                        <td>
+                        </td>
+                    </tr>
+                     
+                    <tr>
+                        <td @click="prevDay(calendar_date)">
+                            <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
+                        </td>
+                        
+                        <td @click="show_days = !show_days" > 
+                            {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  
+                        </td>
+
+                        <td @click="nextDay(calendar_date)"> 
+                            <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i>
+                        </td>
+                    </tr>
+
+            </table>
+
+        </div>
+
+        <!--
+        <div class="d-flex justify-content-start">
+            <text>&nbsp;&nbsp;</text>
+            <i @click="swLock(calendar_date)" class="pt-4 mb-0 fs-1 bi bi-unlock-fill opacity-50"></i>  
+        </div>
+        -->
+
+            
 
 </div>
 </template>
