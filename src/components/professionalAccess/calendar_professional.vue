@@ -501,19 +501,22 @@ export default {
         get_link_calendar()
         {
           let link="http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" "
+          
           return (link)
         },
 
         get_link_email(email)
         {
             let link="mailto:"+email+"?subject="+this.idSpecialty2name(this.specialty_code)+"%20"+this.session_params.professional_name+"&body="+this.idSpecialty2name(this.specialty_code)+"\n"+this.session_params.professional_name+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" "
-            return (link)
+            let encoded = encodeURI(link)
+          return (encoded)
 
         },
         get_link_whatsApp(phone)
         {
             let link="https://wa.me/"+phone+"?text="+this.idSpecialty2name(this.specialty_code)+"\n%20"+this.session_params.professional_name+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" " 
-            return (link)
+            let encoded = encodeURI(link)
+            return (encoded)
         },
 
         set_color(calcol)
