@@ -31,28 +31,30 @@ import { ref } from 'vue'
     <div v-if="show_sub_menu" style="background-color:#2f3e44"  class="text-white"> 
        <hr>
       
-      <p class="p-1">
-			<a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;<text class="text-decoration-none" style="color: #FFF">123hora ? </text>
-			</a>
-	  </p>
-      	<!--
-	  	<text class="text-secondary " >|</text>
-		-->
-      <p class="p-1">
-			<a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;<text class=" text-decoration-none" style="color: #FFF">Profesionales</text>
-			</a>
-	  </p>
-      
-	 	<!--
-	  	<text class="text-secondary " >|</text>
-		-->
-	  <p class="p-1">
-			<a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-				&nbsp;&nbsp;<text class="text-decoration-none" style="color: #FFF">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
-			</a>
-	  </p>
+        <div class="d-flex justify-content-around">
+                <div class="p-1">
+                        <a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
+                            &nbsp;&nbsp;<text class="text-decoration-none" style="color: #FFF">123hora ? </text>
+                        </a>
+                </div>
+                    <!--
+                    <text class="text-secondary " >|</text>
+                    -->
+                <div class="p-1">
+                        <a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
+                            &nbsp;&nbsp;<text class=" text-decoration-none" style="color: #FFF">Profesionales</text>
+                        </a>
+                </div>
+                
+                    <!--
+                    <text class="text-secondary " >|</text>
+                    -->
+                <div class="p-1">
+                        <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
+                            &nbsp;&nbsp;<text class="text-decoration-none" style="color: #FFF">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                </div>
+        </div>
 
       <p class="p-2">
       </p>
