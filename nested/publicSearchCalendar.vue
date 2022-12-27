@@ -7,15 +7,16 @@ import { BKND_CONFIG } from '../config123.js'
 /*
 import GeneralHeader from '../src/components/GeneralHeader.vue'
 */
-import PublicSearchOnCalendar from '../src/components/publicSearchCalendar/PublicSearchOnCalendar.vue'
-    
+/*import PublicSearchOnCalendar from '../src/components/publicSearchCalendar/PublicSearchOnCalendar.vue'
+  */  
 
 </script>
 
 <template>
 <div>
     <div id="app" class="p-3" >    
-        <PublicSearchOnCalendar :global_specialties="global_specialties" :global_comunas="global_comunas" ></PublicSearchOnCalendar>
+      <!--  <PublicSearchOnCalendar :global_specialties="global_specialties" :global_comunas="global_comunas" ></PublicSearchOnCalendar>
+    -->
     </div>
 
 </div>
