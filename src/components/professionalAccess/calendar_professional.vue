@@ -493,6 +493,7 @@ export default {
 
            // Copy the text inside the text field
             navigator.clipboard.writeText(copyText.value);
+            alert("URL de su Agenda Copiado "+copyText.value)
 
 
            //navigator.clipboard.writeText(text);
