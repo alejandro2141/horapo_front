@@ -46,7 +46,7 @@ import axios from 'axios';
        
 
 <!-- show_days -->
-        <div v-if="show_days" class="border border-1" style="border-radius: 15px; ">
+        <div v-if="show_days" class="border border-3" style="border-radius: 15px; ">
             
             <div class="d-flex justify-content-around">
 
