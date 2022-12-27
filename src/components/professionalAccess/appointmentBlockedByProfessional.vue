@@ -7,11 +7,14 @@ import axios from 'axios';
 <template>
 
 
-                    <div class="d-flex justify-content-between border border-3"  :class="{ ' border-primary': selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 25px; border-top-right-radius: 25px;">
+                    <div class="d-flex justify-content-between "  :class="{ ' border-primary': selectApp }"  style="background-color: #fff; border-top-right-radius: 25px; border-bottom-right-radius: 25px">
                     
-                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 "  >
+                        <div  class="p-1" :style="[ {'background-color' : calendar_data.color}]" >
+                        </div>
+                    
+                        <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="p-2 " :class="{'bg-primary text-white':selectApp }" >
                             <text class="fs-3 fw-light"> {{ format_start_time(appointment.start_time) }} </text><br>
-                            <text class="fs-3 fw-light text-muted" >
+                            <text class="fs-3 fw-light" >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
                                 <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i>                         
@@ -22,7 +25,7 @@ import axios from 'axios';
                      
                             <div class="d-flex justify-content-between w-100" style="background: #eee ; border-top-right-radius: 25px;" >       
 -->
-                             <div class="d-flex justify-content-between w-100" style="background: repeating-linear-gradient(-45deg, rgb(230, 230, 230), rgb(230, 230, 230) 5px, rgb(230, 230, 230) 5px, rgb(255, 255, 255) 10px); border-top-right-radius: 25px;" >       
+                            <div class="d-flex justify-content-between w-100" style="background: repeating-linear-gradient(-45deg, rgb(230, 230, 230), rgb(230, 230, 230) 5px, rgb(230, 230, 230) 5px, rgb(255, 255, 255) 10px); border-top-right-radius: 25px; border-botton-right-radius: 25px;" >       
                         
                                 <div @click="selectApp=!selectApp; $emit('addToBlockList',appointment) " class="w-100 text-secondary display-6 p-2"  >
                                     
@@ -37,10 +40,10 @@ import axios from 'axios';
                                     </div>
                                 </div>    
                                 
-                                <div @click="$emit('displayModalAppAvailable', center_data )" style="background-color: #fff; opacity: 0.5;  border-top-right-radius:25px" >
+                                <div @click="$emit('displayModalAppAvailable', center_data )" style="background-color: #fff; opacity: 0.5;  border-top-right-radius:25px ; border-botton-right-radius: 25px;" >
                                     <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-primary" ></i> 
                                 </div>   
-                        </div> 
+                            </div> 
 
                                 <!--
                                 <div @click="$emit('displayModalAppAvailable', center_data )" class="w-100 text-white display-6 p-2" style="background: repeating-linear-gradient(-45deg, rgb(0, 0, 0), rgb(136, 136, 136) 1px, rgb(51, 51, 51) 5px, rgb(51, 51, 51) 10px); border-radius: 15px;"   >
