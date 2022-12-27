@@ -52,8 +52,9 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                         <div>
 
                             <div>
-                                <div class="bg-secondary p-1" style="border-radius: 15px;" >
-                                    {{get_link_calendar()}}
+                                <div class="bg-secondary p-1 w-75" style="border-radius: 15px;" >
+                                    <input type="text" :value="get_link_calendar()" id="linkcal">
+                                   
                                 </div>
                                 <div @click="copyToClipBoard(get_link_calendar())" class="d-flex justify-content-end">
                                     copy
@@ -484,7 +485,17 @@ export default {
             document.execCommand("copy");
             $temp.remove();
             */
-           navigator.clipboard.writeText(text);
+           var copyText = document.getElementById("linkcal");
+
+            // Select the text field
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+
+           // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+
+
+           //navigator.clipboard.writeText(text);
         },
         get_link_calendar()
         {
