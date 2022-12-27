@@ -168,8 +168,10 @@ export default {
         center_data : [] ,
         openModalEvent : 0 ,
         comunas: [],
+        
 
         selected_search_date : null ,
+        req_params:null,
  
         }
   },
@@ -190,6 +192,12 @@ export default {
         this.token=params.get("token")
         this.prof_id=params.get("prof_id")
         this.cal_id=params.get("cal_id")
+        
+        this.req_params = params.get("params")
+        let auxparams =  this.req_params.split("_")
+        this.prof_id=auxparams[0]
+        this.cal_id=auxparams[1]
+
         console.log("URL PARAMETROS :  prof_id:"+this.prof_id+" cal_id:"+this.cal_id+ " Token:"+this.token+" Date:"+this.date  )
     
         this.cdate = new Date()
