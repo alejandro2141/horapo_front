@@ -285,7 +285,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
                 <div v-if="session_params != null"> 
                   <a class="text-white" :href="'https://wa.me/56975397200?text=Im%20interested%20in%20your%20car%20for%20sale'">
-                   lalala <br>
+                   lalala </a>
                 </div>
 
               </div>
