@@ -37,6 +37,62 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                                 -->
                     </div>
 
+                    <div @click="showSocials=!showSocials" class="d-flex justify-content-start text-white"  >
+                        <text class="m-1"> Compartir calendario  </text> 
+                        <i class="fs-3 m-1 bi bi-share">
+                        </i>
+                    </div>
+
+
+                    <div v-if="showSocials" class="text-white m-3 p-2 bg-dark" style="border-radius: 15px;">    
+                        <div class="d-flex justify-content-end"> <i @click="showSocials=false" class="bi bi-x-lg"></i> </div>
+                        
+                        <div>
+                            <div > 
+                                <div @click="showInputEmail=!showInputEmail">
+                                    <i class="display-2  bi bi-envelope"></i>  Enviar calendario por correo
+                                </div>
+
+                                <div v-if="showInputEmail"> 
+                                    Ingrese Email
+                                    <input type="text" v-model="customer_email" id="fname" name="fname"><br>
+                                    <!--
+                                    <a  class="text-white" :href="'mailto:'+customer_email+'?subject='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'&body='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+' '">
+                                    -->
+                                    <a type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false" :href="get_link_email(customer_email)">
+                                        enviar
+                                    </a> 
+                                    <p><br><br></p>
+                  
+                                </div>
+
+                            </div>
+                            <div> 
+                                <div @click="showInputPhone=!showInputPhone">
+                                    <i class="display-2 bi bi-whatsapp"></i> Enviar calendario por WhatsApp
+                                </div>                                
+
+                                <div v-if="showInputPhone"> 
+                                    Ingrese Telefono
+                                    <input type="text" id="fname" v-model="customer_phone" name="fname"><br>
+                                    <!--
+                                    <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text='+idSpecialty2name(specialty_code)+'\n'+session_params['professional_name']+'\nHTTP://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+''" >
+                                    Enviar </a>
+                                    -->
+                                    <a type="button" class="btn btn-primary m-2" :href="get_link_whatsApp(customer_phone)" >
+                                    Enviar 
+                                    </a>
+                                    
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+
                     
                     <div v-if="showEdit" style=" border-radius: 15px; " class="m-2 d-flex w-25 justify-content-between mt-0 p-1 bg-white text-danger"> 
                        <text  @click="deleteCalendar();showEdit=false" >Eliminar <i class="bi bi-trash"></i> </text> 
@@ -383,6 +439,16 @@ export default {
 
             host: null ,
 
+            showSocials : false ,
+
+            showInputEmail : false, 
+            showInputPhone : false ,
+
+            customer_phone : "569" , 
+            customer_email : "@" ,
+
+           
+
         }   
     },
    	
@@ -396,6 +462,18 @@ export default {
     },
 
 	methods :{
+
+        get_link_email(email)
+        {
+            let link="mailto:"+email+"?subject="+this.idSpecialty2name(this.specialty_code)+"%20"+this.idSpecialty2name(this.specialty_code)+"&body="+this.idSpecialty2name(this.specialty_code)+"-"+this.idSpecialty2name(this.specialty_code)+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" "
+            return (link)
+
+        },
+        get_link_whatsApp(phone)
+        {
+            let link="https://wa.me/"+phone+"?text="+this.idSpecialty2name(this.specialty_code)+"\n%20"+this.idSpecialty2name(this.specialty_code)+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" " 
+            return (link)
+        },
 
         set_color(calcol)
         {
