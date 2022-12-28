@@ -17,6 +17,7 @@ defineProps({
 
 <template>
     <div class="p-0" id="form"><form autocomplete="off">
+        <div class="d-flex justify-content-end"> </div>
     
         <div class="form-row"><div class="form-group col-md-6">
             <label for="inputNames"></label>
