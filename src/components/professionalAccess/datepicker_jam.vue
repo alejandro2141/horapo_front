@@ -83,12 +83,13 @@ import axios from 'axios';
                                 <br> 
                                
                                 <div class="d-flex flex-wrap  opacity-50 justify-content-center" >
+                                 
                                     <div class="" v-for="color in day.calendar_colors" :key="color"  style="height:8px; width:8px; margin-right: 2px;" :style="{'background-color': color }" > 
                                     </div>
                                 </div>
 
                                 <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
-                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >&nbsp;{{day.reserved}}  </text>    
                             </text>  
                         </td>                      
                     </tr>
@@ -100,12 +101,13 @@ import axios from 'axios';
                                 <br> 
 
                                 <div class="d-flex flex-wrap  opacity-50 justify-content-center" >
+                                
                                     <div class="" v-for="color in day.calendar_colors" :key="color"  style="height:8px; width:8px; margin-right: 2px;" :style="{'background-color': color }" > 
                                     </div>
                                 </div>
 
                                 <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
-                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >&nbsp;{{day.reserved}}  </text>    
                             </text>  
                         </td>                      
                     </tr>
@@ -117,12 +119,13 @@ import axios from 'axios';
                                 <br> 
 
                                 <div class="d-flex flex-wrap opacity-50 justify-content-center" >
+                               
                                     <div class="" v-for="color in day.calendar_colors" :key="color"  style="height:8px; width:8px; margin-right: 2px;" :style="{'background-color': color }" > 
                                     </div>
                                 </div>
 
                                 <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
-                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >&nbsp;{{day.reserved}}  </text>    
                             </text>  
                         </td>                      
                     </tr>
@@ -134,12 +137,13 @@ import axios from 'axios';
                                 <br> 
                                 
                                 <div class="d-flex flex-wrap opacity-50 justify-content-center" >
+                               
                                     <div class=""  v-for="color in day.calendar_colors" :key="color"  style="height:8px; width:8px; margin-right: 2px;" :style="{'background-color': color }" > 
                                     </div>
                                 </div>
 
                                 <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i> 
-                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >&nbsp;{{day.reserved}}  </text>    
                             </text>  
                         </td>                      
                     </tr>
@@ -151,12 +155,13 @@ import axios from 'axios';
                                 <br> 
                                 
                                 <div class="d-flex flex-wrap opacity-50 justify-content-center" >
+                               
                                     <div class="" v-for="color in day.calendar_colors" :key="color"  style="height:8px; width:8px; margin-right: 2px;" :style="{'background-color': color }" > 
                                     </div>
                                 </div>
 
                             <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>   
-                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>   
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >&nbsp;{{day.reserved}}  </text>   
                             </text>  
                         </td>                      
                     </tr>
@@ -168,12 +173,13 @@ import axios from 'axios';
                                 <br> 
 
                                 <div class="d-flex flex-wrap opacity-50 justify-content-center" >
+                               
                                     <div class="" v-for="color in day.calendar_colors" :key="color"  style="height:8px; width:8px; margin-right: 2px;" :style="{'background-color': color }" > 
                                     </div>
                                 </div>
 
                             <i v-if="day.locked"  class="bi bi-lock-fill" style="font-size: 0.7em;"></i>  
-                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >  {{day.reserved}}  </text>    
+                                <text v-if=" day.reserved>0 " style="font-size: 0.5em;" >&nbsp;{{day.reserved}}  </text>    
                             </text>  
                         </td>                      
                     </tr>
@@ -264,7 +270,7 @@ import axios from 'axios';
                             <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
                         </div>
                         
-                        <div @click="show_days = !show_days" class="fs-2 d-flex align-items-end" > 
+                        <div @click="show_days = !show_days" class=" d-flex align-items-end" > 
                             <text>{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
                         </div>
                         
@@ -279,7 +285,7 @@ import axios from 'axios';
                         </div>
 
                         <div>
-                            <i style="marginTop: '-=55px'"  @click="show_days = !show_days" class="fs-4 bi bi-calendar4-week text-primary" ></i>
+                            <i   @click="show_days = !show_days" class="fs-4 bi bi-calendar4-week text-primary" ></i>
                         </div>
 
                         <div>
@@ -301,6 +307,9 @@ import axios from 'axios';
                     </div>
 
             </div>
+
+
+           
 
             <!--
             <table class=" display-5 w-100">
@@ -359,7 +368,7 @@ import axios from 'axios';
         </div>
         -->
 
-            
+  
 
 </div>
 </template>
@@ -385,7 +394,7 @@ export default {
     
         day_names : ['D','L','M','Mi','J','V','S'] ,
         month_names : ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
-        month_full_names : ['ENERO','FEBRERO','MARZO','ABRRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'] ,
+        month_full_names : ['ENERO','FEBRERO','MARZO','ABRRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','Diciembre'] ,
         day_long_names : [ 'Domingo', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado' ],
 
         show_days : false ,
