@@ -47,25 +47,25 @@ import axios from 'axios';
 
 <!-- show_days -->
         <div v-if="show_days" class="border border-3" style="border-radius: 15px; ">
-            
+        <!--         
             <div class="d-flex justify-content-around">
 
                 <text>
                     <i @click="swLock(calendar_date)" class="fs-1 bi bi-unlock-fill opacity-50"></i> 
                 </text>
 
-                <text @click="show_days = !show_days" class="text-primary m-2">
-                     {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  {{  month_full_names[calendar_date.getMonth()] }}  {{ calendar_date.getFullYear() }}  
-                </text>    
+                <div @click="show_days = !show_days" class="text-primary m-2 display-5">
+                       {{ calendar_date.getDate() }}/{{ (calendar_date.getMonth()+1) }}/{{calendar_date.getFullYear()}} 
+                </div>    
 
                 <text @click="show_days = !show_days">
                     <i class=" text-primary bi bi-x display-3"></i>
                 </text>
 
             </div>
-
-            <table  class=" table " >
-                <tbody>
+        -->
+            <table  class="table  table-sm" >
+                <tbody class="">
                     <tr class="h6 text-dark">
                         <td colspan="2" class="">L</td>
                         <td colspan="2" class="">M</td>
@@ -77,8 +77,8 @@ import axios from 'axios';
                     </tr>
                     
                     <tr v-if="week1!=null" class="text-dark" >
-                        <td  v-for="day in week1" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() > 20     }]" > 
+                        <td  v-for="day in week1" :key="day" colspan="2" class="" > 
+                            <text class="h1 fw-lighter" @click="dayPicked(day.date)" v-if="day.date.getDate() < 20"  :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() > 20     }]" > 
                                 <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
                                 <br> 
                                
@@ -95,7 +95,7 @@ import axios from 'axios';
 
                     <tr v-if="week2!=null" class="text-dark" >
                         <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()     }]" > 
+                            <text class="h1 fw-lighter" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal'  : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()     }]" > 
                                 <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
                                 <br> 
 
@@ -112,7 +112,7 @@ import axios from 'axios';
 
                     <tr v-if="week3!=null" class="text-dark" >
                         <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()     }]" > 
+                            <text class="h1 fw-lighter" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()     }]" > 
                                 <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
                                 <br> 
 
@@ -129,7 +129,7 @@ import axios from 'axios';
 
                     <tr v-if="week4!=null" class="text-dark" >
                         <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
+                            <text class="h1 fw-lighter" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
                                 <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
                                 <br> 
                                 
@@ -145,8 +145,8 @@ import axios from 'axios';
                     </tr>
 
                     <tr v-if="week5!=null" class="text-dark" >
-                        <td  v-for="day in week5" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
+                        <td  v-for="day in week5" :key="day" colspan="2" class="" > 
+                            <text class="h1 fw-lighter" @click="dayPicked(day.date)" v-if="day.date.getDate() > 10"   :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary  text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
                                 <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
                                 <br> 
                                 
@@ -162,8 +162,8 @@ import axios from 'axios';
                     </tr>
 
                     <tr v-if="week6!=null" class="text-dark" >
-                        <td  v-for="day in week6" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <text class="h4" :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
+                        <td  v-for="day in week6" :key="day" colspan="2" class="" > 
+                            <text class="h1 fw-lighter" @click="dayPicked(day.date)" v-if="day.date.getDate() > 10"  :class="[{ 'text-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
                                 <text class="m-0 p-0"> {{day.date.getDate()}}  </text>
                                 <br> 
 
@@ -183,6 +183,25 @@ import axios from 'axios';
                             
                 </tbody>
             </table> 
+
+
+            <div class="d-flex justify-content-between">
+
+                <text>
+                    <i @click="swLock(calendar_date)" class="fs-1 bi bi-unlock-fill opacity-50"></i> 
+                </text>
+<!--
+                <div @click="show_days = !show_days" class="text-primary m-2 display-5">
+                       {{ calendar_date.getDate() }}/{{ (calendar_date.getMonth()+1) }}/{{calendar_date.getFullYear()}} 
+                </div>    
+-->
+                <text @click="show_days = !show_days">
+                    <i class=" text-primary bi bi-x display-3"></i>
+                </text>
+
+            </div>
+
+
             
         </div>
         <!--
@@ -237,6 +256,53 @@ import axios from 'axios';
   
 
        <div class="d-flex justify-content-center   m-3">
+
+            <div class="display-5 w-100">
+                    
+                    <div class="d-flex justify-content-between" style="position: relative; bottom: -10px" >
+                        <div @click="prevMonth(calendar_date)"> 
+                            <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
+                        </div>
+                        
+                        <div @click="show_days = !show_days" class="fs-2 d-flex align-items-end" > 
+                            <text>{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
+                        </div>
+                        
+                        <div @click="nextMonth(calendar_date)">
+                            <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i> 
+                        </div>
+                    </div>
+
+                   
+                    <div class="d-flex justify-content-between" style="" >
+                        <div>
+                        </div>
+
+                        <div>
+                            <i style="marginTop: '-=55px'"  @click="show_days = !show_days" class="fs-4 bi bi-calendar4-week text-primary" ></i>
+                        </div>
+
+                        <div>
+                        </div>
+                    </div>
+                     
+                    <div class="d-flex justify-content-between" style="position: relative; top: -5px">
+                        <div @click="prevDay(calendar_date)">
+                            <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
+                        </div>
+                        
+                        <div @click="show_days = !show_days" > 
+                            {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  
+                        </div>
+
+                        <div @click="nextDay(calendar_date)"> 
+                            <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i>
+                        </div>
+                    </div>
+
+            </div>
+
+            <!--
             <table class=" display-5 w-100">
                     
                     <tr>
@@ -259,7 +325,7 @@ import axios from 'axios';
                         </td>
 
                         <td>
-                            <i   @click="show_days = !show_days" class="bi bi-calendar4-week text-primary" ></i>
+                            <i style="marginTop: '-=55px'"  @click="show_days = !show_days" class="bi bi-calendar4-week text-primary" ></i>
                         </td>
 
                         <td>
@@ -281,6 +347,8 @@ import axios from 'axios';
                     </tr>
 
             </table>
+
+            -->
 
         </div>
 
