@@ -12,7 +12,7 @@ import { ref } from 'vue'
             <i  @click="show_sub_menu = !show_sub_menu" class="fs-2 bi bi-list "></i>
         </div>
 
-        <text></text>
+       
 
         <a HREF="/nested/publicSearch.html" class="text-decoration-none m-2" style="color :#ffffff"> 
             <text class="">123HORA</text>  
@@ -28,11 +28,9 @@ import { ref } from 'vue'
     <!--------------------
           SUB MENU        
     ---------------------->
-    <div v-if="show_sub_menu" style="background-color:#2f3e44"  class="text-white"> 
-       <hr>
-      
+    <div v-if="show_sub_menu" style="background-color:#2f3e44"  class="text-white border-top border-dark"> 
         <div class="d-flex justify-content-around">
-                <div class="p-1">
+                <div class="p-2">
                         <a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class="text-decoration-none" style="color: #FFF">123hora ? </text>
                         </a>
@@ -40,7 +38,7 @@ import { ref } from 'vue'
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-1">
+                <div class="p-2">
                         <a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class=" text-decoration-none" style="color: #FFF">Profesionales</text>
                         </a>
@@ -49,16 +47,14 @@ import { ref } from 'vue'
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-1">
+                <div class="p-2">
                         <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
                             &nbsp;&nbsp;<text class="text-decoration-none" style="color: #FFF">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
         </div>
 
-      <p class="p-2">
-      </p>
-
+     
 
 
         
