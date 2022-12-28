@@ -31,11 +31,11 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
     <!--
         <GeneralHeader></GeneralHeader>
     -->
-            <p class="fs-3 text-center">
+            <div class="fs-3 d-flex justify-content-center">
               Agenda del profesional 
-            </p>
+            </div>
 
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-center">
                 <i class="display-1 m-4 bi bi-person-bounding-box"></i>
                 <text class="mt-4 fs-3">
                    
@@ -55,12 +55,15 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                 <div  v-for="calendar in calendars" :key="calendar.id" >
                     
 
-                    <div class="d-flex justify-content-between mt-5">
-                        <div>
-                            <text class="fs-1 text-success" >{{ id2specialtyName(calendar.specialty1) }}</text> <br>
+                    <div class="mt-1">
+                        
+                            <div class="fs-1 text-success d-flex justify-content-center" >{{ id2specialtyName(calendar.specialty1) }}</div> 
                             
-                            <text v-if="getCenterData(calendar.center_id).home_visit" > Visita a Domicilio <i class="h1 bi bi-house-door"></i> 
-                              <br>
+                            <!-- HOME VISIT  -->
+                            <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).home_visit"  > 
+                                <div>
+                                Visita a Domicilio <i class="h1 bi bi-house-door"></i> 
+                              
                                 <text class="text-primary fs-5">
                                 {{ id2comunaName(getCenterData(calendar.center_id).home_comuna1) }}  
                                 {{ id2comunaName(getCenterData(calendar.center_id).home_comuna2) }} 
@@ -69,20 +72,30 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                                 {{ id2comunaName(getCenterData(calendar.center_id).home_comuna5) }} 
                                 {{ id2comunaName(getCenterData(calendar.center_id).home_comuna6) }}
                                 </text>
-                            </text>
-                            
-                            <text v-if="getCenterData(calendar.center_id).center_visit" > Cita en Consulta <i class="h1 bi bi-building"></i> 
-                                <text class="text-primary fs-5">
-                                    <br> {{ id2comunaName(getCenterData(calendar.center_id).comuna) }}
-                                </text>
-                            </text>
+                                </div>
+                            </div>
+                             <!-- IN CENTER  -->
+                            <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).center_visit" > 
+                                <p class="text-center"> Cita en Consulta 
+                                    <i class="h1 bi bi-building"></i> 
+                                    <br>
+                                    <text class="text-primary fs-5">
+                                    {{ id2comunaName(getCenterData(calendar.center_id).comuna) }}
+                                    </text>
+                                    <p>
+                                    {{getCenterData(calendar.center_id).address}}
+                                    </p>
+                                </p>
+                            </div>
 
-                            <text v-if="getCenterData(calendar.center_id).remote_care" > Atención Remota <i class="h1 bi bi-camera-video"></i> 
+                            <!-- REMOTE CARE -->
+                            <div v-if="getCenterData(calendar.center_id).remote_care" > 
+                                Atención Remota <i class="h1 bi bi-camera-video"></i> 
                                 Todas las comunas
-                            </text>
+                            </div>
                             
-                            <br> {{getCenterData(calendar.center_id).address}}
-                        </div>
+                            <br> 
+                        
                         <!--
                         <div>
                              <a :href="'/nested/publicSearchCalendar.html?cal_id='+calendar.calendar_id"> <i  class="display-1 fw-light text-primary p-2 bi bi-arrow-right-square"></i> </a>
@@ -109,25 +122,33 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
 
             <!-- LIST APPOINTMENTS --->
-            Resultados en los proximos {{appointments.length}} dias.
-            <div v-if="appointments !=null && appointments.length>0">
-               
+           
+            <div v-if="appointments !=null ">
+                <p v-if="appointments.lenght > 0" class="text-center">
+                Resultados en los proximos {{appointments.length}} dias.
+                </p>
                 <div  v-for="appointment in appointments"  :key="appointment.id"  class="mt-3" >
                     <!-- <text> {{appointment.date}} </text> -->    
                     <!-- List app of a day -->
                     <div  v-for="app in appointment.appointments"  :key="app.id"  class="mt-3" >
+                        <div class="">
                         <appointmentAvailableSearchCalendar class=""  v-if="app != null"  v-on:click="setModalReserve(app)" :appointment='app'  > </appointmentAvailableSearchCalendar>       
+                        </div>
                     </div>
                 </div>
-            
+             
+                <div v-if="appointments.lenght == 0  ">
+                    <div class="w-100 text-center">
+                        <i class="m-0 p-0 bi bi-wind display-1" ></i>
+                        <br> Sin Horas disponible 
+                    </div>
+                </div>
+
             </div>
 
             <div v-else class="m-2 p-2 display-5">
              
-                <div class="w-100 text-center">
-                    <i class="m-0 p-0 bi bi-wind display-1" ></i>
-                    <br> Sin Horas disponible 
-                </div>
+               
 
             </div> 
 
