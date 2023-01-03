@@ -4,16 +4,8 @@ import LoadProgress from '../loadProgress.vue'
 import axios from 'axios'
 import GeneralHeader from '../GeneralHeader.vue'
 import appointmentAvailableSearchCalendar from './AppointmentAvailableSearchCalendar.vue'
-//import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
-//import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue';
-
 import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue' 
 
-
-/*
-import patientAppointmentAvailable  from '../publicSearch/PatientAppointmentAvailable.vue'
-import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointment.vue'
-*/
 
 </script>
 
@@ -49,16 +41,18 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
             Calendarios Disponibles
             </p>
 -->
-            <hr>
+            
 
             <div v-if="calendars!=null && calendars.length>0">
                 <div  v-for="calendar in calendars" :key="calendar.id" >
                     
 
-                    <div class="mt-1">
+                    <div class="mt-0">
                         
                             <div class="fs-1 text-success d-flex justify-content-center" >{{ id2specialtyName(calendar.specialty1) }}</div> 
-                            
+
+                          <hr>
+
                             <!-- HOME VISIT  -->
                             <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).home_visit"  > 
                                 <div>
@@ -81,10 +75,10 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                                     <br>
                                     <text class="text-primary fs-5">
                                     {{ id2comunaName(getCenterData(calendar.center_id).comuna) }}
-                                    </text>
-                                    <p>
+                                    </text><br>
+                                    <text>
                                     {{getCenterData(calendar.center_id).address}}
-                                    </p>
+                                    </text>
                                 </p>
                             </div>
 
