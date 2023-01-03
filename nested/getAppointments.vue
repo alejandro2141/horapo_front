@@ -10,7 +10,7 @@ import RecoverAppointmentsForm from '../src/components/RecoverAppointmentsForm.v
 <template>
 <div>
      
-    <!-- <GeneralHeader></GeneralHeader> -->
+    <GeneralHeader></GeneralHeader> 
     
     <div id="app" class="text-center border border-1 p-1 bg-white m-3" style="border-radius: 25px;" >     
     <div class="d-flex justify-content-end" > 
@@ -30,3 +30,5 @@ import RecoverAppointmentsForm from '../src/components/RecoverAppointmentsForm.v
 
 
 </style>
+
+
