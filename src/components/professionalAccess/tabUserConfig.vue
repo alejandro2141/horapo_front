@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import cameraCapturer from './camera_capturer.vue'
 
 </script>
 
@@ -8,8 +9,10 @@ import axios from 'axios';
     <div class="p-3 mb-2 text-white bg-secondary" >
    
     <div class="d-flex justify-content-between mt-3">
-        
-         <i class="bi bi-person-bounding-box display-1 "></i>
+         <cameraCapturer></cameraCapturer><br>
+
+        <i class="bi bi-person-bounding-box display-1 "></i>
+       
            <p class="h4 text-center  mt-3  "> {{ professional_data.name }} </p> 
            <text></text>        
     <!--     <i class="display-1 bi bi-x-lg ml-0 text-primary"   aria-label="Close" v-on:click="closeTabUserConfig()" ></i> 
@@ -79,7 +82,7 @@ import axios from 'axios';
           <hr>
         <p> Especialidades Registradas  :  
             <text  v-for="specialty in global_professional_specialties"  :key='specialty.id' >
-                    <br> <i class="bi bi-heart"></i>  {{specialty.name}} 
+                    <br> <i class=" bi bi-check"></i> {{specialty.name}} 
             </text>
         </p>
 
