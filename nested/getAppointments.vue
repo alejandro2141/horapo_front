@@ -16,7 +16,7 @@ import RecoverAppointmentsForm from '../src/components/RecoverAppointmentsForm.v
     <div class="d-flex justify-content-end" > 
         <a class="m-1 p-1" HREF="/index.html" type="button"> <i class="display-3 bi bi-x-lg"></i></a>
     </div>
-        Ingrese su correo y le enviaremos sus horas ya agendadas. 
+        Ingrese su correo y le enviaremos sus horas ya agendadas 
 
         <RecoverAppointmentsForm></RecoverAppointmentsForm>
         <br>
