@@ -21,17 +21,22 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
       
         <hr>        
         <div v-for="app in appTakenFiltered" :key='app.id' >
-           <!-- 
-            <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
-            <br> 
-            <small>
-            {{ app.patient_name  }} {{ app.patient_doc_id  }} ({{ app.patient_age  }})  {{ app.patient_email  }} <i class="bi bi-telephone"></i>{{app.patient_phone1}}
-            </small>
-            <br>
-            -->
+           
+            <div class="mt-3">
+                <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
+                <br> 
+                <small>
+                {{ app.patient_name  }} {{ app.patient_doc_id  }} ({{ app.patient_age  }})  {{ app.patient_email  }} <i class="bi bi-telephone"></i>{{app.patient_phone1}}
+                </small>
+            </div>            
+            
+            <!--
             <div class="mt-4">
             <AppointmentReserved  includeExtraData='true' v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
-            </div>                           
+            </div>
+            -->
+
+
         </div>
       
 
