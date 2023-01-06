@@ -9,6 +9,9 @@ const count = ref(0)
 
 <template>
        <div class="" >
+
+        
+           
             <div class="row" style="--bs-gutter-x: 0rem ; margin-right: 0rem ; margin-left: 0rem ">
             
                 <div class="col " style="position: relative;" >
@@ -18,16 +21,16 @@ const count = ref(0)
                     </div>
 
                     <div>
-                        <input @keyup="captureSeachLetter" style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
+                        <input @keyup="captureSeachLetter" style=" z-index: 9;  border-radius: 25px; text-align: center;" type="text" class="form-control form-control-lg border  text-secondary"   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-secondary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
                     </div>
-                    
-                    <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
-                        <i class="display-2 m-1  bi bi-x  text-muted border-start" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
+                    <div  style="position: absolute; z-index: 9; top : 0.5em ; right : 0.3em  " class="mb-2  rounded" > 
+                        <i class="bi bi-x-lg m-0 p-0 text-muted border-start display-6" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
                     </div>
+                   
 
                 </div>    
 
-                <div >
+                <div>
                      <div class="h3 m-3 text-primary " v-for="location in location_filtered" :key="location.id" > 
                         <div @click="form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); clearfiltered = true">
                              <i class="display-6  text-muted " ></i>  <small> <i class="display-6  bi bi-geo-alt  text-muted m-0"  ></i> </small> {{ location.name }} 
@@ -35,7 +38,27 @@ const count = ref(0)
                      </div>
                 </div>   
                 
-            </div>
+            </div> 
+            
+            
+                <!--
+                <div v-show="show_input_date() " @click="show_date_picker = !show_date_picker"  >
+
+                    <div class="text-muted d-flex justify-content-between border border-1 border-secondary" style=" z-index: 9;   border-radius: 25px;"  >
+                        <div class="m-0 p-1"> 
+                            &nbsp;<i class="m-0 p-0 bi display-6  bi-calendar-event"></i> 
+                        </div>
+                        <div class="m-0 p-2"> 
+                            <text style="font-size: 1.1em;" class="">&nbsp;&nbsp;&nbsp; {{format_date(search_params.date)}}</text>
+                        </div>
+                        <div class="m-0 p-1"  > 
+                            <i class="bi bi-x-lg m-0 p-0 text-muted border-start display-6"  ></i>  
+                        </div>
+                    </div>
+                 
+                </div>
+                -->
+
         </div>
 </template>
 
