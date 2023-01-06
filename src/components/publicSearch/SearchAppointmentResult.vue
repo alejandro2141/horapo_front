@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import patientAppointmentAvailable  from './PatientAppointmentAvailable.vue'
 import modalPublicViewAppointment from './ModalPublicViewAppointment.vue'
+import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
 import LoadProgress from '../loadProgress.vue'
 
 
@@ -9,9 +10,9 @@ import LoadProgress from '../loadProgress.vue'
 
 <template>
 
-<div>
+<div style="width: 20em;"  >
 
-<loadProgress  :active_spinner="active_spinner" > </loadProgress>
+    <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
        <div  v-if="n_appointments_found>0 && array_appointments !=null && array_appointments.length > 0"   >
             <!--
@@ -49,16 +50,19 @@ import LoadProgress from '../loadProgress.vue'
                 <!-- Start make room for Modal data when it display-->
         </div>
         <div v-else  class="w-100 text-center" >
-            <i style="font-size: 50vw;" class=" m-0 p-0 bi bi-wind"></i><br>
+            <i style="font-size: 7em;" class=" m-0 p-0 bi bi-wind"></i><br>
             Sin Horas disponible
         </div>	
              <div style="height: 400px">
             </div>
         <!-- END SET POSITION MODAL-->
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
-        <modalPublicViewAppointment  :searchParameters="searchParameters" :app="app" :center_data="center_data"    :openModalEvent="openModalEvent"   v-on:updateLastSearch="updateLastSearch"  :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
+       <!-- <modalPublicViewAppointment :searchParameters="searchParameters" :app="app"          :center_data="center_data"    :openModalEvent="openModalEvent"               v-on:updateLastSearch="updateLastSearch"   :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
+      -->
+        <ModalPublicReserveAppForm  :searchParameters='searchParameters' :appToReserve='app' :center_data="center_data"    :eventShowModalPubicReserve='openModalEvent'   v-on:updateLastSearch='updateLastSearch'   :global_comunas="global_comunas" :global_specialties='global_specialties'  :professional_data="professional_data"      ></ModalPublicReserveAppForm>
+
         <!-- Modal Reserve and Confirm End -->
-        </div>     
+</div>     
 
 </template>
 
