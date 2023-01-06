@@ -32,7 +32,7 @@ import { ref } from 'vue'
     ---------------------->
     <div v-if="show_sub_menu"   class="text-dark border-top border-dark"> 
         <div class="d-flex justify-content-around">
-                <div class="p-2">
+                <div class="p-1">
                         <a href="/nested/aboutUs.html" class="m-1 text-dark  text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class="text-decoration-none" >¿123hora? </text>
                         </a>
@@ -40,7 +40,7 @@ import { ref } from 'vue'
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-2">
+                <div class="p-1">
                         <a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class=" text-decoration-none" >Profesionales</text>
                         </a>
@@ -49,16 +49,13 @@ import { ref } from 'vue'
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-2">
+                <div class="p-1">
                         <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
                             &nbsp;&nbsp;<text class="text-decoration-none" >Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
         </div>
-
-     
-
-
+        <hr>
         
     </div>
 
