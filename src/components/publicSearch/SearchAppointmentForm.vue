@@ -11,19 +11,23 @@ import Datepicker from 'vuejs3-datepicker';
 </script>
 
 <template>
-      <div class="container" style="padding-right: 0 ;padding-left: 0  " >
+      <div class="container"  >
 
            <div id="formSearch" class="mx-auto "  >
                 <form autocomplete="off" >
-<!--FORM TYPE CENTER HOME REMOTE -->                    
+<!--FORM TYPE : CENTER,  HOME,  REMOTE -->                    
                 <div class="position-relative">
                     <div class="d-flex justify-content-center mb-0 mt-0">                    
                         <appTypeCircle :appType='0' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>
                         <appTypeCircle :appType='1' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>
                         <appTypeCircle :appType='2' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>    
                     </div>                    
-                    <img v-if="!search_params.type_remote && !search_params.type_home  && !search_params.type_center" src="/public/finger.png" class="position-absolute  top-0 end-0" width="80" > 
-                </div>   
+                </div>
+<!--
+                <div class="position-relative d-flex justify-content-center mb-0 mt-0">
+                    <img v-if="!search_params.type_remote && !search_params.type_home  && !search_params.type_center" src="/public/finger.png"  width="80" > 
+                </div>
+-->
 
 <!--FORM INPUT SPECIALTY -->
 <div class="position-relative mt-3 pb-4 mb-3" >
@@ -35,8 +39,9 @@ import Datepicker from 'vuejs3-datepicker';
             <div class="w-100 mt-0 pt-0 d-flex justify-content-center">
                 <specialtyCircle :specialty='global_specialties[3]'  :bgcolor='circleColors[3]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
                 <specialtyCircle :specialty='global_specialties[4]'  :bgcolor='circleColors[4]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+           <!--  <img style="z-index: 3" v-if=" search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
+            -->
             </div>
-            <img style="z-index: 3" v-if=" search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
             <div class="w-100 mt-0 pt-0  mb-0 pb-0 d-flex justify-content-center">
                 <specialtyCircle :specialty='global_specialties[5]'  :bgcolor='circleColors[5]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
                 <specialtyCircle :specialty='global_specialties[6]'  :bgcolor='circleColors[6]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
@@ -71,16 +76,35 @@ import Datepicker from 'vuejs3-datepicker';
                     </div>
                 </div>           
 -->
+
+
 <!-- FORM INPUT LOCATION-->
-                <div  v-show="show_input_date()"  class="row  mb-1   "  >
+        
+        <div class="d-flex justify-content-center mb-0 mt-0">
+        <div style="width: 20em;">
+                <div  v-if="this.search_params.type_home==null  || this.search_params.type_home==false "   class="row  mb-1   "  >
                     <div class="col">
                         <inputFormComuna position="true" :setLocationCode="setLocationCode" v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
                 </div>
+                <div  v-else  class="row  mb-1   "  >
+                    <div class="col">
+                       
+                        <input  style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-white' : !ready_input ,  'text-success' : ready_input  }"  id="form_comuna" name="form_comuna"   placeholder="Todas las Comunas" >
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
 
 <!-- FORM INPUT DATE -->
+        <div class="d-flex justify-content-center mb-0 mt-2">
+        <div style="width: 20em;">
+       
+
+            
                 <div v-show="show_input_date() " @click="show_date_picker = !show_date_picker"  >
-                    <div class="text-muted d-flex justify-content-between border border-1 border-primary" style=" z-index: 9;   border-radius: 25px;"  >
+                    <div class="text-muted d-flex justify-content-between border border-1 border-secondary" style=" z-index: 9;   border-radius: 25px;"  >
                         <div class="m-0 p-1"> 
                             &nbsp;<i class="m-0 p-0 bi display-6  bi-calendar-event"></i> 
                         </div>
@@ -92,46 +116,16 @@ import Datepicker from 'vuejs3-datepicker';
                         </div>
 
                     </div>
-
-                     <!--
-                    <div class="col " style="position: relative;" >
-
-                        <div  style="position: absolute; z-index: 9; top : 6px ; left : 3px " class="mb-2  rounded" > 
-                            <i class="m-0 p-0 bi h3 bi-calendar-event"></i>                      
-                        </div>
-                        <div>
-                             <text class="m-0 p-0  h5 ">&nbsp;&nbsp;&nbsp; {{getDateFormat()}}</text>
-                        </div>
-                        <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
-                            <i class="display-2 m-0 p-0  bi bi-x  text-muted border-start"  ></i>
-                        </div>
-                    </div> 
-                    -->
-                      <!--  
-                    <div class="d-flex justify-content-between border border-1 p-0 m- 0text-muted " style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;">
-                       
-                        <div>
-                         <i class="m-0 p-0 bi h3 bi-calendar-event"></i>
-                        </div>
-
-                        <div @click="show_date_picker = !show_date_picker"  >
-                           <text class="m-0 p-0  h5 ">&nbsp;&nbsp;&nbsp; {{getDateFormat()}}</text>
-                        </div> 
-
-                        <div  style="" class="rounded" > 
-                            <i class="display-2 m-0 p-0  display-3  bi bi-x   border-start" ></i>
-                        </div>
-
-                    </div>
-                    -->
                  
                 </div>
     <!--DATE PICKER COMPONENT -->
-    <div v-if="show_date_picker" class="text-center "> 
+    
+    <div v-if="show_date_picker" class="text-center"> 
             <datepicker   ref="inputRef"  :monday-first="true" :inline="true" v-model="form_current_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
     </div>
      <!--DATE PICKER COMPONENT -->
-                
+             </div>   
+             </div>
                  
 <!--FORM INPUT  APP TYPE -->
                 <!--
@@ -241,7 +235,7 @@ export default {
                 let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
 
 
-                return (days[aux_date.getDay()]+" "+aux_date.getDate()+" de "+months[aux_date.getMonth()]+" "+aux_date.getFullYear() )
+                return (days[aux_date.getDay()]+" "+aux_date.getDate()+" "+months[aux_date.getMonth()]+" "+aux_date.getFullYear() )
             },
 
 
