@@ -82,7 +82,7 @@ import Datepicker from 'vuejs3-datepicker';
         
         <div class="d-flex justify-content-center mb-0 mt-0">
         <div style="width: 20em;">
-                <div  v-if="this.search_params.type_home==null  || this.search_params.type_home==false "   class="row  mb-1   "  >
+                <div  v-if="search_params.type_home==null  || search_params.type_home==false "   class="row  mb-1   "  >
                     <div class="col">
                         <inputFormComuna position="true" :setLocationCode="setLocationCode" v-on:selectedComunaCode="selectedComunaCode" :global_comunas="global_comunas" > </inputFormComuna>
                     </div>
