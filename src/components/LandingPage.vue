@@ -18,7 +18,8 @@ import FooterContent from './FooterContent.vue'
     <FooterContent></FooterContent>
     -->
     <div>
-        <div v-if="isMobile()">
+        <!-- validate if is mobile browser   isMobile() -->
+        <div v-if="noCheckisMobile()">
             Being redirected based in Browser options<br>
             DDOS filter protection
         </div>
@@ -67,7 +68,13 @@ methods: {
        else{
             return false
        }
+    },
+
+    noCheckisMobile(){
+            window.location.href = "/nested/publicSearch.html";
+            return true
     }
+
     
     } 
 
