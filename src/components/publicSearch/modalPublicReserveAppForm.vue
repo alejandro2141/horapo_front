@@ -14,9 +14,9 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
  
   	<teleport to="body" >
 
-		<div v-if="showModalPublicReserveForm" class="modal  bg-secondary scroll"    >
+		<div v-if="showModalPublicReserveForm"  class="modal scroll d-flex justify-content-center"    >
 		    
-			<transition name="modal">
+			<transition name="modal" style="width: 25em;">
 			<div class="modal-mask "  >
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background "  style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" >
@@ -24,9 +24,9 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                 <div class="modal-body w-100" > 
                 
 				 	<div class="d-flex flex-row justify-content-between ">
-                      <div  class="display-4" style="color:#1f9d94 ;" >{{ showSpecialtyName(appToReserve.specialty) }}  </div>
+                      <div  style="color:#1f9d94 ; font-size:2.5em" >{{ showSpecialtyName(appToReserve.specialty) }}  </div>
                     
-                      <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
+                      <div ><i class="text-primary bi bi-x-lg ml-0" style="font-size:3em"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                     </div>
 <!--
 					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
@@ -64,7 +64,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 				-->
 
 				<div class="d-flex justify-content-start mb-3" >
-					<text  style=""> <i class="text-muted h1  m-2 bi bi-calendar"></i> </text>
+					<text  style="font-size:2em"> <i class="text-muted m-2 bi bi-calendar" ></i> </text>
 					<div class="">
 						<text class="">	{{ transform_date(appToReserve.date) }} </text><br>
 						<text class="" style="">	 
@@ -74,13 +74,13 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 				</div>
 				
 				<div class="d-flex justify-content-start mb-3" >
-					<text  style=""> <i class="text-muted bi bi-person display-1 m-0 p-0"></i> </text>
-					<div class="">
+					<text  style="font-size:3em" > <i class="text-muted bi bi-person  m-0 p-0"></i> </text>
+					<p class="mt-2">
 						<text class="">	Profesional: </text><br>
 						<text v-if="professional_data!=null" class="" style="">	 
 							{{professional_data.name }}   
 						</text>       		
-					</div>
+					</p>
 				</div>
 
 
@@ -89,7 +89,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
         <div class="m-2 " style="">
 
 			<div v-if="center_data.center_visit" class="">
-				<div class="display-6" style="">  
+				<div style="font-size:2em">  
 					<div style="color: #781ED1" >
 					<i class="h1 bi bi-building "></i> En Consulta  </div>
 				</div>
@@ -106,8 +106,8 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 			</div>
 
 			<div v-if="center_data.home_visit" style="color:#3399FF">
-					<div class="display-5" >
-						<i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
+					<div style="font-size:2em" >
+						<i class="bi bi-house-door"></i><text > Visita a Domicilio:</text> <br>
 					</div>
 					
 							<div class="m-2">
@@ -156,7 +156,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 <div v-if="show_reservar">
 <hr>				 
                 <div class="text-dark"> 
-					<p class="display-5"> Datos del Paciente </p>
+					<p style="font-size:2em"> Datos del Paciente </p>
                 </div>							
                             <form autocomplete="off" method="POST" action="take_appointment.html">			
                                 <input class="form-control form-control-lg " type="hidden" placeholder="Token" name="token" value="AAAAA"  >
