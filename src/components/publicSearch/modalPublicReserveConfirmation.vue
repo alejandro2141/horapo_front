@@ -11,9 +11,9 @@ import axios from 'axios'
   <div>
   	<teleport to="body"   >
 
-		<div v-if="showModalConfirmation" class="modal bg-secondary scroll"    >
+		<div v-if="showModalConfirmation" class="modal  scroll d-flex justify-content-center"    >
 		    
-			<transition name="modal">
+			<transition name="modal" style="width: 25em;">
 			<div class="modal-mask "  >
 			<div class="modal-wrapper ">
 			<div class="modal-container  m-1 p-0 modal-background " style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;">
@@ -22,9 +22,9 @@ import axios from 'axios'
                 
 
 				 	<div class="d-flex justify-content-between">
-                      <div  >   <text class="display-5 "> RESERVA EXITOSA </text> </div>
+                      <div  >   <text style="font-size:2em"> RESERVA EXITOSA </text> </div>
                       <div  > </div>
-                      <div ><i class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalConfirmation = false ; this.updateSearchResult() " aria-label="Close"></i> </div>
+                      <div ><i style="font-size:2.5em" class="display-1 text-primary bi bi-x-lg ml-0"  v-on:click="showModalConfirmation = false ; this.updateSearchResult() " aria-label="Close"></i> </div>
           </div>
 <!--
 					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
@@ -39,18 +39,18 @@ import axios from 'axios'
           <div class="text-dark d-flex justify-content-center"> 
             <p> <i class=""></i> Recuerde confirmar su asistencia respondiendo el correo que enviamos a {{appConfirmed.patient_email}}  </p>
           </div>
-<hr>
-					<div  class="h4">
-              <div  class=" display-4 mb-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appConfirmed.specialty_reserved) }} </div> 
+<hr class="m-0 p-0">
+					<div  class="">
+              <div  class="  mb-3" style="color:#1f9d94 ;font-size:1.5em" >{{ showSpecialtyName(appConfirmed.specialty_reserved) }} </div> 
 							<div class="" >
 								<p> <i class="bi bi-circle-fill"  ></i>  Fecha :  {{ transform_date( appConfirmed.date ) }}  </p>
 								<p> <i class="bi bi-circle-fill  "></i> Hora  :  {{ transform_time(appConfirmed.start_time) }} hrs     </p>
 								<p> <i class="bi bi-person-circle "></i> Con :  {{professional_data.name }}  </p>
               
                 <p>  
-                     <text v-if="appConfirmed.app_type_remote" >  <i class=" h1 bi bi-camera-video "></i> Atencion Remota:<br>Profesional le llamara directamente a su Telefono: <b>{{appConfirmed.patient_phone1 }}</b></text>  
-                     <text v-if="appConfirmed.app_type_center" > <i class="  h1 bi bi-building "> </i> En {{center_data.name }} <br>{{center_data.address }} </text>  
-                     <text v-if="appConfirmed.app_type_home" > <i class="    h1 bi bi-house-door "></i> a Domicilio en dirección paciente: <br> {{appConfirmed.patient_address }}</text> 
+                     <text v-if="appConfirmed.app_type_remote" >  <i class="  bi bi-camera-video "></i> Atencion Remota:<br>Profesional le llamara directamente a su Telefono: <b>{{appConfirmed.patient_phone1 }}</b></text>  
+                     <text v-if="appConfirmed.app_type_center" > <i class="   bi bi-building "> </i> En {{center_data.name }} <br>{{center_data.address }} </text>  
+                     <text v-if="appConfirmed.app_type_home" style="color:#3399FF" > <i class=" bi bi-house-door "></i> a Domicilio en dirección paciente: <br> {{appConfirmed.patient_address }}</text> 
                 </p>
                 
   
@@ -70,7 +70,7 @@ import axios from 'axios'
           <hr>
 			 
           <div class="text-dark"> 
-					    <p class="display-4" style="color:#1f9d94 ;"> Datos del Paciente </p>
+					    <p class="display-4" style="color:#1f9d94 ;font-size:1.5em"> Datos del Paciente </p>
 
               <div class="mt-0" > <i class="bi bi-circle-fill text-muted"  ></i> {{appConfirmed.patient_name }}</div>
               <div> <i class="bi bi-circle-fill text-muted"></i> Id : {{appConfirmed.patient_doc_id }}</div>
