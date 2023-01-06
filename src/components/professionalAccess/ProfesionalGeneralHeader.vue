@@ -9,7 +9,7 @@ import SwitchViewButton from './switchViewButton.vue'
 	<div>
 
 
-	<div v-if="session_params['professional_name'] != null"  class="text-white d-flex pt-1 pb-2 justify-content-around bg-secondary" :class="{ 'bg-dark': !showTopMenu }" > 
+	<div v-if="session_params['professional_name'] != null"  class="text-dark d-flex pt-1 pb-2 justify-content-around " :class="{ 'bg-white': !showTopMenu }" > 
 
 		<text >	
 			<i v-if="showTopMenu" class="fs-4 bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
@@ -62,7 +62,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		{{month_name[month]}}
 		-->
 		<div v-if="showTopMenu" class="m-1" @click="setToday(dateObj);switchViewTo(2)" >
-			HOY <text class="text-white"  > {{day}}/{{month+1}} </text>
+			HOY <text class="text-dark"  > {{day}}/{{month+1}} </text>
 		</div>
 		
 
