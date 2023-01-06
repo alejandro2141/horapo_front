@@ -77,7 +77,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 					<text  style=""> <i class="text-muted bi bi-person display-1 m-0 p-0"></i> </text>
 					<div class="">
 						<text class="">	Profesional: </text><br>
-						<text class="" style="">	 
+						<text v-if="professional_data!=null" class="" style="">	 
 							{{professional_data.name }}   
 						</text>       		
 					</div>
@@ -149,7 +149,11 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 			<!-- Include here a map -->
 		</div>
 
+<div class="d-flex justify-content-center">
+	<button @click="show_reservar=!show_reservar" type="button" class="btn btn-secondary">Reservar</button>
+</div>
 
+<div v-if="show_reservar">
 <hr>				 
                 <div class="text-dark"> 
 					<p class="display-5"> Datos del Paciente </p>
@@ -255,6 +259,9 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                 				</div>
 							
 							</form> 
+					
+					</div>
+
                 </div>
         </div> 
         </div> 		
@@ -367,10 +374,13 @@ export default {
 		  appConfirmed : Object,
 		  eventShowModalConfirmation : null ,
 
+		  professional_data : null ,
+		  show_reservar : false, 
+
         }
   },
 
- props: [ 'center_data' , 'professional_data' ,'searchParameters', 'appToReserve','eventShowModalPubicReserve' ,'global_comunas', 'global_specialties' ],
+ props: [ 'center_data' ,'searchParameters', 'appToReserve','eventShowModalPubicReserve' ,'global_comunas', 'global_specialties' ],
  emits: ['updateAppList','updateLastSearch'] , 
       
 computed: {
@@ -379,6 +389,9 @@ computed: {
 	  watch: {
         eventShowModalPubicReserve(newApp, oldApp) {
               console.log("appToReserve change !!!");
+
+		  this.getProfessionalData(this.appToReserve.professional_id);
+
 		  this.form_patient_name = null ,
 		  this.form_patient_doc_id = null ,
 		  this.form_patient_email = null ,
@@ -393,6 +406,29 @@ computed: {
       	},
 
 	methods: {
+
+		async getProfessionalData(prof_id)
+		{
+			console.log("GET PROFESSIONAL ID:"+prof_id)
+			  if ( prof_id != null )
+              { 
+                const json = { 
+                    token : "AC94327FK",
+					professional_id : prof_id ,
+                            };
+
+                  console.log ("patient_get_professional INPUT JSON :"+ JSON.stringify(json)  );
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_professional",json);             
+	              this.professional_data = response_json.data
+				  console.log ("patient_get_professional RESPONSE:"+JSON.stringify(this.professional_data)) ;
+              }
+              else 
+              {
+                    this.appointments = null; 
+              } 
+
+		},
+
 		comuna_id2name(id)
     	{
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
