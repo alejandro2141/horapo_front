@@ -40,18 +40,21 @@ import headerPublicSearch from '../HeaderPublicSearch.vue'
               <searchAppointmentForm  v-on:searchGeneric="searchGeneric" :suggestedSearchParams='suggestedSearchParams' v-on:searchBySpecialty="searchBySpecialty" v-on:searchByTypeCenter="searchByTypeCenter" v-on:searchByTypeHome="searchByTypeHome" v-on:searchByTypeRemote="searchByTypeRemote" v-on:searchByLocation="searchByLocation" v-on:searchByDate="searchByDate" :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_app_filtered="n_appointments_found" ></searchAppointmentForm>
                 -->
               <searchAppointmentForm  v-on:searchGeneric="searchGeneric"  :currentDate="currentDate" :global_specialties="global_specialties" :global_comunas="global_comunas"  :n_appointments_found="n_appointments_found" ></searchAppointmentForm>
+          
               
-            <div ref="scrollToMe"></div>
+          <!-- To focus on result appointments -->
+          <div ref="scrollToMe"></div>
 
-          <div v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
-                 <!-- {{metric_search/1000}} Seg,  {{n_appointments_found }} resultados en los proximos 40 dias.  -->
-                <p class="text-center">{{n_appointments_found }} resultados para los proximos 40 dias</p>
-                 
-                  <!-- <searchAppointmentResult  :filter_home="filter_home" :filter_center="filter_center" :filter_remote="filter_remote" :searchParameters='searchParameters' v-if="daterequired != null && appointments != null"  v-on:updateLastSearch="updateLastSearch"  :appointments="appointments" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
-                  -->
-                  <!-- <hr > -->
-                  <searchAppointmentResult  :n_appointments_found="n_appointments_found" :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+          <!-- LIST APPOINTMENTS -->
+          <div class="d-flex justify-content-center" v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
+                <p class="">{{n_appointments_found }} resultados para los proximos 40 dias</p>
           </div>
+          <div class="d-flex justify-content-center" v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
+                <searchAppointmentResult  :n_appointments_found="n_appointments_found" :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+          </div>
+          <!-- END LIST APPOINTMENTS -->
+
+
           <div v-else style="height:900px">
                 
                
