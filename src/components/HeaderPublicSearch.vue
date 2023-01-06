@@ -4,22 +4,24 @@ import { ref } from 'vue'
 </script>
 
 <template>
-<div style="background-color:#2f3e44">
+<div >
+    <!-- style="background-color:#2f3e44"--> 
   	
-    <div  class="d-flex justify-content-between  mt-0 pt-0 text-white"> 
+    <div  class="d-flex justify-content-between  mt-0 pt-0 text-dark"> 
 
         <div class="m-1">
             <i  @click="show_sub_menu = !show_sub_menu" class="fs-2 bi bi-list "></i>
         </div>
 
        
-
+        <!--
         <a HREF="/nested/publicSearch.html" class="text-decoration-none m-2" style="color :#ffffff"> 
             <text class="">123HORA</text>  
         </a>
+        -->
 
-        <a HREF="/nested/getAppointments.html" class="text-light  text-decoration-none btn-floating m-2 " >
-            Recordar mis Horas  
+        <a HREF="/nested/getAppointments.html" class="text-dark  text-decoration-none btn-floating m-2 " >
+            Recordar mis Horas  <i class="bi bi-arrow-right"></i>
         </a>
 
     </div>
@@ -28,11 +30,11 @@ import { ref } from 'vue'
     <!--------------------
           SUB MENU        
     ---------------------->
-    <div v-if="show_sub_menu" style="background-color:#2f3e44"  class="text-white border-top border-dark"> 
+    <div v-if="show_sub_menu"   class="text-dark border-top border-dark"> 
         <div class="d-flex justify-content-around">
                 <div class="p-2">
-                        <a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
-                            &nbsp;&nbsp;<text class="text-decoration-none" style="color: #FFF">123hora ? </text>
+                        <a href="/nested/aboutUs.html" class="m-1 text-dark  text-decoration-none btn-floating "  role="button">
+                            &nbsp;&nbsp;<text class="text-decoration-none" >¿123hora? </text>
                         </a>
                 </div>
                     <!--
@@ -40,7 +42,7 @@ import { ref } from 'vue'
                     -->
                 <div class="p-2">
                         <a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-                            &nbsp;&nbsp;<text class=" text-decoration-none" style="color: #FFF">Profesionales</text>
+                            &nbsp;&nbsp;<text class=" text-decoration-none" >Profesionales</text>
                         </a>
                 </div>
                 
@@ -49,7 +51,7 @@ import { ref } from 'vue'
                     -->
                 <div class="p-2">
                         <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-                            &nbsp;&nbsp;<text class="text-decoration-none" style="color: #FFF">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;<text class="text-decoration-none" >Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
         </div>
