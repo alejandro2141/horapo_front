@@ -73,7 +73,7 @@ const count = ref(0)
 export default {
    data : function() {
         return {
-            PlaceHolderInput : "Comuna, Zona Geográfica" ,
+            PlaceHolderInput : "Comuna" ,
 
             form_comuna : null,
             comuna_list : [] ,
@@ -82,7 +82,7 @@ export default {
             location_filtered : []  , 
             clearfiltered : false ,
 
-            origComunaName :"Comuna, Zona Geografica" ,
+            origComunaName :"Comuna" ,
         }
     },  
  
