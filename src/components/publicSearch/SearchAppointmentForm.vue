@@ -89,9 +89,20 @@ import Datepicker from 'vuejs3-datepicker';
                 </div>
                 <div  v-else  class="row  mb-1   "  >
                     <div class="col">
-                       
-                        <input  style=" z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-white' : !ready_input ,  'text-success' : ready_input  }"  id="form_comuna" name="form_comuna"   placeholder="Todas las Comunas" >
-                   
+                   <!--    
+                      <input  style="z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border text-primary"   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-white' : !ready_input ,  'text-success' : ready_input  }"  id="form_comuna" name="form_comuna"   placeholder="Todas las Comunas" >
+                   -->
+
+                   <div class="bg-primary text-muted d-flex justify-content-center border border-1 border-white" style=" z-index: 9;   border-radius: 25px;"  >
+                        
+                        <div class="m-0 p-2"> 
+                            <text style="font-size: 1.5em;" class="text-white">Todas las comunas</text>
+                        </div>
+                        
+
+                    </div>
+
+
                     </div>
                 </div>
             </div>
@@ -101,8 +112,6 @@ import Datepicker from 'vuejs3-datepicker';
         <div class="d-flex justify-content-center mb-0 mt-2">
         <div style="width: 20em;">
        
-
-            
                 <div v-show="show_input_date() " @click="show_date_picker = !show_date_picker"  >
                     <div class="text-muted d-flex justify-content-between border border-1 border-secondary" style=" z-index: 9;   border-radius: 25px;"  >
                         <div class="m-0 p-1"> 
@@ -274,8 +283,11 @@ export default {
         specialtySelected(specialty)
         {
            console.log("SearchAppointmentFOrm specialtySelected "+JSON.stringify(specialty))
-           this.search_params.specialty = specialty
-           this.$emit("searchGeneric",this.search_params);
+          
+                this.search_params.specialty = specialty
+                this.$emit("searchGeneric",this.search_params);
+          
+          
         },
 
         show_input_specialty()
