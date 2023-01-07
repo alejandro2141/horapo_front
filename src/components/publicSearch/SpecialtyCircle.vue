@@ -113,7 +113,7 @@ mounted() {
         selectSpecialty(specialty)
         {
         console.log("SelectSpecialty :"+JSON.stringify(specialty))    
-        this.active = true 
+         
         /*
         console.log("Active :"+this.active)
             if (this.active)
@@ -121,7 +121,18 @@ mounted() {
                 this.$emit('specialtySelected',specialty)
             }   
         */
-        this.$emit('specialtySelected',specialty)
+        if (!this.active)
+        {
+            this.active = true
+            this.$emit('specialtySelected',specialty)
+        }
+        else 
+        {
+            this.active = false  
+            // this.$emit('specialtySelected',null)
+        }
+
+        
         },
 
         changeColor()
