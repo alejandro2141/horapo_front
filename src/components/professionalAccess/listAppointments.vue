@@ -97,7 +97,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
 
     <div v-if="!isLockDay && filteredAppList.length == 0">
         <p  class="text-center text-secondary">       
-            <text style="font-size:50vw;">  <i class="bi bi-wind"></i> </text><br>
+            <text style="font-size:5em;">  <i class="bi bi-wind"></i> </text><br>
             <i>Sin Citas</i>
         </p>
     </div>
@@ -105,7 +105,7 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     <div v-if="isLockDay">
         <p  class="text-center text-secondary">
             
-            <text style="font-size:50vw;"><i  class="bi bi-lock-fill"></i></text><br>
+            <text style="font-size:5em;"><i  class="bi bi-lock-fill"></i></text><br>
             <i v-if="!days_expired"  @click="sendUnLock()" class="text-primary" >Desbloquear Dia </i>
         </p>
     </div>
