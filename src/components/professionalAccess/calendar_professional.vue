@@ -17,14 +17,14 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                         
                    <!-- <div class="card mb-5  w-100 border border-1 border-white" style="width: 18rem; border-radius: 15px; " :style="{ 'background-color' : calendar.color   }"  >
                     -->
-                    <div class="card mb-5  w-100 border border-1 border-white bg-secondary" style="width: 18rem; border-radius: 15px; "   >
+                    <div class="card mb-5  w-100 border border-1 border-secondary bg-white" style="width: 18rem; border-radius: 15px; "   >
                     
                     <div class="card-body p-0 m-0" >
 
                     
                     
-                    <div class="d-flex justify-content-between p-2 w-100 bg-secondary" style="width: 18rem; border-radius: 15px; " >
-                                <text class="card-title display-6 text-white mt-0 pt-0"   >
+                    <div class="d-flex justify-content-between p-2 w-100 bg-white" style="width: 18rem; border-radius: 15px; " >
+                                <text class="card-title display-6  mt-0 pt-0"   >
                                   <i class="bi bi-calendar-week "></i>  {{idSpecialty2name(specialty_code) }}  
                                 </text>
                                 <!--
@@ -39,23 +39,25 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                                 -->
                     </div>
 
-                    <div @click="showSocials=!showSocials" class="d-flex justify-content-start text-white"  >
+                    <div @click="showSocials=!showSocials" class="d-flex justify-content-start "  >
                         <text class="m-1"> Compartir calendario  </text> 
-                        <i class="fs-3 m-1 bi bi-share">
+                        <i class="fs-3 m-1 bi bi-share text-primary">
                         </i>
                     </div>
 
 
-                    <div v-if="showSocials" class="text-white m-3 p-2 bg-dark" style="border-radius: 15px;">    
-                        <div class="d-flex justify-content-end"> <i @click="showSocials=false" class="bi bi-x-lg"></i> </div>
+                    <div v-if="showSocials" class="text-dark m-3 p-2  border border-1 border-primary bg-white " style="border-radius: 15px;">    
+                        <div class="d-flex justify-content-end"> <i @click="showSocials=false" class="h3 bi bi-x-lg text-primary"></i> </div>
                         
                         <div>
 
                             <div>
-                                <div class="bg-secondary p-1 w-75" style="border-radius: 15px;" >
-                                    <input  type="text" :value="get_link_calendar()" id="linkcal">
+                                <div class="bg-white p-1 w-75" style="border-radius: 15px;" >
+                                    URL:
+                                    <input  type="text"  class="border border-0" :value="get_link_calendar()" id="linkcal">
                                    
                                 </div>
+                                
                                 <div @click="copyToClipBoard(get_link_calendar())" class="d-flex justify-content-end">
                                     copy
                                 </div>
@@ -63,11 +65,11 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
                             <div > 
                                 <div @click="showInputEmail=!showInputEmail">
-                                    <i class="display-2  bi bi-envelope"></i>  Enviar calendario por correo
+                                    <i class="h4  bi bi-envelope"></i>  Enviar calendario por correo
                                 </div>
 
                                 <div v-if="showInputEmail"> 
-                                    Ingrese Email
+                                    Ingrese Email<br>
                                     <input class="text-dark bg-white" type="text" v-model="customer_email" id="fname" name="fname"><br>
                                     <!--
                                     <a  class="text-white" :href="'mailto:'+customer_email+'?subject='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'&body='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+' '">
@@ -82,11 +84,11 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                             </div>
                             <div> 
                                 <div @click="showInputPhone=!showInputPhone">
-                                    <i class="display-2 bi bi-whatsapp"></i> Enviar calendario por WhatsApp
+                                    <i class="h4 bi bi-whatsapp"></i> Enviar calendario por WhatsApp
                                 </div>                                
 
                                 <div v-if="showInputPhone"> 
-                                    Ingrese Telefono
+                                    Ingrese Telefono<br>
                                     <input class="text-dark bg-white" type="text" id="fname" v-model="customer_phone" name="fname">
                                     <br>
                                     <!--
@@ -113,7 +115,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                     </div>
 
 
-                <div class="bg-secondary  text-white w-100 pt-2 pl-2 pr-2">
+                <div class="bg-white  text-dark w-100 pt-2 pl-2 pr-2">
                     <div class="m-2 ">
 
                     
@@ -124,17 +126,17 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                             Estado    
                         </div>
 
-                        <div v-if="evaluateCalendarStatus(form_date_end)==3" class="bg-secondary" :class="{ 'bg-dark': showEdit }" style=" border-radius: 15px; "  >
-                              <text class="text-white m-3"> Expirado <i class="text-danger display-4 bi bi-slash-circle-fill"></i> </text> 
+                        <div v-if="evaluateCalendarStatus(form_date_end)==3" class="bg-white" :class="{ 'bg-white': showEdit }" style=" border-radius: 15px; "  >
+                              <text class="text-dark m-3"> Expirado <i class="text-danger display-4 bi bi-slash-circle-fill"></i> </text> 
                         </div>
 
                         <div v-else >
                                 <text v-if="form_calendar_active "  >  
-                                  <text v-if="!showEdit" class="text-white "> Activo </text>
+                                  <text v-if="!showEdit" class="text-dark "> Activo </text>
                                   <text v-if="showEdit" @click="switchCalendarActive()" class="btn btn-danger"> Apagar </text>
                                 </text>
                                 <text v-else > 
-                                    <text   class="text-white"> <i class="bi bi-exclamation-octagon-fill text-danger display-5 "></i> Apagado</text>
+                                    <text   class="text-dark"> <i class="bi bi-exclamation-octagon-fill text-danger display-5 "></i> Apagado</text>
                                     <text v-if="showEdit" @click="switchCalendarActive()" class="btn btn-success"> Encender </text>
                                 </text>
                         </div>
@@ -157,16 +159,16 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                 <text>Lugar de Atencion  <br>
                 </text>
                 <div>
-                    <p v-if="calendar.center_visit" class="text-white text-end" >
+                    <p v-if="calendar.center_visit" class="text-dark text-end" >
                         <text>  </text> <text> En Consulta  </text>  
                     </p>
-                    <p v-if="calendar.home_visit" class="text-white text-end">
+                    <p v-if="calendar.home_visit" class="text-dark text-end">
                         <text>  </text> <text> A Domicilio  </text>
                     </p>
-                    <p v-if="calendar.remote_care" class="text-white text-end">
+                    <p v-if="calendar.remote_care" class="text-dark text-end">
                         <text>  </text> <text> Tele Atencion </text>
                     </p>
-                    <i class="bi bi-geo-alt text-white"></i> {{center_data.name}} 
+                    <i class="bi bi-geo-alt text-dark"></i> {{center_data.name}} 
                 </div>
             </div>     
 
@@ -176,7 +178,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                           Fecha Inicio
                           </div>
 
-                          <div class="p-2 " style="border-radius: 15px;" :class="{'bg-dark':showEdit }" @click="show_date_start=!show_date_start"  >
+                          <div class="p-2 " style="border-radius: 15px;" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  @click="show_date_start=!show_date_start"  >
                                 {{formatDate(form_date_start)}} <i class="bi bi-calendar-week"></i>
                           </div>
                   </div>
@@ -190,7 +192,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                       <div class="p-2">
                           Fecha Fin
                       </div>
-                      <div class="p-2" style="border-radius: 15px;"  :class="{'bg-dark':showEdit }"  @click="show_date_end=!show_date_end"  >
+                      <div class="p-2" style="border-radius: 15px;"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  @click="show_date_end=!show_date_end"  >
                              {{formatDate(form_date_end)}} <i class="bi bi-calendar-week"></i>
                       </div>
                   </div>
@@ -205,11 +207,11 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                     
                     <div  class="d-flex flex-row-reverse">
                           <div class="d-flex justify-content-end">
-                              <div @click="show_start_hour_picker=!show_start_hour_picker ;show_start_minutes_picker=false" style="border-radius: 15px;" class="p-2" :class="{'bg-dark':showEdit }">
+                              <div @click="show_start_hour_picker=!show_start_hour_picker ;show_start_minutes_picker=false" style="border-radius: 15px;" class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']">
                                   <text >&nbsp;&nbsp;{{form_start_hour}}&nbsp;&nbsp;</text> 
                               </div>
                               <div class="p-2">:</div>
-                              <div @click="show_start_minutes_picker=!show_start_minutes_picker; show_start_hour_picker=false" style="border-radius: 15px;"  class="p-2" :class="{'bg-dark':showEdit }" >
+                              <div @click="show_start_minutes_picker=!show_start_minutes_picker; show_start_hour_picker=false" style="border-radius: 15px;"  class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
                                     <text >&nbsp;&nbsp;{{form_start_minutes}}&nbsp;&nbsp;</text>
                                     </div>
                               <div class="p-2">hrs</div>
@@ -227,11 +229,11 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                     
                     <div  class="d-flex flex-row-reverse">
                           <div class="d-flex justify-content-end">
-                              <div @click="show_end_hour_picker=!show_end_hour_picker ;show_end_minutes_picker=false" style="border-radius: 15px;"  class="p-2" :class="{'bg-dark':showEdit }" >
+                              <div @click="show_end_hour_picker=!show_end_hour_picker ;show_end_minutes_picker=false" style="border-radius: 15px;"  class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
                                   <text >&nbsp;&nbsp;{{form_end_hour}}&nbsp;&nbsp;</text> 
                               </div>
                               <div class="p-2">:</div>
-                              <div @click="show_end_minutes_picker=!show_end_minutes_picker; show_end_hour_picker=false" style="border-radius: 15px;"  class="p-2" :class="{'bg-dark':showEdit }" >
+                              <div @click="show_end_minutes_picker=!show_end_minutes_picker; show_end_hour_picker=false" style="border-radius: 15px;"  class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
                                     <text >&nbsp;&nbsp;{{form_end_minutes}}&nbsp;&nbsp;</text>
                                     </div>
                               <div class="p-2">hrs</div>
@@ -247,7 +249,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
         <!-- APP DURATION  -->
                 <div  class="d-flex justify-content-between mt-3">
                             <text> Tiempo de atencion: </text>
-                            <div @click="show_duration_minutes=!show_duration_minutes" style="border-radius: 15px;"  class="p-2 " :class="{'bg-dark':showEdit }" >
+                            <div @click="show_duration_minutes=!show_duration_minutes" style="border-radius: 15px;"  class="p-2 " :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
                                   <text >{{form_app_duration}}</text> Minutos
                             </div>
                 </div>
@@ -262,7 +264,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                 <div  class="d-flex justify-content-between mt-3">
                            
                         <text> Tiempo entre Citas: </text>
-                            <div @click="show_timebtw_minutes=!show_timebtw_minutes" style="border-radius: 15px;"  class="p-2 " :class="{'bg-dark':showEdit }" >
+                            <div @click="show_timebtw_minutes=!show_timebtw_minutes" style="border-radius: 15px;"  class="p-2 " :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
                                   <text > {{form_app_time_between}} </text> Minutos
                             </div>
                 </div>
@@ -283,9 +285,9 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                             -->
                 </div>
 
-                <div  class="d-flex justify-content-end" style="border-radius: 15px;"  :class="{ 'bg-dark p-1': showEdit  }" >
+                <div  class="d-flex justify-content-end" style="border-radius: 15px;" >
                     <div v-for="calcol in calendarColorArray"  :key="calcol.id"  >
-                       <div class="m-1 p-3 border border-5 p-2 border-secondary" @click="showEdit ? form_calendar_color=calcol : null"  :class="{'border-white ' : (form_calendar_color==calcol ), 'border-dark ' : showEdit }" :style="{ 'background-color' : calcol   }" > </div>
+                       <div class="m-1 p-3 border border-4  p-2 " @click="showEdit ? form_calendar_color=calcol : null"  :class="{'border-primary ' : (form_calendar_color==calcol ), '' : showEdit }" :style="{ 'background-color' : calcol   }" > </div>
                     </div>
                 </div>
              <!-- SELECT COLOR   -->
@@ -294,19 +296,17 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                 <div class="mt-3">
                   Dias Recurrencia: <br>
 
-                <div class="d-flex justify-content-between  m-0 p-0" style="border-radius: 15px;"  :class="{ 'bg-dark p-1': showEdit}" >
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_mon=!form_recurrency_mon: null " :class="{ 'bg-dark  border-dark': showEdit , 'border-white' :form_recurrency_mon, 'border-secondary':!form_recurrency_mon }" >Lu</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_tue=!form_recurrency_tue: null " :class="{ 'bg-dark  border-dark': showEdit , 'border-white' :form_recurrency_tue, 'border-secondary':!form_recurrency_tue}" >Ma</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_wed=!form_recurrency_wed: null " :class="{ 'bg-dark  border-dark': showEdit , 'border-white' :form_recurrency_wed, 'border-secondary':!form_recurrency_wed}" >Mi</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_thu=!form_recurrency_thu: null " :class="{ 'bg-dark  border-dark': showEdit , 'border-white' :form_recurrency_thu, 'border-secondary':!form_recurrency_thu}">Ju</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_fri=!form_recurrency_fri: null " :class="{ 'bg-dark  border-dark': showEdit , 'border-white' :form_recurrency_fri, 'border-secondary':!form_recurrency_fri}">Vie</div>
+                <div class="d-flex justify-content-between  m-0 p-0" style="border-radius: 15px;"  :class="{ 'bg-white p-1': showEdit}" >
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_mon=!form_recurrency_mon: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_mon, 'border-secondary':!form_recurrency_mon }" >Lu</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_tue=!form_recurrency_tue: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_tue, 'border-secondary':!form_recurrency_tue}" >Ma</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_wed=!form_recurrency_wed: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_wed, 'border-secondary':!form_recurrency_wed}" >Mi</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_thu=!form_recurrency_thu: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_thu, 'border-secondary':!form_recurrency_thu}">Ju</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_fri=!form_recurrency_fri: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_fri, 'border-secondary':!form_recurrency_fri}">Vie</div>
                 </div>
 
-                <div class="d-flex justify-content-start  m-0 p-0" style="border-radius: 15px;"  :class="{ 'bg-dark p-1': showEdit}" >
-
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_sat=!form_recurrency_sat: null " :class="{ 'bg-dark  border-dark': showEdit , 'border-white' :form_recurrency_sat, 'border-secondary':!form_recurrency_sat }" >Sa</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_sun=!form_recurrency_sun: null " :class="{ 'bg-dark  border-dark': showEdit , 'border-white' :form_recurrency_sun, 'border-secondary':!form_recurrency_sun}" >Do</div>
-                   
+                <div class="d-flex justify-content-start  m-0 p-0" style="border-radius: 15px;"  :class="{ 'bg-white p-1': showEdit}" >
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_sat=!form_recurrency_sat: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_sat, 'border-secondary':!form_recurrency_sat }" >Sa</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_sun=!form_recurrency_sun: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_sun, 'border-secondary':!form_recurrency_sun}" >Do</div>
                 </div>
 
                 <!--
@@ -361,17 +361,23 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
               </div>
 -->
                               
-                <hr class="text-white ">
+                <hr class="text-secondary ">
 
-                <div v-if="!showEdit" class="d-flex justify-content-around fs-4 text-white" >
-                     <text  @click="showEdit=true" class="text-white"> Modificar </text>  
+                <!--
+                <div v-if="!showEdit" class="d-flex justify-content-around fs-4 " >
+                     <text  @click="showEdit=true" class="text-primary"> Modificar </text>  
                  
                 </div>
+                -->
+                
+                <p v-if="!showEdit" class="text-end fs-5 mt-1  mb-0" >  
+                    <i @click="showEdit=true"  class="text-primary bi bi-pencil"></i>    
+                </p>
 
-                <div v-if="showEdit" class="d-flex justify-content-between mt-2">
+                <div v-if="showEdit" class="d-flex justify-content-between mt-2 text-primary">
                     <text @click="saveCalendarChanges();showEdit=false" class="" >GUARDAR  </text> 
                             
-                    <text @click="showEdit=false;resetForm()" class="" >CANCELAR </text>  
+                    <text @click="showEdit=false;resetForm()" class="text-primary" >CANCELAR </text>  
                 </div>
 
                                 
