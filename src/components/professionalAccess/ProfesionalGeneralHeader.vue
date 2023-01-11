@@ -9,11 +9,11 @@ import SwitchViewButton from './switchViewButton.vue'
 	<div>
 
 
-	<div v-if="session_params['professional_name'] != null"  class="text-dark d-flex pt-1 pb-2 justify-content-around " :class="{ 'bg-white': !showTopMenu }" > 
+	<div v-if="session_params['professional_name'] != null"  class="text-dark d-flex pt-1 pb-2 justify-content-around " :class="{ 'bg-white': showTopMenu , 'bg-white': !showTopMenu  }" > 
 
-		<text >	
-			<i v-if="showTopMenu" class="fs-4 bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
-			<i v-if="show_close_list" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+		<text style="font-size:2.0em">	
+			<i v-if="showTopMenu" class="bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
+			<i v-if="show_close_list" class=" bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
 		</text>
 		<text>
 			<text v-if="showTopMenu" class="text-white-50">  </text>
@@ -21,48 +21,14 @@ import SwitchViewButton from './switchViewButton.vue'
 		
 
 		<!-- LIST APPOINTMENT -->
-		<!--
-		<div v-if="showTopMenu" >
-			<i @click="switchViewTo(5)" class="bi bi-person-square display-5"></i>  
-		</div>
-		-->
-
-
-		<text  >
-			<text v-if="showTopMenu" class="text-white-50">  </text>
-		</text>
+		
+		
 
 		<!-- DAY CALENDAR -->
-		<!--
-		<div v-if="showTopMenu" @click="setToday(dateObj);switchViewTo(2)" >
-			<div class="w-100 d-flex justify-content-around">
-				<div class="bg-white " style=" width:3px;  height:3px"  >
-						
-				</div>
-			
-				<div class="bg-white " style=" width:3px;  height:3px" >
-					
-				</div>
-				
-			</div>
-			<div  v-if="showTopMenu" class="bg-danger border border-2 border-white" style="border-radius:7px; ">
-
-				<div class="bg-danger" style="border-radius:5px; ">
-					<text class=""   >   </text>
-					
-				</div>
-
-				<div class="bg-white  mt-1 " style="border-bottom-left-radius:5px;  border-bottom-right-radius:5px" >
-					<text class="text-danger"  > &nbsp; {{day}} &nbsp;  </text>
-					
-				</div>
-			</div>
-		</div>
-		{{month_name[month]}}
-		{{month_name[month]}}
-		-->
-		<div v-if="showTopMenu" class="m-1" @click="setToday(dateObj);switchViewTo(2)" >
-			HOY <text class="text-dark"  > {{day}}/{{month+1}} </text>
+		
+		<div v-if="showTopMenu" style="font-size:0.9em" class=" btn btn-danger small " @click="setToday(dateObj);switchViewTo(2)" >
+			<text class="m-0 p-0" style="">HOY</text><br>
+			 <text class="m-0 p-0"> {{day}}/{{month+1}} </text>
 		</div>
 		
 
@@ -70,78 +36,39 @@ import SwitchViewButton from './switchViewButton.vue'
 			<text v-if="showTopMenu" class="text-white-50"> </text>
 		</text>
 		
-
-
 		<!-- CONSULTAS -->
-		<text>
-			<!--
+		<text style="font-size:0.9em">
+			
 			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
-				<i  class="fs-6" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >Consultas</i>
-	        	<br><i class="bi bi-buildings"></i>
-			</div>
-			-->
-			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
-				<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn btn-light small p-1"><small>Consultas <i class="bi bi-building"></i></small></button>
+				<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn btn-secondary  small p-1">
+					<i class="bi bi-building"></i><br>
+					<text>Consultas</text>
+				</button>
 			</div>
 
-			<i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>	
-		
 		</text>
-
+		
 		<text>
 			<text v-if="true" class="text-white-50" >|</text>
 		</text>
+
+		
 
 		<!--CALENDARS -->
-		<text>	
-			<!--
-			<i v-if="showTopMenu" class="fs-6 bi " @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" >Calendarios</i>
-			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
-			-->
-			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
-			<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn btn-light small p-1"><small>Calendar <i class="bi bi-calendar"></i> </small></button>
+		<text style="font-size:0.9em">	
+				<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn btn-secondary small p-1">
+					<i class="bi bi-calendar"></i><br>
+					<text>Calendar</text>
+				</button>
 		</text>
-		<!--
-		<text>	
-			<i v-if="!show_close_centers && !show_close_list" class="fs-4 bi bi-geo-alt" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" ></i>
-		    <i v-if="show_close_centers" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_centers=false " ></i>
+
+		<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-dark" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>
+
+		
+		
+	</div>
+
 	
-		</text>
-
-		<text>
-			<text v-if="true" class="text-white-50" >|</text>
-		</text>
-
-		<text>	
-			<i v-if="!show_close_calendars && !show_close_list" class="fs-4 bi bi-calendar-week" @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" ></i>
-			<i v-if="show_close_calendars" class="fs-2 bi bi-x-lg" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false " ></i>
-			
-		</text>
-		-->
-		
-	</div>
-
-	<!--
-    <div v-if="session_params['professional_name'] != null"  class="d-flex pt-2 pb-2 justify-content-around bg-secondary border-bottom "> 
-
-		<text v-if="session_params['professional_name'] != null"   @click="showUserMenu=!showUserMenu;  header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = false "   class="text-white border border-0 "  :class="{ 'fw-bold' : showUserMenu }" >	
-			<i v-if="!showUserMenu || header_menu_calendars" class="fs-4 bi bi-list"></i>
-			<i v-else class="bi bi-x-lg fs-5"></i>
-			
-		</text>
-
-		<text v-if="session_params['professional_name'] != null"   @click="switchViewTo(2); showUserMenu = false ; header_menu_appointments = true; header_menu_calendars = false ; header_menu_centers = false "  class="text-white border border-0 " :class="{ 'fw-bold' : header_menu_appointments }"  >	
-			<text class="fs-6 "> HOY</text> <small><text class="">{{day}} {{getMonthName(month)}}</text> </small> 
-		</text>
-
-		<text v-if="session_params['professional_name'] != null"  class="text-white border border-0 " >	
-			<i  v-if="!header_menu_calendars" class="bi bi-calendar-week fs-5" @click="switchViewTo(1); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = true ; header_menu_centers = false "    ></i> 
-			<i v-else class="bi bi-x-lg fs-5"  @click="switchViewTo(2); header_menu_calendars=false" ></i>
-		
-		</text>
-		
-	</div>
-	-->
 
 
 	<Transition duration="1050" name="nested">
