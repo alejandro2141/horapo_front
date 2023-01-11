@@ -12,7 +12,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 		<div  v-if="showModalCreate" class="modal bg-secondary scroll" >
 		    <transition name="modal">
 			<div class="modal-mask "   >
-			<div class="modal-wrapper ">
+			<div class="modal-wrapper d-flex justify-content-center ">
 			<div class="modal-container  m-1 p-1 modal-background">
  
 
