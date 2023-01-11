@@ -16,8 +16,8 @@ import Datepicker from 'vuejs3-datepicker';
 		<div  v-if="showModalCreateCalendar" class="modal bg-secondary scroll" >
 		    <transition name="modal">
 			<div class="modal-mask ">
-			<div class="modal-wrapper ">
-			<div class="modal-container  m-0 p-0 bg-secondary">
+			<div class="modal-wrapper d-flex justify-content-center ">
+			<div class="modal-container  m-0 p-0 bg-secondary" style="">
  
                 <div class="modal-header">
                         <div class="text-white display-5">
@@ -604,7 +604,7 @@ data: function () {
             form_app_time_between : 0 ,
 
             form_calendar_color : "#FCFFE9" ,
-            calendarColorArray : ["#FF0000","#00FF00","#0000FF", "#FFE800", "#00ECFF", "#273030"],
+            calendarColorArray : ["#FF4244","#4ebeef","#AF8536", "#f6a700", "#32b780", "#dd6da4"],
            
             form_recurrency_mon : false  , 
             form_recurrency_tue : false , 
