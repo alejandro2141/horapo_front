@@ -436,7 +436,7 @@ export default {
             show_timebtw_minutes : false ,
             form_app_time_between : '00' ,
 
-            calendarColorArray : ["#FF0000","#00FF00","#0000FF", "#FFE800", "#00ECFF", "#273030"],
+            calendarColorArray : [ "#FF4244","#4ebeef","#AF8536", "#f6a700", "#32b780", "#dd6da4"],
 
             form_calendar_color : null ,
 
