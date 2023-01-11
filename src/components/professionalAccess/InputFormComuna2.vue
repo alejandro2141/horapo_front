@@ -15,17 +15,18 @@ import axios from 'axios';
                     </div>
 
                     <div>
-                        <input @keyup="captureSeachLetter" style=" z-index: 9;  padding-left : 10px ; border-radius: 25px;" type="text" class="form-control form-control-lg border  "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
+                        <input @keyup="captureSeachLetter" style=" z-index: 9;  padding-left : 10px ; border-radius: 25px;" type="text" class="form-control  border border-1 "   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-primary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
                     </div>
                     
                     <div  style="position: absolute; z-index: 9; top : 1px ; right : 3px " class="mb-2  rounded" > 
-                        <i class="display-2 m-1  bi bi-x  text-muted border-start" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
+                        <i class="h2 m-0  bi bi-x  text-muted border-start" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
                     </div>
                 </div> 
-                   
+                   <!--
                 <div class="col-1">
-                    <i v-if="location_filtered != null" class="text-primary display-4 bi bi-plus"></i> <!-- Debe seleccionar el primero de la lista-->
+                    <i v-if="location_filtered != null" class="text-primary display-4 bi bi-plus"></i> 
                 </div>
+                -->
 
                 <div class="col-12">
                     <!--CYCLE  -->
