@@ -17,53 +17,50 @@ import TabListAppTaken from   '../src/components/professionalAccess/tabAppointme
 </script>
 
 <template>
-<div>
+<div >
     
     <ProfesionalGeneralHeader v-on:setTodayDateFromHeader='setTodayDateFromHeader'   :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
     
-    
-    <div class='m-0'>
+   
+    <div   class="m-0 w-100 d-flex justify-content-center">
        
 
-      
-   
-
-       <transition> 
-        <div  :style="{display:  visible_tab_login }"  class=" position-relative " >	 
+       <div> 
+        <div  :style="{display:  visible_tab_login }"  class=" position-relative" >	 
             <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
         </div>
-        </transition>
-        
+        </div>
+
  
-        <transition>  
-        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"  style=""  class="position-relative bg-secondary ">
+        <div >
+        <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"    class="  position-relative bg-secondary " >
             <TabCenter :session_params="session_params" :global_comunas="global_comunas" v-on:switchViewTo="switchViewTo" >  </TabCenter> 	
         </div>
-        </transition>
+        </div>
         
-        <transition>
+        <div>
         <div v-if="visible_tab_appointments == 'block'" :style="{display:  visible_tab_appointments }"  style=""  class=" bg-white">
             <TabAppointment :forceUpdateTabAppointment="forceUpdateTabAppointment" :setTodayDate="setTodayDate" :key="forceRender" :session_params="session_params" v-on:switchView="switchView"  v-on:switchToCenters="switchToCenters"  :global_specialties="global_specialties" :global_comunas="global_comunas" >  </TabAppointment> 	
         </div>
-        </transition>
+        </div>
 
-        <transition>
+        <div>
         <div v-if="visible_tab_timetable == 'block'" :style="{display:  visible_tab_timetable }"  style=""  class="bg-secondary">
             <TabTimeTable :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabTimeTable> 	
         </div>
-        </transition>
+        </div>
         
-        <transition>
+        <div>
         <div v-if="visible_tab_userconfig == 'block'" :style="{display:  visible_tab_userconfig }"  style=""  class=" bg-white">
             <TabUserConfig :session_params="session_params" v-on:switchViewTo="switchViewTo" :global_specialties="global_specialties" :global_comunas="global_comunas"  >  </TabUserConfig> 	
         </div>
-        </transition>
+        </div>
 
-         <transition>  
+         <div>  
         <div v-if="visible_tab_appListTaken == 'block'" :style="{display:  visible_tab_appListTaken }"  style=""  class="bg-white ">
            <TabListAppTaken :session_params="session_params"> </TabListAppTaken>
         </div>
-        </transition>
+        </div>
         
 
     </div>
