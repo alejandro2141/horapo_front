@@ -28,8 +28,10 @@ import CalendarSummary from './calendar_summary.vue'
           </div>
       </div> 
       
+      <div >
         <ListAppointments  :force_filter="force_filter" :filterApps="filterApps" :lock_dates="lock_dates"  v-on:addToBlockList="addToBlockList"  v-on:updateAppointmentList="updateAppointmentList" v-if="session_params" :daterequired="daterequired" :appointments_data="appointments_data"  :calendars_marks="calendars_marks" :session_params="session_params" v-on:switchView='switchView' :global_specialties='global_specialties' :global_comunas="global_comunas" ></ListAppointments>
-    
+      </div>
+      
       <div id='footer' style='height : 300px'>
       </div>
 	  
