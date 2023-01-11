@@ -16,7 +16,7 @@ import inputFormComuna from  './InputFormComuna2.vue'
                                         </div>
 
                                          <i v-else class=" bi bi-geo-alt fs-1 m-1"></i> 
-                                         <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control form-control-lg" id="form_phone2" name="form_phone2" v-model="name" style="z-index: 9;  border-radius: 25px; width:80%;  text-align: left; ">
+                                         <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-white border-0 text-dark form-control form-control-lg" id="form_phone2" name="form_phone2" v-model="name" style="z-index: 9;  border-radius: 25px; width:80%;  text-align: left; ">
                                          
                                         </div>
 
@@ -38,32 +38,32 @@ import inputFormComuna from  './InputFormComuna2.vue'
 
                 <text class="mt-2">Tipo:</text>
                       <div class="d-flex justify-content-between " >
-                          <button  v-if="app_type_center || showEditOptions"  type="button" class="btn  m-1" :class="[ app_type_center ? 'btn-outline-light': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
+                          <button  v-if="app_type_center || showEditOptions"  type="button" class="btn  m-1" :class="[ app_type_center ? 'btn-outline-dark': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
                               <i class="h3 bi bi-building m-0 p-0"></i><br>
-                              <text class="fs-6 m-0 p-0">En Consulta</text> 
+                              <text class="fs-6 m-0 p-0">Consulta</text> 
                           </button>
                           
-                          <button v-if="app_type_home || showEditOptions"  type="button" class="btn  m-1" :class="[ app_type_home  ? 'btn-outline-light': 'btn-outline-dark' ]"   @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ;" >
+                          <button v-if="app_type_home || showEditOptions"  type="button" class="btn  m-1" :class="[ app_type_home  ? 'btn-outline-dark': 'btn-outline-dark' ]"   @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ;" >
                               <i class="h3 bi bi-house-door m-0 p-0"></i><br>
-                               <text class="fs-6 m-0 p-0">A Domicilio</text> 
+                               <text class="fs-6 m-0 p-0">Domicilio</text> 
                           </button>
                           
-                          <button v-if="app_type_remote || showEditOptions" type="button" class="btn  m-1" :class="[ app_type_remote  ? 'btn-outline-light': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
+                          <button v-if="app_type_remote || showEditOptions" type="button" class="btn  m-1" :class="[ app_type_remote  ? 'btn-outline-dark': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
                               <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
-                              <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
+                              <text class="fs-6 m-0 p-0">Tele Aten. </text> 
                           </button>
                       </div>
    
                     <div v-if="app_type_center" class="mt-3">
                         <text >Direccion: </text><br>
                         <!--  <text class="text-end">{{center.address}}, {{ comunaId2Name(center.comuna)  }} </text> -->
-                        <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="address" style="z-index: 9;  border-radius: 25px; width:100%;  text-align: right; ">
+                        <input :disabled="!showEditOptions "  type="text" :class="[showEditOptions ? ' border border-1 border-primary' : 'bg-white border border-0 text-dark ' ]" class="form-control" id="form_phone2" name="form_phone2" v-model="address" style="z-index: 9;  border-radius: 25px; width:100%;  text-align: right; ">
                         
                         <text >Comuna: </text><br>
-                        <text class="text-end"> {{ comunaId2Name(center_comuna)  }} </text>
+                        <text class="text-end ">&nbsp;&nbsp; {{ comunaId2Name(center_comuna)  }} </text>
                         <div v-if="showEditOptions" class="d-flex justify-content-between mt-3">
                             <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode_center" :global_comunas='global_comunas' > </inputFormComuna> 
-                            <text class="display-1">+</text>
+                            <!-- <text class="display-1">+</text> -->
                         </div>
                     </div>
                         
@@ -87,16 +87,16 @@ import inputFormComuna from  './InputFormComuna2.vue'
 
                                         <div v-if="centerDetails.phone1 != 'null' " class="d-flex justify-content-between mt-3">
                                             <text class="">Telefono 1:</text>
-                                            <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-secondary border-0 text-white form-control  " id="form_phone2" name="form_phone2" v-model="phone1" style="z-index: 9;  border-radius: 25px; width:40%;  text-align: right; ">
+                                            <input :disabled="!showEditOptions "  type="text" :class="[showEditOptions ? ' border border-1 border-primary' : 'bg-white border border-0 text-dark ' ]"  class="form-control  " id="form_phone2" name="form_phone2" v-model="phone1" style="z-index: 9;  border-radius: 25px; width:40%;  text-align: right; ">
                                           <!--  <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text> -->
                                         </div>
 <hr>
                                         <p v-if="showEditButton" class="text-end fs-5 mt-1  mb-0" >  
-                                            <i @click="showEditOptions=true;showEditButton=false" class="text-white bi bi-pencil"></i>    
+                                            <i @click="showEditOptions=true;showEditButton=false" class="text-primary bi bi-pencil"></i>    
                                         
                                         </p>
                                         
-                                        <div v-if="showEditOptions" class="mt-2 d-flex justify-content-between" >
+                                        <div v-if="showEditOptions" class="mt-2 d-flex justify-content-between text-primary"  >
                                             <text @click="showEditOptions=false;showEditButton=true;resetData()" >CANCELAR  </text><br>
                                             <text @click="saveChanges();showEditOptions=false;showEditButton=true;" >GUARDAR </text>
                                         </div>
