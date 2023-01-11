@@ -8,7 +8,7 @@ import CalendarProfessional from './calendar_professional.vue'
 
 </script>
 <template>
-    <div class="bg-secondary">  
+    <div class="bg-white">  
 
       
             <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas"  :global_specialties="global_specialties"  ></ModalCreateCalendar>
@@ -16,7 +16,7 @@ import CalendarProfessional from './calendar_professional.vue'
           -->
             <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
       
-                <p class="text-center display-5 pt-1 text-white">Tus Calendarios  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2 border-white " style=" border-radius: 15px;" ></i> 
+                <p class="text-center display-5 pt-1 text-dark">Tus Calendarios  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2  text-primary border-primary" style=" border-radius: 15px;" ></i> 
 
 
                 </p>
@@ -26,7 +26,7 @@ import CalendarProfessional from './calendar_professional.vue'
             </div>
         
 
-        <div v-if="session_params.tutorial_calendar || showInfoCreate" class="bg-light m-2">
+        <div v-if="session_params.tutorial_calendar || showInfoCreate" class="bg-white text-dark m-2">
             Felicitaciones, ya creaste tu primera Consulta. Ahora ya puedes crear tu primer Calendario.<br> 
             Un Calendario es un periodo de tiempo, identificado con fechas, dias  y horas en que vas a entregar tus servicios<br>
             El calendario que vas a crear quedara disponible para la busqueda de pacientes, de acuerdo a criterios de Tipo, especialidad, fecha, Comuna. <br> 
