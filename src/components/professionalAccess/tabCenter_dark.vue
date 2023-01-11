@@ -11,18 +11,18 @@ import Consultancy from './consultancy.vue'
 </script>
 
 <template>
-<div class="text-white bg-secondary w-100" >
+<div class="text-dark bg-white w-100" >
      <ModalViewCenterDetails  :session_params='session_params' :activatorViewCenterDetails='activatorViewCenterDetails' :centerToShowDetails='centerToShowDetails' v-on:updateCenterList="updateCenterList"  :global_comunas="global_comunas"   > </ModalViewCenterDetails>                    
      <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" >  </ModalCreateCenter>
       
-<div  class="w-100" style="width: 100%;" >
+<div  class="w-100" style="width:25em" >
 
     <div class="d-flex justify-content-between mb-0 ">
         
          <!-- <i class="bi bi-geo-alt display-3 "></i> -->
          <text></text>
-         <p class="display-6 text-center mt-1  text-white ">
-            Tus Consultas <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2 border-white " style=" border-radius: 15px;" ></i> 
+         <p class="display-6 text-center mt-1  e ">
+            Tus Consultas <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2  border-primary text-primary" style=" border-radius: 15px;" ></i> 
          </p>
          <text></text>
          <!--
@@ -31,7 +31,7 @@ import Consultancy from './consultancy.vue'
     </div>
 
 
-    <div v-if="session_params.tutorial_center || showInfoCreate" class="bg-white text-dark m-2 p-2 border border-rounded" style="border-radius: 15px;" >
+    <div v-if="session_params.tutorial_center || showInfoCreate" class="text-dark m-2 p-2 border border-rounded" style="border-radius: 15px;" >
         Tutorial <br>
              Aqui puedes crear tus consultas   
         <div >
@@ -87,7 +87,7 @@ import Consultancy from './consultancy.vue'
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
 
-                    <div class="card m-4 mt-0  bg-secondary border  border-2 border-white  " style=" border-radius: 15px;"  >
+                    <div class="card m-4 mt-0   border  border-2 border-secondary  " style=" border-radius: 15px;"  >
                         <div class="card-body pb-1"  >
                             
                                 <div >
