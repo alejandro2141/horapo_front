@@ -28,41 +28,8 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
                     
                       <div ><i class="text-primary bi bi-x-lg ml-0" style="font-size:3em"  v-on:click="showModalPublicReserveForm = false" aria-label="Close"></i> </div>
                     </div>
-<!--
-					<div class="d-flex justify-content-start border border-2" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px ">
-						<div class="m-0 p-2  bg-primary text-white" style="border: 0px solid rgb(168, 168, 168); border-radius: 10px 0px 0px 10px;" > <text class="display-5"> {{getShortMonthName(appToReserve.date.substring(5, 7) )}}</text><br><text class="display-1 d-flex align-items-center justify-content-center"> {{appToReserve.date.substring(8, 10) }} </text>  </div>
-					    <div  class=" display-3 p-3" style="color:#1f9d94 ;" >{{ showSpecialtyName(appToReserve.specialty1) }} </div> 
-					</div>
 
-					<div style="margin-top: 1em; " class="h4">
-							<div class="" >
-								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Fecha :  {{ transform_date( appToReserve.date.substring(0, 10) ) }}  </p>
-								<p> <i class="bi bi-circle-fill display-5 text-primary"></i> Hora  :  {{appToReserve.start_time.substring(0, 5) }} hrs     </p>
-								<p> <i class="bi bi-person-circle display-4 text-primary"></i> Con :  {{appToReserve.professional_name }}  </p>
-							</div>
-					</div>
-
-					<div v-if="appToReserve.home_visit"  class="text-primary" >
-							<div class="h3" style="" ><i class="bi bi-house-fill m-1 display-5"></i> Visita a domicilio 
-							</div>
-					</div>
-
-					<div v-if="appToReserve.center_visit"  class="" style=" color:#1f9d94 "  >
-						<div > <i class="bi bi-geo-alt-fill display-5"></i>Direccion de la cita: <br>&nbsp;&nbsp;"{{appToReserve.center_name }}"</div>
-						<div class=""> &nbsp;&nbsp;  {{appToReserve.center_address }}</div>
-					
-					</div>
-
-				-->
-
-				<!--
-				<div style="margin-top: 1em; " class="h4">
-							<div class="" >
-								<p> {{ transform_date(appToReserve.date) }}.<br>A las {{transform_time(appToReserve.start_time)}} hrs  </p>
-							</div>
-				</div>
-				-->
-
+				<!-- SHOW DATE -->
 				<div class="d-flex justify-content-start mb-3" >
 					<text  style="font-size:2em"> <i class="text-muted m-2 bi bi-calendar" ></i> </text>
 					<div class="">
@@ -72,7 +39,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 						</text>       		
 					</div>
 				</div>
-				
+				<!-- SHOW PROFESSIONAL -->
 				<div class="d-flex justify-content-start mb-3" >
 					<text  style="font-size:3em" > <i class="text-muted bi bi-person  m-0 p-0"></i> </text>
 					<p class="mt-2">
@@ -84,7 +51,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 				</div>
 
 
-		<!-- LOCATION -->		
+		<!-- SHOW APP TYPE , LOCATION  -->	
 
         <div class="m-2 " style="">
 
