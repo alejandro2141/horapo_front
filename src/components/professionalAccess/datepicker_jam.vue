@@ -226,10 +226,8 @@ import axios from 'axios';
 
 <style scoped>
 
-
-
 .datepickerminimal{
-  background-image: url('/public/calendar4.svg') ;
+  background-image: url('/public/background_calendar_1.png') ;
   background-repeat: no-repeat;
   width:100% ;
   height:8em ; 
