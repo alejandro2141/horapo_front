@@ -7,10 +7,10 @@ import axios from 'axios';
 <template>
 <div>
    
-    <div class=" m-3    bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-secondary':false  }" style="border-radius: 15px; background-color:#eee " >
+    <div class=" m-3   bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-secondary':false  }" style="border-radius: 15px; background-color:#eee " >
   
 <!-- show_days -->
-        <div v-if="show_days" class="border border-3" style="border-radius: 15px; ">
+        <div v-if="show_days" class="" style="border-style: solid ; border-color: #E1F0FF; border-radius: 15px; border-width: 0.4em;">
         
             <table  class="table  table-sm" >
                 <tbody class="">
@@ -172,7 +172,7 @@ import axios from 'axios';
 
        <div class="d-flex justify-content-center   m-3">
 
-            <div class="display-5 w-100 border border-1 datepickerminimal" style="" >
+            <div class="display-5 w-100  datepickerminimal" style="" >
 
                     
                     <div class="d-flex justify-content-between " style="position: relative; bottom: 0px ; margin-top:2em" >
@@ -230,9 +230,9 @@ import axios from 'axios';
   background-image: url('/public/background_calendar_1.png') ;
   background-repeat: no-repeat;
   width:100% ;
-  height:8em ; 
+  height:7em ; 
   background-size: contain ;
-  opacity: 0.2  ;
+  opacity: 1  ;
   background-position: center ;
   
 }
