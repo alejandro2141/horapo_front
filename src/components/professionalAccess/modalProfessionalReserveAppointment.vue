@@ -10,7 +10,7 @@ import axios from 'axios';
 		<div  v-if="showModalReserveAppointment" class="modal bg-secondary"    >
 		    <transition name="modal">
 			<div class="modal-mask "   >
-			<div class="modal-wrapper ">
+			<div class="modal-wrapper d-flex justify-content-center">
 			<div class="modal-container  m-2 p-0 modal-background" style="border-radius: 15px;" >
  
                  <!--
@@ -37,67 +37,101 @@ import axios from 'axios';
         
 
 
-        <div class="display-4  text-success d-flex justify-content-between "  >	
-
-                          <text class="p-1 text-dark" >
-                            <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
-                            <i v-if="center_data.home_visit"  class=" bi bi-house-door" > </i>                                  
-                            <i v-if="center_data.remote_care" class=" bi bi-camera-video"></i> 
-                          
-                          <text class="p-1">   {{ idSpecialty2name(hourToReserve.specialty) }}  </text>
-
-                          </text> 
-
-                       <!--   <text class="p-1 "> {{ hourToReserve.start_time.substring(0,5) }} </text> -->
-                          
+        <div class="text-success d-flex justify-content-between "  >	
+  
+                            <div  style="color: rgb(31, 157, 148); font-size: 2.5em;"> 
+                                {{ idSpecialty2name(hourToReserve.specialty) }} 
+                            </div>
+                           <!--   <text class="p-1 "> {{ hourToReserve.start_time.substring(0,5) }} </text> -->
                           
                            <i class="display-1 text-primary bi bi-x-lg p-1 "  v-on:click="showModalReserveAppointment = false" aria-label="Close"></i>
         </div>
-        <div class="display-6 mt-3"> 
-            <text class="p-1 "> {{ transform_date(hourToReserve.date ) }} </text> <br>
-            <text class="" ><b>{{ transform_time(hourToReserve.start_time)}}</b> </text > hrs
+
+      <!-- SHOW DATE -->
+       <div class="d-flex justify-content-start mb-3" >
+          <text style="font-size: 2em;">
+            <i class="text-muted m-2 bi bi-calendar" ></i>
+          </text>
+          <div class="">
+            <text class="" >
+            {{ transform_date(hourToReserve.date ) }}
+            </text>
+            <br >
+            <text class="" > 
+            {{ transform_time(hourToReserve.start_time)}}
+              <text>hrs</text>
+            </text>
+          </div>
         </div>
-       
-          <div class="mt-3" >
+      
 
-           <!-- TYPE CENTER --> 
-                    <div v-if="center_data.center_visit" class="" >
+    <!-- SHOW APP TYPE , LOCATION  -->	
+ <div class="m-2 " style="">
 
-                            <p class="h5" style="">
-                              <text class="display-5"> En Consulta<br> </text>
-                              <text class="display-5">{{center_data.name}}</text>
-                              <br>
-                              Direccion:  {{center_data.address}}
-                              ,{{ id2comuna(center_data.comuna) }}
-                            </p>
-                    </div>
+			<div v-if="center_data.center_visit" class="">
+				<div style="font-size:2em">  
+					<div style="color: #781ED1" >
+					<i class="h1 bi bi-building "></i> En Consulta  </div>
+				</div>
+					
+					<div>	
+					"{{center_data.name}}"
+					</div> 
+					<div>
+					Direccion:  {{center_data.address}}
+					</div> 
+					<div style="" class="" >
+					{{id2comuna(center_data.comuna)}}
+					</div>           
+			</div>
 
-          <!-- TYPE HOME -->  
-                    <div v-if="center_data.home_visit" >
-                            <div class="display-5" >
-                               <text >  Visita a Domicilio:</text> <br>
-                            </div>
+			<div v-if="center_data.home_visit" style="color:#3399FF">
+					<div style="font-size:2em" >
+						<i class="bi bi-house-door"></i><text > Visita a Domicilio:</text> <br>
+					</div>
+					
+							<div class="m-2">
+							<p  v-if=" center_data.home_comuna1 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(center_data.home_comuna1) }} 
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna2 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(center_data.home_comuna2) }} 
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna3 != null " >  
+							&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(center_data.home_comuna3) }}
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna4 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(center_data.home_comuna4) }} 
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna5 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(center_data.home_comuna5) }} 
+								<br>
+							</p>
+							<p v-if=" center_data.home_comuna6 != null " >  
+								&nbsp;&nbsp;<i class="bi bi-geo-alt"></i> {{ id2comuna(center_data.home_comuna6) }} 
+								<br>
+							</p>	
+							</div>
+			</div>
 
-                            <h5> Zonas de atención:
-                                 {{id2comuna(center_data.home_comuna1) }} 
-                                 {{id2comuna(center_data.home_comuna2) }} 
-                                 {{id2comuna(center_data.home_comuna3) }} 
-                                 {{id2comuna(center_data.home_comuna4) }} 
-                                 {{id2comuna(center_data.home_comuna5) }} 
-                                 {{id2comuna(center_data.home_comuna6) }} 
-                            
-                            </h5>   
-                    </div>
+			<div v-if="center_data.remote_care" class="mb-3">
+				<div class="display-5" style="color:#b36b00" >
+					<i class="bi bi-camera-video"></i> Tele Atención  	 
+					<div style="" class="text-dark display-6" >
+					Todas las comunas 
+					</div>                      
+				</div>
+			</div>
+			<!-- Include here a map -->
+		</div>
 
-          <!-- TYPE REMOTE  --> 
-                    <div v-if="center_data.remote_care" >
-                         <p class="h5"  >
-                              
-                             <text class="display-5">  Tele Atención. </text> <br> Requiere llamar directamente al telefono registrado del paciente. 
-                        </p>
-                    </div>
+<!-- END SHOW APP TYPE , LOCATION  -->	
 
-        </div>
+
                         <text v-if="hourToReserve.app_type_home" class="">Direccion: {{center_data.address }} </text>
                         
                         <button type="button" class="btn btn-primary m-3 " @click="show_patient_form=!show_patient_form" >Reservar</button>
