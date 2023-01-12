@@ -11,53 +11,47 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
 	<teleport to="body"   >
     
-		<div  v-if="showModalAppointmentTaken" class="modal bg-secondary"    >
+		<div  v-if="showModalAppointmentTaken" class="modal bg-secondary "    >
 		    <transition name="modal">
 			<div class="modal-mask "   >
-			<div class="modal-wrapper ">
-			<div class="modal-container m-2 p-0 modal-background " style="border-radius: 15px;" >
+			<div class="modal-wrapper d-flex justify-content-center">
+			<div class="modal-container m-2 p-0 modal-background  " style="border-radius: 15px;" >
 
     <!------------------ ----> 
     <div v-if="hourTaken != null"   class=" text-body h5">
         
         <div id="app" class="d-flex  "  >	
             <div class="p-2" style="border-radius: 15px;" :style="{ 'background-color' : hourTaken.calendar_color  }" >
-                    
                      <!-- only in case want to show left bar color --> 
             </div>
 
             <div class="p-3">
-        <!--
-        <p class="text-end m-2" >
-          <i class="display-1 text-primary bi bi-x-lg p-1 m-2"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
-        </p>
-        -->
-
-        <div class="display-4  text-success d-flex justify-content-between mt-2 " >	
-
-                          <text class=" text-dark" >
-                            <i v-if="hourTaken.center_visit" class=" bi bi-building"></i>      
-                            <i v-if="hourTaken.home_visit"  class=" bi bi-house-door" > </i>                                  
-                            <i v-if="hourTaken.remote_care" class=" bi bi-camera-video"></i> 
-                            <text class="p-1 text-success "> {{ id2name(hourTaken.specialty) }}  </text>
-                         
-                          </text> 
-                    <!--      <text class="p-1 "> {{ hourTaken.start_time.substring(0,5) }} </text> -->
-                          <i class="display-1 text-primary bi bi-x-lg p-1 "  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i>
       
-        </div>
-        
-        <text class="display-6 p-1 "> 
-          <text class=""> {{ transform_date( hourTaken.date.substring(0, 10) ) }} </text> <br>
-            <b>{{hourTaken.start_time}}</b> <text >hrs</text>  
-        </text>
- 			  <p>	
-        <!--   Reserva #{{hourTaken.id}} -->
+          <!--SPECIALTY -->
+            <div class="d-flex flex-row justify-content-between ">
+                <div  style="color:#1f9d94 ; font-size:1.5em" >{{ id2name(hourTaken.specialty) }}  </div>
+                <div ><i class="text-primary bi bi-x-lg ml-0" style="font-size:2em"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i> </div>
+            </div>
+          <!-- SHOW DATE -->
+          <div class="d-flex justify-content-start mb-3" >
+            <text  style="font-size:2em"> <i class="text-muted m-2 bi bi-calendar" ></i> </text>
+            <div class="">
+              <text class="">	{{ transform_date(hourTaken.date) }} </text><br>
+              <text class="" style="">	 
+                  {{transform_time(hourTaken.start_time)}} <text >hrs</text>  
+              </text>       		
+            </div>
+          </div>
+
+       
+ 			  <p class="text-secondary">	
+        Reserva #{{hourTaken.app_id}} 
         </p>
  
+
           <div class=""    >
            <!-- TYPE CENTER --> 
-                    <div v-if="hourTaken.center_visit" class="">
+                    <div v-if="hourTaken.app_type_center" class="">
                  <!--
                         <div class="" style="">  
                             <p  >
@@ -65,60 +59,71 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                             </p>
                         </div>
 							-->
-                            <p style="" class="mb-0" >
-                               <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
-                            </p>
-
-                            <p class="mt-0" style="">
-                              Centro :   {{getCenter(hourTaken.center_id).name}}
+                          <div style="font-size:1em">  
+                            <div style="color: #781ED1" >
+                              <i class="h1 bi bi-building "></i> En Consulta  
+                            </div>
+                          </div>
+                          
+                          <p class="mt-0" style="">
+                              {{getCenter(hourTaken.center_id).name}}
+                              <br>
+                              <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
                               <br>
                               Direccion:  {{getCenter(hourTaken.center_id).address}}
-                            </p>
+                          </p>
+                          
+                           
                     </div>
 
           <!-- TYPE HOME -->  
-                    <div v-if="hourTaken.home_visit" style="color:#3399FF">
-                            <div class="" >
-                                <text >  Visita a Domicilio:</text> <br>
-                            </div>
-
+                    <div v-if="hourTaken.app_type_home" style="color:#3399FF">
+                            
+                               <div style="font-size:1em color:#3399FF" >
+						                    <i class="bi bi-house-door"></i><text > Visita a Domicilio:</text> <br>
+					                    </div>
+                            <!---
                               <h5> Direccion: 
-                              {{ hourTaken.patient_address}}  </h5>
+                              {{ hourTaken.patient_address}}  </h5> 
+                            -->
                            
-                              
                     </div>
 
           <!-- TYPE REMOTE  --> 
-                    <div v-if="hourTaken.remote_care" >
-                         <p class="" style="color:#b36b00" >
-                               
-                               Tele Atención  	 
-                             
-                                      
-                        </p>
+                    <div v-if="hourTaken.app_type_remote" >
+                         <div class="" style="color:#b36b00" >
+                            <i class="bi bi-camera-video"></i> Tele Atención  	 
+                            <div style="" class="text-dark" >
+                              Todas las comunas 
+                            </div>                      
+                          </div>
                     </div>
         </div>
 					
+  <!-- PATIENT  -->
           <p class=""> 
                  
                 <text class="">
                  <b class="" > Paciente: </b> <br>
-                           {{ hourTaken.patient_name}} <br>
-                            Id:{{ hourTaken.patient_doc_id}} 
+                              {{ hourTaken.patient_name}} ({{ hourTaken.patient_age}} Años ) <br>
+                           id:{{ hourTaken.patient_doc_id}}<br>
+                            <text v-if="hourTaken.patient_address!=null ||hourTaken.patient_address!='null' " >
+                               Direccion:{{ hourTaken.patient_address}} 
+                            </text>
                 </text>
           </p>
-    <!--PATIENT  -->
-            <p class="text-primary  " > 
-                            <a :href='"tel:+56"+hourTaken.patient_phone1' class="text-decoration-none" >
-                                <i class="h1 bi bi-telephone"></i>  {{ hourTaken.patient_phone1}}
-                            </a>
-            </p>             
+ 
+          <p class="text-primary  " > 
+                <a :href='"tel:+56"+hourTaken.patient_phone1' class="text-decoration-none" >
+                    <i class=" bi bi-telephone"></i>  {{ hourTaken.patient_phone1}}
+                </a>
+          </p>             
             
             <p class="text-primary  " > 
-                          <a :href ='"mailto:"+hourTaken.patient_email' class="text-decoration-none"  ><i class="h1 bi bi-envelope"></i> {{ hourTaken.patient_email}} 
+                          <a :href ='"mailto:"+hourTaken.patient_email' class="text-decoration-none"  ><i class="bi bi-envelope"></i> {{ hourTaken.patient_email}} 
                           </a>     
             </p>
-    <!--END PATIENT  -->
+  <!-- END PATIENT  -->
             
 
       
@@ -269,12 +274,30 @@ export default {
 
 	methods :{
 
-
-    transform_date(date)
+    transform_time(date)
     	{
-        let temp = date.split("-") ;
-        return (""+temp[2]+" de "+this.getShortMonthName(temp[1])+" "+temp[0])
+        let temp = new Date(date)
+        return (  String(temp.getHours()).padStart(2,0)+":"+String(temp.getMinutes()).padStart(2,0) )
     	},
+   transform_date(date)
+    	{
+        let temp = new Date(date)
+        return ( this.getDayName(temp.getDay())+" "+temp.getDate()+" de "+this.getShortMonthName(temp.getMonth()+1)+" "+temp.getFullYear())
+    	},
+
+    getDayName(day)
+		  {
+			console.log("day:"+parseInt(day));
+			let days = ['domingo','Lunes','Martes','Miercoles' ,'Jueves','Viernes','Sabado' ]
+			return days[parseInt(day)];
+		  },
+
+    getShortMonthName(month)
+			{
+				console.log("Modal Public Reserve App form MONTH:"+parseInt(month));
+				let months = ['nodata','Ene.','Feb.' ,'Marz.','Abr.','May.','Jun.','Jul.','Ago.','Sept.','Oct.','Noviembre','Dic.' ]
+				return months[parseInt(month)];
+			},	
 
     id2name(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
