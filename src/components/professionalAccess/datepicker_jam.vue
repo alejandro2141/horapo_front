@@ -180,7 +180,7 @@ import axios from 'axios';
                             <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
                         </div>
                         
-                        <div @click="show_days = !show_days" class=" d-flex align-items-end" > 
+                        <div @click="show_days = !show_days" class="d-flex align-items-end text-primary" > 
                             <text>{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
                         </div>
                         
@@ -208,7 +208,7 @@ import axios from 'axios';
                             <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
                         </div>
                         
-                        <div @click="show_days = !show_days" > 
+                        <div @click="show_days = !show_days" class="text-primary" > 
                             {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  
                         </div>
 
@@ -257,7 +257,7 @@ export default {
     
         day_names : ['D','L','M','Mi','J','V','S'] ,
         month_names : ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
-        month_full_names : ['ENERO','FEBRERO','MARZO','ABRRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','Diciembre'] ,
+        month_full_names : ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'] ,
         day_long_names : [ 'Domingo', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado' ],
 
         show_days : false ,
