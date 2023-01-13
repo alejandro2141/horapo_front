@@ -70,7 +70,9 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                               <br>
                               <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
                               <br>
+                              <text>
                               Direccion:  {{getCenter(hourTaken.center_id).address}}
+                              </text>
                           </p>
                           
                            
@@ -105,11 +107,12 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                  
                 <text class="">
                  <b class="" > Paciente: </b> <br>
-                              {{ hourTaken.patient_name}} ({{ hourTaken.patient_age}} Años ) <br>
+                              {{ hourTaken.patient_name}} ({{ hourTaken.patient_age}} Años) <br>
                            id:{{ hourTaken.patient_doc_id}}<br>
-                            <text v-if="hourTaken.patient_address!=null ||hourTaken.patient_address!='null' " >
-                               Direccion:{{ hourTaken.patient_address}} 
-                            </text>
+
+                            <p class="text-primary mt-2" v-if="hourTaken.patient_address!=null ||hourTaken.patient_address!='null' " >
+                               <i class="bi bi-geo-alt"></i> Direccion:{{ hourTaken.patient_address}} 
+                            </p>
                 </text>
           </p>
  
