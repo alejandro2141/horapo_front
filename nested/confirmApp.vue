@@ -10,8 +10,15 @@ import { BKND_CONFIG } from '../config123.js'
 <div>
     <GeneralHeader></GeneralHeader>
     <div id="app" class="text-center p-5 bg-light" >     
-         Gracias por {{ action_message }} su cita. 
-        <br>
+
+        <div v-if="this.req_act == 'ca' ">
+            Cita cancelada con exito. Esta hora quedara disponible para otros usuarios. Gracias
+        </div>
+        <div v-if="this.req_act == 'co' ">
+            Gracias por su confirmación. Notificaremos su asistencia al profesional que le atenderá.
+        </div>
+        
+         <br>
     
         <div class="mt-4 pt-4">
         
@@ -77,6 +84,7 @@ export default {
 
         if (this.req_act == "co")
         {
+            this.confirmApp( this.req_date, this.req_id, this.req_center_id,this.req_patient_doc_id)
             this.action_message = "Confirmar"
         }
         if (this.req_act == "ca")
@@ -84,10 +92,6 @@ export default {
             this.cancelApp( this.req_date, this.req_id, this.req_center_id,this.req_patient_doc_id)
             this.action_message = "Cancelar"
         }
-        
-
-
-
 
     
        },
@@ -116,6 +120,21 @@ export default {
                 console.log("cancelApp REQUEST:"+JSON.stringify(json_request))
                 let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_cancel_app",json_request);
                 console.log("cancelApp RESPONSE :"+JSON.stringify(response.data) )   
+                this.appointments = response.data.appointments     
+            },
+        
+        async confirmApp( req_date, req_id, req_center_id, req_patient_doc_id)
+            {
+                const json_request = { 
+                    req_date : req_date,
+                    req_id  : req_id,
+                    req_center_id :  req_center_id,
+                    req_patient_doc_id : req_patient_doc_id,
+                        };
+
+                console.log("confirmAPP REQUEST:"+JSON.stringify(json_request))
+                let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_confirm_app",json_request);
+                console.log("confirmAPP RESPONSE :"+JSON.stringify(response.data) )   
                 this.appointments = response.data.appointments     
             },
 
