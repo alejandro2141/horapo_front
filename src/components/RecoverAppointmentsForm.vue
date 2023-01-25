@@ -82,7 +82,7 @@ export default {
             {
                console.log("sendRecoverApp");  
                 
-               var r =confirm("Continuar con la Reservar esta cita?");
+               var r =confirm("¿ Enviar las citas a su Email Registrado ?");
                var r = true;
                  
                if (r == true) {
