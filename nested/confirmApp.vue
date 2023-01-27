@@ -9,13 +9,14 @@ import { BKND_CONFIG } from '../config123.js'
 <template>
 <div>
     <GeneralHeader></GeneralHeader>
-    <div id="app" class="text-center p-5 bg-light" >     
+    <div v-if="req_act!=null" id="app" class="text-center p-5 " >     
 
-        <div v-if="this.req_act == 'ca' ">
-            Cita cancelada con exito. Esta hora quedara disponible para otros usuarios. Gracias
+        <div v-if="req_act == 'ca' ">
+            <h3>Cita cancelada con exito</h3> Esta hora quedará disponible para otros usuarios. <br> <br> <h3>Gracias</h3>
         </div>
-        <div v-if="this.req_act == 'co' ">
-            Gracias por su confirmación. Notificaremos su asistencia al profesional que le atenderá.
+        
+        <div v-if="req_act == 'co' ">
+            <h3>Gracias por su confirmación</h3>Notificaremos su asistencia al profesional que le atenderá.<br> <br> <h3>Gracias</h3>
         </div>
         
          <br>
