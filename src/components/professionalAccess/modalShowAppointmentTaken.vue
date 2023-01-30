@@ -103,8 +103,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
         </div>
 					
   <!-- PATIENT  -->
-          <p class=""> 
-                 
+          <p class="">        
                 <text class="">
                  <b class="" > Paciente: </b> <br>
                               {{ hourTaken.patient_name}} ({{ hourTaken.patient_age}} Años) <br>
@@ -122,10 +121,22 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                 </a>
           </p>             
             
-            <p class="text-primary  " > 
-                          <a :href ='"mailto:"+hourTaken.patient_email' class="text-decoration-none"  ><i class="bi bi-envelope"></i> {{ hourTaken.patient_email}} 
-                          </a>     
-            </p>
+            <div class="text-primary  " > 
+                      
+                      <text @click="showInputTextMail=!showInputTextMail"> <i class="bi bi-envelope"></i> {{ hourTaken.patient_email}}     </text>
+                    <!--
+                      <div v-if="showInputTextMail">
+                          <br> 
+                            <text class="text-dark">Mensaje:</text>  
+                          <br>
+                          <textarea   class="form-control" rows="5" id="comment"></textarea>  
+                          
+                          <p class="text-primary"  align="right"> enviar </p>
+                         
+                      </div>
+                    -->
+                          
+            </div>
   <!-- END PATIENT  -->
             
 
@@ -264,6 +275,7 @@ export default {
             form_specialty_code : null ,
             form_center_code  : null ,
             form_app_duration : null ,
+            showInputTextMail : false ,
           }   
     },
    	
@@ -340,9 +352,25 @@ export default {
 
     },
 
-    requestConfirmation(hour)
+    async requestConfirmation(app)
     {
-    console.log("request confirmation to customer : "+hour.patient_email);
+    console.log("request confirmation to customer : "+app.patient_email);
+
+        var r =confirm("¿Enviar Solicitud de confirmacion al paciente?");
+	      if (r == true) {
+
+        const json_input = {  
+              //only variable
+              app_id : app.app_id,
+              patient_email : app.patient_email
+                        }
+                      
+        console.log ("Professional Request Confirmation to patient :"+ JSON.stringify(json_input)  );
+        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_request_confirmation",json_input);
+       // this.$emit('updateAppList');
+       // this.showModalAppointmentTaken= false ;
+        }
+
     },
 
     getCenter(id){
