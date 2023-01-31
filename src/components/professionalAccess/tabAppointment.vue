@@ -8,7 +8,7 @@ import ListAppointments from './listAppointments.vue'
 import Tutorial from './tutorial_start.vue'
 import loadProgress from '../loadProgress.vue'
 import LockOptions from './lockOptions.vue'
-import CalendarSummary from './calendar_summary.vue'
+//import CalendarSummary from './calendar_summary.vue'
 
 </script>
 
