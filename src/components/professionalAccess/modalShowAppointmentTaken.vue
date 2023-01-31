@@ -369,6 +369,7 @@ export default {
         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_request_confirmation",json_input);
        // this.$emit('updateAppList');
        // this.showModalAppointmentTaken= false ;
+        alert("Solicitud de confirmacion enviada");
         }
 
     },
