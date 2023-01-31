@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import axios from 'axios';
 import Datepicker from 'vuejs3-datepicker';
 import DatePickerJAM from './datepicker_jam.vue'
-import CalendarSummary from './calendar_summary.vue'
+//import CalendarSummary from './calendar_summary.vue'
 
 </script>
 
