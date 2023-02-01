@@ -74,9 +74,9 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                                     <!--
                                     <a  class="text-white" :href="'mailto:'+customer_email+'?subject='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'&body='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+' '">
                                     -->
-                                    <a type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false" :href="get_link_email(customer_email)">
+                                    <text type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false; sendCalendarToPatient(customer_email, calendar.id , calendar.professional_id, calendar.center_id )" >
                                         enviar
-                                    </a> 
+                                    </text> 
                                     <p><br><br></p>
                   
                                 </div>
@@ -482,6 +482,27 @@ export default {
     },
 
 	methods :{
+        
+        async sendCalendarToPatient(email, calid , profid, centid )
+        {
+            console.log("send calendar to patient  email:"+email+"  calid:"+calid+" profid:"+profid+" centid:"+centid  );
+        
+            const json = { 
+                   // professional_id: this.session_params.professional_id ,
+                   email :  email, 
+                   calendar_id :  calid,
+                   professional_id : profid,
+                   center_id :centid
+                    };
+
+                  console.log("Send Calendar to patient  REQUEST :"+JSON.stringify(json));
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_calendar_to_patient",json);
+                  console.log ("Send Calendar to patient RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
+                  let aux_resp = response_json.data.rows ; 
+                  //this.showModalViewCalendar = false ; 
+                  //this.$emit('updateCalendarList'); 
+        
+        },
 
         copyToClipBoard(text)
         {
