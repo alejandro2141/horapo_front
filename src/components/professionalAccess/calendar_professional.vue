@@ -25,7 +25,8 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                     
                     <div class="d-flex justify-content-between p-2 w-100 bg-white" style="width: 18rem; border-radius: 15px; " >
                                 <text class="card-title display-6  mt-0 pt-0"   >
-                                  <i class="bi bi-calendar-week "></i>  {{idSpecialty2name(specialty_code) }}  
+                                    <i v-if="showEdit" @click="deleteCalendar();showEdit=false" class="bi bi-trash text-danger" ></i>  
+                                    <i v-else class="bi bi-calendar-week "></i>  {{idSpecialty2name(specialty_code) }}  
                                 </text>
                                 <!--
                                 <div class="fs-1 bg-light text-primary" style="background-color: #D4D4D4;  border-radius: 15px;">
@@ -39,55 +40,63 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                                 -->
                     </div>
 
-                    <div @click="showSocials=!showSocials" class="d-flex justify-content-start "  >
+                <!-- ESTADO -->
+                <div class="d-flex justify-content-between mt-2 p-1"> 
+                        <div>
+                            Estado    
+                        </div>
+
+
+                    <div class="border border-1 p-1 m-1" style="border-radius: 15px;" >
+                        <div v-if="evaluateCalendarStatus(form_date_end)==3" class="bg-white" :class="{ 'bg-white': showEdit }" style=" border-radius: 15px; "  >
+                              <div class=""> <i class="text-danger h3 bi bi-slash-circle-fill"></i> Expirado </div> 
+                        </div>
+
+                        <div v-else  >
+                                <div v-if="form_calendar_active "  >  
+                                    <div @click="switchCalendarActive()" > <i class="text-success h3 bi bi-check2"></i> Encendido </div>
+                                </div>
+                                <div v-else > 
+                                    <div  @click="switchCalendarActive()" > <i class="text-danger h3 bi bi-slash-circle-fill"></i> Apagado </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div v-if="!showEdit && !showSocials" @click="showSocials=!showSocials " class="d-flex justify-content-between "  >
                         <text class="m-1"> Compartir calendario  </text> 
-                        <i class="fs-3 m-1 bi bi-share text-primary">
+                        <i class="m-2 fs-3 m-1 bi bi-share text-primary">
                         </i>
                     </div>
 
 
                     <div v-if="showSocials" class="text-dark m-3 p-2  border border-1 border-primary bg-white " style="border-radius: 15px;">    
-                        <div class="d-flex justify-content-end"> <i @click="showSocials=false" class="h3 bi bi-x-lg text-primary"></i> </div>
+                        <div class="d-flex justify-content-between "> 
+                            <text>Compartir calendario </text>
+                            <i @click="showSocials=false" class="h3 bi bi-x-lg text-primary"></i> 
+                        </div>
                         
                         <div>
-
-                            <div>
-                                <div class="bg-white p-1 w-75" style="border-radius: 15px;" >
-                                    URL:
-                                    <input  type="text"  class="border border-0" :value="get_link_calendar()" id="linkcal">
-                                   
-                                </div>
-                                
-                                <div @click="copyToClipBoard(get_link_calendar())" class="d-flex justify-content-end">
-                                    copy
-                                </div>
+                            <div class="d-flex justify-content-around" style="font-size:2em">
+                                <i @click="showWebLink=!showWebLink " class="bi bi-globe2"></i>
+                                <i @click="showInputEmail=!showInputEmail" class="bi bi-envelope"></i> 
+                                <i @click="showInputPhone=!showInputPhone" class="bi bi-whatsapp"></i> 
                             </div>
 
-                            <div > 
-                                <div @click="showInputEmail=!showInputEmail">
-                                    <i class="h4  bi bi-envelope"></i>  Enviar calendario por correo
-                                </div>
+                            <div v-if="showWebLink">
+                                <a :href="linkWebCalendar" target="_blank" >Ir Agenda Publica</a>
+                            </div>
 
-                                <div v-if="showInputEmail"> 
+                            <div v-if="showInputEmail"> 
                                     Ingrese Email<br>
                                     <input class="text-dark bg-white" type="text" v-model="customer_email" id="fname" name="fname"><br>
-                                    <!--
-                                    <a  class="text-white" :href="'mailto:'+customer_email+'?subject='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'&body='+idSpecialty2name(specialty_code)+'-'+idSpecialty2name(specialty_code)+'\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+' '">
-                                    -->
                                     <text type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false; sendCalendarToPatient(customer_email, calendar.id , calendar.professional_id, calendar.center_id )" >
                                         enviar
                                     </text> 
-                                    <p><br><br></p>
-                  
-                                </div>
-
+                                    <p></p>                  
                             </div>
-                            <div> 
-                                <div @click="showInputPhone=!showInputPhone">
-                                    <i class="h4 bi bi-whatsapp"></i> Enviar calendario por WhatsApp
-                                </div>                                
 
-                                <div v-if="showInputPhone"> 
+                            <div v-show="showInputPhone"> 
                                     Ingrese Telefono<br>
                                     <input class="text-dark bg-white" type="text" id="fname" v-model="customer_phone" name="fname">
                                     <br>
@@ -98,11 +107,8 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                                     <a type="button" class="btn btn-primary m-2" :href="get_link_whatsApp(customer_phone)" >
                                     Enviar 
                                     </a>
-                                    
-
-                                </div>
-
                             </div>
+
                         </div>
 
                         
@@ -118,29 +124,6 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                 <div class="bg-white  text-dark w-100 pt-2 pl-2 pr-2">
                     <div class="m-2 ">
 
-                    
-                   
-                <!-- ESTADO -->
-                    <div class="d-flex justify-content-between mt-2 p-1"> 
-                        <div>
-                            Estado    
-                        </div>
-
-                        <div v-if="evaluateCalendarStatus(form_date_end)==3" class="bg-white" :class="{ 'bg-white': showEdit }" style=" border-radius: 15px; "  >
-                              <text class="text-dark m-3"> Expirado <i class="text-danger display-4 bi bi-slash-circle-fill"></i> </text> 
-                        </div>
-
-                        <div v-else >
-                                <text v-if="form_calendar_active "  >  
-                                  <text v-if="!showEdit" class="text-dark "> Activo </text>
-                                  <text v-if="showEdit" @click="switchCalendarActive()" class="btn btn-danger"> Apagar </text>
-                                </text>
-                                <text v-else > 
-                                    <text   class="text-dark"> <i class="bi bi-exclamation-octagon-fill text-danger display-5 "></i> Apagado</text>
-                                    <text v-if="showEdit" @click="switchCalendarActive()" class="btn btn-success"> Encender </text>
-                                </text>
-                        </div>
-                    </div>
 <!--
                                 <div  v-if="calendar.calendar_active"  class="d-flex justify-content-between">
                                     <text>Estado Actual </text>
@@ -297,16 +280,16 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                   Dias Recurrencia: <br>
 
                 <div class="d-flex justify-content-between  m-0 p-0" style="border-radius: 15px;"  :class="{ 'bg-white p-1': showEdit}" >
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_mon=!form_recurrency_mon: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_mon, 'border-secondary':!form_recurrency_mon }" >Lu</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_tue=!form_recurrency_tue: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_tue, 'border-secondary':!form_recurrency_tue}" >Ma</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_wed=!form_recurrency_wed: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_wed, 'border-secondary':!form_recurrency_wed}" >Mi</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_thu=!form_recurrency_thu: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_thu, 'border-secondary':!form_recurrency_thu}">Ju</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_fri=!form_recurrency_fri: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_fri, 'border-secondary':!form_recurrency_fri}">Vie</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_mon=!form_recurrency_mon: null " :class="{  'border-primary' :form_recurrency_mon, 'border-secondary':form_recurrency_mon  }" >Lu</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_tue=!form_recurrency_tue: null " :class="{  'border-primary' :form_recurrency_tue, 'border-secondary':form_recurrency_tue}" >Ma</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_wed=!form_recurrency_wed: null " :class="{  'border-primary' :form_recurrency_wed, 'border-secondary':form_recurrency_wed}" >Mi</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_thu=!form_recurrency_thu: null " :class="{  'border-primary' :form_recurrency_thu, 'border-secondary':form_recurrency_thu}">Ju</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_fri=!form_recurrency_fri: null " :class="{  'border-primary' :form_recurrency_fri, 'border-secondary':form_recurrency_fri}">Vie</div>
                 </div>
 
                 <div class="d-flex justify-content-start  m-0 p-0" style="border-radius: 15px;"  :class="{ 'bg-white p-1': showEdit}" >
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_sat=!form_recurrency_sat: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_sat, 'border-secondary':!form_recurrency_sat }" >Sa</div>
-                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_sun=!form_recurrency_sun: null " :class="{ 'bg-white  border-secondary': showEdit , 'border-white' :form_recurrency_sun, 'border-secondary':!form_recurrency_sun}" >Do</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_sat=!form_recurrency_sat: null " :class="{  'border-primary' :form_recurrency_sat, 'border-secondary':form_recurrency_sat }" >Sa</div>
+                    <div class="border border-3 m-1 p-2"  @click="showEdit ? form_recurrency_sun=!form_recurrency_sun: null " :class="{  'border-primary' :form_recurrency_sun, 'border-secondary':form_recurrency_sun}" >Do</div>
                 </div>
 
                 <!--
@@ -463,11 +446,14 @@ export default {
 
             showInputEmail : false, 
             showInputPhone : false ,
+            showWebLink    : false,
 
             customer_phone : "569" , 
-            customer_email : "@" ,
+            customer_email : "...@..." ,
 
-           
+
+            linkWebCalendar : "No Set" ,
+            
 
         }   
     },
@@ -479,6 +465,7 @@ export default {
         this.resetForm()       
 
         this.host = window.location.host;
+        this.linkWebCalendar ="http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" "
     },
 
 	methods :{
@@ -526,23 +513,23 @@ export default {
 
            //navigator.clipboard.writeText(text);
         },
-        get_link_calendar()
+        async get_link_calendar()
         {
-          let link="http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" "
+          let link="http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" "
           
           return (link)
         },
 
         get_link_email(email)
         {
-            let link="mailto:"+email+"?subject="+this.idSpecialty2name(this.specialty_code)+"%20"+this.session_params.professional_name+"&body="+this.idSpecialty2name(this.specialty_code)+"\n"+this.session_params.professional_name+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20http://"+this.host+"/nested/publicSiteProfessional.html?prof_id="+this.session_params.professional_id+"&cal_id="+this.calendar.id+" "
+            let link="mailto:"+email+"?subject="+this.idSpecialty2name(this.specialty_code)+"%20"+this.session_params.professional_name+"&body="+this.idSpecialty2name(this.specialty_code)+"\n"+this.session_params.professional_name+"\nPuedes%20buscar%20una%20hora%20disponible%20en:\n%20 "+linkWebCalendar+"  "
             let encoded = encodeURI(link)
           return (encoded)
-
         },
-        get_link_whatsApp(phone)
+
+        async get_link_whatsApp(phone)
         {
-            let link="https://wa.me/"+phone+"?text="+this.idSpecialty2name(this.specialty_code)+"\n%20"+this.session_params.professional_name+"\nPuedes buscar una hora disponible en:\n http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" " 
+            let link="https://wa.me/"+phone+"?text="+await this.idSpecialty2name(this.specialty_code)+"\n%20"+this.session_params.professional_name+"\nPuedes buscar una hora disponible en:\n http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" " 
             let encoded = encodeURI(link)
             return (encoded)
         },
@@ -642,7 +629,9 @@ export default {
             }
       },
        switchCalendarActive()
-        {   if (this.showEdit)
+        {   
+            console.log("switch Calendar "+this.form_calendar_active);
+            if (this.showEdit)
             { this.form_calendar_active=!this.form_calendar_active ; }
         },
 
