@@ -24,7 +24,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
         <GeneralHeader></GeneralHeader>
     -->
             <div class="fs-3 d-flex justify-content-center">
-              Agenda del profesional 
+              Agenda del profesional
             </div>
 
             <div class="d-flex justify-content-center">
@@ -56,23 +56,29 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                             <!-- HOME VISIT  -->
                             <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).home_visit"  > 
                                 <div>
-                                Visita a Domicilio <i class="h1 bi bi-house-door"></i> 
-                              
-                                <text class="text-primary fs-5">
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna1) }}  
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna2) }} 
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna3) }} 
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna4) }} 
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna5) }} 
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna6) }}
-                                </text>
+                                <p class="text-center">
+                                    Visita a Domicilio <i class="h1 bi bi-house-door"></i> 
+                                </p>
+                                
+                                <p >
+                                    <text class="text-primary fs-5">
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna1) }}  
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna2) }} 
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna3) }} 
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna4) }} 
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna5) }} 
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna6) }}
+                                    </text>
+                                </p>
                                 </div>
+                            
                             </div>
                              <!-- IN CENTER  -->
                             <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).center_visit" > 
                                 <p class="text-center"> Cita en Consulta 
                                     <i class="h1 bi bi-building"></i> 
-                                    <br>
+                                </p>
+                                <p>
                                     <text class="text-primary fs-5">
                                     {{ id2comunaName(getCenterData(calendar.center_id).comuna) }}
                                     </text><br>
@@ -84,8 +90,12 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
                             <!-- REMOTE CARE -->
                             <div v-if="getCenterData(calendar.center_id).remote_care" > 
+                                <p class="text-center">
                                 Atención Remota <i class="h1 bi bi-camera-video"></i> 
+                                </p>
+                                <p class="text-center">
                                 Todas las comunas
+                                </p>
                             </div>
                             
                             <br> 
@@ -98,16 +108,18 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                     </div>
                     <hr>
                     
-                    <div class="d-flex justify-content-center">
+                    <div>
                         
-                        <div class="m-2">
+                        <div class="d-flex justify-content-center">
                             <input class="p-3" type="date" id="start" name="trip-start"
                              v-model="selected_search_date" 
-                            :min="search_date.toISOString().split('T')[0]" max="2023-12-31">
+                            :min="search_date.toISOString().split('T')[0]" max="2024-12-31"  >
+                        </div>
+                                                
+                        <div class="d-flex justify-content-center">
+                            <button   @click="showAppAvailable(calendar.id)"  type="button" class="m-2 btn btn-primary">Ver Horas Disponibles <i class="bi bi-arrow-down-short"></i>  </button>
                         </div>
 
-                        <button   @click="showAppAvailable(calendar.id)"  type="button" class="m-2 btn btn-primary">Ver Horas Disponibles <i class="bi bi-arrow-down-short"></i> </button>
-                    
                     </div>
                 
                                 
@@ -117,7 +129,10 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
             <!-- LIST APPOINTMENTS --->
            
-            <div v-if="appointments !=null ">
+        <div v-if="appointments !=null "  class="w-100 d-flex justify-content-center"  >
+
+            <div style="width: 25em;">     
+        
                 <p v-if="appointments.lenght > 0" class="text-center">
                 Resultados en los proximos {{appointments.length}} dias.
                 </p>
@@ -139,6 +154,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                 </div>
 
             </div>
+        </div>
 
             <div v-else class="m-2 p-2 display-5">
              
