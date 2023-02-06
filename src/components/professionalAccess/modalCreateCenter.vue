@@ -9,44 +9,45 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 <template>
 
      	<teleport to="body"   >
-		<div  v-if="showModalCreate" class="modal bg-secondary scroll" >
+		<div  v-if="showModalCreate" class="modal bg-dark scroll" >
 		    <transition name="modal">
 			<div class="modal-mask "   >
 			<div class="modal-wrapper d-flex justify-content-center ">
-			<div class="modal-container  m-1 p-1 modal-background">
+			<div class="modal-container m-0 p-0 ">
  
 
-                <div class="modal-body mt-0"  > 
+                <div class="modal-body mt-0 bg-secondary text-white"  > 
                    
                     <form autocomplete="off">	
 
-                    <div class="d-flex flex-row bd-highlight mb-1 display-3">
+                    <div class="d-flex flex-row bd-highlight mb-1 display-5">
                         <div class="p-1 bd-highlight">Crear Consulta<br/>
                        </div>
                         <div class="p-1 bd-highlight"></div>
                          <div class="p-1 bd-highlight"><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalCreate = false" aria-label="Close"></i>
                        </div>
                     </div>
+                    <hr class="text-white">
 
                       <div class="form-group">
                          <label for="exampleInputEmail1" class="h3" >Nombre de su Consulta </label>
-                            <input type="text" class="form-control" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
+                            <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
                       </div>
 
                       <div class="mt-3 h3">Tipo de consulta</div>
                       
                       <div >
-                          <button type="button" class="btn  m-0" :class="[app_type_center ? 'btn-outline-primary' : 'btn-outline-secondary']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[] ;  form_center_name = form_center_name.slice(0, -11)+'En Consulta'    " >
+                          <button type="button" class="btn  m-0" :class="[app_type_center ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[] ;  form_center_name = form_center_name.slice(0, -11)+'En Consulta'    " >
                               <i class="h3 bi bi-building m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">En Consulta</text> 
                           </button>
                           
-                          <button type="button" class="btn m-1" :class="[app_type_home ? 'btn-outline-primary' : 'btn-outline-secondary']"  @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ; form_comuna_codes=[];  form_center_name = form_center_name.slice(0, -11)+'A Domicilio' " >
+                          <button type="button" class="btn m-1" :class="[app_type_home ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ; form_comuna_codes=[];  form_center_name = form_center_name.slice(0, -11)+'A Domicilio' " >
                               <i class="h3 bi bi-house-door m-0 p-0"></i><br>
                                <text class="fs-6 m-0 p-0">A Domicilio</text> 
                           </button>
                           
-                          <button type="button" class="btn m-0" :class="[app_type_tele ? 'btn-outline-primary' : 'btn-outline-secondary']" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ; form_comuna_codes=[];  form_center_name = form_center_name.slice(0, -11)+'Tele Atenc.' " >
+                          <button type="button" class="btn m-0" :class="[app_type_tele ? 'btn btn-primary' : 'btn btn-dark']" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ; form_comuna_codes=[];  form_center_name = form_center_name.slice(0, -11)+'Tele Atenc.' " >
                               <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
                           </button>
@@ -74,7 +75,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                            
                             <div class="form-group mt-3">
                                 <label for="exampleInputPassword1">Direccion de su Consulta</label>
-                                <input type="text" class="form-control" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
+                                <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
                                 <small id="emailHelp" class="form-text text-muted">Esta direccion al que debe concurrir el paciente a su cita</small>		
                             </div>
 
@@ -82,7 +83,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                             <label for="exampleInputPassword1">Comuna</label>
                             
 
-                            <inputFormComuna  v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
+                            <inputFormComuna v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
                             
                             </div>
     <!--
@@ -94,11 +95,11 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
     -->
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Telefono1</label>
-                                <input type="text" class="form-control" autocomplete="off" id="form_center_phone1" name="form_center_phone1" v-model="form_center_phone1" placeholder="569763522">
+                                <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_phone1" name="form_center_phone1" v-model="form_center_phone1" placeholder="569763522">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Telefono2</label>
-                                <input type="text" class="form-control" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
+                                <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
                             </div>
 
                             
@@ -172,7 +173,7 @@ div.scroll {
 
 /*
 .modal-background {
-    background-color:#DAEFF3
+    background-color:#383838
         }
 */
 /************************* */
