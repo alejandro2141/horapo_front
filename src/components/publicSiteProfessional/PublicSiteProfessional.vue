@@ -56,23 +56,29 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                             <!-- HOME VISIT  -->
                             <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).home_visit"  > 
                                 <div>
-                                Visita a Domicilio <i class="h1 bi bi-house-door"></i> 
-                              
-                                <text class="text-primary fs-5">
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna1) }}  
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna2) }} 
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna3) }} 
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna4) }} 
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna5) }} 
-                                {{ id2comunaName(getCenterData(calendar.center_id).home_comuna6) }}
-                                </text>
+                                <p class="text-center">
+                                    Visita a Domicilio <i class="h1 bi bi-house-door"></i> 
+                                </p>
+                                
+                                <p >
+                                    <text class="text-primary fs-5">
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna1) }}  
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna2) }} 
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna3) }} 
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna4) }} 
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna5) }} 
+                                    {{ id2comunaName(getCenterData(calendar.center_id).home_comuna6) }}
+                                    </text>
+                                </p>
                                 </div>
+                            
                             </div>
                              <!-- IN CENTER  -->
                             <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).center_visit" > 
                                 <p class="text-center"> Cita en Consulta 
                                     <i class="h1 bi bi-building"></i> 
-                                    <br>
+                                </p>
+                                <p>
                                     <text class="text-primary fs-5">
                                     {{ id2comunaName(getCenterData(calendar.center_id).comuna) }}
                                     </text><br>
@@ -84,8 +90,12 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
                             <!-- REMOTE CARE -->
                             <div v-if="getCenterData(calendar.center_id).remote_care" > 
+                                <p class="text-center">
                                 Atención Remota <i class="h1 bi bi-camera-video"></i> 
+                                </p>
+                                <p class="text-center">
                                 Todas las comunas
+                                </p>
                             </div>
                             
                             <br> 
