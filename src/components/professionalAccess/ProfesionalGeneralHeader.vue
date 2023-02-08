@@ -9,11 +9,12 @@ import SwitchViewButton from './switchViewButton.vue'
 	<div>
 
 
-	<div v-if="session_params['professional_name'] != null"  class="text-dark d-flex pt-1 pb-2 justify-content-around " :class="{ 'bg-white': showTopMenu , 'bg-white': !showTopMenu  }" > 
+	<div v-if="session_params['professional_name'] "  class="d-flex  pb-2 justify-content-around " :class="{ 'bg-white text-dark' : showTopMenu  }" > 
 
 		<text style="font-size:2.0em">	
 			<i v-if="showTopMenu" class="bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
-			<i v-if="show_close_list" class=" bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+			<i v-if="show_close_list" class="bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+		
 		</text>
 		<text>
 			<text v-if="showTopMenu" class="text-white-50">  </text>
@@ -26,7 +27,7 @@ import SwitchViewButton from './switchViewButton.vue'
 
 		<!-- DAY CALENDAR -->
 		
-		<div v-if="showTopMenu" style="font-size:0.9em" class=" btn btn-danger small " @click="setToday(dateObj);switchViewTo(2)" >
+		<div v-if="showTopMenu" style="font-size:0.9em" class="opacity-75 btn border border-2 text-danger border-danger small " @click="setToday(dateObj);switchViewTo(2)" >
 			<text class="m-0 p-0" style="">HOY</text><br>
 			 <text class="m-0 p-0"> {{day}}/{{month+1}} </text>
 		</div>
@@ -40,7 +41,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		<text style="font-size:0.9em">
 			
 			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
-				<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn btn-secondary  small p-1">
+				<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn border border-2  small p-1">
 					<i class="bi bi-building"></i><br>
 					<text>Consultas</text>
 				</button>
@@ -48,6 +49,7 @@ import SwitchViewButton from './switchViewButton.vue'
 
 		</text>
 		
+
 		<text>
 			<text v-if="true" class="text-white-50" >|</text>
 		</text>
@@ -56,7 +58,7 @@ import SwitchViewButton from './switchViewButton.vue'
 
 		<!--CALENDARS -->
 		<text style="font-size:0.9em">	
-				<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn btn-secondary small p-1">
+				<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn border border-2 small p-1">
 					<i class="bi bi-calendar"></i><br>
 					<text>Calendar</text>
 				</button>
@@ -76,6 +78,9 @@ import SwitchViewButton from './switchViewButton.vue'
 		<div v-if="showUserMenu"  class="bg-secondary" style="" >
 			<div class="bg-secondary w-100 p-4" style="position: absolute; z-index: 99999; height:600px"  >
 			<div class="bg-secondary" >
+				
+				
+
 				<hr class="text-white">
 			
 				<!-- SALIR -->
