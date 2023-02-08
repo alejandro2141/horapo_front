@@ -20,10 +20,10 @@ import Datepicker from 'vuejs3-datepicker';
 			<div class="modal-container  m-0 p-0 bg-secondary" style="">
  
                 <div class="modal-header">
-                        <div class="text-white display-5">
+                        <div class="text-white " style="font-size: 2em;" >
                         Crear Calendario
                         </div>
-                        <div class="p-0 "><i class="display-1 text-white bi bi-x-lg ml-0"  v-on:click="showModalCreateCalendar = false"  aria-label="Close"></i>
+                        <div class="p-0 "><i class="text-white bi bi-x-lg ml-0" style="font-size: 2em;"   v-on:click="showModalCreateCalendar = false"  aria-label="Close"></i>
                         </div>
                 </div>
 
