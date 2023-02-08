@@ -6,7 +6,7 @@ import cameraCapturer from './camera_capturer.vue'
 </script>
 
 <template>
-    <div class="p-3 mb-2 text-white bg-secondary" >
+    <div class="p-3 mb-2 text-dark bg-white" >
    
     <div class="d-flex justify-content-between mt-3">
          <cameraCapturer></cameraCapturer><br>
