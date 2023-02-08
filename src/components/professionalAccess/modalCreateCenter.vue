@@ -20,21 +20,25 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                    
                     <form autocomplete="off">	
 
-                    <div class="d-flex flex-row bd-highlight mb-1 display-5">
-                        <div class="p-1 bd-highlight">Crear Consulta<br/>
-                       </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="p-1 bd-highlight" style="font-size: 2em;"  >Crear Consulta
+                        </div>
+                        
                         <div class="p-1 bd-highlight"></div>
-                         <div class="p-1 bd-highlight"><i class="display-1 bi bi-x-lg ml-0"  v-on:click="showModalCreate = false" aria-label="Close"></i>
-                       </div>
+                        
+                        <div class="p-1 bd-highlight" >
+                            <i class="bi bi-x-lg ml-0" style="font-size: 2em;" v-on:click="showModalCreate = false" aria-label="Close">
+                            </i>
+                        </div>
                     </div>
                     <hr class="text-white">
 
                       <div class="form-group">
-                         <label for="exampleInputEmail1" class="h3" >Nombre de su Consulta </label>
+                         <label for="exampleInputEmail1" style="font-size: 1em;" >Nombre de su Consulta </label>
                             <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
                       </div>
 
-                      <div class="mt-3 h3">Tipo de consulta</div>
+                      <div class="mt-3 " style="font-size: 1em;" >Tipo de consulta</div>
                       
                       <div >
                           <button type="button" class="btn  m-0" :class="[app_type_center ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[] ;  form_center_name = form_center_name.slice(0, -11)+'En Consulta'    " >
@@ -59,10 +63,10 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                             <!-- <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional> -->
                             <div v-for="comuna in form_comuna_codes" :key="comuna" class="d-flex justify-content-between m-0 p-0 " >
                                 <div>
-                                    <i class="h2 text-success bi bi-check"></i> 
+                                    <i class="h2 text-white bi bi-check"></i> 
                                     <text>{{comunaId2Name(comuna)}} </text>
                                 </div>
-                                <i @click="removeFromList(comuna)" class="h3 text-danger bi bi-x mr-2"></i>
+                                <i @click="removeFromList(comuna)" class="h3 text-white bi bi-x mr-2"></i>
                             </div>
                             <inputFormComuna class="mt-2" v-on:selectedComunaCode="selectedComunaCode_home" :global_comunas='global_comunas' > </inputFormComuna>   
                             <br>  
@@ -82,7 +86,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                             <div class="form-group">
                             <label for="exampleInputPassword1">Comuna</label>
                             
-
+                    
                             <inputFormComuna v-on:selectedComunaCode="selectedComunaCode" :global_comunas='global_comunas' > </inputFormComuna>   
                             
                             </div>
