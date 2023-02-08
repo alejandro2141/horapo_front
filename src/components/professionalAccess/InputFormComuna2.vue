@@ -28,7 +28,7 @@ import axios from 'axios';
                 </div>
                 -->
 
-                <div class="col-12">
+                <div class="col-12 bg-white" style="border-radius: 25px;" >
                     <!--CYCLE  -->
                      <div  v-for="location in location_filtered" :key="location.id" class="h3 m-3 text-primary " > 
                         <div class="d-flex justify-content-between" @click="form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); clearfiltered = true">
