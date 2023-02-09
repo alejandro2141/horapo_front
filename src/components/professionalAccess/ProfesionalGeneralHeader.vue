@@ -9,7 +9,7 @@ import SwitchViewButton from './switchViewButton.vue'
 	<div>
 
 
-	<div v-if="session_params['professional_name'] "  class="d-flex  pb-2 justify-content-around " :class="{ 'bg-white text-dark' : showTopMenu  }" > 
+	<div v-if="session_params['professional_name'] "  class="d-flex mt-3 pb-2 justify-content-around " :class="{ 'bg-white text-dark' : showTopMenu  }" > 
 
 		<text style="font-size:2.0em">	
 			<i v-if="showTopMenu" class="bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
