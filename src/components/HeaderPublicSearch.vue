@@ -14,12 +14,13 @@ import { ref } from 'vue'
         </div>
 
         <div class="m-0 p-0 text-secondary m-2 text-center">
-          <text class="m-0 p-0" style="font-size: 1.4em" >123Hora</text> <br>
-          <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
+          <text class="m-0 p-0" style="font-size: 1.4em" >medihora</text> <br>
+        <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
+        -->
         </div>
         <!--
         <a HREF="/nested/publicSearch.html" class="text-decoration-none m-2" style="color :#ffffff"> 
-            <text class="">123HORA</text>  
+            <text class="">medihora</text>  
         </a>
         -->
 
@@ -37,7 +38,7 @@ import { ref } from 'vue'
         <div class="d-flex justify-content-around ">
                 <div class="p-1">
                         <a href="/nested/aboutUs.html" class="m-1 text-decoration-none btn-floating "  role="button">
-                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿123hora? </text>
+                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿medihora? </text>
                         </a>
                 </div>
                     <!--
