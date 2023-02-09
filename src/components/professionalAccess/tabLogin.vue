@@ -25,11 +25,11 @@ defineProps({
                         <!--
                         <a HREF="/index.html" class="display-4 text-decoration-none" style="color :#2e5668"> 
                         <i class="bi bi-clipboard-pulse" style="font-size: 2rem; color: cornflowerblue;"></i>
-                            123Hora  
+                            medihora 
                         </a>
                         --> 
                         <a HREF="/nested/publicSearch.html" class="text-decoration-none" style="color :#2e5668"> 
-                            <text class="display-4">123HORA</text>  
+                            <text class="display-4">medihora</text>  
                         </a> 
                     
                         <div class="text-muted">Mejores consultas en un solo lugar
