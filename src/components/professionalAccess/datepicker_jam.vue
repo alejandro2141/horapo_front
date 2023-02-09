@@ -169,18 +169,18 @@ import axios from 'axios';
     </div>   
   
 
-       <div class="d-flex justify-content-center   m-3">
+       <div class="d-flex justify-content-center   m-0">
 
             <div class="display-5 w-100  datepickerminimal" style="" >
 
                     
-                    <div class="d-flex justify-content-between " style="position: relative; bottom: 0px ; margin-top:2em" >
+                    <div class="d-flex justify-content-between " style="position: relative; bottom: 0px ; margin-top:0em" >
                         <div @click="prevMonth(calendar_date)"> 
                             <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
                         </div>
                         
-                        <div @click="show_days = !show_days" class="d-flex align-items-end text-primary" > 
-                            <text>{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
+                        <div @click="show_days = !show_days" class="d-flex align-items-end text-primary mb-1" > 
+                            <text style="position: relative; bottom: 0.3em" >{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
                         </div>
                         
                         <div @click="nextMonth(calendar_date)">
@@ -202,7 +202,7 @@ import axios from 'axios';
                     </div>
                     -->
                      
-                    <div class="d-flex justify-content-between mt-1" style="position: relative; top: 0px">
+                    <div class="d-flex justify-content-between mt-0" style="position: relative; top: 0.3em">
                         <div @click="prevDay(calendar_date)">
                             <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
                         </div>
@@ -226,10 +226,10 @@ import axios from 'axios';
 <style scoped>
 
 .datepickerminimal{
-  background-image: url('/public/background_calendar_1.png') ;
+ /* background-image: url('/public/background_calendar_1.png') ; */
   background-repeat: no-repeat;
   width:100% ;
-  height:7em ; 
+ /*  height : 7em ; */ 
   background-size: contain ;
   opacity: 1  ;
   background-position: center ;
