@@ -9,11 +9,11 @@ import { ref } from 'vue'
 		<div class="display-4 "  > 
 			<a HREF="/index.html" class="text-decoration-none" style="color :#2e5668"> 
 			
-				123Hora  
+				medihora  
 			</a> 
 		</div>
-		<div class="text-muted">	Las mejores consultas de salud en un solo lugar
-		</div>
+		<!-- <div class="text-muted">	Las mejores consultas de salud en un solo lugar
+		</div> -->
 		<hr>
 	</div>
 
