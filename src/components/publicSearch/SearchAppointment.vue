@@ -47,7 +47,7 @@ import headerPublicSearch from '../HeaderPublicSearch.vue'
 
           <!-- LIST APPOINTMENTS -->
           <div class="d-flex justify-content-center" v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
-                <p class="">{{n_appointments_found }} resultados para los proximos 40 dias</p>
+                <p class="">{{n_appointments_found }} resultados en próximos  40 dias.  ({{ metric_search/1000}}Seg) </p>
           </div>
           <div class="d-flex justify-content-center" v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
                 <searchAppointmentResult  :n_appointments_found="n_appointments_found" :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
