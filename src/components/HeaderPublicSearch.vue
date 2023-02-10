@@ -7,26 +7,32 @@ import { ref } from 'vue'
 <div >
     <!-- style="background-color:#2f3e44"--> 
   	
-    <div  class="d-flex justify-content-between  mt-0 pt-0 text-dark"> 
+    <div  class="d-flex justify-content-between  mt-0 pt-0 text-secondary"> 
 
-        <div class="m-1">
+        
+        <div class="m-0 p-0">
+            <!-- 
             <i  @click="show_sub_menu = !show_sub_menu" class="fs-2 bi bi-list text-secondary"></i>
+            -->
+            <text  @click="show_sub_menu = !show_sub_menu" style="font-size: 0.9em ; margin-left: 1em;"> menu </text>
+            
         </div>
 
-        <div class="m-0 p-0 text-secondary m-2 text-center">
-          <text class="m-0 p-0" style="font-size: 1.4em" >medihora</text> <br>
-        <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
-        -->
+        <div class="m-0 p-0 text-secondary mt-3 text-center">
+            <text class="m-0 p-0" style="font-size: 1.4em" >medihora</text> <br>
+            <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
+            -->
         </div>
-        <!--
-        <a HREF="/nested/publicSearch.html" class="text-decoration-none m-2" style="color :#ffffff"> 
-            <text class="">medihora</text>  
-        </a>
-        -->
-
-        <a HREF="/nested/getAppointments.html" class=" text-decoration-none btn-floating m-2  text-secondary" >
-           <small>Mis Horas</small>
-        </a>
+            <!--
+            <a HREF="/nested/publicSearch.html" class="text-decoration-none m-2" style="color :#ffffff"> 
+                <text class="">medihora</text>  
+            </a>
+            -->
+        <div class="m-0 p-0">
+            <a HREF="/nested/getAppointments.html" class=" text-decoration-none btn-floating  text-secondary" >
+            <text style="font-size: 0.9em; margin-right: 1em; ">Mis Horas</text>
+            </a>
+        </div>
 
     </div>
 
@@ -34,9 +40,9 @@ import { ref } from 'vue'
     <!--------------------
           SUB MENU        
     ---------------------->
-    <div v-if="show_sub_menu"   class="text-dark border-top  border-bottom"> 
-        <div class="d-flex justify-content-around ">
-                <div class="p-1">
+    <div v-if="show_sub_menu"   class="text-dark bg-light"  style="position: absolute; top: 3em; left: 0; z-index: 9;  border-bottom-left-radius: 10px 10px;"> 
+       
+                <div class="p-3">
                         <a href="/nested/aboutUs.html" class="m-1 text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿medihora? </text>
                         </a>
@@ -44,7 +50,7 @@ import { ref } from 'vue'
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-1">
+                <div class="p-3">
                         <a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class=" text-decoration-none text-secondary" >Profesionales</text>
                         </a>
@@ -53,12 +59,12 @@ import { ref } from 'vue'
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-1">
+                <div class="p-3">
                         <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
                             &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
-        </div>
+       
         
         
     </div>
