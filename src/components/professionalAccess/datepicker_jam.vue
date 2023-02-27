@@ -26,7 +26,7 @@ import axios from 'axios';
                     
                     <tr v-if="week1!=null" class="text-dark" >
                         <td  v-for="day in week1" :key="day" colspan="2" class="" > 
-                            <text class="h1 fw-lighter" @click="dayPicked(day.date)" v-if="day.date.getDate() < 20"  :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary  text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() > 20     }]" > 
+                            <div style="border-radius: 5px;" class="h1 fw-lighter" @click="dayPicked(day.date)" v-if="day.date.getDate() < 20"  :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary  text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() > 20     }]" > 
                                 <div class="m-0 p-0 d-flex justify-content-center">
                                     <text class="m-0 p-0"> {{day.date.getDate()}} </text>
                                     <i v-if="day.locked"  style="margin-left: -20px;" class="opacity-25 text-secondary bi bi-lock-fill" >
@@ -39,13 +39,13 @@ import axios from 'axios';
                                     </div>
                                 </div>
                              
-                            </text>  
+                            </div>  
                         </td>                      
                     </tr>
 
                     <tr v-if="week2!=null" class="text-dark" >
                         <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <div class="h1 fw-lighter" style="border-radius: 10px;" :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
+                            <div style="border-radius: 5px;" class="h1 fw-lighter"  :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
                                 <div class="m-0 p-0 d-flex justify-content-center"> 
                                     <text>{{day.date.getDate()}}</text>
                                     <i v-if="day.locked"  style="margin-left: -20px;" class="opacity-25 text-secondary bi bi-lock-fill" >
@@ -66,7 +66,7 @@ import axios from 'axios';
 
                     <tr v-if="week3!=null" class="text-dark" >
                         <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <div class="h1 fw-lighter" :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
+                            <div style="border-radius: 5px;" class="h1 fw-lighter" :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
                                 <div class="m-0 p-0 d-flex justify-content-center"> 
                                     <text>{{day.date.getDate()}}</text>
                                     <i v-if="day.locked"  style="margin-left: -30px;" class="opacity-50 text-secondary bi bi-lock-fill" >
@@ -87,7 +87,7 @@ import axios from 'axios';
 
                     <tr v-if="week4!=null" class="text-dark" >
                         <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
-                            <div class="h1 fw-lighter" :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
+                            <div style="border-radius: 5px;" class="h1 fw-lighter" :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
                                 <div class="m-0 p-0 d-flex justify-content-center"> 
                                     <text>{{day.date.getDate()}}</text>
                                     <i v-if="day.locked"  style="margin-left: -30px;" class="opacity-50 text-secondary bi bi-lock-fill" >
@@ -108,7 +108,7 @@ import axios from 'axios';
 
                     <tr v-if="week5!=null" class="text-dark" >
                         <td  v-for="day in week5" :key="day" colspan="2" class="" > 
-                            <text class="h1 fw-lighter" @click="dayPicked(day.date)" v-if="day.date.getDate() > 10"   :class="[{ 'text-danger  border border-2 border-danger ' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary  text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
+                            <div class="h1 fw-lighter" style="border-radius: 5px;" @click="dayPicked(day.date)" v-if="day.date.getDate() > 10"   :class="[{ 'text-danger border border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary  text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
                                 
                                 <div class="m-0 p-0 d-flex justify-content-center"> 
                                    <text>{{day.date.getDate()}}</text>
@@ -123,13 +123,13 @@ import axios from 'axios';
                                     </div>
                                 </div>
                                
-                            </text>  
+                            </div>  
                         </td>                      
                     </tr>
 
                     <tr v-if="week6!=null" class="text-dark" >
                         <td  v-for="day in week6" :key="day" colspan="2" class="" > 
-                            <text class="h1 fw-lighter" @click="dayPicked(day.date)" v-if="day.date.getDate() > 10"  :class="[{ 'text-danger  border border-2 border-danger  ' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
+                            <text class="h1 fw-lighter" style="border-radius: 5px;" @click="dayPicked(day.date)" v-if="day.date.getDate() > 10"  :class="[{ 'text-danger  border border-2 border-danger  ' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
                                 
                                 <div class="m-0 p-0 d-flex justify-content-center"> 
                                    <text>{{day.date.getDate()}}</text>
