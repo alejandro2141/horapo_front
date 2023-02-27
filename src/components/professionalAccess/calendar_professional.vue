@@ -113,7 +113,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                                    https://wa.me/"+phone+"?text="+await this.idSpecialty2name(this.specialty_code)+"\n%20"+this.session_params.professional_name+"\nPuedes buscar una hora disponible en:\n http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" " 
                                     -->
 
-                                   <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text=horapo%20Puedes%20Buscar%20una%20Hora%20disponible%20en:%20'+idSpecialty2name(specialty_code)+'Puedes buscar una hora disponible en: http://'+host+'/nested/publicSiteProfessional.html?params='+session_params.professional_id+'_'+this.calendar.id+' '" >
+                                   <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text=horapo%20Puedes%20Buscar%20una%20Hora%20disponible%20en:%20'+idSpecialty2name(specialty_code)+'Puedes buscar una hora disponible en: http://'+host+'/nested/publicSiteProfessional.html?params='+session_params.professional_id+'_'+calendar.id+' '" >
                                     Enviar 
                                     </a>
                             </div>
