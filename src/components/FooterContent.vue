@@ -12,7 +12,7 @@ import { ref } from 'vue'
 
       <text class="">
 			<a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;&nbsp;&nbsp;	<text class="text-decoration-none" style="color: #568281">medihora?</text>
+				&nbsp;&nbsp;&nbsp;&nbsp;	<text class="text-decoration-none" style="color: #568281">horapo?</text>
 			</a>
 	  </text>
 	  	<!--
@@ -52,7 +52,7 @@ import { ref } from 'vue'
 			<section class="d-flex justify-content-between ">
 
 				<a href="/nested/aboutUs.html" class="m-1 text-secondary   text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;&nbsp;&nbsp;	<i class="text-primary">medihora?</i>
+				&nbsp;&nbsp;&nbsp;&nbsp;	<i class="text-primary">horapo?</i>
 				</a>
 		
 				<a HREF="/nested/professionalAccess.html" class=" m-1  text-secondary  text-decoration-none btn-floating "  role="button">
