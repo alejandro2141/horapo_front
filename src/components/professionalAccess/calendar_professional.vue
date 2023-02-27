@@ -104,15 +104,22 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                                     <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text='+idSpecialty2name(specialty_code)+'\n'+session_params['professional_name']+'\nHTTP://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+''" >
                                     Enviar </a>
                                     -->
+                                    
+                                    <!--
                                     <a type="button" class="btn btn-primary m-2" :href="get_link_whatsApp(customer_phone)" >
+                                    -->
+                                    <!--                                   
+                                    <a type="button" class="btn btn-primary m-2" :href="'asdfasdf'" >
+                                   https://wa.me/"+phone+"?text="+await this.idSpecialty2name(this.specialty_code)+"\n%20"+this.session_params.professional_name+"\nPuedes buscar una hora disponible en:\n http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" " 
+                                    -->
+
+                                   <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text=horapo%20Puedes%20Buscar%20una%20Hora%20disponible%20en:%20'+idSpecialty2name(specialty_code)+'Puedes buscar una hora disponible en: http://'+host+'/nested/publicSiteProfessional.html?params='+session_params.professional_id+'_'+this.calendar.id+' '" >
                                     Enviar 
                                     </a>
                             </div>
 
                         </div>
-
-                        
-                        
+  
                     </div>
 
                     
