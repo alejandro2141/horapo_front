@@ -19,13 +19,13 @@ import { ref } from 'vue'
         </div>
 
         <div class="m-0 p-0 text-secondary mt-3 text-center">
-            <text class="m-0 p-0" style="font-size: 1.4em" >medihora</text> <br>
+            <text class="m-0 p-0" style="font-size: 1.4em" >horapo</text> <br>
             <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
             -->
         </div>
             <!--
             <a HREF="/nested/publicSearch.html" class="text-decoration-none m-2" style="color :#ffffff"> 
-                <text class="">medihora</text>  
+                <text class="">horapo</text>  
             </a>
             -->
         <div class="m-0 p-0">
@@ -44,7 +44,7 @@ import { ref } from 'vue'
        
                 <div class="p-3">
                         <a href="/nested/aboutUs.html" class="m-1 text-decoration-none btn-floating "  role="button">
-                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿medihora? </text>
+                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿horapo? </text>
                         </a>
                 </div>
                     <!--
