@@ -11,7 +11,7 @@ import GeneralHeader from '../src/components/GeneralHeader.vue'
     <GeneralHeader></GeneralHeader>
     <div id="app" class="text-center p-5 bg-light" >     
    
-        medihora es una plataforma de agendamiento de horas profesionales, aqui puede buscar y agendar una hora con profesionales de Psicologia, Kinesiologia y otras terapias. <br> Esta plataforma reune a los mejores profesionales en un solo lugar para sus pacientes.
+        horapo es una plataforma de agendamiento de horas profesionales, aqui puede buscar y agendar una hora con profesionales de Psicologia, Kinesiologia y otras terapias. <br> Esta plataforma reune a los mejores profesionales en un solo lugar para sus pacientes.
         <br>
     
         <div class="mt-4 pt-4">
