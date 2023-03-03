@@ -5,7 +5,7 @@ import axios from 'axios'
 import { BKND_CONFIG } from '../config123.js'
 import ProfesionalGeneralHeader from '../src/components/professionalAccess/ProfesionalGeneralHeader.vue'
 import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
-import TabCenter from '../src/components/professionalAccess/tabCenter_dark.vue'
+import TabCenter from '../src/components/professionalAccess/tabCenter.vue'
 import TabAppointment from '../src/components/professionalAccess/tabAppointment.vue'
 import TabTimeTable from '../src/components/professionalAccess/tabTimeTable.vue'
 import TabUserConfig from   '../src/components/professionalAccess/tabUserConfig.vue'
@@ -252,6 +252,12 @@ methods: {
 			console.log(key + " -> " + obj[key]);
 			this.session_params[key] = obj[key];
 			}  
+        
+        if (this.session_params.tutorial_start)
+        {
+            this.session_params.tutorial_start_step1 = true
+        }
+
         console.log("session iniciada para:"+this.session_params['professional_name'] );           
 	},
 
