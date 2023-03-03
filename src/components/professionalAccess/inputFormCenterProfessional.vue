@@ -39,8 +39,8 @@ export default {
     
     emits: ['selectedCenterCode','switchView','centersError','centers_found_flag_emit'] ,
 
-	created () {
-      this.getCenters() ;
+	async created () {
+      await this.getCenters() ;
      
     },
 
