@@ -13,6 +13,7 @@ import Datepicker from 'vuejs3-datepicker';
 <template>
 
      	<teleport to="body"   >
+      <div >
 		<div  v-if="showModalCreateCalendar" class="modal bg-secondary scroll" >
 		    <transition name="modal">
 			<div class="modal-mask ">
@@ -27,11 +28,12 @@ import Datepicker from 'vuejs3-datepicker';
                         </div>
                 </div>
 
-                <div class="modal-body mt-0"  > 
+                <div  class="modal-body mt-0"  > 
 
 <!-- NUEVO FORMULARIO CREACION -->
 
-<div class="">
+<div  v-if="centers_found_flag">
+  
               <text class="text-white">Aqui puedes crear un nuevo calendario llenado la siguiente información </text>
                    
                     <div class="card mb-0 p-3 w-100 border border-1 border-white bg-secondary" style="width: 18rem; border-radius: 15px; "   >
@@ -45,10 +47,18 @@ import Datepicker from 'vuejs3-datepicker';
 
                 <div class=" text-white w-100">
                     <div class="m-0 ">
-                    
+                   
+                  <!-- CONSULTANCY -->
+                  <div class="">
+                                   <text>Consulta
+                                   </text>
+                                    <div class="form-group h3 ">
+                                         <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
+                                    </div>
+                  </div>   
                     
                   <!-- SPECIALTY -->
-                    <div class="">
+                    <div class="mt-2">
                           <div>
                             <text> Especialidad </text>
                           </div>
@@ -62,14 +72,7 @@ import Datepicker from 'vuejs3-datepicker';
                           </div>
                     </div>
                     
-                    <!-- CONSULTANCY -->
-                    <div class="mt-2">
-                                   <text>Consulta
-                                   </text>
-                                    <div class="form-group h3 ">
-                                         <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
-                                    </div>
-                    </div>    
+                    
 
                   <!-- CALENDAR DATE START-->
                   <div  class="d-flex justify-content-between mt-3">
@@ -402,14 +405,24 @@ import Datepicker from 'vuejs3-datepicker';
                 </div>   
                     
 </div>
+<div class="text-white " >
+Debe exisitr al menos una consulta antes de crear un Calendario
+</div>
 
-                </div>
+          
+
+          </div>
+     
 
             </div> 
             </div> 		
             </div> 
             </transition>
     	</div>
+
+      
+  
+    </div>
 	</teleport> 
 
 </template>
@@ -616,12 +629,12 @@ data: function () {
             //END FORM DATA
             
             month_name : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
-
+            centers_found_flag : true, 
 		 }
 	},
 
 	props: ['session_params','activatorCreateNewCalendar','global_comunas' , 'global_specialties' ],
-  emits: ['updateCalendarList','switchView'],
+  emits: ['updateCalendarList','switchView','centers_not_null' ],
 
     created () {
       console.log("created modalCreateCalendar");
@@ -666,8 +679,9 @@ data: function () {
 
       centers_found_flag_emit(val)
       {
-      console.log("MODAL CREATE CALENDAR centers_found_flag_emit : "+val);
       this.centers_found_flag=val
+      console.log("MODAL CREATE CALENDAR centers_found_flag : "+this.centers_found_flag);  
+      this.$emit('centers_not_null',this.centers_found_flag);
       },
       
       switchView(){
