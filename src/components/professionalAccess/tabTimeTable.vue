@@ -10,49 +10,43 @@ import CalendarProfessional from './calendar_professional.vue'
 <template>
     <div class="bg-white">  
 
-      
-            <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas"  :global_specialties="global_specialties"  ></ModalCreateCalendar>
-          <!--  <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
-          -->
-            <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
-      
-                <p class="text-center display-5 pt-1 text-dark">Tus Calendarios  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2  text-primary border-primary" style=" border-radius: 15px;" ></i> 
-
-
-                </p>
-            
+        <ModalCreateCalendar :activatorCreateNewCalendar='activatorCreateNewCalendar'  v-on:centers_not_null=" evaluateDisplayMessageErrorCenters" v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas"  :global_specialties="global_specialties"  ></ModalCreateCalendar>
+        <!--  <ModalViewCalendar :activatorViewCalendar='activatorViewCalendar'   v-on:updateCalendarList="updateCalendarList()"  :session_params='session_params' :global_comunas="global_comunas" :calendar_details="calendar_details" :global_specialties="global_specialties" ></ModalViewCalendar>
+        -->
+        <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
+        
+        <div>
+            <p class="text-center display-5 pt-1 text-dark">Tus Calendarios  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2  text-primary border-primary" style=" border-radius: 15px;" ></i> 
+            </p>
+                
             <div class="text-center p-3 m-3"> 
                 <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
             </div>
-        
-
-        <div v-if="session_params.tutorial_calendar || showInfoCreate" class="bg-white text-dark m-2">
-            Felicitaciones, ya creaste tu primera Consulta. Ahora ya puedes crear tu primer Calendario.<br> 
-            Un Calendario es un periodo de tiempo, identificado con fechas, dias  y horas en que vas a entregar tus servicios<br>
-            El calendario que vas a crear quedara disponible para la busqueda de pacientes, de acuerdo a criterios de Tipo, especialidad, fecha, Comuna. <br> 
-
-            <div class="text-primary mt-4 pt-4" @click='finishTutorial()' >
-                Finalizar Tutorial
-            </div>
-
-        </div>        
-        
-        <div>
-                <div  id="search_result" v-if='calendars!=null'  >
-                    <div v-for="calendar in calendars.calendars"  :key='calendar.id' >
-                        <CalendarProfessional :calendar="calendar" :center_data="getCenterData(calendar.center_id)"  v-on:updateCalendarList="updateCalendarList()" :global_specialties="global_specialties" :global_comunas="global_comunas" :session_params="session_params" > </CalendarProfessional> 
-                    </div>
-                </div>
-
-                <div v-else class="mt-1   "  style="border-radius: 15px;" >
-                        <div v-if="calendars.calendars == null ">
-                             <p class="p-4 text-center" >    
-                            <i class="display-1 bi bi-emoji-expressionless"></i><br>
-                            NULL Aun No existen Calendarios 
-                            </p>
+            
+            <!-- LIST Calendars -->
+            <div>
+                    <div  id="search_result" v-if='calendars!=null && calendars.calendars !=null && calendars.calendars.length > 0 '  >
+                        <div v-for="calendar in calendars.calendars"  :key='calendar.id' >
+                          
+                            <CalendarProfessional :calendar="calendar" :center_data="getCenterData(calendar.center_id)"  v-on:updateCalendarList="updateCalendarList()" :global_specialties="global_specialties" :global_comunas="global_comunas" :session_params="session_params" > </CalendarProfessional> 
                         </div>
-                </div>
+                    </div>
+
+                    <div v-else class="mt-1   "  style="border-radius: 15px;" >
+                            <text class="fs-2">
+                             Debes crear un Calendario!!
+                            </text> 
+                    </div>
+            </div>
+            
         </div>
+        
+
+        
+        <!-- End List Calendars -->
+
+       
+      
         
             
             <div style="height: 200px;">
@@ -87,6 +81,9 @@ data: function () {
             activatorShareCalendar : null,
 
             showShareSocial : true, 
+            center_list : 0 ,
+
+            showErrorCentersNotFound: false  
 
 
 		 }
@@ -98,12 +95,15 @@ data: function () {
          this.active_spinner = true ;  
         },
 
-    created () {  
+    async created () {  
           console.log("TAB Time Table Created");  
           this.active_spinner = true ;  	
               console.log("TAB Calendards this session_params"+this.session_params.professional_id);
               this.getCalendars();
-          this.active_spinner = false ;  	
+          this.active_spinner = false ;  
+          
+          //await this.getCenters()
+
          },
    
 
@@ -118,6 +118,25 @@ data: function () {
 
  
     methods: {
+        
+        /*
+        async getCenters() {
+			const json = { 
+			   professional_id : this.session_params.professional_id  ,			   
+   			   	      };
+			console.log ("professional_get_all_centers REQUEST :"+ JSON.stringify(json)  );
+			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_all_centers",json);
+			console.log ("professional_get_all_centers RESPONSE :"+JSON.stringify(response_json.data.rows)) ;
+			this.center_list = response_json.data.rows;
+            console.log ("TabTimeTable :"+this.center_list.length ) ;
+            },
+        */
+        evaluateDisplayMessageErrorCenters( val)
+        {
+            this.showErrorCentersNotFound = val
+            console.log("evaluate display message error centers:"+this.showErrorCentersNotFound)
+        },
+
 
         async finishTutorial()
         {
