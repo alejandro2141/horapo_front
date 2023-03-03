@@ -11,43 +11,46 @@ import SwitchViewButton from './switchViewButton.vue'
 
 	<div v-if="session_params['professional_name'] "  class="d-flex mt-3 pb-2 justify-content-around " :class="{ 'bg-white text-dark' : showTopMenu  }" > 
 
-		<text style="font-size:2.0em">	
-			<i v-if="showTopMenu" class="bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
-			<i v-if="show_close_list" class="bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
-		
-		</text>
-		<text>
-			<text v-if="showTopMenu" class="text-white-50">  </text>
-		</text>
-		
-
 		<!-- LIST APPOINTMENT -->
-		
-		
+
+		<div :class="{ 'opacity-25' : !session_params.tutorial_start_step10 && session_params.tutorial_start }" >
+			<text style="font-size:2.0em">	
+				<i v-if="showTopMenu" class="bi bi-list " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
+				<i v-if="show_close_list" class="bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+			</text>
+
+			<text>
+				<text v-if="showTopMenu" class="text-white-50">  </text>
+			</text>
+		</div>
+
 
 		<!-- DAY CALENDAR -->
-		
-		<div v-if="showTopMenu" style="font-size:0.9em" class="opacity-75 btn border border-2 text-danger border-danger small " @click="setToday(dateObj);switchViewTo(2)" >
-			<text class="m-0 p-0" style="">HOY</text><br>
-			 <text class="m-0 p-0"> {{day}}/{{month+1}} </text>
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step3  && session_params.tutorial_start }" >
+			<div v-if="showTopMenu" style="font-size:0.9em" class="opacity-75 btn border border-2 text-danger border-danger small " @click="setToday(dateObj);switchViewTo(2)" >
+				<text class="m-0 p-0" style="">HOY</text><br>
+				<text class="m-0 p-0"> {{day}}/{{month+1}} </text>
+			</div>
 		</div>
-		
+
 
 		<text>
 			<text v-if="showTopMenu" class="text-white-50"> </text>
 		</text>
 		
 		<!-- CONSULTAS -->
-		<text style="font-size:0.9em">
-			
-			<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start}" >	
-				<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn border border-2  small p-1">
-					<i class="bi bi-building"></i><br>
-					<text>Consultas</text>
-				</button>
-			</div>
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step1  && session_params.tutorial_start}" >
+			<text style="font-size:0.9em">
+				
+				<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start_step1}" >	
+					<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn border border-2  small p-1">
+						<i class="bi bi-building"></i><br>
+						<text>Consultas</text>
+					</button>
+				</div>
 
-		</text>
+			</text>
+		</div>
 		
 
 		<text>
@@ -57,12 +60,14 @@ import SwitchViewButton from './switchViewButton.vue'
 		
 
 		<!--CALENDARS -->
-		<text style="font-size:0.9em">	
-				<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn border border-2 small p-1">
-					<i class="bi bi-calendar"></i><br>
-					<text>Calendar</text>
-				</button>
-		</text>
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step2 && session_params.tutorial_start}" >
+			<text style="font-size:0.9em">	
+					<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn border border-2 small p-1">
+						<i class="bi bi-calendar"></i><br>
+						<text>Calendar</text>
+					</button>
+			</text>
+		</div>
 
 		<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-dark" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>
 
@@ -102,6 +107,14 @@ import SwitchViewButton from './switchViewButton.vue'
 				<a @click="switchViewTo(5);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
 					&nbsp; <i class="bi bi-person-lines-fill fs-5"></i> &nbsp; Lista de Citas  
 				</a>
+				
+				<hr class="text-white">
+				<!-- APPOINTMENT LIST  -->
+				<a  @click="session_params.tutorial_start = true ;switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false ;session_params.tutorial_start_step1=true" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+					&nbsp; <i class="bi bi-lightbulb fs-5"></i> &nbsp; Ver Tutorial  
+				</a>
+
+				
 
 				<!--
 				<a @click="switchViewTo(3); showUserMenu = false ; header_menu_appointments = false ; header_menu_calendars = false ; header_menu_centers = true "   class="fs-3  text-decoration-none"  >	
