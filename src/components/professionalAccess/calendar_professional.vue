@@ -122,11 +122,11 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
   
                     </div>
 
-                    
+                    <!--
                     <div v-if="showEdit" style=" border-radius: 15px; " class="m-2 d-flex w-25 justify-content-between mt-0 p-1 bg-white text-danger"> 
                        <text  @click="deleteCalendar();showEdit=false" >Eliminar <i class="bi bi-trash"></i> </text> 
                     </div>
-
+                   -->
 
                 <div class="bg-white  text-dark w-100 pt-2 pl-2 pr-2">
                     <div class="m-2 ">
