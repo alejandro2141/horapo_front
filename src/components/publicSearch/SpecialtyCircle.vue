@@ -145,7 +145,7 @@ mounted() {
             {return this.specialty.name }
             else
             {
-                return "nosetname"
+                return "......"
             }
 
         }
