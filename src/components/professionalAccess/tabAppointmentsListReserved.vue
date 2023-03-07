@@ -10,7 +10,7 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
     <div class="m-3">
     <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
 
-            <p class="text-center">Se listan todas las Reservadas</p>
+            <p class="text-center">Se listan las proximas horas</p>
             <div class="md-form mt-0">
     </div>
     <!-- Search form -->
@@ -21,20 +21,22 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
       
         <hr>        
         <div v-for="app in appTakenFiltered" :key='app.id' >
-           
+            
             <div class="mt-3">
                 <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
                 <br> 
                 <small>
                 {{ app.patient_name  }} {{ app.patient_doc_id  }} ({{ app.patient_age  }})  {{ app.patient_email  }} <i class="bi bi-telephone"></i>{{app.patient_phone1}}
                 </small>
-            </div>            
+            </div>  
+                      
             
-            <!--
+            
             <div class="mt-4">
-            <AppointmentReserved  includeExtraData='true' v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
+                <text style="font-size: 1.4em">{{ formatDate(app.date)  }}</text>  <text style="font-size: 1.3em">{{getSpecialty(app.specialty_reserved)}}</text><br>
+            <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
             </div>
-            -->
+            
 
 
         </div>
