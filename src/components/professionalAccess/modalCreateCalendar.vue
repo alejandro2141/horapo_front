@@ -85,7 +85,7 @@ import Datepicker from 'vuejs3-datepicker';
                           </div>
                   </div>
                   <div v-if="show_date_start">
-                          <datepicker  class="text-dark"   ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                          <datepicker :disabled-dates="disabled_dates" :prevent-disable-date-selection="preventDisableDateSelection" class="text-dark"   ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
                   <!--  -->
 
@@ -99,7 +99,7 @@ import Datepicker from 'vuejs3-datepicker';
                       </div>
                   </div>
                   <div v-if="show_date_end">
-                        <datepicker class="text-dark"   ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="form_calendar_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                        <datepicker :disabled-dates="disabled_dates" :prevent-disable-date-selection="preventDisableDateSelection" class="text-dark"   ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="form_calendar_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
                   <!--  -->
 
@@ -630,6 +630,11 @@ data: function () {
             
             month_name : ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],
             centers_found_flag : true, 
+
+           // maximum_calendar_start : null ,
+           // maximum_calendar_end  : null ,
+
+           preventDisableDateSelection : true ,
 		 }
 	},
 
@@ -641,14 +646,19 @@ data: function () {
       this.getSpecialties(); 
       this.form_calendar_start = new Date()
       this.form_calendar_end = new Date()
+
+      this.disabled_dates = {
+        to: new Date(this.form_calendar_start.getTime() ), // Disable all dates up to specific date
+        from: new Date(this.form_calendar_start.getTime()+(86400000*60)), 
+        preventDisableDateSelection: true
+        }
       
-      //this.form_calendar_start=current_date.getDate()+"/"+current_date.getMonth()+1+"/"+ current_date.getFullYear()
-       
+      //this.form_calendar_start=current_date.getDate()+"/"+current_date.getMonth()+1+"/"+ current_date.getFullYear() 
     },
 
     mounted () {
       console.log("mounted modalCreateCalendar");
-         },
+      },
  
     methods: {
       
@@ -657,6 +667,8 @@ data: function () {
         console.log("date Selected en emit :"+date);
         //let aux_date=new Date(date);
         this.form_calendar_start= new Date(date);
+        this.form_calendar_end= new Date(date);
+        this.disabled_dates.to = new Date(date)
      //   this.form_calendar_start=aux_date.getDate()+"/"+month_name[aux_date.getMonth()]+"/"+ aux_date.getFullYear()
         this.show_date_start = false
       },
@@ -783,7 +795,7 @@ data: function () {
               console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
               this.$emit('updateCalendarList');  
               this.showModalCreateCalendar = false ;
-                    
+              alert("Calendario creado en estado 'INACTIVO'. Ahora usted debe revisar y activar el calendario recien creado");
               
         },
 
