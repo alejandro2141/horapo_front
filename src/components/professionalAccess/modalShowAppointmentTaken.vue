@@ -341,7 +341,7 @@ export default {
 
         const json_input = {  
               //only variable
-              appointment_id : hour.id,
+              appointment_id : hour.app_id,
                         }
                       
         console.log ("Professional Cancel Appoitnment :"+ JSON.stringify(json_input)  );
