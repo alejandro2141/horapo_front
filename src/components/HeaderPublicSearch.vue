@@ -40,9 +40,9 @@ import { ref } from 'vue'
     <!--------------------
           SUB MENU        
     ---------------------->
-    <div v-if="show_sub_menu"   class="text-dark bg-light"  style="position: absolute; top: 3em; left: 0; z-index: 9;  border-bottom-left-radius: 10px 10px;"> 
+    <div v-if="show_sub_menu"   class="text-dark bg-white  p-2"  style="position: absolute; top: 3em; left: 0; z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"> 
        
-                <div class="p-3">
+                <div class="p-4 ">
                         <a href="/nested/aboutUs.html" class="m-1 text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿horapo? </text>
                         </a>
@@ -50,7 +50,7 @@ import { ref } from 'vue'
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-3">
+                <div class="p-4">
                         <a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class=" text-decoration-none text-secondary" >Profesionales</text>
                         </a>
@@ -59,9 +59,9 @@ import { ref } from 'vue'
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-3">
+                <div class="p-4">
                         <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >Regístrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
        
