@@ -41,7 +41,9 @@ import axios from 'axios';
                     <div class="d-flex justify-content-around mt-3 pt-3 text-primary"> 
                         <text @click="session_params.tutorial_start_step2=true;session_params.tutorial_start_step1=false"> Proximo </text>
                     </div>
-
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
                    
             </div>
 
@@ -64,6 +66,9 @@ import axios from 'axios';
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
                         <text @click="session_params.tutorial_start_step1=true;session_params.tutorial_start_step2=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step2=false;session_params.tutorial_start_step3=true"> Proximo  </text>
+                    </div>
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
                    
@@ -91,6 +96,10 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step2=true;session_params.tutorial_start_step3=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step3=false;session_params.tutorial_start_step4=true"> Proximo  </text>
                     </div>
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
+
             </div>
 
             <div v-if="session_params.tutorial_start_step4" >
@@ -108,6 +117,10 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step3=true;session_params.tutorial_start_step4=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step4=false;session_params.tutorial_start_step5=true"> Proximo  </text>
                     </div>
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
+
             </div>
 
             <div v-if="session_params.tutorial_start_step5" >
@@ -128,6 +141,10 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step4=true;session_params.tutorial_start_step5=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step5=false;session_params.tutorial_start_step6=true"> Proximo  </text>
                     </div>
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
+
             </div>
 
             <div v-if="session_params.tutorial_start_step6" >
@@ -143,6 +160,9 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step5=true;session_params.tutorial_start_step6=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step6=false;session_params.tutorial_start_step7=true"> Proximo  </text>
                     </div>
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
             </div>
 
             <div v-if="session_params.tutorial_start_step7" >
@@ -157,6 +177,9 @@ import axios from 'axios';
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
                         <text @click="session_params.tutorial_start_step6=true;session_params.tutorial_start_step7=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step7=false;session_params.tutorial_start_step8=true"> Proximo  </text>
+                    </div>
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
 
@@ -174,6 +197,9 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step7=true;session_params.tutorial_start_step8=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step8=false;session_params.tutorial_start_step9=true"> Proximo  </text>
                     </div>
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
             </div>
 
 
@@ -190,6 +216,9 @@ import axios from 'axios';
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
                         <text @click="session_params.tutorial_start_step8=true;session_params.tutorial_start_step9=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step9=false;session_params.tutorial_start_step10=true"> Proximo  </text>
+                    </div>
+                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
 
@@ -216,6 +245,9 @@ import axios from 'axios';
                        <text @click="session_params.tutorial_start_step9=true;session_params.tutorial_start_step10=false"> Anterior </text>
                        <text @click="session_params.tutorial_start_step10=false;session_params.tutorial_start_step11=true"> Proximo  </text>
                    </div>
+                   <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
            </div>
 
            <div v-if="session_params.tutorial_start_step11" >   
@@ -232,6 +264,9 @@ import axios from 'axios';
                        <text @click="session_params.tutorial_start_step10=true;session_params.tutorial_start_step11=false"> Anterior </text>
                        <text @click="session_params.tutorial_start_step11=false;final=true"> Proximo  </text>
                    </div>
+                   <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
            </div>
 
 
@@ -254,6 +289,8 @@ import axios from 'axios';
                     <text @click="session_params.tutorial_start_step11=true;final=false"> Anterior </text>
                     <text class="text-primary" @click='finishTutorial()'>Finalizar Tutorial </text>
                 </div>
+               
+
             </div>
 
 <!--
@@ -339,6 +376,18 @@ data: function () {
 
         async finishTutorial()
         {
+            this.session_params.tutorial_start_step1 = false 
+            this.session_params.tutorial_start_step2 = false 
+            this.session_params.tutorial_start_step3 = false 
+            this.session_params.tutorial_start_step4 = false 
+            this.session_params.tutorial_start_step5 = false 
+            this.session_params.tutorial_start_step6 = false 
+            this.session_params.tutorial_start_step7 = false 
+            this.session_params.tutorial_start_step8 = false 
+            this.session_params.tutorial_start_step9 = false 
+            this.session_params.tutorial_start_step10 = false 
+            this.session_params.tutorial_start_step11 = false 
+
            const json = { 
               professional_id: this.session_params.professional_id ,
               tutorial : 1
@@ -346,6 +395,7 @@ data: function () {
 
             let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
             this.session_params.tutorial_start = false ;   
+            alert("Siempre podrá ver este tutorial en el menu superior izquierdo");
         },
  
 
