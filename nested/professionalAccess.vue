@@ -58,7 +58,7 @@ import TabListAppTaken from   '../src/components/professionalAccess/tabAppointme
 
          <div>  
         <div v-if="visible_tab_appListTaken == 'block'" :style="{display:  visible_tab_appListTaken }"  style=""  class="bg-white ">
-           <TabListAppTaken :session_params="session_params"> </TabListAppTaken>
+           <TabListAppTaken :session_params="session_params" :global_specialties="global_specialties" :global_comunas="global_comunas"> </TabListAppTaken>
         </div>
         </div>
         
