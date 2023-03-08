@@ -9,19 +9,21 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
     
     <div class="m-3">
     <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
-
-            <p class="text-center">Se listan las proximas horas</p>
+   
+            <p class="text-center h4">Horas Reservadas  <i @click="searchPattern(pattern)" class="bi bi-search display-3"></i>
+            </p>
+            
             <div class="md-form mt-0">
     </div>
     <!-- Search form -->
-        <div class="m-2 d-flex justify-content-center">
+        <div v-if="searchBox" class="m-2 d-flex justify-content-center">
             <input class="text-uppercase form-control form-control-sm ml-3 w-75"  v-model="pattern"    type="text" placeholder="Search" aria-label="Search">
-            <i @click="searchPattern(pattern)" class="bi bi-search display-3"></i>
+           
         </div>
       
-        <hr>        
+               
         <div v-for="app in appTakenFiltered" :key='app.id' >
-            
+        <!-- 
             <div class="mt-3">
                 <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
                 <br> 
@@ -29,13 +31,17 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
                 {{ app.patient_name  }} {{ app.patient_doc_id  }} ({{ app.patient_age  }})  {{ app.patient_email  }} <i class="bi bi-telephone"></i>{{app.patient_phone1}}
                 </small>
             </div>  
+        -->
                       
             
             
-            <div class="mt-4">
-                <text style="font-size: 1.4em">{{ formatDate(app.date)  }}</text>  <text style="font-size: 1.3em">{{getSpecialty(app.specialty_reserved)}}</text><br>
-            <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
-            </div>
+            <div class="mt-4  " style="border-radius: 0px; background-color: #FFF;font-family: Arial, Helvetica, sans-serif;border-top: 1px solid;">
+                <div class="p-1">
+                    <text  style="font-size: 1.4em">{{ formatDate(app.date)  }}</text>  <text style="font-size: 1.3em">{{getSpecialty(app.specialty_reserved)}}</text><br>
+                </div>
+               
+                <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
+             </div>
             
 
 
@@ -61,7 +67,7 @@ data: function () {
 		return {
             appsTaken : [],
             specialties: [],
-            pattern : null ,
+            pattern : "" ,
             appTakenFiltered : [] ,
             centers : [] , 
             calendars : [] ,
@@ -70,13 +76,14 @@ data: function () {
             hourTaken : null ,
             daterequired : null ,
             openModalShowAppTakenEvent : null,
-            global_comunas   :  null ,
-            global_specialties :  null ,
+            //global_comunas   :  null ,
+            //global_specialties :  null ,
+            searchBox: false ,
            		 }
 	},
 	
 
-    props : ['session_params'] ,
+    props : ['session_params','global_comunas' , 'global_specialties' ] ,
 	emits : [],
 
     beforeCreate () {
@@ -112,11 +119,15 @@ data: function () {
 
             updateAppList()
             {
-                console.log("updateAppList")
+                console.log("update TabAppointmentListReserved ")
+                this.getAppTaken()
             },
 
             searchPattern(pattern)
-            {  this.pattern = this.pattern.toUpperCase()
+            {  
+                this.searchBox=true
+
+               this.pattern = this.pattern.toUpperCase()
                this.appTakenFiltered = [] 
                console.log("searchPatter:"+pattern)
              
