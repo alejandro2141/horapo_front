@@ -119,12 +119,14 @@ import SwitchViewButton from './switchViewButton.vue'
 					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información 		
 				</a>
 
-				<hr class="text-white">
 				
-				<!-- APPOINTMENT LIST  -->
-				<a @click="switchViewTo(5);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+				
+				<!-- APPOINTMENT LIST  
+				<hr class="text-white">
+					<a @click="switchViewTo(5);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
 					&nbsp; <i class="bi bi-person-lines-fill fs-5"></i> &nbsp; Lista de Citas  
 				</a>
+				-->
 				
 				<hr class="text-white">
 				<!-- APPOINTMENT LIST  -->
