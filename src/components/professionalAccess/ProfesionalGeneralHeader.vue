@@ -9,14 +9,19 @@ import SwitchViewButton from './switchViewButton.vue'
 	<div>
 
 
-	<div v-if="session_params['professional_name'] "  class="d-flex mt-3 pb-2 justify-content-around " :class="{ 'bg-white text-dark' : showTopMenu  }" > 
+	<div v-if="session_params['professional_name'] "  class="d-flex mt-1 pb-2 justify-content-around " :class="{ 'bg-white text-dark' : showTopMenu  }" > 
 
 		<!-- LIST APPOINTMENT -->
 
-		<div :class="{ 'opacity-25' : !session_params.tutorial_start_step10 && session_params.tutorial_start }" >
-			<text style="font-size:2.0em">	
-				<i v-if="showTopMenu" class="bi bi-gear " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
-				<i v-if="show_close_list" class="bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+		<div :class="{ 'opacity-25' : !session_params.tutorial_start_step4 && session_params.tutorial_start }" >
+			<text>	
+				<div v-if="showTopMenu">
+					<i style="font-size:2.0em" class="bi bi-gear " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
+					<br>
+					<text>Menu</text>
+				</div>
+
+				<i v-if="show_close_list" style="font-size:2.0em" class="bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
 			</text>
 			
 			<text>
@@ -40,11 +45,11 @@ import SwitchViewButton from './switchViewButton.vue'
 			<text v-if="showTopMenu" class="text-white-50"> </text>
 		</text>
 
-		<div :class="{ 'opacity-75' :  !session_params.tutorial_start_step3  && session_params.tutorial_start }" >
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step3  && session_params.tutorial_start }" >
 			
 			<div v-if="showTopMenu"  class="" @click=" switchViewTo(5);showTopMenu=false;" >
 				
-				<i style="font-size:1.9em" class="bi bi-people"></i>
+				<i style="font-size:2.0em" class="bi bi-people"></i>
 				 <br>
 				<text>Citas</text>
 			
@@ -57,19 +62,19 @@ import SwitchViewButton from './switchViewButton.vue'
 		</text>
 		
 		<!-- CONSULTAS -->
-		<div :class="{ 'opacity-75' :  !session_params.tutorial_start_step1  && session_params.tutorial_start}" >
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step1  && session_params.tutorial_start}" >
 			<text style="font-size:0.9em">
 				
 				<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start_step1}" >	
 					<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn">
-						<i style="font-size:1.7em" class="bi bi-building"></i><br>
+						<i style="font-size:1.7em" class="bi-geo-alt"></i><br>
 						<text>Consultas</text>
 					</button>
 				</div>
 
 			</text>
 		</div>
-		
+	
 
 		<text>
 			<text v-if="true" class="text-white-50" >|</text>
@@ -78,7 +83,7 @@ import SwitchViewButton from './switchViewButton.vue'
 		
 
 		<!--CALENDARS -->
-		<div :class="{ 'opacity-75' :  !session_params.tutorial_start_step2 && session_params.tutorial_start}" >
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step2 && session_params.tutorial_start}" >
 			<text style="font-size:0.9em">	
 					<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn">
 						<i style="font-size:1.7em" class="bi bi-calendar"></i><br>
