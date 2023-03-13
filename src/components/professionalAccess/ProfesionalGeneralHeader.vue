@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import SwitchViewButton from './switchViewButton.vue'
+import axios from 'axios';
+
 
 
 </script>
@@ -139,6 +141,21 @@ import SwitchViewButton from './switchViewButton.vue'
 					&nbsp; <i class="bi bi-lightbulb fs-5"></i> &nbsp; Ver Tutorial  
 				</a>
 
+				<hr class="text-white">
+				<!-- APPOINTMENT LIST  -->
+				<a  @click="showInputMessage = !showInputMessage" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Ayuda! o Sugerencia 
+				</a>
+					<div v-if="showInputMessage"> 
+
+						<textarea id="story" v-model="text_message" name="story" rows="5" cols="33" placeholder="Comment text.">
+
+						</textarea>
+						<p class="text-white " @click="sendComments">Enviar</p>
+
+					</div>
+
+
 				
 
 				<!--
@@ -228,7 +245,9 @@ export default {
 			transitionHigth : 0 ,
 			month_name : ["Ene","Feb","Marz","Abr","May","Jun","Jul","Ago","Sept","Oct","Nov","Dic"] ,
 
-			dateObj : null 
+			dateObj : null, 
+			showInputMessage : false  ,
+			text_message:"Escribenos!..."
 
         }   
     },
@@ -270,7 +289,25 @@ export default {
 		switchView(){
 			console.log("switchView in Profesional General Header");
 			this.$emit('switchView');
+		},
+
+		async sendComments()
+		{
+			const json = { 
+              professional_id: this.session_params.professional_id ,
+              message : this.text_message
+           				};
+
+			console.log("Send Message")
+			let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_comments",json);
+			console.log("Send Message Response :"+JSON.stringify(resp) )
+
+			this.text_message = "Ya enviaste tu mensaje."  
+			this.showInputMessage = false ;
+			alert ("Gracias por tu mensaje, nuestro equipo atenderá tu mensaje cuanto antes ")
+
 		}
+
 
         },
 
