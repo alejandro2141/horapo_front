@@ -5,13 +5,13 @@ import axios from 'axios';
 </script>
 
 <template>
-<div>
+<div class="border border-1  "  >
   
         <div class="text-center" >
         
         </div>
 
-        <div class="border border-1"  style="background-color: #FFC300 ;">
+        <div class="w-100"  style="background-color: #FFC300 ;">
 
     <!--TUTORIAL CALENDARIO -->
             <div v-if="session_params.tutorial_start_step1" >
@@ -104,7 +104,7 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step1=true;session_params.tutorial_start_step2=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step2=false;session_params.tutorial_start_step3=true"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
@@ -139,7 +139,7 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step2=true;session_params.tutorial_start_step3=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step3=false;session_params.tutorial_start_step4=true"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around m-3 p-3 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
 
@@ -158,6 +158,7 @@ import axios from 'axios';
                     <p class="text-center mt-4">
                     
                         Existen ademas las siguientes opciones secundarias en el <b>menu <i class="bi bi-gear "></i> </b> que usted puede explorar luego. 
+                        <br>
                         <img class="m-2" style="width : 20em ; "  src="/public/professional_menu.png" >
                        
                     </p>
@@ -168,8 +169,8 @@ import axios from 'axios';
                        <text @click="session_params.tutorial_start_step3=true;session_params.tutorial_start_step4=false"> Anterior </text>
                        <text @click="session_params.tutorial_start_step4=false;session_params.tutorial_start_step5=true"> Proximo  </text>
                    </div>
-                   <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
-                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                   <div class="d-flex justify-content-around m-4 p-4  text-primary">
+                        <text class="text-primary " @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
            </div>
 
@@ -178,13 +179,13 @@ import axios from 'axios';
                     
                     <p class="text-center mt-4 pt-4">
                       Veamos ahora como se ve su pantalla princial.<br>
-                      Cuando no ha seleccionado ninguna vista del menu superior, la pantalla principal muestra las horas disponibles y las horas reservadas.  
+                      Cuando No ha seleccionado alguna opcion del menu superior, la pantalla principal lista las Horas disponibles,Reservadas y Bloqueadas.  
                       <br>
-                      Ademas de fecha de las citas que se muestran.                    
+                      Tambien puede cambiar el dia y Mes que esta consultando para ver citas en los proximos dias.                     
                     </p>
                     
                     <div class="d-flex justify-content-center" style="font-size:0.9em">
-                        <img class="" style="width : 20em ; border-radius: 10%;"  src="/public/professional_main_page.png" >
+                        <img class="" style="width : 20em ; border-radius: 2%;"  src="/public/professional_main_page.png" >
                     </div>
                     
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
@@ -192,7 +193,7 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step5=false;session_params.tutorial_start_step6=true"> Proximo  </text>
                     </div>
 
-                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                    <div class="d-flex justify-content-around p-4 m-4 text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
 
@@ -202,8 +203,8 @@ import axios from 'axios';
                     
 
                     <div class=" mt-4 w-100 m-2">
-                        <p>Entre las horas que se listan en su pantalla principal podra ver:  </p>
-                         Hora Disponible se ve de la siguiente forma:  <br>
+                        <p>Ejemplos de lo que usted verá en la pantalla principal:  </p>
+                         Horas Disponibles, ejemplo :  <br>
                         <img class="m-2" style="width : 20em ; "  src="/public/list_app_app_available.png" >
 
                         <br>
@@ -211,7 +212,7 @@ import axios from 'axios';
                         <img class="m-2" style="width : 20em ; "  src="/public/list_app_app_reserved.png" >
                        
                         <br>
-                        Y una hora bloqueada se verá asi:<br>
+                        Una hora bloqueada se verá asi:<br>
                         <img class="m-2" style="width : 20em ; "  src="/public/list_hours_blocked_app.png" >
                        
                         
@@ -220,19 +221,19 @@ import axios from 'axios';
                                                   
                     </div>
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step4=true;session_params.tutorial_start_step5=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step5=false;session_params.tutorial_start_step6=true"> Proximo  </text>
+                        <text @click="session_params.tutorial_start_step5=true;session_params.tutorial_start_step6=false"> Anterior </text>
+                        <text @click="session_params.tutorial_start_step6=false;session_params.tutorial_start_step7=true"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                    <div class="d-flex justify-content-around p-4 m-4 text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
 
             </div>
 
-            <div v-if="session_params.tutorial_start_step6" >
+            <div v-if="session_params.tutorial_start_step7" >
                     
                     <div class="text-center mt-4">
-                       Seleccionando una cita, puede ver los detalles de la reserva. 
+                       Seleccionando una <b>Hora Reservada</b>, puede ver los detalles de la reserva. 
                        
                        <img class="m-2" style="width : 20em ; "  src="/public/Reserved_app_details.png" >
                       
@@ -242,30 +243,10 @@ import axios from 'axios';
                                                   
                     </div>
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step5=true;session_params.tutorial_start_step6=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step6=false;session_params.tutorial_start_step7=true"> Proximo  </text>
-                    </div>
-                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
-                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
-                    </div>
-            </div>
-
-            <div v-if="session_params.tutorial_start_step7" >
-                    
-
-                    <p class="text-center mt-4">
-                       Una cita Disponible, puede usted resevar para alguien.  
-                       <img class="m-2" style="width : 20em ; "  src="/public/Professional_reserve_app.png" >
-                    </p>
-
-                    <div class="d-flex justify-content-center" style="font-size:0.9em">
-                                                  
-                    </div>
-                    <div class="d-flex justify-content-around mt-3 text-primary"> 
                         <text @click="session_params.tutorial_start_step6=true;session_params.tutorial_start_step7=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step7=false;session_params.tutorial_start_step8=true"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                    <div class="d-flex justify-content-around p-4 m-4 text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
@@ -274,11 +255,10 @@ import axios from 'axios';
                     
 
                     <p class="text-center mt-4">
-                       Usted puede solicitar confirmacion de asistencia al paciente.
-                       <br> 
-                       <img class="m-2" style="width : 20em ; "  src="/public/Solicitar_confirmacion_asistencia.png" >
-                       
-                       Con esta accion el sistema le enviará un email al paciente solicitando su confirmacion </p>
+                       Una <b>Hora Disponible</b>, puede ser reservada por usted para un paciente.  
+                       <img class="m-2" style="width : 20em ; "  src="/public/Professional_reserve_app.png" >
+                    </p>
+
                     <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                   
                     </div>
@@ -286,22 +266,22 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step7=true;session_params.tutorial_start_step8=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step8=false;session_params.tutorial_start_step9=true"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
 
-
             <div v-if="session_params.tutorial_start_step9" >
-                   
-
-                    <p class="text-center mt-4">
-                       Usted puede cancelar la cita con el paciente.
+                
+                    <div class="text-center mt-4">
+                      <h4>Mensajes directos al paciente <i class="bi bi-person"></i><i class="bi bi-chat-dots"></i></h4> 
+                      <br>
+                      Usted puede solicitar confirmacion de asistencia al paciente.
                        <br> 
-                       <img class="m-2" style="width : 20em ; "  src="/public/Cancelar_cita_paciente.png" >
-                                              
+                       <img class="m-2" style="width : 20em ; "  src="/public/Solicitar_confirmacion_asistencia.png" >
                        <br>
-                       Con esta accion el sistema le enviará un email al paciente solicitando su confirmacion </p>
+                       Con esta accion el sistema le enviará un email al paciente para solicitarle que confirme su asistencia el dia y hora de la cita. 
+                    </div>
                     <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                   
                     </div>
@@ -309,7 +289,31 @@ import axios from 'axios';
                         <text @click="session_params.tutorial_start_step8=true;session_params.tutorial_start_step9=false"> Anterior </text>
                         <text @click="session_params.tutorial_start_step9=false;session_params.tutorial_start_step10=true"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
+            </div>
+
+
+            <div v-if="session_params.tutorial_start_step10" >
+                   
+
+                    <p class="text-center mt-4">
+                       Usted puede cancelar la cita con el paciente <i class="bi bi-person"></i><i class="bi bi-chat-dots"></i>.
+                       <br> 
+                       <img class="m-2" style="width : 20em ; "  src="/public/Cancelar_cita_paciente.png" >
+                                              
+                       <br>
+                       Con esta accion usted cancelará la cita con el paciente. <br>
+                       El sistema enviara un correo al paciente informandole que usted ha cancelado su cita  </p>
+                    <div class="d-flex justify-content-center" style="font-size:0.9em">
+                                                  
+                    </div>
+                    <div class="d-flex justify-content-around mt-3 text-primary"> 
+                        <text @click="session_params.tutorial_start_step9=true;session_params.tutorial_start_step10=false"> Anterior </text>
+                        <text @click="session_params.tutorial_start_step10=false;session_params.tutorial_start_step11=true"> Proximo  </text>
+                    </div>
+                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
@@ -319,9 +323,22 @@ import axios from 'axios';
 
                     
                     <p class="text-center mt-4">
-                        En el menu superior, se muestran las siguientes opciones <br>
-                        []
+                        Gestion de sus Dias<br>
+                        Usted puede bloquear <i class="bi bi-unlock-fill text-primary"></i> un dia en su agenda, con esta accion los pacientes ya no podran reservar horas ese dia para ninguno de sus calendarios
+                        <br>
+                        <img class="m-2" style="width : 20em ; "  src="/public/main_block_aday.png" >
+                   </p>
+
+                   
+
+                    
+                    <p class="text-center mt-4">
+                        Usted puede <b>bloquear una hora </b> en la opcion inferior de: <text class="text-primary">Bloquear Horas Seleccionadas  <i class="bi bi-unlock"></i></text> un dia en su agenda. Con esta accion los pacientes ya no podran reservar esa hora de ese dia. 
+                        <br>
+                        <img class="m-2" style="width : 20em ; "  src="/public/lock_selected_app.png" >
                     </p>
+
+                    
                    <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                  
                    </div>

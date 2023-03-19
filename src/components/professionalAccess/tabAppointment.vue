@@ -37,8 +37,8 @@ import LockOptions from './lockOptions.vue'
 	  
     </div>
 
-    <div v-else >
-        <Tutorial v-on:switchToCenters='switchToCenters' :session_params="session_params" > </Tutorial>
+    <div  v-else >
+        <Tutorial  v-on:switchToCenters='switchToCenters' :session_params="session_params" > </Tutorial>
     </div>
 
 </div>
