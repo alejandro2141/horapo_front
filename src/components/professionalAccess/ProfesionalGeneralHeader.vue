@@ -148,13 +148,25 @@ import axios from 'axios';
 				</a>
 					<div v-if="showInputMessage"> 
 
-						<textarea id="story" v-model="text_message" name="story" rows="5" cols="33" placeholder="Comment text.">
+					<div class="d-flex justify-content-start">
+						<div>
+							<textarea id="story" v-model="text_message" name="story" rows="7" cols="33" placeholder="Comment text.">
+							</textarea>
+						</div>
+						<div class="m-1">
+							<text class="text-white">Tu Animo</text> <br>
+							<i @click="animo =1;text_message=text_message.concat(' No me sirve. Lo odio !, que se muera el programador ')" class="text-white bi bi-emoji-angry h4 p-2"></i><br>
+							<i @click="animo =2;text_message=text_message.concat(' No es la gran cosa. Que programador sin creatividad !  ')" class="text-white bi bi-emoji-neutral h4 p-2"></i><br>
+							<i @click="animo =3;text_message=text_message.concat(' Me gusta esto, esta buenisimo. Que programador  mas noble, subale el sueldo!  ')"  class="text-white bi bi-emoji-heart-eyes h4 p-2"></i><br>
+							<i @click="animo =4;text_message=text_message.concat(' Tiene errores de software.  Arreglalo infame programador !!. ') " class="text-white bi bi-bug h4 p-2"></i><br>
+							<i @click="animo =5;text_message=text_message.concat(' Esta bueno. Me gusta.  Puede mejorar !. ') " class="text-white bi bi-balloon-heart h4 p-2"></i><br>
+						</div>
+					</div>
 
-						</textarea>
 						<p class="text-white " @click="sendComments">Enviar</p>
 
 					</div>
-
+					
 
 				
 
@@ -247,7 +259,8 @@ export default {
 
 			dateObj : null, 
 			showInputMessage : false  ,
-			text_message:"Escribenos!..."
+			text_message: "Comente algo...", 
+			animo: 0 , 
 
         }   
     },
@@ -295,7 +308,8 @@ export default {
 		{
 			const json = { 
               professional_id: this.session_params.professional_id ,
-              message : this.text_message
+              message : this.text_message,
+			  animo : this.animo
            				};
 
 			console.log("Send Message")
@@ -305,6 +319,7 @@ export default {
 			this.text_message = "Ya enviaste tu mensaje."  
 			this.showInputMessage = false ;
 			alert ("Gracias por tu mensaje, nuestro equipo atenderá tu mensaje cuanto antes ")
+			this.animo=0
 
 		}
 
