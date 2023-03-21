@@ -7,30 +7,34 @@ import { ref } from 'vue'
 <div >
     <!-- style="background-color:#2f3e44"--> 
   	
-    <div  class="d-flex justify-content-between  mt-0 pt-0 text-secondary"> 
+    <div  class="d-flex justify-content-center  mt-0 pt-0 text-secondary"> 
 
         
         <div class="m-0 p-0">
             <!-- 
             <i  @click="show_sub_menu = !show_sub_menu" class="fs-2 bi bi-list text-secondary"></i>
             -->
-            <text  @click="show_sub_menu = !show_sub_menu" style="font-size: 0.9em ; margin-left: 1em;"> menu </text>
+            <text class="" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; margin-left: 1em;"> menu </text>
             
         </div>
+ 
 
         <div class="m-0 p-0 text-secondary mt-3 text-center">
-            <text class="m-0 p-0" style="font-size: 1.4em" >horapo</text> <br>
+            <text class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
             <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
             -->
         </div>
+        
             <!--
             <a HREF="/nested/publicSearch.html" class="text-decoration-none m-2" style="color :#ffffff"> 
                 <text class="">horapo</text>  
             </a>
             -->
+     
+
         <div class="m-0 p-0">
-            <a HREF="/nested/getAppointments.html" class=" text-decoration-none btn-floating  text-secondary" >
-            <text style="font-size: 0.9em; margin-right: 1em; ">Mis Horas</text>
+            <a HREF="/nested/getAppointments.html" class="text-decoration-none btn-floating  text-secondary" >
+            <text style="font-size: 1em; margin-right: 1em; ">citas</text>
             </a>
         </div>
 
