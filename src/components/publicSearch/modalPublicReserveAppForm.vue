@@ -370,9 +370,89 @@ computed: {
 
               this.showModalPublicReserveForm = true ; 
             },
+
+		form_patient_doc_id(value, oldValue) {
+			if (  value!=null && oldValue!=null && value.length != oldValue.length)
+			{
+      		console.log("Old value:"+oldValue +"new value:"+value);
+			//this.rutFormat(value)
+			this.form_patient_doc_id = this.rutFormat(value)
+			}
+
+		}
+  
+
+
       	},
 
 	methods: {
+		rutFormat(value)
+		{
+			console.log("RUT FORMAT")
+			//repeatedString += string;
+
+			let newRutFormated =  value.replace('.', '');
+			
+			if ( newRutFormated.length > 3  )
+			{
+			newRutFormated  =  newRutFormated.substring(newRutFormated.length-9, newRutFormated.length-6) +"."+ newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
+			}
+
+			/*
+			if ( newRutFormated.length > 3 && newRutFormated.length < 7 )
+			{
+				console.log(" 3 < RUT < 7"+ newRutFormated.length)
+				newRutFormated  =  newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
+				return newRutFormated 
+			}
+
+			
+			if ( newRutFormated.length > 7 && newRutFormated.length < 9 )
+			{
+				
+				console.log(" 6 < RUT < 9  "+ newRutFormated.length)
+				newRutFormated  =  newRutFormated.substring(newRutFormated.length-9, newRutFormated.length-6) +"."+ newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
+				return newRutFormated 
+			}
+			*/
+			
+			return newRutFormated 
+			
+			/*
+			if ( value.length > 7 && value.charAt(value.length-7) != "."  )
+			{
+				newRutFormated  = value.substring(value.length-12, value.length-8) +"."+ value.substring(value.length-8 ,value.length)
+			}
+			*/
+
+		/*
+			if ( value.charAt(value.length-3) != "." )
+			{
+				newRutFormated  = value.substring(value.length-8, value.length-3) +"."+ value.substring(value.length-3 ,value.length)
+			}
+
+			else
+			{
+				newRutFormated = value 
+			}
+		*/	
+
+			
+
+			/*
+			if (value.charAt(3) != ".")
+			{
+			//let newRutFormatted =    value.slice(-1);
+			//let newRutFormated =  value.substring(value.length-8, value.length-5)+"."+value.substring(value.length-4, value.length-1)+"-"+value.charAt(value.length - 1)
+			newRutFormated  = value.substring(0, 3)+"."+value.substring(3, 7)
+			}*/
+/*
+			console.log("RUT FORMATED:"+newRutFormated )
+			return newRutFormated 
+			*/
+			
+		},
+
 
 		async getProfessionalData(prof_id)
 		{
@@ -552,6 +632,11 @@ computed: {
 
 
 		 },
+
+
+
+
+		 
 
 
 }
