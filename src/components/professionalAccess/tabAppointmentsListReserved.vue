@@ -10,17 +10,18 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
     <div class="m-3">
     <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
    
-            <p class="text-center h4">Horas Reservadas  <i @click="searchPattern(pattern)" class="bi bi-search display-3"></i>
+            <p class="text-center h4">Horas Reservadas  <i v-if="!searchBox" @click="searchBox=true" class="bi bi-search display-3"></i>
             </p>
             
             <div class="md-form mt-0">
     </div>
     <!-- Search form -->
         <div v-if="searchBox" class="m-2 d-flex justify-content-center">
-            <input class="text-uppercase form-control form-control-sm ml-3 w-75"  v-model="pattern"    type="text" placeholder="Search" aria-label="Search">
-           
+            <input class="text-uppercase form-control form-control-sm ml-3 w-75"  v-model="pattern"    type="text" placeholder="Search" aria-label="Search"><i @click="searchPattern(pattern)" class="bi bi-search display-3"></i>
         </div>
-      
+
+        <button v-if="!showOldApp" @click="showOldApp=true" type="button" class="btn btn-secondary m-4">Ver Citas Pasadas</button>
+        <button v-if="showOldApp" @click="showOldApp=false" type="button" class="btn btn-secondary m-4">Ocultar Citas Pasadas</button>
                
         <div v-for="app in appTakenFiltered" :key='app.id' >
         <!-- 
@@ -32,18 +33,14 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
                 </small>
             </div>  
         -->
-                      
-            
-            
-            <div class="mt-4  " style="border-radius: 0px; background-color: #FFF;font-family: Arial, Helvetica, sans-serif;border-top: 1px solid;">
-                <div class="p-1">
-                    <text  style="font-size: 1.4em">{{ formatDate(app.date)  }}</text>  <text style="font-size: 1.3em">{{getSpecialty(app.specialty_reserved)}}</text><br>
+            <div v-if="evaluateDate(app.date) || showOldApp" class="mt-4 " style="border-radius: 0px; background-color: #FFF;font-family: Arial, Helvetica, sans-serif;border-top: 1px solid;">
+                <div class="p-1"  :class="{ 'text-secondary': !evaluateDate(app.date) }" >
+                   <text v-if="!evaluateDate(app.date)"> (En el pasado) </text> 
+                   <text  style="font-size: 1.4em"  >{{ formatDate(app.date)  }}</text>  <text style="font-size: 1.3em">{{getSpecialty(app.specialty_reserved)}}</text><br>
                 </div>
                
                 <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
              </div>
-            
-
 
         </div>
       
@@ -79,6 +76,8 @@ data: function () {
             //global_comunas   :  null ,
             //global_specialties :  null ,
             searchBox: false ,
+            showOldApp : false ,
+
            		 }
 	},
 	
@@ -110,6 +109,23 @@ data: function () {
 
  
     methods: {
+
+            evaluateDate(date)
+            {
+                let today = new Date()
+                console.log ("TAB APPOINTMENT LIST today:"+today.getTime()+"   AppDate:"+Date.parse(date) )
+                if  (today.getTime() > Date.parse(date) )  
+                {
+                    return false
+                }
+                else 
+                {
+                    return true 
+                }
+
+
+            },
+
             
             displayModalReservedDetails(app)
             {
