@@ -372,12 +372,20 @@ computed: {
             },
 
 		form_patient_doc_id(value, oldValue) {
+			
+			if (value!=null  &&  value.length > 1 )
+			{
+			this.form_patient_doc_id=this.rutFormat(value)
+			}
+
+			/* 
 			if (  value!=null && oldValue!=null && value.length != oldValue.length)
 			{
-      		console.log("Old value:"+oldValue +"new value:"+value);
+      		// console.log("Old value:"+oldValue +"new value:"+value);
 			//this.rutFormat(value)
 			this.form_patient_doc_id = this.rutFormat(value)
 			}
+			*/
 
 		}
   
@@ -388,16 +396,52 @@ computed: {
 	methods: {
 		rutFormat(value)
 		{
-			console.log("RUT FORMAT")
+			console.log("RUT FORMAT New Value:"+value)
+			
+			
 			//repeatedString += string;
+			//return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			//return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 			let newRutFormated =  value.replace('.', '');
+			 newRutFormated =  newRutFormated.replace('-', '');
+			//newRutFormated  =  newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
+			//newRutFormated  =  newRutFormated.substring(newRutFormated.length-9, newRutFormated.length-6) +"."+ newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
 			
-			if ( newRutFormated.length > 3  )
+			//add "-" and verification value
+			if (value.length>6)
 			{
-			newRutFormated  =  newRutFormated.substring(newRutFormated.length-9, newRutFormated.length-6) +"."+ newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
+			let verificationValue = newRutFormated.charAt(newRutFormated.length-1)
+			newRutFormated = newRutFormated.substring(newRutFormated.length-18, newRutFormated.length-1)+"-"+verificationValue
 			}
 
+			//add thousand separator
+			//newRutFormated  = newRutFormated.substring(newRutFormated.length-8, newRutFormated.length-5) +"."+ newRutFormated.substring(newRutFormated.length-5 ,newRutFormated.length)
+			
+			//newRutFormated = newRutFormated.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+			//add Million separator
+			//newRutFormated  = newRutFormated.substring(newRutFormated.length-20, newRutFormated.length-8) +"."+ newRutFormated.substring(newRutFormated.length-8 ,newRutFormated.length)
+			
+			
+			
+			return newRutFormated 
+
+/*
+			if ( newRutFormated.length > 3 && newRutFormated.length <7 )
+			{
+			newRutFormated  = newRutFormated.substring(newRutFormated.length-8, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
+			}
+
+			if ( newRutFormated.length > 6 &&  value.charAt(value.length-3) != "." )
+			{
+			newRutFormated  = newRutFormated.substring(newRutFormated.length-10, newRutFormated.length-6) +"."+ newRutFormated.substring(newRutFormated.length-6 ,newRutFormated.length)
+			}
+			*/
+
+		
+			
+			
 			/*
 			if ( newRutFormated.length > 3 && newRutFormated.length < 7 )
 			{
@@ -416,7 +460,7 @@ computed: {
 			}
 			*/
 			
-			return newRutFormated 
+			//return newRutFormated 
 			
 			/*
 			if ( value.length > 7 && value.charAt(value.length-7) != "."  )
