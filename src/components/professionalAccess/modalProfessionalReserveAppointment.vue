@@ -40,7 +40,7 @@ import axios from 'axios';
         <div class="text-success d-flex justify-content-between "  >	
   
                             <div  style="color: rgb(31, 157, 148); font-size: 2.5em;"> 
-                                {{ idSpecialty2name(hourToReserve.specialty) }} 
+                             aa   {{ idSpecialty2name(hourToReserve.specialty) }} 
                             </div>
                            <!--   <text class="p-1 "> {{ hourToReserve.start_time.substring(0,5) }} </text> -->
                           
@@ -286,7 +286,38 @@ export default {
    	mounted () {
            },
 
+  watch: {
+    
+    form_patient_doc_id(value, oldValue) {
+			
+        if (value!=null  &&  value.length > 1 )
+        {
+        this.form_patient_doc_id=this.rutFormat(value)
+        }
+
+      }
+
+  },
+
 	methods :{
+    
+    rutFormat(value)
+		{
+			console.log("RUT FORMAT New Value:"+value)
+
+			let newRutFormated =  value.replace('.', '');
+			 newRutFormated =  newRutFormated.replace('-', '');
+
+			//add "-" and verification value
+			if (value.length>6)
+			{
+			let verificationValue = newRutFormated.charAt(newRutFormated.length-1)
+			newRutFormated = newRutFormated.substring(newRutFormated.length-18, newRutFormated.length-1)+"-"+verificationValue
+			}
+			
+			return newRutFormated 			
+		},
+
 
      id2comuna(id){
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
