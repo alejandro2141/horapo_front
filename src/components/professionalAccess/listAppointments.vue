@@ -104,19 +104,18 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     
     <div v-if="isLockDay">
         <p  class="text-center text-secondary">
-            
-            <text style="font-size:5em;"><i  class="bi bi-lock-fill"></i></text><br>
+            <text style="font-size:2em;"><i  class="bi bi-lock-fill"></i></text>
+        </p>
+        <p class="text-center" >
             <i v-if="!days_expired"  @click="sendUnLock()" class="text-primary" >Desbloquear Dia </i>
         </p>
     </div>
-   
-
-    <div v-if="appointments_n <= 0 " class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >
-               
-                <div class="p-4 text-center" >    
-                    <i class="display-2"></i><br>
-                  No existen Horarios o  Citas Reservadas para este dia
-                </div>            
+    
+    <div v-if="appointments_n <= 0 " class="d-flex justify-content-between mt-1  "  style="border-radius: 15px;" >             
+        <div class="p-4 text-center" >    
+            <i class="display-2"></i><br>
+            No existen Horarios o  Citas Reservadas para este dia
+        </div>            
     </div>
    
 </div>
