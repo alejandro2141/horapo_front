@@ -378,15 +378,6 @@ computed: {
 			this.form_patient_doc_id=this.rutFormat(value)
 			}
 
-			/* 
-			if (  value!=null && oldValue!=null && value.length != oldValue.length)
-			{
-      		// console.log("Old value:"+oldValue +"new value:"+value);
-			//this.rutFormat(value)
-			this.form_patient_doc_id = this.rutFormat(value)
-			}
-			*/
-
 		}
   
 
@@ -397,104 +388,18 @@ computed: {
 		rutFormat(value)
 		{
 			console.log("RUT FORMAT New Value:"+value)
-			
-			
-			//repeatedString += string;
-			//return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-			//return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 			let newRutFormated =  value.replace('.', '');
 			 newRutFormated =  newRutFormated.replace('-', '');
-			//newRutFormated  =  newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
-			//newRutFormated  =  newRutFormated.substring(newRutFormated.length-9, newRutFormated.length-6) +"."+ newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
-			
+
 			//add "-" and verification value
 			if (value.length>6)
 			{
 			let verificationValue = newRutFormated.charAt(newRutFormated.length-1)
 			newRutFormated = newRutFormated.substring(newRutFormated.length-18, newRutFormated.length-1)+"-"+verificationValue
 			}
-
-			//add thousand separator
-			//newRutFormated  = newRutFormated.substring(newRutFormated.length-8, newRutFormated.length-5) +"."+ newRutFormated.substring(newRutFormated.length-5 ,newRutFormated.length)
 			
-			//newRutFormated = newRutFormated.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-			//add Million separator
-			//newRutFormated  = newRutFormated.substring(newRutFormated.length-20, newRutFormated.length-8) +"."+ newRutFormated.substring(newRutFormated.length-8 ,newRutFormated.length)
-			
-			
-			
-			return newRutFormated 
-
-/*
-			if ( newRutFormated.length > 3 && newRutFormated.length <7 )
-			{
-			newRutFormated  = newRutFormated.substring(newRutFormated.length-8, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
-			}
-
-			if ( newRutFormated.length > 6 &&  value.charAt(value.length-3) != "." )
-			{
-			newRutFormated  = newRutFormated.substring(newRutFormated.length-10, newRutFormated.length-6) +"."+ newRutFormated.substring(newRutFormated.length-6 ,newRutFormated.length)
-			}
-			*/
-
-		
-			
-			
-			/*
-			if ( newRutFormated.length > 3 && newRutFormated.length < 7 )
-			{
-				console.log(" 3 < RUT < 7"+ newRutFormated.length)
-				newRutFormated  =  newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
-				return newRutFormated 
-			}
-
-			
-			if ( newRutFormated.length > 7 && newRutFormated.length < 9 )
-			{
-				
-				console.log(" 6 < RUT < 9  "+ newRutFormated.length)
-				newRutFormated  =  newRutFormated.substring(newRutFormated.length-9, newRutFormated.length-6) +"."+ newRutFormated.substring(newRutFormated.length-6, newRutFormated.length-3) +"."+ newRutFormated.substring(newRutFormated.length-3 ,newRutFormated.length)
-				return newRutFormated 
-			}
-			*/
-			
-			//return newRutFormated 
-			
-			/*
-			if ( value.length > 7 && value.charAt(value.length-7) != "."  )
-			{
-				newRutFormated  = value.substring(value.length-12, value.length-8) +"."+ value.substring(value.length-8 ,value.length)
-			}
-			*/
-
-		/*
-			if ( value.charAt(value.length-3) != "." )
-			{
-				newRutFormated  = value.substring(value.length-8, value.length-3) +"."+ value.substring(value.length-3 ,value.length)
-			}
-
-			else
-			{
-				newRutFormated = value 
-			}
-		*/	
-
-			
-
-			/*
-			if (value.charAt(3) != ".")
-			{
-			//let newRutFormatted =    value.slice(-1);
-			//let newRutFormated =  value.substring(value.length-8, value.length-5)+"."+value.substring(value.length-4, value.length-1)+"-"+value.charAt(value.length - 1)
-			newRutFormated  = value.substring(0, 3)+"."+value.substring(3, 7)
-			}*/
-/*
-			console.log("RUT FORMATED:"+newRutFormated )
-			return newRutFormated 
-			*/
-			
+			return newRutFormated 			
 		},
 
 
