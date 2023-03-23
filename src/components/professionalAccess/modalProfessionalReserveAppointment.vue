@@ -40,7 +40,7 @@ import axios from 'axios';
         <div class="text-success d-flex justify-content-between "  >	
   
                             <div  style="color: rgb(31, 157, 148); font-size: 2.5em;"> 
-                             aa   {{ idSpecialty2name(hourToReserve.specialty) }} 
+                              {{ idSpecialty2name(hourToReserve.specialty) }} 
                             </div>
                            <!--   <text class="p-1 "> {{ hourToReserve.start_time.substring(0,5) }} </text> -->
                           
