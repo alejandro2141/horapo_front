@@ -59,7 +59,7 @@ import LoadProgress from '../loadProgress.vue'
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
        <!-- <modalPublicViewAppointment :searchParameters="searchParameters" :app="app"          :center_data="center_data"    :openModalEvent="openModalEvent"               v-on:updateLastSearch="updateLastSearch"   :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
       -->
-        <ModalPublicReserveAppForm  :searchParameters='searchParameters' :appToReserve='app' :center_data="center_data"    :eventShowModalPubicReserve='openModalEvent'   v-on:updateLastSearch='updateLastSearch'   :global_comunas="global_comunas" :global_specialties='global_specialties'  :professional_data="professional_data"      ></ModalPublicReserveAppForm>
+        <ModalPublicReserveAppForm  :searchParameters='searchParameters' :appToReserve='app' :center_data="center_data"    :eventShowModalPubicReserve='openModalEvent'   v-on:updateLastSearch='updateLastSearch'   :global_comunas="global_comunas" :global_specialties='global_specialties'       ></ModalPublicReserveAppForm>
 
         <!-- Modal Reserve and Confirm End -->
 </div>     
