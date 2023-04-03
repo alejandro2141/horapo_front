@@ -12,7 +12,7 @@ import RecoverAppointmentsForm from '../src/components/RecoverAppointmentsForm.v
       
    <!--  <GeneralHeader></GeneralHeader>  -->
     
-    <div id="app" class="border border-1 p-3 bg-white m-3" style="border-radius: 25px; width:35em" >     
+    <div id="app" class=" p-3 bg-white m-3" style="border-radius: 25px; width:35em" >     
         <div class="d-flex justify-content-end" > 
             <a class="m-1 p-1" HREF="/index.html" type="button"> <i class="display-5 bi bi-x-lg"></i></a>
         </div>
