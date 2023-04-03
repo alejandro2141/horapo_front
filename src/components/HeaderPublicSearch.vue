@@ -56,7 +56,7 @@ import { ref } from 'vue'
                     -->
                 <div class="p-4">
                         <a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-                            &nbsp;&nbsp;<text class=" text-decoration-none text-secondary" >Profesionales</text>
+                            &nbsp;&nbsp;<text class=" text-decoration-none text-secondary" >Acceso Profesionales</text>
                         </a>
                 </div>
                 
