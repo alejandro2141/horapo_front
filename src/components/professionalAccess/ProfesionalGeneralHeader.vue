@@ -144,25 +144,25 @@ import axios from 'axios';
 				<hr class="text-white">
 				<!-- APPOINTMENT LIST  -->
 				<a  @click="showInputMessage = !showInputMessage" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
-					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Ayuda! o Sugerencia 
+					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Sugerencias 
 				</a>
 					<div v-if="showInputMessage"> 
 
 					<div class="d-flex justify-content-start">
 						<div>
-							<textarea style="border-radius: 15px;" id="story" v-model="text_message" name="story" rows="7" cols="25" placeholder="Comment text.">
+							<textarea style="border-radius: 10px; "  class="h-75 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
 							</textarea>
 						</div>
 						<div class="m-1">
 							<text class="text-white"><small>Tu Animo</small></text> <br>
 							<p>
-								<i @click="animo =1;text_message=text_message.concat(' No sirve. Lo odio!, muerte al programador! ')" class="text-white bi bi-emoji-angry h2 m-4 "></i><br>
+								<i @click="animo =1;text_message=text_message.concat('........ No sirve. Lo odio!, muerte al programador! ')" class="text-white bi bi-emoji-angry h2 m-4 "></i><br>
 							</p>
 							<p>
-							<i @click="animo =2;text_message=text_message.concat(' No es la gran cosa. Programador sin creatividad!  ')" class="text-white bi bi-emoji-neutral h2 m-4 "></i><br>
+							<i @click="animo =2;text_message=text_message.concat('......... No es la gran cosa. Programador sin creatividad!  ')" class="text-white bi bi-emoji-neutral h2 m-4 "></i><br>
 							</p>
 							<p>
-							<i @click="animo =3;text_message=text_message.concat(' Maravilloso!, subale el sueldo al programador!  ')"  class="text-white bi bi-emoji-heart-eyes h2 m-4 "></i><br>
+							<i @click="animo =3;text_message=text_message.concat('........ Maravilloso!, subale el sueldo al programador!  ')"  class="text-white bi bi-emoji-heart-eyes h2 m-4 "></i><br>
 							</p>
 							<!--
 							<i @click="animo =4;text_message=text_message.concat(' Tiene errores de software.  Arreglalo infame programador !!. ') " class="text-white bi bi-bug h4 p-2"></i><br>
