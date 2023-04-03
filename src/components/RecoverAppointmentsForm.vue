@@ -40,11 +40,13 @@ defineProps({
         -->
 
         <p class="text-center">
-           <text>Ingrese su correo</text><br> y le enviaremos sus horas ya agendadas 
-           <input   style="border-radius: 15px;" type="text" placeholder="Ej: Email " v-model='user_email' > 
+           <text class="h4">Ingrese su correo</text> <br>
+           <text class="text-muted">Le enviaremos sus citas reservadas.</text>
+           <input class="m-3 p-2"  style="border-radius: 5px;" type="text" placeholder="Ej: TuCorreo@sercorreo.com" v-model='user_email' > 
             
             <br>
-            <a class="btn btn-outline-secondary m-2 p-2" HREF="/index.html" type="button">Regresar</a> 
+            <!--
+            <a class="btn btn-outline-secondary m-2 p-2" HREF="/index.html" type="button">Regresar</a> -->
             <button class="btn btn-success m-2 p-2" v-on:click="sendRecoverApp()" type="button">Enviar</button>
 
         </p>
