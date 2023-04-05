@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import SwitchViewButton from './switchViewButton.vue'
 import axios from 'axios';
+import professional_messages from './professional_messages.vue'
 
 
 
@@ -106,7 +107,7 @@ import axios from 'axios';
 	<Transition duration="1050" name="nested">
 	
 		<div v-if="showUserMenu"  class="bg-secondary" style="" >
-			<div class="bg-secondary w-100 p-4" style="position: absolute; z-index: 99999; height:600px"  >
+			<div class="bg-secondary w-100 p-4" style="position: absolute; z-index: 99999; "  >
 			<div class="bg-secondary" >
 				
 				
@@ -148,35 +149,8 @@ import axios from 'axios';
 				</a>
 					<div v-if="showInputMessage"> 
 
-					<div class="d-flex justify-content-start">
-						<div>
-							<textarea style="border-radius: 10px; "  class="h-75 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
-							</textarea>
-						</div>
-						<div class="m-1">
-							<text class="text-white"><small>Tu Animo</small></text> <br>
-							<p>
-								<i @click="animo =1;text_message=text_message.concat('........ No sirve. Lo odio!, muerte al programador! ')" class="text-white bi bi-emoji-angry h2 m-4 "></i><br>
-							</p>
-							<p>
-							<i @click="animo =2;text_message=text_message.concat('......... No es la gran cosa. Programador sin creatividad!  ')" class="text-white bi bi-emoji-neutral h2 m-4 "></i><br>
-							</p>
-							<p>
-							<i @click="animo =3;text_message=text_message.concat('........ Maravilloso!, subale el sueldo al programador!  ')"  class="text-white bi bi-emoji-heart-eyes h2 m-4 "></i><br>
-							</p>
-							<!--
-							<i @click="animo =4;text_message=text_message.concat(' Tiene errores de software.  Arreglalo infame programador !!. ') " class="text-white bi bi-bug h4 p-2"></i><br>
-							<i @click="animo =5;text_message=text_message.concat(' Esta bueno. Me gusta.  Puede mejorar !. ') " class="text-white bi bi-balloon-heart h4 p-2"></i><br>
-							-->
-						</div>
-					</div>
-
-					<div class="d-flex justify-content-start">
-						<text class="text-white btn btn-primary" @click="text_message=''">Cancelar</text>   
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<text class="text-white btn btn-primary" @click="sendComments">Enviar</text>
-					</div>
-
+						<professional_messages :session_params="session_params"></professional_messages>
+	
 					</div>
 					
 
@@ -194,6 +168,8 @@ import axios from 'axios';
 				<div  style="width: 00px; height: 600px;" >		
 				</div>
 				-->
+				<div  style=" height: 600px;" >		
+				</div>
 			</div>
 			
 			</div>
@@ -316,6 +292,8 @@ export default {
 			this.$emit('switchView');
 		},
 
+		
+		/*
 		async sendComments()
 		{
 			const json = { 
@@ -334,6 +312,7 @@ export default {
 			this.animo=0
 
 		}
+		*/
 
 
         },
