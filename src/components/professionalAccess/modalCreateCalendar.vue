@@ -785,6 +785,8 @@ data: function () {
                 form_calendar_color : this.form_calendar_color ,
 
                 professional_id: this.session_params.professional_id ,
+
+                date: new Date(),
                 
                           };
 
