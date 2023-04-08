@@ -41,7 +41,7 @@ import axios from 'axios';
                 <div v-for="comment in comments" :key="comment.id" class="mt-2" >
                 
                     <div v-if="comment.reply" >
-                        <i class="h2 bi bi-emoji-laughing-fill "></i><text class="fw-bold">HORAPOteam: </text>{{comment.message}}<br>  
+                        <i class="h2 bi bi-emoji-laughing-fill "></i><text class="fw-bold"> HORAPO team : </text>{{comment.message}}<br>  
                     </div>
                     <div v-else>
                         <i v-if="comment.animo == 1" class="bi bi-emoji-angry h2 "></i>
