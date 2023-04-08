@@ -28,6 +28,10 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                                     <i v-if="showEdit" @click="deleteCalendar();showEdit=false" class="bi bi-trash text-danger" ></i>  
                                     <i v-else class="bi bi-calendar-week "></i>  {{idSpecialty2name(specialty_code) }}  
                                 </text>
+
+                                <div  class="text-warning " v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
+                                            <i class="bi bi-tags-fill display-4"></i>Nuevo
+                                </div>
                                 <!--
                                 <div class="fs-1 bg-light text-primary" style="background-color: #D4D4D4;  border-radius: 15px;">
                                     <p @click="displayShareCalendar(calendar)" class="text-center p-1"  >
@@ -461,6 +465,8 @@ export default {
 
             linkWebCalendar : "No Set" ,
             
+            date : null ,
+            cdate : new Date()
 
         }   
     },
@@ -469,7 +475,9 @@ export default {
     emits: ['updateCalendarList'],
 
 	created () {
-        this.resetForm()       
+        this.resetForm()    
+        this.date = new Date(this.calendar.date)    
+        this.cdate = new Date()
 
         this.host = window.location.host;
         this.linkWebCalendar ="http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" "
