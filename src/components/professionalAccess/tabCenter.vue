@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import ModalCreateCenter from './modalCreateCenter.vue'
-import ModalViewCenterDetails from './modalViewCenterDetails.vue'
+//import ModalViewCenterDetails from './modalViewCenterDetails.vue'
 //import ConsultancyCenter from './consultancy_center.vue'
 //import ConsultancyHome from './consultancy_home.vue'
 //import ConsultancyRemote from './consultancy_remote.vue'
@@ -13,7 +13,7 @@ import TutorialCenter from './tutorial_center.vue'
 
 <template>
 <div class="text-dark bg-white w-100" >
-     <ModalViewCenterDetails  :session_params='session_params' :activatorViewCenterDetails='activatorViewCenterDetails' :centerToShowDetails='centerToShowDetails' v-on:updateCenterList="updateCenterList"  :global_comunas="global_comunas"   > </ModalViewCenterDetails>                    
+  <!--   <ModalViewCenterDetails  :session_params='session_params' :activatorViewCenterDetails='activatorViewCenterDetails' :centerToShowDetails='centerToShowDetails' v-on:updateCenterList="updateCenterList"  :global_comunas="global_comunas"   > </ModalViewCenterDetails>     -->                
      <ModalCreateCenter  :session_params='session_params' :activatorCreateNewCenter='activatorCreateNewCenter' :centerToShowDetails='centerToShowDetails'  v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" >  </ModalCreateCenter>
       
 <div  class="w-100" style="width:25em" >
