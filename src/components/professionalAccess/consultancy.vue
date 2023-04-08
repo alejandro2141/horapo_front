@@ -18,6 +18,12 @@ import inputFormComuna from  './InputFormComuna2.vue'
                                          <i v-else class=" bi bi-geo-alt fs-1 m-1"></i> 
                                          <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-white border-0 text-dark form-control form-control-lg" id="form_phone2" name="form_phone2" v-model="name" style="z-index: 9;  border-radius: 25px; width:80%;  text-align: left; ">
                                          
+                                        
+                                        
+                                         <div  class="text-warning " v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
+                                            <i class="bi bi-tags-fill display-4"></i>Nuevo
+                                         </div>
+
                                         </div>
 
                                         <hr class="m-0">
@@ -38,17 +44,17 @@ import inputFormComuna from  './InputFormComuna2.vue'
 
                 <text class="mt-2">Tipo:</text>
                       <div class="d-flex justify-content-between " >
-                          <button  v-if="app_type_center || showEditOptions"  type="button" class="btn  m-1" :class="[ app_type_center ? 'btn-outline-dark': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
+                          <button  v-if="app_type_center "  type="button" class="btn  m-1" :class="[ app_type_center ? 'btn-outline-dark': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
                               <i class="h3 bi bi-building m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">Consulta</text> 
                           </button>
                           
-                          <button v-if="app_type_home || showEditOptions"  type="button" class="btn  m-1" :class="[ app_type_home  ? 'btn-outline-dark': 'btn-outline-dark' ]"   @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ;" >
+                          <button v-if="app_type_home "  type="button" class="btn  m-1" :class="[ app_type_home  ? 'btn-outline-dark': 'btn-outline-dark' ]"   @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ;" >
                               <i class="h3 bi bi-house-door m-0 p-0"></i><br>
                                <text class="fs-6 m-0 p-0">Domicilio</text> 
                           </button>
                           
-                          <button v-if="app_type_remote || showEditOptions" type="button" class="btn  m-1" :class="[ app_type_remote  ? 'btn-outline-dark': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
+                          <button v-if="app_type_remote " type="button" class="btn  m-1" :class="[ app_type_remote  ? 'btn-outline-dark': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ;" >
                               <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">Tele Aten. </text> 
                           </button>
@@ -135,6 +141,8 @@ export default {
             home_comuna5 : null ,
 
             center_comuna : null,
+            date : null ,
+            cdate : new Date()
         }   
     },
    	
@@ -159,6 +167,8 @@ export default {
         this.home_comuna5 = this.centerDetails.home_comuna5 
 
         this.center_comuna = this.centerDetails.comuna
+
+        this.date = new Date(this.centerDetails.date) 
 
     },
 
