@@ -373,6 +373,7 @@ data: function () {
            professional_id: this.session_params.professional_id ,
            app_type       : this.form_app_type , 
            center_color   : randomColor ,
+           date : new Date(),
            };
 
         console.log("REQUEST :"+JSON.stringify(json));
