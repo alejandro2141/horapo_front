@@ -14,25 +14,51 @@ import axios from 'axios';
         <div class="w-100"  style="background-color: #FFC300 ;">
 
     <!--TUTORIAL CALENDARIO -->
-            <div v-if="session_params.tutorial_start_step1" >
+            <div v-if="session_params.tutorial_start_step1" class="p-3" >
+
+                   
+
+                    <p class="display-1 text-center">
+                        Bienvenido <i class="display-4 bi bi-emoji-wink"></i> 
+                    </p>
+                    
+                    <p class="text-center">
+                        Este Tutorial te enseñará las funcionalidades <br> que tiene HoraPO para ti.
+                    </p>
+                    
+                    <p class="text-center">
+                        <button @click="tut_step=1 ; session_params.tutorial_start_step1=false" type="button" class="btn btn-primary">Comenzar Tutorial</button>
+                    </p>
+
+                    <div class="d-flex justify-content-around  m-4 p-4 text-primary"> 
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
+
+            </div>
+
+            <div v-if="tut_step==1" class="p-3">
+
+                    <p class="text-center">                    
+                        horaPO es un sistema de agendamiento de horas online, que le permite a tus <b>pacientes</b>  agendar horas en tus <b>calendarios</b>  
+                    </p>
+
+                 
+                    <p class="text-center">
+                        <button @click="tut_step=2" type="button" class="btn btn-primary">Siguiente</button>
+                    </p>
+                   
+                    <div class="d-flex justify-content-around  m-4 p-4 text-primary"> 
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    </div>
+            </div>        
+                  
+            <div v-if="tut_step==2">    
 
                     <div class="d-flex justify-content-around">
                         <div></div>
                         <i class="display-1 bi bi-arrow-up-short "></i>
                         <div></div>
                     </div>
-
-                    <p class="display-1 text-center">
-                        Bienvenido<br><i class="display-4 bi bi-emoji-wink"></i> 
-                    </p>
-                    <p class="text-center">                    
-                    Este tutorial te guiara por las distintas funcionalidades que tiene HoraPO. 
-                    </p>
-                    
-                    <p class="text-center">
-                        comenzar tutorial
-                    </p>
-                    
 
                     <p class="text-center">
                         Para iniciar debes crear tu primera consulta en el menu superior.   
@@ -425,6 +451,7 @@ export default {
 data: function () {
 		return {
             step1:true,
+            step1_1 : false,
             step2:false,
             step3:false,
             step4:false,
@@ -440,6 +467,7 @@ data: function () {
             step14:false,
             step15:false,
             final:false,
+            tut_step:0,
 
             showInfoConsulta:false,
 		 }
@@ -479,6 +507,8 @@ data: function () {
             this.session_params.tutorial_start_step9 = false 
             this.session_params.tutorial_start_step10 = false 
             this.session_params.tutorial_start_step11 = false 
+
+            this.tut_step = 0 
 
            const json = { 
               professional_id: this.session_params.professional_id ,
