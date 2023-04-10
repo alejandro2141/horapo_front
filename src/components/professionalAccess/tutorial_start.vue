@@ -25,7 +25,15 @@ import axios from 'axios';
                     <p class="display-1 text-center">
                         Bienvenido<br><i class="display-4 bi bi-emoji-wink"></i> 
                     </p>
+                    <p class="text-center">                    
+                    Este tutorial te guiara por las distintas funcionalidades que tiene HoraPO. 
+                    </p>
                     
+                    <p class="text-center">
+                        comenzar tutorial
+                    </p>
+                    
+
                     <p class="text-center">
                         Para iniciar debes crear tu primera consulta en el menu superior.   
                     </p>
