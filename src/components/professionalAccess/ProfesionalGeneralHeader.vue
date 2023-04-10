@@ -90,7 +90,7 @@ import professional_messages from './professional_messages.vue'
 			<text style="font-size:0.9em">	
 					<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn">
 						<i style="font-size:1.7em" class="bi bi-calendar"></i><br>
-						<text>Calendar</text>
+						<text>Calendarios</text>
 					</button>
 			</text>
 		</div>
@@ -145,7 +145,7 @@ import professional_messages from './professional_messages.vue'
 				<hr class="text-white">
 				<!-- APPOINTMENT LIST  -->
 				<a  @click="showInputMessage = !showInputMessage" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
-					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Sugerencias 
+					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Sugerencias y comentarios
 				</a>
 					<div v-if="showInputMessage"> 
 
