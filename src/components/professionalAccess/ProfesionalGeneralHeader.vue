@@ -18,7 +18,7 @@ import professional_messages from './professional_messages.vue'
 
 		<div :class="{ 'opacity-25' : !session_params.tutorial_start_step4 && session_params.tutorial_start }" >
 			<text>	
-				<div v-if="showTopMenu">
+				<div v-if="showTopMenu" >
 					<i style="font-size:2.0em" class="bi bi-gear " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
 					<br>
 					<text>Menu</text>
