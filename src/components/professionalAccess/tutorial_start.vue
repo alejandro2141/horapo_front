@@ -39,17 +39,19 @@ import axios from 'axios';
             <div v-if="tut_step==1" class="p-3">
 
                     <p class="text-center">                    
-                        horaPO es un sistema de agendamiento de horas online, que le permite a tus <b>pacientes</b>  agendar horas en tus <b>calendarios</b>  
+                        horaPO es un sistema online de agendamiento de horas
+                         que le permite a tus <b>pacientes</b>  agendar horas en tus <b>calendarios</b>.  
                     </p>
-
                  
-                    <p class="text-center">
-                        <button @click="tut_step=2" type="button" class="btn btn-primary">Siguiente</button>
-                    </p>
-                   
+                    <!--  Navegacion -->    
+                    <div class="d-flex justify-content-around mt-3 text-primary"> 
+                        <text @click="session_params.tutorial_start_step1=true;tut_step=0"> Anterior </text>
+                        <text @click="tut_step=2"> Proximo  </text>
+                    </div>
                     <div class="d-flex justify-content-around  m-4 p-4 text-primary"> 
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
+
             </div>        
                   
             <div v-if="tut_step==2">    
@@ -77,33 +79,31 @@ import axios from 'axios';
                     <div class="text-center text-primary m-2 " @click="showInfoConsulta=!showInfoConsulta" >
                         ¿ Que es una Consulta ?
                     </div>
+                    <p><br></p>
 
                     <div v-if="showInfoConsulta" class="m-2">
-                        Una <b> Consulta <i class="bi-geo-alt"></i></b> es un lugar fisico, virtual o una zona geografica donde entregas tus servicios.<br>
-                        En horapo existe actualmente tres tipos de consultas: 
+                        Una <b> Consulta <i class="bi-geo-alt"></i></b> es un lugar fisico o virtual donde entregas tus servicios. Existe tres tipos de consultas: 
                         <ul>
-                            <li> <b>En Consulta <i class="bi bi-hospital"></i>: </b> Corresponde a una consulta fisica, que tiene una direccion donde deben concurrir los pacientes</li>    
-                            <li> <b>A Domicilio <i class="bi bi-house"></i> :</b> Son visitas a domicilio del paciente. En este tipo de citas, usted define en que Zonas geograficas entrega sus servicios</li>
-                            <li> <b>Remota <i class="bi bi-camera-video"></i> : </b>Una cita virtual, via una sesion remota via WhatsApp o algun otro tipo de video llamada que usted disponga.  </li>
+                            <li><i class="bi bi-hospital"></i> <b>En Consulta : </b> Corresponde a una consulta fisica, que tiene una direccion (calle y numero) donde deben concurrir tus pacientes</li>    
+                            <li><i class="bi bi-house"></i> <b>A Domicilio  :</b> Son visitas al domicilio del paciente. En este tipo de citas, usted debe seleccionar las comunas en las que entrega sus servicios</li>
+                            <li><i class="bi bi-camera-video"></i>  <b>Remota : </b>Una cita virtual, via  WhatsApp o algun otro tipo de video llamada que usted disponga.  </li>
                         </ul>
                     
                     </div>
 
+                <!--  Navegacion -->    
+                    <div class="d-flex justify-content-around mt-3 text-primary"> 
+                        <text @click="tut_step=1"> Anterior </text>
+                        <text @click="tut_step=3"> Proximo  </text>
+                    </div>
                     <div class="d-flex justify-content-around  m-4 p-4 text-primary"> 
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
-                        <text></text>
-                        <text @click="session_params.tutorial_start_step2=true;session_params.tutorial_start_step1=false"> Proximo </text>
                     </div>
-                    <!--
-                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
-                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
-                    </div>
-                    -->
                    
             </div>
 
     <!--TUTORIAL CALENDARIO -->
-            <div v-if="session_params.tutorial_start_step2" >
+            <div v-if="tut_step==3" >
                     <div class="d-flex justify-content-end"><i class="display-1 bi bi-arrow-up-short "></i></div>
 
                     <p class="text-center">
@@ -121,8 +121,8 @@ import axios from 'axios';
                     </div>
 
                     <div class="m-2">
-                        Un calendario es un periodo de tiempo en el que entregas tus servicios para una especialidad y <b>Consulta</b> (antes creada). 
-                        En la creacion de un calendario, debe indicar: <br>
+                        Un <b>Calendario</b> es un periodo de tiempo en el que entregas tus servicios para una especialidad y <b>Consulta</b> (antes creada). 
+                        Durante la creación de un calendario, debe indicar: <br>
                         <ul>
                             <li>Fecha de Inicio y Termino de este calendario, </li>
                             <li>dias de la semana en que atiende (recurrencia)</li>
@@ -131,20 +131,22 @@ import axios from 'axios';
                             <li>Un color de referencia. </li>
                             <li>otra informacion. </li> 
                         </ul>
-
                     </div>
+                    
 
-                    <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step1=true;session_params.tutorial_start_step2=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step2=false;session_params.tutorial_start_step3=true"> Proximo  </text>
+                     <!--  Navegacion -->    
+                     <div class="d-flex justify-content-around mt-3 text-primary"> 
+                        <text @click="tut_step=2"> Anterior </text>
+                        <text @click="tut_step=4"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
+                    <div class="d-flex justify-content-around  m-4 p-4 text-primary"> 
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
+
             </div>
     <!--TUTORIAL CITAS RESERVADAS -->          
-            <div v-if="session_params.tutorial_start_step3" >
-                    <div class="d-flex justify-content-between">
+            <div v-if="tut_step==4" >
+                    <div class="d-flex justify-content-between w-100">
                         <text></text>
                         <i class="display-1 bi bi-arrow-up-short "></i>
                         <text></text>
@@ -153,25 +155,27 @@ import axios from 'axios';
                         <text></text>
                     </div>
 
-                    <p class="text-center">
-                        Con este botton puedes ver todas las citas reservadas por tus pacientes.                       
-                    </p>
-
-                    <div class="text-secondary d-flex justify-content-center">
-                        <div class="">
+                    <div class="text-center">
+                        
+                        
+                        <div class="text-secondary d-flex justify-content-center">
+                        <div class="border p-2">
                             <i style="font-size:2.0em" class="bi bi-people"></i>
                             <br>
                             <text>Citas</text>
                         </div>
                     </div>
+                        
+                    Con este botton puedes ver todas las citas que han sido reservadas por tus pacientes.                       
+                    </div>
 
                     <div class="d-flex justify-content-center">
                         <img class="m-2" style="width : 10em ; "  src="/public/Professional_list_app.png" >
                     </div>
-
+                    <!--  Navegacion -->    
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step2=true;session_params.tutorial_start_step3=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step3=false;session_params.tutorial_start_step4=true"> Proximo  </text>
+                        <text @click="tut_step=3"> Anterior </text>
+                        <text @click="tut_step=5"> Proximo  </text>
                     </div>
                     <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
@@ -179,7 +183,7 @@ import axios from 'axios';
 
             </div>
 
-            <div v-if="session_params.tutorial_start_step4" >   
+            <div v-if="tut_step==5" >   
                     <div class="d-flex justify-content-between">
                         <i class="display-1 bi bi-arrow-up-short "></i>
                         <text></text>
@@ -189,54 +193,66 @@ import axios from 'axios';
                         <text></text>
                     </div>
 
-                    <p class="text-center mt-4">
+                    <div class="m-2">
                     
-                        Existen ademas las siguientes opciones secundarias en el <b>menu <i class="bi bi-gear "></i> </b> que usted puede explorar luego. 
+                        Existen ademas las siguientes opciones secundarias en el <b class="">menu  <i class="bi bi-gear "></i> </b>
+                        que usted puede explorar luego. 
                         <br>
-                        <img class="m-2" style="width : 20em ; "  src="/public/professional_menu.png" >
-                       
-                    </p>
+                        <div class="d-flex justify-content-center">
+                            <img class="m-2" style="width : 20em ; "  src="/public/professional_menu.png" >
+                        </div>
+                    </div>
+                  
                    <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                  
                    </div>
-                   <div class="d-flex justify-content-around mt-3 text-primary"> 
-                       <text @click="session_params.tutorial_start_step3=true;session_params.tutorial_start_step4=false"> Anterior </text>
-                       <text @click="session_params.tutorial_start_step4=false;session_params.tutorial_start_step5=true"> Proximo  </text>
-                   </div>
-                   <div class="d-flex justify-content-around m-4 p-4  text-primary">
-                        <text class="text-primary " @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
+                    <!--  Navegacion -->    
+                    <div class="d-flex justify-content-around mt-3 text-primary"> 
+                        <text @click="tut_step=4"> Anterior </text>
+                        <text @click="tut_step=6"> Proximo  </text>
+                    </div>
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
            </div>
 
 
-            <div v-if="session_params.tutorial_start_step5" >
+            <div v-if="tut_step==6" >
                     
-                    <p class="text-center mt-4 pt-4">
-                      Veamos ahora como se ve su pantalla princial.<br>
-                      Cuando No ha seleccionado alguna opcion del menu superior, la pantalla principal lista las Horas disponibles,Reservadas y Bloqueadas.  
-                      <br>
-                      Tambien puede cambiar el dia y Mes que esta consultando para ver citas en los proximos dias.                     
-                    </p>
-                    
-                    <div class="d-flex justify-content-center" style="font-size:0.9em">
-                        <img class="" style="width : 20em ; border-radius: 2%;"  src="/public/professional_main_page.png" >
+                    <div class="text-center  pt-4">
+                        Cuando No ha seleccionado una opcion del menu superior se muestra
+                      <b>Pantalla princial</b> un Calendario que puede utilizar para seleccionar distintas fechas que desea consultar. 
+                      
+                      <p>
+                      <img class="" style="width : 20em ; border-radius: 2%;"  src="/public/Professional_main_page_calendar1.png" >
+                      </p>
+                      
+                     
+                                                              
                     </div>
                     
+                    <div class="m-2" >
+                        <p>
+                            <b>Pantalla princial</b> muestra tambien las Horas disponibles, Reservadas y Bloqueadas.</p> 
+                        <p class="text-center">  
+                           <img class="" style="width : 20em ; border-radius: 2%;"  src="/public/professional_main_page.png" >
+                        </p>
+                    </div>
+                    
+                    <!--  Navegacion -->    
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step4=true;session_params.tutorial_start_step5=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step5=false;session_params.tutorial_start_step6=true"> Proximo  </text>
+                        <text @click="tut_step=5"> Anterior </text>
+                        <text @click="tut_step=7"> Proximo  </text>
                     </div>
-
-                    <div class="d-flex justify-content-around p-4 m-4 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
 
             </div>
 
-            <div v-if="session_params.tutorial_start_step6"  >
-                    
+            <div v-if="tut_step==7"  >
 
-                    <div class=" mt-4 w-100 m-2">
+                    <div class="p-2 w-100 ">
                         <p>Ejemplos de lo que usted verá en la pantalla principal:  </p>
                          Horas Disponibles, ejemplo :  <br>
                         <img class="m-2" style="width : 20em ; "  src="/public/list_app_app_available.png" >
@@ -254,19 +270,22 @@ import axios from 'axios';
                     <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                   
                     </div>
+
+                    <!--  Navegacion -->    
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step5=true;session_params.tutorial_start_step6=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step6=false;session_params.tutorial_start_step7=true"> Proximo  </text>
+                        <text @click="tut_step=6"> Anterior </text>
+                        <text @click="tut_step=8"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around p-4 m-4 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
 
+
             </div>
 
-            <div v-if="session_params.tutorial_start_step7" >
+            <div v-if="tut_step==8" >
                     
-                    <div class="text-center mt-4">
+                    <div class="text-center p-2 pt-4">
                        Seleccionando una <b>Hora Reservada</b>, puede ver los detalles de la reserva. 
                        
                        <img class="m-2" style="width : 20em ; "  src="/public/Reserved_app_details.png" >
@@ -276,19 +295,20 @@ import axios from 'axios';
                     <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                   
                     </div>
+                    
+                    <!--  Navegacion -->    
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step6=true;session_params.tutorial_start_step7=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step7=false;session_params.tutorial_start_step8=true"> Proximo  </text>
+                        <text @click="tut_step=7"> Anterior </text>
+                        <text @click="tut_step=9"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around p-4 m-4 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
 
-            <div v-if="session_params.tutorial_start_step8" >
-                    
-
-                    <p class="text-center mt-4">
+            <div v-if="tut_step==9" >
+                    <br>
+                    <p class="text-center p-2">
                        Una <b>Hora Disponible</b>, puede ser reservada por usted para un paciente.  
                        <img class="m-2" style="width : 20em ; "  src="/public/Professional_reserve_app.png" >
                     </p>
@@ -296,21 +316,23 @@ import axios from 'axios';
                     <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                   
                     </div>
+                    
+                    <!--  Navegacion -->    
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step7=true;session_params.tutorial_start_step8=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step8=false;session_params.tutorial_start_step9=true"> Proximo  </text>
+                        <text @click="tut_step=8"> Anterior </text>
+                        <text @click="tut_step=10"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
 
-            <div v-if="session_params.tutorial_start_step9" >
-                
-                    <div class="text-center mt-4">
-                      <h4>Mensajes directos al paciente <i class="bi bi-person"></i><i class="bi bi-chat-dots"></i></h4> 
+            <div v-if="tut_step==10" >
+                    <br>
+                    <div class="text-center p-2">
+                      <h4>Solicitar Confirmación de asistencia al paciente <i class="bi bi-chat-dots"></i></h4> 
                       <br>
-                      Usted puede solicitar confirmacion de asistencia al paciente.
+                      Usted puede enviar un mensaje automatizado al paciente para que confirme su asistencia.
                        <br> 
                        <img class="m-2" style="width : 20em ; "  src="/public/Solicitar_confirmacion_asistencia.png" >
                        <br>
@@ -319,91 +341,101 @@ import axios from 'axios';
                     <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                   
                     </div>
+                    
+                    <!--  Navegacion -->    
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step8=true;session_params.tutorial_start_step9=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step9=false;session_params.tutorial_start_step10=true"> Proximo  </text>
+                        <text @click="tut_step=9"> Anterior </text>
+                        <text @click="tut_step=11"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
 
 
-            <div v-if="session_params.tutorial_start_step10" >
+            <div v-if="tut_step==11" >
                    
-
-                    <p class="text-center mt-4">
-                       Usted puede cancelar la cita con el paciente <i class="bi bi-person"></i><i class="bi bi-chat-dots"></i>.
+                    <br>
+                    <p class="text-center p-2">
+                       Usted puede cancelar la cita con el paciente <i class="bi bi-x-square"></i>.
                        <br> 
                        <img class="m-2" style="width : 20em ; "  src="/public/Cancelar_cita_paciente.png" >
                                               
                        <br>
                        Con esta accion usted cancelará la cita con el paciente. <br>
-                       El sistema enviara un correo al paciente informandole que usted ha cancelado su cita  </p>
+                       El sistema enviara una notificacion al paciente informandole que usted ha cancelado su cita </p>
                     <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                   
                     </div>
+                   
+                    <!--  Navegacion -->    
                     <div class="d-flex justify-content-around mt-3 text-primary"> 
-                        <text @click="session_params.tutorial_start_step9=true;session_params.tutorial_start_step10=false"> Anterior </text>
-                        <text @click="session_params.tutorial_start_step10=false;session_params.tutorial_start_step11=true"> Proximo  </text>
+                        <text @click="tut_step=10"> Anterior </text>
+                        <text @click="tut_step=12"> Proximo  </text>
                     </div>
-                    <div class="d-flex justify-content-around m-4 p-4 text-primary">
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
             </div>
 
 
-           <div v-if="session_params.tutorial_start_step11" >   
-
-                    
-                    <p class="text-center mt-4">
-                        Gestion de sus Dias<br>
-                        Usted puede bloquear <i class="bi bi-unlock-fill text-primary"></i> un dia en su agenda, con esta accion los pacientes ya no podran reservar horas ese dia para ninguno de sus calendarios
+           <div v-if="tut_step==12" >   
+                    <br>
+                    <div class="text-center p-2 ">
+                        <h2>Bloquear Dia y Horas</h2>
+                        Usted puede bloquear <i class="h3 bi bi-unlock-fill text-primary"></i> un dia en su agenda. Con esta accion los pacientes ya no podran reservar horas ese dia para sus calendarios
                         <br>
                         <img class="m-2" style="width : 20em ; "  src="/public/main_block_aday.png" >
-                   </p>
-
-                   
-
+                    </div>
                     
-                    <p class="text-center mt-4">
-                        Usted puede <b>bloquear una hora </b> en la opcion inferior de: <text class="text-primary">Bloquear Horas Seleccionadas  <i class="bi bi-unlock"></i></text> un dia en su agenda. Con esta accion los pacientes ya no podran reservar esa hora de ese dia. 
+                    <p class="text-center p-2">
+                        Usted puede <b>bloquear una hora </b> en la opcion inferior de: <text class="text-primary">Bloquear Horas Seleccionadas  <i class="bi bi-unlock"></i></text>. Pacientes ya no podran reservar esa Hora de ese Dia. 
                         <br>
                         <img class="m-2" style="width : 20em ; "  src="/public/lock_selected_app.png" >
                     </p>
+                                        
+                    <p class="text-center p-2">
+                       Una hora bloqueada se vera así:  <br>
+                        <img class="m-2" style="width : 20em ; "  src="/public/list_hours_blocked_app.png" >
+                    </p>
+
 
                     
                    <div class="d-flex justify-content-center" style="font-size:0.9em">
                                                  
                    </div>
-                   <div class="d-flex justify-content-around mt-3 text-primary"> 
-                       <text @click="session_params.tutorial_start_step10=true;session_params.tutorial_start_step11=false"> Anterior </text>
-                       <text @click="session_params.tutorial_start_step11=false;final=true"> Proximo  </text>
-                   </div>
-                   <div class="d-flex justify-content-around mt-3 pt-3 text-primary">
+                    <!--  Navegacion -->    
+                    <div class="d-flex justify-content-around mt-3 text-primary"> 
+                        <text @click="tut_step=11"> Anterior </text>
+                        <text @click="tut_step=13"> Proximo  </text>
+                    </div>
+                    <div class="d-flex justify-content-around m-4 p-4  text-primary">
                         <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                     </div>
            </div>
 
 
-
-
-
-
-            <div v-if="final" >
+            <div v-if="tut_step==13" class="text-center p-5" >
                 
-                <p class="text-center mt-4">
-                        Gracias por completar este tutorial!!
+                <div class="text-center ">
+                        Gracias por completar este tutorial!! 
                         <br>
                         <i class="display-2 bi bi-emoji-kiss"></i>
                         <br>
-                        Puedes repetir tutorial en Menu, opción <br>
-                        <text> <i class="bi bi-lightbulb fs-5"></i> &nbsp; Ver Tutorial   </text>
-                </p>
+                        <br>
+                        <p>Puedes repetir este tutorial en <b>Menu <i class="bi bi-gear"></i></b>, <br>
+                           opción  <text> <b> <i class="bi bi-lightbulb fs-5"></i>  Ver Tutorial </b>  </text>
+                        </p>
+                </div>
 
-                <div class="d-flex justify-content-around mt-3 text-primary"> 
-                    <text @click="session_params.tutorial_start_step11=true;final=false"> Anterior </text>
-                    <text class="text-primary" @click='finishTutorial()'>Finalizar Tutorial </text>
+                <!--  Navegacion -->   
+                
+                <div class="d-flex justify-content-around mt-5 text-primary"> 
+                        <text @click="tut_step=12"> Anterior </text>
+                     
+                </div>
+                <div class="d-flex justify-content-around m-4 p-4  text-primary">
+                        <text class="text-primary" @click='finishTutorial()'><i class="bi bi-lightbulb-off"></i> Cerrar Tutorial </text>
                 </div>
                
 
