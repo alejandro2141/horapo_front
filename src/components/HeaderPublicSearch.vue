@@ -10,11 +10,11 @@ import { ref } from 'vue'
     <div  class="d-flex justify-content-center  mt-0 pt-0 text-secondary"> 
 
         
-        <div class="m-0 p-0">
+        <div class="p-3 border" style="border-bottom-right-radius: 40%;" >
             <!-- 
             <i  @click="show_sub_menu = !show_sub_menu" class="fs-2 bi bi-list text-secondary"></i>
             -->
-            <text class="" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; margin-left: 1em;"> menu </text>
+            <text class="p-2" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; "> <i class="bi bi-water"></i> </text>
             
         </div>
  
@@ -32,9 +32,9 @@ import { ref } from 'vue'
             -->
      
 
-        <div class="m-0 p-0">
+        <div class="p-3 border" style="border-bottom-left-radius: 40%;">
             <a HREF="/nested/getAppointments.html" class="text-decoration-none btn-floating  text-secondary" >
-            <text style="font-size: 1em; margin-right: 1em; ">citas</text>
+            <text class="p-2 mt-2" style="font-size: 1em; ">citas</text>
             </a>
         </div>
 
