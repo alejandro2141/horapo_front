@@ -35,23 +35,23 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
                       <div class="form-group">
                          <label for="exampleInputEmail1" style="font-size: 1em;" >Nombre de su Consulta </label>
-                            <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Terapias Sta Clarita">
+                            <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Nombre su Consulta             ">
                       </div>
 
                       <div class="mt-3 " style="font-size: 1em;" >Tipo de consulta</div>
                       
                       <div >
-                          <button type="button" class="btn  m-0" :class="[app_type_center ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[] ;  form_center_name = form_center_name.slice(0, -11)+'En Consulta'    " >
+                          <button type="button" class="btn  m-0" :class="[app_type_center ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[]; " >
                               <i class="h3 bi bi-building m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">En Consulta</text> 
                           </button>
                           
-                          <button type="button" class="btn m-1" :class="[app_type_home ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ; form_comuna_codes=[];  form_center_name = form_center_name.slice(0, -11)+'A Domicilio' " >
+                          <button type="button" class="btn m-1" :class="[app_type_home ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ; form_comuna_codes=[]; " >
                               <i class="h3 bi bi-house-door m-0 p-0"></i><br>
                                <text class="fs-6 m-0 p-0">A Domicilio</text> 
                           </button>
                           
-                          <button type="button" class="btn m-0" :class="[app_type_tele ? 'btn btn-primary' : 'btn btn-dark']" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ; form_comuna_codes=[];  form_center_name = form_center_name.slice(0, -11)+'Tele Atenc.' " >
+                          <button type="button" class="btn m-0" :class="[app_type_tele ? 'btn btn-primary' : 'btn btn-dark']" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ; form_comuna_codes=[]; " >
                               <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
                           </button>
@@ -291,7 +291,7 @@ data: function () {
 
     created () {
       let name=this.session_params.professional_name.split(' ')
-      this.form_center_name = name[0]+" "+name[1].charAt(0)+" "+name[2]+" "+name[3].charAt(0)+"  -----------" 
+      //this.form_center_name = name[0]+" "+name[1].charAt(0)+" "+name[2]+" "+name[3].charAt(0)+"  -----------" 
          },
  
     methods: {
