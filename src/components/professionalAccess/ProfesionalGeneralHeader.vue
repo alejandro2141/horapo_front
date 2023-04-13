@@ -124,7 +124,7 @@ import professional_messages from './professional_messages.vue'
 
 				<!-- PROFESSIONAL DATA -->
 				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
-					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; {{session_params.professional_name.split(" ")[0] }} tu Información 		
+					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; Tu Información 		
 				</a>
 
 				
@@ -144,13 +144,24 @@ import professional_messages from './professional_messages.vue'
 
 				<hr class="text-white">
 				<!-- APPOINTMENT LIST  -->
+				<a  @click="showInputEmailToShare = !showInputEmailToShare ;" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+					&nbsp; <i class="bi bi-share"></i> &nbsp; Enviar Invitacion a Colega 
+				</a>
+				<div v-if="showInputEmailToShare">
+					<br>
+					<input type="text" class="form-control" id="usr" placeholder="Correo@decolega.com" v-model="emailToShare" >
+					<text class="text-white btn btn-primary" @click="sendEmailToColleague()">Enviar</text>
+				</div>
+
+				<hr class="text-white">
+				<!-- APPOINTMENT LIST  -->
 				<a  @click="showInputMessage = !showInputMessage" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
 					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Sugerencias y comentarios
 				</a>
 					<div v-if="showInputMessage"> 
 
 						<professional_messages :session_params="session_params"></professional_messages>
-	
+						
 					</div>
 					
 
@@ -250,6 +261,9 @@ export default {
 			text_message: "", 
 			animo: 0 , 
 
+			showInputEmailToShare : false,
+			emailToShare : null,
+
         }   
     },
     props : ['session_params', 'active_tutorial' ] ,
@@ -263,6 +277,20 @@ export default {
     },
 
     methods: {
+		
+		async sendEmailToColleague()
+		{
+		console.log("SendEmailToColleague")
+		const json = { 
+                professional_id: this.session_params.professional_id ,
+			    email:this.emailToShare
+					};
+
+                
+                let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_invitation_colleague",json);
+           	
+		},
+
 		showAppointmentsTakenList()
 		{
 			console.log("showAppointmentsTakenList")
