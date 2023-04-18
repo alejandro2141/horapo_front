@@ -48,7 +48,7 @@ import { ref } from 'vue'
        
                 <div class="p-4 ">
                         <a href="/nested/aboutUs.html" class="m-1 text-decoration-none btn-floating "  role="button">
-                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿horapo? </text>
+                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿Que es Horapo? </text>
                         </a>
                 </div>
                     <!--
