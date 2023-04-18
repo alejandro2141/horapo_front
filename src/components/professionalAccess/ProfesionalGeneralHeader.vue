@@ -143,15 +143,17 @@ import professional_messages from './professional_messages.vue'
 				</a>
 
 				<hr class="text-white">
-				<!-- APPOINTMENT LIST  -->
-				<a  @click="showInputEmailToShare = !showInputEmailToShare ;" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+				<!-- SENT INVITATION TO COLLEAGUE  -->
+				<a  @click="showInputEmailToShare = !showInputEmailToShare ; showMsgInvitationSent=false;emailToShare=null " class="fs-5  text-decoration-none  btn-outline-light text-white"> 
 					&nbsp; <i class="bi bi-share"></i> &nbsp; Enviar Invitacion a Colega 
 				</a>
 				<div v-if="showInputEmailToShare">
 					<br>
 					<input type="text" class="form-control" id="usr" placeholder="Correo@decolega.com" v-model="emailToShare" >
-					<text class="text-white btn btn-primary" @click="sendEmailToColleague()">Enviar</text>
+					<text class="text-white btn btn-primary" @click="sendEmailToColleague();showInputEmailToShare=false; showMsgInvitationSent=true ">Enviar</text>
 				</div>
+				<text v-if="showMsgInvitationSent" class="text-white" >Invitacion enviada!</text>
+
 
 				<hr class="text-white">
 				<!-- APPOINTMENT LIST  -->
@@ -263,6 +265,8 @@ export default {
 
 			showInputEmailToShare : false,
 			emailToShare : null,
+
+			showMsgInvitationSent : false ,
 
         }   
     },
