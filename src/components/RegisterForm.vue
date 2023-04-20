@@ -6,10 +6,33 @@ import axios from 'axios';
 
 <template>
 <div class="bg-light">
+
+
+    <div class="d-flex justify-content-end"><a href="/index.html" class=""><i class="display-3 bi bi-x-lg"></i></a></div>
+
+
         <div class="m-2 p-2 text-center">
-               Para que sus horas de atención esten disponibles en la busqueda de pacientes, debe registarse como profesional completando el siguiente formulario.
-            <div class="text-center mt-2 pt-5 "> 
-                 <a HREF="/index.html" type="button" class="btn btn-outline-secondary m-2">Regresar</a>
+
+Hola! horapo es una plataforma para la busqueda y reserva de horas professionales. 
+Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas de acuerdo a la disponibilidad, ubicacion geografica, fecha, etc <div >
+ <br>    
+        <div style="text-align: center;" >Kinesiologia</div>
+            <div style="text-align: center;" >Psicologia</div>
+            <div style="text-align: center;" >Fonoaudiologia    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <text style="margin-top:13em">Nutrición</text></div>
+            
+            <div style="text-align: center;" >Terapia Ocupacional</div>
+            <div style="text-align: center;" >Psicopedagogia</div>
+            <div style="text-align: center;" >Enfermeria</div>
+            <div style="text-align: center;" >Masoterapia</div>
+        </div>
+
+    <p>
+        </p>
+
+
+
+             <div class="text-center mt-2 pt-5 "> 
+            <!--  <a HREF="/index.html" type="button" class="btn btn-outline-secondary m-2">Regresar</a> -->
                  <button type="button" @click="showForm  = !showForm " class="btn btn-secondary ">Si, deseo Registarme</button>
             </div>
         </div>
