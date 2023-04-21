@@ -9,6 +9,7 @@ import RegisterForm from '../src/components/RegisterForm.vue'
 <template>
 <div>
     <GeneralHeader></GeneralHeader>
+
     <RegisterForm></RegisterForm>
 
 </div>
