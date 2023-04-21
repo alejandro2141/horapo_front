@@ -8,7 +8,9 @@ import axios from 'axios';
 <div class="bg-light">
 
 
-    <div class="d-flex justify-content-end"><a href="/index.html" class=""><i class="display-3 bi bi-x-lg"></i></a></div>
+    <div style="padding:1em;  display: flex;  align-items: center;  justify-content: center;  " > 
+    <div style="padding:1em;text-align: center; max-width:500px ;border-radius: 2em;" >      
+
 
 
         <div class="m-2 p-2 text-center">
@@ -43,32 +45,32 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
             <form autocomplete="off">
                 <div class="form-row">
 
-                <div class="form-group col-md-6">
+                <div class="form-group">
                         <label for="inputNames">Nombres</label>
                         <input type="text" autocomplete="off" class="form-control" id="inputNames" placeholder="Ej: Carlos Alberto" v-model="name">
                 </div>
                 
-                <div class="form-group col-md-6">
+                <div class="form-group">
                     <label for="inputLastName">Apellido Paterno</label>
                     <input type="text" autocomplete="off"  class="form-control" id="inputLastName" placeholder="Ej: Morales" v-model="last_name1">
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group ">
                     <label for="inputSecondLastName">Apellido Materno</label>
                     <input type="text"  autocomplete="off" class="form-control" id="inputSecondLastName" placeholder="Ej:Gonzales" v-model="last_name2">
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group ">
                     <label for="inputEmail4">Email</label>
                     <input type="email"  autocomplete="off" class="form-control" id="inputEmail4" placeholder="Ej: micorreopersonal@gmail.com " v-model="email">
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group ">
                     <label for="inputDocId">N° Cedula RUT </label>
                     <input type="text"  autocomplete="off" class="form-control" id="inputDocId" placeholder="Ej 13909365-8" v-model="doc_id">
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group ">
                     <label for="inputPassword4">Ingrese una contraseña</label>
                     <input type="password"  autocomplete="off" class="form-control" id="inputPassword4" placeholder="***" v-model="passwd">
                 </div>
@@ -100,6 +102,11 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
 
         </template>
 </div>
+
+</div>
+</div>
+
+
 </template>
 
 <style scoped>
