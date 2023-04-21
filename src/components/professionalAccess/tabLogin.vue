@@ -20,6 +20,12 @@ defineProps({
 	
      <div class=" m-3 bg-white " style=" border-radius: 15px;">
 
+
+
+
+    <div class="d-flex justify-content-end"><a href="/index.html" class=""><i class="display-3 bi bi-x-lg"></i></a></div>
+
+
             <div class="d-flex justify-content-center mt-5">
                     <div class=""  > 
                         <!--
