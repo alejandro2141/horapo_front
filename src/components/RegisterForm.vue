@@ -13,11 +13,17 @@ import axios from 'axios';
 
 
 
-        <div class="m-2 p-2 text-center">
+        <div class="m-1 p-1 text-center">
+            <img class="m-2" style="width : 20em ; "  src="/public/horapo_graphic1.png" >
+            
 
 Hola! horapo es una plataforma para la busqueda y reserva de horas professionales. 
-Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas de acuerdo a la disponibilidad, ubicacion geografica, fecha, etc <div >
- <br>    
+Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas de acuerdo a la disponibilidad, ubicacion geografica, fecha, etc 
+<br>
+Actualmente concentramos horas profesionales de las siguientes especialidades de salud:  
+<div >
+ <br>   
+ 
         <div style="text-align: center;" >Kinesiologia</div>
             <div style="text-align: center;" >Psicologia</div>
             <div style="text-align: center;" >Fonoaudiologia    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <text style="margin-top:13em">Nutrición</text></div>
@@ -29,6 +35,8 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
         </div>
 
     <p>
+        <button type="button" @click="showForm  = !showForm " class="btn btn-secondary ">más informacion</button>
+           
         </p>
 
 
