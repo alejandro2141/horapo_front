@@ -15,16 +15,21 @@ import axios from 'axios';
 
         <div class="m-1 p-1 text-center">
             <img class="m-2" style="width : 20em ; "  src="/public/horapo_graphic1.png" >
+           
+          
             
 
 Hola! horapo es una plataforma para la busqueda y reserva de horas professionales. 
 Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas de acuerdo a la disponibilidad, ubicacion geografica, fecha, etc 
 <br>
-Actualmente concentramos horas profesionales de las siguientes especialidades de salud:  
-<div >
- <br>   
+
+    <div >
+        Actualmente concentramos horas profesionales de las siguientes especialidades de salud:  
+        <br>  
+        <img class="m-2" style="width : 18em ; "  src="/public/specialties.png" > 
  
-        <div style="text-align: center;" >Kinesiologia</div>
+            <!--
+            <div style="text-align: center;" >Kinesiologia</div>
             <div style="text-align: center;" >Psicologia</div>
             <div style="text-align: center;" >Fonoaudiologia    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <text style="margin-top:13em">Nutrición</text></div>
             
@@ -32,12 +37,46 @@ Actualmente concentramos horas profesionales de las siguientes especialidades de
             <div style="text-align: center;" >Psicopedagogia</div>
             <div style="text-align: center;" >Enfermeria</div>
             <div style="text-align: center;" >Masoterapia</div>
-        </div>
+            -->
+    </div>
 
-    <p>
-        <button type="button" @click="showForm  = !showForm " class="btn btn-secondary ">más informacion</button>
+    <div >
+        Pacientes pueden buscar y reservar horas de salud de forma super simple.   
+        <br>
+        <img class="m-2" style="width : 8em ; "  src="/public/public_main_search.png" > 
+        <img class="m-2" style="width : 8em ; "  src="/public/public_search_main_result.png" > 
+ 
+        
+    </div>
+
+
+    <div >
+        Y Profesionales de la salud pueden gestionar sus horas y publicar sus calendarios.   
+        <br>
+        <img class="m-2" style="width : 8em ; "  src="/public/professional_main_view.png" > 
+        <img class="m-2" style="width : 8em ; "  src="/public/professional_main_page_calendar.png" > 
+    </div>
+
+    <div>
+       
+        <button type="button" @click="showForm  = !showForm " class="btn btn-secondary ">
+            Soy Profesional de Salud, Quiero conocer más
+        
+        </button>
            
-        </p>
+    </div>
+
+    <div >
+        Un Profesional de salud registrado en Hora po puede crear Consultas  y Calenarios, que genera horas de atencion, siendo estas publicas para la busqueda de pacientes.    
+        Y pacientes agendan citas en horas disponibles. 
+        Un profesional puede gestionar sus horas reservadas y solicitar al paciente confirmacion de su asistencia con un solo click 
+        <img class="m-2" style="width : 5em ; "  src="/public/professional_appointment_details.png" > 
+        <img class="m-2" style="width : 10em ; "  src="/public/professional_calendar.png" > 
+
+        
+        <br>
+        
+    </div>
 
 
 
