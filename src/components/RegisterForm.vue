@@ -57,19 +57,21 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
         <img class="m-2" style="width : 8em ; "  src="/public/professional_main_page_calendar.png" > 
     </div>
 
-    <div>
+    <div class="m-3 mb-5 pb-1">
        
-        <button type="button" @click="showForm  = !showForm " class="btn btn-secondary ">
-            Soy Profesional de Salud, Quiero conocer más
-        
+        <button v-if="!showKnowMore1" type="button" @click="showKnowMore1=true " class="btn btn-secondary ">
+            Quiero conocer más
         </button>
            
     </div>
 
-    <div >
-        Un Profesional de salud registrado en Hora po puede crear Consultas  y Calenarios, que genera horas de atencion, siendo estas publicas para la busqueda de pacientes.    
-        Y pacientes agendan citas en horas disponibles. 
-        Un profesional puede gestionar sus horas reservadas y solicitar al paciente confirmacion de su asistencia con un solo click 
+    <div v-if="showKnowMore1">
+        En horapo un Profesional de salud registrado puede:<br>
+        Crear Consultas y Calenarios, que generan horas de atención. <br>    
+        En horapo los pacientes pueden buscar horas disponibles y agendar citas.<br> 
+        Un profesional puede realizar gestion sobre su horas reservadas <br>
+        Un profesional puede tambien solicitar al paciente confirmacion de su asistencia con <b>un solo click</b> 
+        <br>
         <img class="m-2" style="width : 5em ; "  src="/public/professional_appointment_details.png" > 
         <img class="m-2" style="width : 10em ; "  src="/public/professional_calendar.png" > 
 
@@ -82,7 +84,7 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
 
              <div class="text-center mt-2 pt-5 "> 
             <!--  <a HREF="/index.html" type="button" class="btn btn-outline-secondary m-2">Regresar</a> -->
-                 <button type="button" @click="showForm  = !showForm " class="btn btn-secondary ">Si, deseo Registarme</button>
+                 <button  v-if="!showForm && showKnowMore1" type="button" @click="showForm  = !showForm " class="btn btn-secondary ">Si, deseo Registarme</button>
             </div>
         </div>
 
@@ -177,6 +179,7 @@ export default {
        personal_address  : null ,
        personal_phone  : null ,
        specialty  : null ,
+       showKnowMore1 : false ,
     }
   },
 
