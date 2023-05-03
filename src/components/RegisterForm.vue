@@ -8,23 +8,41 @@ import axios from 'axios';
 <div class="bg-light">
 
 
-    <div style="padding:1em;  display: flex;  align-items: center;  justify-content: center;  " > 
-    <div style="padding:1em;text-align: center; max-width:500px ;border-radius: 2em;" >      
+    <div style="padding:0em;  display: flex;  align-items: center;  justify-content: center;  " > 
+    <div style="padding:0em;text-align: center; max-width:500px ;border-radius: 2em;" >      
 
 
 
-        <div class="m-1 p-1 text-center">
-            <img class="m-2" style="width : 20em ; "  src="/public/horapo_graphic1.png" >
-           
-          
+        <div class="m text-center">
+
+            <div class="d-flex m-2 justify-content-end"> 
+                <a HREF="/index.html" type="button" class=""><i class="display-5 bi bi-x-lg text-primary"></i></a>
+            </div>
+
             
+            <div class="d-flex justify-content-around"> 
+                <text></text>
+                <text class="display-5 p-2 text-decoration-none" style="color: rgb(46, 86, 104);" >¿Que es horapo? </text>
+                <text></text>
+              </div>
 
-Hola! horapo es una plataforma para la busqueda y reserva de horas professionales. 
-Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas de acuerdo a la disponibilidad, ubicacion geografica, fecha, etc 
-<br>
+          
 
-    <div >
-        Actualmente concentramos horas profesionales de las siguientes especialidades de salud:  
+
+          
+            <img class="m-2" style="width : 20em ; "  src="/public/horapo_graphic1.png" >
+           <br>
+          
+    <div class="m-2">  
+
+    <b>horapo</b> es una plataforma para la busqueda y reserva de horas professionales de salud. 
+    Aquí sus horas estarán disponibles para que pacientes busquen y agenden citas de acuerdo a la disponibilidad, ubicacion geografica, fecha, etc 
+    <br>
+
+    </div>
+
+    <div class="m-2">
+        Actualmente reunimos las horas profesionales de las siguientes especialidades de salud:  
         <br>  
         <img class="m-2" style="width : 18em ; "  src="/public/specialties.png" > 
  
@@ -40,7 +58,7 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
             -->
     </div>
 
-    <div >
+    <div  class="m-2">
         Pacientes pueden buscar y reservar horas de salud de forma super simple.   
         <br>
         <img class="m-2" style="width : 8em ; "  src="/public/public_main_search.png" > 
@@ -50,8 +68,8 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
     </div>
 
 
-    <div >
-        Y Profesionales de la salud pueden gestionar sus horas y publicar sus calendarios.   
+    <div class="m-2">
+        Y Profesionales de la salud pueden gestionar sus horas y publicar sus calendarios de forma muy simple.   
         <br>
         <img class="m-2" style="width : 8em ; "  src="/public/professional_main_view.png" > 
         <img class="m-2" style="width : 8em ; "  src="/public/professional_main_page_calendar.png" > 
@@ -65,11 +83,11 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
            
     </div>
 
-    <div v-if="showKnowMore1">
-        En horapo un Profesional de salud registrado puede:<br>
-        Crear Consultas y Calenarios, que generan horas de atención. <br>    
+    <div v-if="showKnowMore1" class="m-2" >
+        En <b>horapo</b> un Profesional de salud registrado puede 
+        crear <b>Consultas</b> y <b>Calenarios</b>, que generan horas de atención. <br>    
         En horapo los pacientes pueden buscar horas disponibles y agendar citas.<br> 
-        Un profesional puede realizar gestion sobre su horas reservadas <br>
+        Un profesional puede realizar gestion sobre su citas <br>
         Un profesional puede tambien solicitar al paciente confirmacion de su asistencia con <b>un solo click</b> 
         <br>
         <img class="m-2" style="width : 5em ; "  src="/public/professional_appointment_details.png" > 
@@ -153,6 +171,13 @@ Aqui sus horas estarán disponibles para que pacientes busquen y agenden citas d
 </div>
 
 </div>
+
+<p>
+    <br>
+    <br>
+    <br>
+</p>
+
 </div>
 
 
@@ -213,13 +238,14 @@ export default {
                 let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_register_professional",json );
                 console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
                 //app = response_json.data[0];
+                alert("Gracias. En los proximos dias nos pondremos en contacto a al correo registrado.");
                 console.log ("Rows : "+JSON.stringify(response_json.data.rows[0].name )  );
                 //if (response_json.data.rows[0] )
                // if (response_json.data.rows[0].name != null )
                // {
                     //display modal 
                     //this.display = true ;
-                window.alert("Gracias por su registro, pronto nos contactaremos a su correo");
+               // window.alert("Gracias por su registro, pronto nos contactaremos a su correo");
                 window.location.replace("/index.html");
                 // this.$emit('showConfirmationModal', response_json.data );
                 //}
