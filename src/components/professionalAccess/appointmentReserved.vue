@@ -20,16 +20,15 @@ import axios from 'axios';
 
                             <text class="fs-3 fw-light " > {{format_start_time(appointment.start_time) }} </text>
                             <br>
-                            
+                            <text> 
+                               <!-- <i style="color:#5BA199" class="display-3 bi bi-person-fill"></i>    -->
+                                <i class="display-5 bi bi-person-fill" :class="{ 'text-success': appointment.patient_confirmation   }" ></i>
+                            </text>
+                            <br>
                             <text class="fs-3 fw-light " >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
                                 <i v-if="center_data.home_visit"   class=" bi bi-house-door" > </i>                                  
                                 <i v-if="center_data.remote_care"  class=" bi bi-camera-video"></i>                   
-                            </text>
-                            
-                            <text> 
-                               <!-- <i style="color:#5BA199" class="display-3 bi bi-person-fill"></i>    -->
-                                <i class="display-5 bi bi-person-fill"></i>
                             </text>
 
                         </div>
