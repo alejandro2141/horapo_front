@@ -20,7 +20,7 @@ import GeneralHeader from '../src/components/GeneralHeader.vue'
         
     </div>
     
-    <div class="" >horapo es una plataforma para la busqueda y reserva de horas professionales.
+    <div class="" >horapo es una plataforma para la busqueda y reserva de horas professionales de salud.
         Aquí puede buscar y agendar una hora con los mejores profesionales en las siguientes especialidades: <br>
         </div>
         
