@@ -29,7 +29,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
       
           <!--SPECIALTY -->
             <div class="d-flex flex-row justify-content-between ">
-                <div  style="color:#1f9d94 ; font-size:1.5em" >{{ id2name(hourTaken.specialty) }}  </div>
+                <div  style="color:#1f9d94 ; font-size:1.5em" >{{ id2name(hourTaken.specialty) }} </div>
                 <div ><i class="text-primary bi bi-x-lg ml-0" style="font-size:2em"  v-on:click="showModalAppointmentTaken = false" aria-label="Close"></i> </div>
             </div>
           <!-- SHOW DATE -->
@@ -43,11 +43,11 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
             </div>
           </div>
 
+          <div  v-if="hourTaken.patient_confirmation" class ="m-2 p-1 small   text-dark " >
+                    <i class="bi bi-person-fill display-5 text-success"></i> Paciente confirmó en <br> {{  transform_date(hourTaken.patient_confirmation_date) }} 
+          </div>
        
- 			  <p class="text-secondary">	
-        Reserva #{{hourTaken.app_id}} 
-        </p>
- 
+        
 
           <div class=""    >
            <!-- TYPE CENTER --> 
@@ -107,9 +107,9 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                 <text class="">
                  <b class="" > Paciente: </b> <br>
                               {{ hourTaken.patient_name}} ({{ hourTaken.patient_age}} Años) <br>
-                           id:{{ hourTaken.patient_doc_id}}<br>
+                           {{ hourTaken.patient_doc_id}}<br>
 
-                            <p class="text-primary mt-2" v-if="hourTaken.patient_address!=null ||hourTaken.patient_address!='null' " >
+                            <p class="text-primary mt-2" v-if="hourTaken.app_type_home" >
                                <i class="bi bi-geo-alt"></i> Direccion:{{ hourTaken.patient_address}} 
                             </p>
                 </text>
@@ -142,14 +142,36 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 
       
       
-      <p class="mt-2">
-          <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
+      <div class="mt-2">
+        
+        <div class=" text-primary ">
+            <div class="small m-2 " v-if="hourTaken.patient_confirmation">
+                <div>
+                  
+                <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Nueva Solicitud Confirmación</button>
+                                   
+                </div> 
+                
+            </div>
+            <div v-else>
+                <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
+                <!-- 
+                <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
+            -->
+            </div>
+
+        </div>
+<!--
+        <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
           <button  v-if='hourTaken.confirmation_status == 1' type="button"   data-bs-dismiss="modal" class="btn btn-success m-2"><i class="bi bi-person-check"></i> Paciente Confirmado</button>
-                     
+      -->       
           <button type="button" @click="cancelAppointment(hourTaken);"  class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Cancelar Cita con Paciente</button>
-      </p>
+      </div>
       <text style="color: #ffffff;" >#{{hourTaken.calendar_id}}</text> 
       
+      <p class="small text-secondary d-flex justify-content-center">	
+          Reserva #{{hourTaken.app_id}} 
+      </p>
        
 
 
@@ -276,6 +298,7 @@ export default {
             form_center_code  : null ,
             form_app_duration : null ,
             showInputTextMail : false ,
+            show_confirmation_data : false ,
           }   
     },
    	
