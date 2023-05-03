@@ -116,6 +116,7 @@ export default {
                     req_id  : req_id,
                     req_center_id :  req_center_id,
                     req_patient_doc_id : req_patient_doc_id,
+                    date_time: Date.now(),
                         };
 
                 console.log("cancelApp REQUEST:"+JSON.stringify(json_request))
@@ -126,11 +127,13 @@ export default {
         
         async confirmApp( req_date, req_id, req_center_id, req_patient_doc_id)
             {
+                let aux_date =  new Date()
                 const json_request = { 
                     req_date : req_date,
                     req_id  : req_id,
                     req_center_id :  req_center_id,
                     req_patient_doc_id : req_patient_doc_id,
+                    date_time: aux_date.toISOString() ,
                         };
 
                 console.log("confirmAPP REQUEST:"+JSON.stringify(json_request))
