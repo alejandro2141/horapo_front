@@ -21,16 +21,31 @@ const count = ref(0)
                     </div>
 
                     <div>
-                        <input @keyup="captureSeachLetter" style=" z-index: 9;  border-radius: 25px; text-align: center;" type="text" class="form-control form-control-lg border  text-secondary"   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-secondary' : !ready_input ,  'text-success' : ready_input  }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
+                        <input @keyup="captureSeachLetter" style=" z-index: 9;  border-radius: 25px; text-align: center;" type="text" class="form-control form-control-lg border  text-secondary"    :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-secondary' : !ready_input ,  'text-success' : ready_input  , 'text-danger': location_filtered!=null && location_filtered.length == 0 }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
                     </div>
+
                     <div  style="position: absolute; z-index: 9; top : 0.5em ; right : 0.3em  " class="mb-2  rounded" > 
-                        <i class="bi bi-x-lg m-0 p-0 text-muted border-start display-6" @click="form_comuna = null; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
+                        <i class="bi bi-x-lg m-0 p-0 text-muted border-start display-6" @click="form_comuna = ''; location_filtered=[]; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
                     </div>
-                   
+                 
 
                 </div>    
 
                 <div>
+                    <text v-if="location_filtered != null && location_filtered.length > 0  " class="d-flex justify-content-center">
+                        Debe seleccionar alguna opcion de la lista <i class="bi bi-arrow-down"></i>
+                    </text>
+                    <text v-if="location_filtered != null &&  location_filtered.length == 0" class="d-flex justify-content-center text-danger">
+                        Comuna no existe
+                    </text>
+
+                    
+                <!--
+                    <text v-if="location_filtered != null && location_filtered.length == 0 ">
+                        Comuna no existe
+                    </text>
+                -->
+
                      <div class="h3 m-3 text-primary " v-for="location in location_filtered" :key="location.id" > 
                         <div @click="form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); clearfiltered = true">
                              <i class="display-6  text-muted " ></i>  <small> <i class="display-6  bi bi-geo-alt  text-muted m-0"  ></i> </small> {{ location.name }} 
@@ -73,16 +88,16 @@ const count = ref(0)
 export default {
    data : function() {
         return {
-            PlaceHolderInput : "Comuna" ,
+            PlaceHolderInput : "Todas las Comunas" ,
 
             form_comuna : null,
             comuna_list : [] ,
             ready_input : false ,
             display_error : false  ,
-            location_filtered : []  , 
+            location_filtered : null  , 
             clearfiltered : false ,
 
-            origComunaName :"Comuna" ,
+            origComunaName :"Todas las Comunas" ,
         }
     },  
  
@@ -116,10 +131,25 @@ mounted() {
                         if (tempfiltered.length >= 1 )
                             {
                             this.location_filtered = tempfiltered;
+
+                                if (this.location_filtered.length == 1 && this.location_filtered[0].name.toUpperCase() === this.form_comuna.toUpperCase())
+                                {
+                                    // && this.location_filtered[0]== form_comuna 
+                                //    form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); clearfiltered = true
+                                console.log("predictor : MATCH EXACTO!!")
+                                //console.log("predictor : queda solo uno!!")
+                                //console.log("predictor : comparando locationFiltered:"+this.location_filtered[0].name+ " vmod form_comuna:"+this.form_comuna  )
+                                this.form_comuna = this.location_filtered[0].name 
+                                //this.$emit('selectedComunaCode', this.location_filtered[0].id )
+                                //this.clearfiltered = true 
+                                //this.location_filtered = null
+                                
+                                }
+
                             }
                         else
                         {
-                            //this.location_filtered = null ;  
+                            this.location_filtered = [];  
                         }         
                     }
                     else
@@ -128,6 +158,8 @@ mounted() {
                     this.location_filtered = null
                     this.clearfiltered = false ; 
                     }  
+                    console.log("this.location_filtered :"+JSON.stringify(this.location_filtered));
+
               },
         },
 
