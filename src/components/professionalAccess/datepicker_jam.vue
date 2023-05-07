@@ -6,11 +6,70 @@ import axios from 'axios';
 
 <template>
 <div>
+<hr>
+
+
+    <div class="d-flex justify-content-center   m-0">
+
+<div class="display-5 w-100  datepickerminimal" style="" >
+
+
+
+    <!-- Day   -->
+        <div class="d-flex justify-content-between mt-0" style="position: relative; ">
+            <div @click="prevDay(calendar_date)">
+                <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
+            </div>
+            
+            <div @click="show_days = !show_days" class="text-primary align-items-end mt-2 " > 
+                {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  
+            </div>
+
+            <div @click="nextDay(calendar_date)"> 
+                <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i>
+            </div>
+        </div>
+    <!-- En  Day   -->
+        
+    <!-- Month  -->
+        <div class="d-flex justify-content-between " style="position: relative; " >
+            <div @click="prevMonth(calendar_date)"> 
+                <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
+            </div>
+            
+            <div @click="show_days = !show_days" class="d-flex  text-primary mb-1" > 
+                <text style="position: relative; " >{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
+            </div>
+            
+            <div @click="nextMonth(calendar_date)">
+                <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i> 
+            </div>
+        </div>
+    <!-- End Month  -->
+
+
+       <!--
+        <div class="d-flex justify-content-between" style="" >
+            <div>
+            </div>
+
+            <div>
+                <i   @click="show_days = !show_days" style="font-size:8em" class="bi bi-calendar4-week text-primary opacity-25" ></i>
+            </div>
+
+            <div>
+            </div>
+        </div>
+        -->
+   
+</div>
+
+</div>
    
     <div class=" m-3   bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-secondary':false  }" style="border-radius: 15px; background-color:#eee " >
   
 <!-- show_days -->
-        <div v-if="show_days" class="" style="border-style: solid ; border-color: #E1F0FF; border-radius: 15px; border-width: 0.4em;">
+        <div v-if="true" class="" style="background-color: #fff ;border-style: solid ; border-color: #FFF; border-radius: 15px; border-width: 0.4em;">
         
             <table  class="table  table-sm" >
                 <tbody class="">
@@ -162,6 +221,7 @@ import axios from 'axios';
                 </text>
 
             </div>
+            <hr>
 
         </div>
                   
@@ -169,62 +229,6 @@ import axios from 'axios';
     </div>   
   
 
-       <div class="d-flex justify-content-center   m-0">
-
-            <div class="display-5 w-100  datepickerminimal" style="" >
-
-
-
-                <!-- Day   -->
-                    <div class="d-flex justify-content-between mt-0" style="position: relative; ">
-                        <div @click="prevDay(calendar_date)">
-                            <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
-                        </div>
-                        
-                        <div @click="show_days = !show_days" class="text-primary align-items-end mt-2 " > 
-                            {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  
-                        </div>
-
-                        <div @click="nextDay(calendar_date)"> 
-                            <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i>
-                        </div>
-                    </div>
-                <!-- En  Day   -->
-                    
-                <!-- Month  -->
-                    <div class="d-flex justify-content-between " style="position: relative; " >
-                        <div @click="prevMonth(calendar_date)"> 
-                            <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
-                        </div>
-                        
-                        <div @click="show_days = !show_days" class="d-flex  text-primary mb-1" > 
-                            <text style="position: relative; " >{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
-                        </div>
-                        
-                        <div @click="nextMonth(calendar_date)">
-                            <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i> 
-                        </div>
-                    </div>
-                <!-- End Month  -->
-
-
-                   <!--
-                    <div class="d-flex justify-content-between" style="" >
-                        <div>
-                        </div>
-
-                        <div>
-                            <i   @click="show_days = !show_days" style="font-size:8em" class="bi bi-calendar4-week text-primary opacity-25" ></i>
-                        </div>
-
-                        <div>
-                        </div>
-                    </div>
-                    -->
-               
-            </div>
-
-        </div>
   
 
 </div>
