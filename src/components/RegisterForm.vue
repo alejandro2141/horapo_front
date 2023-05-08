@@ -35,7 +35,7 @@ import axios from 'axios';
           
     <div class="m-2">  
 
-    <b>horapo</b> es una plataforma para la busqueda y reserva de horas professionales de salud. 
+    <b>horapo</b> es una plataforma de búsqueda y reserva de horas professionales de salud. 
     Aquí sus horas estarán disponibles para que pacientes busquen y agenden citas de acuerdo a la disponibilidad, ubicacion geografica, fecha, etc 
     <br>
 
@@ -59,12 +59,11 @@ import axios from 'axios';
     </div>
 
     <div  class="m-2">
-        Pacientes pueden buscar y reservar horas de salud de forma super simple.   
+        Pacientes pueden buscar y reservar horas de salud de forma simple y amigable.   
         <br>
         <img class="m-2" style="width : 8em ; "  src="/public/public_main_search.png" > 
         <img class="m-2" style="width : 8em ; "  src="/public/public_search_main_result.png" > 
  
-        
     </div>
 
 
@@ -111,7 +110,7 @@ import axios from 'axios';
             <hr>
             <form autocomplete="off">
                 <div class="form-row">
-
+<b>Ingrese su información de registro</b>
                 <div class="form-group">
                         <label for="inputNames">Nombres</label>
                         <input type="text" autocomplete="off" class="form-control" id="inputNames" placeholder="Ej: Carlos Alberto" v-model="name">
