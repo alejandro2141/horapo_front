@@ -6,7 +6,7 @@ import axios from 'axios';
 
 <template>
 <div>
-<hr>
+<hr class="m-0 p-0">
 
 
     <div class="d-flex justify-content-center   m-0">
@@ -66,7 +66,7 @@ import axios from 'axios';
 
 </div>
    
-    <div class=" m-3   bg-white bg-opacity-75 text-secondary" :class="{'border border-3  border-secondary':false  }" style="border-radius: 15px; background-color:#eee " >
+    <div class=" m-1   bg-white bg-opacity-75 text-secondary" :class="{'border border-0  border-secondary':false  }" style="border-radius: 15px; background-color:#eee " >
   
 <!-- show_days -->
         <div v-if="true" class="" style="background-color: #fff ;border-style: solid ; border-color: #FFF; border-radius: 15px; border-width: 0.4em;">
@@ -210,18 +210,19 @@ import axios from 'axios';
                 </tbody>
             </table> 
 
-            <div class="d-flex justify-content-between m-2">
+            <div class="d-flex justify-content-between m-0 p-0">
 
                 <text>
                     <i @click="swLock(calendar_date)" class="text-primary fs-1 bi bi-unlock-fill opacity-50"></i> 
                 </text>
-
+<!--
                 <text @click="show_days = !show_days">
                     <i class=" text-primary bi bi-x-lg display-5"></i>
                 </text>
+-->
 
             </div>
-            <hr>
+           
 
         </div>
                   
