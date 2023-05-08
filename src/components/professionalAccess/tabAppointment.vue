@@ -24,7 +24,7 @@ import LockOptions from './lockOptions.vue'
           -->
           <div class="w-100"> 
               <CalendarPickerMinimal2 class="mt-1" :lock_dates="lock_dates" :session_params="session_params" :daterequired="daterequired" :forceUpdateCalendarPickerMin="forceUpdateCalendarPickerMin" v-on:set_daterequired="set_daterequired" > </CalendarPickerMinimal2>
-              <br> 
+             
           </div>
       </div> 
       
