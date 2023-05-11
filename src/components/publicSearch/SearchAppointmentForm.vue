@@ -17,7 +17,7 @@ import Datepicker from 'vuejs3-datepicker';
                 <form autocomplete="off" >
 <!--FORM TYPE : CENTER,  HOME,  REMOTE -->                    
                 <div class="position-relative">
-                    <div class="d-flex justify-content-center mb-0 mt-0">                    
+                    <div class="d-flex justify-content-center mb-0 mt-0" :class="{'opacity-25': false }"  >                    
                         <appTypeCircle :appType='0' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>
                         <appTypeCircle :appType='1' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>
                         <appTypeCircle :appType='2' v-on:appTypeSelected="appTypeSelected" :appTypeCode="appTypeCode" ></appTypeCircle>    
@@ -80,7 +80,7 @@ import Datepicker from 'vuejs3-datepicker';
 
 <!-- FORM INPUT LOCATION-->
         
-        <div class="d-flex justify-content-center mb-0 mt-0">
+        <div class="d-flex justify-content-center mb-0 mt-0" :class="{'opacity-25': search_params.specialty==null}" >
         <div style="width: 20em;">
                 <div  v-if="search_params.type_remote==null  || search_params.type_remote==false "   class="row  mb-1   "  >
                     <div class="col">
@@ -109,7 +109,7 @@ import Datepicker from 'vuejs3-datepicker';
         </div>
 
 <!-- FORM INPUT DATE -->
-        <div class="d-flex justify-content-center mb-0 mt-2">
+        <div class="d-flex justify-content-center mb-0 mt-2" :class="{'opacity-25': search_params.specialty==null}" >
         <div style="width: 20em;">
        
                 <div v-show="show_input_date() " @click="show_date_picker = !show_date_picker"  >
@@ -270,6 +270,12 @@ export default {
                     this.search_params.type_center = false 
                     this.search_params.type_home = false 
                     this.search_params.type_remote = true 
+                break;
+
+                case null:
+                    this.search_params.type_center = false 
+                    this.search_params.type_home = false 
+                    this.search_params.type_remote = false 
                 break;
              }
 
