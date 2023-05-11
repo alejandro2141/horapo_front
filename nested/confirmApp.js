@@ -6,4 +6,5 @@ const app = createApp(App)
 app.mount('#app')
 app.config.globalProperties.BKND_CONFIG = BKND_CONFIG
 
-console.log(app.config)
+console.log("confirmApp app config "+JSON.stringify(app.config))
+console.log("confirmApp app BKND_CONFIG "+JSON.stringify(BKND_CONFIG))
