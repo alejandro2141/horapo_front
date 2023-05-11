@@ -2,7 +2,7 @@
 
 import GeneralHeader from '../src/components/GeneralHeader.vue'
 import axios from 'axios'
-import { BKND_CONFIG } from '../config123.js'
+//import { BKND_CONFIG } from '../config123.js'
 
 </script>
 
