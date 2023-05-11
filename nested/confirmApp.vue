@@ -82,6 +82,7 @@ export default {
         this.req_act=auxparams[4]
         
         console.log("URL INPUT PARAMS : "+JSON.stringify(auxparams) )
+        console.log("confirmAPP.vue   : "+JSON.stringify(BKND_CONFIG) )
 
         if (this.req_act == "co")
         {
