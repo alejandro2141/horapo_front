@@ -2,7 +2,7 @@
 
 import GeneralHeader from '../src/components/GeneralHeader.vue'
 import axios from 'axios'
-//import { BKND_CONFIG } from '../config123.js'
+import { BKND_CONFIG } from '../config123.js'
 
 </script>
 
@@ -138,7 +138,7 @@ export default {
                         };
 
                 console.log("confirmAPP REQUEST:"+JSON.stringify(json_request))
-                let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_confirm_app",json_request);
+                let response = await axios.post(BKND_CONFIG.BKND_HOST+"/public_confirm_app",json_request);
                 console.log("confirmAPP RESPONSE :"+JSON.stringify(response.data) )   
                 this.appointments = response.data.appointments     
             },
