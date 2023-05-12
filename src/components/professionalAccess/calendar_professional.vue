@@ -68,7 +68,7 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                 </div>
 
                     <div v-if="!showEdit && !showSocials" @click="showSocials=!showSocials " class="d-flex justify-content-between "  >
-                        <text class="m-1"> Compartir calendario  </text> 
+                        <text class="m-1"> enviar calendario  </text> 
                         <i class="m-2 fs-3 m-1 bi bi-share text-primary">
                         </i>
                     </div>
@@ -76,15 +76,18 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
 
                     <div v-if="showSocials" class="text-dark m-3 p-2  border border-1 border-primary bg-white " style="border-radius: 15px;">    
                         <div class="d-flex justify-content-between "> 
-                            <text>Compartir calendario </text>
+                            <text>Enviar calendario a paciente </text>
                             <i @click="showSocials=false" class="h3 bi bi-x-lg text-primary"></i> 
+                        </div>
+                        <div class="text-secondary mb-2">
+                            Paciente podrá buscar una hora disponible en este calendario
                         </div>
                         
                         <div>
-                            <div class="d-flex justify-content-around" style="font-size:2em">
-                                <i @click="showWebLink=!showWebLink " class="bi bi-globe2"></i>
-                                <i @click="showInputEmail=!showInputEmail" class="bi bi-envelope"></i> 
-                                <i @click="showInputPhone=!showInputPhone" class="bi bi-whatsapp"></i> 
+                            <div class="d-flex justify-content-around" >
+                                <i @click="showWebLink=!showWebLink " style="font-size:2em" class="bi bi-globe2"></i>URL
+                                <i @click="showInputEmail=!showInputEmail" style="font-size:2em" class="bi bi-envelope"></i>Email 
+                                <i @click="showInputPhone=!showInputPhone" style="font-size:2em" class="bi bi-whatsapp"></i>WhatsApp 
                             </div>
 
                             <div v-if="showWebLink">
@@ -92,8 +95,8 @@ import MinutesBtwMinutes from './timebtw_minutes.vue'
                             </div>
 
                             <div v-if="showInputEmail"> 
-                                    Ingrese Email<br>
-                                    <input class="text-dark bg-white" type="text" v-model="customer_email" id="fname" name="fname"><br>
+                                    Ingrese Email destino<br>
+                                    <input class="text-dark bg-white" type="text" v-model="customer_email" placeholder="email@gmail.com" id="fname" name="fname"><br>
                                     <text type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false; sendCalendarToPatient(customer_email, calendar.id , calendar.professional_id, calendar.center_id )" >
                                         enviar
                                     </text> 
@@ -460,7 +463,7 @@ export default {
             showWebLink    : false,
 
             customer_phone : "569" , 
-            customer_email : "...@..." ,
+            customer_email : "" ,
 
 
             linkWebCalendar : "No Set" ,
