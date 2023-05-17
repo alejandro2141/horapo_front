@@ -21,7 +21,7 @@ import axios from 'axios';
                 <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
             </div>
             
-            <div @click="show_days = !show_days" class="text-primary align-items-end mt-2 " > 
+            <div @click="show_days = !show_days" class="text-dark align-items-end mt-2 " > 
                 {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  
             </div>
 
@@ -37,7 +37,7 @@ import axios from 'axios';
                 <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
             </div>
             
-            <div @click="show_days = !show_days" class="d-flex  text-primary mb-1" > 
+            <div @click="show_days = !show_days" class="d-flex  text-dark mb-1" > 
                 <text style="position: relative; " >{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
             </div>
             
