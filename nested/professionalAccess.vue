@@ -2,7 +2,7 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import axios from 'axios'
-import { BKND_CONFIG } from '../config123.js'
+
 import ProfesionalGeneralHeader from '../src/components/professionalAccess/ProfesionalGeneralHeader.vue'
 import TabLogin from '../src/components/professionalAccess/tabLogin.vue'
 import TabCenter from '../src/components/professionalAccess/tabCenter.vue'
@@ -12,8 +12,7 @@ import TabUserConfig from   '../src/components/professionalAccess/tabUserConfig.
 
 import TabListAppTaken from   '../src/components/professionalAccess/tabAppointmentsListReserved.vue'
 //import TabListAppTaken from '../src/components/professionalAccess/tabAppointmetsListReserved.vue'
-
-
+import { BKND_CONFIG } from '../config123.js'
 
 </script>
 
@@ -185,7 +184,7 @@ methods: {
    			   	      };
 			console.log ("REQUEST to professional_login_session:"+ JSON.stringify(json)  );
 			
-			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_login_session",json);
+			let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_login_session",json);
             console.log ("RESPONSE login:"+JSON.stringify(response_json.data)) ;
 
 
