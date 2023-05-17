@@ -15,13 +15,7 @@ defineProps({
 <div>
     <loadProgress  :active_spinner="active_spinner" > </loadProgress>
     
-    	
-		
-	
      <div class=" m-3 bg-white " style=" border-radius: 15px;">
-
-
-
 
     <div class="d-flex justify-content-end"><a href="/index.html" class=""><i class="display-5 bi bi-x-lg"></i></a></div>
 
