@@ -9,12 +9,73 @@ import professional_messages from './professional_messages.vue'
 </script>
 
 <template>
-	<div>
+<div>
 
+	<div class="d-flex justify-content-around">
 
-	<div v-if="session_params['professional_name'] "  class="d-flex mt-1 pb-2 justify-content-around " :class="{ 'bg-white text-dark' : showTopMenu  }" > 
+		<div>
+			<!--TODO LEFT MENU ONLY WIDE SCREENS -->
+		</div>
+		
+		<div>
+		
 
-		<!-- LIST APPOINTMENT -->
+				<!--START CENTER MENU -->
+	<div v-if="session_params['professional_name'] "  style="width: 400px; " class="d-flex mt-1 pb-2 justify-content-around " :class="{ 'bg-white text-primary' : showTopMenu  }" > 
+		<!-- MENU -->
+		<div :class="{ 'opacity-25' : !session_params.tutorial_start_step4 && session_params.tutorial_start }" >
+			<text>	
+				<div v-if="showTopMenu" >
+					<i style="font-size:2.0em" class="bi bi-gear " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
+					<br>
+					<text>Menu</text>
+				</div>
+
+				<i v-if="show_close_list" style="font-size:2.0em" class="bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+			</text>
+		</div>
+		<!-- CITAS -->
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step3  && session_params.tutorial_start }" >		
+			<div v-if="showTopMenu"  class="" @click=" switchViewTo(5);showTopMenu=false;" >
+				<i style="font-size:2.0em" class="bi bi-people"></i>
+				 <br>
+				<text>Citas</text>
+			</div>
+		</div>
+		<!-- CONSULTAS -->
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step1  && session_params.tutorial_start}" >
+				<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start_step1}" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >	
+					<div v-if="showTopMenu"  class="text-center"   >
+						<i style="font-size:2.0em" class="bi-geo-alt"></i><br>
+						<text >Consultas</text>
+					</div>
+				</div>
+		</div>
+		<!--CALENDARS -->
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step2 && session_params.tutorial_start}" >
+					<div v-if="showTopMenu" class="text-center"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" >
+						<i style="font-size:2.0em" class="bi bi-calendar"></i><br>
+						<text>Calendarios</text>
+					</div>	
+		</div>
+			<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-dark" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>	
+	</div><!--END CENTER MENU -->
+
+		</div>
+
+		<div>
+			<!--TODO RIGHT MENU ONLY WIDE SCREENS -->	
+		</div>
+
+	</div>
+
+<!--
+<div class="flex justify-content-center w-100">
+
+	<div>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+	</div>
+
+	<div v-if="session_params['professional_name'] "  style="width : 18em " class="d-flex mt-1 pb-2 justify-content-around " :class="{ 'bg-white text-primary' : showTopMenu  }" > 
 
 		<div :class="{ 'opacity-25' : !session_params.tutorial_start_step4 && session_params.tutorial_start }" >
 			<text>	
@@ -26,83 +87,43 @@ import professional_messages from './professional_messages.vue'
 
 				<i v-if="show_close_list" style="font-size:2.0em" class="bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
 			</text>
-			
-			<text>
-				<text v-if="showTopMenu" class="text-white-50">  </text>
-			</text>
 		</div>
 
-
-		<!-- DAY CALENDAR 
-		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step3  && session_params.tutorial_start }" >
-			<div v-if="showTopMenu" style="font-size:0.9em" class="opacity-75 btn border border-2 text-danger border-danger small " @click="setToday(dateObj);switchViewTo(2)" >
-				<text class="m-0 p-0" style="">HOY</text><br>
-				<text class="m-0 p-0"> {{day}}/{{month+1}} </text>
-			</div>
-		</div>
-		-->
-		<text>
-			<text v-if="showTopMenu" class="text-white-50"> </text>
-		</text>
-		<text>
-			<text v-if="showTopMenu" class="text-white-50"> </text>
-		</text>
-
-		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step3  && session_params.tutorial_start }" >
-			
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step3  && session_params.tutorial_start }" >		
 			<div v-if="showTopMenu"  class="" @click=" switchViewTo(5);showTopMenu=false;" >
-				
 				<i style="font-size:2.0em" class="bi bi-people"></i>
 				 <br>
 				<text>Citas</text>
-			
 			</div>
 		</div>
-
-
-		<text>
-			<text v-if="showTopMenu" class="text-white-50"> </text>
-		</text>
-		
-		<!-- CONSULTAS -->
-		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step1  && session_params.tutorial_start}" >
-			<text style="font-size:0.9em">
-				
-				<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start_step1}" >	
-					<button v-if="showTopMenu"  @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" type="button" class="btn">
-						<i style="font-size:1.7em" class="bi-geo-alt"></i><br>
-						<text>Consultas</text>
-					</button>
-				</div>
-
-			</text>
-		</div>
 	
-
-		<text>
-			<text v-if="true" class="text-white-50" >|</text>
-		</text>
-
-		
-
-		<!--CALENDARS -->
-		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step2 && session_params.tutorial_start}" >
-			<text style="font-size:0.9em">	
-					<button v-if="showTopMenu"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" type="button" class="btn">
-						<i style="font-size:1.7em" class="bi bi-calendar"></i><br>
-						<text>Calendarios</text>
-					</button>
-			</text>
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step1  && session_params.tutorial_start}" >
+				<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start_step1}" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >	
+					<div v-if="showTopMenu"  class="text-center"   >
+						<i style="font-size:2.0em" class="bi-geo-alt"></i><br>
+						<text >Consultas</text>
+					</div>
+				</div>
 		</div>
 
-		<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-dark" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>
-
-		
-		
+		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step2 && session_params.tutorial_start}" >
+					<div v-if="showTopMenu" class="text-center"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" >
+						<i style="font-size:2.0em" class="bi bi-calendar"></i><br>
+						<text>Calendarios</text>
+					</div>	
+		</div>
+			<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-dark" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>	
+	</div>
+	
+	<div>
+		bbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 	</div>
 
-	
+</div>
 
+-->
+
+<div>
 
 	<Transition duration="1050" name="nested">
 	
@@ -190,10 +211,10 @@ import professional_messages from './professional_messages.vue'
 	
 	</Transition>
 
+</div>
 
-
-	</div>
-
+	
+</div>
 </template>
 
 <style scoped>
