@@ -17,8 +17,6 @@ import { ref } from 'vue'
             <text v-if="!show_sub_menu" class="p-2" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; "> <i class="bi bi-water text-primary"></i> </text>
             
             <text v-else class="p-2" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary"></i> </text>
-            
-
 
         </div>
  
@@ -42,17 +40,13 @@ import { ref } from 'vue'
             </a>
         </div>
 
-    </div>
 
-
-    <!--------------------
+ <!--------------------
           SUB MENU        
     <div class="d-flex justify-content-end"><a href="/index.html" class=""><i class="display-3 bi bi-x-lg"></i></a></div>
+---------------------->
 
-
-    ---------------------->
-
-    <div v-if="show_sub_menu"   class=" text-dark bg-white border p-2 "  style="position: absolute; top: 3em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"> 
+        <div v-if="show_sub_menu"   class=" text-dark bg-white border p-2"  style="position: absolute; top: 3em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"> 
        <!--
                 <div class="p-4 ">
                         <a href="/nested/aboutUs.html" class="m-1 text-decoration-none btn-floating "  role="button">
@@ -77,11 +71,13 @@ import { ref } from 'vue'
                             &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿Que es Horapo?</text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
-       
-        
-        
     </div>
 
+
+    </div>
+
+
+      
 
 </div>
 
