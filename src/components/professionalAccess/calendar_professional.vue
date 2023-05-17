@@ -8,7 +8,7 @@ import MinutesSelector from './minutes_selector.vue'
 import DurationMinutes from './duration_minutes.vue'
 import MinutesBtwMinutes from './timebtw_minutes.vue'
 
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
