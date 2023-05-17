@@ -14,23 +14,21 @@ import TabListAppTaken from   '../src/components/professionalAccess/tabAppointme
 //import TabListAppTaken from '../src/components/professionalAccess/tabAppointmetsListReserved.vue'
 
 
+
 </script>
 
 <template>
 <div >
     
-    <ProfesionalGeneralHeader v-on:setTodayDateFromHeader='setTodayDateFromHeader'   :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
-    
+    <ProfesionalGeneralHeader  v-on:setTodayDateFromHeader='setTodayDateFromHeader'   :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
    
     <div   class="m-0 w-100 d-flex justify-content-center">
-       
-
+   
        <div> 
         <div  :style="{display:  visible_tab_login }"  class=" position-relative" >	 
-            <TabLogin v-on:startSession="startSessionMethod" >  </TabLogin> 		 
+            <TabLogin  v-on:startSession="startSessionMethod" >  </TabLogin> 		 
         </div>
         </div>
-
  
         <div >
         <div v-if="visible_tab_centers == 'block'" :style="{display:  visible_tab_centers }"    class="  position-relative bg-secondary " >
@@ -62,9 +60,7 @@ import TabListAppTaken from   '../src/components/professionalAccess/tabAppointme
         </div>
         </div>
         
-
     </div>
-   
    
 </div>
 </template>
@@ -113,7 +109,8 @@ export default {
         visible_tab_centers: 'none',
         visible_tab_assistants:'none', 
         visible_tab_appointments: 'none',
-        visible_tab_login: 'block' ,
+      //visible_tab_login: 'block' ,
+        visible_tab_login: 'none' ,
         visible_tab_timetable: 'none' ,
         visible_tab_userconfig : 'none' , 
         visible_tab_appListTaken : 'none' ,
@@ -139,16 +136,79 @@ props: [],
 emits: [],
 
 created() {
-        console.log("NESTED PROFESSIONAL ACCESS SEARCH Fill Global variables");
+
+        this.setSessionFromCode() 
+       
         this.loadGlobalSpecialties();
         this.loadGlobalComunas();
+
+
     
       //  this.loadProfessionalEspecialties();
 },
 
 methods: {
+
+    async setSessionFromCode()
+    {
+    //get session code from URL
+        let uri = window.location.search.substring(1); 
+        let params = new URLSearchParams(uri);
+        let sessionCode = params.get("sessionCode")
+
+    //here call to get session data 
+        if (sessionCode != null )
+        {
+        let session_data= await this.getSessionParamsFromCode(sessionCode)
+        await this.setSessionParamsFromJSON(session_data)
+        console.log("SetSessionFromCode session_params.name "+this.session_params.name);
+        console.log("SetSessionFromCode session_params.id "+this.session_params.id );
+        }
+
+        if (this.session_params.professional_id == null)
+        {
+            this.visible_tab_login='block' 
+        }
+        else 
+        {
+            this.visible_tab_appointments = 'block' ;
+        }  
+
+
+    },
+
+    async getSessionParamsFromCode(sessionCode)
+    {
+
+        const json = { 
+			   sessionCode : sessionCode ,			   
+   			   	      };
+			console.log ("REQUEST to professional_login_session:"+ JSON.stringify(json)  );
+			
+			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_login_session",json);
+            console.log ("RESPONSE login:"+JSON.stringify(response_json.data)) ;
+
+
+
+            /*
+        let session_params = {
+        "professional_id":"1",
+        "result_code":0,
+        "professional_name":"Juan Alejandro Morales Miranda",
+        "token":"5302",
+        "first_time":true,
+        "tutorial_start":false,
+        "tutorial_center":false,
+        "tutorial_calendar":true,
+        "tutorial_menu":true,
+                }
+                */
+        
+
+        return response_json.data
+    
+    },
    
-     
     setTodayDateFromHeader(dateObj)
     {   console.log("setTodayDateFromHeader in professionalAccess")
         this.setTodayDate = dateObj
@@ -237,29 +297,36 @@ methods: {
     startSessionMethod (param)
     {
     console.log("StartSession method:"+param.token );
+    console.log("StartSession method param:"+JSON.stringify(param));
     //set session data. 
     this.setSessionParamsFromJSON(param);
     //switch to view appointments
-    this.switchViewToAppointments();
+    location.href = "/nested/professionalAccess.html?sessionCode="+param.sid;
+    //this.switchViewToAppointments();
     },
 
 //SET Session Params From JSON 
-    setSessionParamsFromJSON(obj)
+    async setSessionParamsFromJSON(obj)
 	{
-        console.log("session params from JSON");
+       
 		for (var key of Object.keys(obj)) 
 			{
 			console.log(key + " -> " + obj[key]);
 			this.session_params[key] = obj[key];
+            console.log("---->session for cicle :"+key)
 			}  
         
         if (this.session_params.tutorial_start)
         {
             this.session_params.tutorial_start_step1 = true
         }
+        await Promise.all(this.session_params)
 
-        console.log("session iniciada para:"+this.session_params['professional_name'] );           
-	},
+        console.log("setSessionParamsFromJSON session iniciada para:"+this.session_params['professional_name'] );   
+        console.log("setSessionParamsFromJSON session params:"+JSON.stringify(this.session_params));      
+        console.log("setSessionParamsFromJSON session params OBJ:"+JSON.stringify(obj));  
+	
+    },
 
 //Set View
     switchViewToAppointments()
