@@ -16,18 +16,17 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 			<div class="modal-container m-0 p-0 ">
  
 
-                <div class="modal-body mt-0 bg-secondary text-white"  > 
+                <div class="modal-body mt-0 bg-white text-dark"  > 
                    
                     <form autocomplete="off">	
 
                     <div class="d-flex justify-content-between">
-                        <div class="p-1 bd-highlight" style="font-size: 2em;"  >Crear Consulta
-                        </div>
+                        <div class="p-1 bd-highlight" style="font-size: 2em;"> Crear Consulta </div>
                         
                         <div class="p-1 bd-highlight"></div>
                         
                         <div class="p-1 bd-highlight" >
-                            <i class="bi bi-x-lg ml-0" style="font-size: 2em;" v-on:click="showModalCreate = false" aria-label="Close">
+                            <i class="bi bi-x-lg ml-0 text-primary" style="font-size: 2em;" v-on:click="showModalCreate = false" aria-label="Close">
                             </i>
                         </div>
                     </div>
@@ -35,23 +34,23 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
                       <div class="form-group">
                          <label for="exampleInputEmail1" style="font-size: 1em;" >Nombre de su Consulta </label>
-                            <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Nombre su Consulta             ">
+                            <input type="text" class="form-control  border-dark  text-dark" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Nombre su Consulta             ">
                       </div>
 
                       <div class="mt-3 " style="font-size: 1em;" >Tipo de consulta</div>
                       
                       <div >
-                          <button type="button" class="btn  m-0" :class="[app_type_center ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[]; " >
+                          <button type="button" class="btn  m-0 border border-1 border-dark" :class="[app_type_center ? 'btn btn-primary' : 'btn btn-light']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[]; " >
                               <i class="h3 bi bi-building m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">En Consulta</text> 
                           </button>
                           
-                          <button type="button" class="btn m-1" :class="[app_type_home ? 'btn btn-primary' : 'btn btn-dark']"  @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ; form_comuna_codes=[]; " >
+                          <button type="button" class="btn m-1 border border-1 border-dark" :class="[app_type_home ? 'btn btn-primary' : 'btn btn-light'  ]"  @click="app_type_home=true ; form_app_type = 2 ; app_type_center=false ; app_type_tele=false ; form_comuna_codes=[]; " >
                               <i class="h3 bi bi-house-door m-0 p-0"></i><br>
                                <text class="fs-6 m-0 p-0">A Domicilio</text> 
                           </button>
                           
-                          <button type="button" class="btn m-0" :class="[app_type_tele ? 'btn btn-primary' : 'btn btn-dark']" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ; form_comuna_codes=[]; " >
+                          <button type="button" class="btn m-0 border border-1 border-dark" :class="[app_type_tele ? 'btn btn-primary' : 'btn btn-light']" @click="app_type_home=false ; form_app_type = 3 ; app_type_center=false; app_type_tele=true ; form_comuna_codes=[]; " >
                               <i class="h3 bi bi-camera-video m-0 p-0"></i><br>
                               <text class="fs-6 m-0 p-0">Tele Atenc. </text> 
                           </button>
@@ -73,13 +72,13 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                         </div>
                       </div>
 
-
+                      <!--  CENTER --> 
                       <div v-if="app_type_center"  class="form-group mt-3" >
                             <p> <text class="h3">Información de Consulta</text> <br> </p>
                            
                             <div class="form-group mt-3">
                                 <label for="exampleInputPassword1">Direccion de su Consulta</label>
-                                <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
+                                <input type="text" class="form-control bg-white border-dark  text-dark" autocomplete="off" id="form_center_address" name="form_center_address" v-model="form_center_address"  placeholder="Av as Condes xxxx, oficina xx, Piso x">
                                 <small id="emailHelp" class="form-text text-muted">Esta direccion al que debe concurrir el paciente a su cita</small>		
                             </div>
 
@@ -99,11 +98,11 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
     -->
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Telefono1</label>
-                                <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_phone1" name="form_center_phone1" v-model="form_center_phone1" placeholder="569763522">
+                                <input type="text" class="form-control bg-white border-dark  text-dark" autocomplete="off" id="form_center_phone1" name="form_center_phone1" v-model="form_center_phone1" placeholder="569763522">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Telefono2</label>
-                                <input type="text" class="form-control bg-dark border-dark  text-white" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
+                                <input type="text" class="form-control bg-white border-dark  text-dark" autocomplete="off" id="form_center_phone2" name="form_center_phone2" v-model="form_center_phone2" placeholder="569763522">
                             </div>
 
                             
