@@ -18,7 +18,7 @@ module.exports = defineConfig({
         main: resolve(__dirname, 'index.html'),
         aboutUs: resolve(__dirname, './nested/aboutUs.html'),
         register: resolve(__dirname, './nested/register.html'),
-        getappointments: resolve(__dirname, './nested/getAppointments.html'),
+       // getappointments: resolve(__dirname, './nested/getAppointments.html'),
         publicsearch: resolve(__dirname, './nested/publicSearch.html'),
         professionalaccess: resolve(__dirname, './nested/professionalAccess.html'),
         publicSearchCalendar: resolve(__dirname, './nested/publicSearchCalendar.html'),
