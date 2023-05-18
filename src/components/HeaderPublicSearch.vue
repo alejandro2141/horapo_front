@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import RecoverAppointmentsForm from './RecoverAppointmentsForm.vue'
 
 </script>
 
@@ -14,7 +15,7 @@ import { ref } from 'vue'
             <!-- 
             <i  @click="show_sub_menu = !show_sub_menu" class="fs-2 bi bi-list text-secondary"></i>
             -->
-            <text v-if="!show_sub_menu" class="p-2" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; "> <i class="bi bi-water text-primary"></i> </text>
+            <text v-if="!show_sub_menu" class="p-2" @click="show_sub_menu = !show_sub_menu; showRecoverApp=false" style="font-size: 1em ; "> <i class="bi bi-water text-primary"></i> </text>
             
             <text v-else class="p-2" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary"></i> </text>
 
@@ -34,20 +35,23 @@ import { ref } from 'vue'
             -->
      
 
-        <div class="p-3 border" style="border-bottom-left-radius: 40%;">
-            <a HREF="/nested/getAppointments.html" class="text-decoration-none btn-floating  text-secondary" >
-            <text class="p-2 mt-2 text-primary" style="font-size: 1em; ">citas</text>
-            </a>
+        <div class="p-3 border"   style="border-bottom-left-radius: 40%;">
+            <text v-if="!showRecoverApp" @click="showRecoverApp=!showRecoverApp;show_sub_menu=false" class="p-2 mt-2 text-primary" style="font-size: 1em; ">citas</text>
+            <text v-else class="p-2" @click="showRecoverApp = !showRecoverApp" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary p-2"></i> </text>
+
         </div>
 
-
+       
  <!--------------------
           SUB MENU        
     <div class="d-flex justify-content-end"><a href="/index.html" class=""><i class="display-3 bi bi-x-lg"></i></a></div>
 ---------------------->
 
-        <div v-if="show_sub_menu"   class=" text-dark bg-white border p-2"  style="position: absolute; top: 3em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"> 
-       <!--
+    <RecoverAppointmentsForm v-if="showRecoverApp" style="position: absolute; top: 5em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"></RecoverAppointmentsForm>
+
+
+    <div v-if="show_sub_menu"   class=" text-dark bg-white border p-2"  style="position: absolute; top: 3em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"> 
+            <!--
                 <div class="p-4 ">
                         <a href="/nested/aboutUs.html" class="m-1 text-decoration-none btn-floating "  role="button">
                             &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿Que es Horapo? </text>
@@ -59,16 +63,16 @@ import { ref } from 'vue'
                     -->
                 <div class="p-4">
                         <a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-                            &nbsp;&nbsp;<text class=" text-decoration-none text-secondary" >Acceso Profesionales</text>
+                            <i class="bi bi-key text-secondary h5 m-3"></i>&nbsp;<text class=" text-decoration-none text-secondary" >Acceso Profesionales</text>
                         </a>
                 </div>
                 
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
-                <div class="p-4">
+                <div class="p-4 text-center">
                         <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-                            &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿Que es Horapo?</text>&nbsp;&nbsp;&nbsp;&nbsp;
+                              &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿ Que es Horapo ?</text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
     </div>
@@ -95,6 +99,7 @@ export default {
  data : function() {
     return {
         show_sub_menu : false,
+        showRecoverApp : false ,
         }
   },
 
