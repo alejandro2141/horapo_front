@@ -21,7 +21,7 @@ import axios from 'axios';
                 <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
             </div>
             
-            <div @click="show_days = !show_days" class="text-dark align-items-end mt-2 " > 
+            <div @click="show_days = !show_days" class="text-dark align-items-end m-3 " > 
                 {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  
             </div>
 
@@ -32,19 +32,24 @@ import axios from 'axios';
     <!-- En  Day   -->
         
     <!-- Month  -->
+    <small><small class="opacity-75">
         <div class="d-flex justify-content-between " style="position: relative; " >
+        
             <div @click="prevMonth(calendar_date)"> 
                 <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
             </div>
+        
             
-            <div @click="show_days = !show_days" class="d-flex  text-dark mb-1" > 
+            <div @click="show_days = !show_days" class="d-flex  text-dark m-2" > 
                 <text style="position: relative; " >{{  month_full_names[calendar_date.getMonth()] }}  {{calendar_date.getFullYear()}} </text>
             </div>
             
             <div @click="nextMonth(calendar_date)">
                 <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i> 
             </div>
+        
         </div>
+    </small></small>
     <!-- End Month  -->
 
 
