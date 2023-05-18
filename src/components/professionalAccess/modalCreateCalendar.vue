@@ -64,7 +64,7 @@ import Datepicker from 'vuejs3-datepicker';
                           </div>
                         
                           <div class="">
-                                    <select   v-model="form_specialty_id" class="bg-white border border-1 text-dark form-control  " :class="{ 'bg-white border border-dark': true }" id="form_specialty_id" >
+                                    <select   v-model="form_specialty_id" class="bg-white border border-1 text-dark form-control  " :class="{ 'bg-white border border-1': true }" id="form_specialty_id" >
                                     <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
                                       {{ specialty.name }} 
                                     </option>
@@ -287,7 +287,7 @@ import Datepicker from 'vuejs3-datepicker';
                 <!-- APP DURATION  -->
                 <div  class="d-flex justify-content-between mt-3">
                             <text> Tiempo de atencion: </text>
-                            <div @click="show_duration_minutes=!show_duration_minutes" class="bg-dark p-2 ">
+                            <div @click="show_duration_minutes=!show_duration_minutes" class="p-2 border border-1">
                                   <text >{{form_app_duration}}</text> Minutos
                             </div>
                 </div>
@@ -325,7 +325,7 @@ import Datepicker from 'vuejs3-datepicker';
                 <div  class="d-flex justify-content-between mt-3">
                            
                   <text> Tiempo entre Citas: </text>
-                            <div @click="show_timebtw_minutes=!show_timebtw_minutes" class="bg-dark p-2 ">
+                            <div @click="show_timebtw_minutes=!show_timebtw_minutes" class="p-2 border border-1">
                                   <text >{{form_app_time_between}}</text> Minutos
                             </div>
                 </div>
@@ -382,16 +382,16 @@ import Datepicker from 'vuejs3-datepicker';
                   Dias Recurrencia: <br>
 
                 <div class="d-flex justify-content-between  m-0 p-0">
-                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_mon=!form_recurrency_mon" :class="{ 'bg-dark p-1': true , 'border-primary' :form_recurrency_mon  }" >Lu</div>
-                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_tue=!form_recurrency_tue" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_tue }" >Ma</div>
-                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_wed=!form_recurrency_wed" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_wed }" >Mi</div>
-                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_thu=!form_recurrency_thu" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_thu }">Ju</div>
-                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_fri=!form_recurrency_fri" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_fri }">Vie</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_mon=!form_recurrency_mon" :class="{ 'bg-white p-1': true , 'border-primary' :form_recurrency_mon  }" >Lu</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_tue=!form_recurrency_tue" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_tue }" >Ma</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_wed=!form_recurrency_wed" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_wed }" >Mi</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_thu=!form_recurrency_thu" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_thu }">Ju</div>
+                    <div class="border border-3 m-1 p-2"  @click="form_recurrency_fri=!form_recurrency_fri" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_fri }">Vie</div>
                     
                   </div>
                   <div class="d-flex justify-content-start m-0 p-0">
-                    <div class="border border-3 m-1 p-2" @click="form_recurrency_sat=!form_recurrency_sat" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_sat }">Sa</div>
-                    <div class="border border-3 m-1 p-2" @click="form_recurrency_sun=!form_recurrency_sun" :class="{ 'bg-dark p-1': true , 'border-primary':form_recurrency_sun }">Do</div>
+                    <div class="border border-3 m-1 p-2" @click="form_recurrency_sat=!form_recurrency_sat" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_sat }">Sa</div>
+                    <div class="border border-3 m-1 p-2" @click="form_recurrency_sun=!form_recurrency_sun" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_sun }">Do</div>
                   </div>
 
                 </div>
