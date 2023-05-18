@@ -18,13 +18,13 @@ import Datepicker from 'vuejs3-datepicker';
 		    <transition name="modal">
 			<div class="modal-mask ">
 			<div class="modal-wrapper d-flex justify-content-center ">
-			<div class="modal-container  m-0 p-0 bg-secondary" style="">
+			<div class="modal-container  m-0 p-0 bg-white" style="">
  
                 <div class="modal-header">
-                        <div class="text-white " style="font-size: 2em;" >
+                        <div class="text-dark " style="font-size: 2em;" >
                         Crear Calendario
                         </div>
-                        <div class="p-0 "><i class="text-white bi bi-x-lg ml-0" style="font-size: 2em;"   v-on:click="showModalCreateCalendar = false"  aria-label="Close"></i>
+                        <div class="p-0 "><i class="text-primary bi bi-x-lg ml-0" style="font-size: 2em;"   v-on:click="showModalCreateCalendar = false"  aria-label="Close"></i>
                         </div>
                 </div>
 
@@ -34,9 +34,9 @@ import Datepicker from 'vuejs3-datepicker';
 
 <div  v-if="centers_found_flag">
   
-              <text class="text-white">Aqui puedes crear un nuevo calendario llenado la siguiente información </text>
+              <text class="text-dark">Aqui puedes crear un nuevo calendario llenado la siguiente información </text>
                    
-                    <div class="card mb-0 p-3 w-100 border border-1 border-white bg-secondary" style="width: 18rem; border-radius: 15px; "   >
+                    <div class="card mb-0 p-3 w-100 border border-1 border-white bg-white" style="width: 18rem; border-radius: 15px; "   >
                     
                     <div class="card-body p-0 m-0" >
                     
@@ -45,7 +45,7 @@ import Datepicker from 'vuejs3-datepicker';
                                
                     </div>
 
-                <div class=" text-white w-100">
+                <div class=" text-dark w-100">
                     <div class="m-0 ">
                    
                   <!-- CONSULTANCY -->
@@ -64,7 +64,7 @@ import Datepicker from 'vuejs3-datepicker';
                           </div>
                         
                           <div class="">
-                                    <select   v-model="form_specialty_id" class="bg-secondary border-0 text-white form-control  " :class="{ 'bg-dark border border-white': true }" id="form_specialty_id" >
+                                    <select   v-model="form_specialty_id" class="bg-white border border-1 text-dark form-control  " :class="{ 'bg-white border border-dark': true }" id="form_specialty_id" >
                                     <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
                                       {{ specialty.name }} 
                                     </option>
@@ -80,7 +80,7 @@ import Datepicker from 'vuejs3-datepicker';
                           Fecha Inicio
                           </div>
 
-                          <div class="p-2  bg-dark  " @click="show_date_start=!show_date_start"  >
+                          <div class="p-2 border border-1  " @click="show_date_start=!show_date_start"  >
                                 {{formatDate(form_calendar_start)}} <i class="bi bi-calendar-week"></i>
                           </div>
                   </div>
@@ -94,7 +94,7 @@ import Datepicker from 'vuejs3-datepicker';
                       <div class="p-2">
                           Fecha Fin
                       </div>
-                      <div class="p-2 bg-dark" @click="show_date_end=!show_date_end"  >
+                      <div class="p-2 border border-1" @click="show_date_end=!show_date_end"  >
                              {{formatDate(form_calendar_end)}} <i class="bi bi-calendar-week"></i>
                       </div>
                   </div>
@@ -108,11 +108,11 @@ import Datepicker from 'vuejs3-datepicker';
                           <text>Hora Inicio </text>
 
                           <div class="d-flex justify-content-end">
-                              <div @click="show_start_hour=!show_start_hour ; show_start_minutes=false" class="bg-dark p-2">
+                              <div @click="show_start_hour=!show_start_hour ; show_start_minutes=false" class="p-2 border border-1">
                                   <text >{{start_hour}}</text> 
                               </div>
                               <div class="p-2">:</div>
-                              <div @click="show_start_minutes=!show_start_minutes" class="bg-dark p-2 ">
+                              <div @click="show_start_minutes=!show_start_minutes" class="p-2 border border-1">
                                   <text >{{start_minutes}}</text>
                               </div>
                               <div class="p-2">hrs</div>
@@ -123,7 +123,7 @@ import Datepicker from 'vuejs3-datepicker';
                       <div class="bg-success text-white border border-1 border-dark">
                         <text class="p-2 h5 ">Seleccione Hora Inicio</text>
                       </div>
-                     
+        <!-- HOUR selector Start -->
                       <table class="table caption-top">
                       
                       <tbody class="border border-dark text-dark  bg-white">
@@ -161,8 +161,12 @@ import Datepicker from 'vuejs3-datepicker';
                         </tr>
                       </tbody>
                       </table>
-                    </div>
+        <!-- end HOUR  selector Start -->                   
 
+      </div>
+
+
+  <!-- MINUTES selector Start -->
                     <div v-if="show_start_minutes" class="text-white">
                       <div class="bg-success text-white border border-1 border-dark">
                         <text class="p-2 h5 ">Seleccione Minutos</text>
@@ -197,11 +201,11 @@ import Datepicker from 'vuejs3-datepicker';
                           <text>Hora Fin</text>
 
                           <div class="d-flex justify-content-end">
-                              <div @click="show_end_hour=!show_end_hour ; show_end_minutes=false" class="bg-dark p-2">
+                              <div @click="show_end_hour=!show_end_hour ; show_end_minutes=false" class="p-2 border border-1">
                                   <text >{{end_hour}}</text> 
                               </div>
                               <div class="p-2">:</div>
-                              <div @click="show_end_minutes=!show_end_minutes" class="bg-dark p-2 ">
+                              <div @click="show_end_minutes=!show_end_minutes" class="p-2 border border-1">
                                   <text >{{end_minutes}}</text>
                               </div>
                               <div class="p-2">hrs</div>
