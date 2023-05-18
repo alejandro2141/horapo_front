@@ -16,7 +16,7 @@ defineProps({
 
 
 <template>
-    <div class="p-0 m-0" id="form" >
+    <div class="p-0 m-0 border border-1 bg-white" id="form" >
         <!--
         <form autocomplete="off">
             Ingrese su correo y le enviaremos sus horas ya agendadas 
@@ -39,27 +39,22 @@ defineProps({
         </form>    
         -->
 
-        <p class="text-center">
-           <text class="h4">Ingrese su correo</text> <br>
-           <text class="text-muted">Le enviaremos sus citas reservadas.</text>
-           <input class="m-3 p-2"  style="border-radius: 5px;" type="text" placeholder="Ej: TuCorreo@sercorreo.com" v-model='user_email' > 
-            
-            <br>
-            <!--
+        <div class="p-3">
+           <text class="d-flex justify-content-center m-2 ">Le enviaremos un recordatorio a su correo</text>
+           <div class="d-flex justify-content-center" >
+             <input class="text-center"  style="border-radius: 5px;" type="text" placeholder="correo@ejemplo.com" v-model='user_email' > 
+           </div> 
+           <!--
             <a class="btn btn-outline-secondary m-2 p-2" HREF="/index.html" type="button">Regresar</a> -->
-            <button class="btn btn-success m-2 p-2" v-on:click="sendRecoverApp()" type="button">Enviar</button>
-
-        </p>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-success m-2 p-2 d-flex justify-content-center" v-on:click="sendRecoverApp()" type="button">Enviar</button>
+            </div>
+        </div>
 
     </div>
 </template>
 
 <style scoped>
-body {
-
- background-image : url(assets/images/background_patient.JPG); height: 100%; width: 100%; border: 0px solid black
-
-}
 </style>
 
 
