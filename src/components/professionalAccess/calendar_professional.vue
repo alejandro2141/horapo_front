@@ -21,8 +21,6 @@ import { BKND_CONFIG } from '../../../config123.js'
                     
                     <div class="card-body p-0 m-0" >
 
-                    
-                    
                     <div class="d-flex justify-content-between p-2 w-100 bg-white" style="width: 18rem; border-radius: 15px; " >
                                 <text class="card-title display-6  mt-0 pt-0"   >
                                     <i v-if="showEdit" @click="deleteCalendar();showEdit=false" class="bi bi-trash text-danger" ></i>  
@@ -749,8 +747,8 @@ export default {
                     // cernter_name
                     form_date_start : start_date_corrected  ,
                     form_date_end : end_date_corrected ,
-                    form_time_start : this.form_start_hour +":"+this.form_start_minutes ,
-                    form_time_end : this.form_end_hour +":"+this.form_end_minutes, 
+                    form_time_start : this.form_start_hour +":"+this.form_start_minutes+":00-"+(start_date_corrected.getTimezoneOffset()/60)  ,
+                    form_time_end : this.form_end_hour +":"+this.form_end_minutes+":00-"+(start_date_corrected.getTimezoneOffset()/60) , 
                     
                     form_day_mon: this.form_recurrency_mon ,
                     form_day_tue: this.form_recurrency_tue ,
