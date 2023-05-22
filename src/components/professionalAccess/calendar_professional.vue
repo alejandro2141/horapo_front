@@ -747,6 +747,7 @@ export default {
                     // cernter_name
                     form_date_start : start_date_corrected  ,
                     form_date_end : end_date_corrected ,
+                    //WARGNING THIS OFFSET  SETTING, WILL ONLY WORK FOR CHILEAN TIME, BECAUSE WE HARDCODED THE MINUS
                     form_time_start : this.form_start_hour +":"+this.form_start_minutes+":00-"+(start_date_corrected.getTimezoneOffset()/60)  ,
                     form_time_end : this.form_end_hour +":"+this.form_end_minutes+":00-"+(start_date_corrected.getTimezoneOffset()/60) , 
                     
