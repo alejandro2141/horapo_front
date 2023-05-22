@@ -766,8 +766,11 @@ data: function () {
                 //form_start_time : this.form_start_time,
                 //form_end_time : this.form_end_time ,
                 time_offset: start_date_corrected.getTimezoneOffset(),
+                
+                //WARGNING THIS OFFSET  SETTING, WILL ONLY WORK FOR CHILEAN TIME, BECAUSE WE HARDCODED THE MINUS
                 form_start_time : this.start_hour+":"+this.start_minutes+":00-"+(start_date_corrected.getTimezoneOffset()/60)  ,
                 form_end_time : this.end_hour+":"+this.end_minutes+":00-"+(start_date_corrected.getTimezoneOffset()/60) ,
+                
                 form_specialty_id : this.form_specialty_id, 
                 form_app_duration : this.form_app_duration ,
                 form_app_time_between : this.form_app_time_between ,
