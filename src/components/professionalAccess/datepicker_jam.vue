@@ -55,7 +55,8 @@ import axios from 'axios';
         </div>
 
         <div v-if="showMonthSelector" class="d-flex justify-content-center opacity-100">
-            <div style="position: absolute; "  class="border bg-white border-1 p-4">
+            
+            <div style="position: absolute; z-index:'999' "  class="border bg-white border-1 p-4">
                 Enero <br> 
                 Febrero <br>
                 Marzo <br>
@@ -69,6 +70,23 @@ import axios from 'axios';
                 Noviembre <br>
                 Diciembre<br>
             </div>
+            
+        <!--
+            <select name="pets" id="pet-select">
+                <option value="05">Enero</option>
+                <option value="05">Febrero</option>  
+                <option value="05">Marzo</option>
+                <option value="05">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="05">Junio</option>
+                <option value="05">Julio</option>
+                <option value="05">Agosto</option>
+                <option value="05">Septiembre</option>
+                <option value="05">Octubre</option>
+            </select>
+        -->
+
+
         </div>
 
         <div v-if="showYearSelector" class="d-flex justify-content-center">
