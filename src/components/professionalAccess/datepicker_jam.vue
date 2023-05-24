@@ -32,20 +32,24 @@ import axios from 'axios';
     <!-- En  Day   -->
         
     <!-- Month  -->
-    <small><small class="opacity-100">
-        <div class="d-flex justify-content-between " style="position: relative; " >
+    <small><small class="">
+        <div class="d-flex justify-content-center text-primary " style="position: relative; " >
         
             <!--
             <div @click="prevMonth(calendar_date)"> 
                 <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
             </div> -->
-            <text></text>
-            
+            <text @click="showMonthSelector=!showMonthSelector; showYearSelector=false">{{  month_full_names[calendar_date.getMonth()] }}</text> 
+           <!-- 
             <div @click="show_days = !show_days" class="d-flex  text-primary m-2" > 
-                <text style="position: relative; " ><text @click="showMonthSelector=!showMonthSelector; showYearSelector=false">{{  month_full_names[calendar_date.getMonth()] }}</text>  <text @click="showYearSelector=!showYearSelector; showMonthSelector=false ">{{calendar_date.getFullYear()}} </text></text>
+                <text style="position: relative; " > <text @click="showYearSelector=!showYearSelector; showMonthSelector=false ">{{calendar_date.getFullYear()}} </text></text>
             </div>
+         -->
+            <text>&nbsp;&nbsp;&nbsp;&nbsp;</text>
             
-            <text></text>
+            <text  @click="showYearSelector=!showYearSelector; showMonthSelector=false ">{{calendar_date.getFullYear()}} 
+
+            </text>
             
             <!--
             <div @click="nextMonth(calendar_date)">
@@ -54,21 +58,32 @@ import axios from 'axios';
         
         </div>
 
-        <div v-if="showMonthSelector" class="d-flex justify-content-center opacity-100">
+        <div v-if="showMonthSelector" class="d-flex justify-content-center ">
             
-            <div style="position: absolute; z-index:'999' "  class="border bg-white border-1 p-4">
-                Enero <br> 
-                Febrero <br>
-                Marzo <br>
-                Abril<br>
-                Mayo<br>
-                Junio<br>
-                Julio<br>
-                Agosto<br>
-                Septiembre <br>
-                Octubre <br>
-                Noviembre <br>
-                Diciembre<br>
+            <div style="position: absolute; z-index:'999999' ;font-size:0.9em;border-radius: 25px; "  class="border d-flex justify-content-evenly bg-white border-1 p-4 mt-3 text-primary ">
+              
+                <div class="d-flex flex-column">  
+                    <text class="p-2" @click="setMonth(1,calendar_date);showMonthSelector=false" >Enero</text>  
+                    <text class="p-2" @click="setMonth(2,calendar_date);showMonthSelector=false">Febrero</text> 
+                    <text class="p-2" @click="setMonth(3,calendar_date);showMonthSelector=false">Marzo</text> 
+                    <text class="p-2" @click="setMonth(4,calendar_date);showMonthSelector=false">Abril</text>
+                </div>
+                
+                <div class="d-flex flex-column">  
+                    <text class="p-2"  @click="setMonth(5,calendar_date);showMonthSelector=false">Mayo</text>
+                    <text class="p-2"  @click="setMonth(6,calendar_date);showMonthSelector=false">Junio</text>
+                    <text class="p-2"  @click="setMonth(7,calendar_date);showMonthSelector=false">Julio</text>
+                    <text class="p-2"  @click="setMonth(8,calendar_date);showMonthSelector=false">Agosto</text>
+
+                </div>
+
+                <div class="d-flex flex-column">  
+                    <text class="p-2"  @click="setMonth(9,calendar_date);showMonthSelector=false">Septiembre</text>
+                    <text class="p-2"  @click="setMonth(10,calendar_date);showMonthSelector=false">Octubre</text> 
+                    <text class="p-2"  @click="setMonth(11,calendar_date);showMonthSelector=false">Noviembre</text>  
+                    <text class="p-2"  @click="setMonth(12,calendar_date);showMonthSelector=false">Diciembre</text>
+                </div>
+                
             </div>
             
         <!--
@@ -90,11 +105,10 @@ import axios from 'axios';
         </div>
 
         <div v-if="showYearSelector" class="d-flex justify-content-center">
-            <div style="position: absolute; "  class="border bg-white border-1 p-4">
-                2021 <br> 
-                2022 <br> 
-                2023 <br>
-                2024 <br>
+            <div style="position: absolute; "  class="border display-5 bg-white text-primary border-1 p-4">
+                <text @click="setYear(2022,calendar_date);showYearSelector=false" >2022</text> <hr>
+                <text @click="setYear(2023,calendar_date);showYearSelector=false" >2023</text> <hr>
+                <text @click="setYear(2024,calendar_date);showYearSelector=false" >2024</text> <hr>
             </div>
         </div>
 
@@ -137,7 +151,7 @@ import axios from 'axios';
                         <td colspan="2" class="text-danger opacity-75">D</td>
                     </tr>
                     
-                    <tr v-if="week1!=null" class="text-dark" >
+                    <tr v-if="week1!=null" class="text-primary" >
                         <td  v-for="day in week1" :key="day" colspan="2" class="" > 
                             <div style="border-radius: 5px;" class="h1 fw-lighter" @click="dayPicked(day.date)" v-if="day.date.getDate() < 20"  :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary  text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() > 20     }]" > 
                                 <div class="m-0 p-0 d-flex justify-content-center">
@@ -156,7 +170,7 @@ import axios from 'axios';
                         </td>                      
                     </tr>
 
-                    <tr v-if="week2!=null" class="text-dark" >
+                    <tr v-if="week2!=null" class="text-primary" >
                         <td  v-for="day in week2" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
                             <div style="border-radius: 5px;" class="h1 fw-lighter"  :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
                                 <div class="m-0 p-0 d-flex justify-content-center"> 
@@ -177,7 +191,7 @@ import axios from 'axios';
                         </td>                      
                     </tr>
 
-                    <tr v-if="week3!=null" class="text-dark" >
+                    <tr v-if="week3!=null" class="text-primary" >
                         <td  v-for="day in week3" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
                             <div style="border-radius: 5px;" class="h1 fw-lighter" :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
                                 <div class="m-0 p-0 d-flex justify-content-center"> 
@@ -198,7 +212,7 @@ import axios from 'axios';
                         </td>                      
                     </tr>
 
-                    <tr v-if="week4!=null" class="text-dark" >
+                    <tr v-if="week4!=null" class="text-primary" >
                         <td  v-for="day in week4" :key="day" colspan="2" class="" @click="dayPicked(day.date)"> 
                             <div style="border-radius: 5px;" class="h1 fw-lighter" :class="[{ 'text-danger  border border-2 border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth()      }]" > 
                                 <div class="m-0 p-0 d-flex justify-content-center"> 
@@ -219,7 +233,7 @@ import axios from 'axios';
                         </td>                      
                     </tr>
 
-                    <tr v-if="week5!=null" class="text-dark" >
+                    <tr v-if="week5!=null" class="text-primary" >
                         <td  v-for="day in week5" :key="day" colspan="2" class="" > 
                             <div class="h1 fw-lighter" style="border-radius: 5px;" @click="dayPicked(day.date)" v-if="day.date.getDate() > 10"   :class="[{ 'text-danger border border-danger' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary  text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
                                 
@@ -240,7 +254,7 @@ import axios from 'axios';
                         </td>                      
                     </tr>
 
-                    <tr v-if="week6!=null" class="text-dark" >
+                    <tr v-if="week6!=null" class="text-primary" >
                         <td  v-for="day in week6" :key="day" colspan="2" class="" > 
                             <text class="h1 fw-lighter" style="border-radius: 5px;" @click="dayPicked(day.date)" v-if="day.date.getDate() > 10"  :class="[{ 'text-danger  border border-2 border-danger  ' : tday.getDate() == day.date.getDate()  && tday.getMonth() == day.date.getMonth() , 'text-primary text-decoration-underline fw-normal' : calendar_date.getDate() == day.date.getDate()  && calendar_date.getMonth() == day.date.getMonth() ,  'opacity-100 fw-lighter' :  day.date.getDate() < 10    }]" > 
                                 
@@ -341,6 +355,18 @@ export default {
         },
 
 	methods :{
+            setYear(new_year,date)
+            {
+             let new_year_date = new Date(new_year , date.getMonth(), date.getDate() )
+             this.$emit('selectedDate', new_year_date ) ;
+            },
+
+            setMonth(new_month,date)
+            {
+             let new_month_date = new Date(date.getFullYear(),new_month-1, date.getDate()  )
+             this.$emit('selectedDate', new_month_date ) ;
+            },
+
             swLock(day)
             {
                 console.log("Looking day:"+day+" IN  lock_dates:"+this.lock_dates)
