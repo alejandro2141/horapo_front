@@ -42,12 +42,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
               </text>       		
             </div>
           </div>
-
-          <div  v-if="hourTaken.patient_confirmation" class ="m-2 p-1 small   text-dark " >
-                    <i class="bi bi-person-fill display-5 text-success"></i> Paciente confirmó en <br> {{  transform_date(hourTaken.patient_confirmation_date) }} 
-          </div>
        
-        
 
           <div class=""    >
            <!-- TYPE CENTER --> 
@@ -82,7 +77,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                     <div v-if="hourTaken.app_type_home" style="color:#3399FF">
                             
                                <div style="font-size:1em color:#3399FF" >
-						                    <i class="bi bi-house-door"></i><text > Visita a Domicilio:</text> <br>
+						                    <i class="bi bi-house-door"></i><text > Visita a Domicilio</text> <br>
 					                    </div>
                             <!---
                               <h5> Direccion: 
@@ -103,7 +98,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
         </div>
 					
   <!-- PATIENT  -->
-          <p class="">        
+          <p class="mt-2">        
                 <text class="">
                  <b class="" > Paciente: </b> <br>
                               {{ hourTaken.patient_name}} ({{ hourTaken.patient_age}} Años) <br>
@@ -141,13 +136,17 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
             
 
       
-      
-      <div class="mt-2">
+      <br>
+      <div class="mt-4 text-center">
         
         <div class=" text-primary ">
             <div class="small m-2 " v-if="hourTaken.patient_confirmation">
                 <div>
-                  
+
+                <div  class ="m-2 p-1 small   text-dark " >
+                  <i class="bi bi-person-check display-5 text-success"></i> Paciente confirmó su asistencia hace {{  getHowManyDaysInThePast(hourTaken.patient_confirmation_date)  }} 
+                </div>
+         
                 <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Nueva Solicitud Confirmación</button>
                                    
                 </div> 
@@ -299,6 +298,7 @@ export default {
             form_app_duration : null ,
             showInputTextMail : false ,
             show_confirmation_data : false ,
+           
           }   
     },
    	
@@ -311,6 +311,21 @@ export default {
     },
 
 	methods :{
+
+     getHowManyDaysInThePast(confDate)
+    {
+      let old = new Date(confDate)
+      let cdate = new Date() 
+
+      let days =  Math.floor( (( old.getTime() - cdate.getTime() ) / 86400000) ) 
+      
+      if (days <1 )
+      { return "Menos de 24 horas" }
+      else {
+      return days+" dias "
+      }
+
+    },
 
     transform_time(date)
     	{
