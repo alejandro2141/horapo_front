@@ -127,45 +127,35 @@ import professional_messages from './professional_messages.vue'
 
 	<Transition duration="1050" name="nested">
 	
-		<div v-if="showUserMenu"  class="bg-secondary" style="" >
-			<div class="bg-secondary w-100 p-4" style="position: absolute; z-index: 99999; "  >
-			<div class="bg-secondary" >
+		<div v-if="showUserMenu"  class="bg-white" style="" >
+			<div class="bg-white w-100 p-4" style="position: absolute; z-index: 999; "  >
+			<div class="bg-white text-dark" >
 				
-				
-
-				<hr class="text-white">
-			
+			<hr>
 				<!-- SALIR -->
-				<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light text-white "> 
+				<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light text-primary "> 
 					&nbsp; <i class="pl-5 bi bi-arrow-left-circle fs-5 "></i> &nbsp; Salir 
 				</a>
-			
-			<hr class="text-white">
-
-
+			<hr>
 				<!-- PROFESSIONAL DATA -->
-				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-primary"> 
 					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; Tu Información 		
 				</a>
-
-				
-				
 				<!-- APPOINTMENT LIST  
 				<hr class="text-white">
 					<a @click="switchViewTo(5);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
 					&nbsp; <i class="bi bi-person-lines-fill fs-5"></i> &nbsp; Lista de Citas  
 				</a>
 				-->
-				
-				<hr class="text-white">
+			<hr>
 				<!-- APPOINTMENT LIST  -->
-				<a  @click="session_params.tutorial_start = true ;switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false ;session_params.tutorial_start_step1=true" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+				<a  @click="session_params.tutorial_start = true ;switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false ;session_params.tutorial_start_step1=true" class="fs-5  text-decoration-none  btn-outline-light text-primary"> 
 					&nbsp; <i class="bi bi-lightbulb fs-5"></i> &nbsp; Ver Tutorial  
 				</a>
 
-				<hr class="text-white">
+			<hr>
 				<!-- SENT INVITATION TO COLLEAGUE  -->
-				<a  @click="showInputEmailToShare = !showInputEmailToShare ; showMsgInvitationSent=false;emailToShare=null " class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+				<a  @click="showInputEmailToShare = !showInputEmailToShare ; showMsgInvitationSent=false;emailToShare=null " class="fs-5  text-decoration-none  btn-outline-light text-primary"> 
 					&nbsp; <i class="bi bi-share"></i> &nbsp; Enviar Invitacion a Colega 
 				</a>
 				<div v-if="showInputEmailToShare">
@@ -173,12 +163,13 @@ import professional_messages from './professional_messages.vue'
 					<input type="text" class="form-control" id="usr" placeholder="Correo@decolega.com" v-model="emailToShare" >
 					<text class="text-white btn btn-primary" @click="sendEmailToColleague();showInputEmailToShare=false; showMsgInvitationSent=true ">Enviar</text>
 				</div>
-				<text v-if="showMsgInvitationSent" class="text-white" >Invitacion enviada!</text>
+				<br>
+				<text v-if="showMsgInvitationSent" class="text-dark" >Invitacion enviada!</text>
 
 
-				<hr class="text-white">
+			<hr>
 				<!-- APPOINTMENT LIST  -->
-				<a  @click="showInputMessage = !showInputMessage" class="fs-5  text-decoration-none  btn-outline-light text-white"> 
+				<a  @click="showInputMessage = !showInputMessage" class="fs-5  text-decoration-none  btn-outline-light text-primary"> 
 					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Sugerencias y comentarios
 				</a>
 					<div v-if="showInputMessage"> 
