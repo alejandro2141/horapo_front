@@ -104,10 +104,10 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
     
     <div v-if="isLockDay">
         <p  class="text-center text-secondary">
-            <text style="font-size:2em;"><i  class="bi bi-lock-fill"></i></text>
+            <text style="font-size:6em;"><i  class=" bi bi-lock-fill"></i></text>
         </p>
         <p class="text-center" >
-            <i v-if="!days_expired"  @click="sendUnLock()" class="text-primary" >Desbloquear Dia </i>
+            <i @click="sendUnLock()" class="text-primary" >Desbloquear Dia </i>
         </p>
     </div>
     
