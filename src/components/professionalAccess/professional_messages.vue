@@ -13,15 +13,15 @@ import axios from 'axios';
 							</textarea>
 						</div>
 						<div class="m-1">
-							<text class="text-white"><small>Tu Animo</small></text> <br>
+							<text class="text-dark"><small>Tu Animo</small></text> <br>
 							<p>
-								<i @click="animo =1;text_message=text_message.concat('........ No sirve. Lo odio!, muerte al programador! ')" class="text-white bi bi-emoji-angry h2 m-4 "></i><br>
+								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry h2 m-4 "></i><br>
 							</p>
 							<p>
-							<i @click="animo =2;text_message=text_message.concat('......... No es la gran cosa. Programador sin creatividad!  ')" class="text-white bi bi-emoji-neutral h2 m-4 "></i><br>
+							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral h2 m-4 "></i><br>
 							</p>
 							<p>
-							<i @click="animo =3;text_message=text_message.concat('........ Maravilloso!, subale el sueldo al programador!  ')"  class="text-white bi bi-emoji-heart-eyes h2 m-4 "></i><br>
+							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes h2 m-4 "></i><br>
 							</p>
 							<!--
 							<i @click="animo =4;text_message=text_message.concat(' Tiene errores de software.  Arreglalo infame programador !!. ') " class="text-white bi bi-bug h4 p-2"></i><br>
@@ -36,7 +36,7 @@ import axios from 'axios';
 						<text class="text-white btn btn-primary" @click="sendComments">Enviar</text>
 			</div>
 
-            <div v-if="comments != null" class="text-white text-start"  >
+            <div v-if="comments != null" class="text-secondary text-start"  >
                <br>
                 <div v-for="comment in comments" :key="comment.id" class="mt-2" >
                 
@@ -47,11 +47,9 @@ import axios from 'axios';
                         <i v-if="comment.animo == 1" class="bi bi-emoji-angry h2 "></i>
                         <i v-if="comment.animo == 2 || comment.animo == 0 " class="bi bi-emoji-neutral h2 "></i>
                         <i v-if="comment.animo == 3" class="bi bi-emoji-heart-eyes h2 "></i>
-                        {{comment.message}}<br>
+                        {{ new Date(comment.date_time).toLocaleDateString() }}  {{comment.message}}<br>
                     </div>
-                  
-                    
-                
+               
                 </div>
             </div>
 
@@ -96,7 +94,7 @@ mounted() {
 
                 console.log("Obtain Previous Messages and Reply")
                 let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_comments",json);
-                //console.log("Get Message Response :"+JSON.stringify(resp) )
+                console.log("Get Message Response :"+JSON.stringify(resp) )
                 //this.comments = resp.data
                 this.comments = resp.data.rows
                
