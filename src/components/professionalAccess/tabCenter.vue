@@ -276,7 +276,7 @@ data: function () {
                         console.log("getComunaList list: "+JSON.stringify(this.comuna_list) );
                     },   
         */
-        //CREATE New Center
+        //GET Center List
         async getCenters() {
                         const json = { 
                         professional_id : this.session_params.professional_id ,			   
@@ -285,7 +285,8 @@ data: function () {
                         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
                         this.centers = response_json.data.rows;
                         console.log ("RESPONSE CENTERS:"+JSON.stringify(this.centers)) ;                       
-                    },			
+                    },	
+                    		
         //UPDATE CENTER LIST
         updateCenterList()
             {
