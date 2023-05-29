@@ -68,7 +68,7 @@ import axios from 'axios';
     <!-- SHOW APP TYPE , LOCATION  -->	
  <div class="m-2 " style="">
 
-			<div v-if="center_data.center_visit" class="">
+			<div v-if="center_data !=null && center_data.center_visit" class="">
 				<div style="font-size:2em">  
 					<div style="color: #781ED1" >
 					<i class="h1 bi bi-building "></i> En Consulta  </div>
@@ -85,7 +85,7 @@ import axios from 'axios';
 					</div>           
 			</div>
 
-			<div v-if="center_data.home_visit" style="color:#3399FF">
+			<div v-if="center_data !=null && center_data.home_visit" style="color:#3399FF">
 					<div style="font-size:2em" >
 						<i class="bi bi-house-door"></i><text > Visita a Domicilio:</text> <br>
 					</div>
@@ -118,7 +118,7 @@ import axios from 'axios';
 							</div>
 			</div>
 
-			<div v-if="center_data.remote_care" class="mb-3">
+			<div v-if="center_data !=null && center_data.remote_care" class="mb-3">
 				<div class="display-5" style="color:#b36b00" >
 					<i class="bi bi-camera-video"></i> Tele Atención  	 
 					<div style="" class="text-dark display-6" >
@@ -277,6 +277,8 @@ export default {
 
           center_data : null ,
           //calendar_data : null ,
+          centers_list : [], 
+
           }   
     },
    	
@@ -284,6 +286,15 @@ export default {
    emits: ['updateAppList','reserveUpdateAppList'] , 
       
    	mounted () {
+      console.log("Mounted Modal Professional Reserve APpoointment")
+      this.getCenter()
+
+           },
+
+    created () {
+      console.log("CREATED Modal Professional Reserve APpoointment")
+      this.getCenter()
+
            },
 
   watch: {
@@ -300,6 +311,18 @@ export default {
   },
 
 	methods :{
+
+    async getCenters_list() {
+      console.log ("MODAL PROFESIONAL RESERVE APP getCenters()...")
+                        const json = { 
+                        professional_id : this.session_params.professional_id ,			   
+                                        };
+                        console.log ("GET CENTERS REQUEST :"+ JSON.stringify(json)  );
+                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+                        this.centers_list = response_json.data.rows;
+                        console.log ("RESPONSE CENTERS:"+JSON.stringify(this.centers_list)) ;                       
+                    },	
+                    
     
     rutFormat(value)
 		{
@@ -326,7 +349,7 @@ export default {
 
         },
       getCenter(id){
-            let temp= this.session_params.centers.find(elem => elem.id ==  id  )
+            let temp= this.centers_list.find(elem => elem.id ==  id  )
             if (temp != null) { return temp }
             else { return null }
       },
@@ -440,13 +463,16 @@ export default {
           },
         */
       
-        openModalReserveAppEvent(variable) {
-          console.log("openModalEvent Reserve App  Event !!!");
-          this.showModalReserveAppointment= true ; 
-  
-          this.center_data = this.session_params.centers.find(elem => elem.id == this.hourToReserve.center_id )
-         //this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.hourToReserve.calendar_id )
-
+        async openModalReserveAppEvent(variable) {
+          console.log("MODAL PROFESIONAL RESERVE APP Watcher  Event !!!");
+          console.log("MODAL PROFESIONAL RESERVE APP getCenter");
+          await this.getCenters_list()
+          console.log("MODAL PROFESIONAL RESERVE APP centers_list "+JSON.stringify(this.centers_list));
+          console.log("MODAL PROFESIONAL RESERVE APP find center");
+          this.center_data = this.centers_list.find(elem => elem.id == this.hourToReserve.center_id )
+          console.log("MODAL PROFESIONAL RESERVE APP Found Center_data:"+JSON.stringify(this.center_data) );
+          //this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.hourToReserve.calendar_id )
+         this.showModalReserveAppointment= true ; 
         },
 
 
