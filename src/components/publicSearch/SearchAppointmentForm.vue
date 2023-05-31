@@ -3,7 +3,7 @@ import { ref } from 'vue'
 //const showForm = ref(false)
 import inputFormSpecialty  from './InputFormSpecialty.vue'
 import inputFormComuna  from './InputFormComuna.vue'
-import specialtyCircle from './SpecialtyCircle.vue'
+import specialtyCircle from './SpecialtyCircle2.vue'
 import appTypeCircle from './AppTypeCircle.vue'
 import Datepicker from 'vuejs3-datepicker';
 
