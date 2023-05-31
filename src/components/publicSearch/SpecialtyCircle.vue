@@ -18,9 +18,23 @@ import { ref } from 'vue'
                 <div  id="hexagono3"  :style="{ 'background-color': '#FF0000'        } " class=" border  border-2  d-flex justify-content-center align-items-center"  > 
                     <div id="hexagono3-1"  class="text-center" :style="{ 'background-color': '#00FF00'      } " >
                         <div id="hexagono3-2" class="d-flex justify-content-center align-items-center" :style="{ 'background-color': getBgcolor() , 'color' : getTextColor() } " >
-                            <text > {{getSpecialtyName()}} 
-                            </text>
-                            <br> 
+                            
+                        
+                        <div  id="hexagono3"  :style="{ 'background-color': '#FFF'        } " class=" border  border-2  d-flex justify-content-center align-items-center"  > 
+                            <div id="hexagono3-1"  class="text-center" :style="{ 'background-color': '#fff'      } " >
+                                <div id="hexagono3-2" class="d-flex justify-content-center align-items-center" :style="{ 'background-color': '#FFF' , 'color' : getTextColor() } " >
+                           
+                                        <text > {{getSpecialtyName()}} 
+                                        </text>
+                                        <br> 
+
+                                </div>
+                            </div> 
+                        </div> 
+
+
+
+
                         </div>
                     </div> 
                 </div> 
