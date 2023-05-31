@@ -17,7 +17,7 @@ import axios from 'axios';
 
     <!-- Day   -->
         <div class="d-flex justify-content-between mt-0" style="position: relative; ">
-            <div @click="prevDay(calendar_date)">
+            <div @click="prevDay(calendar_date); closeAllOverlapped()">
                 <i style="font-size:1.7em" class="display-1 text-primary bi bi-caret-left "></i>
             </div>
             
@@ -25,7 +25,7 @@ import axios from 'axios';
                 {{day_long_names[calendar_date.getDay()] }}  {{ calendar_date.getDate() }}  
             </div>
 
-            <div @click="nextDay(calendar_date)"> 
+            <div @click="nextDay(calendar_date); closeAllOverlapped() "> 
                 <i style="font-size:1.7em" class="text-primary bi bi-caret-right "></i>
             </div>
         </div>
@@ -34,7 +34,7 @@ import axios from 'axios';
     <!-- Month  -->
     <small><small class="">
         <div class="d-flex justify-content-between text-primary " style="position: relative; " >
-            <div class="" @click="goToToday(); showMonthSelector=false ;showYearSelector=false "><small class="text-danger m-2 "><b>Hoy</b></small></div>
+            <div class="" style="font-size: 0.8em ;" @click="goToToday(); showMonthSelector=false ;showYearSelector=false "><small><small class="text-danger m-2 "><i class="bi bi-chevron-compact-left"></i>Hoy</small></small></div>
             <!--
             <div @click="prevMonth(calendar_date)"> 
                 <i style="font-size:1.7em" class="text-primary bi bi-caret-left "></i> 
@@ -68,26 +68,35 @@ import axios from 'axios';
             
             <div style="position: absolute; z-index: 999 ;font-size:0.9em; border-radius: 25px; "  class="border d-flex justify-content-evenly bg-white border-1 p-4 mt-3 text-primary ">
               
-                <div class="d-flex flex-column">  
-                    <text class="p-2" @click="setMonth(1,calendar_date);showMonthSelector=false" >Enero</text>  
-                    <text class="p-2" @click="setMonth(2,calendar_date);showMonthSelector=false">Febrero</text> 
-                    <text class="p-2" @click="setMonth(3,calendar_date);showMonthSelector=false">Marzo</text> 
-                    <text class="p-2" @click="setMonth(4,calendar_date);showMonthSelector=false">Abril</text>
+                <div class="d-flex flex-column p-2">  
+                    <text class="pt-0" @click="setMonth(1,calendar_date);showMonthSelector=false" >Enero</text>  
+                    <br>
+                    <text class="pt-0" @click="setMonth(2,calendar_date);showMonthSelector=false">Febrero</text> 
+                    <br>
+                    <text class="pt-0" @click="setMonth(3,calendar_date);showMonthSelector=false">Marzo</text> 
+                    <br>
+                    <text class="pt-0" @click="setMonth(4,calendar_date);showMonthSelector=false">Abril</text>
                 </div>
                 
-                <div class="d-flex flex-column">  
-                    <text class="p-2"  @click="setMonth(5,calendar_date);showMonthSelector=false">Mayo</text>
-                    <text class="p-2"  @click="setMonth(6,calendar_date);showMonthSelector=false">Junio</text>
-                    <text class="p-2"  @click="setMonth(7,calendar_date);showMonthSelector=false">Julio</text>
-                    <text class="p-2"  @click="setMonth(8,calendar_date);showMonthSelector=false">Agosto</text>
+                <div class="d-flex flex-column p-2">  
+                    <text class="pt-0"  @click="setMonth(5,calendar_date);showMonthSelector=false">Mayo</text>
+                    <br>
+                    <text class="pt-0"  @click="setMonth(6,calendar_date);showMonthSelector=false">Junio</text>
+                    <br>
+                    <text class="pt-0"  @click="setMonth(7,calendar_date);showMonthSelector=false">Julio</text>
+                    <br>
+                    <text class="pt-0"  @click="setMonth(8,calendar_date);showMonthSelector=false">Agosto</text>
 
                 </div>
 
-                <div class="d-flex flex-column">  
-                    <text class="p-2"  @click="setMonth(9,calendar_date);showMonthSelector=false">Septiembre</text>
-                    <text class="p-2"  @click="setMonth(10,calendar_date);showMonthSelector=false">Octubre</text> 
-                    <text class="p-2"  @click="setMonth(11,calendar_date);showMonthSelector=false">Noviembre</text>  
-                    <text class="p-2"  @click="setMonth(12,calendar_date);showMonthSelector=false">Diciembre</text>
+                <div class="d-flex flex-column p-2">  
+                    <text class="pt-0"  @click="setMonth(9,calendar_date);showMonthSelector=false">Septiembr</text>
+                    <br>
+                    <text class="pt-0"  @click="setMonth(10,calendar_date);showMonthSelector=false">Octubre</text> 
+                    <br>
+                    <text class="pt-0"  @click="setMonth(11,calendar_date);showMonthSelector=false">Noviembr</text>  
+                    <br>
+                    <text class="pt-0"  @click="setMonth(12,calendar_date);showMonthSelector=false">Diciembr</text>
                 </div>
                 
             </div>
@@ -361,6 +370,12 @@ export default {
         },
 
 	methods :{
+
+            closeAllOverlapped()
+            {
+            this.showMonthSelector=false 
+            this.showYearSelector=false 
+            },
 
             goToToday()
             {
