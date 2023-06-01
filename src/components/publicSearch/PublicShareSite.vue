@@ -13,9 +13,9 @@ defineProps({
 
 
 <template>
-    <div class="p-0 m-0 border border-1 bg-white" id="form" >
+<div class="bg-secondary ">
+    <div class="m-5 border border-1 bg-white" id="form" style="border-radius: 15px;" >
      
-
         <div class="p-3">
            <text class="d-flex justify-content-center m-2 ">Compartir en redes sociales</text>
             <div class="d-flex justify-content-center">
@@ -33,12 +33,16 @@ defineProps({
             </div> 
            <!--
             <a class="btn btn-outline-secondary m-2 p-2" HREF="/index.html" type="button">Regresar</a> -->
+        <!--
             <div class="d-flex justify-content-center">
                 <button class="btn btn-success m-2 p-2 d-flex justify-content-center" v-on:click="sendRecoverApp()" type="button">Enviar</button>
             </div>
+        -->
+        <br>
         </div>
 
     </div>
+</div>
 </template>
 
 <style scoped>
@@ -62,6 +66,7 @@ export default {
         
     methods: {
 
+        /*
             async sendRecoverApp()
             {
                console.log("sendRecoverApp");  
@@ -82,6 +87,7 @@ export default {
                 //location.href = "professional_view_appointments_agenda.html?"+this.getUrlParam() ;
                 //location.reload();
             },
+            */
 
         },
 
