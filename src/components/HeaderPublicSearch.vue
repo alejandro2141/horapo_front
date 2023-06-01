@@ -17,7 +17,7 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
             <!-- 
             <i  @click="show_sub_menu = !show_sub_menu" class="fs-2 bi bi-list text-secondary"></i>
             -->
-            <text v-if="!show_sub_menu" class="p-2" @click="show_sub_menu = !show_sub_menu; showRecoverApp=false" style="font-size: 1em ; "> <i class="bi bi-water text-primary"></i> </text>
+            <text v-if="!show_sub_menu" class="p-2" @click="closeAllDialog();show_sub_menu = !show_sub_menu; showRecoverApp=false" style="font-size: 1em ; "> <i class="bi bi-water text-primary"></i> </text>
             
             <text v-else class="p-2" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary"></i> </text>
 
@@ -25,7 +25,7 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
  
 
         <div class="m-0 p-0 text-secondary mt-3 text-center">
-            <text @click="showShareSite=!showShareSite" class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
+            <text @click="closeAllDialog(); showShareSite=!showShareSite" class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
             <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
             -->
         </div>
@@ -38,8 +38,8 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
      
 
         <div class="p-3 border"   style="border-bottom-left-radius: 40%;">
-            <text v-if="!showRecoverApp" @click="showRecoverApp=!showRecoverApp;show_sub_menu=false" class="p-2 mt-2 text-primary" style="font-size: 1em; ">citas</text>
-            <text v-else class="p-2" @click="showRecoverApp = !showRecoverApp" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary p-2"></i> </text>
+            <text v-if="!showRecoverApp" @click="closeAllDialog(); showRecoverApp=!showRecoverApp;show_sub_menu=false" class="p-2 mt-2 text-primary" style="font-size: 1em; ">citas</text>
+            <text v-else class="p-2" @click=" showRecoverApp = !showRecoverApp" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary p-2"></i> </text>
 
         </div>
 
@@ -116,6 +116,13 @@ export default {
     },
 
 	methods: {
+
+        closeAllDialog()
+        {
+        this.show_sub_menu = false 
+        this.showRecoverApp = false 
+        this.showShareSite = false 
+        },
 
 	},
 
