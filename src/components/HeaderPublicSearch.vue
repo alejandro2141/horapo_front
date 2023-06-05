@@ -25,7 +25,7 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
  
 
         <div class="m-0 p-0 text-secondary mt-3 text-center">
-            <text @click="closeAllDialog(); showShareSite=!showShareSite" class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
+            <text @click="showShareSite=!showShareSite" class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
             <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
             -->
         </div>
@@ -50,7 +50,7 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
 ---------------------->
 
     <RecoverAppointmentsForm v-if="showRecoverApp" style="position: absolute; top: 5em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"></RecoverAppointmentsForm>
-    <PublicShareSite v-if="showShareSite" style="position: absolute; top: 5em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;" ></PublicShareSite>
+    <PublicShareSite v-on:closePublicShareSite="closePublicShareSite"  v-if="showShareSite" style="position: absolute; top: 5em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;" ></PublicShareSite>
 
     <div v-if="show_sub_menu"   class=" text-dark bg-white border p-2"  style="position: absolute; top: 3em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"> 
             <!--
@@ -116,6 +116,10 @@ export default {
     },
 
 	methods: {
+        closePublicShareSite()
+        { 
+            this.showShareSite = false 
+        },  
 
         closeAllDialog()
         {
