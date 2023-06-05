@@ -31,7 +31,7 @@ import professional_messages from './professional_messages.vue'
 					<text>Menu</text>
 				</div>
 
-				<i v-if="show_close_list" style="font-size:2.0em" class="bi bi-x-lg" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+				<i v-if="show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-primary" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
 			</text>
 		</div>
 		<!-- CITAS -->
@@ -58,7 +58,7 @@ import professional_messages from './professional_messages.vue'
 						<text>Calendarios</text>
 					</div>	
 		</div>
-			<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-dark" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>	
+			<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-primary" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>	
 	</div><!--END CENTER MENU -->
 
 		</div>
