@@ -67,70 +67,93 @@ import { BKND_CONFIG } from '../../../config123.js'
                                 </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
+                <!--
                     <div v-if="!showEdit && !showSocials" @click="showSocials=!showSocials " class="d-flex justify-content-between "  >
                         <text class="m-1"> enviar calendario  </text> 
                         <i class="m-2 fs-3 m-1 bi bi-share text-primary">
                         </i>
                     </div>
-
-
-                    <div v-if="showSocials" class="text-dark m-3 p-2  border border-1 border-primary bg-white " style="border-radius: 15px;">    
+                -->
+                
+                <!-- SOCIALS FOR CALENDARS -->
+                    <div v-if="showSocials" class="w-100  " style="position: absolute; ">    
+                        <div class="m-3 p-2 bg-white border border-1 border-primary" style="border-radius: 15px;">
+                        
                         <div class="d-flex justify-content-between "> 
-                            <text>Compartir este calendario con pacientes </text>
+                            <text></text>
+                            <text>Compartir con pacientes </text>
                             <i @click="showSocials=false" class="h3 bi bi-x-lg text-primary"></i> 
                         </div>
-                        <div class="text-secondary mb-2">
+                        <div class="text-secondary m-3">
                              
-                            <a :href="linkWebCalendar" target="_blank" >Agenda {{ calendar.id }}</a>. Aquí el paciente podrá buscar una hora disponible
+                            Link a calendario<br>
+                            <a :href="linkWebCalendar" target="_blank" >Agenda {{ calendar.id }}</a>
                            
                         </div>
                         
                         <div>
-                            <div class="d-flex justify-content-around" >
-                                <i @click="showWebLink=!showWebLink " style="font-size:2em" class="bi bi-globe2"></i>URL
-                                <i @click="showInputEmail=!showInputEmail" style="font-size:2em" class="bi bi-envelope"></i>Email 
-                                <i @click="showInputPhone=!showInputPhone" style="font-size:2em" class="bi bi-whatsapp"></i>WhatsApp 
-                            </div>
-
-                            <div v-if="showWebLink">
-                                <a :href="linkWebCalendar" target="_blank" >Ir Agenda Publica</a>
-                            </div>
-
-                            <div v-if="showInputEmail"> 
-                                    Ingrese Email destino<br>
-                                    <input class="text-dark bg-white" type="text" v-model="customer_email" placeholder="email@gmail.com" id="fname" name="fname"><br>
-                                    <text type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false; sendCalendarToPatient(customer_email, calendar.id , calendar.professional_id, calendar.center_id )" >
-                                        enviar
-                                    </text> 
-                                    <p></p>                  
-                            </div>
-
-                            <div v-show="showInputPhone"> 
-                                    Ingrese Telefono<br>
-                                    <input class="text-dark bg-white" type="text" id="fname" v-model="customer_phone" name="fname">
-                                    <br>
-                                    <!--
-                                    <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text='+idSpecialty2name(specialty_code)+'\n'+session_params['professional_name']+'\nHTTP://'+host+'/nested/publicSiteProfessional.html?prof_id='+session_params.professional_id+'&cal_id='+calendar.id+''" >
-                                    Enviar </a>
-                                    -->
+                            <div >
+                                <text class="text-secondary">Compartir calendario al paciente</text>
+                                
+                                    <div class="d-flex justify-content-around text-primary" >
+                                        <div>
+                                            <i @click="showInputEmail=!showInputEmail;showInputPhone=false"  class="display-4 bi bi-envelope"></i>
+                                            <br>Email
+                                        </div>
+                                        
+                                        <div>
+                                        <i @click="showInputPhone=!showInputPhone;showInputEmail=false"  class="display-4 bi bi-whatsapp"></i>
+                                        <br>WhatsApp 
+                                
+                                        </div>
+   
+                                    </div>
                                     
-                                    <!--
-                                    <a type="button" class="btn btn-primary m-2" :href="get_link_whatsApp(customer_phone)" >
-                                    -->
-                                    <!--                                   
-                                    <a type="button" class="btn btn-primary m-2" :href="'asdfasdf'" >
-                                   https://wa.me/"+phone+"?text="+await this.idSpecialty2name(this.specialty_code)+"\n%20"+this.session_params.professional_name+"\nPuedes buscar una hora disponible en:\n http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" " 
-                                    -->
+                                    <div v-if="showInputEmail"> 
+                                            Ingrese Email destino<br>
+                                            <input class="text-dark bg-white" type="text" v-model="customer_email" placeholder="email@gmail.com" id="fname" name="fname"><br>
+                                            <text type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false; sendCalendarToPatient(customer_email, calendar.id , calendar.professional_id, calendar.center_id )" >
+                                                enviar
+                                            </text> 
+                                            <p></p>                  
+                                    </div>
+                                    
+                                    <div v-show="showInputPhone"> 
+                                        Ingrese Telefono<br>
+                                        <input class="text-dark bg-white" type="text" id="fname" v-model="customer_phone" name="fname">
+                                        <br>
+                                        <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text=horapo%20Puedes%20Buscar%20una%20Hora%20disponible%20en:%20'+idSpecialty2name(specialty_code)+'Puedes buscar una hora disponible en: http://'+host+'/nested/publicSiteProfessional.html?params='+session_params.professional_id+'_'+calendar.id+' '" >
+                                        Enviar 
+                                        </a>
+                                    </div>
 
-                                   <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text=horapo%20Puedes%20Buscar%20una%20Hora%20disponible%20en:%20'+idSpecialty2name(specialty_code)+'Puedes buscar una hora disponible en: http://'+host+'/nested/publicSiteProfessional.html?params='+session_params.professional_id+'_'+calendar.id+' '" >
-                                    Enviar 
-                                    </a>
+                                    <br>
+                                    <text class=" m-2 ">Compartir en tus redes sociales</text>
+                                    <div class="d-flex justify-content-around m-2">
+                                      
+                                        <a target="_blank" :href=linkWebCalendar_face >  <i class="display-4  bi bi-facebook m-3"></i> </a>
+                                        <a target="_blank" :href=linkWebCalendar_twitter >  <i class="display-4  bi bi-twitter m-3"></i> </a>
+                                        <!--
+                                        <a target="_blank" href="https://www.pinterest.com/pin/find/?url=https://www.horapo.com/">  <i class="display-4  bi bi-pinterest m-3"></i>  </a>
+                                    
+                                        <a href="mailto:correodestinatario@correo.com?subject=HoraPO.%20Las%20mejores%20profesionales%20de%20salud%20en%20un%20solo%20lugar&body=Email%20Body%20Text">asdfasdf<i class="bi bi-envelope-fill display-4  m-2"></i></a>
+                                    -->
+                                    </div> 
+                               
+
+                                    <br><br>
                             </div>
+
+                           
+
+                           
+                           
 
                         </div>
   
+                        </div>
                     </div>
 
                     <!--
@@ -487,7 +510,12 @@ export default {
         this.cdate = new Date()
 
         this.host = window.location.host;
-        this.linkWebCalendar ="http://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+" "
+        this.linkWebCalendar ="https://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id
+        this.linkWebCalendar_face="http://www.facebook.com/share.php?u=https://www.horapo.com//nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+"&title=En HoraPO puedes"
+        this.linkWebCalendar_twitter="https://twitter.com/share?url=https://www.horapo.com/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+"&text=En HoraPO puedes buscar una hora de "+this.idSpecialty2name(this.specialty_code)+" "+this.center_data.name
+
+       // https://twitter.com/share?url=http%3A%2F%2Fwww.horapo.com%2Fnested%2FpublicSiteProfessional.html%3Fparams%3DPROFID_CALID%0A&text=En%20HoraPO%20%20puedes%20buscar%20una%20hora%20disponible%20para%20ESPECIALIDAD%20%20con%20PROFESIONAl%20en%20el%20siguiente%20link.%20%0Ahttp%3A%2F%2Fwww.horapo.com%2Fnested%2FpublicSiteProfessional.html%3Fparams%3DPROFID_CALID%0A">  <i class="display-4  bi bi-twitter m-3"></i> </a>
+
     },
 
 	methods :{
