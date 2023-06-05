@@ -25,11 +25,15 @@ import { BKND_CONFIG } from '../../../config123.js'
                                 <text class="card-title display-6  mt-0 pt-0"   >
                                     <i v-if="showEdit" @click="deleteCalendar();showEdit=false" class="bi bi-trash text-danger" ></i>  
                                     <i v-else class="bi bi-calendar-week "></i>  {{idSpecialty2name(specialty_code) }}  
+                                
                                 </text>
 
                                 <div  class="text-warning " v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
                                             <i class="bi bi-tags-fill display-4"></i>Nuevo
+                                           
                                 </div>
+
+                                <i class="m-2 fs-3 m-1 bi bi-share text-primary" v-if="!showEdit && !showSocials" @click="showSocials=!showSocials "></i>
                                 <!--
                                 <div class="fs-1 bg-light text-primary" style="background-color: #D4D4D4;  border-radius: 15px;">
                                     <p @click="displayShareCalendar(calendar)" class="text-center p-1"  >
@@ -74,11 +78,13 @@ import { BKND_CONFIG } from '../../../config123.js'
 
                     <div v-if="showSocials" class="text-dark m-3 p-2  border border-1 border-primary bg-white " style="border-radius: 15px;">    
                         <div class="d-flex justify-content-between "> 
-                            <text>Enviar calendario a paciente </text>
+                            <text>Compartir este calendario con pacientes </text>
                             <i @click="showSocials=false" class="h3 bi bi-x-lg text-primary"></i> 
                         </div>
                         <div class="text-secondary mb-2">
-                            Paciente podrá buscar una hora disponible en este calendario
+                             
+                            <a :href="linkWebCalendar" target="_blank" >Agenda {{ calendar.id }}</a>. Aquí el paciente podrá buscar una hora disponible
+                           
                         </div>
                         
                         <div>
