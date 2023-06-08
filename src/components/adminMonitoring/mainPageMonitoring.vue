@@ -9,16 +9,19 @@ import { BKND_CONFIG } from '../../../config123.js'
 <template>
 <div>
 
-    MAIN PAGE MONITORING
-
-
+    <text class="m-5 p-5">MAIN PAGE MONITORING</text>
+    
     <div class="border border-1">
-        
-        <button  @click="getProfessionalRegisters()" type="button" class="btn btn-secondary">show</button>
-        <div v-for="reg of p_register">
-        {{ reg.email }}  {{ reg.name }}<br>
-
+        <p class="mt-5"> 
+            <button  @click="getProfessionalRegisters()" type="button" class="btn btn-secondary">Professional Registers</button>
+        </p>
+    
+        <div class="border border-1">
+            <div v-for="reg of p_register">
+            {{ reg.email }}  {{ reg.name }}<br>
+            </div>
         </div>
+    
     </div>
 
 </div>
@@ -46,7 +49,7 @@ data: function () {
         
          },
     mounted () {
-        //this.getProfessionalRegisters()
+        this.getProfessionalRegisters()
          },
 
  
