@@ -14,6 +14,7 @@ import { BKND_CONFIG } from '../../../config123.js'
 
     <div class="border border-1">
         
+        <button  @click="getProfessionalRegisters()" type="button" class="btn btn-secondary">show</button>
         <div v-for="reg of p_register">
         {{ reg.email }}  {{ reg.name }}<br>
 
@@ -41,9 +42,13 @@ data: function () {
   	emits : [] ,
 
 
-    mounted () {
-        this.getProfessionalRegisters()
+    created () {
+        
          },
+    mounted () {
+        //this.getProfessionalRegisters()
+         },
+
  
     methods: {
         
