@@ -73,8 +73,14 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
                     <text class="text-secondary " >|</text>
                     -->
                 <div class="p-4 text-center">
-                        <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
+                        <a HREF="/nested/aboutUs.html" class=" text-decoration-none btn-floating m-1"  role="button">
                               &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >¿ Que es Horapo ?</text>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                </div>
+
+                <div class="p-4 text-center">
+                        <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
+                              &nbsp;&nbsp;<text class="text-decoration-none text-secondary" > Registrarme </text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
     </div>
