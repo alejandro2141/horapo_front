@@ -6,7 +6,7 @@ import { BKND_CONFIG } from '../config123.js'
 
 <template>
 <div>
-   ADMIN MONITORING
+  
 
 <mainPageMonitoring></mainPageMonitoring>
 </div>
