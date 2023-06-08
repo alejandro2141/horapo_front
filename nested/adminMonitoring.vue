@@ -1,0 +1,34 @@
+<script setup>
+import mainPageMonitoring from '../src/components/adminMonitoring/mainPageMonitoring.vue'
+</script>
+
+<template>
+<div>
+   ADMIN MONITORING
+
+<mainPageMonitoring></mainPageMonitoring>
+</div>
+</template>
+
+
+<style scoped>
+
+
+</style>
+
+<script>
+//const showForm = ref(false)
+
+
+export default {
+  data : function() {
+    return {
+       showKnowMore1 : false ,
+       showForm:false ,
+    }
+  },
+
+  methods: {
+  },
+}
+</script>
