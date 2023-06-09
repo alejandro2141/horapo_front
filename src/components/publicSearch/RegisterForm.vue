@@ -6,12 +6,13 @@ import axios from 'axios';
 
 </script>
 
-<template  v-if="true" >
-        <div id="form" class=" p-3">
+<template  >
+<div>
+        <div v-if="showForm"  id="form" class=" p-3">
             
             <form autocomplete="off">
                 <div class="form-row">
-        <p>Ingrese su información de registro profesional</p>
+        <p>Ingrese su información de registro profesional s</p>
                 <div class="form-group">
                         <label for="inputNames">Nombres</label>
                         <input type="text" autocomplete="off" class="form-control" id="inputNames" placeholder="Ej: Carlos Alberto" v-model="name">
@@ -74,7 +75,7 @@ import axios from 'axios';
 
                 <div class="text-center pt-5 mb-5 pb-5" >
 
-                    <a  @click='sendFormRegister' class="btn btn-primary" HREF="/index.html" >Registrarme! </a>
+                    <a  @click='sendFormRegister();showForm = false' class="btn btn-primary"  >Registrarme! </a>
                     <!-- 
                     <button @click='sendFormRegister' class="btn btn-primary">Registrarme!</button>
                     -->
@@ -83,7 +84,21 @@ import axios from 'axios';
             </form>
 
         </div>
+        <div v-if="!showForm" >
+            <p class="text-center">
+                Gracias por su registro, le enviaremos novedades al correo registrado
+            </p>
+            
+            <p class="text-center">
+                <a  class="btn btn-primary" HREF="/index.html" >Ir a HORAPO </a>
+            </p>
 
+          
+                   
+        </div>
+
+
+</div>
 </template>
 
 
@@ -98,7 +113,7 @@ import axios from 'axios';
 export default {
   data : function() {
     return {
-       showForm : false ,
+       showForm : true ,
        name : null ,
        last_name1 : null ,
        last_name2 : null ,
@@ -113,7 +128,7 @@ export default {
   },
 
  props: [],
- emits: ['closeRegisterForm'] , 
+ //emits: ['closeRegisterForm'] , 
 
   methods: {
     sendFormRegister2 () {
@@ -129,7 +144,7 @@ export default {
         
            if (confirm("Confirmar para enviar formulario") == true) {
 
-            alert("Gracias por su Registro, Pronto nos pondremos en contacto con usted")
+            //alert("Gracias por su Registro, Pronto nos pondremos en contacto con usted")
 
                 const json = { 
                     name : this.name,
@@ -145,11 +160,11 @@ export default {
                    
                         };
                  //app.config.globalProperties.dbhost = 'http://192.168.0.114:8080' ;       
-                console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
+                console.log ("sendFormRegister  REQUEST :"+ JSON.stringify(json)  );
                 let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_register_professional",json );
-                //console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
+                console.log ("sendFormRegister  RESPONSE:"+JSON.stringify(response_json.data)) ;
                 //app = response_json.data[0];
-                alert("Gracias por su Registro");
+                //alert("Gracias por su Registro");
                 //console.log ("Rows : "+JSON.stringify(response_json.data.rows[0].name )  );
                 //if (response_json.data.rows[0] )
                // if (response_json.data.rows[0].name != null )
@@ -158,7 +173,7 @@ export default {
                     //this.display = true ;
                 //location.href = "/index.html";
                 //window.location.replace("/index.html");
-                this.$emit('closeRegisterForm', response_json.data );
+                //this.$emit('closeRegisterForm', response_json.data );
                 //}
 
                 }
