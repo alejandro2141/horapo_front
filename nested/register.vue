@@ -15,9 +15,12 @@ import RegisterForm from  '../src/components/publicSearch/RegisterForm.vue'
             <a HREF="/index.html" type="button" class=""><i class="display-5 bi bi-x-lg text-primary"></i></a>
     </div>
 
-    <div v-if="true" >
+    <div v-if="true" class="d-flex justify-content-center" >
         <RegisterForm v-on:closeRegisterForm="closeRegisterForm()" ></RegisterForm>
     </div>
+
+    
+
 
 </div>
 </template>
