@@ -24,6 +24,20 @@ import { BKND_CONFIG } from '../../../config123.js'
     
     </div>
 
+    <div class="border border-1">
+        <p class="mt-5"> 
+            <button  @click="getSessionsActive()" type="button" class="btn btn-secondary">Session Active</button>
+        </p>
+    
+        <div class="border border-1">
+            <div v-for="reg of p_sessions">
+            {{ reg.name }}  {{ reg.last_activity_time }}<br>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 </template>
 
@@ -37,7 +51,8 @@ export default {
 
 data: function () {
 		return {
-            p_register : null 
+            p_register : null ,
+            p_sessions : null 
 		 }
 	},
 
@@ -50,11 +65,24 @@ data: function () {
          },
     mounted () {
         this.getProfessionalRegisters()
+        this.getSessionsActive()
          },
 
  
     methods: {
         
+        //GET Session Active
+        async getSessionsActive() {
+                        const json = { 
+                      			   
+                                      };
+
+                        console.log ("GET SESSIONS ACTIVE :"+ JSON.stringify(json)  );
+                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_sessions_active",json);
+                        this.p_sessions = response_json.data.rows;
+                        console.log ("RESPONSE GET SESSIONS ACTIVE:"+JSON.stringify(this.p_sessions)) ;                       
+                    },	
+
         //GET Center List
         async getProfessionalRegisters() {
                         const json = { 
@@ -65,7 +93,9 @@ data: function () {
                         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_registers",json);
                         this.p_register = response_json.data.rows;
                         console.log ("RESPONSE PROFESIONAL REGISERS:"+JSON.stringify(this.p_register)) ;                       
-                    },	
+                    },
+
+
 
 
 		},
