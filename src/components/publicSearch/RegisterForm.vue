@@ -12,30 +12,30 @@ import axios from 'axios';
             
             <form autocomplete="off">
                 <div class="form-row">
-        <p>Ingrese su información de registro profesional s</p>
+        <p>Ingrese su información de registro profesional</p>
                 <div class="form-group">
                         <label for="inputNames">Nombres</label>
-                        <input type="text" autocomplete="off" class="form-control" id="inputNames" placeholder="Ej: Carlos Alberto" v-model="name">
+                        <input type="text" autocomplete="off" class="form-control" id="inputNames" placeholder="..." v-model="name">
                 </div>
                 
                 <div class="form-group">
                     <label for="inputLastName">Apellido Paterno</label>
-                    <input type="text" autocomplete="off"  class="form-control" id="inputLastName" placeholder="Ej: Morales" v-model="last_name1">
+                    <input type="text" autocomplete="off"  class="form-control" id="inputLastName" placeholder="..." v-model="last_name1">
                 </div>
 
                 <div class="form-group ">
                     <label for="inputSecondLastName">Apellido Materno</label>
-                    <input type="text"  autocomplete="off" class="form-control" id="inputSecondLastName" placeholder="Ej:Gonzales" v-model="last_name2">
+                    <input type="text"  autocomplete="off" class="form-control" id="inputSecondLastName" placeholder="..." v-model="last_name2">
                 </div>
 
                 <div class="form-group ">
                     <label for="inputEmail4">Email</label>
-                    <input type="email"  autocomplete="off" class="form-control" id="inputEmail4" placeholder="Ej: micorreopersonal@gmail.com " v-model="email">
+                    <input type="email"  autocomplete="off" class="form-control" id="inputEmail4" placeholder="..." v-model="email">
                 </div>
 
                 <div class="form-group ">
                     <label for="inputDocId">N° Cedula RUT </label>
-                    <input type="text"  autocomplete="off" class="form-control" id="inputDocId" placeholder="Ej 13909365-8" v-model="doc_id">
+                    <input type="text"  autocomplete="off" class="form-control" id="inputDocId" placeholder="xx.xxx.xxx-y" v-model="doc_id">
                 </div>
 
                 <div class="form-group ">
@@ -46,12 +46,12 @@ import axios from 'axios';
                 </div>
                 <div class="form-group">
                 <label for="inputAddress">Direccion Particular</label>
-                <input type="text"  autocomplete="off" class="form-control" id="inputAddress" placeholder="Ej: Av providencia 1234, Providencia, Santiago" v-model="personal_address">
+                <input type="text"  autocomplete="off" class="form-control" id="inputAddress" placeholder="xxxxx yyyy 9999" v-model="personal_address">
                 </div>
 
                 <div class="form-group">
                     <label for="inputPhone">Telefono personal de contacto </label>
-                    <input type="text"  autocomplete="off" class="form-control" id="inputPhone" placeholder="Ej: +56975397201" v-model="personal_phone">
+                    <input type="text"  autocomplete="off" class="form-control" id="inputPhone" placeholder="Ej: +56XXXXXXXXX" v-model="personal_phone">
                 </div>
 
                 <div class="form-group">
@@ -60,7 +60,7 @@ import axios from 'axios';
                 <!-- 
                     <input type="text"  autocomplete="off"  class="form-control" id="specialty" placeholder="Ej: Kinesiologia, psicologia, terapia.." v-model="specialty">
                 -->
-                    <select class="form-select form-select-lg"  name="languages" id="lang" v-model="specialty" placeholder="Ej: Kinesiologia, psicologia, terapia.." >
+                    <select class="form-select form-select-lg"  name="languages" id="lang" v-model="specialty" placeholder="XXX" >
                         <option value="Kinesiologia">Kinesiología</option>
                         <option value="Psicologia">Psicología</option>
                         <option value="Fonoaudiología">Fonoaudiología</option>
@@ -85,8 +85,11 @@ import axios from 'axios';
 
         </div>
         <div v-if="!showForm" >
-            <p class="text-center">
-                Gracias por su registro, le enviaremos novedades al correo registrado
+            <p class="text-center" >
+                <i class="bi bi-emoji-heart-eyes text-success" style="font-size: 2.5em;" ></i>  
+                <text class="text-success" style="font-size: 1.5em;" > 
+                   
+                    &nbsp;&nbsp;&nbsp; Gracias por su registro <br>Le enviaremos novedades al correo registrado</text>
             </p>
             
             <p class="text-center">
