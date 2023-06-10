@@ -18,25 +18,32 @@ import CalendarProfessional from './calendar_professional.vue'
         <div>
             <p class="text-center display-5 pt-1 text-dark">Tus Calendarios  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2  text-primary border-primary" style=" border-radius: 15px;" ></i> 
             </p>
+
+            
                 
-            <div class="text-center p-3 m-3"> 
+            <div class="text-center p-3 m-3" v-if="calendars != null && calendars.centers != null &&  calendars.centers.length>0 "  > 
                 <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
             </div>
+            <div v-else class="mt-5 mb-5"> 
+                Antes de crear un Calendario, debe primero crear una consulta. 
+            </div>
+
             
             <!-- LIST Calendars -->
             <div>
-                    <div  id="search_result" v-if='calendars!=null && calendars.calendars !=null && calendars.calendars.length > 0 '  >
+                    <div  id="search_result" v-if='calendars!=null && calendars.calendars !=null && calendars.calendars.length > 0'  >
                         <div v-for="calendar in calendars.calendars"  :key='calendar.id' >
                           
                             <CalendarProfessional :calendar="calendar" :center_data="getCenterData(calendar.center_id)"  v-on:updateCalendarList="updateCalendarList()" :global_specialties="global_specialties" :global_comunas="global_comunas" :session_params="session_params" > </CalendarProfessional> 
                         </div>
                     </div>
-
+                <!--
                     <div v-else class="mt-1   "  style="border-radius: 15px;" >
                             <text class="fs-2">
                              Debes crear un Calendario!!
                             </text> 
                     </div>
+                -->
             </div>
             
         </div>
@@ -158,7 +165,7 @@ data: function () {
                 return center_data
             }
             else {
-                let not_found_resp = { name : "Not Found", status: -1 }
+                let not_found_resp = { name : "No existe Consulta", status: -1 }
                 return not_found_resp
             }
         },
