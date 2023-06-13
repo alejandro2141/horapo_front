@@ -25,6 +25,8 @@ module.exports = defineConfig({
         publicSiteProfessional: resolve(__dirname, './nested/publicSiteProfessional.html'),
         confirmApp: resolve(__dirname, './nested/confirmApp.html'),
         adminMonitoring: resolve(__dirname, './nested/adminMonitoring.html'),
+        contactUs: resolve(__dirname, './nested/contactUs.html'),
+
 
       }
     }
