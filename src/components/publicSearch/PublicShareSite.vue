@@ -13,7 +13,7 @@ defineProps({
 
 
 <template>
-<div class="bg-secondary ">
+<div class=" ">
     <div class="m-5 border border-1 bg-white" id="form" style="border-radius: 15px;" >
      
         <div class="p-3">
