@@ -25,7 +25,7 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
  
 
         <div class="m-0 p-0 text-secondary mt-3 text-center">
-            <text @click="showShareSite=!showShareSite" class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
+            <text @click="showShareSite=!showShareSite; show_sub_menu=false; showRecoverApp=false" class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
             <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
             -->
         </div>
@@ -68,7 +68,13 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
                             <i class="bi bi-key text-secondary h5 m-3"></i>&nbsp;<text class=" text-decoration-none text-secondary" >Acceso Profesionales</text>
                         </a>
                 </div>
-                
+
+                <div class="p-4 text-center">
+                        <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
+                              &nbsp;&nbsp;<text class="text-decoration-none text-secondary" > Registrarme </text>&nbsp;&nbsp;&nbsp;&nbsp;
+                        </a>
+                </div>
+
                     <!--
                     <text class="text-secondary " >|</text>
                     -->
@@ -79,10 +85,12 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
                 </div>
 
                 <div class="p-4 text-center">
-                        <a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-                              &nbsp;&nbsp;<text class="text-decoration-none text-secondary" > Registrarme </text>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a HREF="/nested/contactUs.html" class=" text-decoration-none btn-floating m-1"  role="button">
+                              &nbsp;&nbsp;<text class="text-decoration-none text-secondary" >Contactanos</text>&nbsp;&nbsp;&nbsp;&nbsp;
                         </a>
                 </div>
+
+
     </div>
 
 
