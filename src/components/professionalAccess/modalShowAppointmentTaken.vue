@@ -18,7 +18,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 			<div class="modal-container m-2 p-0 modal-background  " style="border-radius: 15px;" >
 
     <!------------------ ----> 
-    <div v-if="hourTaken != null"   class=" text-body h5">
+    <div v-if="hourTaken != null"   class=" text-body ">
         
         <div id="app" class="d-flex  "  >	
             <div class="p-2" style="border-radius: 15px;" :style="{ 'background-color' : hourTaken.calendar_color  }" >
@@ -61,13 +61,16 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                           </div>
                           
                           <p class="mt-0" style="">
-                              {{getCenter(hourTaken.center_id).name}}
-                              <br>
-                              <i class="bi bi-geo-alt h1"></i> {{id2comuna(getCenter(hourTaken.center_id).comuna)}}
-                              <br>
-                              <text>
-                              Direccion:  {{getCenter(hourTaken.center_id).address}}
-                              </text>
+                            {{hourTaken.center_data.name}}
+                            <br>
+                              <i class="bi bi-geo-alt h1"></i> {{id2comuna(hourTaken.center_data.comuna) }}
+                            <br>
+                            <text>
+                              Direccion:  {{hourTaken.center_data.address}}
+                            </text>
+
+                           
+
                           </p>
                           
                            
@@ -100,7 +103,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
   <!-- PATIENT  -->
           <p class="mt-2">        
                 <text class="">
-                 <b class="" > Paciente: </b> <br>
+               
                               {{ hourTaken.patient_name}} ({{ hourTaken.patient_age}} Años) <br>
                            {{ hourTaken.patient_doc_id}}<br>
 
@@ -110,28 +113,59 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
                 </text>
           </p>
  
-          <p class="text-primary  " > 
-                <a :href='"tel:+56"+hourTaken.patient_phone1' class="text-decoration-none" >
-                    <i class=" bi bi-telephone"></i>  {{ hourTaken.patient_phone1}}
-                </a>
-          </p>             
+
+          <div  @click="showInputTextMail=!showInputTextMail" class="border p-1"> 
+                              <i class="bi bi-envelope text-primary h3"></i>   
+                              <br>
+                              <text style="font-size: 1em ;">{{ hourTaken.patient_email}}</text>                     
+          </div>
+              
+
+
+          <div class="p-2"> 
+
+            <div class="d-flex  ">
+
+                    <a :href='"tel:+56"+hourTaken.patient_phone1' class="text-decoration-none flex-fill bg-light border p-2"  >
+                      <i class="h3 bi bi-telephone"></i> 
+                    <br>
+                    *{{ hourTaken.patient_phone1}}
+                    </a>
+                    
+              
+
+                    <a target="_blank" class="p-2 flex-fill border p-2 bg-success" :href='" https://wa.me/"+hourTaken.patient_phone1'  >
+                        <i class="h3 p-2 bi bi-whatsapp  text-white"></i>
+                    </a>
+                    <br>
+                    
+              
+
+              
             
-            <div class="text-primary  " > 
-                      
-                      <text @click="showInputTextMail=!showInputTextMail"> <i class="bi bi-envelope"></i> {{ hourTaken.patient_email}}     </text>
-                    <!--
-                      <div v-if="showInputTextMail">
-                          <br> 
-                            <text class="text-dark">Mensaje:</text>  
-                          <br>
-                          <textarea   class="form-control" rows="5" id="comment"></textarea>  
-                          
-                          <p class="text-primary"  align="right"> enviar </p>
-                         
-                      </div>
-                    -->
-                          
             </div>
+          
+            
+          </div>  
+
+            <br>
+        <!--
+            <div class=""> 
+                  <text>{{ hourTaken.patient_email}}</text>
+                  
+                  <br>
+                   
+                  <div class="d-flex justify-content-between ">
+                      <text></text>
+                      <text  @click="showInputTextMail=!showInputTextMail" class="border p-3"> 
+                              <i class="bi bi-envelope text-primary h3"></i>     
+                      </text>
+                      <text></text>
+
+                  </div>
+                  
+            </div>
+          -->
   <!-- END PATIENT  -->
             
 
@@ -357,7 +391,11 @@ export default {
             if (temp != null) { return temp.name }
             else { return "" }
        },
+
     id2comuna(id){
+    
+          console.log("appointment Reserved comunas "+JSON.stringify(this.global_comunas) );
+
             let temp= this.global_comunas.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return "" }
@@ -387,7 +425,6 @@ export default {
         this.$emit('updateAppList');
         this.showModalAppointmentTaken= false ;
         }
-
     },
 
     async requestConfirmation(app)
@@ -411,12 +448,13 @@ export default {
         }
 
     },
-
+/*
     getCenter(id){
             let temp= this.session_params.centers.find(elem => elem.id ==  id  )
             if (temp != null) { return temp }
             else { return null }
         },
+*/
 
 /*
     async updateApp(hour)
@@ -450,7 +488,7 @@ export default {
     watch : {
         hourTaken(newValue){
             // this.showModalAppointmentTaken= true ;openModalShowAppTakenEvent
-            console.log ("Hour Modal App Taken details Change!!!"+newValue+ " Show ModalApp Details ="+ this.showModalAppointmentDetais );
+            console.log ("Hour Modal App Taken details Change!!!"+newValue+ " " );
             this.form_start_time = newValue.start_time ;
             this.form_center_id =  newValue.center_id ;
             this.form_public  =  newValue.available_public_search ;
@@ -460,6 +498,7 @@ export default {
             this.form_app_duration  =  newValue.duration ;
             this.form_app_d  =  newValue.duration ;
             console.log ("this.form_public!!!"+this.form_public );
+            
         },
         openModalShowAppTakenEvent(newApp, oldApp) {
             console.log("openModalEvent Show App Taken Details !!!");
