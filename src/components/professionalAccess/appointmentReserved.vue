@@ -60,7 +60,7 @@ import axios from 'axios';
                                     </div>
                                 </div>    
                                 
-                                <div @click="$emit('displayModalReservedDetails', appointment )" style="background-color: #5BA199 ; opacity: 0.6;  border-top-right-radius:25px;  border-bottom-right-radius:25px" >
+                                <div @click="displayModalAppReserved(appointment)" style="background-color: #5BA199 ; opacity: 0.6;  border-top-right-radius:25px;  border-bottom-right-radius:25px" >
                                     <i style="font-size: 60px; padding:0px ; margin:-5px ; border:0px" class="bi bi-chevron-compact-right text-white"  ></i> 
                                 </div>   
                         </div>           
@@ -102,6 +102,17 @@ export default {
 
 	methods :{
 
+        displayModalAppReserved(app)
+        {
+
+            let aux_appointment = JSON.parse(JSON.stringify(app));
+            aux_appointment.center_data = JSON.parse(JSON.stringify(this.center_data)); 
+
+            console.log("display APP Reserved: "+JSON.stringify(aux_appointment));
+            this.$emit('displayModalReservedDetails', aux_appointment ) 
+           
+        },
+
         format_start_date(app_date)
         {
             let adate = new Date (app_date)
@@ -120,11 +131,14 @@ export default {
             else { return null }
 
         },
+
+        /*
          getCenterName(id){
             let temp= this.session_params.centers.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return "No Existe Centro" }
         },
+        */
 
       	/*
         id2name(id){
