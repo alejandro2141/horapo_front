@@ -17,7 +17,7 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
             <!-- 
             <i  @click="show_sub_menu = !show_sub_menu" class="fs-2 bi bi-list text-secondary"></i>
             -->
-            <text v-if="!show_sub_menu" class="p-2" @click="closeAllDialog();show_sub_menu = !show_sub_menu; showRecoverApp=false" style="font-size: 1em ; "> <i class="bi bi-water text-primary"></i> </text>
+            <text v-if="!show_sub_menu" class="p-2" @click="closeAllDialog();show_sub_menu = !show_sub_menu; showRecoverApp=false ;showShareSite=false" style="font-size: 1em ; "> <i class="bi bi-water text-primary"></i> </text>
             
             <text v-else class="p-2" @click="show_sub_menu = !show_sub_menu" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary"></i> </text>
 
@@ -25,7 +25,7 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
  
 
         <div class="m-0 p-0 text-secondary mt-3 text-center">
-            <text @click="showShareSite=!showShareSite; show_sub_menu=false; showRecoverApp=false" class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
+            <text @click="showShareSite=!showShareSite ; show_sub_menu=false; showRecoverAppointment=false" class="m-5 p-4" style="font-size: 1.4em" >horapo</text> <br>
             <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
             -->
         </div>
@@ -38,9 +38,11 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
      
 
         <div class="p-3 border"   style="border-bottom-left-radius: 40%;">
-            <text v-if="!showRecoverApp" @click="closeAllDialog(); showRecoverApp=!showRecoverApp;show_sub_menu=false" class="p-2 mt-2 text-primary" style="font-size: 1em; ">citas</text>
-            <text v-else class="p-2" @click=" showRecoverApp = !showRecoverApp" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary p-2"></i> </text>
-
+            <text v-if="true" @click="showRecoverAppointment=!showRecoverAppointment ; show_sub_menu=false  ; showShareSite=false   " class="p-2 mt-2 text-primary" style="font-size: 1em; ">citas</text>
+            <!--
+            <text v-if="!showRecoverAppointment" @click="show_sub_menu=false  ; showShareSite=false ;showRecoverAppointment=true;  " class="p-2 mt-2 text-primary" style="font-size: 1em; ">citas</text>
+            <text v-else class="p-2" @click=" showRecoverAppointment = false ; showShareSite=false ; show_sub_menu=false" style="font-size: 1em ; "> <i class="bi bi-x-lg text-primary p-2"></i> </text>
+            -->
         </div>
 
        
@@ -49,8 +51,8 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
     <div class="d-flex justify-content-end"><a href="/index.html" class=""><i class="display-3 bi bi-x-lg"></i></a></div>
 ---------------------->
 
-    <RecoverAppointmentsForm v-if="showRecoverApp" style="position: absolute; top: 5em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"></RecoverAppointmentsForm>
-    <PublicShareSite v-on:closePublicShareSite="closePublicShareSite"  v-if="showShareSite" style="position: absolute; top: 5em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;" ></PublicShareSite>
+    <RecoverAppointmentsForm v-on:closeRecoverAppointmentForm="closeRecoverAppointmentForm" v-if="showRecoverAppointment" style="position: absolute; top: 4em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"></RecoverAppointmentsForm>
+    <PublicShareSite v-on:closePublicShareSite="closePublicShareSite"  v-if="showShareSite" style="position: absolute; top: 4em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;" ></PublicShareSite>
 
     <div v-if="show_sub_menu"   class=" text-dark bg-white border p-2"  style="position: absolute; top: 3em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;"> 
             <!--
@@ -115,7 +117,7 @@ export default {
  data : function() {
     return {
         show_sub_menu : false,
-        showRecoverApp : false ,
+        showRecoverAppointment: false ,
         showShareSite : false ,
         }
   },
@@ -134,6 +136,17 @@ export default {
         { 
             this.showShareSite = false 
         },  
+
+        showRecoverAppFunction()
+        {
+            console.log("show recover appointment")
+            this.showRecoverAppointment = true 
+        },  
+
+        closeRecoverAppointmentForm()
+        {
+            this.showRecoverAppointment = false 
+        },
 
         closeAllDialog()
         {
