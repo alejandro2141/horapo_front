@@ -171,7 +171,10 @@ methods: {
                console.log ("SearchGeneric RESULTS : "+JSON.stringify(this.appointments_filtered))
                //this.n_appointments_found = this.appointments_filtered.appointments_list.length 
               this.n_appointments_found = this.numberAppointmentFound()  
-              this.scrollDown()
+              
+              //INACTIV SCROLL DOW
+              //this.scrollDown()
+              
               }
                else{
                  this.n_appointments_found = 0  
