@@ -13,14 +13,17 @@ defineProps({
 
 
 <template>
-<div class=" ">
-    <div class="m-5 border border-1 bg-white" id="form" style="border-radius: 15px;" >
+<div class="">
+    <div class="m-1 border border-1 bg-white" id="form" style="border-radius: 15px;" >
      
         <div class="p-3">
            
-            <text @click="sendCloseDialog()" class="d-flex justify-content-end m-2 "> <i class="display-5 bi bi-x-lg text-primary"></i> </text>
-            
-            <text class="d-flex justify-content-center m-2 ">Compartir en redes sociales</text>
+            <div class="d-flex justify-content-between"> 
+                <text></text>
+                <text class="d-flex justify-content-center  m-0 h5">Compartir</text>
+                <text @click="sendCloseDialog()" class="d-flex justify-content-end "> <i class="h3 bi bi-x-lg text-primary"></i> </text>
+            </div>
+
             <div class="d-flex justify-content-center">
                 
                 <a target="_blank" href="whatsapp://send?text=Visita%20HoraPO%2C%20Las%20mejores%20consultas%20de%20salud%20en%20un%20solo%20lugar%20https://www.horapo.com/">  <i class="bi bi-whatsapp display-4  m-3"></i> </a>
