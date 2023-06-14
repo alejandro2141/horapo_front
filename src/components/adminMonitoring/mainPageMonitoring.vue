@@ -43,7 +43,7 @@ import { BKND_CONFIG } from '../../../config123.js'
     
         <div class="border border-1">
             <div v-for="reg of p_comments">
-            {{ reg.email}}  {{ reg.message}}<br>
+                {{ reg.date}}  {{ reg.email}}  {{ reg.message}}<br>
             </div>
         </div>
     </div>
