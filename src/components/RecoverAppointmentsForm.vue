@@ -16,7 +16,7 @@ defineProps({
 
 
 <template>
-    <div class="p-0 m-0 border border-1 bg-white" id="form" >
+    <div class="p-0 m-0 border border-1 p-2 bg-white" id="form" >
         <!--
         <form autocomplete="off">
             Ingrese su correo y le enviaremos sus horas ya agendadas 
@@ -38,11 +38,18 @@ defineProps({
 
         </form>    
         -->
+        <div class="d-flex justify-content-between p-2"> 
+                <text></text>
+                <text class="d-flex justify-content-center  m-0 h5">Recordar mis citas</text>
+                <text @click="sendCloseDialog()" class="d-flex justify-content-end "> <i class="h3 bi bi-x-lg text-primary"></i> </text>
+        </div>
+
+
 
         <div class="p-3">
-           <text class="d-flex justify-content-center m-2 ">Le enviaremos un recordatorio a su correo</text>
+          
            <div class="d-flex justify-content-center" >
-             <input class="text-center"  style="border-radius: 5px;" type="text" placeholder="correo@ejemplo.com" v-model='user_email' > 
+             <input class="text-center"  style="border-radius: 5px;" type="text" placeholder="ingrese su correo" v-model='user_email' > 
            </div> 
            <!--
             <a class="btn btn-outline-secondary m-2 p-2" HREF="/index.html" type="button">Regresar</a> -->
@@ -67,6 +74,9 @@ export default {
            }   
     },
     
+    props: [], 
+    emits: ['closeRecoverAppointmentForm'],
+
     mounted () {   
        },
 
@@ -75,8 +85,13 @@ export default {
         
     methods: {
 
-            async sendRecoverApp()
-            {
+        sendCloseDialog() 
+        {
+            this.$emit("closeRecoverAppointmentForm","nothing");
+        },
+
+        async sendRecoverApp()
+        {
                console.log("sendRecoverApp");  
                 
                var r =confirm("¿ Enviar las citas a su Email Registrado ?");
@@ -94,9 +109,9 @@ export default {
                     }
                 //location.href = "professional_view_appointments_agenda.html?"+this.getUrlParam() ;
                 //location.reload();
-            },
-
         },
+
+    },
 
 }
 </script>
