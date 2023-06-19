@@ -5,6 +5,7 @@ import ModalCreateCalendar from './modalCreateCalendar.vue';
 //import ModalViewCalendar from './modalViewCalendar.vue';
 import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatient.vue'
 import CalendarProfessional from './calendar_professional.vue'
+import infoCalendar from './info_calendar.vue'
 
 </script>
 <template>
@@ -19,13 +20,14 @@ import CalendarProfessional from './calendar_professional.vue'
             <p class="text-center display-5 pt-1 text-dark">Tus Calendarios  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2  text-primary border-primary" style=" border-radius: 15px;" ></i> 
             </p>
 
-            
+            <infoCalendar v-if="showInfoCreate"></infoCalendar>
                 
             <div class="text-center p-3 m-3" v-if="calendars != null && calendars.centers != null &&  calendars.centers.length>0 "  > 
                 <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
             </div>
-            <div v-else class="mt-5 mb-5"> 
-                Antes de crear un Calendario, debe primero crear una consulta. 
+            <div v-else class="text-center p-5"> 
+                <b><i class="bi bi-exclamation-triangle display-4 text-warning"></i></b><br>
+                Antes de crear un nuevo Calendario, debe primero crear una consulta. 
             </div>
 
             
@@ -159,13 +161,13 @@ data: function () {
         getCenterData(center_id)
         {
            let center_data=this.calendars.centers.find(elem => elem.id ==  center_id)
-   console.log("CENTER DATA :"+center_data);
+            console.log("CENTER DATA :"+center_data);
             if (center_data != null )
             {
                 return center_data
             }
             else {
-                let not_found_resp = { name : "No existe Consulta", status: -1 }
+                let not_found_resp = { name : null , status: -1 }
                 return not_found_resp
             }
         },
