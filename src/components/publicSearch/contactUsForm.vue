@@ -46,13 +46,13 @@ import axios from 'axios';
         <div class="m-1 d-flex justify-content-between">
 							
 							<text>
-								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry h2 m-4 "></i><br>
+								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry display-3 m-4 "></i><br>
                             </text>
 							<text>
-							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral h2 m-4 "></i><br>
+							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral display-3 m-4 "></i><br>
                             </text>
 							<text>
-							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes h2 m-4 "></i><br>
+							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes display-3 m-4 "></i><br>
                             </text>
 							<!--
 							<i @click="animo =4;text_message=text_message.concat(' Tiene errores de software.  Arreglalo infame programador !!. ') " class="text-white bi bi-bug h4 p-2"></i><br>
