@@ -29,8 +29,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                                 </text>
 
                                 <div  class="text-warning " v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
-                                            <i class="bi bi-tags-fill display-4"></i>Nuevo
-                                           
+                                            Nuevo        
                                 </div>
 
                                 <i class="m-2 fs-3 m-1 bi bi-share text-primary" v-if="!showEdit && !showSocials" @click="showSocials=!showSocials "></i>
@@ -47,28 +46,34 @@ import { BKND_CONFIG } from '../../../config123.js'
                     </div>
 
                 <!-- ESTADO -->
-                <div class="d-flex justify-content-between mt-2 p-1"> 
+                <div v-if="center_data.name != null" class="d-flex justify-content-between mt-2 p-1"> 
                         <div>
                             Estado    
                         </div>
 
+                    <div  class="border border-1 p-1 m-1" style="border-radius: 15px;"  >
+                        <div >
+                            <div v-if="evaluateCalendarStatus(form_date_end)==3" class="bg-white" :class="{ 'bg-white': showEdit }" style=" border-radius: 15px; "  >
+                                <div class=""> <i class="text-danger h3 bi bi-slash-circle-fill"></i> Expirado </div> 
+                            </div>
 
-                    <div class="border border-1 p-1 m-1" style="border-radius: 15px;" >
-                        <div v-if="evaluateCalendarStatus(form_date_end)==3" class="bg-white" :class="{ 'bg-white': showEdit }" style=" border-radius: 15px; "  >
-                              <div class=""> <i class="text-danger h3 bi bi-slash-circle-fill"></i> Expirado </div> 
-                        </div>
-
-                        <div v-else  >
-                                <div v-if="form_calendar_active "  >  
-                                    <div @click="switchCalendarActive()" > <i class="text-success h3 bi bi-check2"></i> Encendido </div>
-                                </div>
-                                <div v-else > 
-                                    <div  @click="switchCalendarActive()" > <i class="text-danger h3 bi bi-slash-circle-fill"></i> Apagado </div>
-                                </div>
+                            <div v-else  >
+                                    <div v-if="form_calendar_active "  >  
+                                        <div @click="switchCalendarActive()" > <i class="text-success h3 bi bi-check2"></i> Encendido </div>
+                                    </div>
+                                    <div v-else > 
+                                        <div  @click="switchCalendarActive()" > <i class="text-danger h3 bi bi-slash-circle-fill"></i> Apagado </div>
+                                    </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
+                
+                <div v-else class="bg-danger text-white text-center">
+                            NO activo ya que Consulta No existe
+                </div>
+
+
                 <!--
                     <div v-if="!showEdit && !showSocials" @click="showSocials=!showSocials " class="d-flex justify-content-between "  >
                         <text class="m-1"> enviar calendario  </text> 
@@ -192,7 +197,18 @@ import { BKND_CONFIG } from '../../../config123.js'
                     <p v-if="calendar.remote_care" class="text-dark text-end">
                         <text>  </text> <text> Tele Atencion </text>
                     </p>
-                    <i class="bi bi-geo-alt text-dark"></i> {{center_data.name}} 
+           
+                    <div v-if="center_data.name != null">
+                        <text class="bi bi-geo-alt text-dark"> {{center_data.name}} </text> 
+                        
+                    </div>
+                    <div v-else> 
+                        <text class="text-danger bi bi-exclamation-diamond-fill"> Consulta No Existe</text> 
+                    </div>    
+                    
+                   
+                
+                
                 </div>
             </div>     
 
