@@ -13,7 +13,7 @@ import { ref } from 'vue'
 		</div>
 		<!-- <div class="text-muted">	Las mejores consultas de salud en un solo lugar
 		</div> -->
-		<hr>
+		<br>
 	</div>
 
 </template>
