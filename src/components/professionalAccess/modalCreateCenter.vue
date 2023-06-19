@@ -33,12 +33,14 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                     <hr class="text-white">
 
                       <div class="form-group">
-                         <label for="exampleInputEmail1" style="font-size: 1em;" >Nombre de su Consulta </label>
+                        
+                         <label for="exampleInputEmail1" style="font-size: 1em;" >Nombre de su Consulta </label>  
+                         <text v-if="form_center_name_req"  class="text-danger"> Requerido</text>
                             <input type="text" class="form-control  border-dark  text-dark" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Nombre su Consulta             ">
                       </div>
 
                       <div class="mt-3 " style="font-size: 1em;" >Tipo de consulta</div>
-                      
+                      <text v-if="form_center_type_req"  class="text-danger"> Requerido</text>
                       <div >
                           <button type="button" class="btn  m-0 border border-1 border-dark" :class="[app_type_center ? 'btn btn-primary' : 'btn btn-light']"  @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ; form_comuna_codes=[]; " >
                               <i class="h3 bi bi-building m-0 p-0"></i><br>
@@ -58,6 +60,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 
                       <div v-if="app_type_home"  class="form-group mt-3" >
                         <div>  <text class="h3">Atencion a domicilio.</text><br>   Comunas atiende a Domicilio (Máximo 5). </div>
+                        
                         <div  class="mt-0 pt-0" >
                             <!-- <InputFormComunaProfessional class="m-3" v-on:selectedComunas="selectedComunas" :global_comunas="global_comunas"  ></InputFormComunaProfessional> -->
                             <div v-for="comuna in form_comuna_codes" :key="comuna" class="d-flex justify-content-between m-0 p-0 " >
@@ -256,7 +259,7 @@ data: function () {
 			showModalCreate : false ,
             center : Object,
 
-            form_center_name : null,
+            form_center_name : "",
             form_center_address : null,
             form_center_region : null,
             //form_center_comuna_code : null,
@@ -280,7 +283,9 @@ data: function () {
 
             center_comuna : null,
 
-            form_comuna_codes : []
+            form_comuna_codes : [] , 
+            form_center_name_req : null , 
+            form_center_type_req : null ,
 		      }
 
 	},
@@ -349,6 +354,21 @@ data: function () {
       
         //CREATE New Center
  	    async createNewCenter() {
+      
+        if (this.form_center_name.length <2  )
+        {
+          this.form_center_name_req = true 
+          return null 
+        }
+        if (this.form_center_type_req == null )
+        {
+          this.form_center_type_req = true 
+          return null 
+        }
+        
+        
+    
+
         //define color for this center
         var colorArray = [
               "#FFE6E6",
