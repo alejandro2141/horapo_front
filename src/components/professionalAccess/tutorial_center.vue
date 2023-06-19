@@ -8,9 +8,9 @@ import axios from 'axios';
 <div>
   
        
-    <div  class="text-dark m-2 p-2 border border-rounded" style="border-radius: 15px;" >
-        <p class="text-center">Tutorial</p>
-        <p class="text-center">
+    <div  class=" m-2 p-2 border border-rounded bg-warning text-dark " style="border-radius: 15px;" >
+        <p class="text-center">Información</p>
+        <p class="text-left">
              Aqui puedes crear tus consultas   <br>
         
         Una consulta es un lugar fisico o virtual donde usted entrega sus servicios profesionales, <br>
@@ -57,7 +57,7 @@ import axios from 'axios';
             </div>
        </div>
 
-        <p class="text-center mt-3">
+        <p class="text-left mt-3">
             Puede crear tantas consultas como usted quiera,estas consultas estarán disponibles para sus calendarios.  
         </p>
         
