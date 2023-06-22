@@ -111,6 +111,7 @@ data: function () {
 
     updated () {
         console.log("TAB AppointmentsListReserved Updated");
+        console.log("")
             },
 
     destroyed() {
@@ -178,6 +179,7 @@ data: function () {
              
                if (pattern.includes("/"))
                {
+                console.log("-------------search a date")
                    
                     for (let i = 0; i < this.apps.length; i++) 
                     {
@@ -189,22 +191,21 @@ data: function () {
                          {
                          this.appsFiltered.push(this.apps[i]) 
                          }
-
-                        
                     }
-
                }
                else
                {
+                console.log("---------------search pattern text:"+pattern)
                     for (let i = 0; i < this.apps.length; i++) 
                     {
                         if ( this.apps[i].patient_name.includes(pattern) || this.apps[i].patient_email.includes(pattern) || this.apps[i].patient_doc_id.includes(pattern) || this.apps[i].patient_phone1.includes(pattern)  )
                         {
                         this.appsFiltered.push(this.apps[i]) 
-                        }
-                        
+                        }  
+                        console.log("--------- cicle:")
                     }
                }
+               console.log("searchPatter:RESULT: "+JSON.stringify(this.appsFiltered) )
 
             },
 
