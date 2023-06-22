@@ -56,6 +56,20 @@ import axios from 'axios';
                                                 <text v-if="appointment.home_visit"  ><i class="bi bi-dot"></i> A Domicilio <br> 
                                                 - {{appointment.patient_address }} 
                                                 </text>
+                                                <text v-if="appointment.cancelled_professional !=null &&  appointment.cancelled_professional"  class="text-danger">
+                                                    Cancelada por profesional
+                                                </text>
+                                                <text v-if="appointment.cancelled_patient !=null &&  appointment.cancelled_patient"  class="text-danger">
+                                                    Cancelada por paciente 
+                                                </text>
+                                                <br>
+                                                <text v-if="appointment.cancelled_date !=null"  class="text-danger">
+                                                  
+                                                    {{  appointment.cancelled_date }}
+                                                </text>
+
+
+                                               
                                         </small> </small>
                                     </div>
                                 </div>    
