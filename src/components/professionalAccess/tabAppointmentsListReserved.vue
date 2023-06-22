@@ -10,20 +10,31 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
     <div class="m-3">
     <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
    
-            <p class="text-center h4">Horas Reservadas  <i v-if="!searchBox" @click="searchBox=true" class="bi bi-search display-3"></i>
+            <p class="text-center h4">Horas Reservadas  
             </p>
             
             <div class="md-form mt-0">
     </div>
     <!-- Search form -->
-        <div v-if="searchBox" class="m-2 d-flex justify-content-center">
+        <div v-if="true" class="m-2 d-flex justify-content-center">
             <input class="text-uppercase form-control form-control-sm ml-3 w-75"  v-model="pattern"    type="text" placeholder="Search" aria-label="Search"><i @click="searchPattern(pattern)" class="bi bi-search display-3"></i>
         </div>
+        
+        <div class="d-flex justify-content-evenly">
+            <text @click="showOldApp=true"> Todas </text>
+            
+            <text @click="showOldApp=false"> Futuras </text>
+        </div>
 
+
+
+
+        <!--
         <button v-if="!showOldApp" @click="showOldApp=true" type="button" class="btn btn-secondary m-4">Ver Citas Pasadas</button>
         <button v-if="showOldApp" @click="showOldApp=false" type="button" class="btn btn-secondary m-4">Ocultar Citas Pasadas</button>
-               
-        <div v-for="app in appTakenFiltered" :key='app.id' >
+        -->
+
+        <div v-for="app in appsFiltered" :key='app.id' >
         <!-- 
             <div class="mt-3">
                 <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
@@ -35,12 +46,12 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
         -->
             <div v-if="evaluateDate(app.date) || showOldApp" class="mt-4 " style="border-radius: 0px; background-color: #FFF;font-family: Arial, Helvetica, sans-serif;border-top: 1px solid;">
                 <div class="p-1"  :class="{ 'text-secondary': !evaluateDate(app.date) }" >
+                   <text  style="font-size: 1.4em"  >{{ formatDate(app.date)  }}</text>  <text style="font-size: 1.3em">{{getSpecialty(app.specialty_reserved)}}</text>
                    <text v-if="!evaluateDate(app.date)"> (En el pasado) </text> 
-                   <text  style="font-size: 1.4em"  >{{ formatDate(app.date)  }}</text>  <text style="font-size: 1.3em">{{getSpecialty(app.specialty_reserved)}}</text><br>
                 </div>
                
                 <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
-             </div>
+            </div>
 
         </div>
       
@@ -62,10 +73,14 @@ export default {
  
 data: function () {
 		return {
+            apps : [] ,
+            appsFiltered : [] ,
             appsTaken : [],
+            appsCancelled : [] ,
             specialties: [],
             pattern : "" ,
             appTakenFiltered : [] ,
+            appCancelledFiltered : [] ,
             centers : [] , 
             calendars : [] ,
 
@@ -76,7 +91,7 @@ data: function () {
             //global_comunas   :  null ,
             //global_specialties :  null ,
             searchBox: false ,
-            showOldApp : false ,
+            showOldApp : true ,
 
            		 }
 	},
@@ -104,11 +119,22 @@ data: function () {
 
     mounted () {
         console.log("TAB AppointmentsListReserved Mounted");
-        this.getAppTaken()
+        //this.getAppTaken()
+        //this.getAppCancelled()
+        this.getAppointments ()
         },
 
  
     methods: {
+
+            async getAppointments ()
+            {
+                await this.getAppTaken()
+                await this.getAppCancelled()
+                this.appsFiltered = await  this.apps.sort(function(o){ return new Date( o.date ) })  
+                this.appsFiltered =  await  this.appsFiltered.reverse() 
+                
+            },
 
             evaluateDate(date)
             {
@@ -135,8 +161,11 @@ data: function () {
 
             updateAppList()
             {
+                this.apps = [] 
+                this.appsFiltered = [] 
                 console.log("update TabAppointmentListReserved ")
                 this.getAppTaken()
+                this.getAppCancelled()
             },
 
             searchPattern(pattern)
@@ -145,20 +174,20 @@ data: function () {
 
                this.pattern = this.pattern.toUpperCase()
                this.appTakenFiltered = [] 
-               console.log("searchPatter:"+pattern)
+               console.log("searchPatter::"+pattern)
              
                if (pattern.includes("/"))
                {
                    
-                    for (let i = 0; i < this.appsTaken.length; i++) 
+                    for (let i = 0; i < this.apps.length; i++) 
                     {
-                        let auxDate = new Date (this.appsTaken[i].date)
+                        let auxDate = new Date (this.apps[i].date)
                         let dateFormatter =  auxDate.getDate()+"/"+(auxDate.getMonth()+1)+"/"+auxDate.getFullYear()   
                         console.log("dateFormatter:"+dateFormatter)
                          
                          if (dateFormatter.includes(pattern))
                          {
-                         this.appTakenFiltered.push(this.appsTaken[i]) 
+                         this.appsFiltered.push(this.apps[i]) 
                          }
 
                         
@@ -167,11 +196,11 @@ data: function () {
                }
                else
                {
-                    for (let i = 0; i < this.appsTaken.length; i++) 
+                    for (let i = 0; i < this.apps.length; i++) 
                     {
-                        if ( this.appsTaken[i].patient_name.includes(pattern) || this.appsTaken[i].patient_email.includes(pattern) || this.appsTaken[i].patient_doc_id.includes(pattern) || this.appsTaken[i].patient_phone1.includes(pattern)  )
+                        if ( this.apps[i].patient_name.includes(pattern) || this.apps[i].patient_email.includes(pattern) || this.apps[i].patient_doc_id.includes(pattern) || this.apps[i].patient_phone1.includes(pattern)  )
                         {
-                        this.appTakenFiltered.push(this.appsTaken[i]) 
+                        this.appsFiltered.push(this.apps[i]) 
                         }
                         
                     }
@@ -213,12 +242,37 @@ data: function () {
                     let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_taken",json);
                     console.log ("professional_get_appointments_taken  RESPONSE:"+JSON.stringify(response_json)) ;   
                     
+                    this.apps = this.apps.concat(response_json.data.appointments)
+                    this.appsFiltered = this.appsFiltered.concat(response_json.data.appointments)
+                    this.specialties = this.specialties.concat(response_json.data.specialties)
+                    this.centers = this.centers.concat(response_json.data.centers)
+                    this.calendars = this.calendars.concat(response_json.data.calendars)
+                    
+
+                    /*
                     this.appsTaken = response_json.data.appointments
                     this.appTakenFiltered = response_json.data.appointments
                     this.specialties = response_json.data.specialties
                     this.centers = response_json.data.centers
                     this.calendars = response_json.data.calendars
+                    */
             },	
+
+            async getAppCancelled() {
+                const json = { 
+                    //professional_id : this.session_params.professional_id ,			   
+                    professional_id : this.session_params.professional_id ,			   
+                            };
+                    console.log ("professional_get_appointments_cancelled :"+ JSON.stringify(json)  );
+                    let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_cancelled",json);
+                    console.log ("professional_get_appointments_cancelled  RESPONSE:"+JSON.stringify(response_json)) ;   
+                    
+                    this.apps = this.apps.concat(response_json.data.appointments)
+                    this.appsFiltered = this.appsFiltered.concat(response_json.data.appointments)
+                    this.specialties = this.specialties.concat(response_json.data.specialties)
+                    this.centers = this.centers.concat(response_json.data.centers)
+                    this.calendars = this.calendars.concat(response_json.data.calendars)
+            },
 
 		},
   
