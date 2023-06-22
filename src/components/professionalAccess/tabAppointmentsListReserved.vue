@@ -173,7 +173,7 @@ data: function () {
                 this.searchBox=true
 
                this.pattern = this.pattern.toUpperCase()
-               this.appTakenFiltered = [] 
+               this.appFiltered = [] 
                console.log("searchPatter::"+pattern)
              
                if (pattern.includes("/"))
