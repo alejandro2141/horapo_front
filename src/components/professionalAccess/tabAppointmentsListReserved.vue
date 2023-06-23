@@ -7,7 +7,7 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
 </script>
 <template>
     
-    <div class="m-3">
+    <div class="m-3" style="width:350px;">
     <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
    
             <p class="text-center h4">Horas Reservadas  
@@ -17,24 +17,21 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
     </div>
     <!-- Search form -->
         <div v-if="true" class="m-2 d-flex justify-content-center">
-            <input class="text-uppercase form-control form-control-sm ml-3 w-75"  v-model="pattern"    type="text" placeholder="Search" aria-label="Search"><i @click="searchPattern(pattern)" class="bi bi-search display-3"></i>
+            <input style="border-radius: 25px;" class="text-uppercase form-control form-control-sm ml-3 w-75"  v-model="pattern"    type="text" placeholder="Search" aria-label="Search">
+            <i class="bi bi-search display-5 text-secondary" style="margin-left: -1.2em"  ></i>
         </div>
         
         <div class="d-flex justify-content-evenly">
             <text @click="showOldApp=true"> Todas </text>
-            
             <text @click="showOldApp=false"> Futuras </text>
         </div>
-
-
-
 
         <!--
         <button v-if="!showOldApp" @click="showOldApp=true" type="button" class="btn btn-secondary m-4">Ver Citas Pasadas</button>
         <button v-if="showOldApp" @click="showOldApp=false" type="button" class="btn btn-secondary m-4">Ocultar Citas Pasadas</button>
         -->
 
-        <div v-for="app in appsFiltered" :key='app.id' >
+        <div v-for="app in appsFiltered" :key='app.id'  >
         <!-- 
             <div class="mt-3">
                 <i class="bi bi-clock-history"></i>  {{ formatDate(app.date)  }} : {{ formatTime(app.start_time) }}({{ app.duration }} Min)  {{getSpecialty(app.specialty_reserved)}}
@@ -52,6 +49,8 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
                
                 <AppointmentReserved   v-on:displayModalReservedDetails="displayModalReservedDetails" :appointment='app'  :index="app.id" :days_expired="[]"  :global_specialties='specialties' :global_comunas='global_comunas' :specialty_data="specialties.find(elem => elem.id ==  app.specialty_reserved )" :center_data="centers.find(elem => elem.id ==  app.center_id  )" :calendar_data="calendars.find(elem => elem.id ==  app.calendar_id  )"  :session_params='session_params' > </AppointmentReserved>
             </div>
+
+
 
         </div>
       
@@ -92,6 +91,7 @@ data: function () {
             //global_specialties :  null ,
             searchBox: false ,
             showOldApp : true ,
+            showCancelled : true ,
 
            		 }
 	},
@@ -111,7 +111,7 @@ data: function () {
 
     updated () {
         console.log("TAB AppointmentsListReserved Updated");
-        console.log("")
+       
             },
 
     destroyed() {
@@ -130,17 +130,18 @@ data: function () {
 
             async getAppointments ()
             {
+                console.log("get APPOINTMENTS method" )
                 await this.getAppTaken()
                 await this.getAppCancelled()
-                this.appsFiltered = await  this.apps.sort(function(o){ return new Date( o.date ) })  
-                this.appsFiltered =  await  this.appsFiltered.reverse() 
+                this.apps  = await  this.apps.sort(function(o){ return new Date( o.date ) }).reverse()  
                 
+                this.appsFiltered =  [...this.apps] 
             },
 
             evaluateDate(date)
             {
                 let today = new Date()
-                console.log ("TAB APPOINTMENT LIST today:"+today.getTime()+"   AppDate:"+Date.parse(date) )
+                //console.log ("TAB APPOINTMENT LIST today:"+today.getTime()+"   AppDate:"+Date.parse(date) )
                 if  (today.getTime() > Date.parse(date) )  
                 {
                     return false
@@ -149,11 +150,8 @@ data: function () {
                 {
                     return true 
                 }
-
-
             },
-
-            
+   
             displayModalReservedDetails(app)
             {
                 this.hourTaken = app
@@ -169,43 +167,60 @@ data: function () {
                 this.getAppCancelled()
             },
 
-            searchPattern(pattern)
+            async searchPattern(pattern)
             {  
-                this.searchBox=true
+               // await this.getAppointments () 
+               this.searchBox=true
 
-               this.pattern = this.pattern.toUpperCase()
-               this.appFiltered = [] 
-               console.log("searchPatter::"+pattern)
+               let aux_pattern = pattern.toUpperCase()
+               let aux_app_filtered = new Array()
+               console.log("PREVIOS TO SEARCH:")
+               console.log("APPfILTERED:"+aux_app_filtered.length)
+               console.log("APP:"+this.apps.length)
              
-               if (pattern.includes("/"))
-               {
-                console.log("-------------search a date")
-                   
-                    for (let i = 0; i < this.apps.length; i++) 
+               console.log("searchPatter::"+aux_pattern)
+             
+                if ( pattern!= null && pattern.length > 1 )
+                {
+                    if (aux_pattern.includes("/"))
                     {
-                        let auxDate = new Date (this.apps[i].date)
-                        let dateFormatter =  auxDate.getDate()+"/"+(auxDate.getMonth()+1)+"/"+auxDate.getFullYear()   
-                        console.log("dateFormatter:"+dateFormatter)
-                         
-                         if (dateFormatter.includes(pattern))
-                         {
-                         this.appsFiltered.push(this.apps[i]) 
-                         }
+                        
+                        console.log("-------------search a date")
+                        
+                            for (let i = 0; i < this.apps.length; i++) 
+                            {
+                                let auxDate = new Date (this.apps[i].date)
+                                let dateFormatter =  auxDate.getDate()+"/"+(auxDate.getMonth()+1)+"/"+auxDate.getFullYear()   
+                                console.log("dateFormatter:"+dateFormatter)
+                                
+                                if (dateFormatter.includes(pattern))
+                                {
+                                    aux_app_filtered.push(this.apps[i]) 
+                                }
+                            }
                     }
-               }
-               else
-               {
-                console.log("---------------search pattern text:"+pattern)
-                    for (let i = 0; i < this.apps.length; i++) 
+                    else if(this.apps != null  && this.apps.length >0  && aux_pattern.length>1 )
                     {
-                        if ( this.apps[i].patient_name.includes(pattern) || this.apps[i].patient_email.includes(pattern) || this.apps[i].patient_doc_id.includes(pattern) || this.apps[i].patient_phone1.includes(pattern)  )
-                        {
-                        this.appsFiltered.push(this.apps[i]) 
-                        }  
-                        console.log("--------- cicle:")
+                        console.log("---------------search pattern text:"+aux_pattern)
+                            for (let i = 0; i < 5; i++) 
+                            {
+                                if ( this.apps[i].patient_name.includes(aux_pattern) || this.apps[i].patient_email.includes(aux_pattern) || this.apps[i].patient_doc_id.includes(aux_pattern) || this.apps[i].patient_phone1.includes(aux_pattern)  )
+                                {
+                                    aux_app_filtered.push(this.apps[i]) 
+                                }  
+                                console.log("--------- cicle:"+i+"  app.id:"+this.apps[i].id)
+                                
+                            }
                     }
-               }
-               console.log("searchPatter:RESULT: "+JSON.stringify(this.appsFiltered) )
+                }
+                else 
+                {
+                    this.appsFiltered = [...this.apps] 
+                    return     
+                }
+               //console.log("searchPatter:RESULT: "+JSON.stringify(this.appsFiltered) )
+               //this.apps=aux_app_filtered
+               this.appsFiltered = [...aux_app_filtered]
 
             },
 
@@ -276,6 +291,15 @@ data: function () {
             },
 
 		},
+
+        watch: 
+        {
+            pattern (p_new, p_old)
+            {
+                this.searchPattern(this.pattern)
+            }
+
+        }, 
   
 
 }
