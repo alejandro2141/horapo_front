@@ -87,9 +87,9 @@ import axios from 'axios';
         <div v-if="!showForm" >
             <p class="text-center" >
                 <i class="bi bi-emoji-heart-eyes text-success" style="font-size: 2.5em;" ></i>  
-                <text class="text-success" style="font-size: 1.5em;" > 
+                <text class="text-success" style="font-size: 1.1em;" > 
                    
-                    &nbsp;&nbsp;&nbsp; Gracias por su registro <br>Le enviaremos novedades al correo registrado</text>
+                    &nbsp;&nbsp;&nbsp; Gracias por su registro <br>Te enviaremos informacion de acceso a tu correo</text>
             </p>
             
             <p class="text-center">
