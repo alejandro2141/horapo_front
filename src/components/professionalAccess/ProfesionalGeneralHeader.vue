@@ -9,7 +9,7 @@ import professional_messages from './professional_messages.vue'
 </script>
 
 <template>
-<div>
+<div class="text-menu">
 
 	<div class="d-flex justify-content-around">
 
@@ -21,23 +21,24 @@ import professional_messages from './professional_messages.vue'
 		
 
 				<!--START CENTER MENU -->
-	<div v-if="session_params['professional_name'] "  style="width: 400px; " class="d-flex mt-1 pb-2 justify-content-around " :class="{ 'bg-white text-primary' : showTopMenu  }" > 
+	<div v-if="session_params['professional_name'] "  style="width: 400px; " class="d-flex mt-1 pb-2 justify-content-around " :class="{ 'bg-white' : showTopMenu  }" > 
 		<!-- MENU -->
 		<div :class="{ 'opacity-25' : !session_params.tutorial_start_step4 && session_params.tutorial_start }" >
 			<text>	
 				<div v-if="showTopMenu" >
-					<i style="font-size:2.0em" class="bi bi-gear " @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
+					<i  class="bi bi-list icon-menu" @click="showTopMenu=false;show_close_list=true;showUserMenu=true" ></i>
 					<br>
+					
 					<text>Menu</text>
 				</div>
 
-				<i v-if="show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-primary" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
+				<i v-if="show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-menu" @click="switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false " ></i>
 			</text>
 		</div>
 		<!-- CITAS -->
 		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step3  && session_params.tutorial_start }" >		
 			<div v-if="showTopMenu"  class="" @click=" switchViewTo(5);showTopMenu=false;" >
-				<i style="font-size:2.0em" class="bi bi-people"></i>
+				<i  class="bi bi-people icon-menu"></i>
 				 <br>
 				<text>Citas</text>
 			</div>
@@ -46,7 +47,7 @@ import professional_messages from './professional_messages.vue'
 		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step1  && session_params.tutorial_start}" >
 				<div v-if="showTopMenu"  :class="{'':session_params.tutorial_start_step1}" @click="switchViewTo(3);showTopMenu=false;show_close_centers=true;show_close_calendars=false" >	
 					<div v-if="showTopMenu"  class="text-center"   >
-						<i style="font-size:2.0em" class="bi-geo-alt"></i><br>
+						<i  class="bi-geo-alt icon-menu"></i><br>
 						<text >Consultas</text>
 					</div>
 				</div>
@@ -54,11 +55,11 @@ import professional_messages from './professional_messages.vue'
 		<!--CALENDARS -->
 		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step2 && session_params.tutorial_start}" >
 					<div v-if="showTopMenu" class="text-center"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" >
-						<i style="font-size:2.0em" class="bi bi-calendar"></i><br>
+						<i class="bi bi-calendar icon-menu"></i><br>
 						<text>Calendarios</text>
 					</div>	
 		</div>
-			<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-primary" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>	
+			<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-menu" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>	
 	</div><!--END CENTER MENU -->
 
 		</div>
@@ -127,18 +128,18 @@ import professional_messages from './professional_messages.vue'
 
 	<Transition duration="1050" name="nested">
 	
-		<div v-if="showUserMenu"  class="bg-white" style="" >
+		<div v-if="showUserMenu"  class="bg-white text-menu"  >
 			<div class="bg-white w-100 p-4" style="position: absolute; z-index: 999; "  >
-			<div class="bg-white text-dark" >
+			<div class="bg-white"  >
 				
 			<hr>
 				<!-- SALIR -->
-				<a HREF="/index.html" class="fs-5 text-decoration-none  btn-outline-light text-primary "> 
+				<a HREF="/index.html" class="fs-5 text-decoration-none text-menu"  > 
 					&nbsp; <i class="pl-5 bi bi-arrow-left-circle fs-5 "></i> &nbsp; Salir 
 				</a>
 			<hr>
 				<!-- PROFESSIONAL DATA -->
-				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none  btn-outline-light text-primary"> 
+				<a @click="switchViewTo(4);showUserMenu=!showUserMenu" class="fs-5  text-decoration-none text-menu " > 
 					&nbsp; <i class="fs-5  bi bi-person-circle "></i> &nbsp; Tu Información 		
 				</a>
 				<!-- APPOINTMENT LIST  
@@ -149,13 +150,13 @@ import professional_messages from './professional_messages.vue'
 				-->
 			<hr>
 				<!-- APPOINTMENT LIST  -->
-				<a  @click="session_params.tutorial_start = true ;switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false ;session_params.tutorial_start_step1=true" class="fs-5  text-decoration-none  btn-outline-light text-primary"> 
+				<a  @click="session_params.tutorial_start = true ;switchViewTo(2);showUserMenu=false;showTopMenu=true ; show_close_list=false ;session_params.tutorial_start_step1=true" class="fs-5  text-decoration-none  btn-outline-light text-menu"  > 
 					&nbsp; <i class="bi bi-lightbulb fs-5"></i> &nbsp; Ver Tutorial  
 				</a>
 
 			<hr>
 				<!-- SENT INVITATION TO COLLEAGUE  -->
-				<a  @click="showInputEmailToShare = !showInputEmailToShare ; showMsgInvitationSent=false;emailToShare=null " class="fs-5  text-decoration-none  btn-outline-light text-primary"> 
+				<a  @click="showInputEmailToShare = !showInputEmailToShare ; showMsgInvitationSent=false;emailToShare=null " class="fs-5  text-decoration-none   text-menu" > 
 					&nbsp; <i class="bi bi-share"></i> &nbsp; Enviar Invitacion a Colega 
 				</a>
 				
@@ -170,7 +171,7 @@ import professional_messages from './professional_messages.vue'
 
 			<hr>
 				<!-- APPOINTMENT LIST  -->
-				<a  @click="showInputMessage = !showInputMessage" class="fs-5  text-decoration-none  btn-outline-light text-primary"> 
+				<a  @click="showInputMessage = !showInputMessage" class="text-menu fs-5  text-decoration-none  text-menu" > 
 					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Sugerencias y comentarios
 				</a>
 					<div v-if="showInputMessage"> 
@@ -210,6 +211,21 @@ import professional_messages from './professional_messages.vue'
 </template>
 
 <style scoped>
+
+.text-menu
+{
+color: rgb(0, 112, 97);
+
+}
+
+.icon-menu
+{
+color: rgb(0, 112, 97);
+font-size:2.5em;
+}
+
+
+
 
 .nested-enter-active, .nested-leave-active {
 	transition: all 0.3s ;
