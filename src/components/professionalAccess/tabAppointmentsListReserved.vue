@@ -18,7 +18,7 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
     <!-- Search form -->
         <div v-if="true" class="m-2 d-flex justify-content-center">
             <input style="border-radius: 25px;" class="text-uppercase form-control form-control-sm ml-3 w-75"  v-model="pattern"    type="text" placeholder="Search" aria-label="Search">
-            <i class="bi bi-search display-5 text-secondary" style="margin-left: -1.2em"  ></i>
+           <!-- <i class="bi bi-search display-5 text-secondary" style="margin-left: -1.2em"  ></i> -->
         </div>
         
         <div class="d-flex justify-content-evenly">
@@ -101,21 +101,21 @@ data: function () {
 	emits : [],
 
     beforeCreate () {
-         console.log("TAB AppointmentsListReserved BegoreCReate");  
+        // console.log("TAB AppointmentsListReserved BegoreCReate");  
         },
 
     created () {  
-          console.log("TAB AppointmentsListReserved Created");  
+         // console.log("TAB AppointmentsListReserved Created");  
          },
    
 
     updated () {
-        console.log("TAB AppointmentsListReserved Updated");
+        // console.log("TAB AppointmentsListReserved Updated");
        
             },
 
     destroyed() {
-        console.log("TAB AppointmentsListReserved Destroyed");
+        // console.log("TAB AppointmentsListReserved Destroyed");
         },
 
     mounted () {
@@ -130,14 +130,31 @@ data: function () {
 
             async getAppointments ()
             {
-                console.log("get APPOINTMENTS method" )
-                await this.getAppTaken()
-                await this.getAppCancelled()
-                this.apps  = await  this.apps.sort(function(o){ return new Date( o.date ) }).reverse()  
+               console.log("get APPOINTMENTS method" )
+               let appTaken = await this.getAppTaken()
+               // await this.getAppCancelled()
+
+                    this.apps = this.apps.concat(appTaken.appointments)
+                    this.appsFiltered = this.appsFiltered.concat(appTaken.appointments)
+                    this.specialties = this.specialties.concat(appTaken.specialties)
+                    this.centers = this.centers.concat(appTaken.centers)
+                    this.calendars = this.calendars.concat(appTaken.calendars)
+
+                let appReserved = await this.getAppCancelled()
+
+                    this.apps = this.apps.concat(appReserved.appointments)
+                    this.appsFiltered = this.appsFiltered.concat(appReserved.appointments)
+                    this.specialties = this.specialties.concat(appReserved.specialties)
+                    this.centers = this.centers.concat(appReserved.centers)
+                    this.calendars = this.calendars.concat(appReserved.calendars)
                 
+            
+                this.apps  = await  this.apps.sort(function(o){ return new Date( o.start_time ) }).reverse()  
                 this.appsFiltered =  [...this.apps] 
+                console.log( " APPS  : "+JSON.stringify(this.apps ) );
             },
 
+                      
             evaluateDate(date)
             {
                 let today = new Date()
@@ -256,14 +273,18 @@ data: function () {
                             };
                     console.log ("professional_get_appointments_taken :"+ JSON.stringify(json)  );
                     let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_taken",json);
-                    console.log ("professional_get_appointments_taken  RESPONSE:"+JSON.stringify(response_json)) ;   
+                    //console.log ("professional_get_appointments_taken  RESPONSE:"+JSON.stringify(response_json)) ;   
                     
+                    console.log("get Appointment taken concluded")
+                    return response_json.data 
+                    
+                    /*
                     this.apps = this.apps.concat(response_json.data.appointments)
                     this.appsFiltered = this.appsFiltered.concat(response_json.data.appointments)
                     this.specialties = this.specialties.concat(response_json.data.specialties)
                     this.centers = this.centers.concat(response_json.data.centers)
                     this.calendars = this.calendars.concat(response_json.data.calendars)
-                    
+                    */
 
                     /*
                     this.appsTaken = response_json.data.appointments
@@ -272,6 +293,7 @@ data: function () {
                     this.centers = response_json.data.centers
                     this.calendars = response_json.data.calendars
                     */
+                  
             },	
 
             async getAppCancelled() {
@@ -281,13 +303,18 @@ data: function () {
                             };
                     console.log ("professional_get_appointments_cancelled :"+ JSON.stringify(json)  );
                     let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_cancelled",json);
-                    console.log ("professional_get_appointments_cancelled  RESPONSE:"+JSON.stringify(response_json)) ;   
-                    
+                    //console.log ("professional_get_appointments_cancelled  RESPONSE:"+JSON.stringify(response_json)) ;   
+                    console.log("get Appointment Cancelled concluded")
+
+                    return response_json.data
+
+                    /*
                     this.apps = this.apps.concat(response_json.data.appointments)
                     this.appsFiltered = this.appsFiltered.concat(response_json.data.appointments)
                     this.specialties = this.specialties.concat(response_json.data.specialties)
                     this.centers = this.centers.concat(response_json.data.centers)
                     this.calendars = this.calendars.concat(response_json.data.calendars)
+                    */
             },
 
 		},
