@@ -28,8 +28,8 @@ import { BKND_CONFIG } from '../../../config123.js'
                                 
                                 </text>
 
-                                <div  class="text-warning " v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
-                                            Nuevo        
+                                <div  class="text-warning m-1" v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
+                                    <i class="bi bi-tags-fill "></i>Nuevo        
                                 </div>
 
                                 <i class="m-2 fs-3 m-1 bi bi-share text-primary" v-if="!showEdit && !showSocials" @click="showSocials=!showSocials "></i>
