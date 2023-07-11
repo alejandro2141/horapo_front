@@ -23,8 +23,8 @@ import axios from 'axios';
                             <text> 
                                <!-- <i style="color:#5BA199" class="display-3 bi bi-person-fill"></i>    -->
                                 <i class="display-5" :class="[{'text-success bi bi-person-check': appointment.patient_confirmation}, {'text-dark bi bi-person': appointment.patient_confirmation!=true} ]" ></i>
-                               
                             </text>
+
                             <br>
                             <text class="fs-3 fw-light " >
                                 <i v-if="center_data.center_visit" class=" bi bi-building"></i>      
