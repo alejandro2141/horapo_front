@@ -17,11 +17,12 @@ import inputFormComuna from  './InputFormComuna2.vue'
 
                                          <i v-else class=" bi bi-geo-alt fs-1 m-1"></i> 
                                          <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-white border-0 text-dark form-control form-control-lg" id="form_phone2" name="form_phone2" v-model="name" style="z-index: 9;  border-radius: 25px; width:80%;  text-align: left; ">
-                                         
+                                       
                                         
                                         
-                                         <div  class="text-warning " v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
-                                            <i class="bi bi-tags-fill display-4"></i>Nuevo
+                                         <div  class="text-warning d-flex justify-content-start  m-2" v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
+                                            <i class="bi bi-tags-fill "></i>Nuevo
+                                            
                                          </div>
 
                                         </div>
@@ -91,11 +92,19 @@ import inputFormComuna from  './InputFormComuna2.vue'
 
                     </div>
 
+                                        <!-- PHONE 1 -->
                                         <div v-if="centerDetails.phone1 != 'null' " class="d-flex justify-content-between mt-3">
                                             <text class="">Telefono 1:</text>
-                                            <input :disabled="!showEditOptions "  type="text" :class="[showEditOptions ? ' border border-1 border-primary' : 'bg-white border border-0 text-dark ' ]"  class="form-control  " id="form_phone2" name="form_phone2" v-model="phone1" style="z-index: 9;  border-radius: 25px; width:40%;  text-align: right; ">
+                                            <input :disabled="!showEditOptions "  type="text" :class="[showEditOptions ? ' border border-1 border-primary' : 'bg-white border border-0 text-dark ' ]"  class="form-control  " id="form_phone1" name="form_phone1" v-model="phone1" style="z-index: 9;  border-radius: 25px; width:40%;  text-align: right; ">
                                           <!--  <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text> -->
                                         </div>
+                                        <!-- PHONE 2 -->
+                                        <div v-if="centerDetails.phone2 != 'null' " class="d-flex justify-content-between mt-3">
+                                            <text class="">Telefono 2:</text>
+                                            <input :disabled="!showEditOptions "  type="text" :class="[showEditOptions ? ' border border-1 border-primary' : 'bg-white border border-0 text-dark ' ]"  class="form-control  " id="form_phone2" name="form_phone2" v-model="phone2" style="z-index: 9;  border-radius: 25px; width:40%;  text-align: right; ">
+                                          <!--  <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text> -->
+                                        </div>
+
 <hr>
                                         <p v-if="showEditButton" class="text-end fs-5 mt-1  mb-0" >  
                                             <i @click="showEditOptions=true;showEditButton=false" class="text-primary bi bi-pencil"></i>    
