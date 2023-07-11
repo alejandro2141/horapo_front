@@ -36,7 +36,7 @@ import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
                         
                          <label for="exampleInputEmail1" style="font-size: 1em;" >Nombre de su Consulta </label>  
                          <text v-if="form_center_name_req"  class="text-danger"> Requerido</text>
-                            <input type="text" class="form-control  border-dark  text-dark" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Nombre su Consulta             ">
+                            <input type="text" class="form-control  border-dark  text-dark" autocomplete="off" id="form_center_name" name="form_center_name" v-model="form_center_name"  placeholder="Ej: Kine/psico/fonologia Jhon Doe, Santiago Norte  ">
                       </div>
 
                       <div class="mt-3 " style="font-size: 1em;" >Tipo de consulta</div>
