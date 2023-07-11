@@ -9,7 +9,7 @@ import axios from 'axios';
        <div class="" >
             <div class="d-flex justify-content-start">
 						<div>
-							<textarea style="border-radius: 10px; "  class="h-75 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
+							<textarea style="border-radius: 10px; "  maxlength="100" class="h-75 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
 							</textarea>
 						</div>
 						<div class="m-1">
