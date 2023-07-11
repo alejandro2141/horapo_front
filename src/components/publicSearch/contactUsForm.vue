@@ -30,13 +30,13 @@ import axios from 'axios';
         </div>
 
         Email<br>
-        <input type="email" style="border-radius: 10px;" autocomplete="off" class="form-control w-75 m-1 " id="inputEmail4" placeholder="Ingrese su Email" v-model="email">
+        <input type="email" maxlength="40" style="border-radius: 10px;" autocomplete="off" class="form-control w-75 m-1 " id="inputEmail4" placeholder="Ingrese su Email" v-model="email">
        Mensaje
         <div class="d-flex justify-content-start">
 						
                         <div>
                            
-							<textarea style="border-radius: 10px; "  class="form-control h-75 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
+							<textarea maxlength="100" style="border-radius: 10px; "  class="form-control h-90 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="Todo comentario es bienvenido">
 							</textarea>
 						</div>
 						
