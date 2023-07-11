@@ -214,7 +214,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
         <button  v-if='(hourTaken.confirmation_status == 0) || ( hourTaken.confirmation_status == null) ' type="button" @click="requestConfirmation(hourTaken);" data-bs-dismiss="modal" class="btn btn-primary m-2"><i class="bi bi-question-square"></i> Solicitar Confirmación Asistencia</button>
           <button  v-if='hourTaken.confirmation_status == 1' type="button"   data-bs-dismiss="modal" class="btn btn-success m-2"><i class="bi bi-person-check"></i> Paciente Confirmado</button>
       -->       
-          <button type="button" @click="cancelAppointment(hourTaken);"  class="btn btn-primary m-2"><i class="bi bi-x-square"></i> Cancelar Cita con Paciente</button>
+          <button type="button" @click="cancelAppointment(hourTaken);"  class="btn btn-light text-danger m-2"><i class="bi bi-x-square"></i> Cancelar Cita</button>
       </div>
 
 
