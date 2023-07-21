@@ -35,7 +35,7 @@ import LoadProgress from '../loadProgress.vue'
                                 
                                 <!-- Cicle for apps -->
                                 <div  v-for="app in day.appointments" :key="app.id" class="mt-0 " > 
-                                        <patientAppointmentAvailable   :center_data="getCenterData(day.centers,app.center_id)"    :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app,day.centers)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                                        <patientAppointmentAvailable   :center_data="getCenterData(day.centers,app.center_id)"  :calendar_data="getCalendarData(day.calendars,app.calendar_id)"  :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app,day.centers)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
                                 </div>
                             
                             </div>
@@ -189,6 +189,12 @@ export default {
             {
                 let aux_centers = Array.from(centers)
                 return aux_centers.find(elem => elem.id ==  center_id)  
+            },
+
+            getCalendarData(calendars,calendar_id)
+            {
+                let aux_calendars = Array.from(calendars)
+                return aux_calendars.find(elem => elem.id ==  calendar_id)  
             },
           
             setModalReserve(appointment,centers)
