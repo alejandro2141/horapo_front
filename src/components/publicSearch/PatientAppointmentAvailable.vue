@@ -75,7 +75,8 @@ import { ref } from 'vue'
                         </div>
                     </div>
 
-                   
+                    <div>   ${{ calendar_data.price }}</div>
+                    
 
                 </div>
             
@@ -103,7 +104,7 @@ export default {
             }
   },
   
-  props: ['center_data' ,'appointment','searchParameters' , 'global_comunas' , 'global_specialties' ],
+  props: ['center_data' , 'calendar_data'  ,'appointment','searchParameters' , 'global_comunas' , 'global_specialties' ],
 
  mounted () {  
      // this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
