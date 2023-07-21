@@ -328,6 +328,7 @@ import Datepicker from 'vuejs3-datepicker';
                             <div @click="show_timebtw_minutes=!show_timebtw_minutes" class="p-2 border border-1">
                                   <text >{{form_app_time_between}}</text> Minutos
                             </div>
+                            
                 </div>
 
                 <div v-if="show_timebtw_minutes" class="test-dark bg-white  border-dark">
@@ -357,8 +358,31 @@ import Datepicker from 'vuejs3-datepicker';
                       </tbody>
                       </table>
                 </div>
-
                 <!-- END  TIEMPO ATENCION ENTRE CITAS  -->
+
+                <!-- INSERT PRICE   -->
+                <div class="mt-3 d-flex justify-content-between">
+                  
+                  <div>precio </div>
+
+                  <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
+
+                  <div class="input-group mb-3 w-50">   
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">$</span>
+                    </div>
+                    <input v-model="form_app_price" type="number" min="1" max="999999" maxlength="15" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <!-- 
+                      <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                    -->
+                  </div>
+
+
+                </div>
+
+                
 
                 <!-- SELECT COLOR   -->
                 <div  class="d-flex justify-content-between mt-3">
@@ -395,6 +419,11 @@ import Datepicker from 'vuejs3-datepicker';
                   </div>
 
                 </div>
+
+
+
+
+
                               
                 <hr class="text-white ">
 
@@ -638,6 +667,8 @@ data: function () {
            // maximum_calendar_start : null ,
            // maximum_calendar_end  : null ,
 
+           form_app_price : 0 ,
+
            preventDisableDateSelection : true ,
 		 }
 	},
@@ -795,6 +826,8 @@ data: function () {
                 professional_id: this.session_params.professional_id ,
 
                 date: new Date(),
+
+                form_app_price : this.form_app_price
                 
                           };
 
