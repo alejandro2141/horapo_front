@@ -25,7 +25,6 @@ import { BKND_CONFIG } from '../../../config123.js'
                                 <text class="card-title display-6  mt-0 pt-0"   >
                                     <i v-if="showEdit" @click="deleteCalendar();showEdit=false" class="bi bi-trash text-danger" ></i>  
                                     <i v-else class="bi bi-calendar-week "></i>  {{idSpecialty2name(specialty_code) }}  
-                                
                                 </text>
 
                                 <div  class="text-warning m-1" v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
@@ -313,6 +312,29 @@ import { BKND_CONFIG } from '../../../config123.js'
 
                 <!-- END  TIEMPO ATENCION ENTRE CITAS  -->
 
+                
+                <!-- INSERT PRICE   -->
+                <div class="mt-3 d-flex justify-content-between">
+                  
+                  <div>precio </div>
+
+                  <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
+
+                  <div class="input-group mb-3 w-50">   
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">$</span>
+                    </div>
+                    <input v-model="form_app_price"   type="number" min="1" max="999999" maxlength="15"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  aria-label="Amount (to the nearest dollar)">
+                    <!-- 
+                      <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                      </div>
+                    -->
+                  </div>
+
+                </div>
+
+
 
              <!-- SELECT COLOR   -->
                 <div  class="d-flex justify-content-between mt-3">
@@ -512,7 +534,9 @@ export default {
             linkWebCalendar : "No Set" ,
             
             date : null ,
-            cdate : new Date()
+            cdate : new Date() ,
+
+            form_app_price : null 
 
         }   
     },
@@ -741,7 +765,9 @@ export default {
         this.form_recurrency_sun = this.calendar.sunday 
                 
         this.calendar_active = this.calendar.active      
-        this.name = this.calendar.name ;
+        this.name = this.calendar.name 
+
+        this.form_app_price = this.calendar.price
 
         console.log("calendar_professional :  this.calendar.date_start : "+ this.calendar.date_start )
         console.log("calendar_professional :  this.calendar.date_end   : "+ this.calendar.date_end   )
@@ -811,7 +837,10 @@ export default {
                      
                    // professional_id: this.session_params.professional_id ,
                     calendar_id : this.calendar.id,
-                    form_color : this.form_calendar_color
+                    form_color : this.form_calendar_color,
+
+                    form_app_price : this.form_app_price
+
                     };
 
                   console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
