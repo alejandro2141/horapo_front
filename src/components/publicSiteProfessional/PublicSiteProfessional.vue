@@ -137,7 +137,9 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                 Resultados en los proximos {{appointments.length}} dias.
                 </p>
                 <div  v-for="appointment in appointments"  :key="appointment.id"  class="mt-3" >
-                    <!-- <text> {{appointment.date}} </text> -->    
+                    <!-- <text> {{appointment.date}} </text> --> 
+                    <hr>   
+                    <hr>
                     <!-- List app of a day -->
                     <div  v-for="app in appointment.appointments"  :key="app.id"  class="mt-3" >
                         <div class="">
