@@ -43,13 +43,17 @@ import axios from 'axios';
                                                 <small> <small> {{center_data.name}} </small> </small>
                                             </text>
                                         </div>
+
+                                        <div> <small> <small>  precio ${{calendar_data.price}}</small> </small></div>
                                     </div>    
                                     
                                     <div @click="$emit('displayModalAppAvailable', center_data )"  style="background-color: #ffff ; opacity: 0.5;  border-top-right-radius:25px" >
                                         <i style="font-size: 60px; padding: 0px ; padding: 0px ; border:0px" class="bi bi-chevron-compact-right text-primary "  ></i> 
                                     </div>   
                             </div> 
-                        </div>     
+                        </div>   
+                        
+                       
                              
                 </div>
               
