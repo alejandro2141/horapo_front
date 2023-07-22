@@ -51,7 +51,7 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                         
                             <div class="fs-1 text-success d-flex justify-content-center" >{{ id2specialtyName(calendar.specialty1) }}</div> 
 
-                          <hr>
+                          
 
                             <!-- HOME VISIT  -->
                             <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).home_visit"  > 
@@ -74,10 +74,11 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                             
                             </div>
                              <!-- IN CENTER  -->
-                            <div class="d-flex justify-content-center" v-if="getCenterData(calendar.center_id).center_visit" > 
-                                <p class="text-center"> Cita en Consulta 
+                            <div class="text-center" v-if="getCenterData(calendar.center_id).center_visit" > 
+                                <div class="text-center"> Cita en Consulta 
                                     <i class="h1 bi bi-building"></i> 
-                                </p>
+                                </div>
+                               
                                 <p>
                                     <text class="text-primary fs-5">
                                     {{ id2comunaName(getCenterData(calendar.center_id).comuna) }}
@@ -99,6 +100,8 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                             </div>
                             
                             <br> 
+
+                    
                         
                         <!--
                         <div>
@@ -107,8 +110,15 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                         -->
                     </div>
                     <hr>
-                    
-                    <div>
+
+                    <div v-if="!calendar.active" class="text-center h2">
+                        <i class="bi bi-exclamation-triangle text-warning"></i>  Este Calendario No esta activo
+                    </div>
+                    <div v-if="(new Date(calendar.date_end).getTime() < new Date().getTime() )" class="text-center h2">
+                        <i class="bi bi-exclamation-triangle text-warning"></i>  Este Calendario Esta expirado
+                    </div>
+
+                    <div v-if="calendar.active &&  (new Date(calendar.date_end).getTime() > new Date().getTime() ) " >
                         
                         <div class="d-flex justify-content-center">
                             <input class="p-3" type="date" id="start" name="trip-start"
@@ -121,15 +131,32 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
                         </div>
 
                     </div>
+                    
+
+                    <div v-else class="d-flex justify-content-center">
+                       Ir a buscar horas disponibles en <a href="/">Nuestro sitio de busqueda</a>
+                    </div>
+                
                 
                                 
                 </div>
+            </div>
+         
+            <div v-else class="text-center">
+                <div class="h2">
+                    <i class="bi bi-exclamation-triangle text-warning"></i> Calendario no Existe
+                </div>
+                
+                <div>
+                    Busca otras horas disponibles en <a href="/">HoraPO Busqueda de Horas Profesionales</a>
+                </div>
+                
             </div>
 
 
             <!-- LIST APPOINTMENTS --->
            
-        <div v-if="appointments !=null "  class="w-100 d-flex justify-content-center"  >
+        <div v-if="appointments !=null && !appointments.error"  class="w-100 d-flex justify-content-center"  >
 
             <div style="width: 25em;">     
         
@@ -157,6 +184,8 @@ import modalPublicViewAppointment from '../publicSearch/ModalPublicViewAppointme
 
             </div>
         </div>
+
+       
 
             <div v-else class="m-2 p-2 display-5">
              
@@ -291,6 +320,7 @@ export default {
                this.specialties = response.data.specialties 
                this.locations = response.data.locations
             
+               
                
                console.log("professional_pwsite_get_calendar RESPONSE "+JSON.stringify(response) );
             },
