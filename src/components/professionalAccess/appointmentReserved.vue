@@ -8,7 +8,7 @@ import axios from 'axios';
 <template>
                     <div class="d-flex justify-content-start "  :class="{ 'border-primary': selectApp, 'border-success': !selectApp }"  style="background-color: #fff;  border-bottom-left-radius: 0px; border-top-right-radius: 25px; border-bottom-right-radius: 25px;">
                       
-                      <div  class="p-1" :style="[ {'background-color' : calendar_data.color}]" >
+                      <div  v-if="calendar_data!=null && calendar_data.color!=null" class="p-1" :style="[ {'background-color' : calendar_data.color}]" >
                       </div>
                       
 
