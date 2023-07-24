@@ -10,8 +10,15 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
     <div class="m-3" style="width:350px;">
     <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
    
-            <p class="text-center h4">Horas Reservadas  
-            </p>
+
+        <text></text>
+         <p class="display-6 text-center mt-1  e ">
+            Horas Reservadas  
+         </p>
+         <text></text>
+
+
+            
             
             <div class="md-form mt-0">
     </div>
