@@ -8,6 +8,7 @@ import ListAppointments from './listAppointments.vue'
 import Tutorial from './tutorial_start.vue'
 import loadProgress from '../loadProgress.vue'
 import LockOptions from './lockOptions.vue'
+import ProfesionalBugReport from './ProfesionalBugReport.vue';
 //import CalendarSummary from './calendar_summary.vue'
 
 </script>
@@ -39,6 +40,7 @@ import LockOptions from './lockOptions.vue'
     <div  v-else >
         <Tutorial  v-on:switchToCenters='switchToCenters' :session_params="session_params" > </Tutorial>
     </div>
+
 
 </div>
 </template>
