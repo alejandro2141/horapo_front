@@ -13,13 +13,16 @@ import TabUserConfig from   '../src/components/professionalAccess/tabUserConfig.
 import TabListAppTaken from   '../src/components/professionalAccess/tabAppointmentsListReserved.vue'
 //import TabListAppTaken from '../src/components/professionalAccess/tabAppointmetsListReserved.vue'
 import { BKND_CONFIG } from '../config123.js'
+import ProfesionalBugReport from '../src/components/professionalAccess/ProfesionalBugReport.vue'
+
+
 
 </script>
 
 <template>
 <div >
     
-    <ProfesionalGeneralHeader  v-on:setTodayDateFromHeader='setTodayDateFromHeader'   :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
+    <ProfesionalGeneralHeader  v-if="session_params!=null"  v-on:setTodayDateFromHeader='setTodayDateFromHeader'   :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
    
     <div   class="m-0 w-100 d-flex justify-content-center">
    
@@ -60,6 +63,8 @@ import { BKND_CONFIG } from '../config123.js'
         </div>
         
     </div>
+
+    <ProfesionalBugReport v-if="visible_tab_login !='block' " :session_params="session_params" ></ProfesionalBugReport>
    
 </div>
 </template>
@@ -104,6 +109,7 @@ export default {
 
         session : "sesionname",
         session_params : [] ,
+        //session_params : null ,
 
         visible_tab_centers: 'none',
         visible_tab_assistants:'none', 
@@ -164,7 +170,7 @@ methods: {
         console.log("SetSessionFromCode session_params.id "+this.session_params.id );
         }
 
-        if (this.session_params.professional_id == null)
+        if ( this.session_params == null ||  this.session_params.professional_id == null)
         {
             this.visible_tab_login='block' 
         }
