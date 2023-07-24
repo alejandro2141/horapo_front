@@ -87,19 +87,63 @@ import { BKND_CONFIG } from '../../../config123.js'
                         
                         <div class="d-flex justify-content-between "> 
                             <text></text>
-                            <text>Compartir con pacientes </text>
+                            <text>Calendario En Redes Sociales </text>
                             <i @click="showSocials=false" class="h3 bi bi-x-lg text-primary"></i> 
                         </div>
-                        <div class="text-secondary m-3">
+                        <div class="text-primary m-3 text-center">
                              
-                            Link a calendario<br>
-                            <a :href="linkWebCalendar" target="_blank" >Agenda {{ calendar.id }}</a>
+                           <a :href="linkWebCalendar" target="_blank" >  <i class="bi bi-link display-4 "></i>  Ir a Web </a>
+
+                           <br>
+                           <br>
+                           <div @click="showInputEmail=!showInputEmail;showInputPhone=false"> 
+                             <i   class="display-4 bi bi-envelope"></i>  
+                           Email
+                           </div>
+                           <br>
+
+                           <div v-if="showInputEmail"> 
+                                             Ingrese Email destino<br> 
+                                            <input class="text-dark bg-white w-75"  type="text" v-model="customer_email" placeholder="email@gmail.com" id="fname" name="fname"><br>
+                                            <text type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false; sendCalendarToPatient(customer_email, calendar.id , calendar.professional_id, calendar.center_id )" >
+                                                enviar
+                                            </text> 
+                                            <p></p>                  
+                            </div>
                            
+                            <div @click="showInputPhone=!showInputPhone;showInputEmail=false" >
+                            <i  class="display-4 bi bi-whatsapp"></i>
+                            WhatsApp 
+                            </div>
+
+
+                            <br>
+                            <div v-show="showInputPhone"> 
+                                        Ingrese Telefono<br>
+                                        <input class="text-dark bg-white" type="text" id="fname" v-model="customer_phone" name="fname">
+                                        <br>
+                                        <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text=horapo%20Puedes%20Buscar%20una%20Hora%20disponible%20en:%20'+idSpecialty2name(specialty_code)+'Puedes buscar una hora disponible en: http://'+host+'/nested/publicSiteProfessional.html?params='+session_params.professional_id+'_'+calendar.id+' '" >
+                                        Enviar 
+                                        </a>
+                            </div>
+
+                            
+                            
+                            <a target="_blank" :href=linkWebCalendar_face >  <i class="display-4  bi bi-facebook m-3"></i>  Facebook  </a>
+                           
+                            <br>
+                            <br>
+                            <a target="_blank" :href=linkWebCalendar_twitter >  <i class="display-4  bi bi-twitter m-3"></i>  Twitter </a>
+                                 
+
+
                         </div>
-                        
+
+
+
+                        <!-- 
                         <div>
                             <div >
-                                <text class="text-secondary">Compartir calendario al paciente</text>
                                 
                                     <div class="d-flex justify-content-around text-primary" >
                                         <div>
@@ -116,7 +160,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                                     </div>
                                     
                                     <div v-if="showInputEmail"> 
-                                            Ingrese Email destino<br>
+                                             Ingrese Email destino<br> 
                                             <input class="text-dark bg-white" type="text" v-model="customer_email" placeholder="email@gmail.com" id="fname" name="fname"><br>
                                             <text type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false; sendCalendarToPatient(customer_email, calendar.id , calendar.professional_id, calendar.center_id )" >
                                                 enviar
@@ -134,28 +178,22 @@ import { BKND_CONFIG } from '../../../config123.js'
                                     </div>
 
                                     <br>
-                                    <text class=" m-2 ">Compartir en tus redes sociales</text>
                                     <div class="d-flex justify-content-around m-2">
                                       
                                         <a target="_blank" :href=linkWebCalendar_face >  <i class="display-4  bi bi-facebook m-3"></i> </a>
                                         <a target="_blank" :href=linkWebCalendar_twitter >  <i class="display-4  bi bi-twitter m-3"></i> </a>
-                                        <!--
-                                        <a target="_blank" href="https://www.pinterest.com/pin/find/?url=https://www.horapo.com/">  <i class="display-4  bi bi-pinterest m-3"></i>  </a>
-                                    
-                                        <a href="mailto:correodestinatario@correo.com?subject=HoraPO.%20Las%20mejores%20profesionales%20de%20salud%20en%20un%20solo%20lugar&body=Email%20Body%20Text">asdfasdf<i class="bi bi-envelope-fill display-4  m-2"></i></a>
-                                    -->
+                                      
                                     </div> 
                                
 
                                     <br><br>
                             </div>
 
-                           
-
-                           
-                           
+                            
 
                         </div>
+
+                    -->
   
                         </div>
                     </div>
