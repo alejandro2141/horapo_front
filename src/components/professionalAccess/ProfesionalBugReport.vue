@@ -6,14 +6,15 @@ import axios from 'axios';
 </script>
 
 <template>
-     <div class="mb-5 pb-5 " >
+     <div class="m-2 p-2 bg-warning" style="border-radius: 20px;">
         <div >
 
         <!-- BUG ICON on click display form-->
         <div class="d-flex justify-content-center">
             <div @click="displayBugForm=!displayBugForm" >
-                <i class="display-2 bi bi-bug-fill text-warning"></i> 
-                <text class="text-secondary">Reportar un Problema</text>
+                <i class="display-2 bi bi-bug-fill text-secondary"></i> 
+                <text class="text-secondary m-4">Problemas y Comentarios <br></text>
+                
             </div>
         </div>
 
@@ -21,21 +22,21 @@ import axios from 'axios';
         <!-- Form Notificate Profesional Bug-->
        <div class="m-2" v-if="displayBugForm" >
             <div class="d-flex justify-content-center">
-				<textarea style="border-radius: 10px; "  maxlength="100" class="h-75 w-100 m-4 p-3" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
+				<textarea style="border-radius: 10px; "  maxlength="100" class="h-75 w-100 m-4 p-3 border border-warning" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
 				</textarea>		
 			</div>
 
             <!-- FACES -->
-            <div class="m-1 d-flex justify-content-center display-5">
+            <div class="m-1 d-flex justify-content-center">
 							
 							<text>
-								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry  m-4 "></i><br>
+								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry  display-1"></i><br>
                             </text>
 							<text>
-							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral  m-4 "></i><br>
+							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral m-4 display-1"></i><br>
                             </text>
 							<text>
-							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes h1 m-4 "></i><br>
+							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes display-1"></i><br>
                             </text>
 							
 			</div>
