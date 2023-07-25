@@ -81,14 +81,16 @@ import { BKND_CONFIG } from '../../../config123.js'
                     </div>
                 -->
                 
+
+
                 <!-- SOCIALS FOR CALENDARS -->
-                    <div v-if="showSocials" class="w-100  " style="position: absolute; ">    
-                        <div class="m-3 p-2 bg-white border border-1 border-primary" style="border-radius: 15px;">
+                    <div v-if="showSocials" class="w-100  " style="position: absolute; z-index: 999; ">    
+                        <div class="m-1 p-2 bg-light border border-2 border-primary" style="border-radius: 15px;">
                         
                         <div class="d-flex justify-content-between "> 
                             <text></text>
-                            <text>Calendario En Redes Sociales </text>
-                            <i @click="showSocials=false" class="h3 bi bi-x-lg text-primary"></i> 
+                            <text class="h5">Compartir Calendario </text>
+                            <i @click="showSocials=false" class="h2 bi bi-x-lg text-primary"></i> 
                         </div>
                         <div class="text-primary m-3 text-center">
                              
@@ -135,7 +137,9 @@ import { BKND_CONFIG } from '../../../config123.js'
                             <br>
                             <a target="_blank" :href=linkWebCalendar_twitter >  <i class="display-4  bi bi-twitter m-3"></i>  Twitter </a>
                                  
-
+                        <br>
+                        <br>
+                        <br>
 
                         </div>
 
@@ -197,6 +201,11 @@ import { BKND_CONFIG } from '../../../config123.js'
   
                         </div>
                     </div>
+                    <!-- END SOCIAL -->
+
+
+
+
 
                     <!--
                     <div v-if="showEdit" style=" border-radius: 15px; " class="m-2 d-flex w-25 justify-content-between mt-0 p-1 bg-white text-danger"> 
@@ -284,7 +293,54 @@ import { BKND_CONFIG } from '../../../config123.js'
                     
                     <div  class="d-flex flex-row-reverse">
                           <div class="d-flex justify-content-end">
-                              <div @click="show_start_hour_picker=!show_start_hour_picker ;show_start_minutes_picker=false" style="border-radius: 15px;" class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']">
+
+
+                            <select class="form-select"  v-model="form_start_hour" :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                                <option selected>00</option>
+                                <option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                                <option value="7">07</option>
+                                <option value="8">08</option>
+                                <option value="9">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>                             
+                            </select>
+                             &nbsp;<text class="h5">:</text>&nbsp;
+                            <select class="form-select" v-model="form_start_minutes"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  >
+                                <option selected>00</option>
+                                <option value="0">00</option>
+                                <option value="5">05</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>                           
+                            </select>
+                            &nbsp;Hrs 
+
+                            <!--  
+                             <div @click="show_start_hour_picker=!show_start_hour_picker ;show_start_minutes_picker=false" style="border-radius: 15px;" class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']">
                                   <text >&nbsp;&nbsp;{{form_start_hour}}&nbsp;&nbsp;</text> 
                               </div>
                               <div class="p-2">:</div>
@@ -292,18 +348,87 @@ import { BKND_CONFIG } from '../../../config123.js'
                                     <text >&nbsp;&nbsp;{{form_start_minutes}}&nbsp;&nbsp;</text>
                                     </div>
                               <div class="p-2">hrs</div>
+                            -->
+
                           </div>
                     </div>
                 
                 </div>
-                
+                <!-- 
             <HourSelector v-if="show_start_hour_picker && showEdit" :hour='form_start_hour' v-on:selected_hour="set_start_hour"></HourSelector>
             <MinutesSelector v-if="show_start_minutes_picker && showEdit" :minutes='form_start_minutes' v-on:selected_minutes="set_start_minutes" ></MinutesSelector> 
-           
+                -->
+
            <!--TIME END   -->
                 <div  class="d-flex justify-content-between mt-2">
                     <text> Hora FIN </text>
+
                     
+
+                    <div  class="d-flex flex-row-reverse">
+                          <div class="d-flex justify-content-end">
+
+
+                            <select class="form-select"  v-model="form_end_hour" :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                                <option selected>00</option>
+                                <option value="1">01</option>
+                                <option value="2">02</option>
+                                <option value="3">03</option>
+                                <option value="4">04</option>
+                                <option value="5">05</option>
+                                <option value="6">06</option>
+                                <option value="7">07</option>
+                                <option value="8">08</option>
+                                <option value="9">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>                             
+                            </select>
+                             &nbsp;<text class="h5">:</text>&nbsp;
+                            <select class="form-select" v-model="form_end_minutes"  :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                                <option selected>00</option>
+                                <option value="0">00</option>
+                                <option value="5">05</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>                           
+                            </select>
+                            &nbsp;Hrs 
+
+                            <!--  
+                             <div @click="show_start_hour_picker=!show_start_hour_picker ;show_start_minutes_picker=false" style="border-radius: 15px;" class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']">
+                                  <text >&nbsp;&nbsp;{{form_start_hour}}&nbsp;&nbsp;</text> 
+                              </div>
+                              <div class="p-2">:</div>
+                              <div @click="show_start_minutes_picker=!show_start_minutes_picker; show_start_hour_picker=false" style="border-radius: 15px;"  class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                                    <text >&nbsp;&nbsp;{{form_start_minutes}}&nbsp;&nbsp;</text>
+                                    </div>
+                              <div class="p-2">hrs</div>
+                            -->
+
+                          </div>
+                    </div>
+
+                
+                    <!-- 
                     <div  class="d-flex flex-row-reverse">
                           <div class="d-flex justify-content-end">
                               <div @click="show_end_hour_picker=!show_end_hour_picker ;show_end_minutes_picker=false" style="border-radius: 15px;"  class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
@@ -316,23 +441,45 @@ import { BKND_CONFIG } from '../../../config123.js'
                               <div class="p-2">hrs</div>
                           </div>
                     </div>
+                -->
                 
                 </div>
-                
+                <!-- 
             <HourSelector v-if="show_end_hour_picker && showEdit" :hour='form_end_hour' v-on:selected_hour="set_end_hour"></HourSelector>
             <MinutesSelector v-if="show_end_minutes_picker && showEdit" :minutes='form_end_minutes' v-on:selected_minutes="set_end_minutes" ></MinutesSelector> 
-           
+                -->
 
         <!-- APP DURATION  -->
                 <div  class="d-flex justify-content-between mt-3">
                             <text> Tiempo de atencion: </text>
+                            <div class="d-flex justify-content-end">
+                                <select class="form-select" v-model="form_app_duration"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                                    <option value="0">00</option>
+                                    <option value="5">05</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                    <option value="30">30</option>
+                                    <option value="35">35</option>
+                                    <option value="40">40</option>
+                                    <option value="45">45</option>
+                                    <option value="50">50</option>
+                                    <option value="55">55</option>                           
+                                </select>
+                                <text>Minutos</text>
+                                
+                            </div>
+
+                            <!--
                             <div @click="show_duration_minutes=!show_duration_minutes" style="border-radius: 15px;"  class="p-2 " :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
                                   <text >{{form_app_duration}}</text> Minutos
                             </div>
+                            -->
                 </div>
-
+<!-- 
             <DurationMinutes v-if='show_duration_minutes && showEdit ' v-on:selected_app_duration='selected_app_duration'  ></DurationMinutes>
-
+-->
   
         <!-- END  APP DURATION  -->
 
@@ -341,34 +488,52 @@ import { BKND_CONFIG } from '../../../config123.js'
                 <div  class="d-flex justify-content-between mt-3">
                            
                         <text> Tiempo entre Citas: </text>
+
+                        <div class="d-flex justify-content-end">
+                                <select class="form-select" v-model="form_app_time_between"  :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                                    <option value="0">00</option>
+                                    <option value="5">05</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                    <option value="30">30</option>
+                                    <option value="35">35</option>
+                                    <option value="40">40</option>
+                                    <option value="45">45</option>
+                                    <option value="50">50</option>
+                                    <option value="55">55</option>                           
+                                </select>
+                                <text>Minutos</text>
+                                
+                        </div>
+
+                        <!-- 
                             <div @click="show_timebtw_minutes=!show_timebtw_minutes" style="border-radius: 15px;"  class="p-2 " :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
                                   <text > {{form_app_time_between}} </text> Minutos
                             </div>
+                        -->
                 </div>
-
+<!-- 
                 <MinutesBtwMinutes v-if="show_timebtw_minutes && showEdit "  v-on:selected_app_duration_btw='selected_app_duration_btw' ></MinutesBtwMinutes>
-
+-->
                 <!-- END  TIEMPO ATENCION ENTRE CITAS  -->
 
                 
                 <!-- INSERT PRICE   -->
                 <div class="mt-3 d-flex justify-content-between">
                   
-                  <div>precio </div>
-
-                  <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
-
-                  <div class="input-group mb-3 w-50">   
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">$</span>
+                    <div>precio </div>
+                  
+                    <div class="d-flex justify-content-end">
+                        <span class="input-group-text">$</span>
+                        <input v-model="form_app_price"   type="number" min="1" max="999999" maxlength="15"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  aria-label="Amount (to the nearest dollar)">
+                        <!-- 
+                        <div class="input-group-append">
+                            <span class="input-group-text">.00</span>
+                        </div>
+                        -->
                     </div>
-                    <input v-model="form_app_price"   type="number" min="1" max="999999" maxlength="15"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  aria-label="Amount (to the nearest dollar)">
-                    <!-- 
-                      <div class="input-group-append">
-                        <span class="input-group-text">.00</span>
-                      </div>
-                    -->
-                  </div>
 
                 </div>
 
