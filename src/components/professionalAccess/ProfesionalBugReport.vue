@@ -6,11 +6,11 @@ import axios from 'axios';
 </script>
 
 <template>
-     <div class="mb-5 d-flex justify-content-center" >
-        <div class="">
+     <div class="mb-5 pb-5 " >
+        <div >
 
         <!-- BUG ICON on click display form-->
-        <div >
+        <div class="d-flex justify-content-center">
             <div @click="displayBugForm=!displayBugForm" >
                 <i class="display-2 bi bi-bug-fill text-warning"></i> 
                 <text class="text-secondary">Reportar un Problema</text>
@@ -19,31 +19,29 @@ import axios from 'axios';
 
 
         <!-- Form Notificate Profesional Bug-->
-       <div class="" v-if="displayBugForm" >
-            <div class="d-flex justify-content-start">
-						<div>
-							<textarea style="border-radius: 10px; "  maxlength="100" class="h-75 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
-							</textarea>
-						</div>
-						<div class="m-1">
-							<text class="text-dark"><small>Tu Animo</small></text> <br>
-							<p>
-								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry h2 m-4 "></i><br>
-							</p>
-							<p>
-							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral h2 m-4 "></i><br>
-							</p>
-							<p>
-							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes h2 m-4 "></i><br>
-							</p>
-							<!--
-							<i @click="animo =4;text_message=text_message.concat(' Tiene errores de software.  Arreglalo infame programador !!. ') " class="text-white bi bi-bug h4 p-2"></i><br>
-							<i @click="animo =5;text_message=text_message.concat(' Esta bueno. Me gusta.  Puede mejorar !. ') " class="text-white bi bi-balloon-heart h4 p-2"></i><br>
-							-->
-						</div>
+       <div class="m-2" v-if="displayBugForm" >
+            <div class="d-flex justify-content-center">
+				<textarea style="border-radius: 10px; "  maxlength="100" class="h-75 w-100 m-4 p-3" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
+				</textarea>		
 			</div>
 
-			<div class="d-flex justify-content-start">
+            <!-- FACES -->
+            <div class="m-1 d-flex justify-content-center display-5">
+							
+							<text>
+								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry  m-4 "></i><br>
+                            </text>
+							<text>
+							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral  m-4 "></i><br>
+                            </text>
+							<text>
+							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes h1 m-4 "></i><br>
+                            </text>
+							
+			</div>
+
+            <!-- BUTTONS -->
+			<div class="d-flex m-1 d-flex justify-content-center m-3 p-3">
 						<text class="text-white btn btn-primary" @click="text_message='';displayBugForm=false ">Cancelar</text>   
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<text class="text-white btn btn-primary" @click="sendComments">Enviar</text>
