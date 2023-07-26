@@ -6,14 +6,15 @@ import axios from 'axios';
 </script>
 
 <template>
-     <div class="m-2 p-2 bg-warning" style="border-radius: 20px;">
+      <div class="d-flex justify-content-center mt-5 pt-5" style="bottom: 0px;">
+     <div class="m-1 p-1 bg-warning" style="border-radius: 20px; width: 350px;"  >
         <div >
 
         <!-- BUG ICON on click display form-->
         <div class="d-flex justify-content-center">
             <div @click="displayBugForm=!displayBugForm" >
-                <i class="display-2 bi bi-bug-fill text-secondary"></i> 
-                <text class="text-secondary m-4">Problemas y Comentarios <br></text>
+                <i class="display-6 bi bi-bug-fill text-secondary"></i> 
+                <text class="text-secondary">&nbsp; Problemas y Comentarios <br></text>
                 
             </div>
         </div>
@@ -48,7 +49,12 @@ import axios from 'axios';
 						<text class="text-white btn btn-primary" @click="sendComments">Enviar</text>
 			</div>
 
-            <div v-if="comments != null" class="text-secondary text-start  w-75 m-2"  >
+            <div>
+                <text @click="showComments=!showComments;getMessagesReply()" class="text-primary">Ver lista de mensajes </text> 
+            </div>
+
+
+            <div v-if="comments != null && showComments" class="text-secondary text-start  w-75 m-2"  >
                 <i class="bi bi-hammer">Estamos trabajando para solucionar: </i>
                <br>
                 <div v-for="comment in comments" :key="comment.id" class="mt-2 " >
@@ -77,6 +83,7 @@ import axios from 'axios';
     
     </div>
      
+</div>
 </template>
 
 <style scoped>
@@ -93,15 +100,20 @@ export default {
             text_message: "", 
 			animo: 0 , 
             comments: null ,
-            displayBugForm :false 
+            displayBugForm :false ,
+            showComments : false 
         }
     },  
  
    props: ['session_params'], 
    emits: [],
 
+created () {
+   
+   },
+
 mounted() {   
-        this.getMessagesReply();
+         this.getMessagesReply();
         },
 
     watch: {
@@ -124,7 +136,7 @@ mounted() {
             
             async sendComments()
             {
-                if (this.text_message && this.text_message.length>1)
+                if (this.text_message && this.text_message !="Gracias por tu mensaje!!" && this.text_message.length>5 )
                 {
                 const json = { 
                 professional_id: this.session_params.professional_id ,
@@ -136,11 +148,12 @@ mounted() {
                 let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_comments",json);
                 console.log("Send Message Response :"+JSON.stringify(resp) )
 
-                this.text_message = "Ya enviaste tu mensaje."  
+                this.text_message = "Gracias por tu mensaje!!"  
                 this.showInputMessage = false ;
                 alert ("Gracias por tu mensaje, nuestro equipo atenderá tu mensaje cuanto antes ")
                 this.animo=0
                 this.getMessagesReply()
+                this.showComments=true
                 }
 
             }   
