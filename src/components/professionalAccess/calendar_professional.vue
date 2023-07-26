@@ -260,11 +260,11 @@ import { BKND_CONFIG } from '../../../config123.js'
 
             <!-- CALENDAR DATE START-->
                   <div  class="d-flex justify-content-between mt-3">
-                          <div class="p-2">
+                          <div class="">
                           Fecha Inicio
                           </div>
 
-                          <div class="p-2 " style="border-radius: 15px;" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  @click="show_date_start=!show_date_start"  >
+                          <div class="p-2" style="border-radius: 15px;" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  @click="show_date_start=!show_date_start"  >
                                 {{formatDate(form_date_start)}} <i class="bi bi-calendar-week"></i>
                           </div>
                   </div>
@@ -274,8 +274,8 @@ import { BKND_CONFIG } from '../../../config123.js'
                   <!--  -->
 
             <!-- CALENDAR DATE END -->
-                  <div class="d-flex justify-content-between mt-3">
-                      <div class="p-2">
+                  <div class="d-flex justify-content-between mt-3 mb-3">
+                      <div class="">
                           Fecha Fin
                       </div>
                       <div class="p-2" style="border-radius: 15px;"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  @click="show_date_end=!show_date_end"  >
@@ -295,17 +295,17 @@ import { BKND_CONFIG } from '../../../config123.js'
                           <div class="d-flex justify-content-end">
 
 
-                            <select class="form-select"  v-model="form_start_hour" :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                            <select class="form-select"  v-model="form_start_hour" :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white bg-white']" >
                                 <option selected>00</option>
-                                <option value="1">01</option>
-                                <option value="2">02</option>
-                                <option value="3">03</option>
-                                <option value="4">04</option>
-                                <option value="5">05</option>
-                                <option value="6">06</option>
-                                <option value="7">07</option>
-                                <option value="8">08</option>
-                                <option value="9">09</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
                                 <option value="10">10</option>
                                 <option value="11">11</option>
                                 <option value="12">12</option>
@@ -322,10 +322,10 @@ import { BKND_CONFIG } from '../../../config123.js'
                                 <option value="23">23</option>                             
                             </select>
                              &nbsp;<text class="h5">:</text>&nbsp;
-                            <select class="form-select" v-model="form_start_minutes"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  >
+                            <select class="form-select" v-model="form_start_minutes"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white bg-white']"  >
                                 <option selected>00</option>
-                                <option value="0">00</option>
-                                <option value="5">05</option>
+                                <option value="00">00</option>
+                                <option value="05">05</option>
                                 <option value="10">10</option>
                                 <option value="15">15</option>
                                 <option value="20">20</option>
@@ -339,16 +339,6 @@ import { BKND_CONFIG } from '../../../config123.js'
                             </select>
                             &nbsp;Hrs 
 
-                            <!--  
-                             <div @click="show_start_hour_picker=!show_start_hour_picker ;show_start_minutes_picker=false" style="border-radius: 15px;" class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']">
-                                  <text >&nbsp;&nbsp;{{form_start_hour}}&nbsp;&nbsp;</text> 
-                              </div>
-                              <div class="p-2">:</div>
-                              <div @click="show_start_minutes_picker=!show_start_minutes_picker; show_start_hour_picker=false" style="border-radius: 15px;"  class="p-2" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
-                                    <text >&nbsp;&nbsp;{{form_start_minutes}}&nbsp;&nbsp;</text>
-                                    </div>
-                              <div class="p-2">hrs</div>
-                            -->
 
                           </div>
                     </div>
@@ -361,7 +351,7 @@ import { BKND_CONFIG } from '../../../config123.js'
 
            <!--TIME END   -->
                 <div  class="d-flex justify-content-between mt-2">
-                    <text> Hora FIN </text>
+                    <text> Hora Fin </text>
 
                     
 
@@ -369,17 +359,17 @@ import { BKND_CONFIG } from '../../../config123.js'
                           <div class="d-flex justify-content-end">
 
 
-                            <select class="form-select"  v-model="form_end_hour" :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                            <select class="form-select"  v-model="form_end_hour" :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white bg-white']" >
                                 <option selected>00</option>
-                                <option value="1">01</option>
-                                <option value="2">02</option>
-                                <option value="3">03</option>
-                                <option value="4">04</option>
-                                <option value="5">05</option>
-                                <option value="6">06</option>
-                                <option value="7">07</option>
-                                <option value="8">08</option>
-                                <option value="9">09</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
                                 <option value="10">10</option>
                                 <option value="11">11</option>
                                 <option value="12">12</option>
@@ -396,10 +386,10 @@ import { BKND_CONFIG } from '../../../config123.js'
                                 <option value="23">23</option>                             
                             </select>
                              &nbsp;<text class="h5">:</text>&nbsp;
-                            <select class="form-select" v-model="form_end_minutes"  :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                            <select class="form-select" v-model="form_end_minutes"  :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white bg-white' ]" >
                                 <option selected>00</option>
-                                <option value="0">00</option>
-                                <option value="5">05</option>
+                                <option value="00">00</option>
+                                <option value="05">05</option>
                                 <option value="10">10</option>
                                 <option value="15">15</option>
                                 <option value="20">20</option>
@@ -453,7 +443,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                 <div  class="d-flex justify-content-between mt-3">
                             <text> Tiempo de atencion: </text>
                             <div class="d-flex justify-content-end">
-                                <select class="form-select" v-model="form_app_duration"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                                <select class="form-select" v-model="form_app_duration"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white bg-white']" >
                                     <option value="0">00</option>
                                     <option value="5">05</option>
                                     <option value="10">10</option>
@@ -490,7 +480,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                         <text> Tiempo entre Citas: </text>
 
                         <div class="d-flex justify-content-end">
-                                <select class="form-select" v-model="form_app_time_between"  :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']" >
+                                <select class="form-select" v-model="form_app_time_between"  :disabled="!showEdit" :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white bg-white']" >
                                     <option value="0">00</option>
                                     <option value="5">05</option>
                                     <option value="10">10</option>
@@ -525,9 +515,9 @@ import { BKND_CONFIG } from '../../../config123.js'
                   
                     <div>precio </div>
                   
-                    <div class="d-flex justify-content-end">
-                        <span class="input-group-text">$</span>
-                        <input v-model="form_app_price"   type="number" min="1" max="999999" maxlength="15"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white']"  aria-label="Amount (to the nearest dollar)">
+                    <div class="d-flex justify-content-end text-dark">
+                        <span class="input-group-text bg-white border-white">$</span>
+                        <input v-model="form_app_price"   type="number" min="1" max="999999" maxlength="15"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white text-dark']"  aria-label="Monto (Pesos Chilenos)">
                         <!-- 
                         <div class="input-group-append">
                             <span class="input-group-text">.00</span>
@@ -1037,7 +1027,10 @@ export default {
                     form_day_fri: this.form_recurrency_fri ,
                     form_day_sat: this.form_recurrency_sat ,
                     form_day_sun: this.form_recurrency_sun , 
-                     
+
+                    form_app_duration  : this.form_app_duration ,
+                    form_app_time_between :  this.form_app_time_between ,
+                   
                    // professional_id: this.session_params.professional_id ,
                     calendar_id : this.calendar.id,
                     form_color : this.form_calendar_color,
