@@ -49,6 +49,23 @@ defineProps({
                     <i  type="submit" v-on:click="sendLogin()" class="btn  btn-lg btn-block text-white bg-dark " style="width: 100%; border-radius: 15px;"  >{{ login_message }} <i class="m-2 p-2 bi bi-arrow-right-square"></i> </i>
                 </form>   
             </div>
+
+             <p  v-if="!requestReceived" @click="showRecoverPassword=!showRecoverPassword; requestReceived=false" class="m-4 text-secondary"><small>Olvide mi contraseña</small></p>
+             
+             <div v-if="showRecoverPassword" style="width: 300px;">
+                <div class="mb-3" >
+                    <label for="exampleInputEmail1" class="form-label">Ingrese su correo registrado</label>
+                    <input v-model="emailToRecover" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">Enviaremos a su correo registrado un link para actualizar su contraseña</div>
+                </div> 
+                
+                <button v-on:click="recoverPassword(); showRecoverPassword = false; requestReceived=true  " type="button" class="btn btn-secondary">Recuperar</button>
+
+             </div>
+
+             <div v-if="requestReceived">
+                Solicitud recibida
+             </div>
             
             <div class="m-5 p-5 ">
             </div>
@@ -73,11 +90,40 @@ export default {
             form_pass : "",
 
             active_spinner : false , 
+            showRecoverPassword :false,
+            emailToRecover:null , 
+            requestReceived: false 
         }   
     },
     emits: ['startSession'] ,
 
     methods: {
+
+        async recoverPassword()
+        {
+            console.log("forgot passowrd:"+ this.emailToRecover )
+
+            if (confirm("enviar solicitud?") == true) {
+                    const json = { 
+                    form_email : this.emailToRecover ,
+                    form_token : this.form_token ,	
+                    date : new Date(),				   
+                            };
+                    console.log ("REQUEST :"+ JSON.stringify(json)  );
+                    
+                    let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_recover_password",json);
+                        
+            } 
+            else {
+                 
+                }
+			
+            
+		
+        },
+
+        
+
         //SEND LOGIN
         async sendLogin(event) {
 			this.active_spinner = true ; 
