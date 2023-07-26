@@ -52,7 +52,7 @@ import Datepicker from 'vuejs3-datepicker';
                   <div class="">
                                    <text>Consulta
                                    </text>
-                                    <div class="form-group h3 ">
+                                    <div class="form-group h3 border border-1 border-primary">
                                          <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
                                     </div>
                   </div>   
@@ -64,7 +64,7 @@ import Datepicker from 'vuejs3-datepicker';
                           </div>
                         
                           <div class="">
-                                    <select   v-model="form_specialty_id" class="bg-white border border-1 text-dark form-control  " :class="{ 'bg-white border border-1': true }" id="form_specialty_id" >
+                                    <select   v-model="form_specialty_id" class="bg-white border border-1 border-primary text-dark form-control  " :class="{ 'bg-white border border-1': true }" id="form_specialty_id" >
                                     <option v-for="specialty in specialties" :key="specialty.id" :value="specialty.id">
                                       {{ specialty.name }} 
                                     </option>
@@ -80,7 +80,7 @@ import Datepicker from 'vuejs3-datepicker';
                           Fecha Inicio
                           </div>
 
-                          <div class="p-2 border border-1  " @click="show_date_start=!show_date_start"  >
+                          <div class="p-2 border border-1  border-primary" @click="show_date_start=!show_date_start"  >
                                 {{formatDate(form_calendar_start)}} <i class="bi bi-calendar-week"></i>
                           </div>
                   </div>
@@ -94,7 +94,7 @@ import Datepicker from 'vuejs3-datepicker';
                       <div class="p-2">
                           Fecha Fin
                       </div>
-                      <div class="p-2 border border-1" @click="show_date_end=!show_date_end"  >
+                      <div class="p-2 border border-1 border-primary" @click="show_date_end=!show_date_end"  >
                              {{formatDate(form_calendar_end)}} <i class="bi bi-calendar-week"></i>
                       </div>
                   </div>
@@ -107,6 +107,59 @@ import Datepicker from 'vuejs3-datepicker';
                   <div  class="d-flex justify-content-between mt-3">
                           <text>Hora Inicio </text>
 
+                          <div  class="d-flex flex-row-reverse">
+                            <div class="d-flex justify-content-end">
+                            <select class="form-select border border-1 border-primary"  v-model="start_hour"   >
+                                <option selected>00</option>
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>                             
+                            </select>
+                             &nbsp;<text class="h5">:</text>&nbsp;
+                            <select class="form-select border border-1 border-primary" v-model="start_minutes"   >
+                                <option selected>00</option>
+                                <option value="00">00</option>
+                                <option value="05">05</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>                           
+                            </select>
+                            &nbsp;Hrs 
+
+                            </div>
+                          </div>
+
+
+
+                          <!--
                           <div class="d-flex justify-content-end">
                               <div @click="show_start_hour=!show_start_hour ; show_start_minutes=false" class="p-2 border border-1">
                                   <text >{{start_hour}}</text> 
@@ -117,13 +170,16 @@ import Datepicker from 'vuejs3-datepicker';
                               </div>
                               <div class="p-2">hrs</div>
                           </div>
-                  </div>
+                        -->
 
+
+                  </div>
+                  <!--
                     <div v-if="show_start_hour" class="text-white">
                       <div class="bg-success text-white border border-1 border-dark">
                         <text class="p-2 h5 ">Seleccione Hora Inicio</text>
                       </div>
-        <!-- HOUR selector Start -->
+      
                       <table class="table caption-top">
                       
                       <tbody class="border border-dark text-dark  bg-white">
@@ -161,13 +217,15 @@ import Datepicker from 'vuejs3-datepicker';
                         </tr>
                       </tbody>
                       </table>
-        <!-- end HOUR  selector Start -->                   
+            
 
-      </div>
+                  </div>
+                -->
 
 
   <!-- MINUTES selector Start -->
-                    <div v-if="show_start_minutes" class="text-white">
+                  <!-- 
+                  <div v-if="show_start_minutes" class="text-white">
                       <div class="bg-success text-white border border-1 border-dark">
                         <text class="p-2 h5 ">Seleccione Minutos</text>
                       </div>
@@ -194,12 +252,65 @@ import Datepicker from 'vuejs3-datepicker';
                       </tbody>
                       </table>
                     </div>
+                  -->
                 <!-- CONCLUDE TIME START -->
 
                 <!-- TIME END -->
                   <div  class="d-flex justify-content-between mt-3">
                           <text>Hora Fin</text>
 
+
+
+                          <div  class="d-flex flex-row-reverse">
+                            <div class="d-flex justify-content-end">
+                            <select class="form-select border border-1 border-primary"  v-model="end_hour"   >
+                                <option selected>00</option>
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>                             
+                            </select>
+                             &nbsp;<text class="h5">:</text>&nbsp;
+                            <select class="form-select border border-1 border-primary" v-model="end_minutes"   >
+                                <option selected>00</option>
+                                <option value="00">00</option>
+                                <option value="05">05</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                                <option value="55">55</option>                           
+                            </select>
+                            &nbsp;Hrs 
+
+                            </div>
+                          </div>
+                          <!--
                           <div class="d-flex justify-content-end">
                               <div @click="show_end_hour=!show_end_hour ; show_end_minutes=false" class="p-2 border border-1">
                                   <text >{{end_hour}}</text> 
@@ -210,8 +321,11 @@ import Datepicker from 'vuejs3-datepicker';
                               </div>
                               <div class="p-2">hrs</div>
                           </div>
-                  </div>
 
+                        -->
+
+                  </div>
+                  <!--
                     <div v-if="show_end_hour" class="">
                       <div class="bg-success text-white border border-1 border-dark">
                         <text class="p-2 h5 ">Seleccione Hora Inicio</text>
@@ -254,7 +368,9 @@ import Datepicker from 'vuejs3-datepicker';
                       </tbody>
                       </table>
                     </div>
+                  -->
 
+                  <!-- 
                     <div v-if="show_end_minutes" class="text-white">
                       <div class="bg-success text-white border border-1 border-dark">
                           <text>Seleccione Minutos</text>
@@ -281,17 +397,43 @@ import Datepicker from 'vuejs3-datepicker';
                       </tbody>
                       </table>
                     </div>
+                  -->
                 <!-- CONCLUDE TIME START -->
 
 
                 <!-- APP DURATION  -->
                 <div  class="d-flex justify-content-between mt-3">
                             <text> Tiempo de atencion: </text>
+
+                            <div  class="d-flex flex-row-reverse">
+                            <div class="d-flex justify-content-end">
+                                <select class="form-select border border-1 border-primary" v-model="form_app_duration"  >
+                                  <option selected>00</option>
+                                    <option value="00">00</option>
+                                    <option value="05">05</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                    <option value="30">30</option>
+                                    <option value="35">35</option>
+                                    <option value="40">40</option>
+                                    <option value="45">45</option>
+                                    <option value="50">50</option>
+                                    <option value="55">55</option>                           
+                                </select>
+                                <text>&nbsp;  Minutos </text>
+                                
+                            </div>
+                            </div>
+
+                            <!--
                             <div @click="show_duration_minutes=!show_duration_minutes" class="p-2 border border-1">
                                   <text >{{form_app_duration}}</text> Minutos
                             </div>
+                          -->
                 </div>
-
+              <!--
                 <div v-if="show_duration_minutes" class="">
                     <div class="bg-success text-white border border-1 border-dark">
                       <text>Seleccione tiempo de duracion de su cita</text>
@@ -318,6 +460,7 @@ import Datepicker from 'vuejs3-datepicker';
                       </tbody>
                       </table>
                 </div>
+              -->
                 <!-- END  APP DURATION  -->
 
 
@@ -325,13 +468,37 @@ import Datepicker from 'vuejs3-datepicker';
                 <div  class="d-flex justify-content-between mt-3">
                            
                   <text> Tiempo entre Citas: </text>
+
+                    <div  class="d-flex flex-row-reverse">
+                            <div class="d-flex justify-content-end">
+                                <select class="form-select border border-1 border-primary" v-model="form_app_time_between"  >
+                                    <option value="00">00</option>
+                                    <option value="05">05</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                    <option value="30">30</option>
+                                    <option value="35">35</option>
+                                    <option value="40">40</option>
+                                    <option value="45">45</option>
+                                    <option value="50">50</option>
+                                    <option value="55">55</option>                           
+                                </select>
+                                <text>&nbsp;  Minutos </text>
+                                
+                            </div>
+                      </div>
+                          <!--        
                             <div @click="show_timebtw_minutes=!show_timebtw_minutes" class="p-2 border border-1">
                                   <text >{{form_app_time_between}}</text> Minutos
                             </div>
+                          -->
                             
                 </div>
 
-                <div v-if="show_timebtw_minutes" class="test-dark bg-white  border-dark">
+                <!-- 
+                  <div v-if="show_timebtw_minutes" class="test-dark bg-white  border-dark">
                     <div class="text-white bg-success">  
                         <text class="p-2">Entre Citas Tiempo duracion Minutos</text>
                     </div>
@@ -358,6 +525,7 @@ import Datepicker from 'vuejs3-datepicker';
                       </tbody>
                       </table>
                 </div>
+              -->
                 <!-- END  TIEMPO ATENCION ENTRE CITAS  -->
 
                 <!-- INSERT PRICE   -->
@@ -371,7 +539,7 @@ import Datepicker from 'vuejs3-datepicker';
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
                     </div>
-                    <input v-model="form_app_price" type="number" min="1" max="999999" maxlength="15" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <input v-model="form_app_price" type="number" min="1" max="999999" maxlength="15" class="form-control border border-1 border-primary" aria-label="Amount (to the nearest dollar)">
                     <!-- 
                       <div class="input-group-append">
                         <span class="input-group-text">.00</span>
@@ -639,15 +807,15 @@ data: function () {
             start_minutes : '00' ,
 
             show_end_hour : false ,
-            end_hour : '00' ,
+            end_hour : '23' ,
             show_end_minutes : false ,
             end_minutes : '00' ,
             
-            form_app_duration : 0 ,
+            form_app_duration : '00' ,
             show_duration_minutes : false,
 
             show_timebtw_minutes : false,
-            form_app_time_between : 0 ,
+            form_app_time_between : '00' ,
 
             form_calendar_color : "#FCFFE9" ,
             calendarColorArray : ["#FF4244","#4ebeef","#AF8536", "#f6a700", "#32b780", "#dd6da4"],
@@ -838,7 +1006,7 @@ data: function () {
               console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
               this.$emit('updateCalendarList');  
               this.showModalCreateCalendar = false ;
-              alert("Calendario creado en estado 'INACTIVO'. Ahora usted debe revisar y activar el calendario recien creado");
+              alert("Calendario Creado. Debe ser Activado para que sea publico.");
               
         },
 
