@@ -50,7 +50,7 @@ defineProps({
                 </form>   
             </div>
 
-             <p  v-if="!requestReceived" @click="showRecoverPassword=!showRecoverPassword; requestReceived=false" class="m-4 text-secondary"><small>Olvide mi contraseña</small></p>
+             <p  v-if="!requestReceived" @click="showRecoverPassword=!showRecoverPassword; requestReceived=false" class="m-4 text-secondary"><small>¿Olvidaste tu contraseña?</small></p>
              
              <div v-if="showRecoverPassword" style="width: 300px;">
                 <div class="mb-3" >
@@ -64,7 +64,7 @@ defineProps({
              </div>
 
              <div v-if="requestReceived">
-                Solicitud recibida
+                Le enviaremos información para recuperar su cuenta.
              </div>
             
             <div class="m-5 p-5 ">
