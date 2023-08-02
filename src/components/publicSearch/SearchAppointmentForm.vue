@@ -32,20 +32,20 @@ import Datepicker from 'vuejs3-datepicker';
 <!--FORM INPUT SPECIALTY -->
 <div class="position-relative mt-3 pb-4 mb-3" >
             <div class="w-100 mb-0  pb-0 d-flex justify-content-center">
-                <specialtyCircle :specialty='global_specialties[0]'  :bgcolor='circleColors[0]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
-                <specialtyCircle :specialty='global_specialties[1]'  :bgcolor='circleColors[1]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
-                <specialtyCircle :specialty='global_specialties[2]'  :bgcolor='circleColors[2]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[0]'  :bgcolor='circleColors[0]'  :specialtyTextColor='specialtyTextColors[0]'  v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[1]'  :bgcolor='circleColors[1]'  :specialtyTextColor='specialtyTextColors[1]'  v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[2]'  :bgcolor='circleColors[2]'  :specialtyTextColor='specialtyTextColors[2]'  v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
             </div>
             <div class="w-100 mt-0 pt-0 d-flex justify-content-center">
-                <specialtyCircle :specialty='global_specialties[3]'  :bgcolor='circleColors[3]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
-                <specialtyCircle :specialty='global_specialties[4]'  :bgcolor='circleColors[4]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[3]'  :bgcolor='circleColors[3]'  :specialtyTextColor='specialtyTextColors[3]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty" > </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[4]'  :bgcolor='circleColors[4]'  :specialtyTextColor='specialtyTextColors[4]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
            <!--  <img style="z-index: 3" v-if=" search_params.specialty ==null && (search_params.type_remote || search_params.type_home  || search_params.type_center)" src="/public/finger.png" class="position-absolute  top-50 end-0" width="80" > 
             -->
             </div>
             <div class="w-100 mt-0 pt-0  mb-0 pb-0 d-flex justify-content-center">
-                <specialtyCircle :specialty='global_specialties[5]'  :bgcolor='circleColors[5]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
-                <specialtyCircle :specialty='global_specialties[6]'  :bgcolor='circleColors[6]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
-                <specialtyCircle :specialty='global_specialties[7]'  :bgcolor='circleColors[7]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[5]'  :bgcolor='circleColors[5]'  :specialtyTextColor='specialtyTextColors[5]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[6]'  :bgcolor='circleColors[6]'  :specialtyTextColor='specialtyTextColors[6]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
+                <specialtyCircle :specialty='global_specialties[7]'  :bgcolor='circleColors[7]'  :specialtyTextColor='specialtyTextColors[7]' v-on:specialtySelected="specialtySelected" :code="search_params.specialty"> </specialtyCircle>
             </div>
 
             <!--
@@ -80,7 +80,7 @@ import Datepicker from 'vuejs3-datepicker';
 
 <!-- FORM INPUT LOCATION-->
         
-        <div class="d-flex justify-content-center mb-0 mt-0" :class="{'opacity-25': search_params.specialty==null}" >
+    <div class="d-flex justify-content-center mb-0 mt-0" :class="{'opacity-0': search_params.specialty==null}" >
         <div style="width: 20em;">
                 <div  v-if="search_params.type_remote==null  || search_params.type_remote==false "   class="row  mb-1   "  >
                     <div class="col">
@@ -93,48 +93,52 @@ import Datepicker from 'vuejs3-datepicker';
                       <input  style="z-index: 9;  padding-left : 40px ; border-radius: 25px;" type="text" class="form-control form-control-lg border text-primary"   :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-white' : !ready_input ,  'text-success' : ready_input  }"  id="form_comuna" name="form_comuna"   placeholder="Todas las Comunas" >
                    -->
 
-                   <div class="bg-primary text-muted d-flex justify-content-center border border-1 border-white" style=" z-index: 9;   border-radius: 25px;"  >
+                   <div class="bg-white text-secondary d-flex justify-content-center border border-0 border-white" style=" z-index: 9;   border-radius: 25px;"  >
                         
                         <div class="m-0 p-2"> 
-                            <text style="font-size: 1.5em;" class="text-white">Todas las comunas</text>
+                            <text style="font-size: 1.5em;" class="">Todas las comunas</text>
                         </div>
                         
-
                     </div>
 
 
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 
 <!-- FORM INPUT DATE -->
-        <div class="d-flex justify-content-center mb-0 mt-2" :class="{'opacity-25': search_params.specialty==null}" >
+    <div class="d-flex justify-content-center mb-0 mt-2" :class="{'opacity-0': search_params.specialty==null}" >
         <div style="width: 20em;">
        
-                <div v-show="show_input_date() " @click="show_date_picker = !show_date_picker"  >
-                    <div class="text-muted d-flex justify-content-between border border-1 border-secondary" style=" z-index: 9;   border-radius: 25px;"  >
+                <div  @click="show_date_picker = !show_date_picker"  >
+
+                    <div class="d-flex justify-content-between border border-0 border-secondary  bg-secondary text-white" style=" z-index: 9;   border-radius: 25px;"  >
                         <div class="m-0 p-1"> 
                             &nbsp;<i class="m-0 p-0 bi display-6  bi-calendar-event"></i> 
                         </div>
                         <div class="m-0 p-2"> 
-                            <text style="font-size: 1.1em;" class="">&nbsp;&nbsp;&nbsp; {{format_date(search_params.date)}}</text>
+                            <text v-if="show_input_date()" style="font-size: 1.1em;" class="">
+                                &nbsp;&nbsp;&nbsp; {{format_date(search_params.date)}}
+                            </text>
+                            <text v-else  style="font-size: 1.3em;" >
+                                Fecha más Próxima
+                            </text>
                         </div>
                         <div class="m-0 p-1"  > 
-                            <i class="bi bi-x-lg m-0 p-0 text-muted border-start display-6"  ></i>  
+                            <i class="bi bi-x-lg m-0 p-0  border-start display-6"  ></i>  
                         </div>
-
                     </div>
                  
                 </div>
-    <!--DATE PICKER COMPONENT -->
-    
-    <div v-if="show_date_picker" class="text-center"> 
-            <datepicker   ref="inputRef"  :monday-first="true" :inline="true" v-model="form_current_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+
+                <!--DATE PICKER COMPONENT -->
+                <div v-if="show_date_picker" class="text-center"> 
+                        <datepicker   v-on:input="selectedDate" ref="inputRef" placeholder="YYYY-MM-DD" :monday-first="true" :inline="true" v-model="form_current_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                </div>
+                <!--DATE PICKER COMPONENT -->
+        </div>   
     </div>
-     <!--DATE PICKER COMPONENT -->
-             </div>   
-             </div>
                  
 <!--FORM INPUT  APP TYPE -->
                 <!--
@@ -204,8 +208,8 @@ export default {
 */
 
             setLocationCode : 1 ,
-            circleColors: ['#b7d8d6','#DDC696','#CEF3DD','#568281','#BBBBBB','#91B8C1','#FFBFA3','#ffe999','#89dee2'],
-            textColors:   ['#ff0000','#ff0000','#ff0000','#000000','#000000','#000000','#000000','#000000','#000000' ],
+            circleColors: ['#01454f','#BC881C','#8C0241','#575757','#000080','#337686','#DDD','#0B2264','#FFF'],
+            specialtyTextColors:   ['#FFF','#FFF','#FFF','#FFF','#FFF','#FFF','#111','#FFF','#FFF' ],
        
             search_params : { 
 				        specialty : null ,
@@ -230,8 +234,8 @@ export default {
        //TODO DEBERIA SER YEAR MONT DAY LOCAL TIME
         let aux_date = new Date() 
         this.form_minimum_date = aux_date 
-        this.form_current_date = aux_date.getFullYear()+"-"+(aux_date.getMonth()+1)+"-"+aux_date.getDate()
-        this.search_params.date =   this.form_current_date 
+       // this.form_current_date = aux_date.getFullYear()+"-"+(aux_date.getMonth()+1)+"-"+aux_date.getDate()
+        //this.search_params.date =   this.form_current_date 
         },
 
     methods: {
@@ -329,7 +333,15 @@ export default {
 
         show_input_date()
         {   
-            return true
+
+            if (this.search_params !=null && this.search_params.date != null )
+            {
+                return true
+            }
+            else 
+            {
+                return false
+            }
             /*
             if (this.n_appointments_found>0)
            {
@@ -442,8 +454,9 @@ export default {
         selectedDate(date)
         {
             console.log("SelectedDate :"+date);
-            this.search_params.date = date.setHours(-24,0,0,0) 
+            this.search_params.date = date.setHours(0,0,0,0) 
             this.$emit("searchGeneric",this.search_params);
+            this.show_date_picker = false ;
 
             /*
                 const search_params = { 
@@ -482,6 +495,7 @@ export default {
         
         form_current_date(newValue, oldValue)
         {
+            console.log("watcher form_current_date vewVale:"+newValue)
             if (newValue != null)
             {  
                 console.log("New FORM_CURRENT_DATE :"+newValue);
