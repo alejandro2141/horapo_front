@@ -24,7 +24,7 @@ import { ref } from 'vue'
                             <div id="hexagono3-1"  class="text-center" :style="{ 'background-color': '#fff'      } " >
                                 <div id="hexagono3-2" class="d-flex justify-content-center align-items-center" :style="{ 'background-color' : bgcolor, 'color' : '#000' }" >
                            
-                                        <text > {{getSpecialtyName()}} 
+                                        <text :style="{ 'color': specialtyTextColor }"  > {{getSpecialtyName()}} 
                                         </text>
                                         <br> 
 
@@ -79,7 +79,7 @@ export default {
         }
     },  
  
-   props: ['specialty','bgcolor', 'code' ], 
+   props: ['specialty', 'specialtyTextColor' ,'bgcolor', 'code' ], 
    emits: [ 'specialtySelected' ],
  
    
