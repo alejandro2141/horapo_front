@@ -113,7 +113,7 @@ import Datepicker from 'vuejs3-datepicker';
        
                 <div  @click="show_date_picker = !show_date_picker"  >
 
-                    <div class="d-flex justify-content-between border border-0 border-secondary  bg-secondary text-white" style=" z-index: 9;   border-radius: 25px;"  >
+                    <div class="d-flex justify-content-between border border-0 border-secondary  bg-success text-white" style=" z-index: 9;   border-radius: 25px;"  >
                         <div class="m-0 p-1"> 
                             &nbsp;<i class="m-0 p-0 bi display-6  bi-calendar-event"></i> 
                         </div>
