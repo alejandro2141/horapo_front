@@ -397,7 +397,7 @@ async searchAppointmentsGeneric(params) {
                                  
                           const json = { 
                   // agenda_id : this.par_agenda_id ,			 
-                          date : new Date(params.date) ,
+                          
                           specialty : params.specialty.id ,
                           location : params.location ,
                           home_visit : params.home_visit,
@@ -405,6 +405,17 @@ async searchAppointmentsGeneric(params) {
                           type_center : params.type_center,
                           type_remote : params.type_remote,           
                                   };
+                          if ( params !=null && params.date != null  )
+                          { 
+                            json.date = new Date(params.date) 
+                          }
+                          else 
+                          {
+                            json.date = new Date()
+                          }
+
+                                  
+
 
                   console.log ("patient_get_appointments_generic REQUEST:"+ JSON.stringify(json)  );
                  
