@@ -14,18 +14,18 @@ const count = ref(0)
            
             <div class="row" style="--bs-gutter-x: 0rem ; margin-right: 0rem ; margin-left: 0rem ">
             
-                <div class="col " style="position: relative;" >
+                <div class="col text-white" style="position: relative;" >
 
                     <div  style="position: absolute; z-index: 9; top : 6px ; left : 3px " class="mb-2  rounded" > 
-                        <i class="display-6  bi bi-geo-alt  text-muted m-0"  ></i>                        
+                        <i class="display-6  bi bi-geo-alt   m-0"  ></i>                        
                     </div>
 
                     <div>
-                        <input @keyup="captureSeachLetter" style=" z-index: 9;  border-radius: 25px; text-align: center;" type="text" class="form-control form-control-lg border  text-secondary"    :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-secondary' : !ready_input ,  'text-success' : ready_input  , 'text-danger': location_filtered!=null && location_filtered.length == 0 }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
+                        <input @keyup="captureSeachLetter" style="  z-index: 9;  border-radius: 25px; text-align: center;" type="text" class="form-control form-control-lg border bg-success text-white"    :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-secondary' : !ready_input ,  'text-success' : ready_input  , 'text-danger': location_filtered!=null && location_filtered.length == 0 }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
                     </div>
 
                     <div  style="position: absolute; z-index: 9; top : 0.5em ; right : 0.3em  " class="mb-2  rounded" > 
-                        <i class="bi bi-x-lg m-0 p-0 text-muted border-start display-6" @click="form_comuna = ''; location_filtered=[]; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
+                        <i class="bi bi-x-lg m-0 p-0  border-start display-6" @click="form_comuna = ''; location_filtered=[]; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
                     </div>
                  
 
@@ -79,6 +79,10 @@ const count = ref(0)
 
 <style scoped>
 
+input::placeholder {
+  color: rgb(255, 255, 255);
+}
+
 </style>
 
 
@@ -90,7 +94,7 @@ export default {
         return {
             PlaceHolderInput : "Todas las Comunas" ,
 
-            form_comuna : null,
+            form_comuna : null ,
             comuna_list : [] ,
             ready_input : false ,
             display_error : false  ,
