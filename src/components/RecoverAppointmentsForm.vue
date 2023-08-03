@@ -16,7 +16,7 @@ defineProps({
 
 
 <template>
-    <div class="p-0 m-0 border border-1 p-2 bg-white" id="form" >
+    <div class="p-5 m-0 border border-1 p-2 bg-white" id="form" >
         <!--
         <form autocomplete="off">
             Ingrese su correo y le enviaremos sus horas ya agendadas 
