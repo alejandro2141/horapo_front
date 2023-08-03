@@ -75,7 +75,7 @@ import { ref } from 'vue'
                         </div>
                     </div>
 
-                    <div>   ${{ calendar_data.price }}</div>
+                    <div>   ${{ priceFormatter(calendar_data.price)}}</div>
                     
 
                 </div>
@@ -100,6 +100,7 @@ import { ref } from 'vue'
 export default {
   data : function() {
     return {
+        formatter : null ,
         
             }
   },
@@ -108,10 +109,28 @@ export default {
 
  mounted () {  
      // this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
- 
         },
 
 methods: {
+
+    priceFormatter(amount) 
+    {
+        let aux_amount = amount.toString() 
+        /*
+        let last_3 =  aux_amount.slice( aux_amount.length-3, aux_amount.length)
+        let last_6 =  aux_amount.slice(aux_amount.length-6, aux_amount.length-3)
+        let last_9 = ""
+        if (aux_month.length>6 )
+        { 
+            last_9 =  aux_amount.slice(-9,aux_amount.length-6)
+        }
+        
+         return  last_9+"."+last_6+"."+last_3
+         */
+
+         return   amount.toLocaleString('es-cl');
+
+    },
 
      showSpecialtyName(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
