@@ -12,7 +12,7 @@ import axios from 'axios';
             
             <form autocomplete="off">
                 <div class="form-row">
-        <p>Ingrese su información de registro profesional</p>
+        <p style="font-size: 2em">Formulario de Registro</p>
                 <div class="form-group">
                         <label for="inputNames">Nombres</label>
                         <input type="text" autocomplete="off" class="form-control" id="inputNames" placeholder="..." v-model="name">
