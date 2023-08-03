@@ -134,8 +134,16 @@ import Datepicker from 'vuejs3-datepicker';
 
                 <!--DATE PICKER COMPONENT -->
                 <div v-if="show_date_picker" class="text-center"> 
-                        <datepicker   v-on:input="selectedDate" ref="inputRef" placeholder="YYYY-MM-DD" :monday-first="true" :inline="true" v-model="form_current_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
-                </div>
+                        <datepicker   
+                        :disabled-dates="{
+                                        to: new Date(),
+                                        //from: new Date(),date.setDate(date.getDate() - 1);
+                                       
+                                    }"
+                        v-on:input="selectedDate" ref="inputRef" placeholder="YYYY-MM-DD" :monday-first="true" :inline="true" v-model="form_current_date" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                
+                
+                    </div>
                 <!--DATE PICKER COMPONENT -->
         </div>   
     </div>
@@ -233,7 +241,7 @@ export default {
    created () {    
        //TODO DEBERIA SER YEAR MONT DAY LOCAL TIME
         let aux_date = new Date() 
-        this.form_minimum_date = aux_date 
+        this.form_minimum_date = aux_date.setDate(aux_date.getDate() - 1);
        // this.form_current_date = aux_date.getFullYear()+"-"+(aux_date.getMonth()+1)+"-"+aux_date.getDate()
         //this.search_params.date =   this.form_current_date 
         },
