@@ -7,7 +7,7 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
 </script>
 <template>
     
-    <div class="m-3" style="width:350px;">
+    <div class="m-3 h-100" style="width:350px; ">
     <ModalShowAppointmentTaken v-on:updateAppList="updateAppList"  :daterequired='daterequired'  :hourTaken='hourTaken' :session_params='session_params' :openModalShowAppTakenEvent='openModalShowAppTakenEvent' :global_comunas='global_comunas' :global_specialties='global_specialties'  > </ModalShowAppointmentTaken>
    
 
