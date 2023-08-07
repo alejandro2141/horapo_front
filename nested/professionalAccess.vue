@@ -20,11 +20,11 @@ import ProfesionalBugReport from '../src/components/professionalAccess/Profesion
 </script>
 
 <template>
-<div >
+<div class="">
     
     <ProfesionalGeneralHeader  v-if="session_params!=null"  v-on:setTodayDateFromHeader='setTodayDateFromHeader'   :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
    
-    <div   class="m-0 w-100 d-flex justify-content-center">
+    <div   class="m-0 w-100  d-flex justify-content-center">
    
        <div> 
         <div  :style="{display:  visible_tab_login }"  class=" position-relative" >	 
