@@ -44,7 +44,7 @@ import axios from 'axios';
                                             </text>
                                         </div>
 
-                                        <div> <small> <small>  precio ${{calendar_data.price}}</small> </small></div>
+                                        <div> <small> <small>  precio ${{priceFormatter(calendar_data.price)}}</small> </small></div>
                                     </div>    
                                     
                                     <div @click="$emit('displayModalAppAvailable', center_data )"  style="background-color: #ffff ; opacity: 0.5;  border-top-right-radius:25px" >
@@ -76,6 +76,11 @@ export default {
     emits: [ 'displayModalAppAvailable', 'addToBlockList' ] ,
 
 	methods :{
+
+        priceFormatter(amount) 
+        {
+            return   amount.toLocaleString('es-cl');
+        },
 
         getLocalTime()
         {
