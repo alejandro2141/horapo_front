@@ -47,10 +47,10 @@ import headerPublicSearch from '../HeaderPublicSearch.vue'
 
           <!-- LIST APPOINTMENTS -->
           <div class="d-flex justify-content-center" v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
-                <p class="">{{n_appointments_found }} resultados en próximos  40 dias.  ({{ metric_search/1000}}Seg) </p>
+                <p class="">{{ appointments_filtered.appointments_result_counter }} resultados en próximos {{ appointments_filtered.days_counter }} dias.   ({{ metric_search/1000}}Seg) </p>
           </div>
           <div class="d-flex justify-content-center" v-if="appointments_filtered !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list !=null && appointments_filtered.appointments_list.length > 0">                
-                <searchAppointmentResult  :n_appointments_found="n_appointments_found" :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
+                <searchAppointmentResult  :n_appointments_found="appointments_filtered.appointments_result_counter" :key="forceReRender" :appointments_filtered="appointments_filtered" :centers='centers_filtered' :searchParameters='searchParameters'   v-on:updateLastSearch="updateLastSearch" :daterequired="daterequired"  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </searchAppointmentResult> 	    
           </div>
           <!-- END LIST APPOINTMENTS -->
 
@@ -142,6 +142,7 @@ export default {
             },
 
 methods: {
+  /*
 
             numberAppointmentFound()
             {
@@ -153,6 +154,7 @@ methods: {
               }
               return n_app
             },
+            */
 
             async searchGeneric(params)
             {
@@ -170,7 +172,9 @@ methods: {
                this.appointments_filtered = JSON.parse(JSON.stringify(this.appointments));
                console.log ("SearchGeneric RESULTS : "+JSON.stringify(this.appointments_filtered))
                //this.n_appointments_found = this.appointments_filtered.appointments_list.length 
-              this.n_appointments_found = this.numberAppointmentFound()  
+              //this.n_appointments_found = this.numberAppointmentFound()  
+
+             // this.n_appointments_found = this.appointments_filtered 
               
               //INACTIV SCROLL DOW
               //this.scrollDown()
