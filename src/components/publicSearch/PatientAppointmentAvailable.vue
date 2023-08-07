@@ -115,21 +115,7 @@ methods: {
 
     priceFormatter(amount) 
     {
-        let aux_amount = amount.toString() 
-        /*
-        let last_3 =  aux_amount.slice( aux_amount.length-3, aux_amount.length)
-        let last_6 =  aux_amount.slice(aux_amount.length-6, aux_amount.length-3)
-        let last_9 = ""
-        if (aux_month.length>6 )
-        { 
-            last_9 =  aux_amount.slice(-9,aux_amount.length-6)
-        }
-        
-         return  last_9+"."+last_6+"."+last_3
-         */
-
-         return   amount.toLocaleString('es-cl');
-
+        return   amount.toLocaleString('es-cl');
     },
 
      showSpecialtyName(id){
