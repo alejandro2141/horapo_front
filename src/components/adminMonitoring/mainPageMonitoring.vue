@@ -48,6 +48,18 @@ import { BKND_CONFIG } from '../../../config123.js'
         </div>
     </div>
 
+    <div class="border border-1">
+        <p class="mt-5"> 
+            <button  @click="getProfessionalComments()" type="button" class="btn btn-secondary">Get Professional Comments</button>
+        </p>
+    
+        <div class="border border-1">
+            <div v-for="reg of professional_comments">
+                {{ reg.id }}   {{ reg.date_time }}  {{ reg.professional_id}}  {{ reg.message}}  {{ reg.animo}}<br>
+            </div>
+        </div>
+    </div>
+
 
 
 </div>
@@ -65,7 +77,8 @@ data: function () {
 		return {
             p_register : null ,
             p_sessions : null ,
-            p_comments : null
+            p_comments : null ,
+            professional_comments : null ,
 		 }
 	},
 
@@ -78,7 +91,7 @@ data: function () {
          },
     mounted () {
         this.getProfessionalRegisters()
-        this.getSessionsActive()
+      //  this.getSessionsActive()
          },
 
  
@@ -117,6 +130,18 @@ data: function () {
                         console.log ("GET PUBLIC COMMENTS :"+ JSON.stringify(json)  );
                         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_get_public_comments",json);
                         this.p_comments = response_json.data.rows;
+                        console.log ("GET PUBLIC COMMENTS:"+JSON.stringify(this.p_comments)) ;                       
+                    },
+
+        //GET Center List
+        async getProfessionalComments() {
+                        const json = { 
+                      			   
+                                      };
+
+                        console.log ("GET PROFESIONAL COMMENTS COMMENTS :"+ JSON.stringify(json)  );
+                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_comments",json);
+                        this.professional_comments = response_json.data.rows;
                         console.log ("GET PUBLIC COMMENTS:"+JSON.stringify(this.p_comments)) ;                       
                     },
 
