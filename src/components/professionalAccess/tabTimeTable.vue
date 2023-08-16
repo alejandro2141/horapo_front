@@ -21,7 +21,8 @@ import infoCalendar from './info_calendar.vue'
             </p>
 
             <infoCalendar v-if="showInfoCreate"></infoCalendar>
-                
+           
+         <!--   
             <div class="text-center p-3 m-3" v-if="calendars != null && calendars.centers != null &&  calendars.centers.length>0 "  > 
                 <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
             </div>
@@ -29,6 +30,15 @@ import infoCalendar from './info_calendar.vue'
                 <b><i class="bi bi-exclamation-triangle display-4 text-warning"></i></b><br>
                 Antes de crear un nuevo Calendario, debe primero crear una consulta. 
             </div>
+        -->
+            <div class="text-center p-3 m-3" v-if="calendars == null && calendars.centers == null &&  calendars.centers.length < 1 "  > 
+                <b><i class="bi bi-exclamation-triangle display-4 text-warning"></i></b><br>
+                Antes de crear un nuevo Calendario, debe primero crear una consulta.         
+            </div>
+            <div v-else class="text-center p-5"> 
+                <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
+            </div>
+
 
             
             <!-- LIST Calendars -->
