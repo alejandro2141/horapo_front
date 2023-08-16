@@ -64,7 +64,7 @@ import ProfesionalBugReport from '../src/components/professionalAccess/Profesion
         
     </div>
 
-    <ProfesionalBugReport v-if="visible_tab_login !='block' " :session_params="session_params" ></ProfesionalBugReport>
+    <ProfesionalBugReport v-if="visible_tab_login !='block' && showBug==true" :session_params="session_params" ></ProfesionalBugReport>
    <br>
    <br>
    <br>
@@ -137,6 +137,8 @@ export default {
 
          setTodayDate : null  ,
          forceUpdateTabAppointment : 0 ,
+
+         showBug : false ,
        
     }
   },
@@ -150,13 +152,60 @@ created() {
        
         this.loadGlobalSpecialties();
         this.loadGlobalComunas();
-
-
-    
       //  this.loadProfessionalEspecialties();
 },
 
+mounted() {
+    console.log("lelelel  Mounted ")
+   
+},
+
+beforeUpdate() {
+    console.log("lelelel beboreUPdated")    
+},
+
+updated() {
+    console.log("lelelel Updated")  
+},
+
+beforeDestroy() {
+    console.log("lelelel beforeDestroy")  
+},
+
+destroyed() {
+    console.log("lelelel destroyed")  
+},
+
+
+watch: {
+
+    async visible_tab_appListTaken (oldval,newval)
+        {
+            this.showBugFunction()
+        },
+    async visible_tab_timetable (oldval,newval)
+        {
+          this.showBugFunction()
+        },
+    async visible_tab_centers (oldval,newval)
+        {
+          this.showBugFunction()
+        }
+
+
+        
+    
+    },//end watch
+
+
 methods: {
+    async showBugFunction()
+    {
+    //    this.showBug=true 
+    this.showBug=false 
+    setTimeout(() => this.showBug=true , 3000)
+    },
+
 
     async setSessionFromCode()
     {
