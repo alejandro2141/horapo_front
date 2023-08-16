@@ -21,11 +21,11 @@ const count = ref(0)
                     </div>
 
                     <div>
-                        <input @keyup="captureSeachLetter" style="  z-index: 9;  border-radius: 25px; text-align: center;" type="text" class="form-control form-control-lg border bg-success text-white"    :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-secondary' : !ready_input ,  'text-success' : ready_input  , 'text-danger': location_filtered!=null && location_filtered.length == 0 }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
+                        <input @click="PlaceHolderInput=''" @keyup="captureSeachLetter" style=" z-index: 9;  border-radius: 25px; text-align: center;" type="text" class="form-control form-control-lg border bg-success text-white"    :class="{ 'pl-2' : true , 'border-success' : ready_input , 'border-secondary' : !ready_input ,  'text-success' : ready_input  , 'text-danger': location_filtered!=null && location_filtered.length == 0 }" v-model="form_comuna" id="form_comuna" name="form_comuna"   :placeholder="PlaceHolderInput" >
                     </div>
 
                     <div  style="position: absolute; z-index: 9; top : 0.5em ; right : 0.3em  " class="mb-2  rounded" > 
-                        <i class="bi bi-x-lg m-0 p-0  border-start display-6" @click="form_comuna = ''; location_filtered=[]; ready_input = false ; $emit('selectedComunaCode', null);  " ></i>
+                        <i class="bi bi-x-lg m-0 p-0  border-start display-6" @click="form_comuna = ''; location_filtered=[]; ready_input = false ; PlaceHolderInput=''; $emit('selectedComunaCode', null);  " ></i>
                     </div>
                  
 
@@ -81,6 +81,7 @@ const count = ref(0)
 
 input::placeholder {
   color: rgb(255, 255, 255);
+ /* opacity: 0.5; */
 }
 
 </style>
