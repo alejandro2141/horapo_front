@@ -62,7 +62,7 @@ import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
         </div>
       
 
-    <div style="height:25em ">       
+    <div style="height:35em ">       
     </div>
 
     </div>     
