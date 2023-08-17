@@ -161,8 +161,9 @@ import professional_messages from './professional_messages.vue'
 				</a>
 				
 				<div v-if="showInputEmailToShare" >
+					<text class="text-secondary"><small>Igrese email de destino de la Invitación </small></text>
 					<br>
-					<input type="text" class="form-control" id="usr" placeholder="Correo@decolega.com" v-model="emailToShare" >
+					<input type="text" class="form-control" id="usr" placeholder="Correo@destino.com" v-model="emailToShare" >
 					<text class="text-white btn btn-primary m-2" @click="sendEmailToColleague();showInputEmailToShare=false; showMsgInvitationSent=true ">Enviar</text>
 				</div>
 				<br>
