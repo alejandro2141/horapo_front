@@ -54,7 +54,7 @@ import axios from 'axios';
             </div>
 
 
-            <div v-if="comments != null && showComments" class="text-secondary text-start  w-75 m-2"  >
+            <div v-if="comments != null && showComments" class="text-secondary text-start  w-100 m-2"  >
                 <i class="bi bi-hammer">Estamos trabajando para solucionar: </i>
                <br>
                 <div v-for="comment in comments" :key="comment.id" class="mt-2 " >
