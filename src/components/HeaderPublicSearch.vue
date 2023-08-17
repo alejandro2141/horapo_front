@@ -115,7 +115,7 @@ import PublicShareSite from './publicSearch/PublicShareSite.vue';
 
     <div class="d-flex justify-content-center">
       <PublicShareSite v-on:closePublicShareSite="closePublicShareSite"  v-if="showShareSite" style="position: absolute; top: 3em;  z-index: 9;  border-bottom-left-radius: 10px 10px;border-radius: 15px;" ></PublicShareSite>
-      <RecoverAppointmentsForm v-on:closeRecoverAppointmentForm="closeRecoverAppointmentForm" v-if="showRecoverAppointment" style="position: absolute; top: 3em;  z-index: 9;  border-radius: 15px;"></RecoverAppointmentsForm>
+      <RecoverAppointmentsForm v-on:closeRecoverAppointmentForm="closeRecoverAppointmentForm" v-if="showRecoverAppointment" style="position: absolute; top: 3em;  z-index: 9;  border-radius: 15px;" class="w-100"></RecoverAppointmentsForm>
       
     </div>
     
