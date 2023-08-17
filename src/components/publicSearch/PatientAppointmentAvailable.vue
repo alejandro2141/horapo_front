@@ -75,7 +75,7 @@ import { ref } from 'vue'
                         </div>
                     </div>
 
-                    <div>   ${{ priceFormatter(calendar_data.price)}}</div>
+                    <div v-if="calendar_data != null && calendar_data.price>1">   ${{ priceFormatter(calendar_data.price)}}</div>
                     
 
                 </div>
