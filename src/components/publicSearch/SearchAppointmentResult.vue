@@ -35,7 +35,7 @@ import LoadProgress from '../loadProgress.vue'
                                 
                                 <!-- Cicle for apps -->
                                 <div  v-for="app in day.appointments" :key="app.id" class="mt-0 " > 
-                                        <patientAppointmentAvailable   :center_data="getCenterData(day.centers,app.center_id)"  :calendar_data="getCalendarData(day.calendars,app.calendar_id)"  :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app,day.centers)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
+                                        <patientAppointmentAvailable   :center_data="getCenterData(day.centers,app.center_id)"  :calendar_data="getCalendarData(day.calendars,app.calendar_id)"  :searchParameters="searchParameters" class=" m-2 "  v-if="app != null"  v-on:click="setModalReserve(app,day.centers, day.calendars)" :appointment='app'  :global_comunas="global_comunas" :global_specialties="global_specialties"  > </patientAppointmentAvailable>            
                                 </div>
                             
                             </div>
@@ -59,7 +59,7 @@ import LoadProgress from '../loadProgress.vue'
         <!-- Modal Reserve and Confirm  as Component with a teleport to Main Page -->
        <!-- <modalPublicViewAppointment :searchParameters="searchParameters" :app="app"          :center_data="center_data"    :openModalEvent="openModalEvent"               v-on:updateLastSearch="updateLastSearch"   :global_comunas='global_comunas' :global_specialties="global_specialties"  > </modalPublicViewAppointment>
       -->
-        <ModalPublicReserveAppForm  :searchParameters='searchParameters' :appToReserve='app' :center_data="center_data"    :eventShowModalPubicReserve='openModalEvent'   v-on:updateLastSearch='updateLastSearch'   :global_comunas="global_comunas" :global_specialties='global_specialties'       ></ModalPublicReserveAppForm>
+        <ModalPublicReserveAppForm  :searchParameters='searchParameters' :appToReserve='app' :center_data="center_data" :calendar_data="calendar_data"   :eventShowModalPubicReserve='openModalEvent'   v-on:updateLastSearch='updateLastSearch'   :global_comunas="global_comunas" :global_specialties='global_specialties'       ></ModalPublicReserveAppForm>
 
         <!-- Modal Reserve and Confirm End -->
 </div>     
@@ -112,6 +112,7 @@ export default {
             active_spinner : false ,
 
             center_data : null ,
+            calendar_data : null ,
           
     }
   },
@@ -197,11 +198,12 @@ export default {
                 return aux_calendars.find(elem => elem.id ==  calendar_id)  
             },
           
-            setModalReserve(appointment,centers)
+            setModalReserve(appointment,centers,calendars )
             {
                 console.log("Set Modal Reserve method in SearchApp Resutl"+JSON.stringify(appointment));
                 this.app = appointment;
                 this.center_data = this.getCenterData(centers,appointment.center_id)  //this.getCenterData(appointment.center_id);
+                this.calendar_data = this.getCalendarData(calendars,appointment.calendar_id)
                 //this.professional_data = this.getProfessionalData(appointment.professional_id)
                 //this.modalOpen = true; 
                 this.openModalEvent = Math.random();
