@@ -167,7 +167,7 @@ import professional_messages from './professional_messages.vue'
 					<text class="text-white btn btn-primary m-2" @click="sendEmailToColleague();showInputEmailToShare=false; showMsgInvitationSent=true ">Enviar</text>
 				</div>
 				<br>
-				<text v-if="showMsgInvitationSent" class="text-dark" >Invitacion enviada!</text>
+				<text v-if="showMsgInvitationSent" class="text-dark" >&nbsp;&nbsp;&nbsp;&nbsp; Invitacion ya fue enviada!</text>
 
 
 			<hr>
