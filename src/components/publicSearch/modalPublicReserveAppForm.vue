@@ -19,7 +19,7 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 			<transition name="modal" style="width: 25em;">
 			<div class="modal-mask "  >
 			<div class="modal-wrapper ">
-			<div class="modal-container  m-1 p-0 modal-background "  style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" >
+			<div class="modal-container  m-1 p-0 modal-background bg-white"  style="border: 0px solid rgb(168, 168, 168); border-radius: 20px;" >
               
                 <div class="modal-body w-100" > 
                 
@@ -113,8 +113,23 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 					</div>                      
 				</div>
 			</div>
+
+
+
+			
 			<!-- Include here a map -->
 		</div>
+
+		<!-- price-->
+		<div class="m-3">
+			<div v-if="calendar_data!= null && calendar_data.price != null && calendar_data.price > 0 " >
+				$ {{ calendar_data.price.toLocaleString('es-cl') }}
+			</div>
+			<div v-else>
+				
+			</div>
+		</div>
+
 
 <div class="d-flex justify-content-center">
 	<button @click="show_reservar=!show_reservar" type="button" class="btn btn-secondary">Reservar</button>
@@ -211,6 +226,8 @@ import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue
 									</div>
 								
                               	</div>
+
+
  								
 								<div class="d-flex justify-content-center m-5" >
 									<input class="" type="text" id="nothing" style="font-size:1px; border-width:0px; border:none;" >
@@ -274,7 +291,7 @@ div.scroll {
   /*display: table-cell;*/
   vertical-align: middle;
 }
-
+calendar_id
 .modal-container {
  /*width: 100px;*/
   /*margin: 1px auto;*/
@@ -347,7 +364,7 @@ export default {
         }
   },
 
- props: [ 'center_data' ,'searchParameters', 'appToReserve','eventShowModalPubicReserve' ,'global_comunas', 'global_specialties' ],
+ props: [ 'calendar_data' ,'center_data' ,'searchParameters', 'appToReserve','eventShowModalPubicReserve' ,'global_comunas', 'global_specialties' ],
  emits: ['updateAppList','updateLastSearch'] , 
       
 computed: {
@@ -541,6 +558,7 @@ computed: {
 						appointment_location4 : this.center_data.home_comuna4	, 
 						appointment_location5 : this.center_data.home_comuna5	,  
 						appointment_location6 : this.center_data.home_comuna6	, 
+						appointment_price : this.calendar_data.price ,
 
 						patient_age : this.form_patient_age,
 						patient_name : this.form_patient_name,
