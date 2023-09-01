@@ -14,21 +14,29 @@ import LoadProgress from '../loadProgress.vue'
 
     <loadProgress  :active_spinner="active_spinner" > </loadProgress>
  
+      
+
        <div  v-if="n_appointments_found>0 && array_appointments !=null && array_appointments.length > 0"   >
             <!--
                   {{filter_center }} - {{filter_home}} - {{filter_remote}} 
                  <small class="mb-2 pl-3 bg-light" >Encontramos {{appointments.length}} resultados para su busqueda </small>  
             -->
-          
+           
             <div v-for="day in array_appointments" :key="day.id" >
+               
                     
                     <div v-if="day.appointments != null && day.appointments.length >0" >
+                
 
-         <!--    <hr class="style-eight" :style="{'color' : '#FF0000' , ':after.content':'asdf' }" >  -->
-         <hr  style="overflow: visible; padding: 0; border: none;  border-top: medium double #333;  color: #333;  text-align: center;  :after : {content : aaaa} " > 
-         
-          <!-- <hr style="  overflow: visible; padding: 0;  border: none; border-top: medium double #333;  color: #333; text-align: center; "  >
--->
+                <!--    <hr class="style-eight" :style="{'color' : '#FF0000' , ':after.content':'asdf' }" >  -->
+                <!--
+                <hr  style="overflow: visible; padding: 0; border: none;  border-top: medium double #333;  color: #333;  text-align: center;  :after : {content : aaaa} " > 
+                -->
+               <h5 class="hr-lines m-0 p-0" style="font-size: 1em;" > {{format_date(day.date)}} </h5>
+
+
+                <!-- <hr style="  overflow: visible; padding: 0;  border: none; border-top: medium double #333;  color: #333; text-align: center; "  >
+                -->
                            <!-- <p class=" mt-4"> <text class="h5"> {{format_date(day.date)}}  </text> </p> -->
                             
                             <div v-if="day.appointments != null && day.appointments.length >0 ">
@@ -41,13 +49,19 @@ import LoadProgress from '../loadProgress.vue'
                             </div>
 
                             <div v-else class="m-0 p-0">
-                            <p class="text-center" > <i style="font-size: 10vw;" class="m-0 p-0 bi bi-wind"></i>Sin Horas Disponibles </p>
+                                <p class="text-center" > <i style="font-size: 10vw;" class="m-0 p-0 bi bi-wind"></i>Sin Horas Disponibles </p>
                             </div>
                     </div>
 
             </div>
 
                 <!-- Start make room for Modal data when it display-->
+            <div v-if="response_truncated" class="text-center">
+                <hr>
+                Resultados se ha cortado Hemos recortado tu busqueda hasta el dia:
+                {{format_date(response_truncated_date)}}
+            </div>
+
         </div>
         <div v-else  class="w-100 text-center" >
             <i style="font-size: 7em;" class=" m-0 p-0 bi bi-wind"></i><br>
@@ -68,27 +82,33 @@ import LoadProgress from '../loadProgress.vue'
 
 <style scoped>
 
-hr.style-eight {
-   
-    overflow: visible; /* For IE */
-    padding: 0;
-    border: none;
-    border-top: medium double #333;
-    color: #333;
-    text-align: center;
-      
-   
-
-
+.hr-lines{
+  position: relative;
+  max-width: 500px;
+  margin: 100px auto;
+  text-align: center;
 }
-hr.style-eight:after {
-     content: "§";
-    display: inline-block;
-    position: relative;
-    top: -0.7em;
-    font-size: 1.5em;
-    padding: 0 0.25em;
-    background: white;
+
+.hr-lines:before{
+  content:" ";
+  height: 2px;
+  width: 130px;
+  background: red;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.hr-lines:after{
+  content:" ";
+  height: 2px;
+  width: 130px;
+  background: red;
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 0;
 }
 
 </style>
@@ -117,7 +137,7 @@ export default {
     }
   },
 
-   props: [ 'n_appointments_found' ,'centers','searchParameters','session_params','appointments_filtered','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
+   props: [  'response_truncated_date', 'response_truncated' , 'response_truncated_at' , 'n_appointments_found' ,'centers','searchParameters','session_params','appointments_filtered','daterequired','global_comunas', 'global_specialties', 'filter_center' , 'filter_home' , 'filter_remote' ],
    emits: ["updateLastSearch"],
 
     
@@ -152,6 +172,11 @@ export default {
         },
 
     methods: {
+            dateFormater(tdate)
+            {
+                let aux_date = new Date(tdate) 
+                return (aux_date.getDay() +" "+( aux_date.getMonth()+1)+" "+aux_date.getFullYear()  )
+            },
 
             getClassObject()
             {
