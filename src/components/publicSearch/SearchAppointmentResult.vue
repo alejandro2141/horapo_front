@@ -32,7 +32,9 @@ import LoadProgress from '../loadProgress.vue'
                 <!--
                 <hr  style="overflow: visible; padding: 0; border: none;  border-top: medium double #333;  color: #333;  text-align: center;  :after : {content : aaaa} " > 
                 -->
-               <h5 class="hr-lines m-0 p-0" style="font-size: 1em;" > {{format_date(day.date)}} </h5>
+                <br>
+                <h5 class="hr-lines m-0 p-0" style="font-size: 2,5em;" >{{format_date(day.date)}} </h5>
+               
 
 
                 <!-- <hr style="  overflow: visible; padding: 0;  border: none; border-top: medium double #333;  color: #333; text-align: center; "  >
@@ -58,8 +60,10 @@ import LoadProgress from '../loadProgress.vue'
                 <!-- Start make room for Modal data when it display-->
             <div v-if="response_truncated" class="text-center">
                 <hr>
-                Resultados se ha cortado Hemos recortado tu busqueda hasta el dia:
-                {{format_date(response_truncated_date)}}
+                <i class="bi bi-sign-stop display-3"></i> Demasiados resultados <br>
+                hasta <b> {{format_date(response_truncated_date)}}. </b> <br>
+                Prueba ajustar tu busqueda indicando Tipo de Consulta, Comuna y fecha 
+                
             </div>
 
         </div>
@@ -92,8 +96,8 @@ import LoadProgress from '../loadProgress.vue'
 .hr-lines:before{
   content:" ";
   height: 2px;
-  width: 130px;
-  background: red;
+  width: 2em;
+  background: rgb(45, 120, 170);
   display: block;
   position: absolute;
   top: 50%;
@@ -103,8 +107,8 @@ import LoadProgress from '../loadProgress.vue'
 .hr-lines:after{
   content:" ";
   height: 2px;
-  width: 130px;
-  background: red;
+  width: 2em;
+  background: rgb(36, 145, 160);
   display: block;
   position: absolute;
   top: 50%;
@@ -208,7 +212,7 @@ export default {
                 let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
 
 
-                return (days[aux_date.getDay()]+" "+aux_date.getDate()+" de "+months[aux_date.getMonth()]+" "+aux_date.getFullYear() )
+                return (days[aux_date.getDay()]+" "+aux_date.getDate()+" "+months[aux_date.getMonth()] )
             },
 
             getCenterData(centers,center_id)
