@@ -40,7 +40,7 @@ defineProps({
         -->
         <div class="d-flex justify-content-between p-2"> 
                 <text></text>
-                <text class="d-flex justify-content-center  m-0 h5">Recordar mis citas</text>
+                <text class="d-flex justify-content-center  m-0 text-secondary" style="font-size: 1.7em" >Recordar mis citas</text>
                 <text @click="sendCloseDialog()" class="d-flex justify-content-end "> <i class="h3 bi bi-x-lg text-primary"></i> </text>
         </div>
 
