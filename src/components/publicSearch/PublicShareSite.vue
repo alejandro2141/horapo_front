@@ -18,10 +18,10 @@ defineProps({
      
         <div class="p-5">
            
-            <div class="d-flex justify-content-between p-4"> 
+            <div class="d-flex justify-content-between p-1"> 
                 <text></text>
-                <text class="d-flex justify-content-center  m-0 h5 ">Compartir</text>
-                <text @click="sendCloseDialog()" class="d-flex justify-content-end "> <i class="h3 bi bi-x-lg text-primary"></i> </text>
+                <text class="d-flex justify-content-center  m-0 text-secondary" style="font-size: 1.7em" >Compartir</text>
+                <text @click="sendCloseDialog()" class="d-flex justify-content-end "> <i class="h1 bi bi-x-lg text-primary"></i> </text>
             </div>
 
             <div class="d-flex justify-content-center " style="font-size:3em;">
