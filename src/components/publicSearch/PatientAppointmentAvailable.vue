@@ -15,18 +15,18 @@ import { ref } from 'vue'
             </div>
             <div>
                 <div class="">
-                    <div class="" style=" color:#2e5668">	 
-                   <b>  {{ transform_date( appointment.date ) }} </b>
-                    
-                 {{ transform_time(appointment.start_time)}}<text style="">hrs</text>  
+                    <div class="" style="font-size:1.1em ; color:#1f9d94">	 
+                    <!--  <b>  {{ transform_date( appointment.date ) }} </b> style="font-size:1.1em ; color:#2e5668"-->
+                    {{ transform_time(appointment.start_time)}}<text style="font-size:0.5em">hrs</text>   <text style=" ">{{ showSpecialtyName(appointment.specialty) }} </text>  
                     </div>       
                 </div>
-           
+            <!--
                 <div class="" style=" color:#1f9d94">
                     <div >	
                     {{ showSpecialtyName(appointment.specialty) }} 
                     </div>       
                 </div>
+            -->
  
                 <div class="">
                 
@@ -37,7 +37,7 @@ import { ref } from 'vue'
                             <div style="color: #781ED1" >
                             <i class="h1 bi bi-building"></i> En Consulta  </div>
                             </div>
-                            <div style="" class="text-dark" >
+                            <div style="color:#2e5668"  >
                                {{comuna_id2name(center_data.comuna)}}
                             </div>
                             <div class="" style="color:#2e5668" >	
@@ -50,7 +50,7 @@ import { ref } from 'vue'
                             <div class="" >
                                 <i class=" bi bi-house-door"></i><text >  Visita a Domicilio:</text> <br>
                             </div>
-                            <div style="" class="text-dark " >
+                            <div style="color:#2e5668"  >
                               {{  comuna_id2name(center_data.home_comuna1) }}
                               {{  comuna_id2name(center_data.home_comuna2) }}
                               {{  comuna_id2name(center_data.home_comuna3) }}
