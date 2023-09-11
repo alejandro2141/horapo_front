@@ -35,7 +35,7 @@ import axios from 'axios';
                                 
                                     <div class="">
                                         <text class="" > 
-                                            <small> <small> {{center_data.name}} </small> </small>
+                                            <small> <small> {{center_data.name.substring(0,20)}} </small> </small>
                                         </text>
                                     </div>
                                 </div>    
