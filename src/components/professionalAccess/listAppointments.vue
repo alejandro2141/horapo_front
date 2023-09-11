@@ -87,8 +87,9 @@ import ModalProfessionalReserveAppointment from './modalProfessionalReserveAppoi
                 </div>
         </div>
             
-            <div v-if="!isLockDay && hours_block_list.length>0" class="text-primary" >
-                Bloquear horas seleccionadas &nbsp; <i  class=" fs-1 bi bi-unlock " :class="{'text-primary': hours_block_list.length >0 }"  @click="sendLockHours()"> </i> 
+            <div v-if="!isLockDay && hours_block_list.length>0"   @click="sendLockHours()" class="text-center text-primary p-4" >
+               <text  class="text-primary text-center" >Bloquear horas seleccionadas</text>  <br>
+                <i  class="text-center display-2 bi bi-unlock " :class="{'text-primary': hours_block_list.length >0 }" > </i> 
             </div>
          
     </div>
