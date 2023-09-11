@@ -17,7 +17,7 @@ import { ref } from 'vue'
                 <div class="">
                     <div class="" style="font-size:1.1em ; color:#1f9d94">	 
                     <!--  <b>  {{ transform_date( appointment.date ) }} </b> style="font-size:1.1em ; color:#2e5668"-->
-                    {{ transform_time(appointment.start_time)}}<text style="font-size:0.5em">hrs</text>   <text style=" ">{{ showSpecialtyName(appointment.specialty) }} </text>  
+                   <text style="font-size:1.5em">{{ transform_time(appointment.start_time)}}</text><text style="font-size:0.5em">hrs</text>   <text style=" ">{{ showSpecialtyName(appointment.specialty) }} </text>  
                     </div>       
                 </div>
             <!--
@@ -32,10 +32,10 @@ import { ref } from 'vue'
                 
                     
                     <div v-if="center_data.center_visit" class="">
-                 
-                        <div class="" style="">  
+                        
+                            <div class="" style="">  
                             <div style="color: #781ED1" >
-                            <i class="h1 bi bi-building"></i> En Consulta  </div>
+                              <i class="h1 bi bi-building"></i> En Consulta  </div>
                             </div>
                             <div style="color:#2e5668"  >
                                {{comuna_id2name(center_data.comuna)}}
@@ -75,7 +75,7 @@ import { ref } from 'vue'
                         </div>
                     </div>
 
-                    <div v-if="calendar_data != null && calendar_data.price>1">   ${{ priceFormatter(calendar_data.price)}}</div>
+                    <div v-if="calendar_data != null && calendar_data.price>1"> Valor:${{ priceFormatter(calendar_data.price)}}</div>
                     
 
                 </div>
