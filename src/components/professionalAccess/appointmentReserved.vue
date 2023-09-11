@@ -43,7 +43,7 @@ import axios from 'axios';
                                 
                                     <div class="">
                                         <text class="mt-0 pt-0" > 
-                                            <small> <small> {{center_data.name}} </small> </small>
+                                            <small> <small> {{center_data.name.concat('               ').substring(0, 20)}} </small> </small>
                                         </text>
                                     </div>
                                     
