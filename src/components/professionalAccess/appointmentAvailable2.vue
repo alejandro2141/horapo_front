@@ -40,7 +40,7 @@ import axios from 'axios';
                                     
                                         <div class="">
                                             <text class="" > 
-                                                <small> <small> {{center_data.name}} </small> </small>
+                                                <small> <small> {{center_data.name.concat('          ').substring(0, 17)}} </small> </small>
                                             </text>
                                         </div>
 
