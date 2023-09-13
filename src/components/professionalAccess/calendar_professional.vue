@@ -769,6 +769,7 @@ export default {
                   let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_calendar_to_patient",json);
                   console.log ("Send Calendar to patient RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
+                  alert("Calendario Enviado");
                   //this.showModalViewCalendar = false ; 
                   //this.$emit('updateCalendarList'); 
         
@@ -895,7 +896,7 @@ export default {
         async deleteCalendar(){
           console.log("Professional delete Calendar")
          
-           var r =confirm("¿ Esta seguro que desea ELIMINAR este Calendario?  Ok para continuar");
+           var r =confirm("¿ Esta seguro que desea ELIMINAR este Calendario?");
             if (r == true) {
 
                   const json = { 
@@ -907,6 +908,7 @@ export default {
                   let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_delete_calendar",json);
                   console.log ("Activate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
+                  alert("Calendario Eliminado");
                   this.showModalViewCalendar = false ; 
                   this.$emit('updateCalendarList'); 
             }
@@ -1043,10 +1045,12 @@ export default {
                   let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_update_calendar",json);
                   console.log ("Update Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
+                  alert("Calendario Actualizado");
                   this.showModalViewCalendar = false ; 
+                  
                   this.$emit('updateCalendarList'); 
             }
-
+           
         },
 
 
