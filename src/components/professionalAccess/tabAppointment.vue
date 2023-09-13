@@ -161,7 +161,9 @@ data: function () {
             },
 
         async updateAppointmentList() {
-            this.active_spinner = true ;  
+          //shuld update calendar also
+            this.active_spinner = true ;
+            this.forceUpdateCalendarPickerMin = Math.random()  
             //let aux_date = new Date(); //to get User Offset Timezone
             let aux_dateRequired = new Date(this.daterequired)
             //var aux_dateToSearch = new Date(aux_dateRequired.getTime() + new Date().getTimezoneOffset()*60000);
