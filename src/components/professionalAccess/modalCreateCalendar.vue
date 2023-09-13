@@ -85,7 +85,7 @@ import Datepicker from 'vuejs3-datepicker';
                           </div>
                   </div>
                   <div v-if="show_date_start">
-                          <datepicker :disabled-dates="disabled_dates" :prevent-disable-date-selection="preventDisableDateSelection" class="text-dark"   ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                          <datepicker :disabled-dates="disabled_dates_start" :prevent-disable-date-selection="preventDisableDateSelection" class="text-dark"   ref="inputRef"  @selected="setCalendarStart" :monday-first="true" :inline="true" v-model="form_calendar_start" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
                   <!--  -->
 
@@ -99,7 +99,7 @@ import Datepicker from 'vuejs3-datepicker';
                       </div>
                   </div>
                   <div v-if="show_date_end">
-                        <datepicker :disabled-dates="disabled_dates" :prevent-disable-date-selection="preventDisableDateSelection" class="text-dark"   ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="form_calendar_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
+                        <datepicker :disabled-dates="disabled_dates_end" :prevent-disable-date-selection="preventDisableDateSelection" class="text-dark"   ref="inputRef"  @selected="setCalendarEnd" :monday-first="true" :inline="true" v-model="form_calendar_end" :calendar-button="false" input-class='bigText' format="dd"  calendar-button-icon="nada"  name="uniquename"></datepicker>
                   </div>
                   <!--  -->
 
@@ -838,6 +838,9 @@ data: function () {
            form_app_price : 0 ,
 
            preventDisableDateSelection : true ,
+           disabled_dates_start : null ,
+           disabled_dates_end : null ,
+           
 		 }
 	},
 
@@ -850,7 +853,12 @@ data: function () {
       this.form_calendar_start = new Date()
       this.form_calendar_end = new Date()
 
-      this.disabled_dates = {
+      this.disabled_dates_start = {
+        to: new Date(this.form_calendar_start.getTime() ), // Disable all dates up to specific date
+        from: new Date(this.form_calendar_start.getTime()+(86400000*60)), 
+        preventDisableDateSelection: true
+        }
+      this.disabled_dates_end = {
         to: new Date(this.form_calendar_start.getTime() ), // Disable all dates up to specific date
         from: new Date(this.form_calendar_start.getTime()+(86400000*60)), 
         preventDisableDateSelection: true
@@ -871,7 +879,7 @@ data: function () {
         //let aux_date=new Date(date);
         this.form_calendar_start= new Date(date);
         this.form_calendar_end= new Date(date);
-        this.disabled_dates.to = new Date(date)
+         this.disabled_dates_end.to = new Date(date)
      //   this.form_calendar_start=aux_date.getDate()+"/"+month_name[aux_date.getMonth()]+"/"+ aux_date.getFullYear()
         this.show_date_start = false
       },
