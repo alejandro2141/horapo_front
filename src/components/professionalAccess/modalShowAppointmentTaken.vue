@@ -446,6 +446,17 @@ export default {
                       
         console.log ("Professional Cancel Appoitnment :"+ JSON.stringify(json_input)  );
         let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_cancel_appointment",json_input);
+        
+        if (response_json.data.result_code == 200 )
+          {
+            alert("Cita CANCELADA exitosamente");
+          }
+          else 
+          {
+            alert("ERROR al procesar Cancelación de esta cita");
+          }
+        console.log ("resultado de cancelacion "+ JSON.stringify(response_json))
+
         this.$emit('updateAppList');
         this.showModalAppointmentTaken= false ;
         }
