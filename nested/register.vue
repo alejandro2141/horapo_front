@@ -8,8 +8,8 @@ import RegisterForm from  '../src/components/publicSearch/RegisterForm.vue'
 
 <template>
 <div>
-    <GeneralHeader></GeneralHeader>
-
+      <GeneralHeader></GeneralHeader>
+    
 
     <div class="d-flex m-2 justify-content-end"> 
             <a HREF="/index.html" type="button" class=""><i class="display-5 bi bi-x-lg text-primary"></i></a>
