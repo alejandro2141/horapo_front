@@ -5,16 +5,16 @@ import { ref } from 'vue'
 
 <template>
 
-    <div class="text-center pt-2 pb-0 " style="background-color :#ffffff "  >
-		<div class="display-4 "  > 
-			<a HREF="/index.html" class="text-decoration-none" style="color :#2e5668"> 
-					horapo  
-			</a> 
-		</div>
-		<!-- <div class="text-muted">	Las mejores consultas de salud en un solo lugar
-		</div> -->
-		<br>
-	</div>
+	<div class="p-1   text-center text-success" style="font-size: 1.7em ; ">
+            <div>
+                <i class="bi bi-bug"></i> 
+                <text @click="showShareSite=!showShareSite ; show_sub_menu=false; showRecoverAppointment=false" class=""  >
+                horapo
+                </text> 
+            </div>
+            <!--  <text class="m-0 p-0" style="font-size: 0.8em">Mejores consultas un solo lugar</text>
+            -->
+    </div>
 
 </template>
 
