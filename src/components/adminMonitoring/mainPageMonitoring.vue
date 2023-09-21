@@ -89,6 +89,10 @@ data: function () {
             p_sessions : null ,
             p_comments : null ,
             professional_comments : null ,
+            
+            reply_msg:null , 
+            reply_professional_id : null ,
+            reply_prof_msg_id:null 
 		 }
 	},
 
@@ -106,9 +110,18 @@ data: function () {
 
  
     methods: {
-        sendReply()
+        async sendReply()
         {
             console.log("Send Reply")
+
+                const json = { 
+                             };
+
+                  console.log ("SEND REPLY:"+ JSON.stringify(json)  );
+                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_send_professional_reply",json);
+                  this.p_sessions = response_json.data.rows;
+                  console.log ("SEND REPLY RESPONSE:"+JSON.stringify(this.p_sessions)) ;    
+
         },  
     
         
