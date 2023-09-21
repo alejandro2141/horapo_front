@@ -8,7 +8,7 @@ import axios from 'axios';
 
 <template  >
 <div>
-    <div v-if="true"  id="form" class=" p-1" style="margin-top: 0em;">
+    <div v-if="true"  id="form" class=" p-1 " style="margin-top: 2em;">
         <div class="form-row">
         <!--
             <p class="text-center h4">Envianos un mensaje</p>
@@ -22,21 +22,23 @@ import axios from 'axios';
         -->
     <div v-if="show_confirm == !true">
         <div class="d-flex justify-content-between"> 
-                <text class="text-secondary h5 m-2">Envíanos un mensaje</text>
+                <text class="h5 m-2">Envíanos un mensaje</text>
 
                 <div class=""> 
                     <a HREF="/index.html" type="button" class=""><i class="display-5 bi bi-x-lg text-primary"></i></a>
                 </div>
         </div>
 
-        Email<br>
-        <input type="email" maxlength="40" style="border-radius: 10px;" autocomplete="off" class="form-control w-75 m-1 " id="inputEmail4" placeholder="Ingrese su Email" v-model="email">
-       Mensaje
+        <text class="text-secondary">Tu Email</text>
+        <br>
+        <input type="email" maxlength="40" style="border-radius: 10px;" autocomplete="off" class="form-control w-75 m-1 " id="inputEmail4" placeholder="" v-model="email">
+      
+        <text class="text-secondary">Mensaje</text>
         <div class="d-flex justify-content-start">
 						
                         <div>
                            
-							<textarea maxlength="100" style="border-radius: 10px; "  class="form-control h-90 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="Todo comentario es bienvenido">
+							<textarea maxlength="100" style="border-radius: 10px; "  class="form-control h-90 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="incluye aquí tus comentarios">
 							</textarea>
 						</div>
 						
@@ -46,13 +48,13 @@ import axios from 'axios';
         <div class="m-1 d-flex justify-content-between">
 							
 							<text>
-								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry display-3 m-4 "></i><br>
+								<i @click="animo =1;" class="text-danger bi bi-emoji-angry display-3 m-4 "></i><br>
                             </text>
 							<text>
-							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral display-3 m-4 "></i><br>
+							<i @click="animo =2;" class="text-secondary bi bi-emoji-neutral display-3 m-4 "></i><br>
                             </text>
 							<text>
-							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes display-3 m-4 "></i><br>
+							<i @click="animo =3;"  class="text-success bi bi-emoji-heart-eyes display-3 m-4 "></i><br>
                             </text>
 							<!--
 							<i @click="animo =4;text_message=text_message.concat(' Tiene errores de software.  Arreglalo infame programador !!. ') " class="text-white bi bi-bug h4 p-2"></i><br>
