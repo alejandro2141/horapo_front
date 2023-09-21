@@ -17,10 +17,13 @@ import infoCalendar from './info_calendar.vue'
         <ModalShareCalendarToPatient :activatorShareCalendar='activatorShareCalendar' :calendarToShare='calendarToShare' ></ModalShareCalendarToPatient>
         
         <div>
-            <p class="text-center display-5 pt-1 text-dark">Tus Calendarios  <i  @click="showInfoCreate=!showInfoCreate" class="fs-3 bi bi-info border  border-2  text-primary border-primary" style=" border-radius: 15px;" ></i> 
+            <p class="text-center">
+                <text class="text-center display-5 pt-1 text-dark ">Tus Calendarios  </text>
+                <br>
+                <text class="text-secondary"> Dias y horas en los que atiende</text>
             </p>
 
-            <infoCalendar v-if="showInfoCreate"></infoCalendar>
+           <!--  <infoCalendar v-if="showInfoCreate"></infoCalendar>-->
            
          <!--   
             <div class="text-center p-3 m-3" v-if="calendars != null && calendars.centers != null &&  calendars.centers.length>0 "  > 
@@ -31,15 +34,13 @@ import infoCalendar from './info_calendar.vue'
                 Antes de crear un nuevo Calendario, debe primero crear una consulta. 
             </div>
         -->
-            <div class="text-center p-3 m-3" v-if="calendars == null && calendars.centers == null &&  calendars.centers.length < 1 "  > 
+            <div v-if="calendars == null && calendars.centers == null &&  calendars.centers.length < 1 " class="text-center p-3 m-3"  > 
                 <b><i class="bi bi-exclamation-triangle display-4 text-warning"></i></b><br>
                 Antes de crear un nuevo Calendario, debe primero crear una consulta.         
             </div>
-            <div v-else class="text-center p-5"> 
+            <div v-else class="text-center p-0"> 
                 <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
             </div>
-
-
             
             <!-- LIST Calendars -->
             <div>
