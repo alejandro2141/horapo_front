@@ -8,51 +8,13 @@ import axios from 'axios';
 
 <template  >
 <div>
-        <div v-if="showForm"  id="form" class=" p-3">
+        <div v-if="showForm"  id="form" class="m-1 p-1 ">
             
             <form autocomplete="off">
                 <div class="form-row">
-        <p style="font-size: 2em">Formulario de Registro</p>
-                <div class="form-group">
-                        <label for="inputNames">Nombres</label>
-                        <input type="text" autocomplete="off" class="form-control" id="inputNames" placeholder="..." v-model="name">
-                </div>
-                
-                <div class="form-group">
-                    <label for="inputLastName">Apellido Paterno</label>
-                    <input type="text" autocomplete="off"  class="form-control" id="inputLastName" placeholder="..." v-model="last_name1">
-                </div>
+        <p style="font-size: 1.5em">Registro Profesional</p>
 
-                <div class="form-group ">
-                    <label for="inputSecondLastName">Apellido Materno</label>
-                    <input type="text"  autocomplete="off" class="form-control" id="inputSecondLastName" placeholder="..." v-model="last_name2">
-                </div>
 
-                <div class="form-group ">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email"  autocomplete="off" class="form-control" id="inputEmail4" placeholder="..." v-model="email">
-                </div>
-
-                <div class="form-group ">
-                    <label for="inputDocId">N° Cedula RUT </label>
-                    <input type="text"  autocomplete="off" class="form-control" id="inputDocId" placeholder="xx.xxx.xxx-y" v-model="doc_id">
-                </div>
-
-                <div class="form-group ">
-                    <label for="inputPassword4">Ingrese una contraseña</label>
-                    <input type="password"  autocomplete="off" class="form-control" id="inputPassword4" placeholder="***" v-model="passwd">
-                </div>
-
-                </div>
-                <div class="form-group">
-                <label for="inputAddress">Direccion Particular</label>
-                <input type="text"  autocomplete="off" class="form-control" id="inputAddress" placeholder="xxxxx yyyy 9999" v-model="personal_address">
-                </div>
-
-                <div class="form-group">
-                    <label for="inputPhone">Telefono personal de contacto </label>
-                    <input type="text"  autocomplete="off" class="form-control" id="inputPhone" placeholder="Ej: +56XXXXXXXXX" v-model="personal_phone">
-                </div>
 
                 <div class="form-group">
                     <label for="inputSpecialty">Ingrese su especialidad</label>
@@ -72,6 +34,48 @@ import axios from 'axios';
                     </select>
 
                 </div>
+
+                <div class="form-group">
+                        <label for="inputNames">Nombres</label>
+                        <input type="text" autocomplete="off" class="form-control" id="inputNames" placeholder="" v-model="name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="inputLastName">Apellido Paterno</label>
+                    <input type="text" autocomplete="off"  class="form-control" id="inputLastName" placeholder="" v-model="last_name1">
+                </div>
+
+                <div class="form-group ">
+                    <label for="inputSecondLastName">Apellido Materno</label>
+                    <input type="text"  autocomplete="off" class="form-control" id="inputSecondLastName" placeholder="" v-model="last_name2">
+                </div>
+
+                <div class="form-group ">
+                    <label for="inputEmail4">Email</label>
+                    <input type="email"  autocomplete="off" class="form-control" id="inputEmail4" placeholder="" v-model="email">
+                </div>
+
+                <div class="form-group ">
+                    <label for="inputDocId">N° Cedula RUT </label>
+                    <input type="text"  autocomplete="off" class="form-control" id="inputDocId" placeholder="xx.xxx.xxx-y" v-model="doc_id">
+                </div>
+
+                <div class="form-group ">
+                    <label for="inputPassword4">Ingrese una contraseña</label>
+                    <input type="password"  autocomplete="off" class="form-control" id="inputPassword4" placeholder="***" v-model="passwd">
+                </div>
+
+                </div>
+                <div class="form-group">
+                <label for="inputAddress">Direccion Particular</label>
+                <input type="text"  autocomplete="off" class="form-control" id="inputAddress" placeholder="" v-model="personal_address">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPhone">Telefono personal de contacto </label>
+                    <input type="text"  autocomplete="off" class="form-control" id="inputPhone" placeholder="Ej: +56XXXXXXXXX" v-model="personal_phone">
+                </div>
+
 
                 <div class="text-center pt-5 mb-5 pb-5" >
 
@@ -120,7 +124,7 @@ export default {
        name : null ,
        last_name1 : null ,
        last_name2 : null ,
-       email  : null ,
+       email  : "" ,
        doc_id  : null ,
        passwd  : null ,
        personal_address  : null ,
