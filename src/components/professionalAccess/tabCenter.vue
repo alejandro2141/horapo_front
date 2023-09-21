@@ -21,11 +21,15 @@ import TutorialCenter from './tutorial_center.vue'
     <div class="d-flex justify-content-between mb-0 ">
         
          <!-- <i class="bi bi-geo-alt display-3 "></i> -->
-         <text></text>
-         <p class="display-6 text-center mt-1  e ">
-            Tus Consultas <i  @click="showHelpCenter=!showHelpCenter" class="fs-3 bi bi-info border  border-2  border-primary text-primary" style=" border-radius: 15px;" ></i> 
-         </p>
-         <text></text>
+         <div></div>
+
+         <div class="text-center">
+            <text class="display-6 mt-1 ">Tus Consultas</text>  
+            <br><text class="text-secondary" >Lugar Fisico o Virtual donde atiendes</text>
+         </div>
+        
+        <div></div>
+         
          <!--
          <i class="mt-4 display-1 bi bi-x-lg  text-primary" aria-label="Close" v-on:click="closeTabCenter()" ></i> 
         -->
