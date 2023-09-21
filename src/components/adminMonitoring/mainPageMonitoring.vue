@@ -55,10 +55,20 @@ import { BKND_CONFIG } from '../../../config123.js'
     
         <div class="border border-1">
             <div v-for="reg of professional_comments">
-                {{ reg.id }}   {{ reg.date_time }}  {{ reg.professional_id}}  {{ reg.message}}  {{ reg.animo}}<br>
+                {{ reg.id }}   {{ reg.date_time }}  {{ reg.professional_id}}  {{ reg.message}}  {{ reg.animo}} <br>
+                Responder >
             </div>
         </div>
     </div>
+
+
+    <p class="text-center">
+       <textarea name="textarea" rows="6" cols="30"></textarea>
+       <br>
+      <text @click="sendReply()">Enviar</text>   
+    </p>
+   
+
 
 
 
@@ -96,6 +106,11 @@ data: function () {
 
  
     methods: {
+        sendReply()
+        {
+            console.log("Send Reply")
+        },  
+    
         
         //GET Session Active
         async getSessionsActive() {
