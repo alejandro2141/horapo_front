@@ -60,21 +60,52 @@ import axios from 'axios';
                     <input type="text"  autocomplete="off" class="form-control" id="inputDocId" placeholder="xx.xxx.xxx-y" v-model="doc_id">
                 </div>
 
+
+            <br>
+
+             
+
+
                 <div class="form-group ">
-                    <label for="inputPassword4">Ingrese una contraseña</label>
-                    <input type="password"  autocomplete="off" class="form-control" id="inputPassword4" placeholder="***" v-model="passwd">
+                    <label v-if="passwd == passwd2 && passwd2!=null && passwd != null" for="inputPassword4">Ingrese una contraseña</label> 
+                    <label v-else class="text-danger">Contraseñas No coinciden </label> 
+
+                    <input type="password"  autocomplete="off" class="form-control" :class="{'border-danger' : (passwd != passwd2 && passwd2!=null)   }"  id="inputPassword4" placeholder="***" v-model="passwd">
                 </div>
+
+                <div class="form-group ">
+                    <label v-if="passwd == passwd2 && passwd2!=null && passwd != null" for="inputPassword4">Repita contraseña</label> 
+                    <label v-else class="text-danger">Repita contraseña</label> 
+                    <input type="password"  autocomplete="off" class="form-control" :class="{'border-danger' : (passwd != passwd2 && passwd2!=null)   }" id="inputPassword2" placeholder="***" v-model="passwd2">
+                </div>
+
+           
+
 
                 </div>
                 <div class="form-group">
-                <label for="inputAddress">Direccion Particular</label>
+
+                <label v-if="personal_address!= null && personal_address.length < 40 " >Direccion Particular</label> 
+                <label v-else class="text-danger">Dirección No es Válida</label> 
+
                 <input type="text"  autocomplete="off" class="form-control" id="inputAddress" placeholder="" v-model="personal_address">
                 </div>
 
                 <div class="form-group">
-                    <label for="inputPhone">Telefono personal de contacto </label>
-                    <input type="text"  autocomplete="off" class="form-control" id="inputPhone" placeholder="Ej: +56XXXXXXXXX" v-model="personal_phone">
-                </div>
+                    <label v-if="personal_phone!= null && personal_phone.length < 10 " >Teléfono de Contacto</label> 
+                    <label v-else class="text-danger">Ingrese teléfon Válido <i>+569xxxxxxxx</i></label> 
+
+                    <div class="d-flex align-items-start">
+                        <div class="border border-1 p-2">
+                         +56    
+                        </div>
+                        <div>
+                           <input type="text"  autocomplete="off" class="form-control" id="inputPhone" placeholder="Ej: +56XXXXXXXXX" v-model="personal_phone">
+                        </div>
+                    </div>
+
+
+                                 </div>
 
 
                 <div class="text-center pt-5 mb-5 pb-5" >
@@ -127,8 +158,9 @@ export default {
        email  : "" ,
        doc_id  : null ,
        passwd  : null ,
-       personal_address  : null ,
-       personal_phone  : null ,
+       passwd2  : null ,
+       personal_address  : "" ,
+       personal_phone  : "" ,
        specialty  : "Especialidad" ,
        showKnowMore1 : false ,
     }
@@ -188,9 +220,38 @@ export default {
 
         },
 
+    compare () {
+        if (this.passwd2 === this.passwd)
+        {
+            console.log("contraseña es igual")
+        }
+        else 
+        {
+            console.log("contraseña no coincide")
+        }
+
+     
+      //return 0 ;
+    }, 
+
 
 
 
   },
+
+  watch : {
+         // NO SE ACTUALIZAAAA
+        passwd2(oldval,newval)
+        { 
+            console.log("passwd2 cambia");
+            this.compare()
+        },
+        passwd(oldval,newval)
+        { 
+            console.log("passwd1 cambia"); 
+            this.compare()
+        },
+        
+        }
 }
 </script>
