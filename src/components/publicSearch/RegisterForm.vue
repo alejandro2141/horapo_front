@@ -23,15 +23,17 @@ import axios from 'axios';
                     <input type="text"  autocomplete="off"  class="form-control" id="specialty" placeholder="Ej: Kinesiologia, psicologia, terapia.." v-model="specialty">
                 -->
                     <select class="form-select form-select-lg"  name="languages" id="lang" v-model="specialty" placeholder="XXX" >
-                        <option value="Kinesiologia">Kinesiología</option>
-                        <option value="Psicologia">Psicología</option>
-                        <option value="Fonoaudiología">Fonoaudiología</option>
-                        <option value="Nutrición">Nutrición</option>
-                        <option value="Terapia Ocupacional">Terapia Ocupacional</option>
-                        <option value="Psicopedagogía">Psicopedagogía</option>
-                        <option value="Enfermería">Enfermería</option>
-                        <option value="Masoterapia">Masoterapia</option>
+                        <option value="100">Kinesiología</option>
+                        <option value="200">Psicología</option>
+                        <option value="300">Fonoaudiología</option>
+                        <option value="400">Nutrición</option>
+                        <option value="500">Terapia Ocupacional</option>
+                        <option value="600">Psicopedagogía</option>
+                        <option value="700">Enfermería</option>
+                        <option value="800">Masoterapia</option>
                     </select>
+
+                  
 
                 </div>
 
