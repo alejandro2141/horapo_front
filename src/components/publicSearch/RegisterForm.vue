@@ -61,28 +61,24 @@ import axios from 'axios';
                     <label for="inputDocId">N° Cedula RUT </label>
                     <input type="text"  autocomplete="off" class="form-control" id="inputDocId" placeholder="xx.xxx.xxx-y" v-model="doc_id">
                 </div>
-
-
             <br>
-
-             
-
-
+            
                 <div class="form-group ">
                     <label v-if="passwd == passwd2 && passwd2!=null && passwd != null" for="inputPassword4">Ingrese una contraseña</label> 
                     <label v-else class="text-danger">Contraseñas No coinciden </label> 
 
-                    <input type="password"  autocomplete="off" class="form-control" :class="{'border-danger' : (passwd != passwd2 && passwd2!=null)   }"  id="inputPassword4" placeholder="***" v-model="passwd">
+                    <div class="d-flex justify-content-start">
+                        <input :type="type_password1"  autocomplete="off" class="form-control" :class="{'border-danger' : (passwd != passwd2 && passwd2!=null)   }"  id="inputPassword4"  v-model="passwd">
+                        <i @click="showMePassword1()" class="bi  border border-1 p-1" :class="{ 'bi-eye-slash': !showPassword1 , 'bi-eye': showPassword1   }" > </i>
+                    </div>
                 </div>
 
                 <div class="form-group ">
                     <label v-if="passwd == passwd2 && passwd2!=null && passwd != null" for="inputPassword4">Repita contraseña</label> 
                     <label v-else class="text-danger">Repita contraseña</label> 
-                    <input type="password"  autocomplete="off" class="form-control" :class="{'border-danger' : (passwd != passwd2 && passwd2!=null)   }" id="inputPassword2" placeholder="***" v-model="passwd2">
+                    <input :type="type_password1"  autocomplete="off" class="form-control" :class="{'border-danger' : (passwd != passwd2 && passwd2!=null)   }" id="inputPassword2"  v-model="passwd2">
                 </div>
-
            
-
 
                 </div>
                 <div class="form-group">
@@ -102,7 +98,7 @@ import axios from 'axios';
                          +56    
                         </div>
                         <div>
-                           <input type="text"  autocomplete="off" class="form-control" id="inputPhone" placeholder="Ej: +56XXXXXXXXX" v-model="personal_phone">
+                           <input type="text"  autocomplete="off" class="form-control" id="inputPhone" placeholder="Ej: XXXXXXXXX" v-model="personal_phone">
                         </div>
                     </div>
 
@@ -124,7 +120,7 @@ import axios from 'axios';
         <div v-if="!showForm" >
             <p class="text-center" >
                 <i class="bi bi-emoji-heart-eyes text-success" style="font-size: 2.5em;" ></i>  
-                <text class="text-success" style="font-size: 1.1em;" > 
+                <text class="" style="font-size: 1.1em;" > 
                    
                     &nbsp;&nbsp;&nbsp; Gracias por su registro <br>Te enviaremos informacion de acceso a tu correo</text>
             </p>
@@ -165,6 +161,9 @@ export default {
        personal_phone  : "" ,
        specialty  : "Especialidad" ,
        showKnowMore1 : false ,
+       showPassword1 : false ,
+       showPassword2 : false ,
+       type_password1 : "password" 
     }
   },
 
@@ -172,6 +171,22 @@ export default {
  //emits: ['closeRegisterForm'] , 
 
   methods: {
+
+    showMePassword1()
+    {
+    this.showPassword1= !this.showPassword1  
+
+        if ( this.showPassword1) 
+        { 
+            this.type_password1 = "text"
+        } 
+        else 
+        {
+            this.type_password1 = "password"
+        }
+
+    },
+
     sendFormRegister2 () {
       console.log(" send form register method ");
       //return 0 ;
