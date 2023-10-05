@@ -173,7 +173,8 @@ import professional_messages from './professional_messages.vue'
 			<hr>
 				<!-- APPOINTMENT LIST  -->
 				<a  @click="showInputMessage = !showInputMessage" class="text-menu fs-5  text-decoration-none  text-menu" > 
-					&nbsp; <i class="bi bi-chat-right-quote fs-5"></i> &nbsp; Sugerencias y comentarios
+					&nbsp; <i class="bi bi-bug fs-5"></i> &nbsp; Reportar Problema o comentario
+
 				</a>
 					<div v-if="showInputMessage"> 
 
