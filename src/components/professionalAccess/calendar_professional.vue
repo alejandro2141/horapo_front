@@ -517,7 +517,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                   
                     <div class="d-flex justify-content-end text-dark">
                         <span class="input-group-text bg-white border-white">$</span>
-                        <input v-model="form_app_price"   type="number" min="1" max="999999" maxlength="15"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white text-dark']"  aria-label="Monto (Pesos Chilenos)">
+                        <input v-model="form_app_price"   type="text" min="1" max="999999" maxlength="15"  :disabled="!showEdit"  :class="[showEdit ? 'border border-1 border-primary' : 'border border-1 border-white text-dark']"  aria-label="Monto (Pesos Chilenos)">
                         <!-- 
                         <div class="input-group-append">
                             <span class="input-group-text">.00</span>
@@ -962,7 +962,7 @@ export default {
         this.calendar_active = this.calendar.active      
         this.name = this.calendar.name 
 
-        this.form_app_price = this.calendar.price
+        this.form_app_price = this.calendar.price.toLocaleString('es-cl')
 
         console.log("calendar_professional :  this.calendar.date_start : "+ this.calendar.date_start )
         console.log("calendar_professional :  this.calendar.date_end   : "+ this.calendar.date_end   )
@@ -1037,7 +1037,7 @@ export default {
                     calendar_id : this.calendar.id,
                     form_color : this.form_calendar_color,
 
-                    form_app_price : this.form_app_price
+                    form_app_price : this.form_app_price.replaceAll('.','')
 
                     };
 
@@ -1055,7 +1055,21 @@ export default {
 
 
 
-    }
+    },
+
+    watch : {
+
+        form_app_price(amount) 
+        {
+        console.log("amount"+ amount)
+        amount = amount.replaceAll('.','');
+        console.log("amount-"+ amount)
+        console.log("formating amount"+ Number(amount).toLocaleString('es-cl') )
+        this.form_app_price = Number(amount).toLocaleString('es-cl')
+        },
+
+    }//end watch
+
 }
 </script>
 
