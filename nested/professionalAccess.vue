@@ -63,9 +63,10 @@ import ProfesionalBugReport from '../src/components/professionalAccess/Profesion
         </div>
         
     </div>
-
+<!--
     <ProfesionalBugReport v-if="visible_tab_login !='block' && showBug==true" :session_params="session_params" ></ProfesionalBugReport>
-   <br>
+-->
+    <br>
    <br>
    <br>
 
