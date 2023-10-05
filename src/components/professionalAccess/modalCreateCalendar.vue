@@ -539,7 +539,7 @@ import Datepicker from 'vuejs3-datepicker';
                     <div class="input-group-prepend">
                       <span class="input-group-text">$</span>
                     </div>
-                    <input v-model="form_app_price" type="number" min="1" max="999999" maxlength="15" class="form-control border border-1 border-primary" aria-label="Amount (to the nearest dollar)">
+                    <input v-model="form_app_price" type="text" min="1" max="999999999" maxlength="15" class="form-control border border-1 border-primary" aria-label="Amount (to the nearest dollar)">
                     <!-- 
                       <div class="input-group-append">
                         <span class="input-group-text">.00</span>
@@ -573,14 +573,14 @@ import Datepicker from 'vuejs3-datepicker';
                 <div class="mt-3">
                   Dias Recurrencia: <br>
 
-                <div class="d-flex justify-content-between  m-0 p-0">
+                  <div class="d-flex justify-content-between  m-0 p-0">
                     <div class="border border-3 m-1 p-2"  @click="form_recurrency_mon=!form_recurrency_mon" :class="{ 'bg-white p-1': true , 'border-primary' :form_recurrency_mon  }" >Lu</div>
                     <div class="border border-3 m-1 p-2"  @click="form_recurrency_tue=!form_recurrency_tue" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_tue }" >Ma</div>
                     <div class="border border-3 m-1 p-2"  @click="form_recurrency_wed=!form_recurrency_wed" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_wed }" >Mi</div>
                     <div class="border border-3 m-1 p-2"  @click="form_recurrency_thu=!form_recurrency_thu" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_thu }">Ju</div>
                     <div class="border border-3 m-1 p-2"  @click="form_recurrency_fri=!form_recurrency_fri" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_fri }">Vie</div>
-                    
                   </div>
+
                   <div class="d-flex justify-content-start m-0 p-0">
                     <div class="border border-3 m-1 p-2" @click="form_recurrency_sat=!form_recurrency_sat" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_sat }">Sa</div>
                     <div class="border border-3 m-1 p-2" @click="form_recurrency_sun=!form_recurrency_sun" :class="{ 'bg-white p-1': true , 'border-primary':form_recurrency_sun }">Do</div>
@@ -590,9 +590,6 @@ import Datepicker from 'vuejs3-datepicker';
 
 
 
-
-
-                              
                 <hr class="text-white ">
 
                 <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
@@ -835,7 +832,7 @@ data: function () {
            // maximum_calendar_start : null ,
            // maximum_calendar_end  : null ,
 
-           form_app_price : 0 ,
+           form_app_price : "0" ,
 
            preventDisableDateSelection : true ,
            disabled_dates_start : null ,
@@ -1003,7 +1000,7 @@ data: function () {
 
                 date: new Date(),
 
-                form_app_price : this.form_app_price
+                form_app_price : this.form_app_price.replaceAll('.','')
                 
                           };
 
@@ -1019,9 +1016,25 @@ data: function () {
         },
 
 
+        aprice_formatter(amount) 
+        {
+          return amount.toLocaleString('es-cl');  
+        },
+
+
 	    },
     
     watch : {
+
+        form_app_price(amount) 
+        {
+          console.log("amount"+ amount)
+          amount = amount.replaceAll('.','');
+          console.log("amount-"+ amount)
+          console.log("formating amount"+ Number(amount).toLocaleString('es-cl') )
+          this.form_app_price = Number(amount).toLocaleString('es-cl')
+
+        },
         
         activatorCreateNewCalendar (newValue){
             console.log ("showModalCreateCalendar !!!"+newValue );  
