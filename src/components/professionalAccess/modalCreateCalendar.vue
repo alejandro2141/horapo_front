@@ -52,7 +52,7 @@ import Datepicker from 'vuejs3-datepicker';
                   <div class="">
                                    <text>Consulta
                                    </text>
-                                    <div class="form-group h3 border border-1 border-primary">
+                                    <div style="border-radius: 10px;" class="form-group h3 border border-1 border-primary">
                                          <InputFormCenterProfessional  v-on:centers_found_flag_emit='centers_found_flag_emit' v-on:centersError='centersError' v-on:selectedCenterCode="selectedCenterCode" :session_params="session_params" v-on:switchView="switchView" > </InputFormCenterProfessional> 
                                     </div>
                   </div>   
@@ -603,8 +603,10 @@ import Datepicker from 'vuejs3-datepicker';
                 </div>   
                     
 </div>
-<div class="text-white " >
-Debe exisitr al menos una consulta antes de crear un Calendario
+<div  v-else class=" text-center" >
+  <i class="text-danger display-4 bi bi-exclamation-diamond"></i>
+  <br>
+  Antes de crear antes una consulta 
 </div>
 
           
