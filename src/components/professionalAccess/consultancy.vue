@@ -8,41 +8,34 @@ import inputFormComuna from  './InputFormComuna2.vue'
 <template>
 
     <div>
-     <form autocomplete="off">	
-                                        <div class="d-flex justify-content-start ">
 
-                                         <div v-if="showEditOptions" class="d-flex justify-content-between " >
+    <div class="card m-4 mt-0   border  border-2 border-secondary  " style=" border-radius: 15px;"  >
+                         
+
+    <div class=""  >
+
+     <form autocomplete="off">	
+
+        <!--START TITLE-->
+                                    <div class="d-flex justify-content-between">
+
+                                        <div>
+                                            <div v-if="showEditOptions" class="d-flex justify-content-between " >
                                              <text  @click="deleteCenter()" class="text-danger"> <i class="fs-1 m-1 bi bi-trash"></i>  </text>
+                                            </div>
+                                            <i v-else class=" bi bi-geo-alt fs-1 m-1"></i> 
                                         </div>
 
-                                         <i v-else class=" bi bi-geo-alt fs-1 m-1"></i> 
                                          <input :disabled="!showEditOptions "  type="text" :class="{ 'bg-dark border border-white': showEditOptions }"  class="bg-white border-0 text-dark form-control form-control-lg" id="form_phone2" name="form_phone2" v-model="name" style="z-index: 9;  border-radius: 25px; width:80%;  text-align: left; ">
                                        
-                                        
-                                        
-                                         <div  class="text-warning d-flex justify-content-start  m-2" v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
-                                            <i class="bi bi-tags-fill "></i>Nuevo
-                                            
-                                         </div>
+                                         <div  v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"  style="width:4em ; height:4em  ;border-radius: 0px 10px 0px 55px;opacity: 0.5; " class="bg-warning"> </div>
 
-                                        </div>
-
-                                        <hr class="m-0">
-                                        <!--
-                                        <div v-if="showEditOptions" class="d-flex justify-content-between mt-0" >
-                                             <text  @click="deleteCenter()" class="mt-2 text-danger bg-white "> Eliminar Este centro </text>
-                                           
-                                        </div>
-                                        -->
-                                        <!--
-                                        <div class="d-flex justify-content-between mt-0">
-                                                <text class="mt-2">Tipo:</text>
-                                                <text v-if="centerDetails.home_visit"  class="text-end"> A Domicilio <i class="text-white h1 bi bi-house-door"></i> </text>
-                                                <text v-if="centerDetails.center_visit"  class="text-end"> En Consulta <i class="text-white h1 bi bi-building"></i> </text>
-                                                <text v-if="centerDetails.remote_care"  class="text-end">Atencion Remota <i class="text-white h1 bi bi-camera-video"></i> </text>
-                                        </div>
-                                        -->
-
+                                    </div>
+                                    <hr class="m-0">
+        <!-- END TITLE-->
+                    
+        <!-- BODY -->
+        <div class="m-2 p-2">
                 <text class="mt-2">Tipo:</text>
                       <div class="d-flex justify-content-between " >
                           <button  v-if="app_type_center "  type="button" class="btn  m-1" :class="[ app_type_center ? 'btn-outline-dark': 'btn-outline-dark' ]" @click="app_type_home=false ; form_app_type = 1; app_type_center=true ; app_type_tele=false ;" >
@@ -115,9 +108,14 @@ import inputFormComuna from  './InputFormComuna2.vue'
                                             <text @click="showEditOptions=false;showEditButton=true;resetData()" >CANCELAR  </text><br>
                                             <text @click="saveChanges();showEditOptions=false;showEditButton=true;" >GUARDAR </text>
                                         </div>
-
+        <!-- END BODY -->
+        </div>
     </form>
-    </div>
+    
+</div>
+</div>
+
+</div>
 
 </template>
 
