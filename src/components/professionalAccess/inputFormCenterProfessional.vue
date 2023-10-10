@@ -10,7 +10,7 @@ import SwitchViewButton from './switchViewButton.vue'
 <template>
 
     <div v-if="center_list.length > 0" >
-   	  <select class="bg-white border border-1 text-dark form-control" :class="{ 'bg-white ': true }" aria-label="Default" id="form_center"  v-model="form_center"  name="form_center">
+   	  <select style="border-radius: 10px;"  class="bg-white border border-1 text-dark form-control" :class="{ 'bg-white ': true  }" aria-label="Default" id="form_center"  v-model="form_center"  name="form_center">
             <option selected v-for="(center) in center_list" :value="center.id" :key="center.id" > {{center.name}}-[{{getCenterType(center)}}]</option>	
       </select>
     </div>
