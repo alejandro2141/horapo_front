@@ -94,7 +94,7 @@ export default {
         {
                console.log("sendRecoverApp");  
                 
-               var r =confirm("¿ Enviar las citas a su Email Registrado ?");
+               var r =confirm("Si existen citas registradas, las enviaremos a su correo");
                var r = true;
                  
                if (r == true) {
