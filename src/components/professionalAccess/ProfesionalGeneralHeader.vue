@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import SwitchViewButton from './switchViewButton.vue'
 import axios from 'axios';
 import professional_messages from './professional_messages.vue'
+import ProfesionalBugReport from './ProfesionalBugReport.vue'
 
 
 
@@ -177,9 +178,12 @@ import professional_messages from './professional_messages.vue'
 
 				</a>
 					<div v-if="showInputMessage"> 
+						<ProfesionalBugReport :session_params="session_params" ></ProfesionalBugReport>
 
+						<!-- 
 						<professional_messages :session_params="session_params"></professional_messages>
-						
+						-->
+
 					</div>
 					
 
@@ -316,6 +320,7 @@ export default {
 		async sendEmailToColleague()
 		{
 		console.log("SendEmailToColleague")
+
 		const json = { 
                 professional_id: this.session_params.professional_id ,
 			    email:this.emailToShare
@@ -323,7 +328,8 @@ export default {
 
                 
                 let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_invitation_colleague",json);
-           	
+		alert("Hemos enviado una Invitación a tu colega");
+				
 		},
 
 		showAppointmentsTakenList()
