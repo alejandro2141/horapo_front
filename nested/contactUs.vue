@@ -9,15 +9,9 @@ import contactUsForm from  '../src/components/publicSearch/contactUsForm.vue'
 <template>
 <div>
     <GeneralHeader></GeneralHeader>
-
-
-   
-
-    <div v-if="true" class="d-flex justify-content-center" >
-    
-     <contactUsForm></contactUsForm> 
-
-    </div>
+      <div v-if="true" class="d-flex justify-content-center" >
+        <contactUsForm></contactUsForm> 
+      </div>
 
 
 </div>
