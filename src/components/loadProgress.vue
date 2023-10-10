@@ -5,7 +5,7 @@ import { ref } from 'vue'
 
 <template>
 <div v-if="spinner_on" class="spinner  text-center" style="" >
-    <img class="mt-5 pt-5" width="150"  src="/public/spinner.gif" >
+    <img class="mt-5 pt-5" width="150"  src="/public/spinner3_color.gif" >
       
  </div>
 </template>
