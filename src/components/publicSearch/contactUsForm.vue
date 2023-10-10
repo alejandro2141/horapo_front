@@ -37,8 +37,7 @@ import axios from 'axios';
         <div class="d-flex justify-content-start">
 						
                         <div>
-                           
-							<textarea maxlength="100" style="border-radius: 10px; "  class="form-control h-90 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="incluye aquí tus comentarios">
+                            <textarea maxlength="100" style="border-radius: 10px; "  class="form-control h-90 w-90 m-2 p-3" id="story" v-model="text_message" name="story"  placeholder="incluye aquí tus comentarios">
 							</textarea>
 						</div>
 						
@@ -48,13 +47,13 @@ import axios from 'axios';
         <div class="m-1 d-flex justify-content-between">
 							
 							<text>
-								<i @click="animo =1;" class="text-danger bi bi-emoji-angry display-3 m-4 "></i><br>
+								<i @click="animo =1;" class="text-danger bi bi-emoji-angry display-3 m-4 " :class="{ 'border border-5 border-primary' : animo ==1 }"  style="border-radius: 30px; " > </i><br>
                             </text>
 							<text>
-							<i @click="animo =2;" class="text-secondary bi bi-emoji-neutral display-3 m-4 "></i><br>
+							<i @click="animo =2;" class="text-secondary bi bi-emoji-neutral display-3 m-4 " :class="{ 'border border-5 border-primary' : animo ==1 }"  style="border-radius: 30px; " ></i><br>
                             </text>
 							<text>
-							<i @click="animo =3;"  class="text-success bi bi-emoji-heart-eyes display-3 m-4 "></i><br>
+							<i @click="animo =3;"  class="text-success bi bi-emoji-heart-eyes display-3 m-4 " :class="{ 'border border-5 border-primary' : animo ==1 }"  style="border-radius: 30px; "></i><br>
                             </text>
 							<!--
 							<i @click="animo =4;text_message=text_message.concat(' Tiene errores de software.  Arreglalo infame programador !!. ') " class="text-white bi bi-bug h4 p-2"></i><br>
