@@ -6,11 +6,12 @@ import axios from 'axios';
 </script>
 
 <template>
-      <div class="d-flex justify-content-center mt-5 pt-5" style="bottom: 0px;">
+      <div class="d-flex justify-content-left mt-0 pt-0" style="bottom: 0px;">
      <div class="m-1 p-1 bg-warning" style="border-radius: 20px; width: 350px;"  >
         <div >
 
         <!-- BUG ICON on click display form-->
+    <!--
         <div class="d-flex justify-content-center">
             <div @click="displayBugForm=!displayBugForm" >
                 <i class="display-6 bi bi-bug-fill text-secondary"></i> 
@@ -18,10 +19,10 @@ import axios from 'axios';
                 
             </div>
         </div>
-
+    -->
 
         <!-- Form Notificate Profesional Bug-->
-       <div class="m-2" v-if="displayBugForm" >
+       <div class="m-2" v-if="true" >
             <div class="d-flex justify-content-center">
 				<textarea style="border-radius: 10px; "  maxlength="100" class="h-75 w-100 m-4 p-3 border border-warning" id="story" v-model="text_message" name="story"  placeholder="Comment text.">
 				</textarea>		
@@ -30,14 +31,14 @@ import axios from 'axios';
             <!-- FACES -->
             <div class="m-1 d-flex justify-content-center">
 							
-							<text>
-								<i @click="animo =1;text_message=text_message.concat(' :( ')" class="text-danger bi bi-emoji-angry  display-1"></i><br>
+							<text>                                                                           
+								<i @click="animo =1;" class="text-danger bi bi-emoji-angry  display-1 "  :class="{ 'border border-5 border-primary' : animo ==1 }"  style="border-radius: 30px; "  ></i><br>
                             </text>
 							<text>
-							<i @click="animo =2;text_message=text_message.concat(' :| ')" class="text-secondary bi bi-emoji-neutral m-4 display-1"></i><br>
+							<i @click="animo =2;" class="text-secondary bi bi-emoji-neutral m-4 display-1"  :class="{ 'border border-5 border-primary' : animo ==2 }"  style="border-radius: 30px; "  ></i><br>
                             </text>
 							<text>
-							<i @click="animo =3;text_message=text_message.concat(' :) ')"  class="text-success bi bi-emoji-heart-eyes display-1"></i><br>
+							<i @click="animo =3;"  class="text-success bi bi-emoji-heart-eyes display-1" :class="{ 'border border-5 border-primary' : animo ==3 }"  style="border-radius: 30px; " ></i><br>
                             </text>
 							
 			</div>
@@ -49,13 +50,15 @@ import axios from 'axios';
 						<text class="text-white btn btn-primary" @click="sendComments">Enviar</text>
 			</div>
 
+            <!-- 
             <div>
                 <text @click="showComments=!showComments;getMessagesReply()" class="text-primary">Ver lista de mensajes </text> 
             </div>
+            -->
 
-
-            <div v-if="comments != null && showComments" class="text-secondary text-start  w-100 m-2"  >
-                <i class="bi bi-hammer">Estamos trabajando para solucionar: </i>
+            <div v-if="comments != null " class="text-secondary text-start  w-100 m-2"  >
+                
+                <text @click="showComments=!showComments;getMessagesReply()">Estamos trabajando para solucionars: </text>
                <br>
                 <div v-for="comment in comments" :key="comment.id" class="mt-2 " >
                 
@@ -65,7 +68,7 @@ import axios from 'axios';
                         </text>{{comment.message}}<br>  
                     </div>
                     <div v-else>
-                        <i v-if="comment.animo == 1" class="bi bi-emoji-angry h2 "></i>
+                        <i v-if="comment.animo == 1" class="bi bi-emoji-angry h2" ></i>
                         <i v-if="comment.animo == 2 || comment.animo == 0 " class="bi bi-emoji-neutral h2 "></i>
                         <i v-if="comment.animo == 3" class="bi bi-emoji-heart-eyes h2 "></i>
                        <text>{{ new Date(comment.date_time).toLocaleDateString() }}  {{comment.message}}</text> <br>
