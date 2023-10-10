@@ -42,105 +42,36 @@ import TutorialCenter from './tutorial_center.vue'
   
   <div v-if="!showHelpCenter" >
         <div class="text-center p-1 m-1"> 
-            <text @click="addNewCenter()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
+            <text @click="addNewCenter()"  class="m-3 btn btn-primary " style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Consulta </text>
         </div>
 
         <div v-if='centers != null' >       
             <div  id="search_result" v-if='centers.length > 0'  >
                 <div v-for="center in centers"  :key='center.id' >
 
-                    <div class="card m-4 mt-0   border  border-2 border-secondary  " style=" border-radius: 15px;"  >
-                        <div class="card-body pb-1"  >
-                            
                                 <div >
                                     <!-- CENTER VISIT -->
                                     <div v-if="center.center_visit" >
                                         <Consultancy :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </Consultancy> 
-
                                     </div>
 
                                     <!-- A DOMICILIO -->
                                     <div v-if="center.home_visit" >
                                         <Consultancy :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </Consultancy> 
-
-                                        <!--
-
-                                            <div class="d-flex justify-content-between ">
-                                                <text class="h5"><i class="text-white bi bi-geo-alt"></i> {{center.name}} </text>
-                                                <text class=""> </text>  
-                                            </div>
-                                            <hr class="m-0">
-                                            <div class="d-flex justify-content-between mt-2">
-                                                <text class="mt-2">Tipo : </text>
-                                                <text></text>
-                                                <text class="text-end"> A Domicilio <i class="text-white h1 bi bi-house-door"></i> </text>
-                                                
-                                            </div>
-                                           
-                                            <div class="d-flex justify-content-between mt-3">
-                                                    <text> En Comunas: </text>         
-                                                    <text></text>
-                                                    <text class="text-start">
-                                                        <text v-if="comunaId2Name(center.home_comuna1)!=null" > {{ comunaId2Name(center.home_comuna1)  }} &nbsp; <br></text> 
-                                                        <text v-if="comunaId2Name(center.home_comuna2)!=null"> {{ comunaId2Name(center.home_comuna2)  }} &nbsp;  <br></text> 
-                                                        <text v-if="comunaId2Name(center.home_comuna3)!=null"> {{ comunaId2Name(center.home_comuna3)  }} &nbsp; <br></text> 
-                                                        <text v-if="comunaId2Name(center.home_comuna4)!=null"> {{ comunaId2Name(center.home_comuna4)  }} &nbsp; <br></text> 
-                                                        <text v-if="comunaId2Name(center.home_comuna5)!=null"> {{ comunaId2Name(center.home_comuna5)  }} &nbsp; <br></text> 
-                                                        <text v-if="comunaId2Name(center.home_comuna6)!=null"> {{ comunaId2Name(center.home_comuna6)  }} &nbsp; <br></text> 
-                                                    </text>
-                                                    
-                                             </div>
-
-                                            <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
-                                                <text class="">Telefono 1:</text>
-                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone1 }}  </text>
-                                            </div>
-
-                                            <div v-if="center.phone1 != 'null' " class="d-flex justify-content-between mt-2">
-                                                <text class="">Telefono 2:</text>
-                                                <text class="text-end"><i class="text-muted h3 bi bi-telephone"></i> {{center.phone2 }}  </text> 
-                                            </div>
-                                            -->
-
                                     </div>
 
                                     <!-- REMOTE CARE  -->
                                     <div v-if="center.remote_care" >
                                         <Consultancy :centerDetails="center" v-on:updateCenterList="updateCenterList" :global_comunas="global_comunas" :session_params='session_params' > </Consultancy> 
-
-                                        <!--
-                                        <div class="d-flex justify-content-between ">
-                                            <text class="h5"><i class="text-white bi bi-geo-alt"></i> {{center.name}} </text>  
-                                        </div>
-                                         <hr class="m-0">
-                                        <div class="d-flex justify-content-between mt-0">
-                                            <text class="mt-2"> Tipo: </text>
-                                            <text> </text>
-                                            <text class="text-end"> Tele Atención <i class="text-white h1 bi bi-camera-video"></i></text>
-                                            
-                                        </div>
-                                        <div class="d-flex justify-content-between mt-2">
-                                            <text> En Telefono: </text>
-                                          
-                                            <text> <i class="text-white h3 bi bi-telephone"></i> 9999999</text>
-                                        </div>
-                                        -->
-
                                     </div>
                                 
                                 </div>
-
-                                
+             
 <!--
                                 <p class="text-center fs-5 mt-3 mb-0" > <text  @click="showCenter(center)" class="text-white"> <i class="bi bi-pencil"></i>  </text>  </p>
  -->               
-
                                    
                          <!--   <p class="text-end text-muted mt-2"> #{{ center.id }} </p> -->
-                        </div>
-                    </div>
-                
-                
                
                 </div>  
                 
