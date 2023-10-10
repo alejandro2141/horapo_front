@@ -21,18 +21,28 @@ import { BKND_CONFIG } from '../../../config123.js'
                     
                     <div class="card-body p-0 m-0" >
 
-                    <div class="d-flex justify-content-between p-2 w-100 bg-white" style="width: 18rem; border-radius: 15px; " >
-                                <text class="card-title display-6  mt-0 pt-0"   >
+                    <div class="d-flex justify-content-between p-0 m-0 w-100 bg-white" style="width: 18rem; border-radius: 15px; " >
+                                
+                                <text class="card-title display-6  m-2 "   >
                                     <i v-if="showEdit" @click="deleteCalendar();showEdit=false" class="bi bi-trash text-danger" ></i>  
                                     <i v-else class="bi bi-calendar-week "></i>  {{idSpecialty2name(specialty_code) }}  
                                 </text>
 
+                                <!-- 
                                 <div  class="text-warning m-1" v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"> 
                                     <i class="bi bi-tags-fill "></i>Nuevo        
                                 </div>
+                                -->
 
-                                <i class="m-2 fs-3 m-1 bi bi-share text-primary" v-if="!showEdit && !showSocials" @click="showSocials=!showSocials "></i>
-                                <!--
+                                <i class="p-2 fs-3 m-1 bi bi-share text-primary" v-if="!showEdit && !showSocials" @click="showSocials=!showSocials "></i>
+
+                                <div  v-if="((cdate.getTime() - date.getTime() ) < 86400000 )"  style="width:4em ; height:4em  ;border-radius: 0px 10px 0px 55px;opacity: 0.5; " class="bg-warning"> 
+                                   
+                                </div>
+
+                                
+
+                                 <!--
                                 <div class="fs-1 bg-light text-primary" style="background-color: #D4D4D4;  border-radius: 15px;">
                                     <p @click="displayShareCalendar(calendar)" class="text-center p-1"  >
                                         
@@ -142,69 +152,10 @@ import { BKND_CONFIG } from '../../../config123.js'
                         <br>
 
                         </div>
-
-
-
-                        <!-- 
-                        <div>
-                            <div >
-                                
-                                    <div class="d-flex justify-content-around text-primary" >
-                                        <div>
-                                            <i @click="showInputEmail=!showInputEmail;showInputPhone=false"  class="display-4 bi bi-envelope"></i>
-                                            <br>Email
-                                        </div>
-                                        
-                                        <div>
-                                        <i @click="showInputPhone=!showInputPhone;showInputEmail=false"  class="display-4 bi bi-whatsapp"></i>
-                                        <br>WhatsApp 
-                                
-                                        </div>
-   
-                                    </div>
-                                    
-                                    <div v-if="showInputEmail"> 
-                                             Ingrese Email destino<br> 
-                                            <input class="text-dark bg-white" type="text" v-model="customer_email" placeholder="email@gmail.com" id="fname" name="fname"><br>
-                                            <text type="button" class="btn btn-primary m-2"  @click="showSocials=false;showInputEmail=false; sendCalendarToPatient(customer_email, calendar.id , calendar.professional_id, calendar.center_id )" >
-                                                enviar
-                                            </text> 
-                                            <p></p>                  
-                                    </div>
-                                    
-                                    <div v-show="showInputPhone"> 
-                                        Ingrese Telefono<br>
-                                        <input class="text-dark bg-white" type="text" id="fname" v-model="customer_phone" name="fname">
-                                        <br>
-                                        <a type="button" class="btn btn-primary m-2" :href="'https://wa.me/'+customer_phone+'?text=horapo%20Puedes%20Buscar%20una%20Hora%20disponible%20en:%20'+idSpecialty2name(specialty_code)+'Puedes buscar una hora disponible en: http://'+host+'/nested/publicSiteProfessional.html?params='+session_params.professional_id+'_'+calendar.id+' '" >
-                                        Enviar 
-                                        </a>
-                                    </div>
-
-                                    <br>
-                                    <div class="d-flex justify-content-around m-2">
-                                      
-                                        <a target="_blank" :href=linkWebCalendar_face >  <i class="display-4  bi bi-facebook m-3"></i> </a>
-                                        <a target="_blank" :href=linkWebCalendar_twitter >  <i class="display-4  bi bi-twitter m-3"></i> </a>
-                                      
-                                    </div> 
-                               
-
-                                    <br><br>
-                            </div>
-
-                            
-
-                        </div>
-
-                    -->
   
                         </div>
                     </div>
                     <!-- END SOCIAL -->
-
-
-
 
 
                     <!--
