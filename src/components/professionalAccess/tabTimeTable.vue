@@ -34,8 +34,11 @@ import infoCalendar from './info_calendar.vue'
                 Antes de crear un nuevo Calendario, debe primero crear una consulta. 
             </div>
         -->
-            <div v-if="calendars == null && calendars.centers == null &&  calendars.centers.length < 1 " class="text-center p-3 m-3"  > 
-                <b><i class="bi bi-exclamation-triangle display-4 text-warning"></i></b><br>
+            <div v-if="calendars == null && calendars.centers == null &&  calendars.centers.length < 1 " class="text-center text-danger p-3 m-3"  > 
+                <b>
+                    <i class="bi bi-exclamation-triangle display-4 text-warning"></i>
+                </b>
+                <br>
                 Antes de crear un nuevo Calendario, debe primero crear una consulta.         
             </div>
             <div v-else class="text-center p-0"> 
