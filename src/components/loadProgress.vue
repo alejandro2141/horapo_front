@@ -4,8 +4,25 @@ import { ref } from 'vue'
 </script>
 
 <template>
-<div v-if="spinner_on" class="spinner  text-center" style="" >
-    <img class="mt-5 pt-5" width="150"  src="/public/spinner3_color.gif" >
+<div v-if="spinner_on" class="spinner  text-center mt-5 pt-5" style="" >
+   
+    <div v-if="specialty !=null ">
+
+        <p class="mt-5 pt-5 ">
+        </p>
+        <p class="mt-5 pt-5 ">
+            <text class="p-4 m-2" style=" border-radius: 25px;" :style="{'background-color' : specialty.circleColors  ,  'color': specialty.specialtyTextColors }" >
+                Buscando  <text v-if="specialty !=null">{{specialty.name}} </text>
+            </text>
+
+    <!--  
+        <text v-if="specialty !=null">{{specialty.name}}  {{this.spinParams.specialty_id }}</text>
+    -->
+        </p>
+        
+   </div>
+   
+   <img  width="150"  src="/public/spinner3_color.gif" >
       
  </div>
 </template>
@@ -31,15 +48,32 @@ export default {
   data : function() {
     return {
         spinner_on : false , 
+        specialty_data :  [ {'id':100, 'name': 'Kinesiología', 'circleColors': '#01454f' , 'specialtyTextColors': '#FFF'  }, 
+                            {'id':200, 'name': 'Psicología', 'circleColors': '#BC881C' , 'specialtyTextColors': '#FFF'},
+                            {'id':300, 'name': 'Fono audiología', 'circleColors': '#DDD', 'specialtyTextColors': '#111'  },
+                            {'id':400, 'name': 'Nutrición' , 'circleColors': '#8C0241', 'specialtyTextColors': '#FFF' },
+                            {'id':500, 'name': 'Terapia Ocupacional', 'circleColors': '#575757', 'specialtyTextColors':'#FFF'  },
+                            {'id':600, 'name': 'Psico pedagogia', 'circleColors': '#337686', 'specialtyTextColors': '#FFF' },
+                            {'id':700, 'name': 'Enfermería', 'circleColors': '#000080', 'specialtyTextColors':'#FFF'   },
+                            {'id':800, 'name': 'Masoterapia', 'circleColors': '#0B2264', 'specialtyTextColors':'#FFF'  }] ,
+        
+//specialtyTextColors:   ['#FFF','#FFF','#FFF','#FFF','#FFF','#FFF','#111','#FFF','#FFF' ],        
+//                            circleColors: ['#01454f','#BC881C','#8C0241','#575757','#000080','#337686','#DDD','#0B2264','#FFF'],
+        specialty : null 
           }
   },
 
-    props: ['active_spinner'], 
+    props: ['active_spinner', 'spinParams' ], 
 
     watch: {
             active_spinner( newValue, oldValue ) {
 
                     console.log("Spinner value:"+newValue);
+
+                    if( this.spinParams != null )
+                    {
+                        this.specialty = this.specialty_data.find(elem => elem.id ==  this.spinParams.specialty_id  )
+                    }
 
                     if (newValue == true)
                     {
