@@ -8,30 +8,12 @@ import { ref } from 'vue'
 
 	<div class="fixed-bottom m-2  bg-light ">
 	
-    <div  class="d-flex justify-content-between fs-6 m-2"> 
-
-      <text class="">
-			<a href="/nested/aboutUs.html" class="m-1 text-secondary  text-decoration-none btn-floating "  role="button">
-				&nbsp;&nbsp;&nbsp;&nbsp;	<text class="text-decoration-none" style="color: #568281">horapo?</text>
-			</a>
-	  </text>
-	  	<!--
-	  	<text class="text-secondary " >|</text>
-		-->
-      <text class="">
-			<a HREF="/nested/professionalAccess.html" class=" m-1  text-decoration-none btn-floating "  role="button">
-					<text class=" text-decoration-none" style="color: #568281">Profesionales</text>
-			</a>
-	  </text>
-	 	<!--
-	  	<text class="text-secondary " >|</text>
-		-->
-	  <text>
-			<a HREF="/nested/register.html" class=" text-decoration-none btn-floating m-1"  role="button">
-					<text class="text-decoration-none" style="color: #568281">Registrate</text>&nbsp;&nbsp;&nbsp;&nbsp;
-			</a>
-	  </text>
-
+    <div  class="d-flex justify-content-center  m-2"> 
+		<div class="text-secondary" >
+			<small>
+			<i>HOR4P0Cr3W</i> <img class="m-2" style="width : 2em ;opacity: 0.9;"  src="/public/mantis.svg" > 2023
+			</small>
+		</div>
 
 <!--
       <a HREF="/nested/getAppointments.html"  style="text-decoration: none;" class=" fw-lighter">
