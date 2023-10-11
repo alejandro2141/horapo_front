@@ -6,7 +6,7 @@ import CalendarPickerMinimal2 from './calendarPickerMinimal2.vue'
 import DateRequiredActions from './dateRequiredActions.vue'
 import ListAppointments from './listAppointments.vue'
 import Tutorial from './tutorial_start.vue'
-import loadProgress from '../loadProgress.vue'
+import loadProgress from './loadProgressProfessional.vue'
 import LockOptions from './lockOptions.vue'
 import ProfesionalBugReport from './ProfesionalBugReport.vue';
 //import CalendarSummary from './calendar_summary.vue'
