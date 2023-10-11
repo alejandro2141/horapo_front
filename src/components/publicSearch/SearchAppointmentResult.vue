@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import patientAppointmentAvailable  from './PatientAppointmentAvailable.vue'
 import modalPublicViewAppointment from './ModalPublicViewAppointment.vue'
 import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
-import LoadProgress from '../loadProgress.vue'
+import LoadProgress from './loadProgressPatient.vue'
 
 
 </script>
