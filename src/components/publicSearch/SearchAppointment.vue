@@ -18,7 +18,7 @@ import headerPublicSearch from '../HeaderPublicSearch.vue'
    
     <headerPublicSearch></headerPublicSearch>
 
-  <loadProgress  :active_spinner="active_spinner" > </loadProgress> 
+  <loadProgress  :spinParams="spinParams" :active_spinner="active_spinner" > </loadProgress> 
   
       <div class="bg-white  pb-1 text-center"  > 
         <!--
@@ -67,9 +67,9 @@ import headerPublicSearch from '../HeaderPublicSearch.vue'
             </div>
       </div>
 
-<!--
+
   <FooterContent v-if="show_footer"  ></FooterContent>
- --> 
+  
   
   </div>
 
@@ -135,6 +135,11 @@ export default {
             suggestedSearchParams : null ,
 
             show_footer : true,
+            spinParams : {
+                          specialty : "",
+                          specialty_id : null ,
+                          color : null 
+                         }
 
 
     }
@@ -406,6 +411,9 @@ async searchAppointmentsGeneric(params) {
               
               let response_json = {data:[]}
               let metric = Date.now();
+
+              this.spinParams.specialty_id = params.specialty.id
+              
               this.active_spinner = true ; 
               if (  params !=null && params.specialty != null )
               {            
