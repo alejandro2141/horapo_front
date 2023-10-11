@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import LoadProgress from '../loadProgress.vue'
+import LoadProgress from '../publicSearch/loadProgressPatient.vue'
 import axios from 'axios'
 import GeneralHeader from '../GeneralHeader.vue'
 import appointmentAvailableSearchCalendar from './AppointmentAvailableSearchCalendar.vue'
