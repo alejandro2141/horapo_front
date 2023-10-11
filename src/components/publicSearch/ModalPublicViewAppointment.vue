@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import ModalPublicReserveAppForm from './modalPublicReserveAppForm.vue';
-import loadProgress from '../loadProgress.vue'
+import loadProgress from './loadProgressPatient.vue'
 
 //const count = ref(0)
 </script>
