@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-import loadProgress from '../loadProgress.vue'
+import loadProgress from './loadProgressProfessional.vue'
 import generalHeader from '../GeneralHeader.vue'
 
 
