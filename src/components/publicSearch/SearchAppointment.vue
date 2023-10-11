@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import searchAppointmentForm  from './SearchAppointmentForm.vue' 
 import searchAppointmentResult  from './SearchAppointmentResult.vue'
-import loadProgress from '../loadProgress.vue'
+import loadProgress from './loadProgressPatient.vue'
 import suggestedSearch from './SuggestedSearch.vue'
 import FooterContent from '../FooterContent.vue'
 import WordSphere from 'wordsphere';
