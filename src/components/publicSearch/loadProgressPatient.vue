@@ -13,15 +13,47 @@ import { ref } from 'vue'
         <p class="mt-5 pt-5 ">
         </p>
 
-        <div  :style="{'background-color' : specialty.circleColors  ,  'color': specialty.specialtyTextColors }">
-            <text class="p-4 m-2" style=" border-radius: 25px;"  >
-                Buscando  <text v-if="specialty !=null">{{specialty.name}} </text>
-            </text>
-            <!--  
-                <text v-if="specialty !=null">{{specialty.name}}  {{this.spinParams.specialty_id }}</text>
-            -->
+        <div class="d-flex justify-content-center">
             
-            <img  width="150"  src="/public/spinner3_color.gif" >
+            <div   style="border-radius: 95px;  width: 350px " :style="{'background-color' : specialty.circleColors  ,  'color': specialty.specialtyTextColors }">
+                
+                <br>
+                <p class="" style=""  >
+                    
+                    <text>Buscando... </text><br>
+                    
+                    <text v-if="specialty !=null">{{specialty.name}} </text> ....
+                    
+                     <text v-if="spinParams !=null && spinParams.type_home">  A adomicilio <i class="display-5 bi bi-house-door"></i> </text>
+                     <text v-if="spinParams !=null && spinParams.type_center"> En Consulta <i class="display-5 bi bi-building"></i> </text>
+                     <text v-if="spinParams !=null && spinParams.type_remote"> Tele Atención <i class="display-5 bi bi-camera-video"></i> </text>
+                     
+                    
+                    <!--
+                     <br>
+                     <text v-if="spinParams !=null && spinParams.location !=null  "> {{spinParams.location.name }} </text>
+                     <br>
+                     <text v-if="spinParams !=null && spinParams.date !=null "> A partir de {{format_date(spinParams.date) }} </text>
+                     <br>
+                    -->
+                     
+
+                </p>
+                <br>
+                <!--  
+                    <text v-if="specialty !=null">{{specialty.name}}  {{this.spinParams.specialty_id }}</text>
+                    <img  width="150"  src="/public/spinner3_color.gif" >
+            
+              this.spinParams.specialty_id = params.specialty.id
+              this.spinParams.location = params.location
+              this.spinParams.type_home = params.type_home
+              this.spinParams.type_center = params.type_center
+              this.spinParams.type_remote = params.type_remote
+                -->
+                
+                
+            </div>
+        
         </div>
 
 
@@ -68,6 +100,21 @@ export default {
   },
 
     props: ['active_spinner', 'spinParams' ], 
+
+
+    methods: {
+        
+        format_date(date)
+            {
+                let aux_date = new Date(date)
+                let days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ]
+                let months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ]
+
+
+                return (days[aux_date.getDay()]+" "+aux_date.getDate()+" "+months[aux_date.getMonth()]+" "+aux_date.getFullYear() )
+            },
+
+        },
 
     watch: {
             active_spinner( newValue, oldValue ) {
