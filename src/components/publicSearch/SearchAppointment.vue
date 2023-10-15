@@ -135,12 +135,14 @@ export default {
             suggestedSearchParams : null ,
 
             show_footer : true,
-            spinParams : {
-                          specialty : "",
-                          specialty_id : null ,
-                          color : null 
-                         }
-
+            spinParams : [{ specialty_id: 0 }] , 
+/*
+            this.spinParams.specialty_id = params.specialty.id
+              this.spinParams.location = params.location
+              this.spinParams.type_home = params.type_home
+              this.spinParams.type_center = params.type_center
+              this.spinParams.type_remote = params.type_remote
+*/
 
     }
   },
@@ -186,7 +188,6 @@ methods: {
                this.response_truncated = this.appointments.response_truncated
                this.response_truncated_at = this.appointments.response_truncated_at
                this.response_truncated_date = this.appointments.response_truncated_date
-
 
                console.log ("SearchGeneric RESULTS : "+JSON.stringify(this.appointments_filtered))
                //this.n_appointments_found = this.appointments_filtered.appointments_list.length 
@@ -412,7 +413,15 @@ async searchAppointmentsGeneric(params) {
               let response_json = {data:[]}
               let metric = Date.now();
 
+              //SPINNER PARAMS SET
               this.spinParams.specialty_id = params.specialty.id
+              this.spinParams.location = params.location
+              this.spinParams.type_home = params.type_home
+              this.spinParams.type_center = params.type_center
+              this.spinParams.type_remote = params.type_remote
+              
+              //************** */
+
               
               this.active_spinner = true ; 
               if (  params !=null && params.specialty != null )
@@ -422,20 +431,26 @@ async searchAppointmentsGeneric(params) {
                   // agenda_id : this.par_agenda_id ,			 
                           
                           specialty : params.specialty.id ,
-                          location : params.location ,
                           home_visit : params.home_visit,
                           type_home : params.type_home,
                           type_center : params.type_center,
                           type_remote : params.type_remote,           
                                   };
+
+
                           if ( params !=null && params.date != null  )
                           { 
                             json.date = new Date(params.date) 
+                            this.spinParams.date = params.date
                           }
                           else 
                           {
                             json.date = new Date()
                           }
+
+                          if (params.location != null )
+                          { json.location = params.location.id }
+                         
 
                                   
 
