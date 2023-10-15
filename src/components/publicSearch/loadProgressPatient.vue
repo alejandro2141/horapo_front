@@ -15,19 +15,38 @@ import { ref } from 'vue'
 
         <div class="d-flex justify-content-center">
             
-            <div   style="border-radius: 95px;  width: 350px " :style="{'background-color' : specialty.circleColors  ,  'color': specialty.specialtyTextColors }">
+            <div  style="border-radius: 45px; height: 220px; width:300px" :style="{'background-color' : specialty.circleColors  ,  'color': specialty.specialtyTextColors }">
                 
                 <br>
+
                 <p class="" style=""  >
                     
                     <text>Buscando... </text>  <br>
                    
                     <text v-if="specialty !=null">{{specialty.name}} </text> 
+                    
+                    <!-- 
                      <text v-if="spinParams !=null && spinParams.type_home">  A adomicilio <i class="h5 bi bi-house-door"></i> </text>
                      <text v-if="spinParams !=null && spinParams.type_center"> En Consulta <i class="h5 bi bi-building"></i> </text>
                      <text v-if="spinParams !=null && spinParams.type_remote"> Tele Atención <i class="h5 bi bi-camera-video"></i> </text>
                      <br>
-                    <img  width="100"  src="/public/spinner.gif" > 
+                    -->
+
+                    <br>
+                    <br>
+
+                    <div style="">
+                        <text class="h1"> &nbsp;  </text>
+                        <text v-if="spinParams !=null && spinParams.type_home">   <i class="h1 bi bi-house-door"></i>   </text>
+                        <text v-if="spinParams !=null && spinParams.type_center"> <i class="h1 bi bi-building"></i>     </text>
+                        <text v-if="spinParams !=null && spinParams.type_remote"> <i class="h1 bi bi-camera-video"></i> </text>
+                        <text class="h1"> &nbsp;  </text>
+
+                    </div>
+
+                    <br>
+                    
+                    <img  width="170"  style=" position: relative; top: -8em;" src="/public/spinner.gif" > 
                     
                     <!--
                      <br>
@@ -36,8 +55,7 @@ import { ref } from 'vue'
                      <text v-if="spinParams !=null && spinParams.date !=null "> A partir de {{format_date(spinParams.date) }} </text>
                      <br>
                     -->
-                     
-
+                
                 </p>
                 
                 <!--  
