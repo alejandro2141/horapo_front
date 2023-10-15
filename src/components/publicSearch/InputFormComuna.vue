@@ -47,7 +47,7 @@ const count = ref(0)
                 -->
 
                      <div class="h3 m-3 text-primary " v-for="location in location_filtered" :key="location.id" > 
-                        <div @click="form_comuna = location.name ;  $emit('selectedComunaCode', location.id ); clearfiltered = true">
+                        <div @click="form_comuna = location.name ;  $emit('selectedComunaCode', location ); clearfiltered = true">
                              <i class="display-6  text-muted " ></i>  <small> <i class="display-6  bi bi-geo-alt  text-muted m-0"  ></i> </small> {{ location.name }} 
                         </div>
                      </div>
