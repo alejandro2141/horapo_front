@@ -7,7 +7,6 @@ import specialtyCircle from './SpecialtyCircle2.vue'
 import appTypeCircle from './AppTypeCircle.vue'
 import Datepicker from 'vuejs3-datepicker';
 
-
 </script>
 
 <template>
