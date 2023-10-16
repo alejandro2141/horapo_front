@@ -18,7 +18,7 @@ import infoCalendar from './info_calendar.vue'
         
         <div>
             <p class="text-center">
-                <text class="text-center display-5 pt-1 text-dark ">Tus Calendarios  </text>
+                <text class="text-center display-5 pt-1 text-dark ">Tus Agendas  </text>
                 <br>
                 <text class="text-secondary"> Dias y horas en los que atiende</text>
             </p>
@@ -39,10 +39,10 @@ import infoCalendar from './info_calendar.vue'
                     <i class="bi bi-exclamation-triangle display-4 text-warning"></i>
                 </b>
                 <br>
-                Antes de crear un nuevo Calendario, debe primero crear una consulta.         
+                Antes de crear una nueva Agenda, debe primero crear una consulta.         
             </div>
             <div v-else class="text-center p-0"> 
-                <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nuevo Calendario </text>
+                <text @click="addNewCalendar()"  class="m-3 btn btn-primary" style="border-radius: 55px;"> <i class="bi bi-plus-lg"></i> Nueva Agenda </text>
             </div>
             
             <!-- LIST Calendars -->
