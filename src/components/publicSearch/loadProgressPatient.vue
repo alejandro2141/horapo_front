@@ -24,7 +24,7 @@ import { ref } from 'vue'
                     <text>Buscando... </text>  <br>
                    
                     <text v-if="specialty !=null">{{specialty.name}} </text> 
-                    
+                    <br>
                     <!-- 
                      <text v-if="spinParams !=null && spinParams.type_home">  A adomicilio <i class="h5 bi bi-house-door"></i> </text>
                      <text v-if="spinParams !=null && spinParams.type_center"> En Consulta <i class="h5 bi bi-building"></i> </text>
