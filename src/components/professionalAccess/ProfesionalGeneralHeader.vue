@@ -57,7 +57,7 @@ import ProfesionalBugReport from './ProfesionalBugReport.vue'
 		<div :class="{ 'opacity-25' :  !session_params.tutorial_start_step2 && session_params.tutorial_start}" >
 					<div v-if="showTopMenu" class="text-center"  @click="switchViewTo(1);showTopMenu=false;show_close_calendars=true;show_close_centers=false" >
 						<i class="bi bi-calendar icon-menu"></i><br>
-						<text>Calendarios</text>
+						<text>Agendas</text>
 					</div>	
 		</div>
 			<i v-if="!showTopMenu && !show_close_list" style="font-size:2.0em" class="bi bi-x-lg text-menu" @click="switchViewTo(2);showTopMenu=true ; show_close_calendars=false" ></i>	
