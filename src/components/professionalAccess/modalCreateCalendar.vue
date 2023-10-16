@@ -22,7 +22,7 @@ import Datepicker from 'vuejs3-datepicker';
  
                 <div class="modal-header">
                         <div class="text-dark " style="font-size: 2em;" >
-                        Crear Calendario
+                        Nueva Agenda
                         </div>
                         <div class="p-0 "><i class="text-primary bi bi-x-lg ml-0" style="font-size: 2em;"   v-on:click="showModalCreateCalendar = false"  aria-label="Close"></i>
                         </div>
@@ -34,7 +34,7 @@ import Datepicker from 'vuejs3-datepicker';
 
 <div  v-if="centers_found_flag">
   
-              <text class="text-dark">Aqui puedes crear un nuevo calendario llenado la siguiente información </text>
+              <text class="text-dark">Aqui puedes crear una nueva agenda llenado la siguiente información </text>
                    
                     <div class="card mb-0 p-3 w-100 border border-1 border-white bg-white" style="width: 18rem; border-radius: 15px; "   >
                     
@@ -592,7 +592,7 @@ import Datepicker from 'vuejs3-datepicker';
 
                 <hr class="text-white ">
 
-                <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Calendario </button>
+                <button type="button" @click="createNewCalendar" class="btn btn-primary m-3" >Crear Agenda </button>
                        
                                  <!--    <p class="text-white">C#{{calendar.calendar_id}} </p> -->
                
@@ -606,7 +606,7 @@ import Datepicker from 'vuejs3-datepicker';
 <div  v-else class=" text-center" >
   <i class="text-danger display-4 bi bi-exclamation-diamond"></i>
   <br>
-  Antes de crear antes una consulta 
+  Debe crear una consulta 
 </div>
 
           
