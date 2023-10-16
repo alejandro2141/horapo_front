@@ -11,7 +11,7 @@ import { BKND_CONFIG } from '../config123.js'
 <div>
     <GeneralHeader></GeneralHeader>
 
-    <div v-if="showBigImg" class="bg-white"  style="width : 100%; position: absolute;   top: 50%;   left: 50%;   transform: translate(-50%, -50%); ">
+    <div v-if="showBigImg" class="bg-white p-3"  style="width : 100%; position: fixed;   top: 50%;   left: 50%;   transform: translate(-50%, -50%); ">
         <div class="d-flex justify-content-end m-3"> 
                
                 <i @click="showBigImg=false"  class="text-primary display-1 bi bi-x-lg"></i>
@@ -20,7 +20,7 @@ import { BKND_CONFIG } from '../config123.js'
         
         <div class="d-flex justify-content-center">
 
-            <img class="m-2" style="width : 18em ; "  :src="'/public/quees_horapo_graphic'+showBigImgN+'.png'" > 
+            <img class="m-2" style="width : 20em ; "  :src="'/public/quees_horapo_graphic'+showBigImgN+'.png'" > 
         
         </div>
     
@@ -51,19 +51,83 @@ import { BKND_CONFIG } from '../config123.js'
         </div>
       
     <div class="d-flex justify-content-around">
-        <img @click="showImg(1)" class="m-2 text-center" style="width : 10em ; "  src="/public/quees_horapo_graphic1.png" >
-        <img @click="showImg(2)" class="m-2 text-center" style="width : 10em ; "  src="/public/quees_horapo_graphic2.png" >
+        <img @click="showImg(1)" class="m-2 text-center" style="width : 7em ; "  src="/public/quees_horapo_graphic1.png" >
+        <img @click="showImg(2)" class="m-2 text-center" style="width : 7em ; "  src="/public/quees_horapo_graphic2.png" >
     </div>
 
-    <p class="align-items-star m-2">  <b>horapo</b> es la plataforma de búsqueda y reserva de horas de salud.</p>
-       
+    <p class="align-items-star m-2">  <b>horapo</b> es la plataforma Web de búsqueda y reserva de horas de salud,  No es una App, y no requiere instalacion en tu smartphone
+    </p>
+    
+    <p class="text-center h5">En Horapo Profesionales de la Salud</p>
+    
     <div class="m-2 d-flex flex-column align-items-star">      
-        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Profesionales de la salud publican sus agendas de horas disponibles</text>
-        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Profesionales envian a sus pacientes un Link directo de su Agenda para una busqueda de horas dipsonibles.</text>
-        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Profesionales envian a pacientes solicitudes de confirmación de asistencia con un solo click</text>
-        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Profesionales hacen gestion sobre sus agendas de forma simple y rápida</text>
+        
+        
+        <div class="d-flex justify-content-start">
+            <div>
+                <img @click="showImg(10)" class="m-1" style="width : 5em ; "  src="/public/quees_horapo_graphic10.png" >     
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check2-square text-success h3"></i> Publican sus agendas de horas disponibles
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-start">
+            
+            <div>
+                <img @click="showImg(11)" class="m-1" style="width : 5em ; "  src="/public/quees_horapo_graphic11.png" >     
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check2-square text-success h3"></i> Envian a pacientes el LinkWeb de su Agenda para una busqueda de horas disponibles.
+            </div>
+            
+        </div>
+
+        <div class="d-flex justify-content-start">
+            <div>
+                <img @click="showImg(12)" class="m-1" style="width : 5em ; "  src="/public/quees_horapo_graphic12.png" >     
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check2-square text-success h3"></i> Solicitan confirmación de asistencia a pacientes con un solo click.
+            </div>
+            
+            
+        </div>
+
+        <div class="d-flex justify-content-start">
+            <div>
+                <img @click="showImg(13)" class="m-1" style="width : 5em ; "  src="/public/quees_horapo_graphic13.png" >  
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check2-square text-success h3"></i> Gestionan sus consultas y agendas forma simple y rápida
+            </div>
+            
+            
+        </div>
 
 
+        <div class="d-flex justify-content-start">
+            <div>
+                <img @click="showImg(14)" class="m-1" style="width : 5em ; "  src="/public/quees_horapo_graphic14.png" >  
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check2-square text-success h3"></i> Ven claramente las horas reservadas y si estas fueron confirmadas por sus pacientes.
+            </div>
+            
+            
+        </div>
+        
+      
+
+
+       <br>
+       <br>
+       <p class="text-center">
+        Pacientes
+       </p>
         <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Pacientes buscan y agendan citas de acuerdo a la disponibilidad, ubicacion, fecha, etc </text>
         <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Pacientes buscan de acuerdo a especialidad, disponibilidad, ubicacion, fechas, etc </text>
     </div>
@@ -71,29 +135,74 @@ import { BKND_CONFIG } from '../config123.js'
 
 
 <div class="m-2">
-    Reunimos las siguientes especialidades:  
-    <br>  
+   
     <div class="d-flex flex-column align-items-center">
-        <img class="m-2" style="width : 18em ; "  src="/public/specialties.png" > 
+        <img @click="showImg(3)" class="m-2" style="width : 18em ; "  src="/public/specialties.png" > 
     </div>
 </div>
 
 <div  class="m-2">
-    Pacientes pueden buscar y reservar horas de salud de forma simple y amigable.   
+
+    <div class="d-flex justify-content-start">
+            <div>
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check2-square text-success h3"></i> Pacientes pueden buscar y reservar horas de salud de forma simple y amigable.   
+            </div>
+            
+            
+    </div>
+        
     <br>
-    <img class="m-2" style="width : 8em ; "  src="/public/public_main_search.png" > 
-    <img class="m-2" style="width : 8em ; "  src="/public/public_search_main_result.png" > 
+
+    <div class="d-flex justify-content-around text-success " >
+        <div class="text-center ">
+            <div>
+            Busca
+            </div>
+            <img @click="showImg(4)" class="m-1" style="width : 7em ; "  src="/public/quees_horapo_graphic4.png" > 
+            
+        </div>
+        <div class="text-center">
+            <div>
+            Encuentra
+            </div>
+            <img @click="showImg(5)" class="m-1" style="width : 7em ; "  src="/public/quees_horapo_graphic5.png" > 
+        </div>
+        <div class="text-center">
+            <div>
+            Reserva
+            </div>
+            <img @click="showImg(6)" class="m-1" style="width : 7em ; "  src="/public/quees_horapo_graphic6.png" > 
+        </div>
+    </div>
 
 </div>
 
+<div class="d-flex justify-content-start">
+            <div>
+              
+            </div>
+            
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check2-square text-success h3"></i> Pacientes reciben a su correo notificacion de su Citas.    
+            </div>
+            
+            
+</div>
 
+
+<!-- 
 <div class="m-2">
-    Y Profesionales de la salud pueden gestionar sus horas y publicar sus calendarios de forma muy simple.   
+     Profesionales de la salud pueden gestionar sus horas y publicar sus calendarios de forma muy simple.   
     <br>
-    <img class="m-2" style="width : 8em ; "  src="/public/professional_main_view.png" > 
-    <img class="m-2" style="width : 8em ; "  src="/public/professional_main_page_calendar.png" > 
+    <img @click="showImg(7)" class="m-1" style="width : 7em ; "  src="/public/quees_horapo_graphic7.png" > 
+    <img @click="showImg(8)" class="m-1" style="width : 7em ; "  src="/public/quees_horapo_graphic8.png" > 
+    <img @click="showImg(9)" class="m-1" style="width : 7em ; "  src="/public/quees_horapo_graphic9.png" > 
 </div>
-
+-->
+<!--
 <div class="m-3 mb-5 pb-1">
    
     <button v-if="!showKnowMore1" type="button" @click="showKnowMore1=true " class="btn btn-secondary ">
@@ -115,8 +224,9 @@ import { BKND_CONFIG } from '../config123.js'
     <br>
     
 </div>
+-->
          <div class="text-center mt-2 pt-5 "> 
-             <button  v-if="!showForm && showKnowMore1" type="button" @click="showForm  = !showForm " class="btn btn-secondary ">Si, deseo Registarme</button>
+             <button  v-if="!showForm " type="button" @click="showForm  = !showForm " class="btn btn-secondary ">Registarme como Profesional</button>
         </div>
     </div>
 
