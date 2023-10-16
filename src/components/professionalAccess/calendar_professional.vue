@@ -99,7 +99,7 @@ import { BKND_CONFIG } from '../../../config123.js'
                         
                         <div class="d-flex justify-content-between "> 
                             <text></text>
-                            <text class="h5">Compartir Calendario </text>
+                            <text class="h5">Compartir Agenda </text>
                             <i @click="showSocials=false" class="h2 bi bi-x-lg text-primary"></i> 
                         </div>
                         <div class="text-primary m-3 text-center">
