@@ -11,12 +11,33 @@ import { BKND_CONFIG } from '../config123.js'
 <div>
     <GeneralHeader></GeneralHeader>
 
+    <div v-if="showBigImg" class="bg-white"  style="width : 100%; position: absolute;   top: 50%;   left: 50%;   transform: translate(-50%, -50%); ">
+        <div class="d-flex justify-content-end m-3"> 
+               
+                <i @click="showBigImg=false"  class="text-primary display-1 bi bi-x-lg"></i>
+
+            </div>
+        
+        <div class="d-flex justify-content-center">
+
+            <img class="m-2" style="width : 18em ; "  :src="'/public/quees_horapo_graphic'+showBigImgN+'.png'" > 
+        
+        </div>
+    
+    </div>
+
     <div class="bg-light">
 
+        <!-- 
 <div style="padding:0em;  display: flex;  align-items: center;  justify-content: center;  " > 
 <div style="padding:0em;text-align: center; max-width:500px ;border-radius: 2em;" >      
+-->
 
-    <div class="m text-center">
+<div class="d-flex justify-content-center">
+<div>
+
+
+    <div class="m ">
 
         <div class="d-flex m-2 justify-content-end"> 
             <a HREF="/index.html" type="button" class=""><i class="display-5 bi bi-x-lg text-primary"></i></a>
@@ -29,22 +50,32 @@ import { BKND_CONFIG } from '../config123.js'
             <text></text>
         </div>
       
-        <img class="m-2" style="width : 20em ; "  src="/public/horapo_graphic1.png" >
-       <br>
-      
-<div class="m-2">  
+    <div class="d-flex justify-content-around">
+        <img @click="showImg(1)" class="m-2 text-center" style="width : 10em ; "  src="/public/quees_horapo_graphic1.png" >
+        <img @click="showImg(2)" class="m-2 text-center" style="width : 10em ; "  src="/public/quees_horapo_graphic2.png" >
+    </div>
 
-<b>horapo</b> es una plataforma de búsqueda y reserva de horas professionales de salud. 
-Aquí sus horas estarán disponibles para que pacientes busquen y agenden citas de acuerdo a la disponibilidad, ubicacion geografica, fecha, etc 
-<br>
+    <p class="align-items-star m-2">  <b>horapo</b> es la plataforma de búsqueda y reserva de horas de salud.</p>
+       
+    <div class="m-2 d-flex flex-column align-items-star">      
+        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Profesionales de la salud publican sus agendas de horas disponibles</text>
+        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Profesionales envian a sus pacientes un Link directo de su Agenda para una busqueda de horas dipsonibles.</text>
+        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Profesionales envian a pacientes solicitudes de confirmación de asistencia con un solo click</text>
+        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Profesionales hacen gestion sobre sus agendas de forma simple y rápida</text>
 
-</div>
+
+        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Pacientes buscan y agendan citas de acuerdo a la disponibilidad, ubicacion, fecha, etc </text>
+        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Pacientes buscan de acuerdo a especialidad, disponibilidad, ubicacion, fechas, etc </text>
+    </div>
+
+
 
 <div class="m-2">
-    Actualmente reunimos las horas profesionales de las siguientes especialidades de salud:  
+    Reunimos las siguientes especialidades:  
     <br>  
-    <img class="m-2" style="width : 18em ; "  src="/public/specialties.png" > 
-
+    <div class="d-flex flex-column align-items-center">
+        <img class="m-2" style="width : 18em ; "  src="/public/specialties.png" > 
+    </div>
 </div>
 
 <div  class="m-2">
@@ -129,10 +160,21 @@ export default {
     return {
        showKnowMore1 : false ,
        showForm:false ,
+       showBigImg : false,
+       showBigImgN : 0,
     }
   },
 
   methods: {
+
+    showImg(img)
+    {
+        console.log("Show Image:"+img)
+        this.showBigImgN = img ; 
+        this.showBigImg = true ; 
+
+    },
+
   },
 }
 </script>
