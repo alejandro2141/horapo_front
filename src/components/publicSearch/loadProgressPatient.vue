@@ -4,9 +4,13 @@ import { ref } from 'vue'
 </script>
 
 <template>
-<div v-if="spinner_on" class="spinner text-center mt-0 pt-5" style="" >
+<div v-if="spinner_on" class="spinner text-center mt-0 pt-5" style="transition:visibility 0.1s linear,opacity 0.9s linear;" >
    
-   <div v-if="specialty !=null ">
+
+ 
+
+
+   <div v-if="specialty !=null "   >
 
         <p class="mt-5 pt-5 ">
         </p>
@@ -15,12 +19,15 @@ import { ref } from 'vue'
 
         <div class="d-flex justify-content-center">
             
-            <div  style="border-radius: 45px; height: 220px; width:300px" :style="{'background-color' : specialty.circleColors  ,  'color': specialty.specialtyTextColors }">
-                
+            <!-- 
+            <div  class="hexagono2" style="border-radius: 45px; height: 220px; width:300px" :style="{'background-color' : specialty.circleColors  ,  'color': specialty.specialtyTextColors }">
+            -->
+            <div class="hex4" style="width:200px;height:200px" :style="{'background-color' : specialty.circleColors  ,  'color': specialty.specialtyTextColors }">
+            
                 <br>
 
                 <p class="" style=""  >
-                    
+                    <br>
                     <text>Buscando... </text>  <br>
                    
                     <text v-if="specialty !=null">{{specialty.name}} </text> 
@@ -33,7 +40,7 @@ import { ref } from 'vue'
                     -->
 
                     <br>
-                    <br>
+                  
 
                     <div style="">
                         <text class="h1"> &nbsp;  </text>
@@ -43,10 +50,8 @@ import { ref } from 'vue'
                         <text class="h1"> &nbsp;  </text>
 
                     </div>
-
-                    <br>
                     
-                    <img  width="170"  style=" position: relative; top: -8em;" src="/public/spinner.gif" > 
+                    <img  width="130"  style=" position: relative; top: -5em;" src="/public/spinner.gif" > 
                     
                     <!--
                      <br>
@@ -95,6 +100,15 @@ import { ref } from 'vue'
     height : 80% ;
     background-color: rgba(26, 26, 26, 0.4);
 }
+
+
+.hex4 {
+  background: blue;
+  -webkit-clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+}
+
+
 </style>
 
 <script>
