@@ -450,9 +450,13 @@ computed: {
    		},
 	
 		showSpecialtyName(id){
+			if (this.global_specialties !=null)
+			{ 
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
             else { return null }
+			}
+
 
         },
 
