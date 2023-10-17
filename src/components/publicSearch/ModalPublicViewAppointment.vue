@@ -25,8 +25,6 @@ import loadProgress from './loadProgressPatient.vue'
               
             <div class="modal-body scroll h4"  style="border: 0px solid rgb(168, 168, 168);border-radius: 20px; " > 
  					
-
-
     <div v-if="app != null"     class="bg-white p-0 mb-1 ">
 
 		<!-- HEADER -->
