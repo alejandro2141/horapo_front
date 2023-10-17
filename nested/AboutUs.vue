@@ -129,7 +129,6 @@ import { BKND_CONFIG } from '../config123.js'
         Pacientes
        </p>
         <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Pacientes buscan y agendan citas de acuerdo a la disponibilidad, ubicacion, fecha, etc </text>
-        <text class="align-items-star"> <i class="bi bi-check2-square text-success h3"></i> Pacientes buscan de acuerdo a especialidad, disponibilidad, ubicacion, fechas, etc </text>
     </div>
 
 
@@ -148,7 +147,7 @@ import { BKND_CONFIG } from '../config123.js'
             </div>
             
             <div class="d-flex align-items-center">
-                <i class="bi bi-check2-square text-success h3"></i> Pacientes pueden buscar y reservar horas de salud de forma simple y amigable.   
+                <i class="bi bi-check2-square text-success h3"></i> Pacientes reservan horas forma simple y amigable.   
             </div>
             
             
@@ -186,7 +185,7 @@ import { BKND_CONFIG } from '../config123.js'
             </div>
             
             <div class="d-flex align-items-center">
-                <i class="bi bi-check2-square text-success h3"></i> Pacientes reciben a su correo notificacion de su Citas.    
+                <i class="bi bi-check2-square text-success h3"></i> Pacientes reciben a su correo notificacion de su Citas y recordatorios.    
             </div>
             
             
