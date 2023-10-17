@@ -78,7 +78,7 @@ methods: {
         {{appointment.date.split("-")[0] }}
         */
     },
-
+ 
     showSpecialtyName(id){
             let temp= this.global_specialties.find(elem => elem.id ==  id  )
             if (temp != null) { return temp.name }
