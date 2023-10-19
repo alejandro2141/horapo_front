@@ -73,11 +73,16 @@ import { ref } from 'vue'
                         <div class="" style="color:#2e5668" >	
                                 {{center_data.name}}
                         </div>
+                        
+                    </div>
+
+                    <div class="" style="color:#2e5668" >	
+                        {{ professional_data.name}}      
                     </div>
 
                     <div v-if="calendar_data != null && calendar_data.price>1"> Valor:${{ priceFormatter(calendar_data.price)}}</div>
                     
-
+                    
                 </div>
             
             </div>
@@ -105,7 +110,7 @@ export default {
             }
   },
   
-  props: ['center_data' , 'calendar_data'  ,'appointment','searchParameters' , 'global_comunas' , 'global_specialties' ],
+  props: [ 'professional_data' , 'center_data' , 'calendar_data'  ,'appointment','searchParameters' , 'global_comunas' , 'global_specialties' ],
 
  mounted () {  
      // this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
