@@ -36,7 +36,7 @@ import { BKND_CONFIG } from '../config123.js'
                 <i @click="showBigImg1=false"  class="text-primary display-1 bi bi-x-lg"></i>
         </p>
         <div class="d-flex justify-content-center">
-            <img class="m-2" style="width : 20em ; "  src="/quees_horapo_graphic1.png" > 
+            <img class="m-2" style="width : 20em ; "  src="/public/quees_horapo_graphic1.png" > 
         </div>
     </div>
 
@@ -45,7 +45,7 @@ import { BKND_CONFIG } from '../config123.js'
                 <i @click="showBigImg2=false"  class="text-primary display-1 bi bi-x-lg"></i>
         </p>
         <div class="d-flex justify-content-center">
-            <img class="m-2" style="width : 20em ; "  src="/quees_horapo_graphic2.png" > 
+            <img class="m-2" style="width : 20em ; "  src="/public/quees_horapo_graphic2.png" > 
         </div>
     </div>
 
@@ -159,8 +159,8 @@ import { BKND_CONFIG } from '../config123.js'
         </div>
       
     <div class="d-flex justify-content-around">
-        <img @click="showBigImg1 = true" class="m-2 text-center" style="width : 7em ; "  src="/quees_horapo_graphic1.png" >
-        <img @click="showBigImg2 = true" class="m-2 text-center" style="width : 7em ; "  src="/quees_horapo_graphic2.png" >
+        <img @click="showBigImg1 = true" class="m-2 text-center" style="width : 7em ; "  src="/public//quees_horapo_graphic1.png" >
+        <img @click="showBigImg2 = true" class="m-2 text-center" style="width : 7em ; "  src="/public//quees_horapo_graphic2.png" >
     </div>
 
     <p class="align-items-star m-2">  <b>horapo</b> es la plataforma Web de búsqueda y reserva de horas de salud,  No es una App, y no requiere instalacion en tu smartphone
