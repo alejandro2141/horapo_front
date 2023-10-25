@@ -9,15 +9,17 @@ import { ref } from 'vue'
     
     <div v-if="appointment != null"   style="border: 2px solid rgb(168, 168, 168); border-radius: 15px;"  class="bg-white p-0 mb-1 ">
         
-        <div id="app" class="m-0 d-flex" style="font-size: 1.2em;"  >	
+        <div id="app" class="m-0 d-flex w-100" style="font-size: 1.2em;"  >	
             <div class="">
                      &nbsp;
             </div>
             <div>
                 <div class="">
-                    <div class="" style="font-size:1.1em ; color:#1f9d94">	 
+                    <div class="" style="color:#1f9d94">	 
                     <!--  <b>  {{ transform_date( appointment.date ) }} </b> style="font-size:1.1em ; color:#2e5668"-->
-                   <text style="font-size:1.5em">{{ transform_time(appointment.start_time)}}</text><text style="font-size:0.5em">hrs</text>   <text style=" ">{{ showSpecialtyName(appointment.specialty) }} </text>  
+                   <text style="font-size:1.5em">{{ transform_time(appointment.start_time)}}</text>
+                   <text style="font-size:0.5em">hrs</text>   
+                   <text style="font-size:1.4em" >{{ showSpecialtyName(appointment.specialty) }} </text>  
                     </div>       
                 </div>
             <!--
@@ -41,7 +43,7 @@ import { ref } from 'vue'
                                {{comuna_id2name(center_data.comuna)}}
                             </div>
                             <div class="" style="color:#2e5668" >	
-                                {{center_data.name}}
+                               {{center_data.name}}
                             </div> 
                                                        
                     </div>
@@ -76,12 +78,13 @@ import { ref } from 'vue'
                         
                     </div>
 
-                    <div class="" style="color:#2e5668" >	
-                        {{ professional_data.name}}      
+                    <div class="" style="color:#000" >	
+                        <i class="bi bi-person-fill"></i> {{ professionalNameFormatter(professional_data.name) }}      
                     </div>
 
+                    <p class="d-flex justify-content-start">
                     <div v-if="calendar_data != null && calendar_data.price>1"> Valor:${{ priceFormatter(calendar_data.price)}}</div>
-                    
+                    </p>
                     
                 </div>
             
@@ -117,6 +120,13 @@ export default {
         },
 
 methods: {
+
+    professionalNameFormatter(name)
+    {
+        let aux = name.split(' ')
+        return  `${aux[0]}  ${aux[2].toUpperCase().charAt(0)}.  ${aux[2]}`
+    },
+
 
     priceFormatter(amount) 
     {
