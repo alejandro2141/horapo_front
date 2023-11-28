@@ -104,14 +104,7 @@ export default {
     emits: ['displayModalReservedDetails'],
 
 	created () {
-        //this.center_data = this.session_params.centers.find(elem => elem.id == this.appointment.center_id )
-        //this.calendar_data = this.session_params.calendars.find(elem => elem.id == this.appointment.calendar_id )
-        /*
-        if ( this.calendar_data == null)
-        {
-            this.calendar_data = { color: '#5A9358' }
-        }
-        */
+        
     },
 
 	methods :{
