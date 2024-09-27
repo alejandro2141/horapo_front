@@ -53,7 +53,7 @@ watch: {
 methods: {
         async loadGlobalSpecialties() {
                 let metric=Date.now()  ; 
-				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_specialty_list");
+				let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_specialty_list");
                 this.global_specialties = response_json.data.rows;
                 //console.log("APP GET COMUNA LIST METHOD, "+JSON.stringify(this.global_specialties) );
                  console.log("performance , Public Search ,loadGlobalSpecialties, "+ (Date.now() - metric));
@@ -61,7 +61,7 @@ methods: {
 
         async loadGlobalComunas() {
                 let metric=Date.now()  ; 
-				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list");
+				let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_comuna_list");
                 this.global_comunas = response_json.data.rows;
                 //console.log("APP Comuna list: "+JSON.stringify(this.global_comunas) );
                  console.log("performance , Public Search , loadGlobalComunas , "+ (Date.now() - metric));
