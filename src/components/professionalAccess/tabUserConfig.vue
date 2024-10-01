@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import cameraCapturer from './camera_capturer.vue'
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -135,7 +136,7 @@ data: function () {
                    };
 
                 console.log("REQUEST get_professional_specialty :"+JSON.stringify(json));
-                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/get_professional_specialty",json);
+                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/get_professional_specialty",json);
                 console.log ("RESPONSE  get_professional_specialty:"+JSON.stringify(response_json.data.rows)) ;
                 this.global_professional_specialties= response_json.data.rows ; 
             },
@@ -149,7 +150,7 @@ data: function () {
                    };
 
                 console.log("REQUEST professional_get_data :"+JSON.stringify(json));
-                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_data",json);
+                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_data",json);
                 console.log ("RESPONSE  professional_get_data:"+JSON.stringify(response_json.data)) ;
                 this.professional_data= response_json.data ; 
             },
