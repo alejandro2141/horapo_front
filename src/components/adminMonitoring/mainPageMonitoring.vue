@@ -118,7 +118,7 @@ data: function () {
                              };
 
                   console.log ("SEND REPLY:"+ JSON.stringify(json)  );
-                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_send_professional_reply",json);
+                  let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/monitoring_send_professional_reply",json);
                   this.p_sessions = response_json.data.rows;
                   console.log ("SEND REPLY RESPONSE:"+JSON.stringify(this.p_sessions)) ;    
 
@@ -132,7 +132,7 @@ data: function () {
                                       };
 
                         console.log ("GET SESSIONS ACTIVE :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_sessions_active",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_sessions_active",json);
                         this.p_sessions = response_json.data.rows;
                         console.log ("RESPONSE GET SESSIONS ACTIVE:"+JSON.stringify(this.p_sessions)) ;                       
                     },	
@@ -144,7 +144,7 @@ data: function () {
                                       };
 
                         console.log ("GET PROFESIONAL REGISTERS :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_registers",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_registers",json);
                         this.p_register = response_json.data.rows;
                         console.log ("RESPONSE PROFESIONAL REGISERS:"+JSON.stringify(this.p_register)) ;                       
                     },
@@ -156,7 +156,7 @@ data: function () {
                                       };
 
                         console.log ("GET PUBLIC COMMENTS :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_get_public_comments",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/monitoring_get_public_comments",json);
                         this.p_comments = response_json.data.rows;
                         console.log ("GET PUBLIC COMMENTS:"+JSON.stringify(this.p_comments)) ;                       
                     },
@@ -168,7 +168,7 @@ data: function () {
                                       };
 
                         console.log ("GET PROFESIONAL COMMENTS COMMENTS :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_comments",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/monitoring_get_professional_comments",json);
                         this.professional_comments = response_json.data.rows;
                         console.log ("GET PUBLIC COMMENTS:"+JSON.stringify(this.p_comments)) ;                       
                     },
