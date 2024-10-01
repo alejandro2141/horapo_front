@@ -4,7 +4,7 @@ import SwitchViewButton from './switchViewButton.vue'
 import axios from 'axios';
 import professional_messages from './professional_messages.vue'
 import ProfesionalBugReport from './ProfesionalBugReport.vue'
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 
 </script>
@@ -327,7 +327,7 @@ export default {
 					};
 
                 
-                let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_invitation_colleague",json);
+                let resp = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_send_invitation_colleague",json);
 		alert("Hemos enviado una Invitación a tu colega");
 				
 		},
@@ -372,7 +372,7 @@ export default {
            				};
 
 			console.log("Send Message")
-			let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_comments",json);
+			let resp = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_send_comments",json);
 			console.log("Send Message Response :"+JSON.stringify(resp) )
 
 			this.text_message = "Ya enviaste tu mensaje."  
