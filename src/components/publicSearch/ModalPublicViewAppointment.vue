@@ -341,7 +341,7 @@ export default {
                             };
 
                   console.log ("patient_get_professional INPUT JSON :"+ JSON.stringify(json)  );
-                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_professional",json);             
+                  let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/patient_get_professional",json);             
 	              this.professional_data = response_json.data
 				  this.professional_name = this.professional_data.name ;
 				  console.log ("patient_get_professional RESPONSE:"+JSON.stringify(this.professional_data)) ;
