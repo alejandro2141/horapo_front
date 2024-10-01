@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 
 </script>
@@ -217,7 +217,7 @@ export default {
                         };
                  //app.config.globalProperties.dbhost = 'http://192.168.0.114:8080' ;       
                 console.log ("sendFormRegister  REQUEST :"+ JSON.stringify(json)  );
-                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_register_professional",json );
+                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/public_register_professional",json );
                 console.log ("sendFormRegister  RESPONSE:"+JSON.stringify(response_json.data)) ;
                 //app = response_json.data[0];
                 //alert("Gracias por su Registro");
