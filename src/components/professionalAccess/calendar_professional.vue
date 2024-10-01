@@ -717,7 +717,7 @@ export default {
                     };
 
                   console.log("Send Calendar to patient  REQUEST :"+JSON.stringify(json));
-                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_calendar_to_patient",json);
+                  let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_send_calendar_to_patient",json);
                   console.log ("Send Calendar to patient RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
                   alert("Calendario Enviado");
@@ -856,7 +856,7 @@ export default {
                     };
 
                   console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
-                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_delete_calendar",json);
+                  let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_delete_calendar",json);
                   console.log ("Activate Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
                   alert("Calendario Eliminado");
@@ -993,7 +993,7 @@ export default {
                     };
 
                   console.log("Delete Calendar REQUEST :"+JSON.stringify(json));
-                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_update_calendar",json);
+                  let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_update_calendar",json);
                   console.log ("Update Calendar RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                   let aux_resp = response_json.data.rows ; 
                   alert("Calendario Actualizado");
