@@ -267,7 +267,7 @@ export default {
               };
                   
         console.log ("duplicateDay :"+ JSON.stringify(json)  );
-        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_duplicate_day",json);
+        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_duplicate_day",json);
         console.log ("duplicateDay RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
         //location.reload();
         //this.agendas = response_json.data.rows;
