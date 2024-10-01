@@ -12,7 +12,9 @@ import TabUserConfig from   '../src/components/professionalAccess/tabUserConfig.
 
 import TabListAppTaken from   '../src/components/professionalAccess/tabAppointmentsListReserved.vue'
 //import TabListAppTaken from '../src/components/professionalAccess/tabAppointmetsListReserved.vue'
+//import { BKND_CONFIG } from '../config123.js'
 import { BKND_CONFIG } from '../config123.js'
+
 import ProfesionalBugReport from '../src/components/professionalAccess/ProfesionalBugReport.vue'
 
 
@@ -21,7 +23,7 @@ import ProfesionalBugReport from '../src/components/professionalAccess/Profesion
 
 <template>
 <div class="">
-    
+   
     <ProfesionalGeneralHeader  v-if="session_params!=null"  v-on:setTodayDateFromHeader='setTodayDateFromHeader'   :session_params='session_params' v-on:switchView="switchView"  v-on:switchViewTo="switchViewTo" > </ProfesionalGeneralHeader>
    
     <div   class="m-0 w-100  d-flex justify-content-center">
@@ -148,11 +150,23 @@ props: [],
 emits: [],
 
 created() {
+    //console.log("BKND_CONFIG IN THEN "+JSON.stringify(BKND_CONFIG) )
+
+    //BKND_CONFIG.then( () => { console.log("BKND_CONFIG IN THEN "+BKND_CONFIG) } )
 
         this.setSessionFromCode() 
-       
+        this.loadGlobalSpecialties()
+        this.loadGlobalComunas()
+
+
+        /*
+        BKND_CONFIG.then( (value)=>{
+        this.setSessionFromCode() 
         this.loadGlobalSpecialties();
         this.loadGlobalComunas();
+        }
+        )
+        */
       //  this.loadProfessionalEspecialties();
 },
 
@@ -244,7 +258,7 @@ methods: {
    			   	      };
 			console.log ("REQUEST to professional_login_session:"+ JSON.stringify(json)  );
 			
-			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_login_session",json);
+			let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_login_session",json);
             console.log ("RESPONSE login:"+JSON.stringify(response_json.data)) ;
 
 
@@ -290,20 +304,18 @@ methods: {
         if (val == 3) { this.visible_tab_centers = 'block' }
         if (val == 4) { this.visible_tab_userconfig = 'block' }
         if (val == 5) {  this.visible_tab_appListTaken = 'block' }
-
-
     },
 
     async loadGlobalSpecialties() {
                 console.log ("APP GET SPECIALTY LIST METHOD"); 
-				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_specialty_list");
+				let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_specialty_list");
                 this.global_specialties = response_json.data.rows;
                 console.log("APP global_specialties: "+JSON.stringify(this.global_specialties) );
             },
 
     async loadGlobalComunas() {
                  console.log ("APP GET COMUNA LIST METHOD"); 
-				let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list");
+				let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_comuna_list");
                 this.global_comunas = response_json.data.rows;
                 console.log("APP Comuna list: "+JSON.stringify(this.global_comunas) );
             },
@@ -328,7 +340,7 @@ methods: {
                 professional_id : this.session_params.professional_id ,			   
                             };
                 console.log ("GET CENTERS REQUEST :"+ JSON.stringify(json)  );
-                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
                 this.global_professional_centers = response_json.data.rows;
                 console.log ("RESPONSE CENTERS:"+JSON.stringify(this.global_professional_centers)) ;                       
             },
