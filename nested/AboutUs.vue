@@ -4,7 +4,7 @@
 
 import GeneralHeader from '../src/components/GeneralHeader.vue'
 import RegisterForm from  '../src/components/publicSearch/RegisterForm.vue'
-import { BKND_CONFIG } from '../config123.js'
+//import { BKND_CONFIG } from '../config123.js'
 </script>
 
 <template>
