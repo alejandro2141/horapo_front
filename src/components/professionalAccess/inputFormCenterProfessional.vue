@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import SwitchViewButton from './switchViewButton.vue'
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 
 </script>
@@ -74,7 +74,7 @@ export default {
 			   professional_id : this.session_params.professional_id  ,			   
    			   	      };
 			console.log ("getCenters REQUEST :"+ JSON.stringify(json)  );
-			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+			let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
 			console.log ("getCenters RESPONSE :"+JSON.stringify(response_json.data.rows)) ;
 			this.center_list = response_json.data.rows;
             //this.prevCenterName="noset";
