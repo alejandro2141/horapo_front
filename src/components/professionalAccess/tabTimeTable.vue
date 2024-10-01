@@ -6,6 +6,7 @@ import ModalCreateCalendar from './modalCreateCalendar.vue';
 import ModalShareCalendarToPatient from './modalProfessionalShareCalendarToPatient.vue'
 import CalendarProfessional from './calendar_professional.vue'
 import infoCalendar from './info_calendar.vue'
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 <template>
@@ -148,7 +149,7 @@ data: function () {
 			   professional_id : this.session_params.professional_id  ,			   
    			   	      };
 			console.log ("professional_get_all_centers REQUEST :"+ JSON.stringify(json)  );
-			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_all_centers",json);
+			let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_all_centers",json);
 			console.log ("professional_get_all_centers RESPONSE :"+JSON.stringify(response_json.data.rows)) ;
 			this.center_list = response_json.data.rows;
             console.log ("TabTimeTable :"+this.center_list.length ) ;
@@ -168,7 +169,7 @@ data: function () {
               tutorial : 3
            };
 
-            let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
+            let restemp = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
             this.session_params.tutorial_calendar = false ;   
         },
 
@@ -243,7 +244,7 @@ data: function () {
                           
                                     };
                         console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_data_for_calendars_view",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_data_for_calendars_view",json);
                         this.calendars = response_json.data;
                         console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
                     },	
