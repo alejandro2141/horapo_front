@@ -6,7 +6,7 @@ import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
 import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
 import Datepicker from 'vuejs3-datepicker';
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -940,7 +940,7 @@ data: function () {
                    };
 
                 console.log("getSpecialties REQUEST :"+JSON.stringify(json));
-                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/get_professional_specialty",json);
+                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/get_professional_specialty",json);
                 console.log ("getSpecialties  RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                 this.specialties= response_json.data.rows ; 
         },
@@ -1009,7 +1009,7 @@ data: function () {
               console.log("REQUEST :"+JSON.stringify(json));
               
             
-              let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_calendar",json);
+              let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_create_calendar",json);
               console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
               this.$emit('updateCalendarList');  
               this.showModalCreateCalendar = false ;
