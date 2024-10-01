@@ -8,6 +8,8 @@ import ModalCreateCenter from './modalCreateCenter.vue'
 //import ConsultancyRemote from './consultancy_remote.vue'
 import Consultancy from './consultancy.vue'
 import TutorialCenter from './tutorial_center.vue'
+import { BKND_CONFIG } from '../../../config123.js'
+
 
 </script>
 
@@ -205,7 +207,7 @@ data: function () {
                         nodata : 'nodata' ,
                                     };
                         console.log ("getComunaList REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json);
                         console.log ("getComunaList RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                         this.comuna_list = response_json.data.rows;		
                         console.log("getComunaList list: "+JSON.stringify(this.comuna_list) );
@@ -217,7 +219,7 @@ data: function () {
                         professional_id : this.session_params.professional_id ,			   
                                         };
                         console.log ("GET CENTERS REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
                         this.centers = response_json.data.rows;
                         console.log ("RESPONSE CENTERS:"+JSON.stringify(this.centers)) ;                       
                     },	
