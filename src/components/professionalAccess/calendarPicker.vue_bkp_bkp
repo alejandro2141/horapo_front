@@ -114,7 +114,7 @@ export default {
 				requiredDay : required ,
    			   	      };
 			console.log ("getMonthCalendar REQUEST :"+ JSON.stringify(json)  );
-			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_month_calendar",json);
+			let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_month_calendar",json);
 			console.log ("getMonthCalendar RESPONSE :"+JSON.stringify(response_json.data)) ;
 			this.month_calendar = response_json.data;
 			
