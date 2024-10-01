@@ -4,7 +4,7 @@ import axios from 'axios';
 import InputFormSpecialtyProfessional from './inputFormSpecialtyProfessional.vue';
 import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -278,7 +278,7 @@ export default {
                         }
                       
         console.log ("Professional Cancel Appoitnment :"+ JSON.stringify(json_input)  );
-        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/cancel_hour",json_input);
+        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/cancel_hour",json_input);
         this.$emit('updateAppList');
         this.showModalAppointmentDetais= false ;
 
@@ -308,7 +308,7 @@ export default {
                         }
                       
         console.log ("SAVE_APPOINTMENT REQUEST :"+ JSON.stringify(json_input)  );
-        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/save_appointment",json_input);
+        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/save_appointment",json_input);
         
         //console.log ("createHours RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
         /*
