@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import axios from 'axios';
 import loadProgress from './loadProgressProfessional.vue'
 import generalHeader from '../GeneralHeader.vue'
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 defineProps({
   session: Object
@@ -111,7 +111,7 @@ export default {
                             };
                     console.log ("REQUEST :"+ JSON.stringify(json)  );
                     
-                    let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_recover_password",json);
+                    let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_recover_password",json);
                         
             } 
             else {
@@ -135,7 +135,7 @@ export default {
    			   	      };
 			console.log ("REQUEST :"+ JSON.stringify(json)  );
 			
-			let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_login",json);
+			let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_login",json);
 		
             console.log ("RESPONSE login:"+JSON.stringify(response_json.data)) ;
 			//this.response_json = response.data;
@@ -180,7 +180,7 @@ export default {
                 professional_id : this.session_params.professional_id ,			   
                             };
                 console.log ("GET CENTERS REQUEST :"+ JSON.stringify(json)  );
-                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
                 this.global_professional_centers = response_json.data.rows;
                 console.log ("RESPONSE CENTERS:"+JSON.stringify(this.global_professional_centers)) ;                       
             },
