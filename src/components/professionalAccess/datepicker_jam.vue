@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import { BKND_CONFIG } from '../../../config123.js'
+
 
 </script>
 
@@ -426,7 +428,7 @@ export default {
                                 };
 
                                 console.log ("professional_lock_day  REQUEST :"+ JSON.stringify(json)  );
-                                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_lock_day",json );
+                                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_lock_day",json );
                                 //console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
                                 console.log ("RESPONSE professional_lock_day :"+JSON.stringify(response_json.data)) ;
                                 this.appointment_confirm = response_json.data ;
@@ -452,7 +454,7 @@ export default {
                                 };
 
                                 console.log ("professional_lock_day  REQUEST :"+ JSON.stringify(json)  );
-                                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_unlock_day",json );
+                                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_unlock_day",json );
                                 //console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
                                 console.log ("RESPONSE professional_lock_day :"+JSON.stringify(response_json.data)) ;
                                 this.appointment_confirm = response_json.data ;
