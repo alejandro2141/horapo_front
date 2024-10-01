@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import axios from 'axios';
 import inputFormComuna from  './InputFormComuna2.vue'
 import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -396,13 +397,13 @@ data: function () {
            };
 
         console.log("REQUEST :"+JSON.stringify(json));
-        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_create_center",json);
+        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_create_center",json);
         console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
         this.$emit('updateCenterList');  
         this.showModalCreate = false ;    
         
         /*
-        let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
+        let restemp = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_shutdown_firstlogin",json);
         this.session_params.first_time = false ;   
         */
         },
