@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 import inputFormComuna from  './InputFormComuna2.vue'
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -228,7 +229,7 @@ export default {
                        
                         console.log("Delete Center REQUEST :"+JSON.stringify(json));
                         
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_delete_center",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_delete_center",json);
                         console.log ("Delete Center  RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                         let aux_resp = response_json.data.rows ; 
                         //this.showModalViewCalendar = false ; 
@@ -267,7 +268,7 @@ export default {
                        
                         console.log("Save Center  REQUEST :"+JSON.stringify(json));
                         
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_update_center",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_update_center",json);
                         console.log ("Update Center  RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                         let aux_resp = response_json.data.rows ; 
                         //this.showModalViewCalendar = false ; 
