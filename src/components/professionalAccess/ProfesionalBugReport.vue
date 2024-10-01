@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 //import { GLOBAL_COMUNAS } from '../../../config123.js' 
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -130,7 +131,7 @@ mounted() {
                             };
 
                 console.log("Obtain Previous Messages and Reply")
-                let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_comments",json);
+                let resp = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_comments",json);
                 console.log("Get Message Response :"+JSON.stringify(resp) )
                 //this.comments = resp.data
                 this.comments = resp.data.rows
@@ -148,7 +149,7 @@ mounted() {
                             };
 
                 console.log("Send Message")
-                let resp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_send_comments",json);
+                let resp = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_send_comments",json);
                 console.log("Send Message Response :"+JSON.stringify(resp) )
 
                 this.text_message = "Gracias por tu mensaje!!"  
