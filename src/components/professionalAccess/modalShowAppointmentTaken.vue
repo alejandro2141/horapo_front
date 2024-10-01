@@ -4,6 +4,7 @@ import axios from 'axios';
 import InputFormSpecialtyProfessional from './inputFormSpecialtyProfessional.vue';
 import InputFormCenterProfessional from './inputFormCenterProfessional.vue';
 import GenericBlockDateSpecialtyVue from '../GenericBlockDateSpecialty.vue';
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -445,7 +446,7 @@ export default {
                         }
                       
         console.log ("Professional Cancel Appoitnment :"+ JSON.stringify(json_input)  );
-        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_cancel_appointment",json_input);
+        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_cancel_appointment",json_input);
         
         if (response_json.data.result_code == 200 )
           {
@@ -476,7 +477,7 @@ export default {
                         }
                       
         console.log ("Professional Request Confirmation to patient :"+ JSON.stringify(json_input)  );
-        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_request_confirmation",json_input);
+        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_request_confirmation",json_input);
        // this.$emit('updateAppList');
        // this.showModalAppointmentTaken= false ;
         alert("Solicitud de confirmacion enviada");
@@ -513,7 +514,7 @@ export default {
                         }
                       
         console.log ("SAVE_APPOINTMENT REQUEST :"+ JSON.stringify(json_input)  );
-        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/save_appointment",json_input);
+        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/save_appointment",json_input);
         this.$emit('updateAppList');
         this.showModalAppointmentDetais = false ;
         }
