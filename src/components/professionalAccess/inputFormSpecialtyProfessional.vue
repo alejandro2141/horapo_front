@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -72,7 +72,7 @@ export default {
                              professional_id : this.session_params.professional_id  ,		
                                 };
                         console.log ("getSpecialtyList REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/get_professional_specialty",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/get_professional_specialty",json);
                         console.log ("getSpecialtyList RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                         this.specialty_list = response_json.data.rows;	
                         this.specialty_selected = this.specialty_list ;
