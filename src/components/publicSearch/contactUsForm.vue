@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -131,7 +131,7 @@ export default {
 
                  //app.config.globalProperties.dbhost = 'http://192.168.0.114:8080' ;       
                 console.log ("public_send_comments  REQUEST :"+ JSON.stringify(json)  );
-                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_send_comments",json );
+                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/public_send_comments",json );
                 console.log ("public_send_comments  RESPONSE:"+JSON.stringify(response_json.data)) ;
                
 
