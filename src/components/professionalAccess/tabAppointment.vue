@@ -10,6 +10,7 @@ import loadProgress from './loadProgressProfessional.vue'
 import LockOptions from './lockOptions.vue'
 import ProfesionalBugReport from './ProfesionalBugReport.vue';
 //import CalendarSummary from './calendar_summary.vue'
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -175,7 +176,7 @@ data: function () {
                     };
             
               console.log ("professional_get_appointments_day3 REQUEST :"+ JSON.stringify(json)  );
-              let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day3",json);
+              let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_appointments_day3",json);
               console.log ("/professional_get_appointments_day3 RESPONSE:"+JSON.stringify(response_json.data)) ;
               //this.updateCalendarsMarks();
               
@@ -220,7 +221,7 @@ data: function () {
                                      };
 
                         console.log ("GET CALENDARS REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/rofessional_get_calendars",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/rofessional_get_calendars",json);
                         this.calendars_marks = response_json.data.rows;
                         //console.log ("RESPONSE Calendars:"+JSON.stringify(this.calendars)) ;                       
         },
