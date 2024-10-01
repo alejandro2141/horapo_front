@@ -121,7 +121,7 @@ export default {
                         };
 
                 console.log("cancelApp REQUEST:"+JSON.stringify(json_request))
-                let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_cancel_app",json_request);
+                let response = await axios.post(BKND_CONFIG.BKND_HOST+"/public_cancel_app",json_request);
                 console.log("cancelApp RESPONSE :"+JSON.stringify(response.data) )   
                 this.appointments = response.data.appointments     
             },
