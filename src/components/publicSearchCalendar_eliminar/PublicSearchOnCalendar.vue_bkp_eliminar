@@ -258,7 +258,7 @@ export default {
                                 };
 
                   console.log ("searchAppointmentsCalendar INPUT send JSON :"+ JSON.stringify(json)  );
-                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_calendar",json);
+                  let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/patient_get_appointments_calendar",json);
                   
                   this.appointments = response_json.data;
                   console.log ("searchAppointmentsCalendar RESPONSE:"+JSON.stringify(this.appointments)) ;
@@ -297,7 +297,7 @@ export default {
                     center_id : this.appointments[0].center_id,
                     };
                console.log("get Center REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_center",json_center);
+               let response = await axios.post(BKND_CONFIG.BKND_HOST+"/patient_get_center",json_center);
                this.center = response.data
                console.log("get Center RESPONSE "+JSON.stringify(this.center) );
            },
@@ -308,7 +308,7 @@ export default {
                     professional_id : this.appointments[0].professional_id,
                     };
                console.log("get_professional_data REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_professional",json_center);
+               let response = await axios.post(BKND_CONFIG.BKND_HOST+"/patient_get_professional",json_center);
                this.professional= response.data
                console.log("get_professional_data RESPONSE "+JSON.stringify(this.professional) );
            },
@@ -319,7 +319,7 @@ export default {
                     token : 123,
                     };
                console.log("get_specialties REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_specialty_list",json_center);
+               let response = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_specialty_list",json_center);
                console.log("get_specialties RESPONSE "+JSON.stringify(response.data.rows) );
               
               this.global_specialties =  JSON.parse(JSON.stringify(response.data.rows))
@@ -334,7 +334,7 @@ export default {
                     token : 123,
                     };
                console.log("get_locations REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json_center);
+               let response = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_comuna_list",json_center);
                console.log("get_locations RESPONSE "+JSON.stringify(response.data.rows) );
               
               this.global_comunas=  JSON.parse(JSON.stringify(response.data.rows))
