@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios';
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -100,7 +101,7 @@ data: function () {
                      professional_id: this.session_params.professional_id ,
                      tutorial: 2,
            };
-            let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
+            let restemp = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
             this.session_params.tutorial_center = false ;   
         },
 
@@ -120,7 +121,7 @@ data: function () {
               tutorial : 2
            };
 
-            let restemp = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
+            let restemp = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_shutdown_tutorial",json);
             this.session_params.tutorial_center = false ;   
         },
  
