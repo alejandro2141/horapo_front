@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { BKND_CONFIG } from '../../../config123.js' 
+//import { BKND_CONFIG } from '../../../config123.js' 
 
 </script>
 
