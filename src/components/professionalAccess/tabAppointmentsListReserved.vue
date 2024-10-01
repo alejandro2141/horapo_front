@@ -3,6 +3,8 @@ import { ref } from 'vue'
 import axios from 'axios';
 import AppointmentReserved from  './appointmentReserved.vue'
 import ModalShowAppointmentTaken  from './modalShowAppointmentTaken.vue';
+import { BKND_CONFIG } from '../../../config123.js'
+
 
 </script>
 <template>
@@ -285,7 +287,7 @@ data: function () {
                     professional_id : this.session_params.professional_id ,			   
                             };
                     console.log ("professional_get_appointments_taken :"+ JSON.stringify(json)  );
-                    let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_taken",json);
+                    let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_appointments_taken",json);
                     //console.log ("professional_get_appointments_taken  RESPONSE:"+JSON.stringify(response_json)) ;   
                     
                     console.log("get Appointment taken concluded")
@@ -315,7 +317,7 @@ data: function () {
                     professional_id : this.session_params.professional_id ,			   
                             };
                     console.log ("professional_get_appointments_cancelled :"+ JSON.stringify(json)  );
-                    let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_appointments_cancelled",json);
+                    let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_appointments_cancelled",json);
                     //console.log ("professional_get_appointments_cancelled  RESPONSE:"+JSON.stringify(response_json)) ;   
                     console.log("get Appointment Cancelled concluded")
 
