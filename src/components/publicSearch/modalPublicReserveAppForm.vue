@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import ModalPublicReserveConfirmation from './modalPublicReserveConfirmation.vue';
 
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 //const count = ref(0)
 </script>
@@ -431,7 +431,7 @@ computed: {
                             };
 
                   console.log ("patient_get_professional INPUT JSON :"+ JSON.stringify(json)  );
-                  let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_professional",json);             
+                  let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/patient_get_professional",json);             
 	              this.professional_data = response_json.data
 				  console.log ("patient_get_professional RESPONSE:"+JSON.stringify(this.professional_data)) ;
               }
@@ -580,7 +580,7 @@ computed: {
 						};
 
 						console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
-						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/public_take_appointment",json );
+						let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/public_take_appointment",json );
 					//  console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
 						console.log ("RESPONSE save_appointment data raw :"+JSON.stringify(response_json.data)) ;
 						console.log ("RESPONSE save_appointment patient name :"+response_json.data.patient_name ) ;
