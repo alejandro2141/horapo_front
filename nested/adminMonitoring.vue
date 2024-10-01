@@ -1,7 +1,7 @@
 <script setup>
 
 import mainPageMonitoring from '../src/components/adminMonitoring/mainPageMonitoring.vue'
-import { BKND_CONFIG } from '../config123.js'
+//import { BKND_CONFIG } from '../config123.js'
 </script>
 
 <template>
