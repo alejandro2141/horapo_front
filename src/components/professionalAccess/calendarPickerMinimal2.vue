@@ -4,6 +4,7 @@ import axios from 'axios';
 import Datepicker from 'vuejs3-datepicker';
 import DatePickerJAM from './datepicker_jam.vue'
 //import CalendarSummary from './calendar_summary.vue'
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -130,7 +131,7 @@ export default {
                     };
             //first Get Appointments between two dates
             console.log ("calendar Picker - professional_get_month_summary REQUEST :"+ JSON.stringify(json)  ) 
-            let response_json =  await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_month_summary",json) 
+            let response_json =  await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_month_summary",json) 
             console.log ("calendar Picker - professional_get_month_summary RESPONSE: "+JSON.stringify(response_json.data))
             //clean Month Summary
             this.month_summary = [] 
