@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import axios from 'axios';
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -318,7 +319,7 @@ export default {
                         professional_id : this.session_params.professional_id ,			   
                                         };
                         console.log ("GET CENTERS REQUEST :"+ JSON.stringify(json)  );
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_get_centers",json);
                         this.centers_list = response_json.data.rows;
                         console.log ("RESPONSE CENTERS:"+JSON.stringify(this.centers_list)) ;                       
                     },	
@@ -438,7 +439,7 @@ export default {
 						};
 
 						console.log ("sendReserveAppointment  REQUEST :"+ JSON.stringify(json)  );
-						let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_take_appointment",json );
+						let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_take_appointment",json );
 					//  console.log ("RESPONSE save_appointmentJSON.stringify(response_json) :"+JSON.stringify(response_json)) ;
 						console.log ("RESPONSE save_appointment data raw :"+JSON.stringify(response_json.data)) ;
 						console.log ("RESPONSE save_appointment patient name :"+response_json.data.patient_name ) ;
