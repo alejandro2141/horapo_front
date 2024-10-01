@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import axios from 'axios';
 import inputFormComuna from  '../publicSearch/InputFormComuna.vue'
 import InputFormComunaProfessional from './inputFormComunaProfessional.vue' ;
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -258,7 +259,7 @@ data: function () {
                        
                         console.log("Save Center  REQUEST :"+JSON.stringify(json));
                         
-                        let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_update_center",json);
+                        let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_update_center",json);
                         console.log ("Update Center  RESPONSE:"+JSON.stringify(response_json.data.rows)) ;
                         let aux_resp = response_json.data.rows ; 
                         this.showModalViewCalendar = false ; 
@@ -279,7 +280,7 @@ data: function () {
                     professional_id : this.session_params.professional_id ,			   
                         };
                 console.log ("deleteCenter REQUEST :"+ JSON.stringify(json)  );
-                let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/professional_delete_center",json);
+                let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/professional_delete_center",json);
                 console.log ("RESPONSE:"+JSON.stringify(response_json.data)) ;
                 //location.href = "professional_show_centers.html?"+this.getUrlParam()  ;
                 //this.getCenters();
