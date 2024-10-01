@@ -4,6 +4,7 @@ import GeneralHeader from './GeneralHeader.vue';
 import LandingContent from './LandingContent.vue'
 import FooterContent from './FooterContent.vue'
 import axios from 'axios';
+import { BKND_CONFIG } from '../../config123.js'
 
 defineProps({
   nameTitle : String
@@ -102,7 +103,7 @@ export default {
                         email : this.user_email,
                                 };
                     console.log ("Send Recover Appointments   REQUEST :"+ JSON.stringify(json)  );
-                    let response_json = await axios.post(this.BKND_CONFIG.BKND_HOST+"/recover_appointments",json );
+                    let response_json = await axios.post(BKND_CONFIG.BKND_HOST+"/recover_appointments",json );
                     console.log ("Send Recover Appointments RESPONSE:"+JSON.stringify(response_json.data)) ;
                     window.alert("Las citas registradas seran enviadas a su correo");
                     window.location.replace("/index.html");
