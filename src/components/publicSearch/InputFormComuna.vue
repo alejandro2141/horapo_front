@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios';
 //import { GLOBAL_COMUNAS } from '../../../config123.js' 
-
+//import { BKND_CONFIG } from '../../../config123.js'
 
 const count = ref(0)
 </script>
