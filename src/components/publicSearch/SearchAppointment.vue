@@ -9,7 +9,7 @@ import FooterContent from '../FooterContent.vue'
 import WordSphere from 'wordsphere';
 import SuggestedSearch from './SuggestedSearch.vue'
 import headerPublicSearch from '../HeaderPublicSearch.vue'
-
+import { BKND_CONFIG } from '../../../config123.js'
 
 </script>
 
@@ -457,7 +457,7 @@ async searchAppointmentsGeneric(params) {
 
                   console.log ("patient_get_appointments_generic REQUEST:"+ JSON.stringify(json)  );
                  
-                  let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_generic",json);
+                  let response = await axios.post(BKND_CONFIG.BKND_HOST+"/patient_get_appointments_generic",json);
                     if (response != null )
                     {
                     response_json = response.data ; 
@@ -503,7 +503,7 @@ async searchAppointments(params) {
 
                   console.log ("patient_get_appointments_day2 REQUEST:"+ JSON.stringify(json)  );
                  
-                  let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
+                  let response = await axios.post(BKND_CONFIG.BKND_HOST+"/patient_get_appointments_day2",json);
                     if (response != null )
                     {
                     response_json = response.data ; 
@@ -539,7 +539,7 @@ async searchAppointments(params) {
                     centers_ids : centers_id_list,
                     };
                console.log("*********** get_centers REQUEST "+JSON.stringify(json_center));
-               let response = await axios.post(this.BKND_CONFIG.BKND_HOST+"/common_get_centers",json_center);
+               let response = await axios.post(BKND_CONFIG.BKND_HOST+"/common_get_centers",json_center);
               console.log("******** get_centers RESPONSE "+JSON.stringify(response.data) );
               //this.centers = response.data.rows 
               return response.data
