@@ -8,9 +8,9 @@ let BKND_CONFIG = {
     //local ENv
     BKND_HOST : "http://localhost:8080",
     //DEVEL
-    //BKND_HOST : "https://www.horapo.com:8443",
+    //BKND_HOST : "https://horapo.cl:8443",
     //PROD
-    //BKND_HOST : "https://www.horapo.com:8443",
+    //BKND_HOST : "https://horapo.cl:8084",
     BKND_TIME : 1000,
     BNKD_USER : 'abc'
   };
