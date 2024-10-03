@@ -695,10 +695,10 @@ export default {
 
         this.host = window.location.host;
         this.linkWebCalendar ="https://"+this.host+"/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id
-        this.linkWebCalendar_face="http://www.facebook.com/share.php?u=https://www.horapo.com//nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+"&title=En HoraPO puedes"
-        this.linkWebCalendar_twitter="https://twitter.com/share?url=https://www.horapo.com/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+"&text=En HoraPO puedes buscar una hora de "+this.idSpecialty2name(this.specialty_code)+" "+this.center_data.name
+        this.linkWebCalendar_face="http://www.facebook.com/share.php?u=https://horapo.cl//nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+"&title=En HoraPO puedes"
+        this.linkWebCalendar_twitter="https://twitter.com/share?url=https://horapo.cl/nested/publicSiteProfessional.html?params="+this.session_params.professional_id+"_"+this.calendar.id+"&text=En HoraPO puedes buscar una hora de "+this.idSpecialty2name(this.specialty_code)+" "+this.center_data.name
 
-       // https://twitter.com/share?url=http%3A%2F%2Fwww.horapo.com%2Fnested%2FpublicSiteProfessional.html%3Fparams%3DPROFID_CALID%0A&text=En%20HoraPO%20%20puedes%20buscar%20una%20hora%20disponible%20para%20ESPECIALIDAD%20%20con%20PROFESIONAl%20en%20el%20siguiente%20link.%20%0Ahttp%3A%2F%2Fwww.horapo.com%2Fnested%2FpublicSiteProfessional.html%3Fparams%3DPROFID_CALID%0A">  <i class="display-4  bi bi-twitter m-3"></i> </a>
+       // https://twitter.com/share?url=http%3A%2F%2Fhorapo.cl%2Fnested%2FpublicSiteProfessional.html%3Fparams%3DPROFID_CALID%0A&text=En%20HoraPO%20%20puedes%20buscar%20una%20hora%20disponible%20para%20ESPECIALIDAD%20%20con%20PROFESIONAl%20en%20el%20siguiente%20link.%20%0Ahttp%3A%2F%2Fhorapo.cl%2Fnested%2FpublicSiteProfessional.html%3Fparams%3DPROFID_CALID%0A">  <i class="display-4  bi bi-twitter m-3"></i> </a>
 
     },
 
