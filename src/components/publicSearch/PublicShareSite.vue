@@ -26,13 +26,13 @@ defineProps({
 
             <div class="d-flex justify-content-center " style="font-size:3em;">
                 
-                <a target="_blank" href="whatsapp://send?text=Visita%20HoraPO%2C%20Las%20mejores%20consultas%20de%20salud%20en%20un%20solo%20lugar%20https://www.horapo.com/">  <i class="text-success bi bi-whatsapp   m-3 p-3"></i> </a>
+                <a target="_blank" href="whatsapp://send?text=Visita%20HoraPO%2C%20Las%20mejores%20consultas%20de%20salud%20en%20un%20solo%20lugar%20https://horapo.cl/">  <i class="text-success bi bi-whatsapp   m-3 p-3"></i> </a>
            
-                <a target="_blank" href="http://www.facebook.com/share.php?u=https://www.horapo.com/&title=En%20HoraPO%20puedes%20buscar%20horas%20de%20salud.%20Los%20mejores%20profesionales%20de%20salud%20en%20un%20solo%20lugar">  <i class=" bi bi-facebook m-3 p-3"></i> </a>
+                <a target="_blank" href="http://www.facebook.com/share.php?u=https://horapo.cl/&title=En%20HoraPO%20puedes%20buscar%20horas%20de%20salud.%20Los%20mejores%20profesionales%20de%20salud%20en%20un%20solo%20lugar">  <i class=" bi bi-facebook m-3 p-3"></i> </a>
 
-                <a target="_blank" href="https://twitter.com/share?url=https://www.horapo.com/&text=En%20HoraPO%20puedes%20buscar%20horas%20de%20salud.%20Los%20mejores%20profesionales%20de%20salud%20en%20un%20solo%20lugar">  <i class="  bi bi-twitter m-3 p-3" ></i> </a>
+                <a target="_blank" href="https://twitter.com/share?url=https://horapo.cl/&text=En%20HoraPO%20puedes%20buscar%20horas%20de%20salud.%20Los%20mejores%20profesionales%20de%20salud%20en%20un%20solo%20lugar">  <i class="  bi bi-twitter m-3 p-3" ></i> </a>
                 <!--
-                <a target="_blank" href="https://www.pinterest.com/pin/find/?url=https://www.horapo.com/">  <i class="display-4  bi bi-pinterest m-3"></i>  </a>
+                <a target="_blank" href="https://www.pinterest.com/pin/find/?url=https://horapo.cl/">  <i class="display-4  bi bi-pinterest m-3"></i>  </a>
                 <a href="mailto:correodestinatario@correo.com?subject=HoraPO.%20Las%20mejores%20profesionales%20de%20salud%20en%20un%20solo%20lugar&body=Email%20Body%20Text">asdfasdf<i class="bi bi-envelope-fill display-4  m-2"></i></a>
                 -->
             </div> 
